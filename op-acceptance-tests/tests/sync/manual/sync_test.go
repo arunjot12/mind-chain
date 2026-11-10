@@ -3,7 +3,7 @@ package manual
 import (
 	"testing"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
@@ -15,7 +15,7 @@ import (
 
 func TestVerifierManualSync(gt *testing.T) {
 	t := devtest.ParallelT(gt)
-	// Example error using op-reth:
+	// Example error using mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|10:02:09.740]
 	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_el.go:64

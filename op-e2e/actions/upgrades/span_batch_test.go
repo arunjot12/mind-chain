@@ -25,15 +25,15 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
 
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum-optimism/optimism/op-service/testlog"
 )
 
-// TestDropSpanBatchBeforeHardfork tests behavior of op-node before Delta hardfork.
-// op-node must drop SpanBatch before Delta hardfork.
+// TestDropSpanBatchBeforeHardfork tests behavior of mc-node before Delta hardfork.
+// mc-node must drop SpanBatch before Delta hardfork.
 func TestDropSpanBatchBeforeHardfork(gt *testing.T) {
 	t := actionsHelpers.NewDefaultTesting(gt)
 	p := &e2eutils.TestParams{
@@ -122,8 +122,8 @@ func TestDropSpanBatchBeforeHardfork(gt *testing.T) {
 	require.ErrorIs(t, err, ethereum.NotFound)
 }
 
-// TestHardforkMiddleOfSpanBatch tests behavior of op-node Delta hardfork.
-// If Delta activation time is in the middle of time range of a SpanBatch, op-node must drop the batch.
+// TestHardforkMiddleOfSpanBatch tests behavior of mc-node Delta hardfork.
+// If Delta activation time is in the middle of time range of a SpanBatch, mc-node must drop the batch.
 func TestHardforkMiddleOfSpanBatch(gt *testing.T) {
 	t := actionsHelpers.NewDefaultTesting(gt)
 	p := &e2eutils.TestParams{
@@ -237,8 +237,8 @@ func TestHardforkMiddleOfSpanBatch(gt *testing.T) {
 	require.ErrorIs(t, err, ethereum.NotFound)
 }
 
-// TestAcceptSingularBatchAfterHardfork tests behavior of op-node after Delta hardfork.
-// op-node must accept SingularBatch after Delta hardfork.
+// TestAcceptSingularBatchAfterHardfork tests behavior of mc-node after Delta hardfork.
+// mc-node must accept SingularBatch after Delta hardfork.
 func TestAcceptSingularBatchAfterHardfork(gt *testing.T) {
 	t := actionsHelpers.NewDefaultTesting(gt)
 	p := &e2eutils.TestParams{
@@ -324,8 +324,8 @@ func TestAcceptSingularBatchAfterHardfork(gt *testing.T) {
 	require.NotNil(t, vTx)
 }
 
-// TestMixOfBatchesAfterHardfork tests behavior of op-node after Delta hardfork.
-// op-node must accept SingularBatch and SpanBatch in sequence.
+// TestMixOfBatchesAfterHardfork tests behavior of mc-node after Delta hardfork.
+// mc-node must accept SingularBatch and SpanBatch in sequence.
 func TestMixOfBatchesAfterHardfork(gt *testing.T) {
 	t := actionsHelpers.NewDefaultTesting(gt)
 	p := &e2eutils.TestParams{

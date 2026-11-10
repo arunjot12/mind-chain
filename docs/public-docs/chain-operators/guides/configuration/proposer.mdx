@@ -1,13 +1,13 @@
 ---
 title: Proposer Configuration
-description: Reference for the op-proposer configuration options and the proposer policy constraints.
+description: Reference for the mc-proposer configuration options and the proposer policy constraints.
 diataxis: reference
 ---
 
-import OpProposerFlags from '/snippets/generated/op-proposer-flags.mdx';
+import OpProposerFlags from '/snippets/generated/mc-proposer-flags.mdx';
 import { ConfigReferencePreamble } from '/snippets/config-reference-preamble.mdx';
 
-This page lists all configuration options for op-proposer. The op-proposer posts
+This page lists all configuration options for mc-proposer. The mc-proposer posts
 output roots (proposals) to L1, making them available for verifiers. Withdrawals to L1 must reference an output root.
 If the chain is running permissioned fault proofs, only the [designated proposer](/op-stack/protocol/privileged-roles) can submit output roots.
 With [permissionless fault proofs](/op-stack/fault-proofs/explainer), anyone can make a proposal.
@@ -42,6 +42,6 @@ Higher throughput chains can decrease the `proposal-interval` to allow users sub
 
 ## Flags
 
-<ConfigReferencePreamble component="op-proposer" />
+<ConfigReferencePreamble component="mc-proposer" />
 
 <OpProposerFlags />

@@ -19,8 +19,8 @@ import (
 	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
 	"github.com/ethereum-optimism/optimism/op-core/forks"
 	opcoreparams "github.com/ethereum-optimism/optimism/op-core/params"
-	opparams "github.com/ethereum-optimism/optimism/op-node/params"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	opparams "github.com/ethereum-optimism/optimism/mc-node/params"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 )
@@ -714,7 +714,7 @@ type L2CoreDeployConfig struct {
 	// BatchInboxAddress is the L1 account that batches are sent to.
 	BatchInboxAddress common.Address `json:"batchInboxAddress"`
 
-	// SystemConfigStartBlock represents the block at which the op-node should start syncing
+	// SystemConfigStartBlock represents the block at which the mc-node should start syncing
 	// from. It is an override to set this value on legacy networks where it is not set by
 	// default. It can be removed once all networks have this value set in their storage.
 	SystemConfigStartBlock uint64 `json:"systemConfigStartBlock"`

@@ -12,8 +12,8 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	con "github.com/ethereum-optimism/optimism/op-conductor/conductor"
 	"github.com/ethereum-optimism/optimism/op-conductor/consensus"
 	conrpc "github.com/ethereum-optimism/optimism/op-conductor/rpc"
@@ -21,11 +21,11 @@ import (
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/setuputils"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
 	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/config"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	opclient "github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
@@ -149,9 +149,9 @@ func setupHAInfra(t *testing.T, ctx context.Context) (*e2esys.System, map[string
 		Sequencer3Name: make(chan string, 1),
 	}
 
-	// The sequencer op-node & execution engine have to be up first, to get their endpoints running.
-	// The conductor is then started after, using the endpoints of op-node and execution engine.
-	// The op-node, while starting, will wait for the conductor to be up and running, to get its endpoint.
+	// The sequencer mc-node & execution engine have to be up first, to get their endpoints running.
+	// The conductor is then started after, using the endpoints of mc-node and execution engine.
+	// The mc-node, while starting, will wait for the conductor to be up and running, to get its endpoint.
 	// No endpoint is reserved/hardcoded this way, this avoids CI test flakes in the setup.
 	conductorEndpointFn := func(ctx context.Context, name string) (endpoint string, err error) {
 		endpointCh, ok := conductorsReady[name]

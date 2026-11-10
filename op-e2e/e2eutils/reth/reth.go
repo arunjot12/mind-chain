@@ -1,7 +1,7 @@
-// Package reth runs op-reth as an external subprocess and exposes it as a
-// services.EthInstance, so op-e2e can use op-reth as the L2 execution layer.
+// Package reth runs mc-reth as an external subprocess and exposes it as a
+// services.EthInstance, so op-e2e can use mc-reth as the L2 execution layer.
 // The launch/genesis/JWT/readiness machinery mirrors op-devstack/sysgo, which
-// already drives op-reth this way.
+// already drives mc-reth this way.
 package reth
 
 import (
@@ -26,23 +26,23 @@ import (
 	"github.com/ethereum-optimism/optimism/op-service/tasks"
 )
 
-// Config carries the op-e2e-level EL knobs that translate onto the op-reth CLI.
+// Config carries the op-e2e-level EL knobs that translate onto the mc-reth CLI.
 type Config struct {
-	// GenesisJSONPath identifies an existing genesis JSON file for op-reth.
+	// GenesisJSONPath identifies an existing genesis JSON file for mc-reth.
 	// InitL2 does not decode or rewrite this file.
 	GenesisJSONPath string
-	// SequencerHTTP, when non-empty, wires op-reth to forward transactions to the
+	// SequencerHTTP, when non-empty, wires mc-reth to forward transactions to the
 	// sequencer via --rollup.sequencer-http (sentry tx-forwarding).
 	SequencerHTTP string
-	// DataDir is the base directory for the op-reth datadir/logs/proof-history.
+	// DataDir is the base directory for the mc-reth datadir/logs/proof-history.
 	// Callers should pass t.TempDir() so the test framework owns cleanup even if
 	// the test panics before Close.
 	DataDir string
-	// ExtraArgs are appended verbatim to the op-reth `node` invocation.
+	// ExtraArgs are appended verbatim to the mc-reth `node` invocation.
 	ExtraArgs []string
 }
 
-// Instance is a running op-reth process exposed through services.EthInstance.
+// Instance is a running mc-reth process exposed through services.EthInstance.
 type Instance struct {
 	logger log.Logger
 
@@ -72,14 +72,14 @@ func (i *Instance) Close() error {
 			// already exited; nothing to interrupt
 		default:
 			if err := i.cmd.Process.Signal(os.Interrupt); err != nil {
-				i.logger.Warn("failed to interrupt op-reth", "err", err)
+				i.logger.Warn("failed to interrupt mc-reth", "err", err)
 			}
 		}
 		<-i.exited
 		// An interrupted process exits non-zero; that's expected, not an error.
 		var exitErr *exec.ExitError
 		if i.waitErr != nil && !errors.As(i.waitErr, &exitErr) {
-			errs = append(errs, fmt.Errorf("op-reth wait: %w", i.waitErr))
+			errs = append(errs, fmt.Errorf("mc-reth wait: %w", i.waitErr))
 		}
 	}
 	if i.stdoutPipe != nil {
@@ -91,7 +91,7 @@ func (i *Instance) Close() error {
 	return errors.Join(errs...)
 }
 
-// InitL2 initializes the op-reth databases, starts the node, and waits for its
+// InitL2 initializes the mc-reth databases, starts the node, and waits for its
 // RPC endpoints. Set exactly one genesis source: genesis or cfg.GenesisJSONPath.
 // The caller must create cfg.DataDir with t.TempDir().
 func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis.Genesis, jwtPath string, cfg Config) (*Instance, error) {
@@ -101,16 +101,16 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 
 	execPath, err := rustbin.Spec{
 		SrcDir:  "rust",
-		Package: "op-reth",
-		Binary:  "op-reth",
+		Package: "mc-reth",
+		Binary:  "mc-reth",
 	}.EnsureExists(ctx, lgr)
 	if err != nil {
-		return nil, fmt.Errorf("op-reth binary not available: %w", err)
+		return nil, fmt.Errorf("mc-reth binary not available: %w", err)
 	}
 
 	baseDir := cfg.DataDir
 	if baseDir == "" {
-		return nil, errors.New("op-reth DataDir must be set with t.TempDir()")
+		return nil, errors.New("mc-reth DataDir must be set with t.TempDir()")
 	}
 
 	dataDir := filepath.Join(baseDir, "data")
@@ -140,7 +140,7 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 		"--datadir="+dataDir,
 		"--chain="+chainConfigPath,
 	); err != nil {
-		return nil, fmt.Errorf("op-reth init: %w", err)
+		return nil, fmt.Errorf("mc-reth init: %w", err)
 	}
 
 	proofsInitArgs := []string{
@@ -150,7 +150,7 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 		"--proofs-history.storage-path=" + proofHistoryDir,
 	}
 	if err := runToCompletion(ctx, execPath, proofsInitArgs...); err != nil {
-		return nil, fmt.Errorf("op-reth proofs init: %w", err)
+		return nil, fmt.Errorf("mc-reth proofs init: %w", err)
 	}
 
 	args := []string{
@@ -192,7 +192,7 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 		logger: lgr,
 	}
 
-	// op-reth reports the ephemeral http/ws/auth ports via structured logs once
+	// mc-reth reports the ephemeral http/ws/auth ports via structured logs once
 	// the servers bind; capture the URLs from those readiness lines.
 	userHTTPRPCChan := make(chan string, 1)
 	userWSRPCChan := make(chan string, 1)
@@ -223,8 +223,8 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 		}
 	}
 
-	logOut := logpipe.ToLoggerWithMinLevel(lgr.New("component", "op-reth", "src", "stdout", "name", name), slog.LevelInfo)
-	logErr := logpipe.ToLoggerWithMinLevel(lgr.New("component", "op-reth", "src", "stderr", "name", name), slog.LevelWarn)
+	logOut := logpipe.ToLoggerWithMinLevel(lgr.New("component", "mc-reth", "src", "stdout", "name", name), slog.LevelInfo)
+	logErr := logpipe.ToLoggerWithMinLevel(lgr.New("component", "mc-reth", "src", "stderr", "name", name), slog.LevelWarn)
 	inst.stdoutPipe = logpipe.NewLineBuffer(func(line []byte) {
 		e := logpipe.ParseRustStructuredLogs(line)
 		logOut(e)
@@ -239,7 +239,7 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 	cmd.Stdout = inst.stdoutPipe
 	cmd.Stderr = inst.stderrPipe
 	if err := cmd.Start(); err != nil {
-		return nil, fmt.Errorf("start op-reth node: %w", err)
+		return nil, fmt.Errorf("start mc-reth node: %w", err)
 	}
 	inst.cmd = cmd
 	inst.exited = make(chan struct{})
@@ -256,13 +256,13 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 
 	var userHTTPURL, userWSURL, authURL string
 	if err := tasks.Await(ctx, userHTTPRPCChan, &userHTTPURL); err != nil {
-		return closeOnErr(fmt.Errorf("waiting for op-reth user HTTP RPC: %w", err))
+		return closeOnErr(fmt.Errorf("waiting for mc-reth user HTTP RPC: %w", err))
 	}
 	if err := tasks.Await(ctx, userWSRPCChan, &userWSURL); err != nil {
-		return closeOnErr(fmt.Errorf("waiting for op-reth user WS RPC: %w", err))
+		return closeOnErr(fmt.Errorf("waiting for mc-reth user WS RPC: %w", err))
 	}
 	if err := tasks.Await(ctx, authRPCChan, &authURL); err != nil {
-		return closeOnErr(fmt.Errorf("waiting for op-reth auth RPC: %w", err))
+		return closeOnErr(fmt.Errorf("waiting for mc-reth auth RPC: %w", err))
 	}
 
 	inst.userRPC = endpoint.WsOrHttpRPC{
@@ -276,14 +276,14 @@ func InitL2(ctx context.Context, lgr log.Logger, name string, genesis *opgenesis
 
 	client, err := ethclient.DialContext(ctx, endpoint.SelectRPC(endpoint.PreferHttpRPC, inst.userRPC))
 	if err != nil {
-		return closeOnErr(fmt.Errorf("dial op-reth user RPC: %w", err))
+		return closeOnErr(fmt.Errorf("dial mc-reth user RPC: %w", err))
 	}
 	defer client.Close()
 	if err := wait.ForNodeUp(ctx, client, lgr); err != nil {
-		return closeOnErr(fmt.Errorf("op-reth did not come up: %w", err))
+		return closeOnErr(fmt.Errorf("mc-reth did not come up: %w", err))
 	}
 
-	lgr.Info("op-reth is ready", "name", name, "userHTTPRPC", userHTTPURL, "userWSRPC", userWSURL, "authRPC", authURL)
+	lgr.Info("mc-reth is ready", "name", name, "userHTTPRPC", userHTTPURL, "userWSRPC", userWSURL, "authRPC", authURL)
 	return inst, nil
 }
 

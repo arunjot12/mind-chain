@@ -625,7 +625,7 @@ pub fn build_post_exec_tx(block_number: u64, gas_refund_entries: Vec<SDMGasEntry
 /// Post-exec transactions serialize as full RPC transaction objects when embedded in a
 /// [`crate::OpTxEnvelope`] response.
 ///
-/// Unlike the standalone [`TxPostExec`] serde form, RPC consumers such as op-node expect the
+/// Unlike the standalone [`TxPostExec`] serde form, RPC consumers such as mc-node expect the
 /// canonical `input` field to be present so the transaction can be decoded by go-ethereum types.
 #[cfg(feature = "serde")]
 pub fn serde_post_exec_tx_rpc<S>(

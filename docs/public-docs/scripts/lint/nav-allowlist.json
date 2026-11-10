@@ -22,7 +22,7 @@
       "reason": "Deliberately out of the sidebar: completed notice kept at a permanent URL because live pages link into it. Browsable from the notice archive index (notices/archive/index.mdx), which is the Archive entry in the Notices tab. Remove from this list only if the page is renavigated; delete the page only when nothing links to it and the hardfork registry carries the same facts."
     },
     {
-      "path": "notices/archive/op-deployer-upgrade-deprecation",
+      "path": "notices/archive/mc-deployer-upgrade-deprecation",
       "reason": "Deliberately out of the sidebar: completed notice kept at a permanent URL because live pages link into it. Browsable from the notice archive index (notices/archive/index.mdx), which is the Archive entry in the Notices tab. Remove from this list only if the page is renavigated; delete the page only when nothing links to it and the hardfork registry carries the same facts."
     },
     {

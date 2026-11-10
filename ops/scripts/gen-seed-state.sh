@@ -2,7 +2,7 @@
 #
 # Generates op-core/nuts/state/jovian_state.json.
 # It must use jovian's OWN toolchain, so we check out jovian's commit
-# in a worktree, where op-deployer and the contracts are mutually consistent,
+# in a worktree, where mc-deployer and the contracts are mutually consistent,
 # and dump the predeploy state there.
 #
 # Usage: ops/scripts/gen-seed-state.sh [commit]

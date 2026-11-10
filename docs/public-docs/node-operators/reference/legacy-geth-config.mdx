@@ -31,14 +31,14 @@ Legacy Geth accepts the following environment variables:
 
 ## Execution-client routing flag
 
-Both op-reth and op-geth use the same `--rollup.historicalrpc` flag to route pre-Bedrock requests to Legacy Geth.
+Both mc-reth and op-geth use the same `--rollup.historicalrpc` flag to route pre-Bedrock requests to Legacy Geth.
 The flag takes the URL of the Legacy Geth RPC endpoint, for example `--rollup.historicalrpc=http://localhost:8545`.
 
 ## RPC methods routed to Legacy Geth
 
-This section describes op-reth.
-When `--rollup.historicalrpc` is set, op-reth forwards requests that target pre-Bedrock blocks to Legacy Geth and serves everything else directly.
-This covers both methods that require transaction execution (which op-reth cannot perform for pre-Bedrock blocks) and methods that read pre-Bedrock block or transaction data.
+This section describes mc-reth.
+When `--rollup.historicalrpc` is set, mc-reth forwards requests that target pre-Bedrock blocks to Legacy Geth and serves everything else directly.
+This covers both methods that require transaction execution (which mc-reth cannot perform for pre-Bedrock blocks) and methods that read pre-Bedrock block or transaction data.
 Methods not listed below (for example `eth_getLogs`) are never routed to Legacy Geth.
 
 <Info>
@@ -62,7 +62,7 @@ Routed to Legacy Geth when the method's block parameter refers to a pre-Bedrock 
 
 ### Block data methods
 
-Routed to Legacy Geth when the requested block is pre-Bedrock, or when the requested block hash is unknown to op-reth:
+Routed to Legacy Geth when the requested block is pre-Bedrock, or when the requested block hash is unknown to mc-reth:
 
 - `eth_getBlockByNumber` / `eth_getBlockByHash`
 - `eth_getBlockReceipts`
@@ -76,7 +76,7 @@ Routed to Legacy Geth when the requested block is pre-Bedrock, or when the reque
 
 ### Transaction data methods
 
-Routed to Legacy Geth when the transaction belongs to a pre-Bedrock block, or when the transaction is unknown to op-reth:
+Routed to Legacy Geth when the transaction belongs to a pre-Bedrock block, or when the transaction is unknown to mc-reth:
 
 - `eth_getTransactionByHash`
 - `eth_getTransactionReceipt`
@@ -86,6 +86,6 @@ Routed to Legacy Geth when the transaction belongs to a pre-Bedrock block, or wh
 ### `eth_getBlockReceipts` emulation
 
 Legacy Geth (`l2geth`) predates `eth_getBlockReceipts` and does not implement it.
-op-reth forwards the request first; if Legacy Geth responds that the method does not exist, op-reth fetches the block's transaction hashes from Legacy Geth and assembles the response from one `eth_getTransactionReceipt` call per transaction.
+mc-reth forwards the request first; if Legacy Geth responds that the method does not exist, mc-reth fetches the block's transaction hashes from Legacy Geth and assembles the response from one `eth_getTransactionReceipt` call per transaction.
 Receipts are returned in transaction order and passed through verbatim, with their legacy fields intact — exactly what a forwarded `eth_getTransactionReceipt` returns for the same transactions.
 A block unknown to Legacy Geth returns `null`, and a block without transactions returns `[]`.

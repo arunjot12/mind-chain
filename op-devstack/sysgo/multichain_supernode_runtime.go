@@ -14,7 +14,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
 	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
@@ -22,10 +22,10 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	opnodeconfig "github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	opnodeconfig "github.com/ethereum-optimism/optimism/mc-node/config"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
@@ -117,7 +117,7 @@ func NewTwoL2SupernodeRuntimeWithConfig(t devtest.T, cfg PresetConfig) *MultiCha
 }
 
 // startSupernodeEL starts an L2 EL node for the supernode runtime,
-// respecting DEVSTACK_L2EL_KIND (defaults to op-reth when unset).
+// respecting DEVSTACK_L2EL_KIND (defaults to mc-reth when unset).
 func startSupernodeEL(t devtest.T, l2Net *L2Network, jwtPath string, jwtSecret [32]byte) L2ELNode {
 	return startL2ELForKey(t, l2Net, jwtPath, jwtSecret, "sequencer", NewELNodeIdentity(0), ResolveMixedL2ELOpts(t)...)
 }
@@ -149,7 +149,7 @@ func startSupernodeELWithInteropURL(
 		l2EL.Start()
 		t.Cleanup(l2EL.Stop)
 		return l2EL
-	default: // op-reth
+	default: // mc-reth
 		return startMixedOpRethNodeWithInteropURL(
 			t, l2Net, key, jwtPath, jwtSecret, nil, interopURL, ResolveMixedL2ELOpts(t)...)
 	}
@@ -598,7 +598,7 @@ func startSharedSupernode(
 			IgnoreMissingPectraBlobSchedule: false,
 			ExperimentalOPStackAPI:          true,
 		}
-		require.NoError(cfg.Check(), "invalid supernode op-node config for chain %s", l2Net.ChainID())
+		require.NoError(cfg.Check(), "invalid supernode mc-node config for chain %s", l2Net.ChainID())
 		return cfg
 	}
 
@@ -708,7 +708,7 @@ func startSingleChainSharedSupernode(
 			ExperimentalOPStackAPI:          true,
 			IgnoreMissingPectraBlobSchedule: false,
 		}
-		require.NoError(cfg.Check(), "invalid supernode op-node config for chain %s", l2Net.ChainID())
+		require.NoError(cfg.Check(), "invalid supernode mc-node config for chain %s", l2Net.ChainID())
 		return cfg
 	}
 

@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
 	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/closer"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"

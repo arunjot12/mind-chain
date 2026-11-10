@@ -7,7 +7,7 @@ import (
 )
 
 // SingleSupernodeWithSyncTester mirrors SimpleWithSyncTester but replaces the
-// verifier op-node CL with a verifier-mode supernode VN. Interop is always
+// verifier mc-node CL with a verifier-mode supernode VN. Interop is always
 // enabled; activation is controlled by WithInteropActivationDelay (0 = genesis).
 type SingleSupernodeWithSyncTester struct {
 	Minimal

@@ -8,8 +8,8 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/ethereum-optimism/optimism/op-conductor/flags"
-	opnode "github.com/ethereum-optimism/optimism/op-node"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	opnode "github.com/ethereum-optimism/optimism/mc-node"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
 	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
@@ -56,7 +56,7 @@ type Config struct {
 	// If the leader reaches this timeout without contacts to followers, it resigns.
 	RaftLeaderLeaseTimeout time.Duration
 
-	// NodeRPC is the HTTP provider URL for op-node.
+	// NodeRPC is the HTTP provider URL for mc-node.
 	NodeRPC string
 
 	// ExecutionRPC is the HTTP provider URL for execution layer.

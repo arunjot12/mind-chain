@@ -5,13 +5,13 @@
   DeployConfig struct tree in op-chain-ops/genesis at the release tag below.
   Do not hand-edit; regenerate per
   docs/public-docs/scripts/gen-deploy-config/README.md when a new finalized
-  op-deployer release is published:
+  mc-deployer release is published:
 
     go run ./docs/public-docs/scripts/gen-deploy-config
 */}
 
 Generated from the [`DeployConfig` struct](https://github.com/ethereum-optimism/optimism/blob/op-deployer%2Fv0.7.1/op-chain-ops/genesis/config.go)
-in `op-chain-ops/genesis` at [`op-deployer/v0.7.1`](https://github.com/ethereum-optimism/optimism/releases/tag/op-deployer%2Fv0.7.1):
+in `op-chain-ops/genesis` at [`mc-deployer/v0.7.1`](https://github.com/ethereum-optimism/optimism/releases/tag/op-deployer%2Fv0.7.1):
 122 values in 20 groups. The JSON key for each value is its `json:"..."` struct
 tag there; descriptions are the Go doc comments. When this page and the source
 disagree, the source wins.
@@ -157,7 +157,7 @@ L2CoreDeployConfig configures the core protocol parameters of the chain.
 | `sequencerWindowSize` | number | SequencerWindowSize is the number of L1 blocks per sequencing window. |
 | `channelTimeout` | number | ChannelTimeoutBedrock is the number of L1 blocks that a frame stays valid when included in L1. |
 | `batchInboxAddress` | address | BatchInboxAddress is the L1 account that batches are sent to. |
-| `systemConfigStartBlock` | number | SystemConfigStartBlock represents the block at which the op-node should start syncing from. It is an override to set this value on legacy networks where it is not set by default. It can be removed once all networks have this value set in their storage. |
+| `systemConfigStartBlock` | number | SystemConfigStartBlock represents the block at which the mc-node should start syncing from. It is an override to set this value on legacy networks where it is not set by default. It can be removed once all networks have this value set in their storage. |
 
 ### Fee market limits
 

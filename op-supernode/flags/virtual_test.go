@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
 
-	opnodeflags "github.com/ethereum-optimism/optimism/op-node/flags"
+	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
 )
 
 func newTestContext(t *testing.T, flags []cli.Flag, args []string) *cli.Context {
@@ -108,7 +108,7 @@ func TestFullDynamicFlags_ClonesAllFlagsForChainsAndGlobal(t *testing.T) {
 		seen[name] = struct{}{}
 	}
 
-	// For every op-node flag, we expect vn.all.<base> and vn.<id>.<base>
+	// For every mc-node flag, we expect vn.all.<base> and vn.<id>.<base>
 	for _, f := range opnodeflags.Flags {
 		base := f.Names()[0]
 		globalName := VNFlagGlobalPrefix + base

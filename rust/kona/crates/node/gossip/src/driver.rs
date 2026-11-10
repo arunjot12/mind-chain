@@ -47,7 +47,7 @@ pub struct GossipDriver<G: ConnectionGate> {
     /// This is an option to allow to take the underlying value when the gossip driver gets
     /// activated.
     ///
-    /// TODO(op-rs/kona#2141): remove the sync-req-resp protocol once the `op-node`
+    /// TODO(op-rs/kona#2141): remove the sync-req-resp protocol once the `mc-node`
     /// phases it out.
     #[debug(skip)]
     pub sync_protocol: Option<IncomingStreams>,
@@ -135,8 +135,8 @@ where
     /// ## Note
     ///
     /// This is used to ensure op-nodes are not penalizing kona-nodes for not supporting it.
-    /// This feature is being deprecated by the op-node team. Once it is fully removed from the
-    /// op-node's implementation we will remove this handler.
+    /// This feature is being deprecated by the mc-node team. Once it is fully removed from the
+    /// mc-node's implementation we will remove this handler.
     pub(super) fn sync_protocol_handler(&mut self) {
         let Some(mut sync_protocol) = self.sync_protocol.take() else {
             return;

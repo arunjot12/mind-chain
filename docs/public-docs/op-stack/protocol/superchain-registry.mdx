@@ -10,7 +10,7 @@ The [superchain-registry](https://github.com/ethereum-optimism/superchain-regist
 *   Validation checks to ensure standard chains comply with the Standard Rollup Charter and non-standard chains pass baseline validation before joining the superchain-registry
 *   A repository that shows who's in the registry and each chain's configuration
 
-The main benefit of joining the registry is a practical one: a registered chain's genesis and rollup configuration are baked into releases of the canonical OP Stack node software, including op-node and op-reth. Operators and node runners can start a node against a registered chain simply by passing its name to the client's network flag, with no need to hand-distribute configuration files. See [hard fork activation inheritance behavior](#hard-fork-activation-inheritance-behavior) below for the exact flags. Registration also lists your chain publicly alongside its configuration and signals reliability and alignment with the OP Stack ecosystem.
+The main benefit of joining the registry is a practical one: a registered chain's genesis and rollup configuration are baked into releases of the canonical OP Stack node software, including mc-node and mc-reth. Operators and node runners can start a node against a registered chain simply by passing its name to the client's network flag, with no need to hand-distribute configuration files. See [hard fork activation inheritance behavior](#hard-fork-activation-inheritance-behavior) below for the exact flags. Registration also lists your chain publicly alongside its configuration and signals reliability and alignment with the OP Stack ecosystem.
 
 ## What is a standard chain?
 
@@ -58,21 +58,21 @@ Two features define a standard chain in practice:
 *   **Specified sequencer configurations:**
     Sequencer settings must follow prescribed parameters for transaction ordering and submission to maintain network stability.
 
-## Role of op-deployer in standardization
+## Role of mc-deployer in standardization
 
-The [op-deployer](/chain-operators/tools/op-deployer/overview) is a tool designed to automate and streamline the deployment of standard configuration-compliant chains.
+The [mc-deployer](/chain-operators/tools/mc-deployer/overview) is a tool designed to automate and streamline the deployment of standard configuration-compliant chains.
 Key features include:
 
 *   **Default values:**
-    op-deployer provides default values that adhere to standard specifications.
+    mc-deployer provides default values that adhere to standard specifications.
 
 *   **Ease of customization within standards:**
-    The op-deployer tool allows for overriding default values. For example, you can override the L2 block time to 1s, which is standard. However, please ensure you know what you're doing when applying overrides because they may violate standard specifications.
+    The mc-deployer tool allows for overriding default values. For example, you can override the L2 block time to 1s, which is standard. However, please ensure you know what you're doing when applying overrides because they may violate standard specifications.
 
-By using op-deployer, chain operators can reduce the complexity of chain deployment while ensuring alignment with OP Stack standards.
+By using mc-deployer, chain operators can reduce the complexity of chain deployment while ensuring alignment with OP Stack standards.
 
 <Info>
-  We **strongly** recommend using the [op-deployer](/chain-operators/tools/op-deployer/overview) to deploy L1 contracts and generate the L2 genesis file that meets the configuration requirements outlined in the [Standard Rollup Charter](/op-stack/protocol/blockspace-charter).
+  We **strongly** recommend using the [mc-deployer](/chain-operators/tools/mc-deployer/overview) to deploy L1 contracts and generate the L2 genesis file that meets the configuration requirements outlined in the [Standard Rollup Charter](/op-stack/protocol/blockspace-charter).
 </Info>
 
 ## Joining the Registry
@@ -81,7 +81,7 @@ To join the Registry, follow the [Join the Superchain Registry guide](/chain-ope
 
 ## Hard fork activation inheritance behavior
 
-After being included into the superchain-registry, subsequent releases of the `op-node` and `op-geth` will contain the chain's genesis and rollup configurations baked in. You can use then use the `--network` (`op-node`) and `--op-network` (`op-geth`) flags to start up your node with this information. Using these flags means that the node will automatically inherit the hard fork activation times from the superchain-registry, so you don't need to manually set them in your node configuration.
+After being included into the superchain-registry, subsequent releases of the `mc-node` and `op-geth` will contain the chain's genesis and rollup configurations baked in. You can use then use the `--network` (`mc-node`) and `--op-network` (`op-geth`) flags to start up your node with this information. Using these flags means that the node will automatically inherit the hard fork activation times from the superchain-registry, so you don't need to manually set them in your node configuration.
 
 Additionally, chains can opt into the hard fork activation inheritance behavior by specifying the `superchain_time` in the chain's TOML file to start inheriting OP Stack wide activation timestamps.
 Networks that utilize this mechanism will activate network hard forks specified in the `superchain.toml` files: [Sepolia superchain.toml](https://github.com/ethereum-optimism/superchain-registry/blob/main/superchain/configs/sepolia/superchain.toml) and [Mainnet superchain.toml](https://github.com/ethereum-optimism/superchain-registry/blob/main/superchain/configs/mainnet/superchain.toml).

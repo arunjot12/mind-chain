@@ -4,8 +4,8 @@
 // It is invoked by ops/scripts/gen-seed-state.sh, which copies this file into a git
 // worktree checked out at the fork's commit and runs it there. Running inside the
 // worktree is the whole point: it pairs the fork-era contracts with the fork-era
-// op-deployer (via op-e2e/config), avoiding the ABI drift that breaks the current
-// op-deployer against older contracts. For that reason it depends only on the
+// mc-deployer (via op-e2e/config), avoiding the ABI drift that breaks the current
+// mc-deployer against older contracts. For that reason it depends only on the
 // long-stable public op-e2e/config.L2Allocs API, which exists across these
 // commits — do not add dependencies on newer helpers.
 package main

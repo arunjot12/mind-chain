@@ -9,7 +9,7 @@ date: 2026-07-08
 The Karst hard fork is a proposed network upgrade for OP Stack chains. It **introduces the L2 Contract Manager (L2CM)** enabling governance-approved L2 smart contract upgrades through a new consensus layer mechanism, **promotes `CANNON_KONA` to the respected game type** making the Rust-based `kona-client` the primary fault proof program used for withdrawals, **activates Osaka EIPs on L2** including the EIP-7825 transaction gas limit, and **adds a preemptive Glamsterdam Defense change** reducing the BN256 pairing precompile maximum input size from 427 to 300 pairs.
 
 <Warning>
-  **`op-geth` and `op-program` will not support Upgrade 19 / Karst.** Migrate to **`op-reth`** (and **`kona-client`** for fault proofs) before activation. End of Support is **May 31, 2026** — see [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation).
+  **`op-geth` and `op-program` will not support Upgrade 19 / Karst.** Migrate to **`mc-reth`** (and **`kona-client`** for fault proofs) before activation. End of Support is **May 31, 2026** — see [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation).
 </Warning>
 
 <Info>
@@ -34,7 +34,7 @@ Upgrade 19 introduces the following changes:
 * **OPCMv2:** Upgrade 19 is the first upgrade to use OPCMv2, the redesigned OP Contracts Manager. OPCMv2 has a new interface, please take a look at the [source code](https://github.com/ethereum-optimism/optimism/blob/c332a1bafb206f18561173eb13c31f1747f9aea4/packages/contracts-bedrock/src/L1/opcm/OPContractsManagerV2.sol#L38) (as of `c332a1b`) for more information.
 
 <Info>
-  This upgrade uses OPCMv2, the new default OP Contracts Manager. Chain operators calling `OPCM.upgrade()` directly or using `op-deployer` should ensure they are targeting the correct OPCMv2 contract version.
+  This upgrade uses OPCMv2, the new default OP Contracts Manager. Chain operators calling `OPCM.upgrade()` directly or using `mc-deployer` should ensure they are targeting the correct OPCMv2 contract version.
 </Info>
 
 ## Breaking Changes
@@ -45,7 +45,7 @@ After Upgrade 19, L2 transactions are subject to the [EIP-7825](https://eips.eth
 
 * **Deposit transactions are exempt** from the EIP-7825 limit. Deposits are already capped at 20M gas total per L1 block, and rejecting deposits on L2 that were accepted on L1 could cause permanent ETH loss. Deposits will continue to land on L2 even if their gas limit exceeds the EIP-7825 threshold.
 * **For app developers:** if your application submits L2 transactions with very high gas limits (above the EIP-7825 limit), those transactions will no longer be valid after this upgrade. In practice, very few transactions are expected to exceed this limit. If your contracts call `MODEXP` or `P256VERIFY`, verify that your gas estimates account for the updated costs. Contracts relying on hardcoded gas values for these precompiles should be updated. Additionally, `MODEXP` calls with inputs exceeding the new size limit will fail.
-* **For node operators:** the `op-reth` execution client must be updated to enforce the new gas limit rules. System deposit transactions (e.g., network upgrade transactions) are also exempt from the limit.
+* **For node operators:** the `mc-reth` execution client must be updated to enforce the new gas limit rules. System deposit transactions (e.g., network upgrade transactions) are also exempt from the limit.
 
 ### Glamsterdam Defense: BN256 pairing input size reduction
 
@@ -62,7 +62,7 @@ Upgrade 19 reduces the maximum input size for `ecPairing` (BN256 pairing, `0x08`
 After Upgrade 19, the respected game type changes from `CANNON` (0) to `CANNON_KONA` (8). Withdrawals must be proven against `CANNON_KONA` games.
 
 * **For users proving withdrawals:** no action required, the `OptimismPortal` will automatically recognize `CANNON_KONA` as the respected game type after the upgrade.
-* **For chain operators running permissionless fault proofs:** `op-challenger` must be configured to support `cannon-kona` trace types **prior** to the upgrade. Failure to update `op-challenger` may result in uncontested invalid games.
+* **For chain operators running permissionless fault proofs:** `mc-challenger` must be configured to support `cannon-kona` trace types **prior** to the upgrade. Failure to update `mc-challenger` may result in uncontested invalid games.
 
 ### L2CM: new L2 predeploy upgrade mechanism
 
@@ -74,28 +74,28 @@ Because Upgrade 19 includes hard fork changes (Osaka on L2 and Glamsterdam Defen
 
 <Steps>
   <Step title="Update to the latest release">
-  Update `op-node` and `op-reth` to the version specified in the component table below. The new version includes consensus rules for the Karst hard fork activation for chains in the superchain-registry.
+  Update `mc-node` and `mc-reth` to the version specified in the component table below. The new version includes consensus rules for the Karst hard fork activation for chains in the superchain-registry.
   </Step>
 
   <Step title="Configure the Karst activation timestamp">
   How you configure the Karst activation timestamp depends on whether your chain is in the superchain-registry.
 
   **Chains in the superchain-registry** (e.g. `Soneium`, `Ink`, `Unichain`, `Mode`, `Metal`, `Zora`):
-  The Karst activation timestamp is built into the updated releases — no manual timestamp configuration is needed. Make sure you are using the network flag so that op-node and op-reth load chain config from the superchain-registry:
-  * `op-node`: [`--network <network>`](/node-operators/reference/op-node-config#network-and-rollup-config) (e.g. `--network soneium-mainnet`, `--network op-sepolia`)
-  * `op-reth`: [`--chain <network>`](/node-operators/op-reth/cli/op-reth/node) (e.g. `--chain soneium`, `--chain unichain`)
+  The Karst activation timestamp is built into the updated releases — no manual timestamp configuration is needed. Make sure you are using the network flag so that mc-node and mc-reth load chain config from the superchain-registry:
+  * `mc-node`: [`--network <network>`](/node-operators/reference/mc-node-config#network-and-rollup-config) (e.g. `--network soneium-mainnet`, `--network op-sepolia`)
+  * `mc-reth`: [`--chain <network>`](/node-operators/mc-reth/cli/mc-reth/node) (e.g. `--chain soneium`, `--chain unichain`)
 
   **Chains not in the superchain-registry:**
   Set the activation timestamp manually in each client's config:
-  * `op-node`: set `karst_time: <timestamp>` in the rollup config
-  * `op-reth`: set `"karstTime": <timestamp>` in the genesis file
+  * `mc-node`: set `karst_time: <timestamp>` in the rollup config
+  * `mc-reth`: set `"karstTime": <timestamp>` in the genesis file
   </Step>
 
   <Step title="Verify activation configuration">
   Make the following checks to verify that your node is properly configured:
     * The configurations will be logged at startup
     * Check that the Karst time is set to its correct activation timestamp
-    * In the `op-node` startup logs, check that `keep_karst_upgrade_gas` is set to true if appropriate (see [this section](#gas-limit-action-required-for-affected-chains))
+    * In the `mc-node` startup logs, check that `keep_karst_upgrade_gas` is set to true if appropriate (see [this section](#gas-limit-action-required-for-affected-chains))
   </Step>
 </Steps>
 
@@ -105,16 +105,16 @@ Update the following components:
 
 | Component        | Version      | Notes |
 | ---------------- | ------------ | ----- |
-| `op-node`        | `v1.19.1`    | Must be updated **prior** to the activation timestamp. Includes the Karst gas limit fix (`keep_karst_upgrade_gas`). Replaces `v1.19.0`, which is now deprecated. |
-| `op-reth`        | `v2.3.3`     | Must be updated **prior** to the activation timestamp. Fixes SCR loading for `op-sepolia` and `op-mainnet`. Adds `engine_getPayloadV5` support for Karst. Replaces `v2.3.2`, which is now deprecated. |
-| `op-challenger`  | `v1.9.3`     | *(unchanged)* Must be updated **prior** to the upgrade. |
+| `mc-node`        | `v1.19.1`    | Must be updated **prior** to the activation timestamp. Includes the Karst gas limit fix (`keep_karst_upgrade_gas`). Replaces `v1.19.0`, which is now deprecated. |
+| `mc-reth`        | `v2.3.3`     | Must be updated **prior** to the activation timestamp. Fixes SCR loading for `op-sepolia` and `op-mainnet`. Adds `engine_getPayloadV5` support for Karst. Replaces `v2.3.2`, which is now deprecated. |
+| `mc-challenger`  | `v1.9.3`     | *(unchanged)* Must be updated **prior** to the upgrade. |
 | `op-dispute-mon` | `v1.5.2`     | *(unchanged)* Must be updated **prior** to the upgrade. |
 | `op-contracts`   | `v7.0.0`     | *(unchanged)* |
 | `rollup-boost`   | `v0.7.16`    | Only if running Flashblocks. Adds `engine_getPayloadV5` support for Karst. Replaces `v0.7.15`. |
 | `op-rbuilder`    | `v0.4.9`     | Only if running Flashblocks. Fixes SCR loading for `op-sepolia`/`op-mainnet`. Adds `engine_getPayloadV5` support. Replaces `v0.4.8`. |
 
 <Warning>
-  **Upgrade order:** On networks that have **not yet activated Karst** (pre-Karst), `op-node`, `op-reth`, and `op-rbuilder` can be upgraded independently in any order — they will continue using the previous Engine API version until the fork timestamp. On networks that have **already activated Karst** (post-Karst, e.g. Sepolia chains), all three must be upgraded together in a coordinated rollout, as Karst requires `engine_getPayloadV5` and a version mismatch will cause downtime.
+  **Upgrade order:** On networks that have **not yet activated Karst** (pre-Karst), `mc-node`, `mc-reth`, and `op-rbuilder` can be upgraded independently in any order — they will continue using the previous Engine API version until the fork timestamp. On networks that have **already activated Karst** (post-Karst, e.g. Sepolia chains), all three must be upgraded together in a coordinated rollout, as Karst requires `engine_getPayloadV5` and a version mismatch will cause downtime.
 </Warning>
 
 ### Gas limit: action required for affected chains
@@ -132,7 +132,7 @@ The chains with `keep_karst_upgrade_gas = true` are:
 Metal, Mode, and Zora Mainnet did not have this value configured on their sequencers during Karst activation.
 So they inherited the default value of `keep_karst_upgrade_gas = false`.
 
-Node operators will not be able to utilize the `--network` flag on `op-node` until a subsequent node release is cut with these changes being [updated](https://github.com/ethereum-optimism/superchain-registry/pull/1281) in the superchain-registry.
+Node operators will not be able to utilize the `--network` flag on `mc-node` until a subsequent node release is cut with these changes being [updated](https://github.com/ethereum-optimism/superchain-registry/pull/1281) in the superchain-registry.
 
 
 #### Restoring the gas limit
@@ -164,7 +164,7 @@ After activation, submit a `setGasLimit()` transaction from your chain's `System
 
 ### For permissioned fault proof chains
 
-Chains running **permissioned** fault proofs (game type `PERMISSIONED`) do not need the full permissionless setup below, but `op-challenger` still requires a cannon prestate to be configured at startup even though the legacy `CANNON` (0) prestate is not used after the upgrade.
+Chains running **permissioned** fault proofs (game type `PERMISSIONED`) do not need the full permissionless setup below, but `mc-challenger` still requires a cannon prestate to be configured at startup even though the legacy `CANNON` (0) prestate is not used after the upgrade.
 
 If you are currently passing `--prestates-url=<YOUR_PRESTATE_URL>`, replace it with a placeholder cannon prestate:
 
@@ -188,7 +188,7 @@ With `CANNON_KONA` becoming the respected game type, chains running permissionle
   If you are a permissionless FP enabled chain not included in the prepared set, you must perform all steps below yourself.
 </Info>
 
-If your chain was already configured for `cannon-kona` as part of [Upgrade 18](/notices/archive/upgrade-18), verify that your `op-challenger` is running the latest version and that prestates are up to date.
+If your chain was already configured for `cannon-kona` as part of [Upgrade 18](/notices/archive/upgrade-18), verify that your `mc-challenger` is running the latest version and that prestates are up to date.
 
 <Steps>
   <Step title="Verify the new kona-client absolute prestate">
@@ -244,13 +244,13 @@ If your chain was already configured for `cannon-kona` as part of [Upgrade 18](/
   </Step>
 
   <Step title="Upload your new preimage files">
-  Upload the new preimage file to where you're storing your other absolute preimage files. This should be the location where you're pointing your `--prestates-url` at. The `op-challenger` will fetch this file and use it when it needs to challenge games.
+  Upload the new preimage file to where you're storing your other absolute preimage files. This should be the location where you're pointing your `--prestates-url` at. The `mc-challenger` will fetch this file and use it when it needs to challenge games.
 
   Rename the file to have the absolute prestate hash as the filename (e.g., `0x<hash>.bin.gz`).
   </Step>
 
-  <Step title="Configure op-challenger for cannon-kona as respected game type">
-  Ensure `op-challenger` is updated and configured to support Kona games.
+  <Step title="Configure mc-challenger for cannon-kona as respected game type">
+  Ensure `mc-challenger` is updated and configured to support Kona games.
   Include `cannon-kona` in trace types:
 
   ```bash
@@ -273,7 +273,7 @@ If your chain was already configured for `cannon-kona` as part of [Upgrade 18](/
   --cannon-kona-prestates-url=<CANNON_KONA_PRESTATES_URL>
   ```
 
-  If not using the standard OP Labs `op-challenger` Docker image, set the `kona-host` binary path:
+  If not using the standard OP Labs `mc-challenger` Docker image, set the `kona-host` binary path:
 
   ```bash
   OP_CHALLENGER_CANNON_KONA_SERVER=/path/to/kona-host
@@ -290,12 +290,12 @@ If your chain was already configured for `cannon-kona` as part of [Upgrade 18](/
   Please simulate and validate the expected output prior to executing the transaction.
   </Step>
 
-  <Step title="Update op-proposer to use CANNON_KONA game type">
+  <Step title="Update mc-proposer to use CANNON_KONA game type">
   <Warning>
-    **`op-proposer` will start failing immediately after the contract upgrade executes** if the game type is not updated. The respected game type changes to `CANNON_KONA` (8) on-chain at the moment the upgrade transaction lands — any proposals submitted against the old game type (0) after that point will be rejected. Update the game type before or at the same time as the contract upgrade.
+    **`mc-proposer` will start failing immediately after the contract upgrade executes** if the game type is not updated. The respected game type changes to `CANNON_KONA` (8) on-chain at the moment the upgrade transaction lands — any proposals submitted against the old game type (0) after that point will be rejected. Update the game type before or at the same time as the contract upgrade.
   </Warning>
 
-  After the L1 contract upgrade executes, the respected game type changes from `CANNON` (0) to `CANNON_KONA` (8) on-chain. `op-proposer` must be reconfigured to submit proposals against the new game type, or it will begin failing immediately after the upgrade.
+  After the L1 contract upgrade executes, the respected game type changes from `CANNON` (0) to `CANNON_KONA` (8) on-chain. `mc-proposer` must be reconfigured to submit proposals against the new game type, or it will begin failing immediately after the upgrade.
 
   Set the game type to `8` in your proposer configuration:
 

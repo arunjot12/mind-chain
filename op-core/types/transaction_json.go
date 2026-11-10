@@ -129,7 +129,7 @@ func (d *DepositTx) UnmarshalJSON(input []byte) error {
 
 // Hash returns the transaction hash: the keccak-256 hash of the canonical
 // EIP-2718 encoding — the rule every typed transaction follows, shared with
-// op-reth (see TestPostExecTxHashGoldenVector). See DepositTx.Hash for the
+// mc-reth (see TestPostExecTxHashGoldenVector). See DepositTx.Hash for the
 // panic rationale.
 func (p *PostExecTx) Hash() common.Hash {
 	raw, err := p.MarshalBinary()

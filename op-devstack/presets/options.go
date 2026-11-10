@@ -3,9 +3,9 @@ package presets
 import (
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 
@@ -234,8 +234,8 @@ func WithZKProposerOption(opt sysgo.ZKProposerOption) Option {
 	}
 }
 
-// WithOpRethOption applies an op-reth option to every EL in the preset that can sequence. Nodes
-// that only verify stay on stock op-reth, so a binary override here yields a sequencing-builds /
+// WithOpRethOption applies an mc-reth option to every EL in the preset that can sequence. Nodes
+// that only verify stay on stock mc-reth, so a binary override here yields a sequencing-builds /
 // stock-verifies split rather than a uniform swap.
 func WithOpRethOption(opt sysgo.OpRethOption) Option {
 	var kinds optionKinds
@@ -365,7 +365,7 @@ func WithInteropLogBackfillDepth(d time.Duration) Option {
 	}
 }
 
-// WithoutHonestProposer skips starting the honest proposer (op-proposer, or op-zk-proposer for the ZK preset).
+// WithoutHonestProposer skips starting the honest proposer (mc-proposer, or op-zk-proposer for the ZK preset).
 func WithoutHonestProposer() Option {
 	return option{
 		kinds: optionKindSkipHonestProposer,
@@ -400,7 +400,7 @@ func WithConductorFastHealthChecks() Option {
 }
 
 // WithInteropAtGenesis activates the Lagoon hardfork at genesis on the L2 chain and provisions
-// a DependencySet for op-node startup without a supervisor. Required by presets that exercise
+// a DependencySet for mc-node startup without a supervisor. Required by presets that exercise
 // interop-gated consensus features (e.g. SDM PostExec).
 func WithInteropAtGenesis() Option {
 	return option{

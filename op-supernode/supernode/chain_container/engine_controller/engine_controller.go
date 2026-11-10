@@ -5,8 +5,8 @@ import (
 	"errors"
 
 	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
@@ -72,8 +72,8 @@ func NewEngineControllerWithL2AndRollup(l2 l2Provider, rollup *rollup.Config) En
 	return &simpleEngineController{l2: l2, rollup: rollup, log: oplog.New()}
 }
 
-// NewEngineControllerFromConfig builds an engine client from the op-node L2 endpoint config.
-// This creates a separate connection (not passed as an override to op-node).
+// NewEngineControllerFromConfig builds an engine client from the mc-node L2 endpoint config.
+// This creates a separate connection (not passed as an override to mc-node).
 //
 // The connection is dialed lazily: setup never touches the network, so the controller is
 // usable even when the L2 engine is unreachable at startup. The underlying client dials on

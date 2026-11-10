@@ -13,7 +13,7 @@ This feature was introduced with the Ecotone network upgrade.
   <Step title="Determine scalar values for using blobs">
   The first step to switching to submit data with Blobs is to calculate the
     scalar values you wish to set for the formula to charge users fees.
-    Your scalar values depend on the average transactions per day your chain is processing, the types of transactions that occur on your chain, the [`OP_BATCHER_MAX_CHANNEL_DURATION`](/chain-operators/guides/configuration/batcher#set-your--op_batcher_max_channel_duration) you have parameterized on your `op-batcher`, and the target margin you wish to charge users on top of your L1 costs.
+    Your scalar values depend on the average transactions per day your chain is processing, the types of transactions that occur on your chain, the [`OP_BATCHER_MAX_CHANNEL_DURATION`](/chain-operators/guides/configuration/batcher#set-your--op_batcher_max_channel_duration) you have parameterized on your `mc-batcher`, and the target margin you wish to charge users on top of your L1 costs.
     For a walkthrough of sizing the scalars against your measured batcher spend, see [Recover the spend with fee scalars](/use-cases/tune-batcher-costs#step-5-recover-the-spend-with-fee-scalars) in the Tune batcher costs guide.
     For more details on fee scalar, see [Transaction Fees, Ecotone section](/op-stack/transactions/fees#ecotone).
   

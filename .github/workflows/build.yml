@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [op-node, op-batcher, op-proposer, op-challenger, op-reth, kona-host]
+        target: [mc-node, mc-batcher, mc-proposer, mc-challenger, mc-reth, kona-host]
     steps:
       - uses: actions/checkout@v4
         with:

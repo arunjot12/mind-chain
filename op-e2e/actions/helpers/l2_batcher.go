@@ -18,13 +18,13 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 
 	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-batcher/compressor"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	"github.com/ethereum-optimism/optimism/mc-batcher/batcher"
+	"github.com/ethereum-optimism/optimism/mc-batcher/compressor"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	derive_params "github.com/ethereum-optimism/optimism/op-node/rollup/derive/params"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	derive_params "github.com/ethereum-optimism/optimism/mc-node/rollup/derive/params"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum-optimism/optimism/op-service/txmgr"
@@ -95,9 +95,9 @@ type L2BlockRefs interface {
 
 // L2Batcher buffers and submits L2 batches to L1.
 //
-// TODO: note the batcher shares little logic/state with actual op-batcher,
+// TODO: note the batcher shares little logic/state with actual mc-batcher,
 // tests should only use this actor to build batch contents for rollup node actors to consume,
-// until the op-batcher is refactored and can be covered better.
+// until the mc-batcher is refactored and can be covered better.
 type L2Batcher struct {
 	log log.Logger
 

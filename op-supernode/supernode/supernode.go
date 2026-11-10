@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
+	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
 	"github.com/ethereum-optimism/optimism/op-service/apis"
 	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/eth"

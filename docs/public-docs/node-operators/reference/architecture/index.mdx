@@ -13,7 +13,7 @@ OP Mainnet also optionally supports a third component, Legacy Geth, that can ser
 
 ## Node flow diagram
 The following diagram shows how the Rollup Node, Execution Client, and Legacy Geth components work together to form a complete node running on OP Stack networks.
-This diagram uses the `op-node` implementation of the Rollup Node and shows the general architecture that applies to all execution client implementations.
+This diagram uses the `mc-node` implementation of the Rollup Node and shows the general architecture that applies to all execution client implementations.
 
 ![OP Mainnet node architecture diagram.](/public/img/guides/node-operators/node-arch.svg)
 
@@ -23,10 +23,10 @@ The Rollup Node is responsible for deriving L2 block payloads from L1 data and p
 
 ### Rollup node implementations
 
-*   **[op-node](/op-stack/components/op-node)** is the reference implementation of the Rollup Node, written in Go and maintained by Optimism. It is the default choice for any node role and is not deprecated.
+*   **[mc-node](/op-stack/components/mc-node)** is the reference implementation of the Rollup Node, written in Go and maintained by Optimism. It is the default choice for any node role and is not deprecated.
 *   **[kona-node](/op-stack/components/kona-node)** is the Rust implementation of the Rollup Node, built as part of the Kona project. It is in active development and should be considered experimental, so give it a role where that is acceptable.
 
-For nodes that follow every chain in an [interop](/op-stack/interop/explainer) dependency set, deploy the consensus layer as [op-supernode](/op-stack/interop/supernode), which hosts an op-node instance for each chain in one process and adds cross-chain message verification. See the [supernode configuration guide](/node-operators/guides/configuration/supernode) for recommended settings and the [op-supernode configuration reference](/node-operators/reference/op-supernode-config) for the flag catalogue.
+For nodes that follow every chain in an [interop](/op-stack/interop/explainer) dependency set, deploy the consensus layer as [op-supernode](/op-stack/interop/supernode), which hosts an mc-node instance for each chain in one process and adds cross-chain message verification. See the [supernode configuration guide](/node-operators/guides/configuration/supernode) for recommended settings and the [op-supernode configuration reference](/node-operators/reference/op-supernode-config) for the flag catalogue.
 
 ## Execution client
 
@@ -36,7 +36,7 @@ The Execution Client is largely analogous to an [execution client](https://ether
 
 ### Execution client implementations
 
-*   **[op-reth](/op-stack/components/op-reth)** is the Optimism-maintained execution client, written in Rust and built on reth. It is the primary supported execution client for OP Stack nodes. See the [execution client configuration guide](/node-operators/guides/configuration/execution-clients) for a working configuration.
+*   **[mc-reth](/op-stack/components/mc-reth)** is the Optimism-maintained execution client, written in Rust and built on reth. It is the primary supported execution client for OP Stack nodes. See the [execution client configuration guide](/node-operators/guides/configuration/execution-clients) for a working configuration.
 *   **[Nethermind](https://github.com/NethermindEth/nethermind)** is a third-party execution client written in C# that also supports OP Stack chains. The docs focus on Optimism-maintained software; for Nethermind specifics, see the [Nethermind documentation](https://docs.nethermind.io/get-started/running-node/l2-networks).
 
 <OpGethEol />
@@ -50,6 +50,6 @@ It is typically only needed for complete OP Mainnet archive nodes; see the [Lega
 
 ## Next steps
 
-*   To get your node up and running, start with the [run a node from docker](/node-operators/tutorials/node-from-docker) or [build and run a node from source](/node-operators/tutorials/run-node-from-source) tutorial. The source tutorial covers `op-reth` (primary) and `Nethermind` execution clients.
+*   To get your node up and running, start with the [run a node from docker](/node-operators/tutorials/node-from-docker) or [build and run a node from source](/node-operators/tutorials/run-node-from-source) tutorial. The source tutorial covers `mc-reth` (primary) and `Nethermind` execution clients.
 *   If you've already got your node up and running, check out the [Node Metrics and Monitoring Guide](/node-operators/guides/monitoring/metrics) to learn how to keep tabs on your node and make sure it keeps running smoothly.
 *   If you run into any problems, please visit the [Node Troubleshooting Guide](/node-operators/guides/troubleshooting) for help.

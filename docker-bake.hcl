@@ -90,7 +90,7 @@ variable "OP_INTEROP_MON_VERSION" {
 }
 
 
-target "op-node" {
+target "mc-node" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -98,12 +98,12 @@ target "op-node" {
     GIT_DATE = "${GIT_DATE}"
     OP_NODE_VERSION = "${OP_NODE_VERSION}"
   }
-  target = "op-node-target"
+  target = "mc-node-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-node:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-node:${tag}"]
 }
 
-target "op-batcher" {
+target "mc-batcher" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -111,12 +111,12 @@ target "op-batcher" {
     GIT_DATE = "${GIT_DATE}"
     OP_BATCHER_VERSION = "${OP_BATCHER_VERSION}"
   }
-  target = "op-batcher-target"
+  target = "mc-batcher-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-batcher:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-batcher:${tag}"]
 }
 
-target "op-proposer" {
+target "mc-proposer" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -124,12 +124,12 @@ target "op-proposer" {
     GIT_DATE = "${GIT_DATE}"
     OP_PROPOSER_VERSION = "${OP_PROPOSER_VERSION}"
   }
-  target = "op-proposer-target"
+  target = "mc-proposer-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-proposer:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-proposer:${tag}"]
 }
 
-target "op-challenger" {
+target "mc-challenger" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -137,9 +137,9 @@ target "op-challenger" {
     GIT_DATE = "${GIT_DATE}"
     OP_CHALLENGER_VERSION = "${OP_CHALLENGER_VERSION}"
   }
-  target = "op-challenger-target"
+  target = "mc-challenger-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-challenger:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-challenger:${tag}"]
 }
 
 target "op-dispute-mon" {
@@ -232,7 +232,7 @@ target "cannon" {
   tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/cannon:${tag}"]
 }
 
-target "op-deployer" {
+target "mc-deployer" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -240,9 +240,9 @@ target "op-deployer" {
     GIT_DATE = "${GIT_DATE}"
     OP_DEPLOYER_VERSION = "${OP_DEPLOYER_VERSION}"
   }
-  target = "op-deployer-target"
+  target = "mc-deployer-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-deployer:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-deployer:${tag}"]
 }
 
 target "op-dripper" {
@@ -351,8 +351,8 @@ target "op-zk-proposer" {
   tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-zk-proposer:${tag}"]
 }
 
-target "op-reth" {
-  dockerfile = "op-reth/DockerfileOp"
+target "mc-reth" {
+  dockerfile = "mc-reth/DockerfileOp"
   context = "rust"
   # The chainspec build.rs reads the superchain-registry submodule (at the repo
   # root, outside the "rust" context); expose it as a named context so the
@@ -367,7 +367,7 @@ target "op-reth" {
     GIT_DATE = "${GIT_DATE}"
   }
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-reth:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-reth:${tag}"]
 }
 
 target "cannon-builder" {

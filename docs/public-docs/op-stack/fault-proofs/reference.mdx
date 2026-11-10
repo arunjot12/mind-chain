@@ -11,7 +11,7 @@ For how the system works, see the [Fault proofs explainer](/op-stack/fault-proof
 <Info>
   Contract addresses and several parameter values are set per chain.
   Look up the values for a specific chain in the [Superchain Registry](/op-stack/protocol/superchain-registry) or by querying the deployed contracts directly.
-  The standard values on this page are the defaults `op-deployer` applies to new standard chains, as defined in [`op-deployer/pkg/deployer/standard/standard.go`](https://github.com/ethereum-optimism/optimism/blob/develop/op-deployer/pkg/deployer/standard/standard.go).
+  The standard values on this page are the defaults `mc-deployer` applies to new standard chains, as defined in [`mc-deployer/pkg/deployer/standard/standard.go`](https://github.com/ethereum-optimism/optimism/blob/develop/op-deployer/pkg/deployer/standard/standard.go).
 </Info>
 
 ## Dispute game types
@@ -40,7 +40,7 @@ Notes:
 
 *   A game type is only playable on a chain after the `DisputeGameFactory` owner registers an implementation for it (`setImplementation`); the owner also sets the bond required to create games of that type (`setInitBond`).
 *   The **respected game type** (the game type whose results the system accepts for withdrawals and anchor state updates) is stored in the `AnchorStateRegistry` and can be changed by the Guardian via `setRespectedGameType`.
-*   `op-deployer` deploys new standard chains with the permissioned game (type `1`) as the initial game type.
+*   `mc-deployer` deploys new standard chains with the permissioned game (type `1`) as the initial game type.
 
 ## Core contracts
 
@@ -78,7 +78,7 @@ Per-chain deployment addresses are listed in the [Superchain Registry](/op-stack
 
 ## Standard parameters
 
-Values below are the `op-deployer` standard-chain defaults.
+Values below are the `mc-deployer` standard-chain defaults.
 Individual chains can deviate; always confirm against the chain's deployed configuration.
 
 ### Bisection game

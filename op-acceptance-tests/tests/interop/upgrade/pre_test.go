@@ -23,14 +23,14 @@ import (
 )
 
 // preInteropExecError returns true if err matches a known pre-interop
-// executing message failure from op-geth or op-reth.
+// executing message failure from op-geth or mc-reth.
 func preInteropExecError(err error) bool {
 	msg := err.Error()
 	// op-geth: gas estimation hits the uninitialized proxy and returns the revert reason
 	if strings.Contains(msg, "implementation not initialized") {
 		return true
 	}
-	// op-reth: gas estimation fails with a generic gas error for the same underlying reason
+	// mc-reth: gas estimation fails with a generic gas error for the same underlying reason
 	if strings.Contains(msg, "intrinsic gas too high") {
 		return true
 	}

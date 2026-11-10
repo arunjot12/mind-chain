@@ -11,9 +11,9 @@ TEST_TIMEOUT := env('TEST_TIMEOUT', '10m')
 #   op-acceptance-tests             dedicated acceptance-test job (needs a running devnet)
 #   cannon                          dedicated cannon job (slow MIPS emulation tests)
 #   rust                            rust-e2e pipeline (needs prebuilt Rust binaries)
-#   op-deployer/pkg/deployer/forge  fails when forge is on PATH (ethereum-optimism/optimism#21200)
+#   mc-deployer/pkg/deployer/forge  fails when forge is on PATH (ethereum-optimism/optimism#21200)
 # See the list-test-packages recipe, which expands `go list ./...` minus these.
-EXCLUDED_TEST_PKGS := "op-acceptance-tests cannon rust op-deployer/pkg/deployer/forge"
+EXCLUDED_TEST_PKGS := "op-acceptance-tests cannon rust mc-deployer/pkg/deployer/forge"
 
 # Fault-proof packages run in the default go-tests job and again in a dedicated
 # job with Cannon enabled, so they keep a separate list.
@@ -61,7 +61,7 @@ sync-superchain-go:
   @OP_CORE_SYNC_SUPERCHAIN=1 just build-superchain-go
 
 # Regenerates the committed Rust artifacts from the submodule: kona's etc/*.json
-# (via KONA_SYNC_SUPERCHAIN) and op-reth's superchain-configs.tar.sha256 +
+# (via KONA_SYNC_SUPERCHAIN) and mc-reth's superchain-configs.tar.sha256 +
 # chain_specs.rs (via OP_RETH_SYNC_SUPERCHAIN; the tar itself is gitignored).
 sync-superchain-rust: update-superchain-registry-submodule
   cd rust && KONA_SYNC_SUPERCHAIN=true cargo build -p kona-registry
@@ -76,7 +76,7 @@ sync-superchain ref="": (update-superchain-registry-submodule ref) sync-supercha
 build: build-go build-contracts
 
 # Builds main Go components.
-build-go: submodules build-superchain-go op-node op-proposer op-batcher op-challenger op-dispute-mon cannon
+build-go: submodules build-superchain-go mc-node mc-proposer mc-batcher mc-challenger op-dispute-mon cannon
 
 # Builds contracts-bedrock.
 build-contracts:
@@ -119,7 +119,7 @@ golang-docker: update-superchain-registry-submodule
       --progress plain \
       --load \
       -f docker-bake.hcl \
-      op-node op-batcher op-proposer op-challenger op-dispute-mon
+      mc-node mc-batcher mc-proposer mc-challenger op-dispute-mon
 
 # Builds selected Docker image targets using buildx.
 [private]
@@ -139,14 +139,14 @@ docker-bake targets: update-superchain-registry-submodule
       -f docker-bake.hcl \
       "${bake_targets[@]}"
 
-# Builds Docker image for op-node using buildx.
-op-node-docker: (docker-bake "op-node")
+# Builds Docker image for mc-node using buildx.
+mc-node-docker: (docker-bake "mc-node")
 
-# Builds Docker image for op-batcher using buildx.
-op-batcher-docker: (docker-bake "op-batcher")
+# Builds Docker image for mc-batcher using buildx.
+mc-batcher-docker: (docker-bake "mc-batcher")
 
-# Builds the requested local Docker images for op-node and op-batcher.
-op-stack-go-requested-docker: (docker-bake "op-node op-batcher")
+# Builds the requested local Docker images for mc-node and mc-batcher.
+op-stack-go-requested-docker: (docker-bake "mc-node mc-batcher")
 
 # Removes the Docker buildx builder.
 docker-builder-clean:
@@ -162,12 +162,12 @@ docker-builder:
 compute-git-versions:
   GIT_COMMIT=$(git rev-parse HEAD) ./ops/scripts/compute-git-versions.sh
 
-# Builds cross-platform Docker image for op-node.
+# Builds cross-platform Docker image for mc-node.
 [script('bash')]
-cross-op-node:
+cross-mc-node:
   set -euo pipefail
   GITCOMMIT=$(git rev-parse HEAD)
-  tags=$(git tag --points-at "$GITCOMMIT" | grep '^op-node/' | sed 's/op-node\///' | sort -V)
+  tags=$(git tag --points-at "$GITCOMMIT" | grep '^mc-node/' | sed 's/mc-node\///' | sort -V)
   preferred_tag=$(echo "$tags" | grep -v -- '-rc' | tail -n 1)
   if [ -z "$preferred_tag" ]; then
       if [ -z "$tags" ]; then
@@ -189,7 +189,7 @@ cross-op-node:
       --load \
       --no-cache \
       -f docker-bake.hcl \
-      op-node
+      mc-node
 
 # Builds Docker image for Bedrock contracts.
 [script('bash')]
@@ -206,29 +206,29 @@ contracts-bedrock-docker:
 submodules:
   git submodule update --init --recursive
 
-# Builds op-node binary.
-op-node:
-  just ./op-node/op-node
+# Builds mc-node binary.
+mc-node:
+  just ./mc-node/mc-node
 
-# Generates mocks for op-node.
-generate-mocks-op-node:
-  cd op-node && just generate-mocks
+# Generates mocks for mc-node.
+generate-mocks-mc-node:
+  cd mc-node && just generate-mocks
 
 # Generates mocks for op-service.
 generate-mocks-op-service:
   cd op-service && just generate-mocks
 
-# Builds op-batcher binary.
-op-batcher:
-  just ./op-batcher/op-batcher
+# Builds mc-batcher binary.
+mc-batcher:
+  just ./mc-batcher/mc-batcher
 
-# Builds op-proposer binary.
-op-proposer:
-  just ./op-proposer/op-proposer
+# Builds mc-proposer binary.
+mc-proposer:
+  just ./mc-proposer/mc-proposer
 
-# Builds op-challenger binary.
-op-challenger:
-  cd op-challenger && just op-challenger
+# Builds mc-challenger binary.
+mc-challenger:
+  cd mc-challenger && just mc-challenger
 
 # Builds op-dispute-mon binary.
 op-dispute-mon:
@@ -285,9 +285,9 @@ nuke: clean
 
 # Runs unit tests for individual components.
 test-unit:
-  cd op-node && just test
-  cd op-proposer && just test
-  cd op-batcher && just test
+  cd mc-node && just test
+  cd mc-proposer && just test
+  cd mc-batcher && just test
   cd op-e2e && just test
   cd packages/contracts-bedrock && just test
 
@@ -435,7 +435,7 @@ update-op-geth:
 
 # Build all Rust binaries (release) for sysgo tests.
 build-rust-release:
-  cd rust && cargo build --release -p kona-node --bin kona-node -p kona-host --bin kona-host -p op-reth --bin op-reth
+  cd rust && cargo build --release -p kona-node --bin kona-node -p kona-host --bin kona-host -p mc-reth --bin mc-reth
 
 # Checks that locked NUT bundles have not been modified.
 check-nut-locks:
@@ -542,7 +542,7 @@ latest-rc-tag component:
 # directory. Consumers needing a glob append `**/*` themselves — release-notes
 # does, for git-cliff.
 #
-#   just release-paths op-challenger
+#   just release-paths mc-challenger
 [script('bash')]
 release-paths component:
     set -euo pipefail
@@ -555,37 +555,37 @@ release-paths component:
     kona_host="kona-host=rust/Cargo.toml,rust/kona/bin/host/,rust/kona/crates/proof/,rust/kona/crates/protocol/,rust/kona/crates/providers/,rust/kona/crates/utilities/,rust/alloy-op-evm/,rust/alloy-op-hardforks/,rust/op-alloy/,rust/op-revm/"
     specs=()
     case "{{ component }}" in
-        op-node|op-batcher|op-proposer|op-supernode|op-dispute-mon)
+        mc-node|mc-batcher|mc-proposer|op-supernode|op-dispute-mon)
             specs=("{{ component }}/" "$go_shared")
             ;;
-        op-challenger)
-            # The op-challenger image ships three binaries, so all three are
-            # release-relevant: op-challenger itself, the cannon VM, and kona-host
-            # built from the in-repo rust/ workspace. See the op-challenger-target
+        mc-challenger)
+            # The mc-challenger image ships three binaries, so all three are
+            # release-relevant: mc-challenger itself, the cannon VM, and kona-host
+            # built from the in-repo rust/ workspace. See the mc-challenger-target
             # stage in ops/docker/op-stack-go/Dockerfile. A kona-host-only fix has
-            # no op-challenger/ diff yet still changes what operators run.
+            # no mc-challenger/ diff yet still changes what operators run.
             # kona-client is not in the image — it ships as a prestate hash.
-            specs=("op-challenger/" "cannon/" "$kona_host" "$go_shared")
+            specs=("mc-challenger/" "cannon/" "$kona_host" "$go_shared")
             ;;
-        op-reth)
+        mc-reth)
             specs=("rust/{{ component }}/" "rust/Cargo.toml" "rust/op-alloy/" "rust/alloy-op-evm/" "rust/alloy-op-hardforks/")
             ;;
         kona-*|op-zk-proposer)
             specs=("rust/kona/" "rust/Cargo.toml" "rust/op-alloy/" "rust/alloy-op-evm/" "rust/alloy-op-hardforks/" "rust/op-revm/")
             ;;
-        op-deployer)
-            # op-deployer embeds the contract artifacts and runs the scripts in
-            # them, so a script change alters what op-deployer does. The scripts
+        mc-deployer)
+            # mc-deployer embeds the contract artifacts and runs the scripts in
+            # them, so a script change alters what mc-deployer does. The scripts
             # import a few test mocks. Contract source changes belong to the
-            # op-contracts release that the op-deployer note links to.
+            # op-contracts release that the mc-deployer note links to.
             cb=packages/contracts-bedrock
-            specs=("op-deployer/" "op-chain-ops/" "contract-scripts=$cb/scripts/,$cb/test/mocks/" "$go_shared")
+            specs=("mc-deployer/" "op-chain-ops/" "contract-scripts=$cb/scripts/,$cb/test/mocks/" "$go_shared")
             ;;
         op-contracts)
             specs=("packages/contracts-bedrock/")
             ;;
         *)
-            echo "error: component must be one of: op-node, op-batcher, op-proposer, op-challenger, op-dispute-mon, op-reth, op-deployer, op-contracts, op-supernode, kona-*, op-zk-proposer; is {{ component }}" >&2
+            echo "error: component must be one of: mc-node, mc-batcher, mc-proposer, mc-challenger, op-dispute-mon, mc-reth, mc-deployer, op-contracts, op-supernode, kona-*, op-zk-proposer; is {{ component }}" >&2
             exit 1
             ;;
     esac
@@ -615,13 +615,13 @@ release-paths component:
 # Set <mode> to 'offline' to skip GitHub API calls (faster, but no PR metadata).
 #
 # Examples:
-#   just release-notes op-node                          # latest stable -> latest RC (default)
-#   just release-notes op-node latest develop           # all unreleased changes since the latest stable release
-#   just release-notes op-node latest develop offline   # same, but without GitHub API calls
-#   just release-notes op-node v1.16.5 v1.16.6          # explicit tags
+#   just release-notes mc-node                          # latest stable -> latest RC (default)
+#   just release-notes mc-node latest develop           # all unreleased changes since the latest stable release
+#   just release-notes mc-node latest develop offline   # same, but without GitHub API calls
+#   just release-notes mc-node v1.16.5 v1.16.6          # explicit tags
 #
 # Requires GITHUB_TOKEN for git-cliff's GitHub integration (unless mode=offline):
-#   GITHUB_TOKEN=$(gh auth token) just release-notes op-node
+#   GITHUB_TOKEN=$(gh auth token) just release-notes mc-node
 [script('zsh')]
 release-notes component from='latest' to='latest-rc' mode='':
     set -euo pipefail

@@ -3,12 +3,12 @@ package presets
 import (
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl/contract"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	ps "github.com/ethereum-optimism/optimism/op-proposer/proposer"
+	ps "github.com/ethereum-optimism/optimism/mc-proposer/proposer"
 	"github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
 	"github.com/ethereum-optimism/optimism/op-service/txintent/contractio"
 )
@@ -121,7 +121,7 @@ func WithWithdrawalDelaySeconds(seconds uint64) Option {
 }
 
 // WithZK installs a shared ZK dispute game after the interop migration and
-// starts the honest op-zk-proposer and op-challenger for it, sourcing super
+// starts the honest op-zk-proposer and mc-challenger for it, sourcing super
 // roots from the supernode. The SP1 super-aggregation vkey is loaded from
 // KONA_SP1_ELF_DIR when the system starts. It also enables time travel and the
 // timing defaults used by devstack ZK tests.

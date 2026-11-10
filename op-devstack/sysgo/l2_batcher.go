@@ -1,7 +1,7 @@
 package sysgo
 
 import (
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 

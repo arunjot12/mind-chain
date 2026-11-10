@@ -19,32 +19,32 @@ var bundleAllowed = []string{
 	// This package.
 	"github.com/ethereum-optimism/optimism/op-core/superchain",
 
-	// Registry loaders (op-node/superchain, op-node/chaincfg) and the node
-	// wiring built on them. Enumerated exactly rather than as op-node/...
-	// so that op-node/rollup/... — the type surface downstream modules import
-	// most — stays guarded (op-node/rollup's own TestNoSuperchainImport pins
+	// Registry loaders (mc-node/superchain, mc-node/chaincfg) and the node
+	// wiring built on them. Enumerated exactly rather than as mc-node/...
+	// so that mc-node/rollup/... — the type surface downstream modules import
+	// most — stays guarded (mc-node/rollup's own TestNoSuperchainImport pins
 	// that invariant where a regression would be introduced).
-	"github.com/ethereum-optimism/optimism/op-node",
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg",
-	"github.com/ethereum-optimism/optimism/op-node/cmd/...",
-	"github.com/ethereum-optimism/optimism/op-node/config",
-	"github.com/ethereum-optimism/optimism/op-node/flags",
-	"github.com/ethereum-optimism/optimism/op-node/node",
-	"github.com/ethereum-optimism/optimism/op-node/p2p/cli",
-	"github.com/ethereum-optimism/optimism/op-node/superchain",
+	"github.com/ethereum-optimism/optimism/mc-node",
+	"github.com/ethereum-optimism/optimism/mc-node/chaincfg",
+	"github.com/ethereum-optimism/optimism/mc-node/cmd/...",
+	"github.com/ethereum-optimism/optimism/mc-node/config",
+	"github.com/ethereum-optimism/optimism/mc-node/flags",
+	"github.com/ethereum-optimism/optimism/mc-node/node",
+	"github.com/ethereum-optimism/optimism/mc-node/p2p/cli",
+	"github.com/ethereum-optimism/optimism/mc-node/superchain",
 
 	// Runs registry chains selected by name (--network, VM executor), and
 	// resolves dispute contract addresses from registry data.
-	"github.com/ethereum-optimism/optimism/op-challenger/...",
+	"github.com/ethereum-optimism/optimism/mc-challenger/...",
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/...",
 
-	// Resolves --network via op-node's rollup-config loading.
+	// Resolves --network via mc-node's rollup-config loading.
 	"github.com/ethereum-optimism/optimism/op-conductor/...",
 
 	// Reads superchain and chain records for standard deployments.
-	"github.com/ethereum-optimism/optimism/op-deployer/...",
+	"github.com/ethereum-optimism/optimism/mc-deployer/...",
 
-	// Embeds op-node, which loads registry configs.
+	// Embeds mc-node, which loads registry configs.
 	"github.com/ethereum-optimism/optimism/op-supernode/...",
 
 	// Loads rollup configs for registry networks by name.
@@ -53,7 +53,7 @@ var bundleAllowed = []string{
 	// Builds registry bundles for arbitrary registry commits.
 	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/...",
 
-	// Deploys via op-deployer, which reads registry records.
+	// Deploys via mc-deployer, which reads registry records.
 	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen",
 
 	// Chain-selection flags: the --network help text lists the available
@@ -70,7 +70,7 @@ var bundleAllowed = []string{
 	"github.com/ethereum-optimism/optimism/op-up",
 	"github.com/ethereum-optimism/optimism/ops/scripts/prefork-state-dump",
 	"github.com/ethereum-optimism/optimism/rust/kona/tests/...",
-	"github.com/ethereum-optimism/optimism/rust/op-reth/tests/...",
+	"github.com/ethereum-optimism/optimism/rust/mc-reth/tests/...",
 }
 
 // TestBundleReachability keeps every package outside bundleAllowed importable
@@ -89,9 +89,9 @@ var bundleAllowed = []string{
 // only the PathFlag value type but took it from op-service/flags, whose
 // --network flag interpolates chaincfg.AvailableNetworks() into its usage
 // string. It is also how the op-service client stack (apis, dial, sources) and
-// the op-node derivation pipeline broke: op-core/interop/depset coupled the
+// the mc-node derivation pipeline broke: op-core/interop/depset coupled the
 // DependencySet types with the registry-backed loader that now lives in
-// op-node/superchain.
+// mc-node/superchain.
 //
 // The guard is an allowlist over the whole monorepo rather than a list of
 // guarded packages, so the invariant holds by default. It is checked in both

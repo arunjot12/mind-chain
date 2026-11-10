@@ -57,7 +57,7 @@ import (
 //   - With ELP2P enabled, repeated FCU attempts eventually validate and advance the canonical chain.
 func TestL2ELP2PCanonicalChainAdvancedByFCU(gt *testing.T) {
 	t := devtest.ParallelT(gt)
-	// Example error with op-reth:
+	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|09:58:15.522]
 	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_el.go:64
@@ -436,7 +436,7 @@ func TestInvalidPayloadThroughCLP2P(gt *testing.T) {
 	logger.Info("Injected fault to payload but not updated hash")
 	// Post invalid payload with the fault that can be checked at the CL side
 	require.ErrorContains(sys.L2CLB.Escape().RollupAPI().PostUnsafePayload(ctx, payload), "bad block hash")
-	// ex) op-node error msg: "payload has bad block hash"
+	// ex) mc-node error msg: "payload has bad block hash"
 	// CL will not send the payload but drop immediately due to hash mismatch
 	// EL did not advance
 	sys.L2ELB.UnsafeHead().NumEqualTo(startNum + 1)

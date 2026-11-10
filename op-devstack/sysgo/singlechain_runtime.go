@@ -8,21 +8,21 @@ import (
 	"slices"
 	"time"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	opchallenger "github.com/ethereum-optimism/optimism/op-challenger"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	challengermetrics "github.com/ethereum-optimism/optimism/op-challenger/metrics"
+	opchallenger "github.com/ethereum-optimism/optimism/mc-challenger"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
+	challengermetrics "github.com/ethereum-optimism/optimism/mc-challenger/metrics"
 	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
 	opgenesis "github.com/ethereum-optimism/optimism/op-core/genesis"
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	sharedchallenger "github.com/ethereum-optimism/optimism/op-devstack/shared/challenger"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/setuputils"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	ps "github.com/ethereum-optimism/optimism/op-proposer/proposer"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	ps "github.com/ethereum-optimism/optimism/mc-proposer/proposer"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
@@ -461,7 +461,7 @@ func startMinimalChallenger(
 	var zkChallengerSuperRootRPCProxy *StallableProxy
 	switch {
 	case zkEnabled:
-		// The ZK game validates super roots from the op-node's superroot_atTimestamp endpoint;
+		// The ZK game validates super roots from the mc-node's superroot_atTimestamp endpoint;
 		// it needs no VM config or dependency set.
 		zkChallengerSuperRootRPCProxy = StartStallableProxy(t, "zk-challenger-super-root", l2CL.UserRPC())
 		options = append(options,

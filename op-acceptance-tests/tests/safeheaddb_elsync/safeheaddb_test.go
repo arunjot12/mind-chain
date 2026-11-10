@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 
 	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 )
@@ -26,7 +26,7 @@ func newSingleChainMultiNodeELSync(t devtest.T) *presets.SingleChainMultiNode {
 
 func TestTruncateDatabaseOnELResync(gt *testing.T) {
 	t := devtest.ParallelT(gt)
-	// Example error with op-reth:
+	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|09:41:28.788]
 	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/sysgo/l2_el_p2p_util.go:61
@@ -95,7 +95,7 @@ func TestNotTruncateDatabaseOnRestartWithExistingDatabase(gt *testing.T) {
 	preRestartSafeBlock := sys.L2CLB.SafeHeadDBFloor()
 	sys.L2CLB.VerifySafeHeadDatabaseMatches(sys.L2CL, dsl.WithMinRequiredL2Block(preRestartSafeBlock))
 
-	// Restart the verifier op-node, but not the EL so the existing chain data is not deleted.
+	// Restart the verifier mc-node, but not the EL so the existing chain data is not deleted.
 	sys.L2CLB.Stop()
 
 	sys.L2CL.Advanced(safety.LocalSafe, 3, 30)

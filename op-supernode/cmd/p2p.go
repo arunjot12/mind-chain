@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	opnodeflags "github.com/ethereum-optimism/optimism/op-node/flags"
+	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
 	"github.com/ethereum-optimism/optimism/op-supernode/flags"
 )
 

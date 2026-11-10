@@ -14,7 +14,7 @@ default: op-up
 op-up: (go_build BINARY "." "-ldflags" _LDFLAGSSTRING)
 
 artifacts:
-    just ../op-deployer/copy-contract-artifacts
+    just ../mc-deployer/copy-contract-artifacts
 
 clean:
     rm -f {{ BINARY }}

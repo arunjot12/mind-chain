@@ -125,7 +125,7 @@ func (m *Metrics) Start(host string, port int) (*httputil.HTTPServer, error) {
 }
 
 // RecordInfo sets a pseudo-metric that contains versioning and
-// config info for the op-proposer.
+// config info for the mc-proposer.
 func (m *Metrics) RecordInfo(version string) {
 	m.info.WithLabelValues(version).Set(1)
 }

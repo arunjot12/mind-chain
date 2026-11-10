@@ -2,14 +2,14 @@ package eth
 
 // SuperNodeSyncStatusResponse is the response returned by supernode_syncStatus.
 type SuperNodeSyncStatusResponse struct {
-	// Chains contains the per-chain op-node sync status.
+	// Chains contains the per-chain mc-node sync status.
 	Chains map[ChainID]SyncStatus `json:"chains"`
 
 	// ChainIDs are the chain IDs in the dependency set, sorted ascending.
 	ChainIDs []ChainID `json:"chain_ids"`
 
 	// CurrentL1 is the L1 block currently being processed by the slowest L1
-	// processor (op-node or verifier) in the supernode. Every L1 block strictly
+	// processor (mc-node or verifier) in the supernode. Every L1 block strictly
 	// below CurrentL1.Number has been fully processed by all chains; data at
 	// CurrentL1 itself may still be incomplete. Consumers gating on
 	// "L1[≤X] is fully processed" must require CurrentL1.Number > X.

@@ -16,9 +16,9 @@ import (
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
 	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
 	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
@@ -524,7 +524,7 @@ func (c *l2Configurator) WithForkAtOffset(fork opforks.Name, offset *uint64) {
 	key, ok := genesis.ForkOffsetKey(fork)
 	require.True(c.t, ok, "fork %q has no deploy-config time offset", fork)
 
-	// The typing is important, or op-deployer merge-JSON tricks will fail.
+	// The typing is important, or mc-deployer merge-JSON tricks will fail.
 	//
 	// A nil offset writes an explicit null override rather than removing the key.
 	// Op-deployer merges user overrides over its defaults, so an omitted key

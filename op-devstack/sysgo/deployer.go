@@ -23,23 +23,23 @@ import (
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen/config"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
 	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
 	opgenesis "github.com/ethereum-optimism/optimism/op-core/genesis"
 	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/broadcaster"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/env"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/broadcaster"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/opcm"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/env"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/stack"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/ioutil"
 	"github.com/ethereum-optimism/optimism/op-service/log"
@@ -623,7 +623,7 @@ func (wb *worldBuilder) buildL2Genesis() {
 		// or import Karst blocks. The op-geth EL lane therefore cannot run any
 		// chain that ever activates Karst, so skip such tests here — the single
 		// point every runtime builds genesis through — letting Karst+ coverage
-		// run on op-reth (the official Karst EL client). op-geth still covers
+		// run on mc-reth (the official Karst EL client). op-geth still covers
 		// chains up to Jovian.
 		if l2Genesis.Config.KarstTime != nil && devstackL2ELKind() == MixedL2ELOpGeth {
 			wb.p.Logf("op-geth is deprecated as of Karst; skipping test: chain %s activates Karst and DEVSTACK_L2EL_KIND=op-geth", id)

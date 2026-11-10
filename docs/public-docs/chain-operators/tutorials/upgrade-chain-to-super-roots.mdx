@@ -1,7 +1,7 @@
 ---
 title: Upgrading a Chain From Output Roots to Super Roots
 lang: en-US
-description: Upgrade an OP Stack chain from output-root dispute games to super-root dispute games with a single opcm.upgrade call, then cut op-proposer, op-challenger, and op-dispute-mon over to super roots.
+description: Upgrade an OP Stack chain from output-root dispute games to super-root dispute games with a single opcm.upgrade call, then cut mc-proposer, mc-challenger, and op-dispute-mon over to super roots.
 diataxis: how-to
 ---
 
@@ -14,7 +14,7 @@ import { SuperchainOpsPrereqs } from "/snippets/superchain-ops-prereqs.mdx"
 
 This runbook walks you through upgrading a single OP Stack chain from output-root dispute games (`PERMISSIONED_CANNON`, `CANNON` or `CANNON_KONA`) to super-root dispute games (`SUPER_PERMISSIONED` or `SUPER_CANNON_KONA`). It runs as a single `opcm.upgrade` call against the chain's existing per-chain `AnchorStateRegistry` and `DisputeGameFactory`. The chain's permission model is preserved: a permissioned chain stays permissioned with `SUPER_PERMISSIONED` only; a permissionless chain runs both super game types with `SUPER_CANNON_KONA` as the respected one. Differences between the two are called out inline.
 
-By the end you will have a chain proposing super-root claims via `op-proposer` using a single-chain super-root RPC endpoint and monitoring them with `op-dispute-mon`. On permissionless chains, `op-challenger` defends `SUPER_CANNON_KONA` claims. On permissioned chains, `op-dispute-mon` detects invalid `SUPER_PERMISSIONED` claims, `op-challenger` updates the `AnchorStateRegistry` as games finalize. Every pre-migration dispute game already in flight continues to resolve, and proven withdrawals are not invalidated.
+By the end you will have a chain proposing super-root claims via `mc-proposer` using a single-chain super-root RPC endpoint and monitoring them with `op-dispute-mon`. On permissionless chains, `mc-challenger` defends `SUPER_CANNON_KONA` claims. On permissioned chains, `op-dispute-mon` detects invalid `SUPER_PERMISSIONED` claims, `mc-challenger` updates the `AnchorStateRegistry` as games finalize. Every pre-migration dispute game already in flight continues to resolve, and proven withdrawals are not invalidated.
 
 <Note>This is `opcm.upgrade`, not `opcm.migrate` — the chain keeps its own per-chain `AnchorStateRegistry` and `DisputeGameFactory`.</Note>
 
@@ -72,15 +72,15 @@ Read the values you need from `chain.json`:
 | `OPCM` address for the target network | `validation/standard/standard-versions-<network>.toml` in the [superchain-registry](https://github.com/ethereum-optimism/superchain-registry). Look up the `op-contracts/v8.x.y` release pinned by the `OPCMUpgradeV800` template and read `op_contracts_manager.address`. |
 | Kona-interop prestate hash | OPCM release manifest. Use the `-interop` kona variant, even if interop is not scheduled for the chain.|
 | Prestate artifact URL | The chain's existing `cannon-kona-prestates-url` server, with the kona-interop prestate uploaded ahead of the upgrade |
-| Single-chain super-root RPC endpoint (`$SUPER_ROOT_RPC`) | Your infrastructure team. Use the chain's op-node RPC endpoint or an op-supernode `/<chainID>/` endpoint. An op-node must run with `--safedb.path` enabled and populated. The namespaced endpoint returns a super root containing only this chain, even if the op-supernode tracks other chains. |
+| Single-chain super-root RPC endpoint (`$SUPER_ROOT_RPC`) | Your infrastructure team. Use the chain's mc-node RPC endpoint or an op-supernode `/<chainID>/` endpoint. An mc-node must run with `--safedb.path` enabled and populated. The namespaced endpoint returns a super root containing only this chain, even if the op-supernode tracks other chains. |
 
 ### Verify the Preconditions
 
 Before you change any configuration:
 
 * **Confirm the template's extra instructions.** Open `superchain-ops/src/template/OPCMUpgradeV800.sol` and check `_buildExtraInstructions`. As of writing it injects `overrides.cfg.startingRespectedGameType` and `PermittedProxyDeployment`. Both need attention before continuing. `PermittedProxyDeployment` must be dropped: OPCM `8.0.0` permits no proxy deployments during an upgrade, because the unified `DelayedWETH` shipped with the 7.x OPCM, so the instruction now reverts with `OPContractsManagerV2_InvalidUpgradeInstruction`. An `overrides.cfg.startingAnchorRoot` override must be added: without it, OPCM falls back to the existing on-chain `startingAnchorRoot`, which on a pre-upgrade chain is an output-root-shaped value with a block-number `l2SequenceNumber` — not a valid super-root anchor. The template must be extended to read a starting super-root anchor from TOML and add it as an extra instruction. Fix the template before continuing.
-* **Confirm the RPC endpoint returns a single-chain super root.** Either the chain's op-node RPC endpoint or an op-supernode `/<chainID>/` endpoint can be used. Do not use a multi-chain op-supernode root endpoint; it computes roots across its full dependency set.
-* **Verify the single-chain RPC endpoint is healthy.** For an op-node or namespaced op-supernode endpoint, confirm it reports a recent finalized L2 head and can produce the corresponding super root:
+* **Confirm the RPC endpoint returns a single-chain super root.** Either the chain's mc-node RPC endpoint or an op-supernode `/<chainID>/` endpoint can be used. Do not use a multi-chain op-supernode root endpoint; it computes roots across its full dependency set.
+* **Verify the single-chain RPC endpoint is healthy.** For an mc-node or namespaced op-supernode endpoint, confirm it reports a recent finalized L2 head and can produce the corresponding super root:
 
   ```bash
   TS=$(cast rpc optimism_syncStatus --rpc-url $SUPER_ROOT_RPC | jq -r '.finalized_l2.timestamp')
@@ -88,7 +88,7 @@ Before you change any configuration:
     --rpc-url $SUPER_ROOT_RPC | jq -r '.data.super_root'
   ```
 
-  If an op-node returns a SafeDB error, configure `--safedb.path`, let the node populate records through derivation, and retry. `optimism_syncStatus` can succeed while SafeDB is disabled, but `superroot_atTimestamp` cannot serve a non-genesis timestamp without SafeDB.
+  If an mc-node returns a SafeDB error, configure `--safedb.path`, let the node populate records through derivation, and retry. `optimism_syncStatus` can succeed while SafeDB is disabled, but `superroot_atTimestamp` cannot serve a non-genesis timestamp without SafeDB.
 * **Verify the prestate server serves the new hash.**
 
   ```bash
@@ -99,9 +99,9 @@ Before you change any configuration:
 
 Apply these changes before you submit the on-chain upgrade. After the changes ship, the components keep operating against existing pre-migration games and pick up super-root games automatically once the upgrade lands.
 
-### Update op-challenger
+### Update mc-challenger
 
-Update the running `op-challenger` for the chain. Keep `--rollup-rpc` and the existing `--game-types` so existing games continue to be defended. Add the super-root trace type only on permissionless chains, where `SUPER_CANNON_KONA` is enabled.
+Update the running `mc-challenger` for the chain. Keep `--rollup-rpc` and the existing `--game-types` so existing games continue to be defended. Add the super-root trace type only on permissionless chains, where `SUPER_CANNON_KONA` is enabled.
 
 | Action | Flag (env var) | Value |
 | --- | --- | --- |
@@ -110,7 +110,7 @@ Update the running `op-challenger` for the chain. Keep `--rollup-rpc` and the ex
 | Confirm set | `--cannon-kona-prestates-url` (`OP_CHALLENGER_CANNON_KONA_PRESTATES_URL`) | The prestate-server URL you validated in the preconditions |
 | Confirm set | `--cannon-kona-network` (`OP_CHALLENGER_CANNON_KONA_NETWORK`) or `--cannon-kona-depset-config` (`OP_CHALLENGER_CANNON_KONA_DEPSET_CONFIG`) | One must be set so kona can resolve the dependency set for `SUPER_CANNON_KONA`. |
 
-On a permissionless chain, confirm the startup log lists `super-cannon-kona` as registered and shows no connection errors against the single-chain super-root RPC endpoint. On a permissioned chain, confirm the existing trace types remain registered; do not configure a `SUPER_PERMISSIONED` trace type. `op-challenger` is still required on permissioned chains to update the `AnchorStateRegistry` as `SUPER_PERMISSIONED` games finalize.
+On a permissionless chain, confirm the startup log lists `super-cannon-kona` as registered and shows no connection errors against the single-chain super-root RPC endpoint. On a permissioned chain, confirm the existing trace types remain registered; do not configure a `SUPER_PERMISSIONED` trace type. `mc-challenger` is still required on permissioned chains to update the `AnchorStateRegistry` as `SUPER_PERMISSIONED` games finalize.
 
 ### Update op-dispute-mon
 
@@ -122,9 +122,9 @@ Update the running `op-dispute-mon` for the chain.
 
 Keep `--rollup-rpc`. `op-dispute-mon` discovers games from the existing `DisputeGameFactory` and does not need a game-type filter change. After the restart, confirm the existing-games metrics keep populating.
 
-### Leave op-proposer Unchanged for Now
+### Leave mc-proposer Unchanged for Now
 
-Skip `op-proposer` until cutover. Its configuration changes in [Switch op-proposer to Super Roots](#switch-op-proposer-to-super-roots).
+Skip `mc-proposer` until cutover. Its configuration changes in [Switch mc-proposer to Super Roots](#switch-mc-proposer-to-super-roots).
 
 ## Generate the Starting Anchor Super Root
 
@@ -197,8 +197,8 @@ The simulation passes once every printed code has been either resolved or knowin
 
 ## Execute the Upgrade
 
-1. **Stop `op-proposer` for the chain.** Existing games continue to resolve; only new proposals halt.
-2. **Leave `op-challenger` and `op-dispute-mon` running.** Both were configured earlier and pick up super-root games automatically.
+1. **Stop `mc-proposer` for the chain.** Existing games continue to resolve; only new proposals halt.
+2. **Leave `mc-challenger` and `op-dispute-mon` running.** Both were configured earlier and pick up super-root games automatically.
 3. **Sign and broadcast the task** using your team's standard `superchain-ops` signing workflow.
 4. **Wait for the L1 transaction to confirm.**
 
@@ -210,7 +210,7 @@ The on-chain effect:
 
 ## Verify the Upgrade On-Chain
 
-Run the checks below before you cut `op-proposer` over.
+Run the checks below before you cut `mc-proposer` over.
 
 <Warning>If any check fails, stop, do not start the new proposer, and escalate via your standard incident-response channel. Recovery from a half-cut state with a misbehaving proposer is materially harder than recovery from a paused proposer.</Warning>
 
@@ -262,9 +262,9 @@ cast call <DGF> 'gameImpls(uint32)(address)' 9 --rpc-url $L1_RPC   # SUPER_CANNO
 # Expect: 0x0000000000000000000000000000000000000000
 ```
 
-## Switch op-proposer to Super Roots
+## Switch mc-proposer to Super Roots
 
-Start `op-proposer` with the new configuration.
+Start `mc-proposer` with the new configuration.
 
 | Flag (env var) | Old | New |
 | --- | --- | --- |
@@ -301,7 +301,7 @@ After start-up, verify:
   # Expect: equals rootClaim from above
   ```
 
-  This confirms `op-proposer` is correctly configured and passing valid super roots.
+  This confirms `mc-proposer` is correctly configured and passing valid super roots.
 
 ## Verify After the Upgrade
 
@@ -314,7 +314,7 @@ Run these checks once the proposer is stable.
   # 0 = IN_PROGRESS, 1 = CHALLENGER_WINS, 2 = DEFENDER_WINS
   ```
 
-* **`op-challenger` traces `SUPER_CANNON_KONA` when enabled.** On a permissionless chain, verify the startup log lists `super-cannon-kona` and ongoing logs contain no scheduler or game-poll errors as type-9 games appear. On a permissioned chain, `op-challenger` continues to update the `AnchorStateRegistry` when `SUPER_PERMISSIONED` games finalize but does not need to post claims.
+* **`mc-challenger` traces `SUPER_CANNON_KONA` when enabled.** On a permissionless chain, verify the startup log lists `super-cannon-kona` and ongoing logs contain no scheduler or game-poll errors as type-9 games appear. On a permissioned chain, `mc-challenger` continues to update the `AnchorStateRegistry` when `SUPER_PERMISSIONED` games finalize but does not need to post claims.
 * **`op-dispute-mon` reports super-root games.** Confirm `op_dispute_mon_games` reports the enabled super game types and `op_dispute_mon_failed_games` remains zero. On a permissioned chain, alert on `op_dispute_mon_games_agreement{status="disagree_defender_wins"}` and `Unexpected game result` logs for `SUPER_PERMISSIONED`.
 * **No new pre-migration games can be created.** Optionally call `DisputeGameFactory.create` with one of the disabled game types and confirm it reverts.
 * **Anchor advances on first super-game finalisation.** The first anchor update typically lands ~7 days after the first super-root game is created (game duration plus `disputeGameFinalityDelaySeconds()`). Do not block the rollout on this — schedule a follow-up to re-run `getAnchorRoot()` after that window and confirm it returns the new game's claim instead of the starting root. Track via `op-dispute-mon` rather than waiting in-line.

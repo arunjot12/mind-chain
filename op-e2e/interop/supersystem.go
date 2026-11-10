@@ -15,7 +15,7 @@ import (
 	"time"
 
 	opgenesis "github.com/ethereum-optimism/optimism/op-core/genesis"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/stretchr/testify/require"
@@ -28,7 +28,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen"
@@ -42,7 +42,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
 	"github.com/ethereum-optimism/optimism/op-e2e/system/helpers"
-	opnodeconfig "github.com/ethereum-optimism/optimism/op-node/config"
+	opnodeconfig "github.com/ethereum-optimism/optimism/mc-node/config"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/dial"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
@@ -108,7 +108,7 @@ type SuperSystem interface {
 type SuperSystemConfig struct {
 	SupportTimeTravel bool
 	BatcherUsesBlobs  bool
-	// L2ELKind selects the L2 execution-layer backend (op-geth or op-reth).
+	// L2ELKind selects the L2 execution-layer backend (op-geth or mc-reth).
 	// Defaults to services.DefaultELKind() when unset.
 	L2ELKind services.ELKind
 }
@@ -282,7 +282,7 @@ func (s *interopE2ESystem) L2Genesis(network string) *opgenesis.Genesis {
 	return s.l2s[network].l2Out.Genesis
 }
 
-// prepareSupernode boots an op-supernode that owns one virtual op-node per L2 chain.
+// prepareSupernode boots an op-supernode that owns one virtual mc-node per L2 chain.
 // The L2 ELs (op-geth) must already be running so their engine RPC endpoints can be wired in.
 func (s *interopE2ESystem) prepareSupernode() (*supernode.Supernode, string) {
 	logger := testlog.Logger(s.t, log.LevelDebug).New("role", "supernode")
@@ -634,7 +634,7 @@ func worldToDepSet(world *interopgen.WorldOutput) (*depset.StaticConfigDependenc
 	return depset.NewStaticConfigDependencySet(depSet)
 }
 
-// waitForSupernodeRoute polls the supernode's per-chain route until the chain's op-node API is
+// waitForSupernodeRoute polls the supernode's per-chain route until the chain's mc-node API is
 // fully registered (admin/optimism namespaces). The chain container brings the per-chain RPC up
 // asynchronously, so callers that dial too early see "method does not exist" even though the
 // HTTP layer is mounted.

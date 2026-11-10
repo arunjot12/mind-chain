@@ -72,13 +72,13 @@ build-kona-node-debug:
 
 alias build-node := build-kona-node
 
-# Build op-reth
-build-op-reth:
-  cargo build --release --bin op-reth
+# Build mc-reth
+build-mc-reth:
+  cargo build --release --bin mc-reth
 
-# Build op-reth in debug mode (faster compilation for local E2E test iteration)
-build-op-reth-debug:
-  cargo build --bin op-reth
+# Build mc-reth in debug mode (faster compilation for local E2E test iteration)
+build-mc-reth-debug:
+  cargo build --bin mc-reth
 
 # Build lokahi. The package is not a workspace default member, so `-p`
 # is required for `cargo` to resolve the binary.
@@ -410,7 +410,7 @@ rust-review base='':
 ############################ no_std #################################
 
 # Check no_std compatibility for proof, protocol, alloy, and op-alloy crates, plus the host-target
-# no_std build of op-reth's evm crate, whose reth dependencies do not build for riscv.
+# no_std build of mc-reth's evm crate, whose reth dependencies do not build for riscv.
 check-no-std:
   #!/usr/bin/env bash
   set -euo pipefail
@@ -534,7 +534,7 @@ hack-tests-default partition="" shuffle="false" seed="default":
 ########################### Release #################################
 
 # Release crates at the given version.
-# target: either "workspace" (releases every subdir under rust/ except op-reth,
+# target: either "workspace" (releases every subdir under rust/ except mc-reth,
 #         in dependency order) or one of the subdir names (op-alloy,
 #         alloy-op-hardforks, alloy-op-evm, op-revm, kona).
 # mode: "dry" (default, prints changes without applying) or "execute"
@@ -585,7 +585,7 @@ release TARGET VERSION MODE="dry" *ARGS="":
     ACTUAL_SUBDIRS=$(echo "$METADATA" \
       | jq -r '.packages[].manifest_path' \
       | sed -nE 's|.*/rust/([^/]+)/.*|\1|p' \
-      | grep -vx 'op-reth' \
+      | grep -vx 'mc-reth' \
       | sort -u)
     if [[ "$EXPECTED_SUBDIRS" != "$ACTUAL_SUBDIRS" ]]; then
       echo "error: hardcoded ALL_SUBDIRS list doesn't match actual subdirs under rust/." >&2

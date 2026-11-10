@@ -5,7 +5,7 @@ import (
 	"math/rand"
 
 	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
 	"github.com/ethereum-optimism/optimism/op-core/forks"
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"

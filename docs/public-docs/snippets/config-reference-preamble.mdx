@@ -7,12 +7,12 @@
   Usage:
     import { ConfigReferencePreamble } from "/snippets/config-reference-preamble.mdx"
 
-    <ConfigReferencePreamble component="op-batcher" />
+    <ConfigReferencePreamble component="mc-batcher" />
 
   Props:
     component - required. The service whose flags the page documents, as the
-                monorepo directory name: "op-batcher", "op-challenger",
-                "op-proposer", "op-conductor", or "op-node". Rendered in prose
+                monorepo directory name: "mc-batcher", "mc-challenger",
+                "mc-proposer", "op-conductor", or "mc-node". Rendered in prose
                 and as the monorepo flags path ({component}/flags).
 
   Consumer pages (keep this list in sync):
@@ -20,7 +20,7 @@
     chain-operators/reference/challenger-configuration.mdx
     chain-operators/guides/configuration/proposer.mdx
     chain-operators/tools/op-conductor/reference.mdx
-    node-operators/reference/op-node-config.mdx
+    node-operators/reference/mc-node-config.mdx
 */}
 
 export const ConfigReferencePreamble = ({ component }) => (

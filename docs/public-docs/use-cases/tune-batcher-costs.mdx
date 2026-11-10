@@ -9,21 +9,21 @@ last-reviewed: 2026-07-16
 This guide takes a chain operator whose largest onchain operating cost is L1 data
 posting and walks the whole cost loop in one pass: what the batcher spends,
 the settings that control that spend, and the fee parameters that recover it
-from users. It involves the `op-batcher`, your chain's `SystemConfig` fee
+from users. It involves the `mc-batcher`, your chain's `SystemConfig` fee
 parameters, and, for throttling, the sequencer's execution client.
 
 ## Is this guide for you?
 
 Use this guide if:
 
-*   You operate an OP Stack chain: you control the `op-batcher` deployment
+*   You operate an OP Stack chain: you control the `mc-batcher` deployment
     and can reach the [SystemConfig owner](/op-stack/protocol/privileged-roles)
     when a parameter change needs it.
 *   Your goal is economic (L1 posting costs look too high, or user fees
     aren't covering them) rather than a batcher outage or sync problem.
 
 If you are standing up a batcher for the first time, follow the
-[batcher setup tutorial](/chain-operators/tutorials/create-l2-rollup/op-batcher-setup)
+[batcher setup tutorial](/chain-operators/tutorials/create-l2-rollup/mc-batcher-setup)
 first. If you want to understand how fees work rather than change them, read
 [Transaction fees](/op-stack/transactions/fees). If you are evaluating
 alternative data availability layers, see the
@@ -34,7 +34,7 @@ This guide covers Ethereum DA (calldata and blobs) only.
 
 You should already have:
 
-*   A running `op-batcher` posting batches for your chain, and the ability
+*   A running `mc-batcher` posting batches for your chain, and the ability
     to change its flags or environment variables and restart it.
 *   Access to the batch submitter's L1 spend history (its address on an L1
     explorer) so you can measure the effect of changes.
@@ -223,13 +223,13 @@ custom process name):
 
 *   [Batcher configuration reference](/chain-operators/reference/batcher-configuration):
     the full flag and environment-variable catalogue. Hand-pinned to
-    `op-batcher/v1.10.0` as of 2026-07-16; confirm values against
-    `op-batcher --help` for the release you run.
-*   [op-batcher throttling deep dive](https://github.com/ethereum-optimism/optimism/blob/develop/op-batcher/throttling.md):
+    `mc-batcher/v1.10.0` as of 2026-07-16; confirm values against
+    `mc-batcher --help` for the release you run.
+*   [mc-batcher throttling deep dive](https://github.com/ethereum-optimism/optimism/blob/develop/op-batcher/throttling.md):
     the only in-depth documentation of the four throttling controllers,
     their runtime-management RPCs, and the experimental PID controller's
     tuning profiles. In-repo document on `develop`, as of 2026-07-16.
-*   [op-batcher readme](https://github.com/ethereum-optimism/optimism/blob/develop/op-batcher/readme.md):
+*   [mc-batcher readme](https://github.com/ethereum-optimism/optimism/blob/develop/op-batcher/readme.md):
     batcher architecture and operational detail beyond configuration.
     In-repo document on `develop`, as of 2026-07-16.
 *   [Frame format in the derivation spec](https://specs.optimism.io/protocol/derivation.html?utm_source=op-docs&utm_medium=docs#frame-format):

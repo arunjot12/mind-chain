@@ -55,30 +55,30 @@ checkout of any tag.
   at and the snippet's SHA-256; the provenance line names the same tag. All
   three are updated together, only on regeneration.
 
-## Why the tag is an op-deployer tag
+## Why the tag is an mc-deployer tag
 
 `op-chain-ops` is a library, not a released binary — it has no release tags of
 its own. The released tool whose pipeline derives and emits the `DeployConfig`
-(and the deploy path the docs frame as the default) is **op-deployer**, so the
+(and the deploy path the docs frame as the default) is **mc-deployer**, so the
 snippet documents the schema as of the newest finalized (non-rc, non-alpha)
-`op-deployer/v*` tag, and regeneration is keyed to those releases.
+`mc-deployer/v*` tag, and regeneration is keyed to those releases.
 
 ## Regenerating for a new release
 
 The snippet documents *released* software, so never regenerate from unreleased
-code. When a new finalized `op-deployer/v*` tag is published:
+code. When a new finalized `mc-deployer/v*` tag is published:
 
 1. Update the `tag` in `manifest.json` to the new release tag.
 2. Generate from the schema source at that tag. Either check out the tag, or
    extract just the package the tool parses and point `-source` at it:
 
    ```bash
-   git archive op-deployer/vX.Y.Z op-chain-ops/genesis | tar -x -C /tmp/opd-tag
+   git archive mc-deployer/vX.Y.Z op-chain-ops/genesis | tar -x -C /tmp/opd-tag
    go run ./docs/public-docs/scripts/gen-deploy-config -source /tmp/opd-tag/op-chain-ops/genesis
    ```
 
    (If `op-chain-ops/genesis` is identical between the tag and your current
-   checkout — `git diff op-deployer/vX.Y.Z HEAD -- op-chain-ops/genesis` —
+   checkout — `git diff mc-deployer/vX.Y.Z HEAD -- op-chain-ops/genesis` —
    running without `-source` is equivalent.)
 3. Commit the regenerated snippet and `manifest.json` in the same change.
 
@@ -89,7 +89,7 @@ than against a regeneration from the current tree: the schema source on
 is reported informationally only.
 
 Regeneration is not yet automated. A monorepo CI job triggered by each
-finalized `op-deployer/v*` tag will run the generator and open the docs pull
+finalized `mc-deployer/v*` tag will run the generator and open the docs pull
 request (ethereum-optimism/solutions#1518, Phase 2). Until it exists,
 regenerate locally per the steps above when a release is published; `-check`
 verifies the committed snippet at any time.
@@ -106,7 +106,7 @@ model in the Solutions repo's
 | --- | --- | --- | --- |
 | Generator code + its CI job (this directory, the regeneration workflow) | Matthew Cruz (@sbvegan), docs owner — proposed, pending confirmation | @ethereum-optimism/solutions (via the `/docs/public-docs/scripts/` CODEOWNERS rule) | Author of record |
 | Generated snippet (`snippets/generated/deploy-config-schema.mdx`) | The pipeline — nobody hand-edits; `-check` fails on hand edits by construction | @ethereum-optimism/solutions review the regeneration PRs | A snippet that can't be regenerated cleanly is filed as an `accuracy`-labelled issue on the Solutions board |
-| Schema facts (`op-chain-ops/genesis` struct tags + doc comments) | Component engineers | Component team | Component team; the docs schema follows at the next finalized op-deployer release |
+| Schema facts (`op-chain-ops/genesis` struct tags + doc comments) | Component engineers | Component team | Component team; the docs schema follows at the next finalized mc-deployer release |
 
 Known residual gaps (accepted, by design):
 

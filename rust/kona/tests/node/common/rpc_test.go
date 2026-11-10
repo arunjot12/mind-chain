@@ -6,7 +6,7 @@ import (
 
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/apis"
 	node_utils "github.com/ethereum-optimism/optimism/rust/kona/tests/node/utils"
 	"github.com/stretchr/testify/require"
@@ -51,7 +51,7 @@ func p2pSelfAndPeers(t devtest.T, out *node_utils.MixedOpKonaPreset) {
 					otherCLName := node.Escape().Name()
 					require.NoError(t, node_utils.SendRPCRequest(otherCLRPC, "opp2p_self", otherPeerInfo), "failed to send RPC request to node %s: %s", clName)
 
-					// These checks fail for the op-node. It seems that their p2p handler is flaky and doesn't always return the correct peer info.
+					// These checks fail for the mc-node. It seems that their p2p handler is flaky and doesn't always return the correct peer info.
 					if otherPeerInfo.PeerID == peer.PeerID {
 						require.Equal(t, otherPeerInfo.NodeID, peer.NodeID, "nodeID mismatch, %s", otherCLName)
 						require.Equal(t, otherPeerInfo.ProtocolVersion, peer.ProtocolVersion, "protocolVersion mismatch, %s", otherCLName)

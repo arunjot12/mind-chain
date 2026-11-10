@@ -140,7 +140,7 @@ kona-node info --help
 
 - **L1 Execution Client**: Access to an Ethereum L1 execution client RPC endpoint
 - **L1 Beacon API**: Access to an Ethereum L1 beacon chain API endpoint
-- **L2 Execution Client**: Access to an OP Stack L2 execution client (e.g., op-reth)
+- **L2 Execution Client**: Access to an OP Stack L2 execution client (e.g., mc-reth)
 - **JWT Secret**: A JWT secret file for authenticated communication with the L2 execution client
 
 ## Advanced Configuration

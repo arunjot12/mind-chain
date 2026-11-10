@@ -2,7 +2,7 @@
 #
 # The monorepo is moving off op-geth to upstream go-ethereum, and every entry below blocks that
 # cutover. Before adding one, check docs/ai/opgeth-decoupling.md for how to avoid the dependency
-# (op-core/*, the op-service seams, op-reth). If there is no way around it yet, add the entry with
+# (op-core/*, the op-service seams, mc-reth). If there is no way around it yet, add the entry with
 # a reason; reviewers will ask for one that holds up.
 #
 # Format: <package> | <what it needs from op-geth> | <reason>
@@ -35,10 +35,10 @@ op-acceptance-tests/tests/sdm (tests) | missing go-ethereum/core/types.DepositTx
 op-acceptance-tests/tests/sdm (tests) | missing go-ethereum/core/types.PostExecTx | #23405 test and DSL swaps to op-core
 op-acceptance-tests/tests/sdm/sdmtest | missing go-ethereum/core/types.DepositTxType | #23405 test and DSL swaps to op-core
 op-acceptance-tests/tests/sync_tester/sync_tester_hfs (tests) | missing go-ethereum/params.ChainConfig.JovianTime | #23405 test and DSL swaps to op-core
-op-batcher/batcher | missing go-ethereum/core/types.Header.BlockAccessListHash | upstream backport, in go-ethereum v1.17.7
-op-batcher/batcher (tests) | changed signature of go-ethereum/core/types.NewBlock | #23405 test and DSL swaps to op-core
-op-batcher/batcher (tests) | missing go-ethereum/core/types.DefaultBlockConfig | #23405 test and DSL swaps to op-core
-op-batcher/batcher (tests) | missing go-ethereum/core/types.Header.BlockAccessListHash | upstream backport, in go-ethereum v1.17.7
+mc-batcher/batcher | missing go-ethereum/core/types.Header.BlockAccessListHash | upstream backport, in go-ethereum v1.17.7
+mc-batcher/batcher (tests) | changed signature of go-ethereum/core/types.NewBlock | #23405 test and DSL swaps to op-core
+mc-batcher/batcher (tests) | missing go-ethereum/core/types.DefaultBlockConfig | #23405 test and DSL swaps to op-core
+mc-batcher/batcher (tests) | missing go-ethereum/core/types.Header.BlockAccessListHash | upstream backport, in go-ethereum v1.17.7
 op-chain-ops/genesis (tests) | missing go-ethereum/params.ChainConfig.Optimism | #23200 differential tests pin the chain config and genesis JSON codecs to op-geth's until the cutover
 op-chain-ops/genesis (tests) | missing go-ethereum/params.OptimismConfig | #23200 differential tests pin the chain config and genesis JSON codecs to op-geth's until the cutover
 op-chain-ops/pkg/sdm (tests) | missing go-ethereum/core/types.DepositTxType | #23405 test and DSL swaps to op-core
@@ -115,10 +115,10 @@ op-core/types (tests) | missing go-ethereum/core/types.Transaction.IsDepositTx |
 op-core/types (tests) | missing go-ethereum/core/types.Transaction.IsSystemTx | #20266 op-core transition code, removed at the cutover
 op-core/types (tests) | missing go-ethereum/core/types.Transaction.Mint | #20266 op-core transition code, removed at the cutover
 op-core/types (tests) | missing go-ethereum/core/types.Transaction.SourceHash | #20266 op-core transition code, removed at the cutover
-op-deployer/pkg/deployer/opcm | missing go-ethereum/params.BuilderDepositAddress | upstream backport, in go-ethereum v1.17.7
-op-deployer/pkg/deployer/opcm | missing go-ethereum/params.BuilderExitAddress | upstream backport, in go-ethereum v1.17.7
-op-deployer/pkg/deployer/pipeline | missing go-ethereum/core.Genesis.StateHash | #23217 genesis readers
-op-deployer/pkg/deployer/pipeline (tests) | missing go-ethereum/core.Genesis.StateHash | #23217 genesis readers
+mc-deployer/pkg/deployer/opcm | missing go-ethereum/params.BuilderDepositAddress | upstream backport, in go-ethereum v1.17.7
+mc-deployer/pkg/deployer/opcm | missing go-ethereum/params.BuilderExitAddress | upstream backport, in go-ethereum v1.17.7
+mc-deployer/pkg/deployer/pipeline | missing go-ethereum/core.Genesis.StateHash | #23217 genesis readers
+mc-deployer/pkg/deployer/pipeline (tests) | missing go-ethereum/core.Genesis.StateHash | #23217 genesis readers
 op-devstack/dsl | missing go-ethereum/core/types.DepositTxType | #23405 test and DSL swaps to op-core
 op-devstack/dsl | missing go-ethereum/core/types.FlzCompressLen | #23405 test and DSL swaps to op-core
 op-devstack/dsl | missing go-ethereum/core/types.NewL1CostFuncFjord | #23405 test and DSL swaps to op-core
@@ -241,20 +241,20 @@ op-e2e/system/fees (tests) | missing go-ethereum/core/types.Transaction.RollupCo
 op-e2e/system/verifier (tests) | missing go-ethereum/miner.Config.RollupComputePendingBlock | #21744 in-process op-geth L2 EL
 op-interop-filter/filter (tests) | missing go-ethereum/params.InteropCrossL2InboxAddress | #23405 test and DSL swaps to op-core
 op-interop-mon/monitor (tests) | missing go-ethereum/params.InteropCrossL2InboxAddress | #23405 test and DSL swaps to op-core
-op-node | missing go-ethereum/params.ChainConfig.IsOptimism | #23406 non-test swaps
-op-node (tests) | missing go-ethereum/params.ChainConfig.Optimism | #23406 non-test swaps
-op-node (tests) | missing go-ethereum/params.OptimismConfig | #23406 non-test swaps
-op-node/rollup/derive (tests) | missing go-ethereum/consensus/misc/eip1559.EncodeOptimismExtraData | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.DepositTx | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.DepositTxType | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.ExtractDAFootprintGasScalar | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.PostExecTx | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.IsDepositTx | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.IsSystemTx | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.Mint | #23405 test and DSL swaps to op-core
-op-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.SourceHash | #23405 test and DSL swaps to op-core
-op-node/rollup/derive/test | changed signature of go-ethereum/core/types.NewBlock | #23405 test and DSL swaps to op-core
-op-node/rollup/derive/test | missing go-ethereum/core/types.DefaultBlockConfig | #23405 test and DSL swaps to op-core
+mc-node | missing go-ethereum/params.ChainConfig.IsOptimism | #23406 non-test swaps
+mc-node (tests) | missing go-ethereum/params.ChainConfig.Optimism | #23406 non-test swaps
+mc-node (tests) | missing go-ethereum/params.OptimismConfig | #23406 non-test swaps
+mc-node/rollup/derive (tests) | missing go-ethereum/consensus/misc/eip1559.EncodeOptimismExtraData | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.DepositTx | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.DepositTxType | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.ExtractDAFootprintGasScalar | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.PostExecTx | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.IsDepositTx | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.IsSystemTx | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.Mint | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive (tests) | missing go-ethereum/core/types.Transaction.SourceHash | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive/test | changed signature of go-ethereum/core/types.NewBlock | #23405 test and DSL swaps to op-core
+mc-node/rollup/derive/test | missing go-ethereum/core/types.DefaultBlockConfig | #23405 test and DSL swaps to op-core
 op-service/bgpo (tests) | changed signature of go-ethereum/core/types.NewBlock | #23405 test and DSL swaps to op-core
 op-service/bgpo (tests) | missing go-ethereum/core/types.DefaultBlockConfig | #23405 test and DSL swaps to op-core
 op-service/sources | missing go-ethereum/core/types.Header.BlockAccessListHash | upstream backport, in go-ethereum v1.17.7

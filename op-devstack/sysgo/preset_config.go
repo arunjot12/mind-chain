@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 
@@ -64,7 +64,7 @@ type PresetConfig struct {
 	PreGenesisSuperGame     *PreGenesisSuperGameConfig
 	ZKDisputeGame           *ZKDisputeGameConfig
 	ZKProposerOptions       []ZKProposerOption
-	// SkipHonestProposer skips starting the honest proposer (op-proposer, or op-zk-proposer for the ZK preset).
+	// SkipHonestProposer skips starting the honest proposer (mc-proposer, or op-zk-proposer for the ZK preset).
 	SkipHonestProposer bool
 	// SkipHonestChallenger skips starting the honest challenger.
 	SkipHonestChallenger bool
@@ -73,7 +73,7 @@ type PresetConfig struct {
 	// InteropActivationDelaySeconds offsets Interop activation past genesis (0 = at genesis).
 	InteropActivationDelaySeconds uint64
 	// InteropAtGenesis activates Interop on the L2 chain at genesis and provisions a
-	// DependencySet for op-node startup (without a supervisor). Required by tests that
+	// DependencySet for mc-node startup (without a supervisor). Required by tests that
 	// exercise Interop-gated consensus features (e.g. SDM PostExec) on the default
 	// single-chain runtime.
 	InteropAtGenesis bool

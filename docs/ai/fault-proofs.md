@@ -22,7 +22,7 @@ ask for op-program changes.
 - **Cannon**: a MIPS32 VM that executes kona-client in single-step mode, producing a
   reproducible execution trace.
 - **kona-client**: the primary fault proof program — a Rust binary that derives and executes
-  L2 state. It executes blocks via `op-revm`/`op-alloy` through `kona-executor`, not op-reth.
+  L2 state. It executes blocks via `op-revm`/`op-alloy` through `kona-executor`, not mc-reth.
 - **Dispute game**: an on-chain bisection game to resolve output root disputes.
 - **Preimage oracle**: the mechanism for the VM to load external data (L1 blocks, L2 state).
 - **Kona-SP1 acceptance boundary**: tests exercise the shipping super-root path through the
@@ -69,7 +69,7 @@ a mise-activated shell, and run `mise trust` once in a fresh worktree.
 ```bash
 # from packages/contracts-bedrock — compile the contracts
 mise x -- just forge-build --skip test
-# from op-deployer — bundle the artifacts where the e2e env reads them
+# from mc-deployer — bundle the artifacts where the e2e env reads them
 mise x -- just copy-contract-artifacts
 ```
 
@@ -85,8 +85,8 @@ binary, so they need it built and `KONA_HOST_PATH` pointing at it. These tests a
 from the normal `go test ./...` suite — they only run under kona-host.
 
 > [!NOTE]
-> These tests cover **op-node as well as kona-client**. The chain is built and derived by op-node
-> — the action-test `L2Sequencer`/`L2Verifier` drives `op-node/rollup/derive` through
+> These tests cover **mc-node as well as kona-client**. The chain is built and derived by mc-node
+> — the action-test `L2Sequencer`/`L2Verifier` drives `mc-node/rollup/derive` through
 > `PreparePayloadAttributes` → `PayloadToSystemConfig` — and the `RunFaultProofProgram` step then
 > has kona-client re-derive and prove that same chain. So a single test exercises both
 > consensus-layer implementations of the state transition.

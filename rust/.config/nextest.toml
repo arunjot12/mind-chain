@@ -14,7 +14,7 @@ slow-timeout = { period = "30s", terminate-after = 4 }
 [profile.default.junit]
 path = "junit.xml"
 
-# op-reth's EVM/state-conformance suites are legitimately slow; give them more
+# mc-reth's EVM/state-conformance suites are legitimately slow; give them more
 # headroom before the slow-timeout terminates them.
 [[profile.default.overrides]]
 filter = "test(general_state_tests)"

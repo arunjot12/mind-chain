@@ -12,7 +12,7 @@ The `just test` target automatically builds dependencies (contracts, cannon pres
 
 **Prerequisites:** mise tools must be installed (see [dev-workflow.md](dev-workflow.md#setup)), and a working C toolchain (`clang` or `gcc`) must be available for Rust builds.
 
-Always set `RUST_JIT_BUILD=1` when running locally. This lets the test framework automatically build any Rust binaries it needs (e.g. op-reth) using cargo's rebuild detection, so you don't have to pre-build them separately.
+Always set `RUST_JIT_BUILD=1` when running locally. This lets the test framework automatically build any Rust binaries it needs (e.g. mc-reth) using cargo's rebuild detection, so you don't have to pre-build them separately.
 
 Run from `op-acceptance-tests/`:
 
@@ -42,15 +42,15 @@ Every run covers the whole `./op-acceptance-tests/tests/...` tree; there is no p
 subset target. Which clients the devstack starts is chosen by two environment variables, read
 in `op-devstack/sysgo/mixed_runtime.go`:
 
-- `DEVSTACK_L2CL_KIND` — `op-node` (the default) or `kona-node`
-- `DEVSTACK_L2EL_KIND` — `op-reth` (the default) or `op-geth`
+- `DEVSTACK_L2CL_KIND` — `mc-node` (the default) or `kona-node`
+- `DEVSTACK_L2EL_KIND` — `mc-reth` (the default) or `op-geth`
 
 ```bash
 cd op-acceptance-tests && DEVSTACK_L2CL_KIND=kona-node RUST_JIT_BUILD=1 mise exec -- just acceptance-test
 ```
 
-CI runs two variants of the `op-acceptance-tests` job: `memory-all-opn-op-reth-<l1_fork>`
-(op-node + op-reth) and `memory-all-kona-op-reth-<l1_fork>` (kona-node + op-reth).
+CI runs two variants of the `op-acceptance-tests` job: `memory-all-opn-mc-reth-<l1_fork>`
+(mc-node + mc-reth) and `memory-all-kona-mc-reth-<l1_fork>` (kona-node + mc-reth).
 
 A test that cannot run under a given client skips itself in code rather than being left out of
 a list — `sysgo.SkipOnKonaNode`, `sysgo.SkipOnOpReth` and `sysgo.SkipOnOpGeth`.
@@ -82,8 +82,8 @@ The `just build-deps` target (called automatically by `just test`) runs these st
 1. **mise** — `mise install` (ensures gotestsum, forge, etc. are available)
 2. **Contracts** — `cd packages/contracts-bedrock && just install && just build-no-tests`
 3. **Cannon prestates** — `just cannon-prestates` (builds the kona prestate artifacts)
-4. **Rust binaries** — `just build-rust-release` (kona-node, kona-host, and op-reth). SDM
-   acceptance fixtures use hidden, default-off testing flags on the normal op-reth binary.
+4. **Rust binaries** — `just build-rust-release` (kona-node, kona-host, and mc-reth). SDM
+   acceptance fixtures use hidden, default-off testing flags on the normal mc-reth binary.
 
 You can also run `just build-deps` directly to pre-build without running tests.
 

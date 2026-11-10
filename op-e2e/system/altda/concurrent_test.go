@@ -8,11 +8,11 @@ import (
 
 	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/flags"
+	"github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/transactions"
 	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
 	"github.com/stretchr/testify/require"
 )
 

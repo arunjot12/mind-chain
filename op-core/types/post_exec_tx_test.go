@@ -37,7 +37,7 @@ func TestPostExecTxMarshalBinaryDifferential(t *testing.T) {
 }
 
 // TestPostExecTxHashGoldenVector pins the cross-client post-exec (0x7D) tx hash: op-geth and
-// op-reth must agree on keccak256(0x7D || Data), the canonical EIP-2718 rule. data is op-alloy's
+// mc-reth must agree on keccak256(0x7D || Data), the canonical EIP-2718 rule. data is op-alloy's
 // build_post_exec_tx(42, [{3,7}]); opRethTxHash is the value op-alloy pins for TxPostExec::tx_hash.
 // Guards the op-geth hash fix against regression when the op-geth pin moves (old op-geth returned
 // keccak256(0x7D || RLP([Data]))).
@@ -47,7 +47,7 @@ func TestPostExecTxHashGoldenVector(t *testing.T) {
 
 	gethHash := gethtypes.NewTx(&gethtypes.PostExecTx{Data: data}).Hash()
 	require.Equal(t, opRethTxHash, gethHash.Hex(),
-		"op-geth post-exec tx hash must match op-reth (op-alloy TxPostExec::tx_hash)")
+		"op-geth post-exec tx hash must match mc-reth (op-alloy TxPostExec::tx_hash)")
 
 	// The shared value is exactly keccak256 of the canonical encoding op-core produces.
 	canonical, err := (&optypes.PostExecTx{Data: data}).MarshalBinary()

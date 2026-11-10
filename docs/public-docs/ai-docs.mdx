@@ -139,14 +139,14 @@ Grounding pages: [Configure the Batcher](/chain-operators/guides/configuration/b
 Read https://docs.optimism.io/chain-operators/guides/configuration/batcher.md
 and https://docs.optimism.io/chain-operators/guides/management/transaction-fees-101.md
 
-Here is my current op-batcher configuration: [paste your flags or env vars].
+Here is my current mc-batcher configuration: [paste your flags or env vars].
 My chain posts roughly [N] transactions per day and targets [blobs / calldata].
 
 Audit the configuration for data-availability cost: identify settings that
 increase posting cost, explain the trade-off each one controls (cost vs.
 latency vs. safety), and propose a revised configuration with reasoning.
 Flag any flag you are not sure still exists so I can check it against
-op-batcher --help for my release.
+mc-batcher --help for my release.
 ```
 
 ### Walk Me Through the Deposit Flow
@@ -172,14 +172,14 @@ minimal code to trigger a deposit from my app. I am building
 **Persona:** chain operator
 
 Every permissionless fault-proof chain needs an honest challenger watching its dispute games.
-Grounding pages: [OP-Challenger Explainer](/op-stack/fault-proofs/challenger) and [How to Configure Challenger for Your Chain](/chain-operators/guides/configuration/op-challenger-config-guide).
+Grounding pages: [OP-Challenger Explainer](/op-stack/fault-proofs/challenger) and [How to Configure Challenger for Your Chain](/chain-operators/guides/configuration/mc-challenger-config-guide).
 
 ```text
 Read https://docs.optimism.io/op-stack/fault-proofs/challenger.md and
 https://docs.optimism.io/chain-operators/guides/configuration/op-challenger-config-guide.md
 
 I operate an OP Stack chain with fault proofs enabled on [network].
-Produce a deployment plan for op-challenger: the role it plays, the
+Produce a deployment plan for mc-challenger: the role it plays, the
 resources and keys it needs, the bond funding it requires, the
 configuration I must set, and the monitoring I should attach. List open
 questions I need to answer about my own chain before deploying.

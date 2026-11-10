@@ -39,7 +39,7 @@ A new version can introduce:
    - Are there any security vulnerabilities addressed by this version?
 6. **Implementation**: If the proposal receives unanimous approval from the review panel, the
    Foundry version upgrade will be implemented across the entire OP Stack codebase, including:
-   - The monorepo (`mise.toml` and `op-deployer/pkg/deployer/forge/version.json`)
+   - The monorepo (`mise.toml` and `mc-deployer/pkg/deployer/forge/version.json`)
    - The `superchain-ops` repository
 7. The PR that implements the bump MUST include a reference to the approved, merged design document that approves that foundry version for usage.
 
@@ -63,7 +63,7 @@ This process will be managed by the person who submitted the proposal to ensure 
 issues. The upgrade will apply to all components simultaneously, including:
 
 - `mise.toml`: Update `forge`, `cast`, and `anvil` version entries
-- `op-deployer/pkg/deployer/forge/version.json`: Update the `forge` version and corresponding
+- `mc-deployer/pkg/deployer/forge/version.json`: Update the `forge` version and corresponding
   checksums for all supported platforms
 - `superchain-ops` repository: Update Foundry version configuration
 

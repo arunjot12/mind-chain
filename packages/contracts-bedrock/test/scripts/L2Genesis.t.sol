@@ -498,7 +498,7 @@ contract L2Genesis_Run_Test is L2Genesis_TestInit {
 
     /// @notice Tests that when interop is scheduled for a later fork (genesis fork < LAGOON),
     ///         the runtime INTEROP feature flag on L1Block is NOT set at genesis. The flag will
-    ///         instead be flipped at the activation block by op-node's setFeature deposit wrapper.
+    ///         instead be flipped at the activation block by mc-node's setFeature deposit wrapper.
     function test_setL1Block_interopScheduledNotActive_succeeds() external {
         _setInputInteropEnabled();
         input.fork = uint256(Fork.ISTHMUS);

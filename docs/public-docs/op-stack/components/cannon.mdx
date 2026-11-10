@@ -27,7 +27,7 @@ disputes resolvable: participants bisect an execution trace down to a single
 MIPS instruction, and that one instruction is proven onchain.
 
 **Who runs it:** dispute game participants, not everyday node operators.
-[op-challenger](/op-stack/fault-proofs/challenger) invokes the cannon binary
+[mc-challenger](/op-stack/fault-proofs/challenger) invokes the cannon binary
 automatically when a fault dispute reaches the execution-trace stage, and
 chain operators build cannon prestates when configuring permissionless fault
 proofs. For how cannon fits into the dispute game, see the
@@ -44,7 +44,7 @@ proofs. For how cannon fits into the dispute game, see the
 ## How-tos
 
 *   [Generating absolute prestate and preimage files](/chain-operators/tutorials/absolute-prestate)
-    — build and verify the cannon prestate of kona-client that op-challenger
+    — build and verify the cannon prestate of kona-client that mc-challenger
     runs at dispute time.
 *   [Generating a custom kona-client absolute prestate](/chain-operators/tutorials/kona-custom-prestate)
     — the same, for chains not yet in the public Superchain Registry.

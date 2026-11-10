@@ -1,6 +1,6 @@
 ---
 title: "Run Kona Node as a Binary"
-description: "Run the kona-node binary against an op-reth execution client, from starting both clients to watching the node sync."
+description: "Run the kona-node binary against an mc-reth execution client, from starting both clients to watching the node sync."
 diataxis: how-to
 ---
 
@@ -15,11 +15,11 @@ guide to build one yourself.
 This means that the node is a _consensus_-layer client, which needs
 a corresponding execution-layer client in order to sync and follow
 the L2 chain. The OP Stack uses a minimal diff approach to L1
-execution clients, and [`op-reth`][op-reth] is the primary L2
+execution clients, and [`mc-reth`][mc-reth] is the primary L2
 execution layer client.
 
 This section will illustrate running the `kona-node` with an instance
-of [`op-reth`][op-reth].
+of [`mc-reth`][mc-reth].
 
 Out of the box, the `kona-node` can be used for any `OP Stack` chain
 that is part of the [`superchain-registry`][scr]. In order to use an
@@ -33,7 +33,7 @@ This tutorial walks through running the `kona-node` as
 a binary. To use docker, head over to the
 [Docker Guide](/node-operators/kona-node/run/docker) which uses a `docker-compose`
 setup provided by `kona`. The `docker-compose` setup
-automatically bootstraps the `kona-node` with `op-reth`,
+automatically bootstraps the `kona-node` with `mc-reth`,
 provisioning grafana dashboards and a default Prometheus
 configuration. It is encouraged to follow the
 [Docker Guide](/node-operators/kona-node/run/docker) to avoid misconfigurations.
@@ -49,18 +49,18 @@ The `kona-node` requires a few CLI flags.
   URL of the engine API endpoint of an L2 execution client.
 
 The L2 engine RPC points to the execution layer client's engine API,
-[`op-reth`][op-reth].
+[`mc-reth`][mc-reth].
 
 An L1 beacon endpoint and rpc endpoint are also required to
 fetch the L1 chain data that the L2 chain is derived from.
 
-First, start an instance of [`op-reth`][op-reth]. The
-[`op-reth` docs][op-reth-docs] provide very detailed instructions
-for running `op-reth` nodes for OP Stack chains (L2). For this
+First, start an instance of [`mc-reth`][mc-reth]. The
+[`mc-reth` docs][mc-reth-docs] provide very detailed instructions
+for running `mc-reth` nodes for OP Stack chains (L2). For this
 demo, we'll use `base`, but any other OP Stack chain will do.
 
 ```
-op-reth node \
+mc-reth node \
     --chain base \
     --rollup.sequencer-http https://mainnet-sequencer.base.org \
     --http \
@@ -77,7 +77,7 @@ create the `jwt.hex` file. Run `just generate-jwt`.
 The JWT token file path passed into `--authrpc.jwtsecret`
 **MUST** be the same as the one passed into the `kona-node`.
 
-This JWT token is how the `op-reth` client authenticates
+This JWT token is how the `mc-reth` client authenticates
 requests made by the `kona-node` to the engine rpc.
 
 By default, the `kona-node` will attempt to read a JWT token
@@ -128,7 +128,7 @@ chain's P2P bootnodes.
 Once the first unsafe L2 payload attributes (block) is received
 from peers in the libp2p swarm, it is sent off to the `kona-node`'s
 engine actor which will kick off execution layer sync on the
-`op-reth` execution client. When this happens, the `op-reth` logs
+`mc-reth` execution client. When this happens, the `mc-reth` logs
 will start to show that it is fetching past L2 blocks to sync the
 chain to tip.
 
@@ -152,9 +152,9 @@ engine actor to insert into the chain.
 
 [scr]: https://github.com/ethereum-optimism/superchain-registry/tree/main
 
-[op-reth-docs]: https://reth.rs/run/opstack
+[mc-reth-docs]: https://reth.rs/run/opstack
 
-[op-reth]: https://github.com/paradigmxyz/reth/blob/main/crates/optimism/bin/src/main.rs
+[mc-reth]: https://github.com/paradigmxyz/reth/blob/main/crates/optimism/bin/src/main.rs
 
 [buildx]: https://github.com/ethereum-optimism/optimism/tree/develop/rust/kona/docker
 [packages]: https://github.com/orgs/op-rs/packages?repo_name=kona

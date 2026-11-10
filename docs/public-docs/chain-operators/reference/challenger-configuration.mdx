@@ -1,21 +1,21 @@
 ---
 title: Challenger configuration reference
-description: Reference for all op-challenger configuration options, covering CLI flags, environment variables, and default values.
+description: Reference for all mc-challenger configuration options, covering CLI flags, environment variables, and default values.
 diataxis: reference
 ---
 
-import OpChallengerFlags from '/snippets/generated/op-challenger-flags.mdx';
+import OpChallengerFlags from '/snippets/generated/mc-challenger-flags.mdx';
 import { ConfigReferencePreamble } from '/snippets/config-reference-preamble.mdx';
 
-This page catalogues every configuration option for the op-challenger, the
+This page catalogues every configuration option for the mc-challenger, the
 dispute game agent that monitors fault proof games on L1, challenges invalid
 claims, and defends valid state transitions.
 
-<ConfigReferencePreamble component="op-challenger" />
+<ConfigReferencePreamble component="mc-challenger" />
 
 For step-by-step setup instructions — prestates, trace types, wallets, and
 monitoring — see the
-[challenger configuration guide](/chain-operators/guides/configuration/op-challenger-config-guide);
+[challenger configuration guide](/chain-operators/guides/configuration/mc-challenger-config-guide);
 for how the fault proof system works, see the
 [challenger explainer](/op-stack/fault-proofs/challenger).
 
@@ -27,7 +27,7 @@ for how the fault proof system works, see the
 
 ### Conditionally required flags
 
-The required table above lists the flags op-challenger always checks at
+The required table above lists the flags mc-challenger always checks at
 startup. Additional flags become required depending on the configuration: the
 chain must be identified by `--network` or by `--game-factory-address`, and
 each enabled game type requires its trace-execution flags (for example the
@@ -44,7 +44,7 @@ not need to be set.
 
 Selects which dispute game types the challenger plays. Which type defends
 your chain depends on the protocol version it runs; see the
-[challenger configuration guide](/chain-operators/guides/configuration/op-challenger-config-guide)
+[challenger configuration guide](/chain-operators/guides/configuration/mc-challenger-config-guide)
 for choosing game types, trace types, and the matching prestates.
 
 ### cannon-* and cannon-kona-*
@@ -61,8 +61,8 @@ variants are still being maintained.
 
 ## Utility subcommands
 
-Beyond running the challenger service, the `op-challenger` binary provides
+Beyond running the challenger service, the `mc-challenger` binary provides
 utility subcommands for inspecting and interacting with dispute games:
 `list-games`, `list-claims`, `list-credits`, `create-game`, `move`,
 `resolve`, `resolve-claim`, and `run-trace`. Each takes its own flags; run
-`op-challenger <subcommand> --help` for details.
+`mc-challenger <subcommand> --help` for details.

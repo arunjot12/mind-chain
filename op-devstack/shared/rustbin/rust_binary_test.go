@@ -9,12 +9,12 @@ import (
 
 func TestSelectNewestBinaryPrefersFreshReleaseOverStaleDebug(t *testing.T) {
 	targetDir := t.TempDir()
-	releaseBin := filepath.Join(targetDir, "release", "op-reth")
-	debugBin := filepath.Join(targetDir, "debug", "op-reth")
+	releaseBin := filepath.Join(targetDir, "release", "mc-reth")
+	debugBin := filepath.Join(targetDir, "debug", "mc-reth")
 	writeStubBinary(t, debugBin, time.Now().Add(-time.Hour))
 	writeStubBinary(t, releaseBin, time.Now())
 
-	got, err := selectNewestBinary(targetDir, "op-reth")
+	got, err := selectNewestBinary(targetDir, "mc-reth")
 	if err != nil {
 		t.Fatalf("selectNewestBinary: %v", err)
 	}
@@ -25,12 +25,12 @@ func TestSelectNewestBinaryPrefersFreshReleaseOverStaleDebug(t *testing.T) {
 
 func TestSelectNewestBinaryPrefersFreshDebugOverStaleRelease(t *testing.T) {
 	targetDir := t.TempDir()
-	releaseBin := filepath.Join(targetDir, "release", "op-reth")
-	debugBin := filepath.Join(targetDir, "debug", "op-reth")
+	releaseBin := filepath.Join(targetDir, "release", "mc-reth")
+	debugBin := filepath.Join(targetDir, "debug", "mc-reth")
 	writeStubBinary(t, releaseBin, time.Now().Add(-time.Hour))
 	writeStubBinary(t, debugBin, time.Now())
 
-	got, err := selectNewestBinary(targetDir, "op-reth")
+	got, err := selectNewestBinary(targetDir, "mc-reth")
 	if err != nil {
 		t.Fatalf("selectNewestBinary: %v", err)
 	}
@@ -40,7 +40,7 @@ func TestSelectNewestBinaryPrefersFreshDebugOverStaleRelease(t *testing.T) {
 }
 
 func TestSelectNewestBinaryMissing(t *testing.T) {
-	if _, err := selectNewestBinary(t.TempDir(), "op-reth"); err == nil {
+	if _, err := selectNewestBinary(t.TempDir(), "mc-reth"); err == nil {
 		t.Fatal("expected error when no binary is present")
 	}
 }

@@ -11,21 +11,21 @@ import { NormativeSpec } from "/snippets/normative-spec.mdx"
   what="The honest challenger's behavior"
   title="honest challenger specification"
   href="https://specs.optimism.io/fault-proof/stage-one/honest-challenger-fdg.html"
-  note="This page explains how op-challenger implements that role; it does not restate the spec."
+  note="This page explains how mc-challenger implements that role; it does not restate the spec."
 />
 
-The `op-challenger` operates as the *honest actor* in the fault dispute system and defends the chain by securing the `OptimismPortal` and ensuring the game always resolves to the correct state of the chain. For verifying the legitimacy of claims, `op-challenger` relies on a synced, trusted rollup node as well as a trace provider (e.g., [Cannon](/op-stack/fault-proofs/cannon)).
+The `mc-challenger` operates as the *honest actor* in the fault dispute system and defends the chain by securing the `OptimismPortal` and ensuring the game always resolves to the correct state of the chain. For verifying the legitimacy of claims, `mc-challenger` relies on a synced, trusted rollup node as well as a trace provider (e.g., [Cannon](/op-stack/fault-proofs/cannon)).
 
-Specifically, `op-challenger` performs the following actions:
+Specifically, `mc-challenger` performs the following actions:
 
 *   monitors and interacts with dispute games
 *   defends valid output root proposals
 *   challenges invalid output root proposals
-*   assists `op-proposer` by resolving claims and games once chess clocks expire
+*   assists `mc-proposer` by resolving claims and games once chess clocks expire
 *   claims paid out bonds for both the challenger and proposer
 
 ## Architecture
-This diagram illustrates how `op-challenger` monitors dispute games, defends valid proposals, and challenges invalid ones. It also shows its interaction with the `op-proposer` in resolving claims.
+This diagram illustrates how `mc-challenger` monitors dispute games, defends valid proposals, and challenges invalid ones. It also shows its interaction with the `mc-proposer` in resolving claims.
 
 ```mermaid
 graph TD;
@@ -40,19 +40,19 @@ graph TD;
 ```
 
 <Info>
-  The `op-challenger` docker container runs the `cannon` VM with a fault-proof program as a sub-process to generate game trace data. Since the Karst upgrade, the respected game type is `cannon-kona`, which uses `kona-host`. The legacy `cannon` game type uses `op-program host`, which reached end-of-support at the Karst upgrade. See [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation).
+  The `mc-challenger` docker container runs the `cannon` VM with a fault-proof program as a sub-process to generate game trace data. Since the Karst upgrade, the respected game type is `cannon-kona`, which uses `kona-host`. The legacy `cannon` game type uses `op-program host`, which reached end-of-support at the Karst upgrade. See [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation).
 </Info>
 
 ## Fault detection responses
 
-`op-challenger` assesses each claim's validity, countering only those deemed invalid, following this logic:
+`mc-challenger` assesses each claim's validity, countering only those deemed invalid, following this logic:
 
-1.  If the trusted node agrees with the output, `op-challenger` takes no action. An honest challenger does nothing because there are no claims it disagrees with. It continues to monitor the game in case someone posts a counter-claim to the valid root claim, in which case the challenger will participate in the game to defend the proposal.
-2.  If the trusted node disagrees, `op-challenger` posts a counter-claim to challenge the proposed output. In contrast to the above scenario, an honest challenger aims to delete any output roots that its trusted node disagrees with in order to claim the bond attached to it. The honest challenger assumes that their rollup node is synced to the canonical state and that the fault proof program is correct, so it is willing to put its money on the line to counter any faults.
+1.  If the trusted node agrees with the output, `mc-challenger` takes no action. An honest challenger does nothing because there are no claims it disagrees with. It continues to monitor the game in case someone posts a counter-claim to the valid root claim, in which case the challenger will participate in the game to defend the proposal.
+2.  If the trusted node disagrees, `mc-challenger` posts a counter-claim to challenge the proposed output. In contrast to the above scenario, an honest challenger aims to delete any output roots that its trusted node disagrees with in order to claim the bond attached to it. The honest challenger assumes that their rollup node is synced to the canonical state and that the fault proof program is correct, so it is willing to put its money on the line to counter any faults.
 
 ## Fault dispute game responses
 
-`op-challenger` iterates through claims as stored in the contract, ensuring ancestors are processed before their descendants. For each claim, the honest challenger determines and tracks the set of honest responses to all claims, regardless of whether that response already exists in the full game state.
+`mc-challenger` iterates through claims as stored in the contract, ensuring ancestors are processed before their descendants. For each claim, the honest challenger determines and tracks the set of honest responses to all claims, regardless of whether that response already exists in the full game state.
 
 ### Root claim
 
@@ -89,9 +89,9 @@ The `FaultDisputeGame` does not put a time cap on resolution - because of the li
 
 ## Next steps
 
-*   Ready to get started? Read our guide on how to [configure `op-challenger` on your OP Stack chain](/chain-operators/guides/configuration/op-challenger-config-guide).
-*   For more info about how `op-challenger` works under the hood, [check out the specs](https://specs.optimism.io/fault-proof/stage-one/honest-challenger-fdg.html?utm_source=op-docs&utm_medium=docs).
-*   For releases, configuration reference, and source links, see the [op-challenger hub](/op-stack/components/op-challenger).
+*   Ready to get started? Read our guide on how to [configure `mc-challenger` on your OP Stack chain](/chain-operators/guides/configuration/mc-challenger-config-guide).
+*   For more info about how `mc-challenger` works under the hood, [check out the specs](https://specs.optimism.io/fault-proof/stage-one/honest-challenger-fdg.html?utm_source=op-docs&utm_medium=docs).
+*   For releases, configuration reference, and source links, see the [mc-challenger hub](/op-stack/components/mc-challenger).
 
 ## FAQs
 

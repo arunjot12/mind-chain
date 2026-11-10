@@ -23,10 +23,10 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/op-challenger/metrics"
+	"github.com/ethereum-optimism/optimism/mc-challenger/config"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
+	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/challenger"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/disputegame"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
@@ -187,7 +187,7 @@ func TestGranitePrecompiles(t *testing.T) {
 		errMsg := err.Error()
 		require.Truef(t,
 			strings.Contains(errMsg, "bad elliptic curve pairing input size") || // op-geth
-				strings.Contains(errMsg, "precompiled failed"), // op-reth
+				strings.Contains(errMsg, "precompiled failed"), // mc-reth
 			"expected trace error to contain known Granite precompile failure text, got %q", errMsg)
 
 		t.Logf("Transaction hash %v", tx.Hash())

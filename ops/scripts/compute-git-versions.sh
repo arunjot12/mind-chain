@@ -9,7 +9,7 @@ set -euo pipefail
 #   GIT_COMMIT=$(git rev-parse HEAD) ./ops/scripts/compute-git-versions.sh
 #
 # Output format:
-#   {"op-node":"v1.2.3","op-batcher":"v1.1.0",...}
+#   {"mc-node":"v1.2.3","mc-batcher":"v1.1.0",...}
 
 GIT_COMMIT="${GIT_COMMIT:-$(git rev-parse HEAD)}"
 

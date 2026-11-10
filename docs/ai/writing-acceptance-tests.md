@@ -138,7 +138,7 @@ Returning *objects* that represent entities in the system is fine — they expos
 
 ```go
 claim   := game.RootClaim()
-counter := claim.VerifyCountered()   // waits for op-challenger to counter
+counter := claim.VerifyCountered()   // waits for mc-challenger to counter
 counter.VerifyClaimant(honestChallenger)
 counter.Attack()
 ```

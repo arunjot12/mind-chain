@@ -36,7 +36,7 @@ func TestSupernodeResyncResumesAtActivation_PostActivation(gt *testing.T) {
 	sys.Supernode.AwaitBackfillCompleted()
 
 	// Setup: let L2 finalized advance several blocks on both chains. On
-	// restart, op-node may drop back as part of its safe start process,
+	// restart, mc-node may drop back as part of its safe start process,
 	// but won't go past the finalized head. With finalized well past
 	// genesis the post-restart cold-start backfill has a real window to
 	// populate, instead of collapsing to empty against a re-recorded
@@ -82,7 +82,7 @@ func TestSupernodeResyncSchedulesAtActivation_PreActivation(gt *testing.T) {
 	sys.Supernode.AwaitBackfillCompleted()
 	activation := sys.Supernode.ActivationTimestamp()
 
-	// Setup: let local-safe accumulate enough that op-node's SafeDB has
+	// Setup: let local-safe accumulate enough that mc-node's SafeDB has
 	// entries to serve to the post-restart cold-start init.
 	dsl.CheckAll(t,
 		sys.L2ACL.AdvancedFn(safety.LocalSafe, 2, 30),

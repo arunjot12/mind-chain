@@ -47,7 +47,7 @@ var (
 //  1. Inserting a synthetic block (modified extra data) sharing the target's parent and FCU-ing
 //     to it. This makes the original target block non-canonical in the EL's view.
 //  2. Re-inserting the supplied target payload via engine_newPayload. This guarantees the EL
-//     has the block durably stored before we ask it to become the head — pruners (op-reth in
+//     has the block durably stored before we ask it to become the head — pruners (mc-reth in
 //     particular) may have removed the block while it sat non-canonical after step 1.
 //  3. FCU-ing to the target block, which restores it as the canonical head.
 //
@@ -130,7 +130,7 @@ func (e *simpleEngineController) Rewind(ctx context.Context, target *eth.Executi
 
 	// Step 4: re-insert the canonical target payload via engine_newPayload. The previous FCU
 	// to the synthetic block made the target block non-canonical, which means the EL is free
-	// to prune it (op-reth's pruner does so eagerly). Calling NewPayload again forces the EL
+	// to prune it (mc-reth's pruner does so eagerly). Calling NewPayload again forces the EL
 	// to re-import the block before we ask it to become the head in step 5.
 	if err := e.reinsertCanonicalPayload(ctx, target); err != nil {
 		return err

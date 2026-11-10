@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/version"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/version"
 	"github.com/ethereum-optimism/optimism/op-fetcher/fetch"
 	opservice "github.com/ethereum-optimism/optimism/op-service"
 	"github.com/ethereum-optimism/optimism/op-service/cliapp"

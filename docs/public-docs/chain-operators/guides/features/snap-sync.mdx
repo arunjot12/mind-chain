@@ -4,7 +4,7 @@ description: Learn how to enable snap sync on your OP Stack chain.
 diataxis: how-to
 ---
 
-Snap sync significantly improves the experience of syncing an OP Stack node. On the consensus layer, `op-node` enables it with the `--syncmode=execution-layer` flag.
+Snap sync significantly improves the experience of syncing an OP Stack node. On the consensus layer, `mc-node` enables it with the `--syncmode=execution-layer` flag.
 Rather than re-executing every block from genesis, the execution client downloads chain and state data from other nodes on the network over P2P and begins executing from the completed state.
 This means that performing a snap sync is significantly faster than performing a full sync.
 
@@ -17,16 +17,16 @@ To enable snap sync, chain operators need to spin up a node which is exposed to 
 This node will serve snap sync requests on the execution layer from other nodes on the network.
 
 <Info>
-For snap sync, all nodes should expose port `30303` TCP and `30303` UDP to easily find other nodes to sync from. These are op-reth's defaults for `--port` (TCP) and `--discovery.port` (UDP).
-  *   If you set the port with [`--discovery.port`](/node-operators/op-reth/cli/op-reth/node), then you must open the port specified for UDP.
-  *   If you set [`--port`](/node-operators/op-reth/cli/op-reth/node), then you must open the port specified for TCP.
+For snap sync, all nodes should expose port `30303` TCP and `30303` UDP to easily find other nodes to sync from. These are mc-reth's defaults for `--port` (TCP) and `--discovery.port` (UDP).
+  *   If you set the port with [`--discovery.port`](/node-operators/mc-reth/cli/mc-reth/node), then you must open the port specified for UDP.
+  *   If you set [`--port`](/node-operators/mc-reth/cli/mc-reth/node), then you must open the port specified for TCP.
   *   The only exception is for sequencers and transaction ingress nodes.
 </Info>
 
 <Steps>
   <Step title="Setup a snap sync node">
-  *   Expose port `30303` (op-reth's default listening and discovery port) to the internet on TCP and UDP.
-    *   Disable transaction gossip with the [`--rollup.disable-tx-pool-gossip`](/node-operators/op-reth/cli/op-reth/node) flag
+  *   Expose port `30303` (mc-reth's default listening and discovery port) to the internet on TCP and UDP.
+    *   Disable transaction gossip with the [`--rollup.disable-tx-pool-gossip`](/node-operators/mc-reth/cli/mc-reth/node) flag
   </Step>
 
   <Step title="Enable snap sync on your network">

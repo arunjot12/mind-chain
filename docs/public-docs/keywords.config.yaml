@@ -74,7 +74,7 @@ metadata_rules:
       - sequencer-pbs
       - sequencer-decentralization
       - sequencer-in-a-box
-      - op-batcher
+      - mc-batcher
       - batcher-configuration
       - outages
       - downtime
@@ -90,7 +90,7 @@ metadata_rules:
       - rollup-node
       - rollup-configuration
       - consensus-client
-      - op-node        
+      - mc-node        
       - fault-proofs
       - fp-contracts
       - dispute-game
@@ -100,7 +100,7 @@ metadata_rules:
       - contests
       - span-batches
       - virtual-machine
-      - op-challenger
+      - mc-challenger
       - safe-head
       - derivation
       - derivation-pipeline
@@ -112,7 +112,7 @@ metadata_rules:
       
       # Execution Layer
       - op-geth
-      - op-reth
+      - mc-reth
       - op-erigon
       - op-nethermind
       - evm-equivalence
@@ -179,7 +179,7 @@ metadata_rules:
       - token-transfers
       - interoperable-assets
       - reorgs
-      - op-deployer        # Tool: contract deployment
+      - mc-deployer        # Tool: contract deployment
       - transaction-finality
       - ethereum-consensus
       - finality-guarantees
@@ -251,7 +251,7 @@ metadata_rules:
       # Chain Management (Cross-layer)
       - protocol
       - infrastructure
-      - op-proposer
+      - mc-proposer
       - op-conductor
       - op-signer
       - mcp
@@ -354,12 +354,12 @@ metadata_rules:
       # Component versions
       - pattern: ^(op-\w+|cannon)/v\d+\.\d+\.\d+$
         description: "Component releases must be in format component/vX.Y.Z"
-        examples: ["op-node/v1.11.0", "op-batcher/v1.11.1"]
+        examples: ["mc-node/v1.11.0", "mc-batcher/v1.11.1"]
 
       # Release candidates
       - pattern: ^(op-\w+)/v\d+\.\d+\.\d+-rc\.\d+$
         description: "Release candidates must be in format component/vX.Y.Z-rc.N"
-        examples: ["op-node/v1.11.0-rc.2"]
+        examples: ["mc-node/v1.11.0-rc.2"]
 
       # Alpha/Beta versions
       - pattern: ^(op-\w+|cannon)/v\d+\.\d+\.\d+-(alpha|beta)\.\d+$

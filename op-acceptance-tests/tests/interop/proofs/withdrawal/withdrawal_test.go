@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	ps "github.com/ethereum-optimism/optimism/op-proposer/proposer"
+	ps "github.com/ethereum-optimism/optimism/mc-proposer/proposer"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"

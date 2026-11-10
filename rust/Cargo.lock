@@ -9892,7 +9892,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "op-reth"
+name = "mc-reth"
 version = "2.0.0"
 dependencies = [
  "eyre",
@@ -9915,7 +9915,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "op-reth-proof-bench"
+name = "mc-reth-proof-bench"
 version = "1.11.0"
 dependencies = [
  "alloy-primitives",
@@ -9931,7 +9931,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "op-reth-test-engine"
+name = "mc-reth-test-engine"
 version = "0.1.0"
 dependencies = [
  "alloy-consensus 2.4.2",

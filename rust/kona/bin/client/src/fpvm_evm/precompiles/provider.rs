@@ -138,7 +138,7 @@ where
 
         // Turning the output into an interpreter result is revm's job, not ours: every field it
         // sets on the result gas has to reach the caller frame the same way it does under
-        // `EthPrecompiles`, which op-reth uses.
+        // `EthPrecompiles`, which mc-reth uses.
         Ok(Some(precompile_output_to_interpreter_result(output, inputs.gas_limit)))
     }
 
@@ -509,7 +509,7 @@ mod test {
     }
 
     /// At every address it does not accelerate, this provider is a pass-through to the
-    /// [`EthPrecompiles`] it wraps — the one op-reth runs — so it has to hand back exactly what
+    /// [`EthPrecompiles`] it wraps — the one mc-reth runs — so it has to hand back exactly what
     /// that provider would. Compares the whole [`InterpreterResult`], gas tracker included,
     /// rather than the few fields any one test happens to look at: the conversion from
     /// [`PrecompileOutput`] carries more state than a returned status and gas cost.

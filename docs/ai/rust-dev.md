@@ -7,7 +7,7 @@ Guidance for AI agents working with Rust code in the Optimism monorepo. See [dev
 All Rust code lives under `rust/`. This is a unified Cargo workspace — always run Rust commands from this directory. The workspace contains four main component groups:
 
 - **Kona** — Proof system and rollup node (`rust/kona/`)
-- **Op-Reth** — OP Stack execution client built on reth (`rust/op-reth/`)
+- **Op-Reth** — OP Stack execution client built on reth (`rust/mc-reth/`)
 - **Op-Alloy / Alloy extensions** — OP Stack types and providers
 - **Lokahi** — Rust rewrite of the Go `op-supernode` multi-chain consensus-layer host (`rust/lokahi/`, binary `lokahi`). Early development: the crate currently builds a CLI skeleton only.
 
@@ -19,7 +19,7 @@ Workspace tool config lives at **`rust/.config/`** — `nextest.toml` (test sett
 
 Most of the OP Stack Rust code here was **officially migrated** into the monorepo in coordination with the upstream repository owners — it is **not** a vendored copy. The upstream crates have been deleted or deprecated, so the entire Rust OP Stack is now developed here. This applies to:
 
-- **op-reth** (`rust/op-reth/`)
+- **mc-reth** (`rust/mc-reth/`)
 - **kona-\*** (`rust/kona/`)
 - **op-alloy-\*** (`rust/op-alloy/`)
 - **alloy-op-\*** (`rust/alloy-op-evm/`, `rust/alloy-op-hardforks/`)
@@ -65,13 +65,13 @@ just build-release
 
 # Build specific binaries
 just build-node             # kona-node
-just build-op-reth          # op-reth
+just build-mc-reth          # mc-reth
 just build-lokahi   # lokahi
 ```
 
-### superchain-registry submodule (op-reth)
+### superchain-registry submodule (mc-reth)
 
-The `reth-optimism-chainspec` crate's `build.rs` materializes its chain-config archive (`res/superchain-configs.tar`, gitignored) from the `superchain-registry` submodule at the repo root. Any op-reth build that enables the `superchain-configs` feature (the `op-reth` binary, `clippy --all-features`, the chainspec tests) needs that submodule checked out, or the build fails. Initialize it from the repo root with `just update-superchain-registry-submodule` (or `just sync-superchain`, which also does it). Once `res/` holds the archive, later builds reuse it without touching the submodule (default mode mirrors kona's `KONA_SYNC_SUPERCHAIN`); set `OP_RETH_SYNC_SUPERCHAIN=1` to force a regeneration.
+The `reth-optimism-chainspec` crate's `build.rs` materializes its chain-config archive (`res/superchain-configs.tar`, gitignored) from the `superchain-registry` submodule at the repo root. Any mc-reth build that enables the `superchain-configs` feature (the `mc-reth` binary, `clippy --all-features`, the chainspec tests) needs that submodule checked out, or the build fails. Initialize it from the repo root with `just update-superchain-registry-submodule` (or `just sync-superchain`, which also does it). Once `res/` holds the archive, later builds reuse it without touching the submodule (default mode mirrors kona's `KONA_SYNC_SUPERCHAIN`); set `OP_RETH_SYNC_SUPERCHAIN=1` to force a regeneration.
 
 ### Running Tests
 
@@ -90,9 +90,9 @@ just test-unit
 just test-docs
 ```
 
-### Running op-reth E2E Tests
+### Running mc-reth E2E Tests
 
-The op-reth E2E tests (`rust/op-reth/tests/proofs/`) run a full devnet with op-reth as both the sequencer and the validator EL by default; `OP_DEVSTACK_PROOF_SEQUENCER_EL` and `OP_DEVSTACK_PROOF_VALIDATOR_EL` override either role (`rust/op-reth/tests/proofs/utils/preset.go`). They require two build prerequisites:
+The mc-reth E2E tests (`rust/mc-reth/tests/proofs/`) run a full devnet with mc-reth as both the sequencer and the validator EL by default; `OP_DEVSTACK_PROOF_SEQUENCER_EL` and `OP_DEVSTACK_PROOF_VALIDATOR_EL` override either role (`rust/mc-reth/tests/proofs/utils/preset.go`). They require two build prerequisites:
 
 1. **Forge artifacts** — the devnet deploys contracts from compiled artifacts:
    ```bash
@@ -100,18 +100,18 @@ The op-reth E2E tests (`rust/op-reth/tests/proofs/`) run a full devnet with op-r
    mise exec -- just build-no-tests
    ```
 
-2. **op-reth binary** — the test harness (`op-devstack/shared/rustbin/rust_binary.go`) uses the most recently built binary under `target/release/` or `target/debug/`. Options:
+2. **mc-reth binary** — the test harness (`op-devstack/shared/rustbin/rust_binary.go`) uses the most recently built binary under `target/release/` or `target/debug/`. Options:
    ```bash
    # Option A: let the test build it (slow first run, cached after)
-   RUST_JIT_BUILD=1 go test -v -run TestName ./rust/op-reth/tests/proofs/core/
+   RUST_JIT_BUILD=1 go test -v -run TestName ./rust/mc-reth/tests/proofs/core/
 
    # Option B: pre-build the binary
-   cd rust && just build-op-reth
+   cd rust && just build-mc-reth
    ```
 
 Run from the monorepo root:
 ```bash
-mise exec -- go test -v -run TestExecutePayloadSuccess -count=1 ./rust/op-reth/tests/proofs/core/
+mise exec -- go test -v -run TestExecutePayloadSuccess -count=1 ./rust/mc-reth/tests/proofs/core/
 ```
 
 ### Generating Prestates
@@ -201,7 +201,7 @@ Op-reth requires `clang` / `libclang-dev` for reth-mdbx-sys bindgen. CI installs
 
 ## Cross-implementation parity
 
-`rust/op-alloy` holds the OP transaction and receipt types that op-reth and kona consume; the Go
+`rust/op-alloy` holds the OP transaction and receipt types that mc-reth and kona consume; the Go
 services run the same formats through op-geth and `op-core/*`. A change to a wire format or hash
 rule on either side has to agree with the other, pinned by a shared golden vector asserted in both
 suites. The rule and the current
@@ -210,7 +210,7 @@ batcher-controlled decoders are covered in [derivation.md](derivation.md).
 
 ## Hardforks
 
-The OP fork → implied L1 (Ethereum) fork mapping is defined once, in `OpHardfork::activates_l1_fork` in `rust/alloy-op-hardforks/src/lib.rs`. When a new OP hardfork rides an L1 fork (e.g. Isthmus → Prague, Karst → Osaka), add the single match arm there; the cumulative (`implied_l1_fork`) and inverse (`activating_op_fork`) views and all downstream consumers (op-revm, op-reth chainspec, kona) derive from it.
+The OP fork → implied L1 (Ethereum) fork mapping is defined once, in `OpHardfork::activates_l1_fork` in `rust/alloy-op-hardforks/src/lib.rs`. When a new OP hardfork rides an L1 fork (e.g. Isthmus → Prague, Karst → Osaka), add the single match arm there; the cumulative (`implied_l1_fork`) and inverse (`activating_op_fork`) views and all downstream consumers (op-revm, mc-reth chainspec, kona) derive from it.
 
 ## Updating the reth dependency
 
@@ -223,7 +223,7 @@ Agent-specific tips beyond what's in the guide:
 - The bump is iterative — run `cargo check --workspace --tests`, fix the first batch of errors, re-run, repeat. Don't try to enumerate every API change up front and don't ask the user to confirm every line of adaptation; just iterate to a green compile and report the diff at the end.
 - If you have a local checkout of `paradigmxyz/reth`, use it to look up upstream trait signatures and run `git log <old-rev>..<new-rev>` to find the commit that changed any given symbol — much faster and more reliable than hand-fetching raw GitHub URLs. If you don't know whether one is available, ask the user. Don't assume a path.
 - For trait methods that gained an ignored parameter, prefix the new param with `_` (e.g. `_block_access_list_hash: Option<B256>`) so it doesn't generate an unused-variable warning. Don't invent a meaningful name unless you're actually plumbing the value through.
-- If upstream removed a trait or re-export that op-reth still uses, vendor it locally with a comment pointing at the upstream removal PR — don't try to refactor op-reth to do without it without first confirming the consumer is actually unused. The "stale" label upstream doesn't mean unused downstream.
+- If upstream removed a trait or re-export that mc-reth still uses, vendor it locally with a comment pointing at the upstream removal PR — don't try to refactor mc-reth to do without it without first confirming the consumer is actually unused. The "stale" label upstream doesn't mean unused downstream.
 - When the new rev pulls in new transitive deps (visible as `Adding <crate>` lines from `cargo update`), check whether they're from upstream reth's own deps or from a misconfiguration on our side. `cargo tree -i <crate>` traces the path.
 
 ## Skills

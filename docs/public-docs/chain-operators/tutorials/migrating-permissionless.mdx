@@ -3,9 +3,9 @@ title: Migrating to permissionless fault proofs on OP Stack
 description: "Migrate your OP Stack chain from permissioned to permissionless fault proofs: configure the dispute components, deploy the contracts with OPCM, test the off-chain agents, and switch the respected game type."
 diataxis: how-to
 audit-source:
-  - op-challenger/flags/flags.go
-  - op-challenger/game/types/game_type.go
-  - op-challenger/cmd/run_trace.go
+  - mc-challenger/flags/flags.go
+  - mc-challenger/game/types/game_type.go
+  - mc-challenger/cmd/run_trace.go
 ---
 
 This guide shows you how to transition your OP Stack chain from permissioned to permissionless fault proofs.
@@ -20,7 +20,7 @@ Permissioned games previously relied on a single trusted validator, this is typi
 This migration involves several key components:
 
 *   Configuring security-critical dispute [monitoring services](/chain-operators/tools/chain-monitoring)
-*   Deploying and configuring smart contracts using [op-deployer](/chain-operators/tools/op-deployer/overview)
+*   Deploying and configuring smart contracts using [mc-deployer](/chain-operators/tools/mc-deployer/overview)
 *   Testing the new system before activation
 *   Setting the respected game type to permissionless fault proofs, specifically using the [`FaultDisputeGame`](https://github.com/ethereum-optimism/optimism/blob/develop/packages/contracts-bedrock/src/dispute/FaultDisputeGame.sol)
 
@@ -30,7 +30,7 @@ Before beginning this transition, your chain should:
 
 *   Be running a standard OP Stack implementation
 *   It's recommended to use the latest contracts version, minimum required [**v5.0.0**](https://github.com/ethereum-optimism/optimism/releases/tag/op-contracts%2Fv5.0.0).
-*   Be operating with the required infrastructure services including [`op-challenger`](/op-stack/fault-proofs/challenger) and [`op-dispute-mon`](/chain-operators/tools/chain-monitoring#dispute-mon).
+*   Be operating with the required infrastructure services including [`mc-challenger`](/op-stack/fault-proofs/challenger) and [`op-dispute-mon`](/chain-operators/tools/chain-monitoring#dispute-mon).
 
 ## Migration steps
 
@@ -40,9 +40,9 @@ Let's begin with configuring the dispute components that will interact with the 
 
 ## 1. Configure the dispute components
 
-The `op-challenger` and `op-dispute-mon` services are critical security components that participate in the dispute game process to challenge invalid proposals and monitor active games.
+The `mc-challenger` and `op-dispute-mon` services are critical security components that participate in the dispute game process to challenge invalid proposals and monitor active games.
 
-### Upgrade to the latest `op-challenger`
+### Upgrade to the latest `mc-challenger`
 
 Upgrade to the [latest release](https://github.com/ethereum-optimism/optimism/releases), which contains important improvements to simplify the upgrade process.
 
@@ -57,7 +57,7 @@ Then run the image, for example:
 
 ```bash
 # Run with all required flags
-docker run -d --name op-challenger \
+docker run -d --name mc-challenger \
   -e OP_CHALLENGER_GAME_TYPES=permissioned,cannon-kona \
   -e OP_CHALLENGER_PRESTATES_URL=<YOUR_PRESTATES_URL> \
   -e OP_CHALLENGER_L1_ETH_RPC=<YOUR_L1_RPC_URL> \
@@ -76,14 +76,14 @@ Replace `<YOUR_PRESTATES_URL>` with your actual prestates URL.
 If your deployment requires building from source, you can alternatively use:
 
 ```bash
-git clone https://github.com/ethereum-optimism/optimism -b op-challenger/<latest_version> --recurse-submodules
+git clone https://github.com/ethereum-optimism/optimism -b mc-challenger/<latest_version> --recurse-submodules
 cd optimism
-make op-challenger
+make mc-challenger
 ```
 
 ### Update network configuration
 
-Configure `op-challenger` to load your chain configuration.
+Configure `mc-challenger` to load your chain configuration.
 Even if your chain is not included in the [superchain-registry](/op-stack/protocol/superchain-registry), you can specify a custom configuration:
 
 ```bash
@@ -97,7 +97,7 @@ Even if your chain is not included in the [superchain-registry](/op-stack/protoc
 
 ### Enable the cannon-kona game type
 
-From the Karst upgrade, `cannon-kona` (the kona-client program run inside the Cannon VM) is the respected permissionless game type, replacing op-program. Configure `op-challenger` to support both permissioned and permissionless games by setting:
+From the Karst upgrade, `cannon-kona` (the kona-client program run inside the Cannon VM) is the respected permissionless game type, replacing op-program. Configure `mc-challenger` to support both permissioned and permissionless games by setting:
 
 ```bash
 --game-types permissioned,cannon-kona
@@ -134,7 +134,7 @@ For chains not in the superchain-registry, you need to build custom prestates wi
 Build the kona-client absolute prestate with `just reproducible-prestate-kona` (see the [absolute prestate tutorial](/chain-operators/tutorials/absolute-prestate)). The artifacts are written to:
 
 *   `rust/kona/prestate-artifacts-cannon/prestate-proof.json` — the proof file; its `pre` field is the absolute prestate hash (`jq -r .pre ...`)
-*   `rust/kona/prestate-artifacts-cannon/<PRESTATE_HASH>.bin.gz` — the preimage file `op-challenger` loads
+*   `rust/kona/prestate-artifacts-cannon/<PRESTATE_HASH>.bin.gz` — the preimage file `mc-challenger` loads
 
 <Info>
   Register the kona-client absolute prestate with your `FaultDisputeGame` and `PermissionedDisputeGame`. The challenger refuses to interact with games whose on-chain absolute prestate doesn't match the one it has, so the hash must match exactly.
@@ -155,12 +155,12 @@ As a general guideline:
 
 ### Ensure there is disk space for the challenger to use
 
-`op-challenger`, particularly in permissionless mode, should have access to disk. About 50GB is enough to cover a couple of `invalid_ games`. Though the storage requirements will increase if the challenger needs to respond to more invalid dispute games.
+`mc-challenger`, particularly in permissionless mode, should have access to disk. About 50GB is enough to cover a couple of `invalid_ games`. Though the storage requirements will increase if the challenger needs to respond to more invalid dispute games.
 Nominally, the challenger does not use disk space as long as there aren’t any invalid proposals being made.
 
-One way to gain more confidence that the op-challenger was configured correctly is to operate the op-challenger in “runner” mode. 
-Using the same op-challenger configuration, invoke the `op-challenger run-trace --run cannon-kona` subcommand. 
-This will run op-challenger in a mode where it runs the kona-client program in a Cannon VM on live L2 blocks to ensure those were configured correctly. 
+One way to gain more confidence that the mc-challenger was configured correctly is to operate the mc-challenger in “runner” mode. 
+Using the same mc-challenger configuration, invoke the `mc-challenger run-trace --run cannon-kona` subcommand. 
+This will run mc-challenger in a mode where it runs the kona-client program in a Cannon VM on live L2 blocks to ensure those were configured correctly. 
 This command runs forever, checking every couple of L2 blocks. But it suffices to let it run until it has completed one loop and kill it. 
 Wait you see `Successfully verified output root` in the logs before shutting it down. 
 Any errors indicate a misconfiguration.
@@ -184,7 +184,7 @@ For detailed information about privileged roles and their security implications,
 
 ### Adding the PermissionlessDisputeGame to a chain
 
-To enable the permissionless dispute game, call the `upgrade()` function on the `OPContractsManagerV2` (OPCM) contract with the appropriate `DisputeGameConfig` entries. This is typically done via `op-deployer manage add-game-type-v2`.
+To enable the permissionless dispute game, call the `upgrade()` function on the `OPContractsManagerV2` (OPCM) contract with the appropriate `DisputeGameConfig` entries. This is typically done via `mc-deployer manage add-game-type-v2`.
 
 The upgrade will:
 
@@ -195,9 +195,9 @@ See a high‐level implementation from this [docs](/chain-operators/tutorials/di
 
 ## 3. Testing off-chain agents
 
-After you've set the permissionless `FaultDisputeContract` implementations on the `DisputeGameFactory` and before you set the respected game type to it (game type 0), you can test `op-challenger` and `op-dispute-mon` to ensure they are working correctly with permissionless games.
+After you've set the permissionless `FaultDisputeContract` implementations on the `DisputeGameFactory` and before you set the respected game type to it (game type 0), you can test `mc-challenger` and `op-dispute-mon` to ensure they are working correctly with permissionless games.
 
-There are a number of useful `op-challenger` subcommands that can be used for testing, particularly `list-games`, `list-claims` and `create-game`.  See the [README](https://github.com/ethereum-optimism/optimism/tree/develop/op-challenger#subcommands) and `op-challenger --help` output for further details. The two tests below are basic sanity tests:
+There are a number of useful `mc-challenger` subcommands that can be used for testing, particularly `list-games`, `list-claims` and `create-game`.  See the [README](https://github.com/ethereum-optimism/optimism/tree/develop/op-challenger#subcommands) and `mc-challenger --help` output for further details. The two tests below are basic sanity tests:
 
 ### Test defending valid proposals
 
@@ -210,7 +210,7 @@ Create a valid proposal using the permissionless game type `0`:
 
     ```
 
-2.  Get a valid output root (from op-node):
+2.  Get a valid output root (from mc-node):
 
     ```bash
     cast rpc --rpc-url <OP_NODE_ENDPOINT> optimism_outputAtBlock \
@@ -221,7 +221,7 @@ Create a valid proposal using the permissionless game type `0`:
 3.  Create a test game:
 
     ```bash
-    ./op-challenger/bin/op-challenger create-game \
+    ./mc-challenger/bin/mc-challenger create-game \
       --l1-eth-rpc=<L1_RPC_ENDPOINT> \
       --game-factory-address <DISPUTE_GAME_FACTORY_ADDR> \
       --l2-block-num <BLOCK_NUMBER> \
@@ -231,8 +231,8 @@ Create a valid proposal using the permissionless game type `0`:
     ```
 
 4.  Verify:
-    *   `op-challenger` logs a message showing the game is in progress
-    *   `op-challenger` doesn't post a counter claim (as this is a valid proposal)
+    *   `mc-challenger` logs a message showing the game is in progress
+    *   `mc-challenger` doesn't post a counter claim (as this is a valid proposal)
     *   `dispute-mon` includes the new game with `status="agree_defender_ahead"`
 
 ### Test countering invalid claims
@@ -240,7 +240,7 @@ Create a valid proposal using the permissionless game type `0`:
 Post an invalid counter claim to the valid proposal created above:
 
 ```bash
-./op-challenger/bin/op-challenger move \
+./mc-challenger/bin/mc-challenger move \
   --l1-eth-rpc <L1_RPC_ENDPOINT> \
   --game-address <GAME_ADDR> \
   --attack \
@@ -250,10 +250,10 @@ Post an invalid counter claim to the valid proposal created above:
 
 ```
 
-Verify that `op-challenger` posts a counter-claim to the invalid claim. You can view claims using:
+Verify that `mc-challenger` posts a counter-claim to the invalid claim. You can view claims using:
 
 ```bash
-./op-challenger/bin/op-challenger list-claims \
+./mc-challenger/bin/mc-challenger list-claims \
   --l1-eth-rpc <L1_RPC_ENDPOINT> \
   --game-address <GAME_ADDR>
 
@@ -344,7 +344,7 @@ cast call --rpc-url <YOUR_RPC_URL> <ASR_ADDRESS> "respectedGameType()(uint32)"
 
 ### Post-execution configuration:
 
-After updating, configure `op-proposer` to create proposals using the permissionless `CANNON` game type:
+After updating, configure `mc-proposer` to create proposals using the permissionless `CANNON` game type:
 
 Via command-line argument:
 

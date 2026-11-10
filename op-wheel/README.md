@@ -7,7 +7,7 @@ Pull requests: [monorepo](https://github.com/ethereum-optimism/optimism/pulls?q=
 `op-wheel` is a CLI tool to direct the engine one way or the other with Engine API routines.
 
 It was named the "wheel" because of two reasons:
-- Figuratively, it allows to steer the stack, an interface for a *driver* (like the op-node sub-component) to control the execution *engine* (e.g. op-geth).
+- Figuratively, it allows to steer the stack, an interface for a *driver* (like the mc-node sub-component) to control the execution *engine* (e.g. op-geth).
 - Idiomatically, like the Unix wheel-bit and its slang origins: empower a user to execute restricted commands, or more generally just someone with great power or influence.
 
 ## Quickstart
@@ -53,7 +53,7 @@ This is not part of a standard release / process, as this tool is not used commo
 and the end-user is expected to be familiar with building from source.
 
 Actions that are common enough to be used at least once by the average end-user should
-be part of the op-node or other standard op-stack release.
+be part of the mc-node or other standard op-stack release.
 
 ## Design principles
 

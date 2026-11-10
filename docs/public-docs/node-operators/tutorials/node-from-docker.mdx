@@ -1,6 +1,6 @@
 ---
 title: Running a Node With Docker
-description: Run an OP Stack node (op-reth + op-node) using the official Docker images and docker-compose.
+description: Run an OP Stack node (mc-reth + mc-node) using the official Docker images and docker-compose.
 diataxis: tutorial
 ---
 
@@ -16,16 +16,16 @@ import OpGethEol from "/snippets/op-geth-eol.mdx"
   [Learn the OP Stack](/op-stack/learn/index) for where to go next.
 </Info>
 
-This tutorial runs an OP Stack node using the **official op-reth and op-node Docker images** in a single `docker-compose.yml`. No source build required.
+This tutorial runs an OP Stack node using the **official mc-reth and mc-node Docker images** in a single `docker-compose.yml`. No source build required.
 
 <Info>
-  To run the Rust consensus client instead of op-node, see the
+  To run the Rust consensus client instead of mc-node, see the
   [kona-node Docker guide](/node-operators/kona-node/run/docker), which ships
-  its own docker-compose recipe for a kona-node + op-reth stack.
+  its own docker-compose recipe for a kona-node + mc-reth stack.
 </Info>
 
 <Warning>
-  **OP Mainnet requires a one-time pre-Bedrock state import.** OP Sepolia does not. If you point this tutorial at OP Mainnet on a fresh datadir, op-reth will fail at startup with `Op-mainnet has been launched without importing the pre-Bedrock state`. Before running OP Mainnet, follow the [op-reth sync-op-mainnet guide](https://reth.rs/run/sync-op-mainnet.html) to either restore from a [pre-synced snapshot](https://datadirs.optimism.io/) or run the minimal-bootstrap import. OP Sepolia bootstraps via snap sync with no extra steps — start there if you're just testing the setup.
+  **OP Mainnet requires a one-time pre-Bedrock state import.** OP Sepolia does not. If you point this tutorial at OP Mainnet on a fresh datadir, mc-reth will fail at startup with `Op-mainnet has been launched without importing the pre-Bedrock state`. Before running OP Mainnet, follow the [mc-reth sync-op-mainnet guide](https://reth.rs/run/sync-op-mainnet.html) to either restore from a [pre-synced snapshot](https://datadirs.optimism.io/) or run the minimal-bootstrap import. OP Sepolia bootstraps via snap sync with no extra steps — start there if you're just testing the setup.
 </Warning>
 
 ## Dependencies
@@ -33,7 +33,7 @@ This tutorial runs an OP Stack node using the **official op-reth and op-node Doc
 *   [Docker](https://docs.docker.com/engine/install/)
 *   [Docker Compose](https://docs.docker.com/compose/install/) (v2)
 *   **An L1 execution RPC endpoint** (Ethereum mainnet for OP Mainnet, or Ethereum Sepolia for OP Sepolia).
-*   **An L1 Beacon API endpoint** for the same L1 chain. Needed by op-node to fetch blob data post-Ecotone.
+*   **An L1 Beacon API endpoint** for the same L1 chain. Needed by mc-node to fetch blob data post-Ecotone.
 
 ## Quick start
 
@@ -84,9 +84,9 @@ This tutorial runs an OP Stack node using the **official op-reth and op-node Doc
   <Step title="Create docker-compose.yml">
     ```yaml
     services:
-      op-reth:
+      mc-reth:
         image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-reth:v2.2.5
-        container_name: op-reth
+        container_name: mc-reth
         ports:
           - "8545:8545"          # JSON-RPC HTTP
           - "8546:8546"          # JSON-RPC WebSocket
@@ -113,11 +113,11 @@ This tutorial runs an OP Stack node using the **official op-reth and op-node Doc
           - --metrics=0.0.0.0:9001
         restart: unless-stopped
 
-      op-node:
+      mc-node:
         image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.18.2
-        container_name: op-node
+        container_name: mc-node
         depends_on:
-          - op-reth
+          - mc-reth
         ports:
           - "9545:7000"          # JSON-RPC HTTP (host 9545 → container 7000; macOS uses 7000 for AirPlay)
           - "7300:7300"          # Prometheus metrics
@@ -126,11 +126,11 @@ This tutorial runs an OP Stack node using the **official op-reth and op-node Doc
         volumes:
           - ./jwt.txt:/jwt.txt:ro
         command:
-          - op-node
+          - mc-node
           - --l1=${L1_RPC_URL}
           - --l1.rpckind=${L1_RPC_KIND}
           - --l1.beacon=${L1_BEACON_URL}
-          - --l2=ws://op-reth:8551
+          - --l2=ws://mc-reth:8551
           - --l2.jwt-secret=/jwt.txt
           - --network=${OP_NODE_NETWORK}
           - --syncmode=execution-layer
@@ -143,9 +143,9 @@ This tutorial runs an OP Stack node using the **official op-reth and op-node Doc
         restart: unless-stopped
     ```
 
-    The op-reth datadir is bind-mounted from `./reth-data` on the host so you can inspect / restore from a snapshot directly (see [Bootstrap from a snapshot](#bootstrap-from-a-snapshot) below).
+    The mc-reth datadir is bind-mounted from `./reth-data` on the host so you can inspect / restore from a snapshot directly (see [Bootstrap from a snapshot](#bootstrap-from-a-snapshot) below).
 
-    Image tags shown are the latest as of writing. For the current tags, see the [op-reth releases](https://github.com/ethereum-optimism/optimism/releases?q=op-reth) and [op-node releases](https://github.com/ethereum-optimism/optimism/releases?q=op-node).
+    Image tags shown are the latest as of writing. For the current tags, see the [mc-reth releases](https://github.com/ethereum-optimism/optimism/releases?q=op-reth) and [mc-node releases](https://github.com/ethereum-optimism/optimism/releases?q=op-node).
   </Step>
 
   <Step title="Start the node">
@@ -173,7 +173,7 @@ curl -s -X POST -H "Content-Type: application/json" \
 
 Expected: `{"jsonrpc":"2.0","id":1,"result":"0x..."}` with the current block in hex. Run again after a minute — the number should increase as sync progresses.
 
-For op-node sync status (unsafe, safe, and finalized heads in one call):
+For mc-node sync status (unsafe, safe, and finalized heads in one call):
 
 ```bash
 curl -s -X POST -H "Content-Type: application/json" \
@@ -182,18 +182,18 @@ curl -s -X POST -H "Content-Type: application/json" \
 ```
 
 <Info>
-  During the initial EL-driven sync (`--syncmode=execution-layer`), `unsafe_l2` tracks the tip via libp2p gossip while `safe_l2` and `finalized_l2` stay at 0. This is expected — op-node defers L1 derivation until op-reth finishes its staged sync. Once the EL catches up, derivation begins and the safe/finalized heads start advancing.
+  During the initial EL-driven sync (`--syncmode=execution-layer`), `unsafe_l2` tracks the tip via libp2p gossip while `safe_l2` and `finalized_l2` stay at 0. This is expected — mc-node defers L1 derivation until mc-reth finishes its staged sync. Once the EL catches up, derivation begins and the safe/finalized heads start advancing.
 </Info>
 
-You can also tail op-node logs directly:
+You can also tail mc-node logs directly:
 
 ```bash
-docker compose logs op-node | grep -E "Sync progress|Finished EL sync"
+docker compose logs mc-node | grep -E "Sync progress|Finished EL sync"
 ```
 
 ## Bootstrap from a snapshot
 
-Syncing from scratch is fine for OP Sepolia (~30–50 GB, hours) but slow for OP Mainnet (~700 GB, days). For Mainnet — or anytime you'd rather skip the initial sync — bootstrap op-reth from a pre-synced snapshot.
+Syncing from scratch is fine for OP Sepolia (~30–50 GB, hours) but slow for OP Mainnet (~700 GB, days). For Mainnet — or anytime you'd rather skip the initial sync — bootstrap mc-reth from a pre-synced snapshot.
 
 <Info>
   For OP Mainnet, a snapshot also handles the pre-Bedrock state requirement (see the warning at the top of this page) in one step.
@@ -233,10 +233,10 @@ Syncing from scratch is fine for OP Sepolia (~30–50 GB, hours) but slow for OP
   <Step title="Start the node">
     ```bash
     docker compose up -d
-    docker compose logs -f op-reth
+    docker compose logs -f mc-reth
     ```
 
-    op-reth will recognize the existing datadir on startup and pick up from the snapshot's tip — `latest_block` should be the snapshot's height, not 0. It will then catch up from that tip to current (minutes for Sepolia, hours for Mainnet, depending on snapshot age).
+    mc-reth will recognize the existing datadir on startup and pick up from the snapshot's tip — `latest_block` should be the snapshot's height, not 0. It will then catch up from that tip to current (minutes for Sepolia, hours for Mainnet, depending on snapshot age).
   </Step>
 </Steps>
 

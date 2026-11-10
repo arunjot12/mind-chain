@@ -14,9 +14,9 @@ import (
 
 	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
 	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 

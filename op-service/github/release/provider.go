@@ -75,7 +75,7 @@ type GithubReleaseDownloader struct {
 	// Repository name (e.g. "optimism").
 	repo string
 
-	// Name of the binary to download (e.g. "op-deployer").
+	// Name of the binary to download (e.g. "mc-deployer").
 	//
 	// If the binary is not located under this name directly in the tarball,
 	// a custom BinaryLocator should be provided.

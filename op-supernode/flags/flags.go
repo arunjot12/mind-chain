@@ -6,7 +6,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	opnodeflags "github.com/ethereum-optimism/optimism/op-node/flags"
+	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
 	opservice "github.com/ethereum-optimism/optimism/op-service"
 	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
 	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
@@ -111,7 +111,7 @@ func init() {
 
 var Flags []cli.Flag
 
-// SupernodeOwnedFlags lists op-node flag names whose resources are owned by the
+// SupernodeOwnedFlags lists mc-node flag names whose resources are owned by the
 // supernode (e.g. the shared L1 client) rather than individual virtual nodes.
 // Setting these at the vn.all.* or vn.<id>.* level has no effect because the
 // supernode injects pre-built resources via InitializationOverrides.
@@ -132,13 +132,13 @@ func CheckRequired(ctx *cli.Context) error {
 }
 
 // FullDynamicFlags returns the base supernode flags plus dynamically-generated
-// vn.* flags cloned from op-node flags for all-chains and per-chain IDs.
+// vn.* flags cloned from mc-node flags for all-chains and per-chain IDs.
 func FullDynamicFlags(chains []uint64) []cli.Flag {
 	// start with the base supernode flags
 	final := make([]cli.Flag, 0, len(Flags)+len(opnodeflags.Flags)*(1+len(chains)))
 	final = append(final, Flags...)
 
-	// for each op-node flag, add vn.all.<name> and vn.<id>.<name> variants
+	// for each mc-node flag, add vn.all.<name> and vn.<id>.<name> variants
 	for _, f := range opnodeflags.Flags {
 		baseName := f.Names()[0]
 		// vn.all.* env var/alias prefixing

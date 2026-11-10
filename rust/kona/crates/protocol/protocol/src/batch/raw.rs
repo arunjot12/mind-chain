@@ -133,7 +133,7 @@ mod test {
 
     #[test]
     fn test_decode_encode_raw_span_batch() {
-        // Load in the raw span batch from the `op-node` derivation pipeline implementation.
+        // Load in the raw span batch from the `mc-node` derivation pipeline implementation.
         let raw_span_batch_hex = include_bytes!("./testdata/raw_batch.hex");
         let raw_span_batch = RawSpanBatch::decode(&mut raw_span_batch_hex.as_slice()).unwrap();
 
@@ -142,10 +142,10 @@ mod test {
         assert_eq!(encoding_buf, raw_span_batch_hex);
     }
 
-    /// Re-encodes a real op-node span batch with a non-minimally encoded `block_count`, leaving
+    /// Re-encodes a real mc-node span batch with a non-minimally encoded `block_count`, leaving
     /// every other field untouched — the batch a byzantine batcher would publish to split
-    /// derivation. op-node decodes it to the same batch as the minimal encoding, so kona must too.
-    /// `TestSpanBatchNonMinimalBlockCount` runs the same scenario against op-node, on its own
+    /// derivation. mc-node decodes it to the same batch as the minimal encoding, so kona must too.
+    /// `TestSpanBatchNonMinimalBlockCount` runs the same scenario against mc-node, on its own
     /// batch — unlike the field-level vectors, the bytes here are not shared between the suites.
     #[test]
     fn test_decode_raw_span_batch_non_minimal_block_count() {

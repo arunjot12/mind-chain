@@ -50,14 +50,14 @@ const warnings: string[] = [];
 // snippets/unreleased.mdx. A callout naming anything else can never become
 // stale (no tag will ever match), so it is rejected outright.
 const COMPONENTS = new Set([
-  "op-node",
-  "op-batcher",
-  "op-proposer",
-  "op-challenger",
+  "mc-node",
+  "mc-batcher",
+  "mc-proposer",
+  "mc-challenger",
   "op-conductor",
   "op-supernode",
-  "op-deployer",
-  "op-reth",
+  "mc-deployer",
+  "mc-reth",
   "kona-node",
 ]);
 

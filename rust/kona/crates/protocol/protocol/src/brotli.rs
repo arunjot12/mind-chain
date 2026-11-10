@@ -241,8 +241,8 @@ mod test {
         // through into BROTLI_STATE_DONE, where WriteRingBuffer overwrote it with
         // SUCCESS — so corrupt streams decoded as `Ok` with the (uncorrupted)
         // plaintext. The C reference (libbrotlidec) and Go (andybalholm/brotli,
-        // used by op-node) both reject these as PADDING_2, so the buggy Rust
-        // behavior was a Go vs Rust derivation divergence: op-node rejects the
+        // used by mc-node) both reject these as PADDING_2, so the buggy Rust
+        // behavior was a Go vs Rust derivation divergence: mc-node rejects the
         // channel while kona would have accepted it.
         //
         // With the fix the decoder returns `ResultFailure` with zero bytes

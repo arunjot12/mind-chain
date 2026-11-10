@@ -70,7 +70,7 @@ func runSequenceWindowExpireTest(gt *testing.T, testCfg *helpers.TestCfg[any]) {
 
 	// Set recover mode on the sequencer:
 	env.Sequencer.ActSetRecoverMode(t, true)
-	// Since recover mode only affects the L2 CL (op-node),
+	// Since recover mode only affects the L2 CL (mc-node),
 	// it won't stop the test environment injecting transactions
 	// directly into the engine. So we will force the engine
 	// to ignore such injections if recover mode is enabled.

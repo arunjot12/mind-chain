@@ -27,7 +27,7 @@ This release includes bug fixes for cluster stability and leader failover, a new
   - feat(conductor): fix leader loop switch by adding round-robin leadership transfer by @KyrinCode in
   https://github.com/ethereum-optimism/optimism/pull/18697
   - chore: replace deprecated deps with stdlib equivalents by @sebastianst in https://github.com/ethereum-optimism/optimism/pull/20014
-  - op-node: remove deprecated ProtocolVersions watching by @sebastianst in https://github.com/ethereum-optimism/optimism/pull/20311
+  - mc-node: remove deprecated ProtocolVersions watching by @sebastianst in https://github.com/ethereum-optimism/optimism/pull/20311
   - chore(op-conductor): remove op-supervisor support by @ajsutton in https://github.com/ethereum-optimism/optimism/pull/20781
 
   Full Changelog: https://github.com/ethereum-optimism/optimism/compare/op-conductor/v0.9.3...op-conductor/v0.9.4
@@ -91,7 +91,7 @@ In this release the conductor is updated to forward `miner_setMaxDASize` API cal
 * unconditionally -- that is, proxying the call even if the origin sequencers is not currently the leader 
 
 > [!IMPORTANT]
-> It is strongly recommended to upgrade. If updating to the latest op-batcher release, it is required to upgrade to this version of op-conductor too, because starting with this batcher release, all endpoints are always throttled, not only the active sequencer.
+> It is strongly recommended to upgrade. If updating to the latest mc-batcher release, it is required to upgrade to this version of op-conductor too, because starting with this batcher release, all endpoints are always throttled, not only the active sequencer.
 
 [View full release on GitHub →](https://github.com/ethereum-optimism/optimism/releases/tag/op-conductor/v0.5.1-rc.3)
 

@@ -20,7 +20,7 @@ import (
 )
 
 // SuperRootSource is the super-root query surface the dispute-game DSL needs. It is
-// satisfied by both op-supernode (interop, multi-chain) and op-node (non-interop,
+// satisfied by both op-supernode (interop, multi-chain) and mc-node (non-interop,
 // single-chain), letting the same dispute-game tests run against either source.
 type SuperRootSource interface {
 	QueryAPI() apis.SupernodeQueryAPI
@@ -38,7 +38,7 @@ var (
 )
 
 // SuperRootQuerier is a SuperRootSource backed by a fixed apis.SupernodeQueryAPI. It is
-// used directly as the op-node-backed source (see NewOpNodeSuperRoots) and embedded by
+// used directly as the mc-node-backed source (see NewOpNodeSuperRoots) and embedded by
 // Supernode, which adds op-supernode-only controls on top.
 type SuperRootQuerier struct {
 	commonImpl
@@ -46,8 +46,8 @@ type SuperRootQuerier struct {
 	userRPC string
 }
 
-// NewOpNodeSuperRoots wraps a single op-node's superroot_atTimestamp endpoint as a
-// super-root source. Only superroot_atTimestamp is served by op-node; SyncStatus
+// NewOpNodeSuperRoots wraps a single mc-node's superroot_atTimestamp endpoint as a
+// super-root source. Only superroot_atTimestamp is served by mc-node; SyncStatus
 // (supernode_syncStatus) is not available on this source.
 func NewOpNodeSuperRoots(cl *L2CLNode) *SuperRootQuerier {
 	return &SuperRootQuerier{

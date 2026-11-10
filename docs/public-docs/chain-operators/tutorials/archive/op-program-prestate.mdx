@@ -12,7 +12,7 @@ diataxis: how-to
 
 ## Overview
 
-Permissionless fault proofs are a critical component of the OP Stack's security model. They allow anyone to challenge invalid state proposals, ensuring the correctness of L2 to L1 withdrawals without relying on trusted third parties. To enable this functionality, chain operators must generate and maintain the necessary absolute prestate and preimage files. The absolute prestate is a commitment to the initial state of the fault proof program, and the preimage is the serialized binary representation of this program state. These files are essential for the op-challenger tool to participate in dispute games when challenging invalid claims.
+Permissionless fault proofs are a critical component of the OP Stack's security model. They allow anyone to challenge invalid state proposals, ensuring the correctness of L2 to L1 withdrawals without relying on trusted third parties. To enable this functionality, chain operators must generate and maintain the necessary absolute prestate and preimage files. The absolute prestate is a commitment to the initial state of the fault proof program, and the preimage is the serialized binary representation of this program state. These files are essential for the mc-challenger tool to participate in dispute games when challenging invalid claims.
 
 ## Prerequisites
 
@@ -91,7 +91,7 @@ You can find the latest prestate tags in the [Superchain registry](https://githu
     mv prestate-mt64.bin.gz <cannon64-prestate-hash>.bin.gz
     ```
 
-    Replace `<cannon64-prestate-hash>` with the actual `Cannon64` absolute prestate hash value from the output. This file needs to be uploaded to a location that's accessible by your op-challenger instances.
+    Replace `<cannon64-prestate-hash>` with the actual `Cannon64` absolute prestate hash value from the output. This file needs to be uploaded to a location that's accessible by your mc-challenger instances.
   </Step>
 </Steps>
 
@@ -101,10 +101,10 @@ After generating the absolute prestate and preimage files, you'll need to:
 
 <Steps>
   <Step title="Upload preimage file">
-    Upload the preimage file to a location accessible by your op-challenger instances
+    Upload the preimage file to a location accessible by your mc-challenger instances
   </Step>
-  <Step title="Configure op-challenger">
-    Configure the op-challenger to use the generated prestate. There are two ways to provide prestates:
+  <Step title="Configure mc-challenger">
+    Configure the mc-challenger to use the generated prestate. There are two ways to provide prestates:
   </Step>
 </Steps>
 
@@ -113,7 +113,7 @@ After generating the absolute prestate and preimage files, you'll need to:
     If your prestate files are hosted on a web server, you can simply provide the URL to the directory containing those files:
 
     ```bash
-    docker run -d --name op-challenger \
+    docker run -d --name mc-challenger \
      -e OP_CHALLENGER_TRACE_TYPE=permissioned,cannon \
      -e OP_CHALLENGER_PRESTATES_URL=<HTTP_URL_PATH_TO_PRESTATE> \
      -e OP_CHALLENGER_L1_ETH_RPC=<YOUR_L1_RPC_URL> \
@@ -133,7 +133,7 @@ After generating the absolute prestate and preimage files, you'll need to:
     If you have prestate files stored locally, you'll need to mount them as a volume and use the `file://` protocol:
 
     ```bash
-    docker run -d --name op-challenger \
+    docker run -d --name mc-challenger \
       -e OP_CHALLENGER_TRACE_TYPE=permissioned,cannon \
       -e OP_CHALLENGER_PRESTATES_URL=file:///prestates \
       -e OP_CHALLENGER_L1_ETH_RPC=<YOUR_L1_RPC_URL> \
@@ -153,7 +153,7 @@ After generating the absolute prestate and preimage files, you'll need to:
 </Steps>
 
 <Info>
-  - Ensure you're using the latest op-challenger version, see the [release page](https://github.com/ethereum-optimism/optimism/releases).
+  - Ensure you're using the latest mc-challenger version, see the [release page](https://github.com/ethereum-optimism/optimism/releases).
   - If your chain uses interoperability features, you'll need to add a `depsets.json` file to the `op-program/chainconfig/configs` directory.
   - This file contains dependency set configurations. Use the same dependency set definition your interop-enabled chain is already configured with.
 </Info>

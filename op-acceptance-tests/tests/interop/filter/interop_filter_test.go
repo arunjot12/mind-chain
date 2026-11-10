@@ -26,7 +26,7 @@ func setupInteropFilterTest(t devtest.T) *presets.TwoL2SupernodeInterop {
 }
 
 // interopTxRejectedError returns true if err matches any known interop
-// transaction rejection from op-geth, op-reth, or the interop filter.
+// transaction rejection from op-geth, mc-reth, or the interop filter.
 func interopTxRejectedError(err error) bool {
 	msg := err.Error()
 	// op-geth: generic filter rejection wrapping all causes
@@ -37,7 +37,7 @@ func interopTxRejectedError(err error) bool {
 	if strings.Contains(msg, "failed to parse access entry") {
 		return true
 	}
-	// op-reth fast-path: cached failsafe state rejects before calling filter
+	// mc-reth fast-path: cached failsafe state rejects before calling filter
 	if strings.Contains(msg, "interop failsafe is active") {
 		return true
 	}
@@ -100,11 +100,11 @@ func TestInteropFilter_IngressRejectsInvalid(gt *testing.T) {
 // and recover after failsafe is disabled.
 //
 // NOT TESTED: txpool eviction of pending interop txs on failsafe activation.
-// Both op-reth (poll_failsafe) and op-geth (startBackgroundInteropFailsafeDetection)
+// Both mc-reth (poll_failsafe) and op-geth (startBackgroundInteropFailsafeDetection)
 // have background tasks that evict interop txs from the pool when failsafe
 // transitions from disabled to enabled. Testing this reliably is difficult because
 // it requires stopping the sequencer to prevent block inclusion, but StopSequencer
-// only stops the op-node from requesting new payloads — an already in-flight
+// only stops the mc-node from requesting new payloads — an already in-flight
 // engine API payload (forkchoiceUpdated → getPayload → newPayload) can still land
 // after StopSequencer returns. This creates a race where the tx may be included in
 // a block before failsafe eviction runs, causing flaky assertions. Reliably testing
@@ -130,7 +130,7 @@ func TestInteropFilter_FailsafeLifecycle(gt *testing.T) {
 	require.Equal(types.ReceiptStatusSuccessful, execMsg.Receipt.Status,
 		"interop tx should succeed before failsafe")
 
-	// Step 2: Enable failsafe — no wait needed; even if op-reth hasn't polled
+	// Step 2: Enable failsafe — no wait needed; even if mc-reth hasn't polled
 	// the change yet, checkAccessList will reject interop txs on the filter side.
 	require.NotNil(sys.InteropFilter, "interop filter must be configured")
 	sys.InteropFilter.SetFailsafeEnabled(true)
@@ -169,7 +169,7 @@ func TestInteropFilter_FailsafeLifecycle(gt *testing.T) {
 	require.True(interopTxRejectedError(err),
 		"expected interop filter rejection, got: %v", err)
 
-	// Step 4: Disable failsafe and wait one block for op-reth's poller to pick up the change
+	// Step 4: Disable failsafe and wait one block for mc-reth's poller to pick up the change
 	sys.InteropFilter.SetFailsafeEnabled(false)
 	sys.L2B.WaitForBlock()
 

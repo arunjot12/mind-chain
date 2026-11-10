@@ -4,11 +4,11 @@ import (
 	"context"
 
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-node/metrics"
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node"
-	"github.com/ethereum-optimism/optimism/op-node/node/runcfg"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
+	"github.com/ethereum-optimism/optimism/mc-node/config"
+	"github.com/ethereum-optimism/optimism/mc-node/metrics"
+	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
+	"github.com/ethereum-optimism/optimism/mc-node/node/runcfg"
+	"github.com/ethereum-optimism/optimism/mc-node/p2p"
 	"github.com/ethereum-optimism/optimism/op-service/cliapp"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
@@ -63,7 +63,7 @@ func NewOpnode(l log.Logger, c *config.Config, clk clock.Clock, errFn func(error
 				// errFn must be goroutine-safe (use t.Error, not require/FailNow).
 				errFn(errCause)
 			}
-			l.Warn("closed op-node!")
+			l.Warn("closed mc-node!")
 		}()
 	}
 	node, err := rollupNode.New(context.Background(), c, l, "", metrics.NewMetrics("", nil), clk)

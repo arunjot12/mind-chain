@@ -15,16 +15,16 @@ import (
 	"github.com/ethereum-optimism/optimism/op-service/testutils/tcpproxy"
 )
 
-// OpRethConfig holds the configurable knobs applied to an op-reth node before it is started.
+// OpRethConfig holds the configurable knobs applied to an mc-reth node before it is started.
 type OpRethConfig struct {
 	// ExtraArgs are appended to the generated CLI args.
 	ExtraArgs []string
-	// Binary selects the EL binary to launch. Empty means "op-reth". A CLI-compatible superset
-	// (any binary that accepts every op-reth subcommand/flag, plus optionally its own additive
+	// Binary selects the EL binary to launch. Empty means "mc-reth". A CLI-compatible superset
+	// (any binary that accepts every mc-reth subcommand/flag, plus optionally its own additive
 	// flags) may be selected via OpRethWithBinary.
 	Binary string
 	// DisableProofsHistory skips the proofs-history init + runtime flags for this node. The mixed
-	// runtime otherwise enables proofs-history on every op-reth node; some CLI-superset binaries
+	// runtime otherwise enables proofs-history on every mc-reth node; some CLI-superset binaries
 	// reject --proofs-history in the mode under test.
 	DisableProofsHistory bool
 }
@@ -62,15 +62,15 @@ func (b OpRethOptionBundle) Apply(p devtest.T, target ComponentTarget, cfg *OpRe
 	}
 }
 
-// OpRethWithExtraArgs appends raw CLI arguments to the op-reth invocation.
+// OpRethWithExtraArgs appends raw CLI arguments to the mc-reth invocation.
 func OpRethWithExtraArgs(args ...string) OpRethOption {
 	return OpRethOptionFn(func(p devtest.T, _ ComponentTarget, cfg *OpRethConfig) {
 		cfg.ExtraArgs = append(cfg.ExtraArgs, args...)
 	})
 }
 
-// OpRethWithBinary selects the EL binary to launch instead of the default "op-reth". The binary
-// must be a CLI superset of op-reth (it is invoked with op-reth's subcommands and flags). A binary
+// OpRethWithBinary selects the EL binary to launch instead of the default "mc-reth". The binary
+// must be a CLI superset of mc-reth (it is invoked with mc-reth's subcommands and flags). A binary
 // that lives outside this repo is resolved via the rustbin env overrides keyed off its name —
 // RUST_BINARY_PATH_<NAME> (or RUST_SRC_DIR_<NAME> + RUST_JIT_BUILD), with <NAME> the upper-snake-cased
 // binary name.
@@ -81,7 +81,7 @@ func OpRethWithBinary(binary string) OpRethOption {
 }
 
 // OpRethWithoutProofsHistory disables the proofs-history subsystem for this node. The mixed runtime
-// enables proofs-history on every op-reth node by default; use this for a CLI-superset binary that
+// enables proofs-history on every mc-reth node by default; use this for a CLI-superset binary that
 // rejects --proofs-history in the mode under test.
 func OpRethWithoutProofsHistory() OpRethOption {
 	return OpRethOptionFn(func(p devtest.T, _ ComponentTarget, cfg *OpRethConfig) {
@@ -89,7 +89,7 @@ func OpRethWithoutProofsHistory() OpRethOption {
 	})
 }
 
-// OpRethWithInteropURL wires the op-reth node to the given interop filter HTTP endpoint.
+// OpRethWithInteropURL wires the mc-reth node to the given interop filter HTTP endpoint.
 // An empty interopURL is a no-op so callers can pass the value unconditionally.
 func OpRethWithInteropURL(interopURL string) OpRethOption {
 	return OpRethOptionFn(func(p devtest.T, _ ComponentTarget, cfg *OpRethConfig) {
@@ -131,7 +131,7 @@ func (n *OpReth) Start() {
 	n.mu.Lock()
 	defer n.mu.Unlock()
 	if n.sub != nil {
-		n.p.Logger().Warn("op-reth already started")
+		n.p.Logger().Warn("mc-reth already started")
 		return
 	}
 	if n.authProxy == nil {
@@ -150,7 +150,7 @@ func (n *OpReth) Start() {
 		})
 		n.userRPC = "ws://" + n.userProxy.Addr()
 	}
-	stdoutLogger := n.p.Logger().New("component", "op-reth", "src", "stdout", "name", n.name, "chain", n.chainID)
+	stdoutLogger := n.p.Logger().New("component", "mc-reth", "src", "stdout", "name", n.name, "chain", n.chainID)
 	stdoutInfo := logpipe.ToLoggerWithMinLevel(stdoutLogger, log.LevelInfo)
 	// Peer-disconnect reasons are logged below INFO under net::session / net::peers.
 	// Raise those entries to INFO (original level kept as an attribute) so they
@@ -164,7 +164,7 @@ func (n *OpReth) Start() {
 		}
 		stdoutInfo(e)
 	}
-	logErr := logpipe.ToLoggerWithMinLevel(n.p.Logger().New("component", "op-reth", "src", "stderr", "name", n.name, "chain", n.chainID), log.LevelWarn)
+	logErr := logpipe.ToLoggerWithMinLevel(n.p.Logger().New("component", "mc-reth", "src", "stderr", "name", n.name, "chain", n.chainID), log.LevelWarn)
 
 	authRPCChan := make(chan string, 1)
 	defer close(authRPCChan)
@@ -225,12 +225,12 @@ func (n *OpReth) Start() {
 	n.authProxy.SetUpstream(ProxyAddr(n.p.Require(), authRPCAddr))
 }
 
-// Stop stops the op-reth node.
+// Stop stops the mc-reth node.
 func (n *OpReth) Stop() {
 	n.mu.Lock()
 	defer n.mu.Unlock()
 	if n.sub == nil {
-		n.p.Logger().Warn("op-reth already stopped")
+		n.p.Logger().Warn("mc-reth already stopped")
 		return
 	}
 	n.clearProxyUpstreams()

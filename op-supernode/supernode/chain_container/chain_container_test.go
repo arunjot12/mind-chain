@@ -13,10 +13,10 @@ import (
 	"time"
 
 	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
+	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
+	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
@@ -1032,7 +1032,7 @@ func TestChainContainer_RewindEngine(t *testing.T) {
 	t.Run("treats DeadlineExceeded from engine as transient and retries", func(t *testing.T) {
 		// The caller's ctx is the long-lived service ctx with no deadline, so a
 		// DeadlineExceeded from engine.Rewind originates from a per-call RPC deadline
-		// (e.g. a slow synthetic FCU against op-reth). The retry loop must keep going.
+		// (e.g. a slow synthetic FCU against mc-reth). The retry loop must keep going.
 		// See ethereum-optimism/optimism#21015.
 		mockVN := newMockVirtualNode()
 		mockEngine := newMockEngineController()

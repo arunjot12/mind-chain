@@ -73,11 +73,11 @@
     },
     {
       "source": "/node-operators/reference/op-geth-config",
-      "destination": "/node-operators/reference/op-reth-config"
+      "destination": "/node-operators/reference/mc-reth-config"
     },
     {
       "source": "/node-operators/reference/op-geth-json-rpc",
-      "destination": "/node-operators/reference/op-reth-json-rpc"
+      "destination": "/node-operators/reference/mc-reth-json-rpc"
     },
     {
       "source": "/node-operators/tutorials/node-from-docker-simple-optimism-node",
@@ -92,8 +92,8 @@
       "destination": "/node-operators/reference/consensus-layer-sync"
     },
     {
-      "source": "/rust/op-reth/cli/cli",
-      "destination": "/node-operators/op-reth/cli/overview"
+      "source": "/rust/mc-reth/cli/cli",
+      "destination": "/node-operators/mc-reth/cli/overview"
     },
     {
       "source": "/chain-operators/reference/architecture",
@@ -112,12 +112,12 @@
       "destination": "/op-stack/interop/explainer"
     },
     {
-      "source": "/chain-operators/tools/op-deployer/usage/upgrade",
-      "destination": "/notices/archive/op-deployer-upgrade-deprecation"
+      "source": "/chain-operators/tools/mc-deployer/usage/upgrade",
+      "destination": "/notices/archive/mc-deployer-upgrade-deprecation"
     },
     {
-      "source": "/chain-operators/tools/op-deployer/reference/custom-deployments",
-      "destination": "/chain-operators/tools/op-deployer/usage/custom-deployments"
+      "source": "/chain-operators/tools/mc-deployer/reference/custom-deployments",
+      "destination": "/chain-operators/tools/mc-deployer/usage/custom-deployments"
     },
     {
       "source": "/pages/app-developers/get-started",
@@ -1028,8 +1028,8 @@
       "destination": "/notices/archive/op-geth-deprecation"
     },
     {
-      "source": "/notices/op-deployer-upgrade-deprecation",
-      "destination": "/notices/archive/op-deployer-upgrade-deprecation"
+      "source": "/notices/mc-deployer-upgrade-deprecation",
+      "destination": "/notices/archive/mc-deployer-upgrade-deprecation"
     },
     {
       "source": "/notices/req-resp-cl-sync-deprecation",
@@ -1077,7 +1077,7 @@
     },
     {
       "source": "/operators/chain-operators/deploy/genesis",
-      "destination": "/chain-operators/tools/op-deployer/overview"
+      "destination": "/chain-operators/tools/mc-deployer/overview"
     },
     {
       "source": "/operators/chain-operators/deploy/overview",
@@ -1085,7 +1085,7 @@
     },
     {
       "source": "/operators/chain-operators/deploy/smart-contracts",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-deployer-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-deployer-setup"
     },
     {
       "source": "/operators/chain-operators/features",
@@ -1164,16 +1164,16 @@
       "destination": "/op-stack/transactions/fees"
     },
     {
-      "source": "/operators/chain-operators/tools/op-challenger",
-      "destination": "/chain-operators/guides/configuration/op-challenger-config-guide"
+      "source": "/operators/chain-operators/tools/mc-challenger",
+      "destination": "/chain-operators/guides/configuration/mc-challenger-config-guide"
     },
     {
       "source": "/operators/chain-operators/tools/op-conductor",
       "destination": "/chain-operators/tools/op-conductor"
     },
     {
-      "source": "/operators/chain-operators/tools/op-deployer",
-      "destination": "/chain-operators/tools/op-deployer/overview"
+      "source": "/operators/chain-operators/tools/mc-deployer",
+      "destination": "/chain-operators/tools/mc-deployer/overview"
     },
     {
       "source": "/operators/chain-operators/tools/op-txproxy",
@@ -1245,11 +1245,11 @@
     },
     {
       "source": "/operators/node-operators/json-rpc",
-      "destination": "/node-operators/reference/op-node-json-rpc"
+      "destination": "/node-operators/reference/mc-node-json-rpc"
     },
     {
       "source": "/node-operators/reference/json-rpc",
-      "destination": "/node-operators/reference/op-node-json-rpc"
+      "destination": "/node-operators/reference/mc-node-json-rpc"
     },
     {
       "source": "/operators/node-operators/management",
@@ -1629,14 +1629,14 @@
     },
     {
       "source": "/node-operators/guides/configuration/consensus-config#configuration-options-reference",
-      "destination": "/node-operators/reference/op-node-config"
+      "destination": "/node-operators/reference/mc-node-config"
     },
     {
       "source": "/node-operators/guides/configuration/consensus-config",
       "destination": "/node-operators/guides/configuration/consensus-clients"
     },
     {
-      "source": "/node-operators/configuration/consensus-clients/op-node",
+      "source": "/node-operators/configuration/consensus-clients/mc-node",
       "destination": "/node-operators/guides/configuration/consensus-clients"
     },
     {
@@ -1645,7 +1645,7 @@
     },
     {
       "source": "/node-operators/guides/configuration/execution-config#configuration-options-reference",
-      "destination": "/node-operators/reference/op-reth-config"
+      "destination": "/node-operators/reference/mc-reth-config"
     },
     {
       "source": "/node-operators/guides/configuration/execution-config",
@@ -1680,12 +1680,12 @@
       "destination": "/chain-operators/guides/features/subblocks-guide"
     },
     {
-      "source": "/stack/smart-contracts/op-deployer-upgrade",
-      "destination": "/chain-operators/tutorials/l1-contract-upgrades/op-deployer-upgrade"
+      "source": "/stack/smart-contracts/mc-deployer-upgrade",
+      "destination": "/chain-operators/tutorials/l1-contract-upgrades/mc-deployer-upgrade"
     },
     {
-      "source": "/concepts/stack/op-deployer-upgrade",
-      "destination": "/chain-operators/tutorials/l1-contract-upgrades/op-deployer-upgrade"
+      "source": "/concepts/stack/mc-deployer-upgrade",
+      "destination": "/chain-operators/tutorials/l1-contract-upgrades/mc-deployer-upgrade"
     },
     {
       "source": "/concepts/stack/upgrade-op-contracts-1-3-1-8",
@@ -1696,8 +1696,8 @@
       "destination": "/chain-operators/tutorials/l1-contract-upgrades/superchain-ops-guide"
     },
     {
-      "source": "/chain-operators/tutorials/op-deployer-upgrade",
-      "destination": "/chain-operators/tutorials/l1-contract-upgrades/op-deployer-upgrade"
+      "source": "/chain-operators/tutorials/mc-deployer-upgrade",
+      "destination": "/chain-operators/tutorials/l1-contract-upgrades/mc-deployer-upgrade"
     },
     {
       "source": "/chain-operators/tutorials/superchain-ops-guide",
@@ -1740,7 +1740,7 @@
       "destination": "/op-stack/protocol/derivation-pipeline"
     },
     {
-      "source": "/operators/chain-operators/deploy/op-challenger",
+      "source": "/operators/chain-operators/deploy/mc-challenger",
       "destination": "/op-stack/fault-proofs/challenger"
     },
     {
@@ -1753,31 +1753,31 @@
     },
     {
       "source": "/operators/chain-operators/tutorials/create-l2-rollup/op-geth-setup",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-reth-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-reth-setup"
     },
     {
       "source": "/chain-operators/tutorials/create-l2-rollup/op-geth-setup",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-reth-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-reth-setup"
     },
     {
       "source": "/chain-operators/tutorials/create-l2-rollup/create-l2-rollup",
       "destination": "/chain-operators/tutorials/create-l2-rollup"
     },
     {
-      "source": "/operators/chain-operators/tutorials/create-l2-rollup/op-deployer-setup",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-deployer-setup"
+      "source": "/operators/chain-operators/tutorials/create-l2-rollup/mc-deployer-setup",
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-deployer-setup"
     },
     {
-      "source": "/operators/chain-operators/tutorials/create-l2-rollup/op-proposer-setup",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-proposer-setup"
+      "source": "/operators/chain-operators/tutorials/create-l2-rollup/mc-proposer-setup",
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-proposer-setup"
     },
     {
-      "source": "/operators/chain-operators/tutorials/create-l2-rollup/op-batcher-setup",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-batcher-setup"
+      "source": "/operators/chain-operators/tutorials/create-l2-rollup/mc-batcher-setup",
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-batcher-setup"
     },
     {
       "source": "/operators/chain-operators/deploy/sequencer-node",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-reth-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-reth-setup"
     },
     {
       "source": "/app-developers/tools/testing/devnet",
@@ -1845,23 +1845,23 @@
     },
     {
       "source": "/chain-operators/guides/deployment/smart-contracts",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-deployer-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-deployer-setup"
     },
     {
       "source": "/chain-operators/guides/deployment/genesis",
-      "destination": "/chain-operators/tools/op-deployer/overview"
+      "destination": "/chain-operators/tools/mc-deployer/overview"
     },
     {
       "source": "/chain-operators/guides/deployment/sequencer-node",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-reth-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-reth-setup"
     },
     {
       "source": "/chain-operators/guides/deployment/spin-batcher",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-batcher-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-batcher-setup"
     },
     {
       "source": "/chain-operators/guides/deployment/proposer-setup-guide",
-      "destination": "/chain-operators/tutorials/create-l2-rollup/op-proposer-setup"
+      "destination": "/chain-operators/tutorials/create-l2-rollup/mc-proposer-setup"
     },
     {
       "source": "/chain-operators/reference/features/flashblocks/chain-operators",
@@ -1904,8 +1904,8 @@
       "destination": "/op-stack/transactions/fees"
     },
     {
-      "source": "/chain-operators/tools/op-challenger",
-      "destination": "/chain-operators/guides/configuration/op-challenger-config-guide"
+      "source": "/chain-operators/tools/mc-challenger",
+      "destination": "/chain-operators/guides/configuration/mc-challenger-config-guide"
     },
     {
       "source": "/app-developers/tools/data-and-dashboards/overview",
@@ -2000,12 +2000,12 @@
       "destination": "/op-stack/fault-proofs/kona/fpp-dev/intro"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/receipts_in_static_files",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/receipts_in_static_files",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/transaction_senders_in_static_files",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/transaction_senders_in_static_files",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
       "source": "/app-developers/guides/superchain",
@@ -2104,260 +2104,260 @@
       "destination": "/node-operators/kona-node/monitoring"
     },
     {
-      "source": "/rust/op-reth",
-      "destination": "/node-operators/op-reth/index"
+      "source": "/rust/mc-reth",
+      "destination": "/node-operators/mc-reth/index"
     },
     {
-      "source": "/rust/op-reth/index",
-      "destination": "/node-operators/op-reth/index"
+      "source": "/rust/mc-reth/index",
+      "destination": "/node-operators/mc-reth/index"
     },
     {
-      "source": "/rust/op-reth/run/opstack",
+      "source": "/rust/mc-reth/run/opstack",
       "destination": "/node-operators/guides/configuration/execution-clients"
     },
     {
-      "source": "/node-operators/op-reth/run/opstack",
+      "source": "/node-operators/mc-reth/run/opstack",
       "destination": "/node-operators/guides/configuration/execution-clients"
     },
     {
-      "source": "/rust/op-reth/run/faq/sync-op-mainnet",
-      "destination": "/node-operators/op-reth/run/faq/sync-op-mainnet"
+      "source": "/rust/mc-reth/run/faq/sync-op-mainnet",
+      "destination": "/node-operators/mc-reth/run/faq/sync-op-mainnet"
     },
     {
-      "source": "/rust/op-reth/cli/overview",
-      "destination": "/node-operators/op-reth/cli/overview"
+      "source": "/rust/mc-reth/cli/overview",
+      "destination": "/node-operators/mc-reth/cli/overview"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth",
-      "destination": "/node-operators/op-reth/cli/op-reth"
+      "source": "/rust/mc-reth/cli/mc-reth",
+      "destination": "/node-operators/mc-reth/cli/mc-reth"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/node",
-      "destination": "/node-operators/op-reth/cli/op-reth/node"
+      "source": "/rust/mc-reth/cli/mc-reth/node",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/node"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/init",
-      "destination": "/node-operators/op-reth/cli/op-reth/init"
+      "source": "/rust/mc-reth/cli/mc-reth/init",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/init"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/init-state",
-      "destination": "/node-operators/op-reth/cli/op-reth/init-state"
+      "source": "/rust/mc-reth/cli/mc-reth/init-state",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/init-state"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/import-op",
-      "destination": "/node-operators/op-reth/cli/op-reth/import-op"
+      "source": "/rust/mc-reth/cli/mc-reth/import-op",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/import-op"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/import-receipts-op",
-      "destination": "/node-operators/op-reth/cli/op-reth/import-receipts-op"
+      "source": "/rust/mc-reth/cli/mc-reth/import-receipts-op",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/import-receipts-op"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/dump-genesis",
-      "destination": "/node-operators/op-reth/cli/op-reth/dump-genesis"
+      "source": "/rust/mc-reth/cli/mc-reth/dump-genesis",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/dump-genesis"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db",
-      "destination": "/node-operators/op-reth/cli/op-reth/db"
+      "source": "/rust/mc-reth/cli/mc-reth/db",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/stats",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/stats"
+      "source": "/rust/mc-reth/cli/mc-reth/db/stats",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/stats"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/list",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/list"
+      "source": "/rust/mc-reth/cli/mc-reth/db/list",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/list"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/checksum",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/checksum"
+      "source": "/rust/mc-reth/cli/mc-reth/db/checksum",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/checksum"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/checksum/mdbx",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/checksum/mdbx"
+      "source": "/rust/mc-reth/cli/mc-reth/db/checksum/mdbx",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/checksum/mdbx"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/checksum/static-file",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/checksum/static-file"
+      "source": "/rust/mc-reth/cli/mc-reth/db/checksum/static-file",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/checksum/static-file"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/diff",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/diff"
+      "source": "/rust/mc-reth/cli/mc-reth/db/diff",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/diff"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/get",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/get"
+      "source": "/rust/mc-reth/cli/mc-reth/db/get",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/get"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/get/mdbx",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/get/mdbx"
+      "source": "/rust/mc-reth/cli/mc-reth/db/get/mdbx",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/get/mdbx"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/get/static-file",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/get/static-file"
+      "source": "/rust/mc-reth/cli/mc-reth/db/get/static-file",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/get/static-file"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/drop",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/drop"
+      "source": "/rust/mc-reth/cli/mc-reth/db/drop",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/drop"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/clear",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/clear"
+      "source": "/rust/mc-reth/cli/mc-reth/db/clear",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/clear"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/clear/mdbx",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/clear/mdbx"
+      "source": "/rust/mc-reth/cli/mc-reth/db/clear/mdbx",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/clear/mdbx"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/clear/static-file",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/clear/static-file"
+      "source": "/rust/mc-reth/cli/mc-reth/db/clear/static-file",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/clear/static-file"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/repair-trie",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/repair-trie"
+      "source": "/rust/mc-reth/cli/mc-reth/db/repair-trie",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/repair-trie"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/static-file-header",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/static-file-header"
+      "source": "/rust/mc-reth/cli/mc-reth/db/static-file-header",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/static-file-header"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/static-file-header/block",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/static-file-header/block"
+      "source": "/rust/mc-reth/cli/mc-reth/db/static-file-header/block",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/static-file-header/block"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/static-file-header/path",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/static-file-header/path"
+      "source": "/rust/mc-reth/cli/mc-reth/db/static-file-header/path",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/static-file-header/path"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/version",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/version"
+      "source": "/rust/mc-reth/cli/mc-reth/db/version",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/version"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/path",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/path"
+      "source": "/rust/mc-reth/cli/mc-reth/db/path",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/path"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/get",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/get"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/get",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/get"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/receipts",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/receipts",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/transaction_senders",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/transaction_senders",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/account_changesets",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/account_changesets",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/storages_history",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/storages_history",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/transaction_hash_numbers",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/transaction_hash_numbers",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/account_history",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/account_history",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/settings/set/storage_changesets",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/rust/mc-reth/cli/mc-reth/db/settings/set/storage_changesets",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/db/account-storage",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/account-storage"
+      "source": "/rust/mc-reth/cli/mc-reth/db/account-storage",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/account-storage"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage"
+      "source": "/rust/mc-reth/cli/mc-reth/stage",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/run",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/run"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/run",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/run"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/drop",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/drop"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/drop",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/drop"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/dump",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/dump"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/dump",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/dump"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/dump/execution",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/dump/execution"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/dump/execution",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/dump/execution"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/dump/storage-hashing",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/dump/storage-hashing"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/dump/storage-hashing",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/dump/storage-hashing"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/dump/account-hashing",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/dump/account-hashing"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/dump/account-hashing",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/dump/account-hashing"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/dump/merkle",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/dump/merkle"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/dump/merkle",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/dump/merkle"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/unwind",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/unwind"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/unwind",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/unwind"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/unwind/to-block",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/unwind/to-block"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/unwind/to-block",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/unwind/to-block"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/stage/unwind/num-blocks",
-      "destination": "/node-operators/op-reth/cli/op-reth/stage/unwind/num-blocks"
+      "source": "/rust/mc-reth/cli/mc-reth/stage/unwind/num-blocks",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/stage/unwind/num-blocks"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/p2p",
-      "destination": "/node-operators/op-reth/cli/op-reth/p2p"
+      "source": "/rust/mc-reth/cli/mc-reth/p2p",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/p2p"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/p2p/header",
-      "destination": "/node-operators/op-reth/cli/op-reth/p2p/header"
+      "source": "/rust/mc-reth/cli/mc-reth/p2p/header",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/p2p/header"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/p2p/body",
-      "destination": "/node-operators/op-reth/cli/op-reth/p2p/body"
+      "source": "/rust/mc-reth/cli/mc-reth/p2p/body",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/p2p/body"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/p2p/rlpx",
-      "destination": "/node-operators/op-reth/cli/op-reth/p2p/rlpx"
+      "source": "/rust/mc-reth/cli/mc-reth/p2p/rlpx",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/p2p/rlpx"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/p2p/rlpx/ping",
-      "destination": "/node-operators/op-reth/cli/op-reth/p2p/rlpx/ping"
+      "source": "/rust/mc-reth/cli/mc-reth/p2p/rlpx/ping",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/p2p/rlpx/ping"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/p2p/bootnode",
-      "destination": "/node-operators/op-reth/cli/op-reth/p2p/bootnode"
+      "source": "/rust/mc-reth/cli/mc-reth/p2p/bootnode",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/p2p/bootnode"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/config",
-      "destination": "/node-operators/op-reth/cli/op-reth/config"
+      "source": "/rust/mc-reth/cli/mc-reth/config",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/config"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/prune",
-      "destination": "/node-operators/op-reth/cli/op-reth/prune"
+      "source": "/rust/mc-reth/cli/mc-reth/prune",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/prune"
     },
     {
-      "source": "/rust/op-reth/cli/op-reth/re-execute",
-      "destination": "/node-operators/op-reth/cli/op-reth/re-execute"
+      "source": "/rust/mc-reth/cli/mc-reth/re-execute",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/re-execute"
     },
     {
       "source": "/rust/kona/node/design/intro",
@@ -2668,32 +2668,32 @@
       "destination": "/app-developers/guides/building-apps"
     },
     {
-      "source": "/node-operators/op-reth/cli/op-reth/db/settings/set/account_changesets",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/node-operators/mc-reth/cli/mc-reth/db/settings/set/account_changesets",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/node-operators/op-reth/cli/op-reth/db/settings/set/account_history",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/node-operators/mc-reth/cli/mc-reth/db/settings/set/account_history",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/node-operators/op-reth/cli/op-reth/db/settings/set/receipts",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/node-operators/mc-reth/cli/mc-reth/db/settings/set/receipts",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/node-operators/op-reth/cli/op-reth/db/settings/set/storage_changesets",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/node-operators/mc-reth/cli/mc-reth/db/settings/set/storage_changesets",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/node-operators/op-reth/cli/op-reth/db/settings/set/storages_history",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/node-operators/mc-reth/cli/mc-reth/db/settings/set/storages_history",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/node-operators/op-reth/cli/op-reth/db/settings/set/transaction_hash_numbers",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/node-operators/mc-reth/cli/mc-reth/db/settings/set/transaction_hash_numbers",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
-      "source": "/node-operators/op-reth/cli/op-reth/db/settings/set/transaction_senders",
-      "destination": "/node-operators/op-reth/cli/op-reth/db/settings/set"
+      "source": "/node-operators/mc-reth/cli/mc-reth/db/settings/set/transaction_senders",
+      "destination": "/node-operators/mc-reth/cli/mc-reth/db/settings/set"
     },
     {
       "source": "/op-stack/protocol/overview",
@@ -2771,7 +2771,7 @@
                   "chain-operators/guides/configuration/getting-started",
                   "chain-operators/guides/configuration/batcher",
                   "chain-operators/guides/configuration/proposer",
-                  "chain-operators/guides/configuration/op-challenger-config-guide"
+                  "chain-operators/guides/configuration/mc-challenger-config-guide"
                 ]
               },
               {
@@ -2813,18 +2813,18 @@
                 "group": "Create L2 Rollup",
                 "pages": [
                   "chain-operators/tutorials/create-l2-rollup/index",
-                  "chain-operators/tutorials/create-l2-rollup/op-deployer-setup",
-                  "chain-operators/tutorials/create-l2-rollup/op-reth-setup",
-                  "chain-operators/tutorials/create-l2-rollup/op-batcher-setup",
-                  "chain-operators/tutorials/create-l2-rollup/op-proposer-setup",
-                  "chain-operators/tutorials/create-l2-rollup/op-challenger-setup",
+                  "chain-operators/tutorials/create-l2-rollup/mc-deployer-setup",
+                  "chain-operators/tutorials/create-l2-rollup/mc-reth-setup",
+                  "chain-operators/tutorials/create-l2-rollup/mc-batcher-setup",
+                  "chain-operators/tutorials/create-l2-rollup/mc-proposer-setup",
+                  "chain-operators/tutorials/create-l2-rollup/mc-challenger-setup",
                   "chain-operators/tutorials/create-l2-rollup/code-setup"
                 ]
               },
               {
                 "group": "L1 contract upgrades",
                 "pages": [
-                  "chain-operators/tutorials/l1-contract-upgrades/op-deployer-upgrade",
+                  "chain-operators/tutorials/l1-contract-upgrades/mc-deployer-upgrade",
                   "chain-operators/tutorials/l1-contract-upgrades/superchain-ops-guide",
                   "chain-operators/tutorials/l1-contract-upgrades/upgrade-op-contracts-1-3-1-8"
                 ]
@@ -2873,33 +2873,33 @@
               {
                 "group": "OP Deployer",
                 "pages": [
-                  "chain-operators/tools/op-deployer/overview",
-                  "chain-operators/tools/op-deployer/installation",
+                  "chain-operators/tools/mc-deployer/overview",
+                  "chain-operators/tools/mc-deployer/installation",
                   {
                     "group": "Usage",
                     "pages": [
-                      "chain-operators/tools/op-deployer/usage/bootstrap",
-                      "chain-operators/tools/op-deployer/usage/init",
-                      "chain-operators/tools/op-deployer/usage/apply",
-                      "chain-operators/tools/op-deployer/usage/verify",
-                      "chain-operators/tools/op-deployer/usage/custom-deployments",
-                      "chain-operators/tools/op-deployer/usage/release-workflows"
+                      "chain-operators/tools/mc-deployer/usage/bootstrap",
+                      "chain-operators/tools/mc-deployer/usage/init",
+                      "chain-operators/tools/mc-deployer/usage/apply",
+                      "chain-operators/tools/mc-deployer/usage/verify",
+                      "chain-operators/tools/mc-deployer/usage/custom-deployments",
+                      "chain-operators/tools/mc-deployer/usage/release-workflows"
                     ]
                   },
-                  "chain-operators/tools/op-deployer/known-limitations",
+                  "chain-operators/tools/mc-deployer/known-limitations",
                   {
                     "group": "Reference",
                     "pages": [
                       {
                         "group": "Architecture",
                         "pages": [
-                          "chain-operators/tools/op-deployer/reference/architecture/overview",
-                          "chain-operators/tools/op-deployer/reference/architecture/pipeline",
-                          "chain-operators/tools/op-deployer/reference/architecture/engine"
+                          "chain-operators/tools/mc-deployer/reference/architecture/overview",
+                          "chain-operators/tools/mc-deployer/reference/architecture/pipeline",
+                          "chain-operators/tools/mc-deployer/reference/architecture/engine"
                         ]
                       },
-                      "chain-operators/tools/op-deployer/reference/artifacts-locators",
-                      "chain-operators/tools/op-deployer/reference/releases"
+                      "chain-operators/tools/mc-deployer/reference/artifacts-locators",
+                      "chain-operators/tools/mc-deployer/reference/releases"
                     ]
                   }
                 ]
@@ -3031,10 +3031,10 @@
                 ]
               },
               {
-                "group": "op-reth",
+                "group": "mc-reth",
                 "pages": [
-                  "node-operators/op-reth/index",
-                  "node-operators/op-reth/run/faq/sync-op-mainnet"
+                  "node-operators/mc-reth/index",
+                  "node-operators/mc-reth/run/faq/sync-op-mainnet"
                 ]
               }
             ]
@@ -3048,170 +3048,170 @@
                   "node-operators/reference/architecture/index"
                 ]
               },
-              "node-operators/reference/op-node-config",
-              "node-operators/reference/op-node-json-rpc",
+              "node-operators/reference/mc-node-config",
+              "node-operators/reference/mc-node-json-rpc",
               "node-operators/reference/op-supernode-config",
-              "node-operators/reference/op-reth-config",
-              "node-operators/reference/op-reth-json-rpc",
-              "node-operators/reference/op-reth-historical-proof-config",
+              "node-operators/reference/mc-reth-config",
+              "node-operators/reference/mc-reth-json-rpc",
+              "node-operators/reference/mc-reth-historical-proof-config",
               "node-operators/reference/consensus-layer-sync",
               {
-                "group": "op-reth CLI reference",
+                "group": "mc-reth CLI reference",
                 "pages": [
-                  "node-operators/op-reth/cli/overview",
+                  "node-operators/mc-reth/cli/overview",
                   {
-                    "group": "op-reth",
+                    "group": "mc-reth",
                     "pages": [
-                      "node-operators/op-reth/cli/op-reth",
-                      "node-operators/op-reth/cli/op-reth/node",
-                      "node-operators/op-reth/cli/op-reth/init",
-                      "node-operators/op-reth/cli/op-reth/init-state",
-                      "node-operators/op-reth/cli/op-reth/import-op",
-                      "node-operators/op-reth/cli/op-reth/import-receipts-op",
-                      "node-operators/op-reth/cli/op-reth/dump-genesis",
+                      "node-operators/mc-reth/cli/mc-reth",
+                      "node-operators/mc-reth/cli/mc-reth/node",
+                      "node-operators/mc-reth/cli/mc-reth/init",
+                      "node-operators/mc-reth/cli/mc-reth/init-state",
+                      "node-operators/mc-reth/cli/mc-reth/import-op",
+                      "node-operators/mc-reth/cli/mc-reth/import-receipts-op",
+                      "node-operators/mc-reth/cli/mc-reth/dump-genesis",
                       {
-                        "group": "op-reth db",
+                        "group": "mc-reth db",
                         "pages": [
-                          "node-operators/op-reth/cli/op-reth/db",
-                          "node-operators/op-reth/cli/op-reth/db/stats",
-                          "node-operators/op-reth/cli/op-reth/db/list",
+                          "node-operators/mc-reth/cli/mc-reth/db",
+                          "node-operators/mc-reth/cli/mc-reth/db/stats",
+                          "node-operators/mc-reth/cli/mc-reth/db/list",
                           {
-                            "group": "op-reth db checksum",
+                            "group": "mc-reth db checksum",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/db/checksum",
-                              "node-operators/op-reth/cli/op-reth/db/checksum/mdbx",
-                              "node-operators/op-reth/cli/op-reth/db/checksum/static-file",
-                              "node-operators/op-reth/cli/op-reth/db/checksum/rocksdb"
+                              "node-operators/mc-reth/cli/mc-reth/db/checksum",
+                              "node-operators/mc-reth/cli/mc-reth/db/checksum/mdbx",
+                              "node-operators/mc-reth/cli/mc-reth/db/checksum/static-file",
+                              "node-operators/mc-reth/cli/mc-reth/db/checksum/rocksdb"
                             ]
                           },
-                          "node-operators/op-reth/cli/op-reth/db/copy",
-                          "node-operators/op-reth/cli/op-reth/db/diff",
+                          "node-operators/mc-reth/cli/mc-reth/db/copy",
+                          "node-operators/mc-reth/cli/mc-reth/db/diff",
                           {
-                            "group": "op-reth db get",
+                            "group": "mc-reth db get",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/db/get",
-                              "node-operators/op-reth/cli/op-reth/db/get/mdbx",
-                              "node-operators/op-reth/cli/op-reth/db/get/static-file",
-                              "node-operators/op-reth/cli/op-reth/db/get/rocksdb"
+                              "node-operators/mc-reth/cli/mc-reth/db/get",
+                              "node-operators/mc-reth/cli/mc-reth/db/get/mdbx",
+                              "node-operators/mc-reth/cli/mc-reth/db/get/static-file",
+                              "node-operators/mc-reth/cli/mc-reth/db/get/rocksdb"
                             ]
                           },
-                          "node-operators/op-reth/cli/op-reth/db/drop",
+                          "node-operators/mc-reth/cli/mc-reth/db/drop",
                           {
-                            "group": "op-reth db clear",
+                            "group": "mc-reth db clear",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/db/clear",
-                              "node-operators/op-reth/cli/op-reth/db/clear/mdbx",
-                              "node-operators/op-reth/cli/op-reth/db/clear/static-file"
+                              "node-operators/mc-reth/cli/mc-reth/db/clear",
+                              "node-operators/mc-reth/cli/mc-reth/db/clear/mdbx",
+                              "node-operators/mc-reth/cli/mc-reth/db/clear/static-file"
                             ]
                           },
-                          "node-operators/op-reth/cli/op-reth/db/repair-trie",
+                          "node-operators/mc-reth/cli/mc-reth/db/repair-trie",
                           {
-                            "group": "op-reth db static-file-header",
+                            "group": "mc-reth db static-file-header",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/db/static-file-header",
-                              "node-operators/op-reth/cli/op-reth/db/static-file-header/block",
-                              "node-operators/op-reth/cli/op-reth/db/static-file-header/path"
+                              "node-operators/mc-reth/cli/mc-reth/db/static-file-header",
+                              "node-operators/mc-reth/cli/mc-reth/db/static-file-header/block",
+                              "node-operators/mc-reth/cli/mc-reth/db/static-file-header/path"
                             ]
                           },
-                          "node-operators/op-reth/cli/op-reth/db/version",
-                          "node-operators/op-reth/cli/op-reth/db/path",
+                          "node-operators/mc-reth/cli/mc-reth/db/version",
+                          "node-operators/mc-reth/cli/mc-reth/db/path",
                           {
-                            "group": "op-reth db settings",
+                            "group": "mc-reth db settings",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/db/settings",
-                              "node-operators/op-reth/cli/op-reth/db/settings/get",
+                              "node-operators/mc-reth/cli/mc-reth/db/settings",
+                              "node-operators/mc-reth/cli/mc-reth/db/settings/get",
                               {
-                                "group": "op-reth db settings set",
+                                "group": "mc-reth db settings set",
                                 "pages": [
-                                  "node-operators/op-reth/cli/op-reth/db/settings/set",
-                                  "node-operators/op-reth/cli/op-reth/db/settings/set/v2"
+                                  "node-operators/mc-reth/cli/mc-reth/db/settings/set",
+                                  "node-operators/mc-reth/cli/mc-reth/db/settings/set/v2"
                                 ]
                               }
                             ]
                           },
                           {
-                            "group": "op-reth db prune-checkpoints",
+                            "group": "mc-reth db prune-checkpoints",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/db/prune-checkpoints",
-                              "node-operators/op-reth/cli/op-reth/db/prune-checkpoints/get",
-                              "node-operators/op-reth/cli/op-reth/db/prune-checkpoints/set"
+                              "node-operators/mc-reth/cli/mc-reth/db/prune-checkpoints",
+                              "node-operators/mc-reth/cli/mc-reth/db/prune-checkpoints/get",
+                              "node-operators/mc-reth/cli/mc-reth/db/prune-checkpoints/set"
                             ]
                           },
                           {
-                            "group": "op-reth db stage-checkpoints",
+                            "group": "mc-reth db stage-checkpoints",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/db/stage-checkpoints",
-                              "node-operators/op-reth/cli/op-reth/db/stage-checkpoints/get",
-                              "node-operators/op-reth/cli/op-reth/db/stage-checkpoints/set"
+                              "node-operators/mc-reth/cli/mc-reth/db/stage-checkpoints",
+                              "node-operators/mc-reth/cli/mc-reth/db/stage-checkpoints/get",
+                              "node-operators/mc-reth/cli/mc-reth/db/stage-checkpoints/set"
                             ]
                           },
-                          "node-operators/op-reth/cli/op-reth/db/account-storage",
-                          "node-operators/op-reth/cli/op-reth/db/state",
-                          "node-operators/op-reth/cli/op-reth/db/migrate-v2"
+                          "node-operators/mc-reth/cli/mc-reth/db/account-storage",
+                          "node-operators/mc-reth/cli/mc-reth/db/state",
+                          "node-operators/mc-reth/cli/mc-reth/db/migrate-v2"
                         ]
                       },
                       {
-                        "group": "op-reth stage",
+                        "group": "mc-reth stage",
                         "pages": [
-                          "node-operators/op-reth/cli/op-reth/stage",
-                          "node-operators/op-reth/cli/op-reth/stage/run",
-                          "node-operators/op-reth/cli/op-reth/stage/drop",
+                          "node-operators/mc-reth/cli/mc-reth/stage",
+                          "node-operators/mc-reth/cli/mc-reth/stage/run",
+                          "node-operators/mc-reth/cli/mc-reth/stage/drop",
                           {
-                            "group": "op-reth stage dump",
+                            "group": "mc-reth stage dump",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/stage/dump",
-                              "node-operators/op-reth/cli/op-reth/stage/dump/execution",
-                              "node-operators/op-reth/cli/op-reth/stage/dump/storage-hashing",
-                              "node-operators/op-reth/cli/op-reth/stage/dump/account-hashing",
-                              "node-operators/op-reth/cli/op-reth/stage/dump/merkle"
+                              "node-operators/mc-reth/cli/mc-reth/stage/dump",
+                              "node-operators/mc-reth/cli/mc-reth/stage/dump/execution",
+                              "node-operators/mc-reth/cli/mc-reth/stage/dump/storage-hashing",
+                              "node-operators/mc-reth/cli/mc-reth/stage/dump/account-hashing",
+                              "node-operators/mc-reth/cli/mc-reth/stage/dump/merkle"
                             ]
                           },
                           {
-                            "group": "op-reth stage unwind",
+                            "group": "mc-reth stage unwind",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/stage/unwind",
-                              "node-operators/op-reth/cli/op-reth/stage/unwind/to-block",
-                              "node-operators/op-reth/cli/op-reth/stage/unwind/num-blocks"
+                              "node-operators/mc-reth/cli/mc-reth/stage/unwind",
+                              "node-operators/mc-reth/cli/mc-reth/stage/unwind/to-block",
+                              "node-operators/mc-reth/cli/mc-reth/stage/unwind/num-blocks"
                             ]
                           }
                         ]
                       },
                       {
-                        "group": "op-reth p2p",
+                        "group": "mc-reth p2p",
                         "pages": [
-                          "node-operators/op-reth/cli/op-reth/p2p",
-                          "node-operators/op-reth/cli/op-reth/p2p/header",
-                          "node-operators/op-reth/cli/op-reth/p2p/body",
+                          "node-operators/mc-reth/cli/mc-reth/p2p",
+                          "node-operators/mc-reth/cli/mc-reth/p2p/header",
+                          "node-operators/mc-reth/cli/mc-reth/p2p/body",
                           {
-                            "group": "op-reth p2p rlpx",
+                            "group": "mc-reth p2p rlpx",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/p2p/rlpx",
-                              "node-operators/op-reth/cli/op-reth/p2p/rlpx/ping"
+                              "node-operators/mc-reth/cli/mc-reth/p2p/rlpx",
+                              "node-operators/mc-reth/cli/mc-reth/p2p/rlpx/ping"
                             ]
                           },
-                          "node-operators/op-reth/cli/op-reth/p2p/bootnode",
-                          "node-operators/op-reth/cli/op-reth/p2p/enode"
+                          "node-operators/mc-reth/cli/mc-reth/p2p/bootnode",
+                          "node-operators/mc-reth/cli/mc-reth/p2p/enode"
                         ]
                       },
-                      "node-operators/op-reth/cli/op-reth/config",
-                      "node-operators/op-reth/cli/op-reth/prune",
-                      "node-operators/op-reth/cli/op-reth/re-execute",
+                      "node-operators/mc-reth/cli/mc-reth/config",
+                      "node-operators/mc-reth/cli/mc-reth/prune",
+                      "node-operators/mc-reth/cli/mc-reth/re-execute",
                       {
-                        "group": "op-reth proofs",
+                        "group": "mc-reth proofs",
                         "pages": [
-                          "node-operators/op-reth/cli/op-reth/proofs",
-                          "node-operators/op-reth/cli/op-reth/proofs/init",
-                          "node-operators/op-reth/cli/op-reth/proofs/backfill",
-                          "node-operators/op-reth/cli/op-reth/proofs/prune",
+                          "node-operators/mc-reth/cli/mc-reth/proofs",
+                          "node-operators/mc-reth/cli/mc-reth/proofs/init",
+                          "node-operators/mc-reth/cli/mc-reth/proofs/backfill",
+                          "node-operators/mc-reth/cli/mc-reth/proofs/prune",
                           {
-                            "group": "op-reth proofs snapshot",
+                            "group": "mc-reth proofs snapshot",
                             "pages": [
-                              "node-operators/op-reth/cli/op-reth/proofs/snapshot",
-                              "node-operators/op-reth/cli/op-reth/proofs/snapshot/init",
-                              "node-operators/op-reth/cli/op-reth/proofs/snapshot/drop"
+                              "node-operators/mc-reth/cli/mc-reth/proofs/snapshot",
+                              "node-operators/mc-reth/cli/mc-reth/proofs/snapshot/init",
+                              "node-operators/mc-reth/cli/mc-reth/proofs/snapshot/drop"
                             ]
                           },
-                          "node-operators/op-reth/cli/op-reth/proofs/unwind"
+                          "node-operators/mc-reth/cli/mc-reth/proofs/unwind"
                         ]
                       }
                     ]
@@ -3521,23 +3521,23 @@
                   {
                     "group": "Sequencing",
                     "pages": [
-                      "op-stack/components/op-batcher",
+                      "op-stack/components/mc-batcher",
                       "op-stack/components/op-conductor"
                     ]
                   },
                   {
                     "group": "Derivation & Execution",
                     "pages": [
-                      "op-stack/components/op-node",
+                      "op-stack/components/mc-node",
                       "op-stack/components/kona-node",
-                      "op-stack/components/op-reth"
+                      "op-stack/components/mc-reth"
                     ]
                   },
                   {
                     "group": "Settlement & Proofs",
                     "pages": [
-                      "op-stack/components/op-proposer",
-                      "op-stack/components/op-challenger",
+                      "op-stack/components/mc-proposer",
+                      "op-stack/components/mc-challenger",
                       "op-stack/components/cannon",
                       "op-stack/components/kona-client",
                       "op-stack/components/kona-host",
@@ -3547,7 +3547,7 @@
                   {
                     "group": "Deployment & Infrastructure",
                     "pages": [
-                      "op-stack/components/op-deployer",
+                      "op-stack/components/mc-deployer",
                       "op-stack/components/proxyd"
                     ]
                   }
@@ -3653,12 +3653,12 @@
               {
                 "group": "Protocol",
                 "pages": [
-                  "releases/op-node",
+                  "releases/mc-node",
                   "releases/kona-node",
-                  "releases/op-reth",
-                  "releases/op-batcher",
-                  "releases/op-proposer",
-                  "releases/op-challenger",
+                  "releases/mc-reth",
+                  "releases/mc-batcher",
+                  "releases/mc-proposer",
+                  "releases/mc-challenger",
                   "releases/op-contracts"
                 ]
               },
@@ -3672,7 +3672,7 @@
               {
                 "group": "Tooling",
                 "pages": [
-                  "releases/op-deployer",
+                  "releases/mc-deployer",
                   "releases/op-conductor",
                   "releases/proxyd",
                   "releases/op-acceptor"

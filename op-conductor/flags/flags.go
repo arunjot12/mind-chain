@@ -83,7 +83,7 @@ var (
 	}
 	NodeRPC = &cli.StringFlag{
 		Name:    "node.rpc",
-		Usage:   "HTTP provider URL for op-node",
+		Usage:   "HTTP provider URL for mc-node",
 		EnvVars: opservice.PrefixEnvVar(EnvVarPrefix, "NODE_RPC"),
 	}
 	ExecutionRPC = &cli.StringFlag{

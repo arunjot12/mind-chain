@@ -1,6 +1,6 @@
 ---
 title: "Docker Guide"
-description: "Run kona-node with op-reth using Kona's pre-packaged docker-compose setup, including Grafana dashboards and Prometheus."
+description: "Run kona-node with mc-reth using Kona's pre-packaged docker-compose setup, including Grafana dashboards and Prometheus."
 diataxis: how-to
 ---
 
@@ -9,7 +9,7 @@ This guide uses Kona's pre-packaged docker config.
 
 For detailed usage of the `kona-node` binary, head
 over to [the binary guide](/node-operators/kona-node/run/binary).
-To run an op-node + op-reth stack with Docker instead, see
+To run an mc-node + mc-reth stack with Docker instead, see
 [Running a Node With Docker](/node-operators/tutorials/node-from-docker).
 </Info>
 
@@ -39,22 +39,22 @@ The easiest way to run `kona-node` with Docker is using the provided recipe:
 
 This will start:
 - `kona-node` - The OP Stack node implementation
-- `op-reth` - Execution layer client  
+- `mc-reth` - Execution layer client  
 - `prometheus` - Metrics collection
 - `grafana` - Monitoring dashboards (accessible at http://localhost:3000)
 
 ## Docker Compose
 
 In the [provided docker compose][compose], there are a few services
-aside from the `kona-node` and `op-reth`. These are `prometheus`
+aside from the `kona-node` and `mc-reth`. These are `prometheus`
 and `grafana` which automatically come provisioned with dashboards
-for monitoring and insight into the `kona-node` and `op-reth` services.
+for monitoring and insight into the `kona-node` and `mc-reth` services.
 For more detail into how Prometheus and Grafana work, head over to the
 [Monitoring][monitoring] docs.
 
 The `docker-compose.yaml` uses published images from GitHub Container Registry:
 
-- **`op-reth`**: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-reth:develop
+- **`mc-reth`**: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-reth:develop
 - **`kona-node`**: us-docker.pkg.dev/oplabs-tools-artifacts/images/kona-node:develop
 
 ### Service Configuration
@@ -70,9 +70,9 @@ The `kona-node` service is configured with the following key settings:
 - **Environment**: L1 RPC and Beacon API endpoints are required
 - **Volumes**: Persistent data storage and JWT token for engine API authentication
 
-#### op-reth Service
+#### mc-reth Service
 
-The `op-reth` service provides the execution layer:
+The `mc-reth` service provides the execution layer:
 
 - **Ports**:
   - `8545` - HTTP RPC
@@ -89,8 +89,8 @@ By default, the recipe is configured for **OP Sepolia**. To sync a different OP 
 
 1. Set appropriate L1 endpoints for your target network in `cfg.env`
 2. Modify the docker-compose.yaml:
-   - Update `op-reth --chain` parameter
-   - Update `op-reth --rollup.sequencer-http` endpoint
+   - Update `mc-reth --chain` parameter
+   - Update `mc-reth --rollup.sequencer-http` endpoint
    - Update `kona-node --chain` parameter
 
 ### RPC Trust Configuration
@@ -112,7 +112,7 @@ kona-node:
     --l1-eth-rpc ${L1_PROVIDER_RPC}
     --l1-beacon ${L1_BEACON_API}
     --l1-trust-rpc false  # Add this for untrusted L1 RPCs
-    --l2-engine-rpc ws://op-reth:8551
+    --l2-engine-rpc ws://mc-reth:8551
     --l2-trust-rpc false  # Add this for untrusted L2 RPCs
 ```
 
@@ -166,7 +166,7 @@ just restart
 
 ## Getting the kona-node Image
 
-The recipe pulls published `kona-node` and `op-reth` images automatically.
+The recipe pulls published `kona-node` and `mc-reth` images automatically.
 Use this section when you want to pull or build the `kona-node` image
 yourself, for example to pin a release version or test local changes.
 

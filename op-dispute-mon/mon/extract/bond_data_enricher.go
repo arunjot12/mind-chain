@@ -10,9 +10,9 @@ import (
 	"slices"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts"
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
+	faultTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	monTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/common"

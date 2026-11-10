@@ -3,15 +3,15 @@ default:
 	@just -l
 
 # initialize project
-init: && update build-kona-node build-op-reth (create-docker-network "stf-net") up
+init: && update build-kona-node build-mc-reth (create-docker-network "stf-net") up
 	-git clone https://github.com/op-rs/kona.git kona-node/kona
-	-git clone https://github.com/paradigmxyz/reth op-reth/reth
+	-git clone https://github.com/paradigmxyz/reth mc-reth/reth
 	-./generate-jwt.sh
 
 # update submodules
-update: && build-kona-node build-op-reth
+update: && build-kona-node build-mc-reth
 	git -C kona-node/kona submodule update --init --remote
-	git -C op-reth/reth submodule update --init --remote
+	git -C mc-reth/reth submodule update --init --remote
 
 # checkout kona dev branch
 checkout BRANCH="main":
@@ -61,9 +61,9 @@ build-kona-node: rmi
 	(cd kona-node/kona && cargo build --bin kona-node --release)
 
 # build reth
-build-op-reth:
+build-mc-reth:
 	#!/bin/bash
-	(cd op-reth/reth && cargo build --release)
+	(cd mc-reth/reth && cargo build --release)
 
 reset-and-build: reset-git build-kona-node
 

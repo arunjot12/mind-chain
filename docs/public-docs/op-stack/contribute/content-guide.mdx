@@ -76,7 +76,7 @@ docs.optimism.io holds for each.
 | Protocol | Hardfork activations and chain metadata | [superchain-registry](https://github.com/ethereum-optimism/superchain-registry) | Pages rendered from the registry's structured data, joined — not hand-copied |
 | Components | Concepts, how-tos, and tutorials for running components | docs.optimism.io (full ownership) | The pages themselves, e.g. the [batcher guide](/chain-operators/guides/configuration/batcher) |
 | Components | Flags, commands, and configuration reference | The published release artifact at a finalized tag (its `--help` output, or the schema in its source at that tag) | Generated pages only, versioned by release line, under `reference/` — see [Component reference](#component-reference). Never a hand-maintained flag table |
-| Components | Implementation internals and developer books (e.g. [kona](https://github.com/ethereum-optimism/optimism/tree/develop/rust/kona), [op-reth](https://github.com/ethereum-optimism/optimism/tree/develop/rust/op-reth)) | The component's developer documentation, maintained beside its source | Orientation and selection pages that link into the deep material |
+| Components | Implementation internals and developer books (e.g. [kona](https://github.com/ethereum-optimism/optimism/tree/develop/rust/kona), [mc-reth](https://github.com/ethereum-optimism/optimism/tree/develop/rust/op-reth)) | The component's developer documentation, maintained beside its source | Orientation and selection pages that link into the deep material |
 | Periphery | SDKs and ecosystem tooling (e.g. [viem](https://viem.sh/op-stack), wagmi) | The upstream project's own documentation | One curated hub with a support matrix; every listing marked with `<ThirdPartyContent>` |
 
 Precedents for the matrix, clause by clause:
@@ -96,7 +96,7 @@ Precedents for the matrix, clause by clause:
     so curation is policy application rather than per-PR debate.
 *   **The component declares its docs home.** Each component's README should
     point at its canonical documentation, following the
-    [op-deployer README](https://github.com/ethereum-optimism/optimism/blob/develop/op-deployer/README.md)
+    [mc-deployer README](https://github.com/ethereum-optimism/optimism/blob/develop/op-deployer/README.md)
     model.
 
 When two pages could both claim a topic, the matrix decides. If the matrix
@@ -111,8 +111,8 @@ it is generated. This section is the convention that makes those references
 uniform across components; the generator and its lint enforce it, and
 reviewers cite it when a change would break it.
 
-**Components covered:** op-node, op-batcher, op-proposer, op-challenger,
-op-conductor, op-supernode, op-deployer, op-reth, and kona-node. A component
+**Components covered:** mc-node, mc-batcher, mc-proposer, mc-challenger,
+op-conductor, op-supernode, mc-deployer, mc-reth, and kona-node. A component
 joins the list by being added to the generator, never by a hand-written page.
 
 ### Source of truth
@@ -132,7 +132,7 @@ tag, never from a pre-release, and never from `develop` except into the
 *   **JSON-RPC:** the method registrations in the component's source at the
     tag: the `rpc.API` namespaces the Go services register, and the `#[rpc]`
     and `#[method]` attributes on kona-node's jsonrpsee traits. A component
-    that inherits an upstream client's RPC (op-reth) points at the upstream
+    that inherits an upstream client's RPC (mc-reth) points at the upstream
     reference for the inherited namespaces and generates only the OP Stack
     additions.
 *   **Metrics:** the metric definitions (name, type, labels, help string) in
@@ -198,7 +198,7 @@ pages render one table (name, type, labels, description).
 <Note>
   **Transition.** The component references published today live inside the
   persona tabs (for example `chain-operators/reference/` and
-  `node-operators/op-reth/cli/`), some generated and some hand-maintained.
+  `node-operators/mc-reth/cli/`), some generated and some hand-maintained.
   They move into the top-level `reference/` tree as each component joins the
   generator, and the rules above apply to a component once it has moved.
   Until then, do not add a new hand-maintained flag table anywhere; add the
@@ -248,13 +248,13 @@ same pull request, as follows:
     ```mdx
     import { Unreleased } from "/snippets/unreleased.mdx"
 
-    <Unreleased component="op-reth" />
-    <Unreleased component="op-reth" version="v2.5.0" />
+    <Unreleased component="mc-reth" />
+    <Unreleased component="mc-reth" version="v2.5.0" />
     ```
 
     Which renders:
 
-    <Unreleased component="op-reth" />
+    <Unreleased component="mc-reth" />
 
     The callout is temporary. When it names a version, `pnpm lint:reference`
     warns on every run once that tag exists, and the weekly CI sweep, which

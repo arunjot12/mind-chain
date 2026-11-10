@@ -29,13 +29,13 @@ The following section will walk you through the sequence of steps a chain operat
 
 <Steps>
   <Step title="Smart contract deployment">
-    Using a CLI tool called [op-deployer](/chain-operators/tools/op-deployer/overview) you will configure your chain and then deploy the smart contracts on Ethereum.
+    Using a CLI tool called [mc-deployer](/chain-operators/tools/mc-deployer/overview) you will configure your chain and then deploy the smart contracts on Ethereum.
   </Step>
   <Step title="Chain genesis creation">
-    After deploying the L1 smart contracts, you will use [op-deployer](/chain-operators/tools/op-deployer/overview) to generate two files necessary to run nodes on the L2 network:
+    After deploying the L1 smart contracts, you will use [mc-deployer](/chain-operators/tools/mc-deployer/overview) to generate two files necessary to run nodes on the L2 network:
 
-        *   **Genesis file** (`genesis.json`): Initializes the execution client (`op-reth`)
-        *   **Rollup configuration file** (`rollup.json`): Configures the consensus client (`op-node`)
+        *   **Genesis file** (`genesis.json`): Initializes the execution client (`mc-reth`)
+        *   **Rollup configuration file** (`rollup.json`): Configures the consensus client (`mc-node`)
 
     These files contain all the essential information your services need to interact with Ethereum and the system contracts you deployed.
   </Step>
@@ -43,13 +43,13 @@ The following section will walk you through the sequence of steps a chain operat
     To begin sequencing transactions and building blocks, you will then run an **execution client** and **consensus client** that come together as your **sequencer node**. 
   </Step>
   <Step title="Begin batching transactions">
-    Next you will run `op-batcher` which will publish user transactions on Ethereum.
+    Next you will run `mc-batcher` which will publish user transactions on Ethereum.
   </Step>
   <Step title="Start proposing state roots">
-    Then you will run `op-proposer` to publish the L2 state root on Ethereum to enable withdrawals back to Ethereum.
+    Then you will run `mc-proposer` to publish the L2 state root on Ethereum to enable withdrawals back to Ethereum.
   </Step>
   <Step title="Protect your chain">
-    Finally you will run `op-challenger` to monitor and dispute any invalid L2 state roots that have been posted.
+    Finally you will run `mc-challenger` to monitor and dispute any invalid L2 state roots that have been posted.
   </Step>
 </Steps>
 

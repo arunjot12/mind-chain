@@ -449,7 +449,7 @@ Required core configuration:
 | Variable | Purpose |
 |---|---|
 | `OP_ZK_PROPOSER_L1_RPC` | L1 execution RPC; must support standard JSON-RPC batch requests (current proposer game-state batches contain at most 4 `eth_call` entries) |
-| `OP_ZK_PROPOSER_SUPERROOT_RPCS` | op-supernode or single-chain op-node RPCs serving `superroot_atTimestamp`. Multiple comma-separated RPCs can be provided for redundancy |
+| `OP_ZK_PROPOSER_SUPERROOT_RPCS` | op-supernode or single-chain mc-node RPCs serving `superroot_atTimestamp`. Multiple comma-separated RPCs can be provided for redundancy |
 | `OP_ZK_PROPOSER_NETWORK` | Predefined network name recognized by OP Stack services, such as `op-mainnet`; alternative to `OP_ZK_PROPOSER_FACTORY_ADDRESS` |
 | `OP_ZK_PROPOSER_FACTORY_ADDRESS` | Explicit `DisputeGameFactory` address; required when no network is selected and overrides network lookup |
 | `OP_ZK_PROPOSER_PRESTATES_URL` | prestate artifact directory (`<vkey>.agg.bin.gz`, `<vkey>.range.bin.gz`, and `<vkey>.log.bin.gz`) |
@@ -816,8 +816,8 @@ tests in its `kona-sp1-action-tests` job. The executor also loads `log-commitmen
 consolidation reads a block below a local safe head.
 
 Because the executor is a separate process that resolves the transition itself, the action-test
-harness serves op-node's superroot API over a loopback HTTP listener
-(`L2Verifier.StartSuperRootHTTPRPC`) and passes it as `--supernode-address`. op-node answers
+harness serves mc-node's superroot API over a loopback HTTP listener
+(`L2Verifier.StartSuperRootHTTPRPC`) and passes it as `--supernode-address`. mc-node answers
 with a one-chain response, which is what the action-test chain is.
 
 For faster coverage of the super-range logic, the same executor also supports `--native-core`.

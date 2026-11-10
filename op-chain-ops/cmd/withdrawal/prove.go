@@ -6,9 +6,9 @@ import (
 	"fmt"
 
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	opnode_bindings "github.com/ethereum-optimism/optimism/op-node/bindings"
-	bindingspreview "github.com/ethereum-optimism/optimism/op-node/bindings/preview"
-	"github.com/ethereum-optimism/optimism/op-node/withdrawals"
+	opnode_bindings "github.com/ethereum-optimism/optimism/mc-node/bindings"
+	bindingspreview "github.com/ethereum-optimism/optimism/mc-node/bindings/preview"
+	"github.com/ethereum-optimism/optimism/mc-node/withdrawals"
 	op_service "github.com/ethereum-optimism/optimism/op-service"
 	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
 	"github.com/ethereum-optimism/optimism/op-service/txmgr"

@@ -52,7 +52,7 @@ pub fn parse_bundle(json: &str) -> Result<BundleFile> {
 /// Capitalize the first character of `name` — `"karst"` becomes `"Karst"`.
 ///
 /// The NUT bundle's `fork_name` feeds into the source-hash derivation and must
-/// match the capitalized form used by op-node.
+/// match the capitalized form used by mc-node.
 pub fn capitalize(name: &str) -> String {
     let mut c = name.chars();
     c.next().map_or_else(String::new, |first| first.to_uppercase().collect::<String>() + c.as_str())

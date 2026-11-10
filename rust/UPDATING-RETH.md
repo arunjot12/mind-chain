@@ -9,7 +9,7 @@ the shared `revm`/`alloy` versions in sync with it.
 
 ## When to update
 
-- Picking up a fix or feature merged upstream that op-reth depends on.
+- Picking up a fix or feature merged upstream that mc-reth depends on.
 - Periodic catch-up to limit drift before it becomes painful.
 - After your own reth-side change has merged upstream.
 
@@ -127,8 +127,8 @@ main's CI actually validated.
 
    When a bump is genuinely needed, **version in-tree crate families as a
    group.** Upstream reth versions every crate from one workspace version; two
-   in-tree families follow the same rule: the published op-reth crates
-   (`op-reth`, `reth-optimism-*`, `reth-op`) and the `op-alloy*` crates. When
+   in-tree families follow the same rule: the published mc-reth crates
+   (`mc-reth`, `reth-optimism-*`, `reth-op`) and the `op-alloy*` crates. When
    any crate of a family needs a new version, bump the whole family to the
    same version. A lone bump leaves siblings whose API also changed at a
    version that downstream requirements still accept.
@@ -150,7 +150,7 @@ main's CI actually validated.
    revision before proceeding.
 
 6. Revisit the upstream slot-preimage seeding API.
-   `op-reth/crates/cli/src/commands/slot_preimages_seed.rs` uses reth's public
+   `mc-reth/crates/cli/src/commands/slot_preimages_seed.rs` uses reth's public
    `SlotPreimages` helper directly. Review changes to that helper and its MDBX
    layout between the old and new reth revisions:
 
@@ -198,7 +198,7 @@ main's CI actually validated.
 8. Build, format, and test before pushing:
 
    ```bash
-   mise exec -- cargo build -p op-reth
+   mise exec -- cargo build -p mc-reth
    just fmt-fix && just lint
    just test   # unit + doc tests — CI runs both, and doc examples call reth APIs too
    ```
@@ -209,8 +209,8 @@ main's CI actually validated.
    crate whose source you touched.
 
 9. Regenerate the CLI surface snapshot. Most reth bumps add, remove, or
-   re-default upstream CLI flags, and op-reth inherits them silently. The
-   snapshot test `rust/op-reth/crates/cli/tests/cli_snapshot.rs` fails on any
+   re-default upstream CLI flags, and mc-reth inherits them silently. The
+   snapshot test `rust/mc-reth/crates/cli/tests/cli_snapshot.rs` fails on any
    such change so it gets reviewed instead of shipped unnoticed. If the diff
    is intentional, regenerate and commit the snapshot:
 
@@ -219,12 +219,12 @@ main's CI actually validated.
    ```
 
    Review the snapshot diff like code: it is the operator-facing surface of
-   the node. Upstream flags op-reth deliberately rejects (the `DENIED_ARGS`
-   deny-list in `op-reth/crates/cli/src/lib.rs`, e.g. `--minimal`) must stay
+   the node. Upstream flags mc-reth deliberately rejects (the `DENIED_ARGS`
+   deny-list in `mc-reth/crates/cli/src/lib.rs`, e.g. `--minimal`) must stay
    rejected — they render with a `[hidden]` marker in the snapshot.
 
    Report removed flags and changed defaults in the PR's migration notes. The
-   [published CLI reference](../docs/public-docs/scripts/gen-op-reth-cli/README.md)
+   [published CLI reference](../docs/public-docs/scripts/gen-mc-reth-cli/README.md)
    intentionally documents a finalized release, not `develop`. Do not regenerate
    it from an unreleased dependency bump; update it through the release generator
    after the next finalized tag.
@@ -314,7 +314,7 @@ and mark it ready for review.
 
 A rev bump is rarely "just a rev change." Upstream reth iterates trait
 signatures, struct fields, re-exports, and feature flags between commits, and
-any of them can require op-reth-side adaptation. Recent examples observed in
+any of them can require mc-reth-side adaptation. Recent examples observed in
 the wild:
 
 - Trait methods gaining new parameters (e.g. `FullConsensus::validate_block_post_execution`
@@ -329,10 +329,10 @@ the wild:
   `trie_updates` losing their `Either<Arc<...>, _>` wrappers).
 - Renames (e.g. `ComputedTrieData::without_trie_input` → `::new`).
 - Removed re-exports — sometimes the trait itself is deleted upstream while
-  op-reth (and the wider OP Stack) still relies on it. In that case the
+  mc-reth (and the wider OP Stack) still relies on it. In that case the
   smallest correct fix is to vendor the trait locally in the consuming crate
   (with a comment pointing at the upstream PR that removed it). See
-  `rust/op-reth/crates/rpc/src/witness.rs` for an example.
+  `rust/mc-reth/crates/rpc/src/witness.rs` for an example.
 - Type changes in test fixtures (e.g. struct fields flipping from `u16` to
   `Option<u16>`).
 
@@ -382,8 +382,8 @@ onto an older base, or accept the broader catch-up work as part of the bump.
 - `rust/Cargo.toml` — where the pin lives (~70 occurrences).
 - `rust/kona/sp1/programs/Cargo.lock` — the second lockfile; refresh it when
   shared revm or alloy anchors move.
-- `rust/op-reth/crates/rpc/src/witness.rs` — example of vendoring a trait that
+- `rust/mc-reth/crates/rpc/src/witness.rs` — example of vendoring a trait that
   upstream removed.
-- `rust/op-reth/crates/cli/src/commands/slot_preimages_seed.rs` — caller of
+- `rust/mc-reth/crates/cli/src/commands/slot_preimages_seed.rs` — caller of
   reth's public `SlotPreimages` seeding API; review the upstream helper on every
   bump.

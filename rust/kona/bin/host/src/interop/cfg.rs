@@ -142,7 +142,7 @@ pub enum InteropHostError {
     /// Lagoon is scheduled for a supplied rollup config but no dependency-set file was provided.
     #[error(
         "Lagoon is scheduled for chain {chain_id} (lagoon_time = {lagoon_time:?}), but \
-         --depset-cfg was not provided. Supply the dependency-set JSON file matching op-node's \
+         --depset-cfg was not provided. Supply the dependency-set JSON file matching mc-node's \
          --interop.dependency-set to avoid silent state divergence on Lagoon activation."
     )]
     InteropWithoutDependencySet {

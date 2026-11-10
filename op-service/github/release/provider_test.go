@@ -180,7 +180,7 @@ func TestGithubReleaseDownloader_OpDeployer(t *testing.T) {
 	provider := NewGithubReleaseDownloader(
 		"ethereum-optimism",
 		"optimism",
-		"op-deployer",
+		"mc-deployer",
 		WithCachePather(NewStaticCachePather(cacheDir)),
 		WithURLGetter(NewOPStackURLGetter()),
 		WithBinaryLocator(NewOPStackBinaryLocator()),

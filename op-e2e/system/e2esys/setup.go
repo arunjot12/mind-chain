@@ -18,7 +18,7 @@ import (
 	"testing"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/stretchr/testify/require"
 
 	ds "github.com/ipfs/go-datastore"
@@ -41,9 +41,9 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 
 	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	batcherCfg "github.com/ethereum-optimism/optimism/op-batcher/config"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
+	batcherCfg "github.com/ethereum-optimism/optimism/mc-batcher/config"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
 	opgenesis "github.com/ethereum-optimism/optimism/op-core/genesis"
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
@@ -61,16 +61,16 @@ import (
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/setuputils"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
-	config2 "github.com/ethereum-optimism/optimism/op-node/config"
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-node/p2p/store"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	l2os "github.com/ethereum-optimism/optimism/op-proposer/proposer"
+	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
+	config2 "github.com/ethereum-optimism/optimism/mc-node/config"
+	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
+	"github.com/ethereum-optimism/optimism/mc-node/p2p"
+	"github.com/ethereum-optimism/optimism/mc-node/p2p/store"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
+	l2os "github.com/ethereum-optimism/optimism/mc-proposer/proposer"
 	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/dial"
@@ -108,7 +108,7 @@ func WithAllocType(allocType config.AllocType) SystemConfigOpt {
 	}
 }
 
-// WithL2ELKind pins the L2 execution-layer backend (op-geth or op-reth).
+// WithL2ELKind pins the L2 execution-layer backend (op-geth or mc-reth).
 func WithL2ELKind(kind services.ELKind) SystemConfigOpt {
 	return func(s *SystemConfigOpts) {
 		s.L2ELKind = kind
@@ -368,7 +368,7 @@ type SystemConfig struct {
 
 	AllocType config.AllocType
 
-	// L2ELKind selects the L2 execution-layer backend (op-geth or op-reth).
+	// L2ELKind selects the L2 execution-layer backend (op-geth or mc-reth).
 	L2ELKind services.ELKind
 }
 

@@ -1,7 +1,7 @@
 // Package state provides the frozen pre-fork L2 predeploy state artifacts that
 // the NUT bundle activation test boots from.
 //
-// It is deliberately a separate package from op-core/nuts: op-node and kona-node
+// It is deliberately a separate package from op-core/nuts: mc-node and kona-node
 // import op-core/nuts for the embedded bundles, and the state JSON is large
 // (hundreds of KB per fork). Keeping the embed here means the state ships only in
 // test binaries that import this package, not in the node binaries.

@@ -17,14 +17,14 @@ pub use directory::DirectoryKeyValueStore;
 mod split;
 pub use split::SplitKeyValueStore;
 
-/// The filename used to record the storage format, for compatibility with op-challenger.
+/// The filename used to record the storage format, for compatibility with mc-challenger.
 const FORMAT_FILENAME: &str = "kvformat";
 
 /// The storage format for on-disk preimage data.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, clap::ValueEnum, serde::Serialize)]
 pub enum DataFormat {
     /// Files stored in subdirectories with hex-encoded values.
-    /// Compatible with op-challenger's `DataFormatDirectory`.
+    /// Compatible with mc-challenger's `DataFormatDirectory`.
     #[default]
     Directory,
     /// RocksDB-backed storage.

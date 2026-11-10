@@ -21,11 +21,11 @@ not a monitoring gap.
 
 ## Implementations
 
-| | op-node | kona-node |
+| | mc-node | kona-node |
 |---|---|---|
-| Code | `op-node/node/safedb/` | `rust/kona/crates/node/safedb/` |
+| Code | `mc-node/node/safedb/` | `rust/kona/crates/node/safedb/` |
 | Store | pebble | rocksdb, behind the non-default `rocksdb` feature |
-| Contract | `rollup.SafeHeadListener` (`op-node/rollup/iface.go:79-96`) plus the reader interface (`op-node/node/api.go:45-56`) | the `SafeDb` trait (`src/traits.rs`) |
+| Contract | `rollup.SafeHeadListener` (`mc-node/rollup/iface.go:79-96`) plus the reader interface (`mc-node/node/api.go:45-56`) | the `SafeDb` trait (`src/traits.rs`) |
 | Disabled form | `safedb.Disabled` | `DisabledDatabase` |
 | State | wired: derivation writes it, two RPCs serve it | crate only; not yet wired to derivation or RPC |
 
@@ -35,7 +35,7 @@ guarantee. The compatibility surface is the RPC (`optimism_safeHeadAtL1Block`,
 `superroot_atTimestamp`) and the in-process interface. A review finding about the byte
 layout is implementation-local. A finding about an answer is not.
 
-Line references below point at op-node, because it is the wired implementation. The
+Line references below point at mc-node, because it is the wired implementation. The
 behaviour they illustrate applies to both.
 
 ## The contract
@@ -76,7 +76,7 @@ Cross-safe, the verified head, and the finalized head each lag local-safe by a d
 variable amount, so a ref carrying one of them is the wrong value.
 
 Before interop, and whenever follow-source is disabled, local-safe and cross-safe hold the
-same block (`op-node/rollup/engine/engine_controller.go:1076-1079`). A test in those modes
+same block (`mc-node/rollup/engine/engine_controller.go:1076-1079`). A test in those modes
 cannot tell them apart. See trap 6.
 
 ### I2. Recorded history has no gaps
@@ -86,9 +86,9 @@ produces no error — the walk returns the **next** entry, so the answer is an L
 later than the true one.
 
 This is the worst failure the safedb has, because nothing detects it. The operator
-guidance says the same about a restored snapshot: op-challenger acts on an incorrect safe
+guidance says the same about a restored snapshot: mc-challenger acts on an incorrect safe
 head and cannot detect the condition
-(`docs/public-docs/chain-operators/guides/configuration/op-challenger-config-guide.mdx:276-278`).
+(`docs/public-docs/chain-operators/guides/configuration/mc-challenger-config-guide.mdx:276-278`).
 
 ### I3. The truncation point equals the point derivation resumes from
 
@@ -123,17 +123,17 @@ that entry's L1 block.
 An entry is written only when derivation advances the safe head, so an entry's L1 block
 **is** the L1 block at which that L2 block became safe.
 
-There is no safe direction to round in. op-challenger clamps its honest trace to the safe
-head at the game's L1 head (`op-challenger/game/fault/trace/outputs/provider.go:76-88`).
+There is no safe direction to round in. mc-challenger clamps its honest trace to the safe
+head at the game's L1 head (`mc-challenger/game/fault/trace/outputs/provider.go:76-88`).
 Too low, it disputes correct proposals. Too high, it claims roots the L1 data does not
 support. Trading exactness for convenience is a finding even when it looks conservative.
 
 ## Technique 1: name the label on every ref
 
 For each ref reaching a record or a truncate, trace it to the field it was read from and
-name the label it holds. Stop at the assignment, not the parameter name — op-node's reset
+name the label it holds. Stop at the assignment, not the parameter name — mc-node's reset
 event carries four heads, and the parameter is called `safeHead` whichever one arrives
-(`op-node/rollup/engine/engine_controller.go:1285-1290`).
+(`mc-node/rollup/engine/engine_controller.go:1285-1290`).
 
 This finds label drift. The interop work split one `Safe` field into `LocalSafe` and
 `CrossSafe`; a call site that mechanically took `CrossSafe` kept compiling and kept
@@ -145,8 +145,8 @@ For each truncation, find the head derivation restarts from on that path:
 
 | Path | Truncates to | Derivation resumes from |
 |---|---|---|
-| engine reset confirmation (`op-node/rollup/driver/sync_deriver.go`) | the event's local-safe | the reset's local-safe |
-| EL-sync completion (`op-node/rollup/engine/engine_controller.go:951-986`) | the anchor near the offset head, or nothing | the same anchor, or the offset head |
+| engine reset confirmation (`mc-node/rollup/driver/sync_deriver.go`) | the event's local-safe | the reset's local-safe |
+| EL-sync completion (`mc-node/rollup/engine/engine_controller.go:951-986`) | the anchor near the offset head, or nothing | the same anchor, or the offset head |
 
 A new path adds a row. If a row's two columns are not the same block, that is the finding.
 Name the L2 range that goes missing.
@@ -174,14 +174,14 @@ callers re-checked.
 
 | Consumer | Uses | A wrong answer causes |
 |---|---|---|
-| `optimism_safeHeadAtL1Block` (`op-node/node/api.go:158-170`) | safe head at L1 | see the two rows below |
-| `superroot_atTimestamp` (`op-node/node/superroot_api.go:74-79`) | L1 at safe head | a wrong `RequiredL1`, so super-root games resolve on the wrong transition |
-| op-challenger output games (`op-challenger/game/fault/trace/outputs/provider.go:76-88`) | the RPC | the honest trace clamps at the wrong block, so valid proposals are disputed |
+| `optimism_safeHeadAtL1Block` (`mc-node/node/api.go:158-170`) | safe head at L1 | see the two rows below |
+| `superroot_atTimestamp` (`mc-node/node/superroot_api.go:74-79`) | L1 at safe head | a wrong `RequiredL1`, so super-root games resolve on the wrong transition |
+| mc-challenger output games (`mc-challenger/game/fault/trace/outputs/provider.go:76-88`) | the RPC | the honest trace clamps at the wrong block, so valid proposals are disputed |
 | op-dispute-mon (`op-dispute-mon/mon/extract/output_agreement_enricher.go:119-133`) | the RPC | a false alert; an error is deliberately treated as safe |
 | op-supernode interop (`op-supernode/supernode/chain_container/chain_container.go:611-663`) | L1 at safe head | interop halts, or backs off forever |
-| EL-sync completion (`op-node/rollup/engine/engine_controller.go:951-986`) | last entry, L1 at safe head | the database is wrongly kept, trimmed, or cleared |
+| EL-sync completion (`mc-node/rollup/engine/engine_controller.go:951-986`) | last entry, L1 at safe head | the database is wrongly kept, trimmed, or cleared |
 
-Note the asymmetry: op-dispute-mon degrades safely on an error, op-challenger does not. An
+Note the asymmetry: op-dispute-mon degrades safely on an error, mc-challenger does not. An
 error is not the dangerous outcome. A confident wrong answer is.
 
 ## False-positive traps
@@ -195,7 +195,7 @@ error is not the dangerous outcome. A confident wrong answer is.
    the head became safe in that L1 block or before its records start.
 4. **A truncation path that does not check `Enabled`.** The disabled implementation makes
    the truncation a no-op, and the interface permits callbacks when it reports disabled
-   (`op-node/rollup/iface.go:84-86`).
+   (`mc-node/rollup/iface.go:84-86`).
 5. **A query returning an L1 block below the one requested.** That is the contract for
    "safe head at L1".
 6. **A green test on a label change.** Pre-interop and follow-source-disabled modes make
@@ -209,7 +209,7 @@ error is not the dangerous outcome. A confident wrong answer is.
 1. **EL sync wrote heads derivation never produced** (I4) —
    ethereum-optimism/optimism#16644 deleted the whole database on EL sync.
 2. **The whole database was deleted on every restart** (I2) —
-   ethereum-optimism/optimism#21111. With op-reth or erigon, EL sync started each restart.
+   ethereum-optimism/optimism#21111. With mc-reth or erigon, EL sync started each restart.
    The fix keeps what is still canonical.
 3. **The first entry was read while still in flight** (I5) —
    ethereum-optimism/optimism#20855.

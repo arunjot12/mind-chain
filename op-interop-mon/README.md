@@ -23,7 +23,7 @@ against the *initiating* chain's block, that:
 These checks together are equivalent to the `MessageChecksum` binding used by `interop_checkAccessList`.
 
 The chain set and the message expiry window are sourced from an interop dependency-set JSON file via
-`--dependency-set` (the same format consumed by `op-supernode` / `op-node`).
+`--dependency-set` (the same format consumed by `op-supernode` / `mc-node`).
 
 This service belongs to the post-`op-supervisor` interop topology: `op-supernode` (consensus layer,
 makes the cross-chain safety decision), Light CL follower nodes, and `op-interop-filter` (execution

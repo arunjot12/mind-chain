@@ -12,7 +12,7 @@ import (
 )
 
 // Committer commits blocks with the op-stack commit API.
-// This can be an op-node that processes and persists the block as canonical.
+// This can be an mc-node that processes and persists the block as canonical.
 type Committer struct {
 	api     apis.CommitAPI
 	onClose func()

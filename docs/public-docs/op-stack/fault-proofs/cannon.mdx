@@ -44,16 +44,16 @@ Now for simplicity, when referring to Cannon in this documentation, we are refer
 
 The above diagram, recreated from the [OP Fault Proof System video](https://www.youtube.com/watch?v=nIN5sNc6nQM) by Clabby, predates the move to kona:
 where it says `op-program`, read `kona-client`, which fills that role today. In it, we can see
-that Cannon interacts with op-challenger and the fault proof program. However, this diagram is a simplification of the relationship between
-op-challenger \<> Cannon, and kona-client \<> Cannon. In general, Cannon will not be run until an active fault dispute reaches the
+that Cannon interacts with mc-challenger and the fault proof program. However, this diagram is a simplification of the relationship between
+mc-challenger \<> Cannon, and kona-client \<> Cannon. In general, Cannon will not be run until an active fault dispute reaches the
 execution trace portion of the bisection game. This does not occur until the participants in the active fault dispute game reach a
 single L2 block state transition that they disagree on.
 
-### op-challenger \<> Cannon
+### mc-challenger \<> Cannon
 
-Once an active fault dispute game reaches a depth below attacking / defending L2 block state transitions, [op-challenger](/op-stack/fault-proofs/challenger) will run
+Once an active fault dispute game reaches a depth below attacking / defending L2 block state transitions, [mc-challenger](/op-stack/fault-proofs/challenger) will run
 Cannon to begin processing MIPS instructions within the FPVM. As part of processing MIPS instructions, Cannon will generate state
-witness hashes, which are the commitment to the results of the MIPS instructions' computation within the FPVM. Now, in the bisection game, op-challenger will provide the generated hashes
+witness hashes, which are the commitment to the results of the MIPS instructions' computation within the FPVM. Now, in the bisection game, mc-challenger will provide the generated hashes
 until a single MIPS instruction is identified as the root disagreement between participants in the active dispute. Cannon will then
 generate the witness proof, which contains all the information required to run the MIPS instruction onchain. Running this single MIPS
 instruction onchain in `MIPS64.sol` will be used to definitively prove the correct post state, which will then be used to resolve the fault
@@ -142,7 +142,7 @@ multithreaded version.
 
 #### Generating the witness proof
 
-Cannon handles two major components in the dispute game: generating state witness hashes for op-challenger to post during the execution trace
+Cannon handles two major components in the dispute game: generating state witness hashes for mc-challenger to post during the execution trace
 bisection game, and generating the witness proof once a single MIPS instruction is reached as the root of disagreement in the fault dispute game.
 The witness proof, as mentioned previously, contains all the necessary information for `MIPS64.sol` to be able to run the same instruction onchain,
 and derive the post state that will be used to resolve the fault dispute game. The post state of the instruction run by `MIPS64.sol` should be
@@ -154,7 +154,7 @@ in `cannon/cmd` initiates the witness proof generation. The internal
 struct that holds all the relevant information for the particular MIPS instruction, which is encoded as the `MIPS64.sol` calldata.
 
 Additionally, if a Pre-image is required for the MIPS
-instruction, `witness.go` will communicate the relevant Pre-image key and offset to op-challenger so that it can be posted onchain
+instruction, `witness.go` will communicate the relevant Pre-image key and offset to mc-challenger so that it can be posted onchain
 to `PreimageOracle.sol`.
 
 An important note about generating the witness proof: it is imperative that all relevant information about the instruction to be run
@@ -227,7 +227,7 @@ However, there are differences between the two:
 ### PreimageOracle interaction
 
 As mentioned previously, Cannon is responsible for setting up all state that may be required to run an instruction in `MIPS64.sol`.
-Cannon is also responsible for interacting with the Pre-image server, and directing op-challenger to provide Pre-images to
+Cannon is also responsible for interacting with the Pre-image server, and directing mc-challenger to provide Pre-images to
 the onchain `PreimageOracle.sol` if necessary for the instruction that will be run in `MIPS64.sol`.
 
 The Pre-image server is [kona-host](/releases/kona-host): `run.go` launches it as a sub-process (the host command is passed to

@@ -5,13 +5,13 @@ set -euo pipefail
 usage() {
   echo "Usage: $0 [--force|-f]"
   echo ""
-  echo "Publish contract artifacts to GCS using op-deployer's build process."
+  echo "Publish contract artifacts to GCS using mc-deployer's build process."
   echo ""
   echo "Options:"
   echo "  --force, -f    Force upload even if artifacts already exist"
   echo "  --help, -h     Show this help message"
   echo ""
-  echo "Uses 'just build-contracts' and 'just copy-contract-artifacts' from op-deployer."
+  echo "Uses 'just build-contracts' and 'just copy-contract-artifacts' from mc-deployer."
   exit 0
 }
 
@@ -30,10 +30,10 @@ BUCKET_URL="https://storage.googleapis.com/$DEPLOY_BUCKET"
 
 # Resolve paths
 ROOT_DIR=$(cd -- "$CONTRACTS_DIR/../.." &> /dev/null && pwd)
-OP_DEPLOYER_DIR="$ROOT_DIR/op-deployer"
+OP_DEPLOYER_DIR="$ROOT_DIR/mc-deployer"
 
 if [ ! -d "$OP_DEPLOYER_DIR" ]; then
-  echoerr "> ERROR: op-deployer not found at $OP_DEPLOYER_DIR"
+  echoerr "> ERROR: mc-deployer not found at $OP_DEPLOYER_DIR"
   exit 1
 fi
 

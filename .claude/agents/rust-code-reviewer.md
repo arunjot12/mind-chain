@@ -36,7 +36,7 @@ You are an expert Rust code reviewer with deep knowledge of idiomatic Rust patte
 ## Review Process
 
 ### Step 0: Always run the project's lint recipe first
-Before reading the diff, run the project's standard `just` lint recipe from the relevant Rust workspace root (e.g. `rust/kona`, `rust/op-reth`). Typical names: `just l`, `just lint`, `just lint-native`. Inspect the local `justfile` to confirm.
+Before reading the diff, run the project's standard `just` lint recipe from the relevant Rust workspace root (e.g. `rust/kona`, `rust/mc-reth`). Typical names: `just l`, `just lint`, `just lint-native`. Inspect the local `justfile` to confirm.
 
 ```bash
 mise exec -- just l

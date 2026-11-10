@@ -46,7 +46,7 @@ impl LocalNode {
 impl LocalNode {
     /// Build the local node ENR. This should contain the information we wish to
     /// broadcast to the other nodes in the network. See
-    /// [the op-node implementation](https://github.com/ethereum-optimism/optimism/blob/174e55f0a1e73b49b80a561fd3fedd4fea5770c6/op-node/p2p/discovery.go#L61-L97)
+    /// [the mc-node implementation](https://github.com/ethereum-optimism/optimism/blob/174e55f0a1e73b49b80a561fd3fedd4fea5770c6/op-node/p2p/discovery.go#L61-L97)
     /// for the go equivalent
     fn build_enr(self, chain_id: u64) -> Result<Enr, enr::Error> {
         let opstack = OpStackEnr::from_chain_id(chain_id);

@@ -53,8 +53,8 @@ log_error() {
 check_prerequisites() {
     log_info "Checking prerequisites..."
 
-    if ! command -v op-deployer &> /dev/null; then
-        log_error "op-deployer not found. Please ensure it's downloaded"
+    if ! command -v mc-deployer &> /dev/null; then
+        log_error "mc-deployer not found. Please ensure it's downloaded"
         log_info "Run: make download"
         exit 1
     fi
@@ -92,9 +92,9 @@ generate_addresses() {
     log_info "Addresses generated successfully, continuing to init..."
 }
 
-# Initialize op-deployer
+# Initialize mc-deployer
 init_deployer() {
-    log_info "Initializing op-deployer..."
+    log_info "Initializing mc-deployer..."
 
     cd "$DEPLOYER_DIR"
 
@@ -108,13 +108,13 @@ EOF
     rm -rf .deployer
 
         # Initialize intent
-    op-deployer init \
+    mc-deployer init \
         --l1-chain-id $L1_CHAIN_ID \
         --l2-chain-ids "$L2_CHAIN_ID_DECIMAL" \
         --workdir .deployer \
         --intent-type standard-overrides
 
-    log_success "op-deployer initialized"
+    log_success "mc-deployer initialized"
 }
 
 # Update intent configuration
@@ -132,7 +132,7 @@ update_intent() {
     CHALLENGER_ADDR=$(cat addresses/challenger_address.txt)
     OPERATOR_FEE_VAULT_ADDR=$(cat addresses/operator_fee_vault_recipient_address.txt)
 
-    # Keep the default contract locators and opcmAddress from op-deployer init
+    # Keep the default contract locators and opcmAddress from mc-deployer init
 
     # Update only the chain-specific fields in the existing intent.toml
     L2_CHAIN_ID_HEX=$(printf "0x%064x" "$L2_CHAIN_ID")
@@ -156,7 +156,7 @@ deploy_contracts() {
 
     cd "$DEPLOYER_DIR"
 
-    op-deployer apply \
+    mc-deployer apply \
         --workdir .deployer \
         --l1-rpc-url "$L1_RPC_URL" \
         --private-key "$PRIVATE_KEY"
@@ -170,8 +170,8 @@ generate_config() {
 
     cd "$DEPLOYER_DIR"
 
-    op-deployer inspect genesis --workdir .deployer "$L2_CHAIN_ID" > .deployer/genesis.json
-    op-deployer inspect rollup --workdir .deployer "$L2_CHAIN_ID" > .deployer/rollup.json
+    mc-deployer inspect genesis --workdir .deployer "$L2_CHAIN_ID" > .deployer/genesis.json
+    mc-deployer inspect rollup --workdir .deployer "$L2_CHAIN_ID" > .deployer/rollup.json
 
     log_success "Chain configuration generated"
 }
@@ -216,8 +216,8 @@ setup_batcher() {
     
     # Create .env file with OP_BATCHER prefixed variables
     cat > .env << EOF
-OP_BATCHER_L2_ETH_RPC=http://op-reth:8545
-OP_BATCHER_ROLLUP_RPC=http://op-node:8547
+OP_BATCHER_L2_ETH_RPC=http://mc-reth:8545
+OP_BATCHER_ROLLUP_RPC=http://mc-node:8547
 OP_BATCHER_PRIVATE_KEY=$PRIVATE_KEY
 OP_BATCHER_POLL_INTERVAL=1s
 OP_BATCHER_SUB_SAFETY_MARGIN=6
@@ -473,7 +473,7 @@ setup_dispute_monitor() {
     # Create environment file for dispute monitor
     cat > .env << EOF
 # Rollup RPC Configuration
-ROLLUP_RPC=http://op-node:8547
+ROLLUP_RPC=http://mc-node:8547
 
 # Contract Addresses
 OP_DISPUTE_MON_GAME_FACTORY_ADDRESS=$GAME_FACTORY_ADDRESS
@@ -497,11 +497,11 @@ EOF
     log_info "To verify it's working, run: curl -s http://localhost:7300/metrics | grep -E \"op_dispute_mon_(games|ignored)\" | head -10"
 }
 
-# Add op-deployer to PATH if it exists in the workspace
-if [ -f "$(dirname "$0")/../op-deployer" ]; then
-    OP_DEPLOYER_PATH="$(cd "$(dirname "$0")/.." && pwd)/op-deployer"
+# Add mc-deployer to PATH if it exists in the workspace
+if [ -f "$(dirname "$0")/../mc-deployer" ]; then
+    OP_DEPLOYER_PATH="$(cd "$(dirname "$0")/.." && pwd)/mc-deployer"
     export PATH="$(dirname "$OP_DEPLOYER_PATH"):$PATH"
-    log_info "Added op-deployer to PATH: $OP_DEPLOYER_PATH"
+    log_info "Added mc-deployer to PATH: $OP_DEPLOYER_PATH"
 fi
 
 # Main execution

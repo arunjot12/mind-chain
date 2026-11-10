@@ -24,7 +24,7 @@ For what op-supernode is and why it exists, see the [supernode explainer](/op-st
 
 <Info>
   Environment-variable names don't always derive mechanically from the CLI flag name.
-  Some env-var suffixes keep op-node's source-level spelling even when the CLI flag was renamed (for example, `--vn.<chainID>.l2` is set by `OP_SUPERNODE_VN_<chainID>_L2_ENGINE_RPC`, not `OP_SUPERNODE_VN_<chainID>_L2`).
+  Some env-var suffixes keep mc-node's source-level spelling even when the CLI flag was renamed (for example, `--vn.<chainID>.l2` is set by `OP_SUPERNODE_VN_<chainID>_L2_ENGINE_RPC`, not `OP_SUPERNODE_VN_<chainID>_L2`).
   The per-flag entries below show the correct env-var name alongside the CLI form.
   When in doubt, run `op-supernode --chains=<chainIDs> --help` for the authoritative name of any flag.
 </Info>
@@ -60,7 +60,7 @@ The default value is `./datadir`.
 
 The supernode shares one L1 client and one beacon client across every chain in the dependency set.
 These are the supernode's own in-process clients (caching layers in front of remote endpoints), not the remote L1 node and beacon node themselves — the supernode connects to existing endpoints rather than running its own.
-Configure these flags at the top level only — the per-chain namespace also includes `--vn.<chainID>.l1` and `--vn.<chainID>.l1.beacon` (because the supernode mechanically clones every op-node flag into the namespace), but the supernode discards them at startup.
+Configure these flags at the top level only — the per-chain namespace also includes `--vn.<chainID>.l1` and `--vn.<chainID>.l1.beacon` (because the supernode mechanically clones every mc-node flag into the namespace), but the supernode discards them at startup.
 
 ### l1
 
@@ -114,13 +114,13 @@ Per-chain `--vn.<chainID>.l1.http-poll-interval` settings are ignored because th
 ## Per-chain virtual-node configuration
 
 Every chain in `--chains` runs as a virtual node inside the supernode.
-The supernode reproduces the full op-node flag set under two prefixes so you can configure each chain.
+The supernode reproduces the full mc-node flag set under two prefixes so you can configure each chain.
 
 * **`--vn.<chainID>.<flag>`** sets `<flag>` for one specific chain.
 * **`--vn.all.<flag>`** sets `<flag>` for every chain in the dependency set.
 
 The environment-variable form follows the same prefix rule: `OP_SUPERNODE_VN_<CHAINID>_<SUFFIX>` for one chain and `OP_SUPERNODE_VN_ALL_<SUFFIX>` for every chain.
-The `<SUFFIX>` is the op-node flag's source-level environment-variable name (see the note at the top of this page for why it doesn't always match the CLI flag).
+The `<SUFFIX>` is the mc-node flag's source-level environment-variable name (see the note at the top of this page for why it doesn't always match the CLI flag).
 
 <Info>
   A few flags are owned by the supernode rather than by individual virtual nodes.
@@ -133,12 +133,12 @@ The `<SUFFIX>` is the op-node flag's source-level environment-variable name (see
 </Info>
 
 The flags most operators need to set per chain are listed below.
-For the full set of op-node flags available under the `--vn.*` namespace, see the [op-node configuration reference](/node-operators/reference/op-node-config) and the [consensus client configuration page](/node-operators/guides/configuration/consensus-clients).
+For the full set of mc-node flags available under the `--vn.*` namespace, see the [mc-node configuration reference](/node-operators/reference/mc-node-config) and the [consensus client configuration page](/node-operators/guides/configuration/consensus-clients).
 
 ### vn.&lt;chainID&gt;.network
 
-Names the chain's known network configuration so the supernode can load the matching rollup config from op-node's built-in registry.
-Use this for any chain registered with op-node (`op-mainnet`, `op-sepolia`, `unichain-sepolia`, etc.).
+Names the chain's known network configuration so the supernode can load the matching rollup config from mc-node's built-in registry.
+Use this for any chain registered with mc-node (`op-mainnet`, `op-sepolia`, `unichain-sepolia`, etc.).
 
 <Tabs>
   <Tab title="Syntax">`--vn.<chainID>.network=<value>`</Tab>
@@ -148,7 +148,7 @@ Use this for any chain registered with op-node (`op-mainnet`, `op-sepolia`, `uni
 
 ### vn.&lt;chainID&gt;.rollup.config
 
-Path to a rollup configuration JSON file for chains that are not in op-node's built-in network registry.
+Path to a rollup configuration JSON file for chains that are not in mc-node's built-in network registry.
 Use this instead of `--vn.<chainID>.network` for custom devnets or any chain you have a rollup config file for.
 
 <Tabs>
@@ -183,7 +183,7 @@ Use the per-chain `--vn.<chainID>.l2.jwt-secret` form only when a chain's execut
 ### vn.&lt;chainID&gt;.l2.enginekind
 
 Selects the engine-client variant so the supernode can apply engine-API behavior tailored to each.
-Set to `reth` when the chain's execution client is op-reth; leave at the default for op-geth.
+Set to `reth` when the chain's execution client is mc-reth; leave at the default for op-geth.
 Supported values are `geth` and `reth`.
 The default value is `geth`.
 
@@ -256,9 +256,9 @@ The default value is `0s` (no backfill).
 
 ## JSON-RPC server
 
-The supernode exposes a single JSON-RPC server that multiplexes activity methods and every chain's op-node RPC under one HTTP endpoint.
+The supernode exposes a single JSON-RPC server that multiplexes activity methods and every chain's mc-node RPC under one HTTP endpoint.
 Per-chain RPC namespaces are mounted under a `/<chainID>/` path prefix on the same server.
-For example, `POST /11155420/` reaches the OP Sepolia op-node RPC surface.
+For example, `POST /11155420/` reaches the OP Sepolia mc-node RPC surface.
 Activity RPC methods (`superroot_atTimestamp`, `supernode_syncStatus`, `heartbeat_check`) are exposed at the root.
 For example, `POST /` with method `superroot_atTimestamp` reaches the SuperRoot activity.
 
@@ -412,5 +412,5 @@ The default value is `6060`.
 
 * Follow the [supernode configuration guide](/node-operators/guides/configuration/supernode) for recommended settings and a starter configuration.
 * Read the [supernode explainer](/op-stack/interop/supernode) for what op-supernode is and why it exists.
-* Read the [op-node configuration reference](/node-operators/reference/op-node-config) for the full set of flags available under the `--vn.*` namespace.
+* Read the [mc-node configuration reference](/node-operators/reference/mc-node-config) for the full set of flags available under the `--vn.*` namespace.
 * See the [op-supernode source](https://github.com/ethereum-optimism/optimism/tree/develop/op-supernode) in the monorepo for implementation detail.

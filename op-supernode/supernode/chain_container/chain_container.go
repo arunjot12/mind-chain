@@ -11,10 +11,10 @@ import (
 	"time"
 
 	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
+	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
+	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	oplog "github.com/ethereum-optimism/optimism/op-service/log"
@@ -580,7 +580,7 @@ func (c *simpleChainContainer) LocalSafeBlockAtTimestamp(ctx context.Context, ts
 	return c.engine.L2BlockRefByNumber(ctx, num)
 }
 
-// SyncStatus returns the in-process op-node sync status for this chain.
+// SyncStatus returns the in-process mc-node sync status for this chain.
 func (c *simpleChainContainer) SyncStatus(ctx context.Context) (*eth.SyncStatus, error) {
 	vn := c.getVN()
 	if vn == nil {
@@ -820,7 +820,7 @@ retryLoop:
 			// context.DeadlineExceeded is treated as transient: the caller's ctx is
 			// the long-lived service ctx (no deadline), so a DeadlineExceeded here
 			// originates from a per-call RPC deadline inside the engine client — e.g.
-			// a slow synthetic FCU against op-reth. Keep retrying: if the EL is truly
+			// a slow synthetic FCU against mc-reth. Keep retrying: if the EL is truly
 			// down a subsequent attempt will surface a transport error, and if it is
 			// still chewing on the rewind, waiting is the right answer. The ctx.Done()
 			// branch below stops the loop on service shutdown.

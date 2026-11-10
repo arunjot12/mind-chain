@@ -17,8 +17,8 @@ import (
 
 	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/log"
@@ -228,7 +228,7 @@ func BatcherKeyRotation(gt *testing.T, deltaTimeOffset *hexutil.Uint64) {
 }
 
 // GPODefaultParams tests that the pre-Ecotone L1 data fee charged to an L2 transaction is
-// computed from the genesis gas config: op-node derives the fee parameters, the sequencer
+// computed from the genesis gas config: mc-node derives the fee parameters, the sequencer
 // applies them through the L1 attributes transaction, and they surface on the receipt.
 func GPODefaultParams(gt *testing.T, deltaTimeOffset *hexutil.Uint64) {
 	t := actionsHelpers.NewDefaultTesting(gt)
@@ -366,7 +366,7 @@ func TestGPOParamsChangeEcotone(gt *testing.T) {
 	sysCfg, err = derive.PayloadToSystemConfig(sd.RollupCfg, envelope.ExecutionPayload)
 	require.NoError(t, err)
 	require.Equal(t, eth.Bytes32(eth.EncodeScalar(newScalars)), sysCfg.Scalar, "scalar changed")
-	// setGasConfigEcotone emits a zero overhead, and op-node zeroes it after Ecotone regardless
+	// setGasConfigEcotone emits a zero overhead, and mc-node zeroes it after Ecotone regardless
 	require.Equal(t, eth.Bytes32{}, sysCfg.Overhead, "overhead zeroed")
 
 	requireEcotoneL1Fee(t, alice.LastTxReceipt(t), tx, newScalars)

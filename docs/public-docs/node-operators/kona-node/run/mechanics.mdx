@@ -21,7 +21,7 @@ A rollup node is responsible for deriving the canonical L2 chain from L1
 blocks and their receipts. It validates these blocks using the
 [Engine API][engine-api], passing them to the execution layer for processing.
 
-Paired with an execution engine like op-reth or op-geth, `kona-node` tracks
+Paired with an execution engine like mc-reth or op-geth, `kona-node` tracks
 the unsafe, safe, and finalized tips of the L2 OP Stack chain, ensuring the
 node is always in sync with the latest state.
 
@@ -58,7 +58,7 @@ The `kona-node` syncs the L2 chain in two main phases:
    update through the engine api. Since the engine state is lazily
    initialized (the safe and finalized heads are zero), the forkchoice
    update kicks off EL sync on the execution layer (EL) client (such
-   as op-reth or op-geth). EL sync instructs the execution client to
+   as mc-reth or op-geth). EL sync instructs the execution client to
    fetch and sync L2 blocks directly from peers. During this phase,
    the `kona-node` effectively waits for the EL client to reach the
    chain tip, when it returns that it is `synced`. No L2 blocks

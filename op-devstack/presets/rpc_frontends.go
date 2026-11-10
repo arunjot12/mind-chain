@@ -10,11 +10,11 @@ import (
 	gethrpc "github.com/ethereum/go-ethereum/rpc"
 
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	challengerConfig "github.com/ethereum-optimism/optimism/op-challenger/config"
+	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
 	conductorRpc "github.com/ethereum-optimism/optimism/op-conductor/rpc"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/apis"
 	opclient "github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/eth"

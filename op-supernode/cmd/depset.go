@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-supernode/config"
 )

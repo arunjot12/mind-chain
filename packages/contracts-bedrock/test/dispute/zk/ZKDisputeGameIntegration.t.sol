@@ -286,7 +286,7 @@ contract ZKDisputeGame_Integration_Test is DisputeGameFactory_TestInit {
         assertEq(challenger.balance, challengerBal + 2 * bond);
 
         // E: no challenger, so credit is assigned to address(0). Claim it to burn the bond.
-        // In practice, op-challenger is expected to trigger this claim since no one else
+        // In practice, mc-challenger is expected to trigger this claim since no one else
         // has an economic incentive to do so.
         uint256 burnBalanceBefore = address(0).balance;
         _claimCreditTwoPhase(s2_gameE, address(0));

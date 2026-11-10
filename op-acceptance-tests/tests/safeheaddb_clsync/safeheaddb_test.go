@@ -7,14 +7,14 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 
 	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 )
 
 func TestPreserveDatabaseOnCLResync(gt *testing.T) {
 	t := devtest.ParallelT(gt)
-	// Example error with op-reth:
+	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|09:40:50.281]
 	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/sysgo/l2_el_p2p_util.go:61

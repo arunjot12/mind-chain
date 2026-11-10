@@ -24,19 +24,19 @@ contract-by-contract tour of both layers, see the
 
 It exists because an OP Stack chain's security anchors on Ethereum: the
 bridge, the state proposals that dispute games check, and the withdrawal path
-that [op-challenger](/op-stack/components/op-challenger) defends are all
+that [mc-challenger](/op-stack/components/mc-challenger) defends are all
 enforced by these contracts.
 
 **Who runs it:** nobody operates op-contracts as a service; the contracts run
 onchain. Chain operators deploy a chain's L1 contracts with
-[op-deployer](/op-stack/components/op-deployer) and upgrade them through the
+[mc-deployer](/op-stack/components/mc-deployer) and upgrade them through the
 [OP Contracts Manager](/chain-operators/reference/opcm), which deploys and
 upgrades the contracts for a chain in a single transaction.
 
 ## Get started
 
-*   [Deploy L1 contracts with op-deployer](/chain-operators/tutorials/create-l2-rollup/op-deployer-setup):
-    install op-deployer, prepare your environment, and deploy the L1
+*   [Deploy L1 contracts with mc-deployer](/chain-operators/tutorials/create-l2-rollup/mc-deployer-setup):
+    install mc-deployer, prepare your environment, and deploy the L1
     contracts for a new OP Stack chain.
 
 ## How-tos
@@ -45,8 +45,8 @@ upgrades the contracts for a chain in a single transaction.
     upgrade a chain's L1 contracts with the superchain-ops task workflow,
     the path for chains that require security council signing or a more
     secure upgrade process.
-*   [Upgrade L1 contracts using op-deployer](/chain-operators/tutorials/l1-contract-upgrades/op-deployer-upgrade):
-    version availability and migration paths for op-deployer's deprecated
+*   [Upgrade L1 contracts using mc-deployer](/chain-operators/tutorials/l1-contract-upgrades/mc-deployer-upgrade):
+    version availability and migration paths for mc-deployer's deprecated
     `upgrade` command, which supports upgrades only up to
     `op-contracts/v5.0.0`.
 
@@ -57,7 +57,7 @@ configuration the contracts are deployed with.
 
 *   [Rollup deployment configuration](/chain-operators/reference/rollup-deployment-configuration):
     every deploy config field, generated from source and keyed to the
-    finalized op-deployer release named on the page.
+    finalized mc-deployer release named on the page.
 *   [What is a standard chain?](/op-stack/protocol/superchain-registry#what-is-a-standard-chain):
     the standard configuration values a chain must adhere to.
 

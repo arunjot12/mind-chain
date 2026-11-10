@@ -185,7 +185,7 @@ func validatePostExecRPC(ctx context.Context, rpcClient Caller, postExec *RPCTra
 	if !isZeroBig(tx.Value) {
 		return fmt.Errorf("post-exec transaction value is %s, want 0", formatBig(tx.Value))
 	}
-	// gasPrice is not checked: deployed op-reth still reports the base fee for PostExec.
+	// gasPrice is not checked: deployed mc-reth still reports the base fee for PostExec.
 	return nil
 }
 
@@ -212,12 +212,12 @@ func validateReceiptConformance(validation *ValidationResult, receipts map[commo
 	if postExecReceipt.OPGasRefund != nil {
 		return fmt.Errorf("post-exec receipt unexpectedly exposes opGasRefund=%d", *postExecReceipt.OPGasRefund)
 	}
-	// op-reth before v2.5.0-rc.1 derived both fields from the PostExec encoding (fixed in #22941).
+	// mc-reth before v2.5.0-rc.1 derived both fields from the PostExec encoding (fixed in #22941).
 	if !isExplicitZeroBig(postExecReceipt.L1Fee) {
-		return fmt.Errorf("post-exec receipt l1Fee is %s, want explicit zero (requires op-reth v2.5.0-rc.1 or later)", formatBig(postExecReceipt.L1Fee))
+		return fmt.Errorf("post-exec receipt l1Fee is %s, want explicit zero (requires mc-reth v2.5.0-rc.1 or later)", formatBig(postExecReceipt.L1Fee))
 	}
 	if !isExplicitZeroBig(postExecReceipt.L1GasUsed) {
-		return fmt.Errorf("post-exec receipt l1GasUsed is %s, want explicit zero (requires op-reth v2.5.0-rc.1 or later)", formatBig(postExecReceipt.L1GasUsed))
+		return fmt.Errorf("post-exec receipt l1GasUsed is %s, want explicit zero (requires mc-reth v2.5.0-rc.1 or later)", formatBig(postExecReceipt.L1GasUsed))
 	}
 	if postExecReceipt.L1FeeScalar != nil {
 		return fmt.Errorf("post-exec receipt unexpectedly exposes removed l1FeeScalar=%s", formatBig(postExecReceipt.L1FeeScalar))

@@ -1,6 +1,6 @@
 ---
 name: safedb-reviewer
-description: "Reviews changes to a safe head database (`safedb`) in either implementation — op-node's `op-node/node/safedb` or kona's `rust/kona/crates/node/safedb` — covering the write path, the truncation on reset or EL-sync completion, the queries, and the consumers of their answers. Catches the failure the compiler and the unit tests both miss: a deleted or misrecorded entry that makes the backward walk answer with a later L1 block and no error. Use when a diff touches either crate or package, a safe-head record or truncate call site, `SafeDerivedEvent`, `EngineResetConfirmedEvent`, the EL-sync completion policy, or `optimism_safeHeadAtL1Block` / `superroot_atTimestamp`."
+description: "Reviews changes to a safe head database (`safedb`) in either implementation — mc-node's `mc-node/node/safedb` or kona's `rust/kona/crates/node/safedb` — covering the write path, the truncation on reset or EL-sync completion, the queries, and the consumers of their answers. Catches the failure the compiler and the unit tests both miss: a deleted or misrecorded entry that makes the backward walk answer with a later L1 block and no error. Use when a diff touches either crate or package, a safe-head record or truncate call site, `SafeDerivedEvent`, `EngineResetConfirmedEvent`, the EL-sync completion policy, or `optimism_safeHeadAtL1Block` / `superroot_atTimestamp`."
 model: opus
 ---
 
@@ -21,7 +21,7 @@ Three facts drive the whole review:
 - Local-safe and cross-safe are the **same block** in the modes most unit tests run in, so
   a passing test proves nothing about which label a ref carries.
 - The compatibility surface is the RPC answers and the in-process interface, **not** the
-  stored byte layout. Layout differences between op-node and kona are not findings.
+  stored byte layout. Layout differences between mc-node and kona are not findings.
 
 ## Output format
 

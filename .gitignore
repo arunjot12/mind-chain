@@ -23,7 +23,7 @@ cache
 !op-chain-ops/foundry/testdata/srcmaps/cache
 !op-chain-ops/foundry/testdata/srcmaps/artifacts
 
-!op-deployer/pkg/deployer/artifacts
+!mc-deployer/pkg/deployer/artifacts
 
 packages/contracts-bedrock/deployments/anvil
 
@@ -63,7 +63,7 @@ crytic-export
 # Locally-built superchain bundles, generated from the superchain-registry submodule.
 # The binary archives are gitignored; only their .sha256 (and generated text) are committed.
 op-core/superchain/superchain-configs.zip
-rust/op-reth/crates/chainspec/res/superchain-configs.tar
+rust/mc-reth/crates/chainspec/res/superchain-configs.tar
 
 # Mind Chain: built/downloaded tool binaries
 /bin

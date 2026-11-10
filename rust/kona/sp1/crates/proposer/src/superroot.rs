@@ -43,7 +43,7 @@ pub struct SuperRootAt {
 }
 
 impl SuperrootClient {
-    /// Builds a client for the supernode (or single-chain op-node) RPC.
+    /// Builds a client for the supernode (or single-chain mc-node) RPC.
     pub fn new(urls: &[Url]) -> Result<Self> {
         let clients = urls
             .iter()

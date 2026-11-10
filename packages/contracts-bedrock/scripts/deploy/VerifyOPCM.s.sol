@@ -1411,7 +1411,7 @@ contract VerifyOPCM is Script {
     /// @notice Verifies the raw SP1 verifier referenced by the release adapter: its address
     ///         (`EXPECTED_SP1_VERIFIER`, network default) and its `VERIFIER_HASH()`
     ///         (`EXPECTED_SP1_VERIFIER_HASH`, required; the release value is
-    ///         op-deployer's standard.SP1VerifierHashFor). The hash is only read once the
+    ///         mc-deployer's standard.SP1VerifierHashFor). The hash is only read once the
     ///         address matches, so an unexpected address never reverts here.
     function _verifySP1Verifier(ISP1PlonkAdapter _adapter) internal view returns (bool) {
         // nosemgrep: sol-style-vm-env-only-in-config-sol

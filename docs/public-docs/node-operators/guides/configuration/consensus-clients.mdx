@@ -1,6 +1,6 @@
 ---
 title: Consensus client configuration
-description: Learn how to configure consensus clients (op-node, kona-node) for your OP Stack node.
+description: Learn how to configure consensus clients (mc-node, kona-node) for your OP Stack node.
 diataxis: how-to
 ---
 
@@ -17,17 +17,17 @@ Don't run multiple execution client instances behind one consensus client, or vi
 Choose the consensus client that best fits your needs:
 
 <Tabs>
-  <Tab title="op-node">
-    ## op-node configuration
+  <Tab title="mc-node">
+    ## mc-node configuration
 
-    [op-node](https://github.com/ethereum-optimism/optimism/tree/develop/op-node) is the reference implementation of the OP Stack consensus client, written in Go.
+    [mc-node](https://github.com/ethereum-optimism/optimism/tree/develop/op-node) is the reference implementation of the OP Stack consensus client, written in Go.
 
     ### Minimal configuration
 
-    The minimum required flags for running op-node:
+    The minimum required flags for running mc-node:
 
     ```bash
-    op-node \
+    mc-node \
       --l1=https://ethereum-rpc-endpoint.example.com \
       --l1.beacon=https://ethereum-beacon-endpoint.example.com \
       --l2=http://localhost:8551 \
@@ -55,16 +55,16 @@ Choose the consensus client that best fits your needs:
 
     ### l2.enginekind
 
-    Controls op-node's engine-API behavior to match the connected execution client. Supported values:
+    Controls mc-node's engine-API behavior to match the connected execution client. Supported values:
 
-    * `reth` — default; for op-reth.
+    * `reth` — default; for mc-reth.
     * `geth` — for op-geth (*deprecated*, see the [op-geth deprecation notice](/notices/archive/op-geth-deprecation)).
 
-    The default is `reth`, so op-reth operators do not need to set this flag. Set `--l2.enginekind=geth` only if you are running op-geth.
+    The default is `reth`, so mc-reth operators do not need to set this flag. Set `--l2.enginekind=geth` only if you are running op-geth.
 
     ### Complete reference
 
-    For all available configuration options, see the [op-node configuration reference](/node-operators/reference/op-node-config).
+    For all available configuration options, see the [mc-node configuration reference](/node-operators/reference/mc-node-config).
   </Tab>
 
   <Tab title="kona-node">
@@ -78,7 +78,7 @@ Choose the consensus client that best fits your needs:
 
     ### Basic configuration
 
-    kona-node follows a similar configuration pattern to op-node:
+    kona-node follows a similar configuration pattern to mc-node:
 
     ```bash
     kona-node \

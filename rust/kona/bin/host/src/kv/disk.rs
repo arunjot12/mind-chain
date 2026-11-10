@@ -20,7 +20,7 @@ impl DiskKeyValueStore {
         let db = DB::open(&Self::get_db_options(), data_directory.as_path())
             .unwrap_or_else(|e| panic!("Failed to open database at {data_directory:?}: {e}"));
 
-        // Write the kvformat marker file for op-challenger compatibility.
+        // Write the kvformat marker file for mc-challenger compatibility.
         let format_path = data_directory.join(FORMAT_FILENAME);
         if !format_path.exists() {
             std::fs::write(&format_path, DataFormat::Rocksdb.as_str())

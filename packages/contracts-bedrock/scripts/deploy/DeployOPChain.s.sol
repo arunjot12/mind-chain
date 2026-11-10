@@ -39,7 +39,7 @@ contract DeployOPChain is Script {
     bool public isSuperRoot;
 
     /// @notice The output of the DeployOPChain script. This is the same as the DeployOPChainOutput type in the
-    /// op-deployer package.
+    /// mc-deployer package.
     struct Output {
         IProxyAdmin opChainProxyAdmin;
         IAddressManager addressManager;

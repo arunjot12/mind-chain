@@ -8,8 +8,8 @@ import (
 
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen/config"
-	challengerconfig "github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
+	challengerconfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
 	coredepset "github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/shared/rustbin"
@@ -51,11 +51,11 @@ type SingleChainNodeRuntime struct {
 
 type SyncTesterRuntime struct {
 	Service *SyncTesterService
-	// Node is set on the op-node-verifier path; nil on the supernode path.
+	// Node is set on the mc-node-verifier path; nil on the supernode path.
 	Node *SingleChainNodeRuntime
 	// EL is the sync-tester-backed L2ELNode.
 	EL L2ELNode
-	// CL drives the sync-tester EL (op-node or SuperNodeProxy).
+	// CL drives the sync-tester EL (mc-node or SuperNodeProxy).
 	CL L2CLNode
 }
 

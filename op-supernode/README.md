@@ -12,7 +12,7 @@ Chain Containers represent the concerns of one specific chain being managed by `
 
 Chain Containers abstract away the local Consensus Layer / Derivation Pipeline, as well as the Execution Engine.
 Chain containers manage the runtime of the CL as a local process called a "Virtual Node", which presently is implemented
-only by `op-node` itself.
+only by `mc-node` itself.
 Chain Containers provide a stable interface to get data from the chain or affect the chain without needing to operate on the internals of
 that chain.
 Chain Containers also allow for multiple chains to be derived inside of the same `op-supernode`. Because they are isolated,
@@ -36,8 +36,8 @@ See [this document](./safety-labels.md).
 
 #### Flag Configuration Tips
 
-Because `op-node` is the only implementation of Virtual Nodes presently, it gets special treatment when the application starts up.
-Specifically, all flags found in `op-node` are upstreamed with namespacing into the `op-supernode` flags.
+Because `mc-node` is the only implementation of Virtual Nodes presently, it gets special treatment when the application starts up.
+Specifically, all flags found in `mc-node` are upstreamed with namespacing into the `op-supernode` flags.
 This allows for *roughly* 1:1 setup and behavior between Node and Supernode, with the caveats listed below.
 
 - To set a value for one chain, use `--vn.<chainID>.<flag>`
@@ -67,7 +67,7 @@ Example launch of Supernode:
 ```
 
 Note: consult the `help` printout of the application as currently there is a mistake in the naming of environment variables for flags.
-Environment variables may be used, but at present their names include inappropriate `op-node` markers.
+Environment variables may be used, but at present their names include inappropriate `mc-node` markers.
 
 ### Activities
 

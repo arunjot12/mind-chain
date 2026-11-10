@@ -39,7 +39,7 @@ func ForkOffsetKey(fork forks.Name) (string, bool) {
 // every prior fork at genesis, and explicitly deactivate every later fork with
 // an explicit nil offset rather than an omitted key.
 //
-// Explicitly disabling subsequent forks is required because of how op-deployer
+// Explicitly disabling subsequent forks is required because of how mc-deployer
 // merges user-provided configs with its default configs.
 func ForkOverridesAtGenesis(fork forks.Name) (map[string]*hexutil.Uint64, error) {
 	if !forks.IsValid(fork) {

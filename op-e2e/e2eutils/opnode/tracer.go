@@ -5,7 +5,7 @@ import (
 
 	"github.com/libp2p/go-libp2p/core/peer"
 
-	"github.com/ethereum-optimism/optimism/op-node/node/tracer"
+	"github.com/ethereum-optimism/optimism/mc-node/node/tracer"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 

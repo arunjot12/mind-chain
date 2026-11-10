@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive/params"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive/params"
 	"github.com/ethereum/go-ethereum/crypto"
 )
 
@@ -32,7 +32,7 @@ func CommitmentTypeFromString(s string) (CommitmentType, error) {
 
 // CommitmentType describes the binary format of the commitment.
 // KeccakCommitmentType is the default commitment type for the centralized DA storage.
-// GenericCommitmentType indicates an opaque bytestring that the op-node never opens.
+// GenericCommitmentType indicates an opaque bytestring that the mc-node never opens.
 const (
 	Keccak256CommitmentType CommitmentType = 0
 	GenericCommitmentType   CommitmentType = 1
@@ -159,7 +159,7 @@ func (c GenericCommitment) TxData() []byte {
 	return append([]byte{params.DerivationVersion1}, c.Encode()...)
 }
 
-// Verify always returns true for GenericCommitment because the DA Server must validate the data before returning it to the op-node.
+// Verify always returns true for GenericCommitment because the DA Server must validate the data before returning it to the mc-node.
 func (c GenericCommitment) Verify(input []byte) error {
 	return nil
 }

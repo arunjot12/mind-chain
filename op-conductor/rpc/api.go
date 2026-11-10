@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 
 	"github.com/ethereum-optimism/optimism/op-conductor/consensus"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 
@@ -57,7 +57,7 @@ type API interface {
 	// ClusterMembership returns the current cluster membership configuration.
 	ClusterMembership(ctx context.Context) (*consensus.ClusterMembership, error)
 
-	// APIs called by op-node
+	// APIs called by mc-node
 	// Active returns true if op-conductor is active (not paused or stopped).
 	Active(ctx context.Context) (bool, error)
 	// CommitUnsafePayload commits an unsafe payload (latest head) to the consensus layer.
@@ -65,19 +65,19 @@ type API interface {
 }
 
 // ExecutionProxyAPI defines the methods proxied to the execution 'eth_' rpc backend
-// This should include all methods that are called by op-batcher or op-proposer
+// This should include all methods that are called by mc-batcher or mc-proposer
 type ExecutionProxyAPI interface {
 	GetBlockByNumber(ctx context.Context, number rpc.BlockNumber, fullTx bool) (map[string]interface{}, error)
 }
 
 // ExecutionMinerProxyAPI defines the methods proxied to the execution 'miner_' rpc backend
-// This should include all methods that are called by op-batcher or op-proposer
+// This should include all methods that are called by mc-batcher or mc-proposer
 type ExecutionMinerProxyAPI interface {
 	SetMaxDASize(ctx context.Context, maxTxSize hexutil.Big, maxBlockSize hexutil.Big) (bool, error)
 }
 
 // NodeProxyAPI defines the methods proxied to the node 'optimism_' rpc backend
-// This should include all methods that are called by op-batcher or op-proposer
+// This should include all methods that are called by mc-batcher or mc-proposer
 type NodeProxyAPI interface {
 	OutputAtBlock(ctx context.Context, blockNumString string) (*eth.OutputResponse, error)
 	SyncStatus(ctx context.Context) (*eth.SyncStatus, error)
@@ -85,7 +85,7 @@ type NodeProxyAPI interface {
 }
 
 // NodeAdminProxyAPI defines the methods proxied to the node 'admin_' rpc backend
-// This should include all methods that are called by op-batcher or op-proposer
+// This should include all methods that are called by mc-batcher or mc-proposer
 type NodeAdminProxyAPI interface {
 	SequencerActive(ctx context.Context) (bool, error)
 }

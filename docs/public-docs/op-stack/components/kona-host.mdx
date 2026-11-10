@@ -31,7 +31,7 @@ kona-client itself in a native process, useful for witness generation and
 testing.
 
 **Who runs it:** dispute game participants, indirectly:
-[op-challenger](/op-stack/fault-proofs/challenger)'s `--cannon-kona-server`
+[mc-challenger](/op-stack/fault-proofs/challenger)'s `--cannon-kona-server`
 flag points at a kona-host binary, which cannon launches when a fault
 dispute reaches the execution-trace stage. Developers also run it directly
 in native mode to execute kona-client without an FPVM.
@@ -45,11 +45,11 @@ in native mode to execute kona-client without an FPVM.
 ## How-tos
 
 *   [Run a fault-proof challenger](/use-cases/run-a-fault-proof-challenger):
-    stand up an op-challenger deployment, including pointing
+    stand up an mc-challenger deployment, including pointing
     `--cannon-kona-server` at a kona-host build that matches the configured
     prestate.
-*   [Spin up challenger](/chain-operators/tutorials/create-l2-rollup/op-challenger-setup):
-    configure op-challenger for a new chain, including where to get the
+*   [Spin up challenger](/chain-operators/tutorials/create-l2-rollup/mc-challenger-setup):
+    configure mc-challenger for a new chain, including where to get the
     kona-host binary it needs.
 
 ## Configuration & flags reference

@@ -15,9 +15,9 @@ For **what** snapshots are available for OP Mainnet and their download links, se
 
 <OpGethEol />
 
-This guide assumes an `op-reth` node.
+This guide assumes an `mc-reth` node.
 
-You don't always need one. With [execution-layer sync](/node-operators/reference/consensus-layer-sync) — `--syncmode=execution-layer` and `--l2.enginekind=reth` on `op-node` — `op-reth` retrieves blocks over the P2P network instead of deriving each one, which makes the initial sync much faster and, on most OP Stack chains, needs no snapshot at all. [Nethermind](https://docs.nethermind.io/get-started/running-node/l2-networks#op-stack) downloads what it needs automatically.
+You don't always need one. With [execution-layer sync](/node-operators/reference/consensus-layer-sync) — `--syncmode=execution-layer` and `--l2.enginekind=reth` on `mc-node` — `mc-reth` retrieves blocks over the P2P network instead of deriving each one, which makes the initial sync much faster and, on most OP Stack chains, needs no snapshot at all. [Nethermind](https://docs.nethermind.io/get-started/running-node/l2-networks#op-stack) downloads what it needs automatically.
 
 Use a snapshot when:
 
@@ -25,7 +25,7 @@ Use a snapshot when:
 *   You simply want to skip the initial sync entirely: a mature chain's data directory can run to hundreds of gigabytes (OP Mainnet is roughly 700 GB for a full node), and even execution-layer sync takes days from scratch.
 
 <Note>
-  On **OP Mainnet**, syncing `op-reth` on a fresh data directory is another reason to use a snapshot: it satisfies the [pre-Bedrock state import requirement](/node-operators/op-reth/run/faq/sync-op-mainnet) in one step, even when execution-layer sync is enabled.
+  On **OP Mainnet**, syncing `mc-reth` on a fresh data directory is another reason to use a snapshot: it satisfies the [pre-Bedrock state import requirement](/node-operators/mc-reth/run/faq/sync-op-mainnet) in one step, even when execution-layer sync is enabled.
 </Note>
 
 ## Before you begin
@@ -68,7 +68,7 @@ Use a snapshot when:
     tar -I zstd -xvf <snapshot-file>.tar.zst -C <datadir> --strip-components=1
     ```
 
-    `--strip-components=1` removes the top-level wrapping directory inside the tarball. If the inspection shows files already at the archive root, omit it. Use the same path your client is configured with (the `--datadir` flag for `op-reth`).
+    `--strip-components=1` removes the top-level wrapping directory inside the tarball. If the inspection shows files already at the archive root, omit it. Use the same path your client is configured with (the `--datadir` flag for `mc-reth`).
   </Step>
 
   <Step title="Start the node and confirm it picked up the snapshot">
@@ -86,6 +86,6 @@ Use a snapshot when:
 
 ## Next steps
 
-*   Running with Docker? The [node-from-docker tutorial](/node-operators/tutorials/node-from-docker#bootstrap-from-a-snapshot) shows this flow with a bind-mounted `op-reth` data directory.
+*   Running with Docker? The [node-from-docker tutorial](/node-operators/tutorials/node-from-docker#bootstrap-from-a-snapshot) shows this flow with a bind-mounted `mc-reth` data directory.
 *   See the [Snapshots reference page](/op-mainnet/network-information/snapshots) for all OP Mainnet download links, including the legacy (pre-Bedrock) data directory for archive nodes.
 *   If you run into problems, check the [node troubleshooting guide](/node-operators/guides/troubleshooting) or reach out to [developer support](https://github.com/ethereum-optimism/developers/discussions).

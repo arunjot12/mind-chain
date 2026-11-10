@@ -10,7 +10,7 @@
         <mxCell id="NEOWG00TkRC5VoY5OhAR-2" value="op-geth" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="230" y="400" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="NEOWG00TkRC5VoY5OhAR-3" value="op-node" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="NEOWG00TkRC5VoY5OhAR-3" value="mc-node" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="230" y="260" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="NEOWG00TkRC5VoY5OhAR-4" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="NEOWG00TkRC5VoY5OhAR-2" target="NEOWG00TkRC5VoY5OhAR-3">
@@ -24,10 +24,10 @@
             <mxPoint x="-1" y="-3" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="NEOWG00TkRC5VoY5OhAR-7" value="op-batcher" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="NEOWG00TkRC5VoY5OhAR-7" value="mc-batcher" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="320" y="260" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="NEOWG00TkRC5VoY5OhAR-10" value="op-proposer" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+        <mxCell id="NEOWG00TkRC5VoY5OhAR-10" value="mc-proposer" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
           <mxGeometry x="410" y="260" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="NEOWG00TkRC5VoY5OhAR-12" value="Sequencer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">

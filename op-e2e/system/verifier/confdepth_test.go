@@ -9,7 +9,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-service/log"
 
 	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
 	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/stretchr/testify/require"
 )

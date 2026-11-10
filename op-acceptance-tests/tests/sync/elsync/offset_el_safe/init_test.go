@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 )
 
 const testOffset = 10 * time.Second

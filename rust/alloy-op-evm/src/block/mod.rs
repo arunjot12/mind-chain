@@ -583,7 +583,7 @@ where
 /// the node that executes it.
 ///
 /// A derived block that fails with such an error is replaced with its deposits-only block. The
-/// fault proof program and op-reth's payload builder both decide with this function, so that they
+/// fault proof program and mc-reth's payload builder both decide with this function, so that they
 /// replace the same blocks. A node-local failure classified as invalid would derive a wrong
 /// deposits-only block, so every other error is not.
 pub fn is_invalid_payload_error(err: &BlockExecutionError) -> bool {

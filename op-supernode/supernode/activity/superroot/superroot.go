@@ -58,7 +58,7 @@ func (s *Superroot) atTimestamp(ctx context.Context, timestamp uint64) (eth.Supe
 	result, verifierL1, vrErr := s.verified.VerifiedResultAtTimestamp(timestamp)
 
 	// Any chain-level error building the optimistic branch must fail the
-	// call: op-challenger reads OptimisticAtTimestamp at step>0 and a silent
+	// call: mc-challenger reads OptimisticAtTimestamp at step>0 and a silent
 	// partial map would produce permanent InvalidTransition commitments on
 	// chain. The pre-interop regime also relies on this map for Data.
 	optimisticBranch, err := s.buildOptimisticBranch(ctx, timestamp)

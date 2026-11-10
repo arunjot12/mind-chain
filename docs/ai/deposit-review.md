@@ -88,12 +88,12 @@ It does not vendor them. `op-alloy-consensus` holds the wire format and the sour
 | --- | --- | --- | --- | --- |
 | `0x7E` wire format, encode, decode, hash | [Deposited transaction type](https://specs.optimism.io/protocol/deposits.html#the-deposited-transaction-type) | `op-core/types`: `DepositTx`, `MarshalBinary`, `UnmarshalDepositTx`, `Hash` | `op-alloy-consensus`: `TxDeposit`, `OpTxType`; `op-revm`: `DepositTransactionParts`, `DEPOSIT_TRANSACTION_TYPE` | `OptimismPortal2`: `TransactionDeposited` |
 | Typed-envelope dispatch, including every fallback | [Deposited transaction type](https://specs.optimism.io/protocol/deposits.html#the-deposited-transaction-type) | `op-core/types`: `UnmarshalDepositTx`, the JSON transaction decoder | `op-alloy-consensus`: `OpTxEnvelope`, `OpPooledTransaction`, `fallback_decode`; `reth-optimism-primitives`: the `Decodable2718` table for `OpTransactionSigned` | n/a |
-| Source hash domains | [Source hash computation](https://specs.optimism.io/protocol/deposits.html#source-hash-computation) | `op-node/rollup/derive`: `UserDepositSource`, `L1InfoDepositSource`, `UpgradeDepositSource` | `op-alloy-consensus`: `DepositSourceDomain`, `UserDepositSource`, `L1InfoDepositSource`, `UpgradeDepositSource`. Kona holds no second implementation. | n/a |
-| Deposit log decode and the derived fields | [User-deposited transactions](https://specs.optimism.io/protocol/deposits.html#user-deposited-transactions) | `op-node/rollup/derive`: `UnmarshalDepositLogEvent`, `unmarshalDepositVersion0`, `MarshalDepositLogEvent` | `kona-protocol`: `decode_deposit`, `DepositError` | `OptimismPortal2`: `depositTransaction`, the `opaqueData` packing |
-| Per-block deposit list | [Kinds of deposited transactions](https://specs.optimism.io/protocol/deposits.html#kinds-of-deposited-transactions) | `op-node/rollup/derive`: `UserDeposits`, `DeriveDeposits` | `kona-derive`: `StatefulAttributesBuilder`, `derive_deposits` | n/a |
-| Transaction order in the block | [Kinds of deposited transactions](https://specs.optimism.io/protocol/deposits.html#kinds-of-deposited-transactions) | `op-node/rollup/derive`: `PreparePayloadAttributes` | `kona-derive`: `prepare_payload_attributes` | n/a |
-| L1 attributes deposit and calldata | [L1 attributes deposited transaction](https://specs.optimism.io/protocol/deposits.html#l1-attributes-deposited-transaction), [Ecotone L1 attributes](https://specs.optimism.io/protocol/ecotone/l1-attributes.html) | `op-node/rollup/derive`: `L1InfoDeposit`, `L1InfoDepositBytes`, `L1InfoDepositerAddress`, the per-fork marshal functions | `kona-protocol`: `L1BlockInfoTx`, `try_new_with_deposit_tx`, `encode_calldata`, `decode_calldata`, `L1_INFO_DEPOSITOR_ADDRESS` | `L1Block`: the `setL1BlockValues` functions, `DEPOSITOR_ACCOUNT` |
-| Network upgrade deposits | The upgrade-transaction section of each fork specification, [L2 upgrades](https://specs.optimism.io/protocol/l2-upgrades-1-execution.html) | `op-node/rollup/derive`: `UpgradeTransactions`, `UpgradeGas`, `nutBundleForFork`, the Lagoon activation transactions | `kona-hardforks`: the per-fork upgrade types; `op-alloy-consensus`: the NUT bundle conversion | `NetworkUpgradeTxns` |
+| Source hash domains | [Source hash computation](https://specs.optimism.io/protocol/deposits.html#source-hash-computation) | `mc-node/rollup/derive`: `UserDepositSource`, `L1InfoDepositSource`, `UpgradeDepositSource` | `op-alloy-consensus`: `DepositSourceDomain`, `UserDepositSource`, `L1InfoDepositSource`, `UpgradeDepositSource`. Kona holds no second implementation. | n/a |
+| Deposit log decode and the derived fields | [User-deposited transactions](https://specs.optimism.io/protocol/deposits.html#user-deposited-transactions) | `mc-node/rollup/derive`: `UnmarshalDepositLogEvent`, `unmarshalDepositVersion0`, `MarshalDepositLogEvent` | `kona-protocol`: `decode_deposit`, `DepositError` | `OptimismPortal2`: `depositTransaction`, the `opaqueData` packing |
+| Per-block deposit list | [Kinds of deposited transactions](https://specs.optimism.io/protocol/deposits.html#kinds-of-deposited-transactions) | `mc-node/rollup/derive`: `UserDeposits`, `DeriveDeposits` | `kona-derive`: `StatefulAttributesBuilder`, `derive_deposits` | n/a |
+| Transaction order in the block | [Kinds of deposited transactions](https://specs.optimism.io/protocol/deposits.html#kinds-of-deposited-transactions) | `mc-node/rollup/derive`: `PreparePayloadAttributes` | `kona-derive`: `prepare_payload_attributes` | n/a |
+| L1 attributes deposit and calldata | [L1 attributes deposited transaction](https://specs.optimism.io/protocol/deposits.html#l1-attributes-deposited-transaction), [Ecotone L1 attributes](https://specs.optimism.io/protocol/ecotone/l1-attributes.html) | `mc-node/rollup/derive`: `L1InfoDeposit`, `L1InfoDepositBytes`, `L1InfoDepositerAddress`, the per-fork marshal functions | `kona-protocol`: `L1BlockInfoTx`, `try_new_with_deposit_tx`, `encode_calldata`, `decode_calldata`, `L1_INFO_DEPOSITOR_ADDRESS` | `L1Block`: the `setL1BlockValues` functions, `DEPOSITOR_ACCOUNT` |
+| Network upgrade deposits | The upgrade-transaction section of each fork specification, [L2 upgrades](https://specs.optimism.io/protocol/l2-upgrades-1-execution.html) | `mc-node/rollup/derive`: `UpgradeTransactions`, `UpgradeGas`, `nutBundleForFork`, the Lagoon activation transactions | `kona-hardforks`: the per-fork upgrade types; `op-alloy-consensus`: the NUT bundle conversion | `NetworkUpgradeTxns` |
 | Upgrade bundle data | [L2 upgrades](https://specs.optimism.io/protocol/l2-upgrades-1-execution.html) | `op-core/nuts/bundles`: the per-fork NUT bundle JSON, shared by both clients | the same JSON files | n/a |
 | Validation and authorization | [Validation and authorization](https://specs.optimism.io/protocol/deposits.html#validation-and-authorization-of-deposited-transactions) | n/a | `op-revm`: `validate_env`, `validate_initial_tx_gas` | `OptimismPortal2`: `depositTransaction` |
 | Mint, caller deduction, nonce | [Execution](https://specs.optimism.io/protocol/deposits.html#execution), [Nonce handling](https://specs.optimism.io/protocol/deposits.html#nonce-handling) | n/a | `op-revm`: `validate_against_state_and_deduct_caller` | `OptimismPortal2`, `ETHLockbox` |
@@ -111,11 +111,11 @@ The fault-proof executor holds no separate deposit execution rules.
 It uses `alloy-op-evm` and `op-revm`, so an execution finding usually affects both clients.
 
 The receipts-root encoding is the exception.
-Three implementations reproduce it: op-node in Go, `reth-optimism-consensus`, and `kona-executor`.
+Three implementations reproduce it: mc-node in Go, `reth-optimism-consensus`, and `kona-executor`.
 Each one applies the Regolith-to-Canyon nonce strip with its own fork predicate.
 Compare all three when a change touches the deposit receipt.
 
-Fork gates live in `alloy-op-hardforks` and in `op-node/rollup`.
+Fork gates live in `alloy-op-hardforks` and in `mc-node/rollup`.
 `op-revm` maps each OP fork onto an L1 specification identifier.
 
 Methods in `op-revm` carry `UPSTREAM-MIRROR` comments.
@@ -261,8 +261,8 @@ In this area the sibling pairs are:
 - An upgrade deposit against a user deposit, in the same client.
 - The derivation-side field construction against the execution-side field use.
 - The consensus decode path against any network or pooled decode path.
-- The same rule list in op-node against the matching list in Kona.
-- The execution rule set in op-reth against the rule set in the fault-proof executor.
+- The same rule list in mc-node against the matching list in Kona.
+- The execution rule set in mc-reth against the rule set in the fault-proof executor.
 
 ## Adversarial boundaries
 

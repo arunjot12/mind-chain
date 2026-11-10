@@ -2,7 +2,7 @@ package sysgo
 
 import (
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 )
@@ -65,9 +65,9 @@ func NewMinimalInteropNoSupernodeRuntime(t devtest.T) *SingleChainRuntime {
 }
 
 // NewSingleChainInteropNoSupernodeSuperRootRuntimeWithConfig constructs a single-chain
-// interop world with no supernode, running an op-challenger that plays super-cannon-kona
-// games sourcing super roots directly from the op-node's superroot_atTimestamp endpoint.
-// The primary op-node enables its safe DB (required by superroot_atTimestamp).
+// interop world with no supernode, running an mc-challenger that plays super-cannon-kona
+// games sourcing super roots directly from the mc-node's superroot_atTimestamp endpoint.
+// The primary mc-node enables its safe DB (required by superroot_atTimestamp).
 func NewSingleChainInteropNoSupernodeSuperRootRuntimeWithConfig(t devtest.T, cfg PresetConfig) *SingleChainRuntime {
 	cfg = withSuperRootGamesAtGenesisDeployerFeatures(cfg)
 	cfg.AddedGameTypes = append(cfg.AddedGameTypes, gameTypes.SuperCannonKonaGameType)
@@ -81,8 +81,8 @@ func NewSingleChainInteropNoSupernodeSuperRootRuntimeWithConfig(t devtest.T, cfg
 }
 
 // NewSingleChainInteropNoSupernodeZKDisputeRuntimeWithConfig constructs a single-chain interop
-// world with no supernode, running an op-challenger that plays ZK dispute games sourcing super
-// roots directly from the op-node's superroot_atTimestamp endpoint. The primary op-node enables
+// world with no supernode, running an mc-challenger that plays ZK dispute games sourcing super
+// roots directly from the mc-node's superroot_atTimestamp endpoint. The primary mc-node enables
 // its safe DB (required by superroot_atTimestamp).
 func NewSingleChainInteropNoSupernodeZKDisputeRuntimeWithConfig(t devtest.T, cfg PresetConfig) *SingleChainRuntime {
 	cfg = withSuperRootGamesAtGenesisDeployerFeatures(cfg)

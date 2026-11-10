@@ -45,7 +45,7 @@ func TestSDMOptInIsInertOnStockOpReth(gt *testing.T) {
 	block, included, targetBlockNum := sdmtest.MustFindRepeatedSlotBlock(t, sys, 2, 3)
 	t.Require().GreaterOrEqual(len(included), 2, "stock-null target block must contain user txs")
 	postExecTx, _ := sdmpkg.FindPostExecTransaction(block)
-	t.Require().Nil(postExecTx, "active and opted-in stock op-reth must not produce a post-exec tx")
+	t.Require().Nil(postExecTx, "active and opted-in stock mc-reth must not produce a post-exec tx")
 	for _, receipt := range included {
 		refund, present := getOPGasRefund(t, sys.L2EL, receipt.TxHash)
 		t.Require().False(present, "stock-null receipt must omit opGasRefund")
@@ -56,16 +56,16 @@ func TestSDMOptInIsInertOnStockOpReth(gt *testing.T) {
 		sdmtest.SetSDMEnabled(t, sys.L2EL, enabled)
 		probeBlock, probeReceipt := submitFixtureProbe(t, sys)
 		probePostExec, _ := sdmpkg.FindPostExecTransaction(probeBlock)
-		t.Require().Nil(probePostExec, "stock op-reth opt-in=%v must remain inert", enabled)
+		t.Require().Nil(probePostExec, "stock mc-reth opt-in=%v must remain inert", enabled)
 		_, present := getOPGasRefund(t, sys.L2EL, probeReceipt.TxHash)
-		t.Require().False(present, "stock op-reth opt-in=%v receipt must omit opGasRefund", enabled)
+		t.Require().False(present, "stock mc-reth opt-in=%v receipt must omit opGasRefund", enabled)
 	}
 
 	dsl.CheckAll(t,
 		sys.L2EL.AdvancedFn(eth.Unsafe, 5),
 		sys.L2ELVerifier.AdvancedFn(eth.Unsafe, 5),
 	)
-	t.Logger().Info("stock op-reth SDM opt-in remained inert", "target_block", targetBlockNum)
+	t.Logger().Info("stock mc-reth SDM opt-in remained inert", "target_block", targetBlockNum)
 }
 
 func TestSDMFixturePayloadReceiptAndAccounting(gt *testing.T) {
@@ -352,7 +352,7 @@ func testSDMPostExecBlockDerivesAndChainProgresses(t devtest.T, batchType string
 // and keeps its safe head moving.
 //
 // This exercises the force-build path: with no gossiped unsafe block to consolidate against,
-// op-node hands the derived attributes (which embed the block's 0x7D tx) to the EL to rebuild via
+// mc-node hands the derived attributes (which embed the block's 0x7D tx) to the EL to rebuild via
 // FCU-with-attributes (`no_tx_pool = true`). The verifier never opts into SDM production, so its EL
 // must still rebuild the block in Verify mode purely from the embedded payload. The
 // consolidation-path test (TestSDMPostExecBlockDerivesAndChainProgresses) cannot catch a
@@ -403,7 +403,7 @@ func TestSDMPostExecBlockDerivesOnIsolatedVerifier(gt *testing.T) {
 		"isolated verifier must not receive any unsafe blocks over P2P; it should still be at genesis")
 
 	// Start batching: the verifier can now derive from L1. With no unsafe block to consolidate
-	// against, op-node force-builds each derived block — including the PostExec block — through the
+	// against, mc-node force-builds each derived block — including the PostExec block — through the
 	// EL payload builder.
 	sys.L2Batcher.Start()
 	dsl.CheckAll(t,

@@ -25,7 +25,7 @@ build-deps:
     cd {{REPO_ROOT}}
     just cannon-prestates
 
-    echo "Building Rust binaries (kona-node, kona-host, op-reth)..."
+    echo "Building Rust binaries (kona-node, kona-host, mc-reth)..."
     cd {{REPO_ROOT}}
     just build-rust-release
 
@@ -74,7 +74,7 @@ acceptance-test:
     fi
 
     # Each ParallelT acceptance test spins its own full devstack (L1 geth +
-    # op-node + op-reth/op-geth + batcher + proposer + challenger), so the real
+    # mc-node + mc-reth/op-geth + batcher + proposer + challenger), so the real
     # cost driver is concurrent ParallelT goroutines, bounded by -p * -parallel.
     # The previous unbounded default (-p = CPU_COUNT ~= 20, -parallel = ~10)
     # saturated CPU+RAM and triggered mass "context deadline exceeded" failures

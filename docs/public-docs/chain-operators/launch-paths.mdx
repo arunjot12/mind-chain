@@ -44,7 +44,7 @@ What that ownership includes, stated the way the docs themselves state it:
     [the launch guide's sequencer topology step](/use-cases/launch-a-chain-with-fault-proofs-and-ha-sequencing#step-3-design-the-sequencer-topology).
 *   **The defense.** The defense is a service you run and a set of decisions
     your team staffs. The
-    [`op-challenger`](/op-stack/fault-proofs/challenger) is a service that
+    [`mc-challenger`](/op-stack/fault-proofs/challenger) is a service that
     monitors every game, defends valid proposals, challenges invalid ones,
     resolves games, and claims bonds. Starting it is not the whole job. Every
     claim it posts carries a bond sent as transaction value; correct claims are
@@ -62,16 +62,16 @@ What that ownership includes, stated the way the docs themselves state it:
     that the bridges between L2 and L1 behave as expected, including the
     faultproof withdrawal monitor that watches `ProvenWithdrawals` events on
     the `OptimismPortal` and flags invariant violations. Your own components
-    need their metrics endpoints scraped alongside that: `op-node`,
-    `op-batcher`, `op-proposer`, and `op-challenger` each expose one. Peer
-    count belongs on that list too, because an `op-node` without peers cannot
+    need their metrics endpoints scraped alongside that: `mc-node`,
+    `mc-batcher`, `mc-proposer`, and `mc-challenger` each expose one. Peer
+    count belongs on that list too, because an `mc-node` without peers cannot
     sync unsafe blocks and falls behind the sequencer. See
     [Chain monitoring options](/chain-operators/tools/chain-monitoring) and
     [the important node metrics](/node-operators/guides/monitoring/metrics#important-metrics).
 *   **The RPC endpoints.** Every service in the stack depends on RPC, and not
-    only on L1. Each sequencer's op-node derives the chain from an L1 RPC and
+    only on L1. Each sequencer's mc-node derives the chain from an L1 RPC and
     an L1 beacon endpoint, and the batcher, proposer, and challenger read and
-    transact against L1; `op-challenger` additionally needs an L2 archive node
+    transact against L1; `mc-challenger` additionally needs an L2 archive node
     (`--l2-eth-rpc`) and a rollup node with SafeDB (`--rollup-rpc`), and
     `op-dispute-mon` takes a rollup RPC of its own. Redundant nodes behind a
     generic load balancer are the wrong shape for any of them. Two nodes can be
@@ -91,14 +91,14 @@ What that ownership includes, stated the way the docs themselves state it:
     contracts on L1 and L2, the System Config Owner can change the values in
     the `SystemConfig` contract, the Guardian can pause withdrawal logic and
     disable dispute game types from executing withdrawals, and the permissioned
-    Challenger role is a distinct address from the `op-challenger` service.
+    Challenger role is a distinct address from the `mc-challenger` service.
     Which addresses hold which role, and how each key is held, whether through
     an HSM or a cloud key management system, are decisions the chain operator
     makes. See
     [Key management](/chain-operators/guides/management/key-management) and
     [Privileged roles in OP Stack chains](/op-stack/protocol/privileged-roles#privileged-roles-in-op-stack-chains)
     for what every role can do and what a compromise of it means.
-*   **The path to permissionless proofs.** Chains deployed with `op-deployer`
+*   **The path to permissionless proofs.** Chains deployed with `mc-deployer`
     start with the permissioned dispute game, in which the proposer and
     challenger are specific addresses holding privileged roles. Moving to
     permissionless fault proofs is a switch your team schedules after launch.

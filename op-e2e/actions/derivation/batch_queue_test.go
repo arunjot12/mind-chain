@@ -7,13 +7,13 @@ import (
 	"github.com/ethereum-optimism/optimism/op-service/log"
 
 	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
 	upgradesHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/upgrades/helpers"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum-optimism/optimism/op-service/testlog"
@@ -92,7 +92,7 @@ func TestDeriveChainFromNearL1Genesis(gt *testing.T) {
 	require.EqualValues(gt, l2BlockNum, bigs.Uint64Strict(seqEngine.L2Chain().CurrentFinalBlock().Number))
 
 	// Create a new verifier using the existing engine so it already has the safe and finalized heads set.
-	// This is the same situation as if op-node restarted at this point.
+	// This is the same situation as if mc-node restarted at this point.
 	l2Cl, err := sources.NewEngineClient(seqEngine.RPCClient(), logger, nil, sources.EngineClientDefaultConfig(sd.RollupCfg))
 	require.NoError(gt, err)
 	verifier := helpers.NewL2Verifier(t, logger, miner.L1Client(t, sd.RollupCfg), miner.BlobStore(), altda.Disabled,

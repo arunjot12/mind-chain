@@ -266,7 +266,7 @@ impl RollupConfig {
 
     /// Returns true if SDM post-exec transactions are active at the given timestamp.
     ///
-    /// Defers to the hardfork where SDM is activated, matching op-node's `IsSDM`.
+    /// Defers to the hardfork where SDM is activated, matching mc-node's `IsSDM`.
     #[must_use]
     pub fn is_sdm_active(&self, timestamp: u64) -> bool {
         self.is_lagoon_active(timestamp)
@@ -302,7 +302,7 @@ impl RollupConfig {
     }
 
     /// Returns true if `timestamp` is `fork`'s activation block — `fork` is active at `timestamp`
-    /// but was not active at the previous block. Mirrors op-node's `IsActivationBlockForFork`.
+    /// but was not active at the previous block. Mirrors mc-node's `IsActivationBlockForFork`.
     pub fn is_fork_activation_block(&self, fork: OpHardfork, timestamp: u64) -> bool {
         let activation = self.op_fork_activation(fork);
         activation.active_at_timestamp(timestamp) &&
@@ -318,7 +318,7 @@ impl RollupConfig {
     /// Returns true if the interop feature is active at the given timestamp.
     ///
     /// Defers to the hardfork where interop is activated, but kept as a separate feature gate —
-    /// mirroring op-node's `IsInterop` — so interop can diverge from the fork if its activation is
+    /// mirroring mc-node's `IsInterop` — so interop can diverge from the fork if its activation is
     /// ever decoupled. Interop-feature code should gate on this, not on the raw fork accessor.
     pub fn is_interop_active(&self, timestamp: u64) -> bool {
         self.is_lagoon_active(timestamp)

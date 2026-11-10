@@ -16,7 +16,7 @@ Follow these steps to rewind your op-geth node.
 <Steps>
   <Step title="Shut down the CL">
     Whatever CL clients are driving the op-geth instance need to be stopped to prevent them from interfering with the rewind later. 
-    This would typically be a locally running `op-node` or `kona-node` application, a Docker container or a pod in a Kubernetes cluster.
+    This would typically be a locally running `mc-node` or `kona-node` application, a Docker container or a pod in a Kubernetes cluster.
 
     <Note>
         Make sure you don't have something like ArgoCD syncing the app in question which would just scale the pod back up again.

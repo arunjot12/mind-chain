@@ -36,9 +36,9 @@ On a high level, op-conductor serves the following functions:
    2. store latest unsafe block within its state machine.
 2. serves rpc requests for
    1. admin rpc for manual recovery scenarios such as stop leadership vote, remove itself from cluster, etc
-   2. health rpc for op-node to determine if it should allow publish txs / unsafe blocks
-3. monitor sequencer (op-node) health
-4. control loop => control sequencer (op-node) status (start / stop) based on different scenarios
+   2. health rpc for mc-node to determine if it should allow publish txs / unsafe blocks
+3. monitor sequencer (mc-node) health
+4. control loop => control sequencer (mc-node) status (start / stop) based on different scenarios
 
 ![op-conductor architecture](./assets/op-conductor.svg)
 

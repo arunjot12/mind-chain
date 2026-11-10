@@ -17,7 +17,7 @@ diataxis: how-to
 | `cannonPrestate`        | Bytes32 | Set               | Set                    | Must be a valid `cannon64` prestate hash            |
 | `cannonKonaPrestate`    | Bytes32 | Set               | Set                    | Must be a valid `cannon64-kona` prestate hash       |
 
-Kona proofs use the `kona-client` fault proof program, which is a combination of `kona-node` and `op-reth`. It replaces `op-program` (a combination of `op-node` and `op-geth`), which has reached end-of-support and does not support the Karst hardfork. See [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation). Both programs:
+Kona proofs use the `kona-client` fault proof program, which is a combination of `kona-node` and `mc-reth`. It replaces `op-program` (a combination of `mc-node` and `op-geth`), which has reached end-of-support and does not support the Karst hardfork. See [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation). Both programs:
 
 - Use Cannon as the FPVM, and  
 - Are used by the same dispute game implementation (`FaultDisputeGame.sol`).
@@ -36,9 +36,9 @@ Until you switch, the respected game type remains `CANNON` (0), meaning only tho
 The high-level flow is:
 
 - Verify that cannon+kona support is correctly deployed on-chain.  
-- Confirm that your off-chain infra (especially `op-challenger`) is Kona-ready.  
+- Confirm that your off-chain infra (especially `mc-challenger`) is Kona-ready.  
 - Switch the respected game type to `CANNON_KONA` (8).  
-- Update `op-proposer` to post Kona games.  
+- Update `mc-proposer` to post Kona games.  
 - Monitor the system.
 
 ---
@@ -82,7 +82,7 @@ The high-level flow is:
        Both calls should return non-zero addresses.
   </Step>
 
-  <Step title="Ensure op-challenger is Kona-ready">
+  <Step title="Ensure mc-challenger is Kona-ready">
     Your challengers must be able to play both cannon and kona games before you change the respected game type.
 
     
@@ -98,7 +98,7 @@ The high-level flow is:
 
     2. **Prestate URLs**
 
-       Make sure `op-challenger` can fetch both cannon and cannon-kona prestates:
+       Make sure `mc-challenger` can fetch both cannon and cannon-kona prestates:
 
        - If they are at the same URL, use:
 
@@ -115,7 +115,7 @@ The high-level flow is:
 
     3. **Kona host binary**
 
-       For operators not using the standard OP Labs `op-challenger` Docker images, you must also provide:
+       For operators not using the standard OP Labs `mc-challenger` Docker images, you must also provide:
 
        ```bash
        --cannon-kona-server=/path/to/kona-host
@@ -169,12 +169,12 @@ The high-level flow is:
        The returned value should be `8`, indicating that `CANNON_KONA` is now the respected game type.
   </Step>
 
-  <Step title="Update op-proposer to use game type 8">
+  <Step title="Update mc-proposer to use game type 8">
     With `CANNON_KONA` set as the respected game type, your proposers must create Kona games.
 
     1. **Update the proposer game type**
 
-       Change your `op-proposer` configuration from game type 0 to 8:
+       Change your `mc-proposer` configuration from game type 0 to 8:
 
        ```bash
        # Before
@@ -206,7 +206,7 @@ The high-level flow is:
 
     2. **Observe metrics and logs**
 
-       - Monitor `op-proposer` and `op-challenger` logs for errors.  
+       - Monitor `mc-proposer` and `mc-challenger` logs for errors.  
        - Watch dispute game metrics (for example, game counts and step timings) for anomalies.
   </Step>
 </Steps>

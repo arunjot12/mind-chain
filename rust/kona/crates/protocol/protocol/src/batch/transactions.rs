@@ -117,7 +117,7 @@ const EIP2718_MAX_TX_TYPE: u8 = 0x7F;
 /// Reads one span-batch transaction element from `r`, returning the element bytes (with any
 /// EIP-2718 type prefix preserved) and its [`OpTxType`].
 ///
-/// Its responsibility is deliberately narrow, matching op-node's `ReadTxData`: split the element
+/// Its responsibility is deliberately narrow, matching mc-node's `ReadTxData`: split the element
 /// into its optional leading type byte and RLP payload, validating only the RLP *structure* — the
 /// payload must be a list within the span-batch element-size bound. It does **not yet** discard
 /// transactions with an invalid *type*: a representable-but-unsupported envelope — a leading `0x00`
@@ -154,7 +154,7 @@ fn read_tx_data(r: &mut &[u8]) -> Result<(Vec<u8>, OpTxType), SpanBatchError> {
 
     // A leading byte with no `OpTxType` at all is rejected here. Every representable type —
     // including `Legacy` (a leading `0x00`) and `Deposit`, neither a valid span-batch envelope — is
-    // kept and rejected once by the typed decoder downstream, matching op-node's deferred
+    // kept and rejected once by the typed decoder downstream, matching mc-node's deferred
     // rejection.
     let tx_type = match OpTxType::try_from(tx_type_id) {
         Err(_) => {
@@ -166,7 +166,7 @@ fn read_tx_data(r: &mut &[u8]) -> Result<(Vec<u8>, OpTxType), SpanBatchError> {
     // Preserve whether a type prefix was physically present instead of inferring it from the
     // logical transaction type. `OpTxType::Legacy` is represented as zero for transaction-type
     // metadata, but a leading `0x00` is still a typed-envelope prefix and must not be discarded.
-    // Keeping it lets the typed span-batch decoder reject the unsupported envelope, as op-node
+    // Keeping it lets the typed span-batch decoder reject the unsupported envelope, as mc-node
     // does, rather than silently reinterpreting its payload as a prefixless legacy transaction.
     let tx_data_capacity = payload_length_with_header + usize::from(has_type_prefix);
     let mut tx_data = Vec::with_capacity(tx_data_capacity);
@@ -808,7 +808,7 @@ mod tests {
 
     #[test]
     fn test_read_tx_data_preserves_leading_zero_type_byte() {
-        // The shared op-node<->kona conformance vector: the valid legacy element from
+        // The shared mc-node<->kona conformance vector: the valid legacy element from
         // `test_read_tx_data_accepts_prefixless_legacy` with a `0x00` EIP-2718 type byte prepended.
         // The reader must preserve the prefix so the typed decoder rejects it, instead of
         // reinterpreting the remaining bytes as a prefixless legacy transaction.

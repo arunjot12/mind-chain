@@ -3,7 +3,7 @@ package mon
 import (
 	"time"
 
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
+	faultTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/metrics"
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum-optimism/optimism/op-service/log"

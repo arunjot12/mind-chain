@@ -12,15 +12,15 @@ configuration that sets the L1 contract parameters and the L2 genesis state when
 an OP Stack chain is deployed.
 
 The schema tables below are generated directly from the `DeployConfig` Go
-struct tree in the monorepo (`op-chain-ops/genesis`) at a finalized op-deployer
+struct tree in the monorepo (`op-chain-ops/genesis`) at a finalized mc-deployer
 release, so the field list, JSON keys, types, and descriptions cannot silently
 fall behind the source. Recommended values and standard-configuration
 requirements are policy rather than code, and are maintained by hand in the
 [guidance section](#guidance-and-standard-configuration-requirements) below.
 
 <Info>
-  **The recommended way to deploy an OP Stack chain is [OP Deployer](/chain-operators/tools/op-deployer/overview).**
-  OP Deployer takes a declarative [intent file](/chain-operators/tools/op-deployer/usage/init) (`intent.toml`)
+  **The recommended way to deploy an OP Stack chain is [OP Deployer](/chain-operators/tools/mc-deployer/overview).**
+  OP Deployer takes a declarative [intent file](/chain-operators/tools/mc-deployer/usage/init) (`intent.toml`)
   rather than a hand-written `DeployConfig` JSON, and derives the `DeployConfig`
   documented here from that intent as part of its deployment pipeline. Most chain
   operators set the intent file and never edit a `DeployConfig` directly.
@@ -28,8 +28,8 @@ requirements are policy rather than code, and are maintained by hand in the
   This page documents the underlying `DeployConfig` surface: the exhaustive set of
   values a deployment ultimately resolves to. Use it to understand what an intent
   setting maps to, to interpret the `DeployConfig` that OP Deployer can emit for an
-  applied deployment (via `op-deployer inspect deploy-config`), or as background for
-  the lower-level [custom deployments](/chain-operators/tools/op-deployer/usage/custom-deployments)
+  applied deployment (via `mc-deployer inspect deploy-config`), or as background for
+  the lower-level [custom deployments](/chain-operators/tools/mc-deployer/usage/custom-deployments)
   OP Deployer also supports.
 </Info>
 
@@ -179,7 +179,7 @@ standard-configuration requirements from the draft
 *   The `*FeeVaultWithdrawalNetwork` values choose where each vault withdraws:
     `"remote"` sends fees to the recipient address on L1, `"local"` on L2.
     Withdrawals to L1 are more expensive. Note that when the config is
-    re-emitted (for example by `op-deployer inspect deploy-config`), these
+    re-emitted (for example by `mc-deployer inspect deploy-config`), these
     values marshal in the legacy numeric form: `0` for `"remote"`, `1` for
     `"local"`.
 *   The `*FeeVaultMinimumWithdrawalAmount` values exist because withdrawals to
@@ -223,9 +223,9 @@ setting `useFaultProofs`; see the
 `faultGameWithdrawalDelay` should not be 0. `faultGameMaxDepth` should be
 conservatively set so that there is always enough room for a full Cannon trace.
 
-<Unreleased component="op-deployer" />
+<Unreleased component="mc-deployer" />
 
-With `op-deployer`, the three delays are set per chain and must fall within
+With `mc-deployer`, the three delays are set per chain and must fall within
 the implementations' bounds. After deployment, the L1 `ProxyAdmin` owner can
 change them within the same bounds.
 

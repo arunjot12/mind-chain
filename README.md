@@ -68,11 +68,11 @@ The Optimism Immunefi program offers up to $2,000,042 for in-scope critical vuln
 │   └── <a href="./docs/public-docs">public-docs</a>: Public developer documentation for <a href="https://docs.optimism.io">docs.optimism.io</a>
 ├── <a href="./op-acceptance-tests">op-acceptance-tests</a>: Acceptance tests and configuration for OP Stack
 ├── <a href="./op-alt-da">op-alt-da</a>: Alternative Data Availability mode (beta)
-├── <a href="./op-batcher">op-batcher</a>: L2-Batch Submitter, submits bundles of batches to L1
+├── <a href="./mc-batcher">mc-batcher</a>: L2-Batch Submitter, submits bundles of batches to L1
 ├── <a href="./op-chain-ops">op-chain-ops</a>: State surgery utilities
-├── <a href="./op-challenger">op-challenger</a>: Dispute game challenge agent
+├── <a href="./mc-challenger">mc-challenger</a>: Dispute game challenge agent
 ├── <a href="./op-conductor">op-conductor</a>: High-availability sequencer service
-├── <a href="./op-deployer">op-deployer</a>: CLI tool for deploying and upgrading OP Stack smart contracts
+├── <a href="./mc-deployer">mc-deployer</a>: CLI tool for deploying and upgrading OP Stack smart contracts
 ├── <a href="./op-devstack">op-devstack</a>: Flexible test frontend for integration and acceptance testing
 ├── <a href="./op-dispute-mon">op-dispute-mon</a>: Off-chain service to monitor dispute games
 ├── <a href="./op-dripper">op-dripper</a>: Controlled token distribution service
@@ -80,9 +80,9 @@ The Optimism Immunefi program offers up to $2,000,042 for in-scope critical vuln
 ├── <a href="./op-faucet">op-faucet</a>: Dev-faucet with support for multiple chains
 ├── <a href="./op-fetcher">op-fetcher</a>: Data fetching utilities
 ├── <a href="./op-interop-mon">op-interop-mon</a>: Interoperability monitoring service
-├── <a href="./op-node">op-node</a>: Rollup consensus-layer client
+├── <a href="./mc-node">mc-node</a>: Rollup consensus-layer client
 ├── <a href="./op-preimage">op-preimage</a>: Go bindings for Preimage Oracle
-├── <a href="./op-proposer">op-proposer</a>: L2-Output Submitter, submits proposals to L1
+├── <a href="./mc-proposer">mc-proposer</a>: L2-Output Submitter, submits proposals to L1
 ├── <a href="./op-service">op-service</a>: Common codebase utilities
 ├── <a href="./op-sync-tester">op-sync-tester</a>: Sync testing utilities
 ├── <a href="./op-test-sequencer">op-test-sequencer</a>: Test sequencer for development
@@ -93,8 +93,8 @@ The Optimism Immunefi program offers up to $2,000,042 for in-scope critical vuln
 │   └── <a href="./packages/contracts-bedrock">contracts-bedrock</a>: OP Stack smart contracts
 └── <a href="./rust">rust</a>: Rust components — a unified Cargo workspace
     ├── <a href="./rust/kona">kona</a>: OP Stack state-transition (fault proof) program and rollup node in Rust
-    ├── <a href="./rust/op-reth">op-reth</a>: OP Stack execution client built on reth
-    ├── <a href="./rust/op-reth-test-engine">op-reth-test-engine</a>: Minimal execution-layer engine, e.g. an op-geth replacement in Go action tests (WIP)
+    ├── <a href="./rust/mc-reth">mc-reth</a>: OP Stack execution client built on reth
+    ├── <a href="./rust/mc-reth-test-engine">mc-reth-test-engine</a>: Minimal execution-layer engine, e.g. an op-geth replacement in Go action tests (WIP)
     ├── <a href="./rust/op-revm">op-revm</a>: OP Stack EVM implementation (revm fork)
     ├── <a href="./rust/op-alloy">op-alloy</a>: OP Stack types and providers for the alloy ecosystem
     ├── <a href="./rust/alloy-op-evm">alloy-op-evm</a>: OP Stack EVM support for the alloy ecosystem
@@ -111,8 +111,8 @@ Please read this section carefully if you're planning to fork or make frequent P
 ### Production Releases
 
 Production releases are always tags, versioned as `<component-name>/v<semver>`.
-For example, an `op-node` release might be versioned as `op-node/v1.1.2`, and  smart contract releases might be versioned as `op-contracts/v1.0.0`.
-Release candidates are versioned in the format `op-node/v1.1.2-rc.1`.
+For example, an `mc-node` release might be versioned as `mc-node/v1.1.2`, and  smart contract releases might be versioned as `op-contracts/v1.0.0`.
+Release candidates are versioned in the format `mc-node/v1.1.2-rc.1`.
 We always start with `rc.1` rather than `rc`.
 
 For contract releases, refer to the GitHub release notes for a given release which will list the specific contracts being released. Not all contracts are considered production ready within a release and many are under active development.
@@ -131,11 +131,11 @@ See the [GitHub releases](https://github.com/ethereum-optimism/optimism/releases
 
 The full set of components that have releases are:
 
-- `op-batcher`
+- `mc-batcher`
 - `op-contracts`
-- `op-challenger`
-- `op-node`
-- `op-proposer`
+- `mc-challenger`
+- `mc-node`
+- `mc-proposer`
 
 All other components and packages should be considered development components only and do not have releases.
 

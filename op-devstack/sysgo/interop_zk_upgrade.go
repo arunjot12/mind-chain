@@ -11,9 +11,9 @@ import (
 	"github.com/lmittmann/w3"
 
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/upgrade/embedded"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/upgrade/embedded"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/ioutil"

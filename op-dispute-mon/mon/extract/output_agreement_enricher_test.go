@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	challengerTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	challengerTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/eth"

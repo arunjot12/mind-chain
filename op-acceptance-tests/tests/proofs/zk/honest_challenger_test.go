@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl/proofs"
@@ -14,12 +14,12 @@ import (
 )
 
 // newOpNodeSystem starts a single-chain interop system with no supernode, running an honest
-// op-challenger whose --superroot-rpc points at the op-node's superroot_atTimestamp endpoint.
+// mc-challenger whose --superroot-rpc points at the mc-node's superroot_atTimestamp endpoint.
 func newOpNodeSystem(t devtest.T) *presets.SingleChainInterop {
 	return presets.NewSingleChainInteropNoSupernodeZKDispute(t)
 }
 
-// newSupernodeSystem starts a supernode-backed interop system whose honest op-challenger sources
+// newSupernodeSystem starts a supernode-backed interop system whose honest mc-challenger sources
 // super roots from the supernode (with the honest op-zk-proposer also running unless disabled
 // via extra options). It is returned as the shared *SingleChainInterop base so the same scenario
 // bodies run against either super-root source.
@@ -68,7 +68,7 @@ func honestChallengerBeatsInvalidProposal(t devtest.T, sys *presets.SingleChainI
 // honestChallengerBeatsUnsafeProposal seeds a proposal for a timestamp the node has not yet made
 // safe. It has no canonical super root (Data == nil), which the honest challenger treats as invalid:
 // it challenges and, with no proof submitted, wins once the window expires without ever proving. The
-// op-node source reaches Data == nil via a skeleton result, the supernode source via a NotFound from
+// mc-node source reaches Data == nil via a skeleton result, the supernode source via a NotFound from
 // VerifiedResultAtTimestamp — distinct paths that must reach the same outcome.
 func honestChallengerBeatsUnsafeProposal(t devtest.T, sys *presets.SingleChainInterop) {
 	factory := sys.DisputeGameFactory()
@@ -96,10 +96,10 @@ func honestChallengerBeatsUnsafeProposal(t devtest.T, sys *presets.SingleChainIn
 // super-root sources share the decision body; the supernode subtest additionally proves the
 // unchallenged valid proposal anchors (source-agnostic lifecycle behavior tested once).
 func TestZK_HonestChallenger_ValidProposal_DefenderWins(gt *testing.T) {
-	gt.Run("op-node", func(gt *testing.T) {
+	gt.Run("mc-node", func(gt *testing.T) {
 		t := devtest.ParallelT(gt)
 		sys := newOpNodeSystem(t)
-		// The op-node preset runs no op-zk-proposer; seed the proposal manually.
+		// The mc-node preset runs no op-zk-proposer; seed the proposal manually.
 		game := sys.DisputeGameFactory().StartZKGame(sys.FunderL1.NewFundedEOA(eth.OneEther))
 		honestChallengerResolvesValidProposal(t, sys, game)
 	})
@@ -122,7 +122,7 @@ func TestZK_HonestChallenger_ValidProposal_DefenderWins(gt *testing.T) {
 // super-root sources share the decision body; the supernode subtest additionally proves the
 // challenger claims its credit and the invalid proposal never advances the anchor state.
 func TestZK_HonestChallenger_InvalidProposal_ChallengerWins(gt *testing.T) {
-	gt.Run("op-node", func(gt *testing.T) {
+	gt.Run("mc-node", func(gt *testing.T) {
 		t := devtest.ParallelT(gt)
 		honestChallengerBeatsInvalidProposal(t, newOpNodeSystem(t))
 	})
@@ -206,7 +206,7 @@ func TestZK_HonestChallenger_InvalidChainBProposal_ChallengesProposal(gt *testin
 // CHALLENGER_WINS. This is a distinct path from a mismatched-root proposal at an already-safe
 // timestamp, and each super-root source reaches Data == nil differently, so both are exercised.
 func TestZK_HonestChallenger_UnsafeProposal_ChallengerWins(gt *testing.T) {
-	gt.Run("op-node", func(gt *testing.T) {
+	gt.Run("mc-node", func(gt *testing.T) {
 		t := devtest.ParallelT(gt)
 		honestChallengerBeatsUnsafeProposal(t, newOpNodeSystem(t))
 	})

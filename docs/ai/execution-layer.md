@@ -6,15 +6,15 @@ Stack carries on top of upstream Ethereum execution.
 
 ## Execution-Layer Clients
 
-- **op-reth** is the primary execution-layer implementation. It lives in the monorepo at
-  `rust/op-reth`, built on [reth](https://github.com/paradigmxyz/reth) with OP Stack
+- **mc-reth** is the primary execution-layer implementation. It lives in the monorepo at
+  `rust/mc-reth`, built on [reth](https://github.com/paradigmxyz/reth) with OP Stack
   extensions (deposit transactions, L1 fee model, OP hardforks).
 - **kona-client** carries its own execution path for fault proofs (and future zk proofs).
-  It does **not** embed op-reth: the proof program executes blocks via `op-revm` and
+  It does **not** embed mc-reth: the proof program executes blocks via `op-revm` and
   `op-alloy` directly through `kona-executor` (`rust/kona/crates/proof/executor`), keeping the
   proof binary minimal. See [fault-proofs.md](fault-proofs.md).
 - **op-geth** is a **deprecated** execution-layer client (`ethereum-optimism/op-geth`, a fork
-  of go-ethereum). It is being removed in favor of op-reth, and OP-Stack-specific code is
+  of go-ethereum). It is being removed in favor of mc-reth, and OP-Stack-specific code is
   being extracted out of op-geth into `op-core/*` so the monorepo can depend on upstream
   go-ethereum directly. Only read [opgeth-decoupling.md](opgeth-decoupling.md) when doing
   op-geth-decoupling / op-core-extraction work — it is not needed for general execution-layer
@@ -41,7 +41,7 @@ modifications the OP Stack adds on top of upstream Ethereum execution.
   execution path.
 - **L1 fee accuracy**: the L1 fee calculation must match the on-chain L1 oracle exactly.
 - **Determinism**: the state transition function is deterministic. The same inputs must
-  produce identical results across op-reth and kona-client's execution path.
+  produce identical results across mc-reth and kona-client's execution path.
 - **Gas limit enforcement**: block gas limit enforcement must account for deposit
   transactions.
 
@@ -57,4 +57,4 @@ modifications the OP Stack adds on top of upstream Ethereum execution.
 - The upstream execution test suite must continue passing.
 - Deposit transaction tests covering all edge cases.
 - L1 fee calculation tests against known reference values.
-- State transition consistency between op-reth and kona-client's execution path.
+- State transition consistency between mc-reth and kona-client's execution path.

@@ -6,8 +6,8 @@ import (
 
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/opnode"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/config"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum-optimism/optimism/op-service/testutils/tcpproxy"
@@ -27,7 +27,7 @@ type OpNode struct {
 	clock     clock.Clock
 }
 
-// SyncMode reports the sync mode the op-node was started with
+// SyncMode reports the sync mode the mc-node was started with
 // (VerifierSyncMode for verifiers, SequencerSyncMode for sequencers).
 func (n *OpNode) SyncMode() nodeSync.Mode {
 	return n.syncMode
@@ -55,16 +55,16 @@ func (n *OpNode) Start() {
 		})
 		n.userRPC = "http://" + n.userProxy.Addr()
 	}
-	n.logger.Info("Starting op-node")
+	n.logger.Info("Starting mc-node")
 	opNode, err := opnode.NewOpnode(n.logger, n.cfg, n.clock, func(err error) {
 		// Use Errorf (non-fatal) instead of Require().NoError (fatal) because this
 		// callback is invoked from the event-processing goroutine, not the test
 		// goroutine. Require/FailNow calls runtime.Goexit() which would only exit
 		// the event goroutine, not the test, leaving the test to hang until timeout.
-		n.p.Errorf("op-node critical error: %v", err)
+		n.p.Errorf("mc-node critical error: %v", err)
 	})
-	n.p.Require().NoError(err, "op-node failed to start")
-	n.logger.Info("Started op-node")
+	n.p.Require().NoError(err, "mc-node failed to start")
+	n.logger.Info("Started mc-node")
 	n.opNode = opNode
 
 	n.userProxy.SetUpstream(ProxyAddr(n.p.Require(), opNode.UserRPC().RPC()))
@@ -80,9 +80,9 @@ func (n *OpNode) Stop() {
 	n.clearProxyUpstreams()
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel() // force-quit
-	n.logger.Info("Closing op-node")
+	n.logger.Info("Closing mc-node")
 	closeErr := n.opNode.Stop(ctx)
-	n.logger.Info("Closed op-node", "err", closeErr)
+	n.logger.Info("Closed mc-node", "err", closeErr)
 
 	n.opNode = nil
 }

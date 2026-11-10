@@ -8,8 +8,8 @@ extend-exclude = [
     "*.min.js",
     "op-alloy/CHANGELOG.md",
     "op-revm/CHANGELOG.md",
-    "op-reth/crates/storage/libmdbx-rs/mdbx-sys/libmdbx",
-    "op-reth/testing/ef-tests",
+    "mc-reth/crates/storage/libmdbx-rs/mdbx-sys/libmdbx",
+    "mc-reth/testing/ef-tests",
 ]
 
 [default]
@@ -104,7 +104,7 @@ tokio = "tokio"
 async = "async"
 await = "await"
 
-# op-reth specific
+# mc-reth specific
 seeked = "seeked"
 Seeked = "Seeked"
 Whe = "Whe"

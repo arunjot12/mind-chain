@@ -39,11 +39,11 @@ interface GitHubRelease {
 const COMPONENTS: Component[] = [
   // ── optimism repo ──────────────────────────────────────────────────────────
   {
-    slug: "op-node",
-    prefix: "op-node/v",
-    label: "op-node",
+    slug: "mc-node",
+    prefix: "mc-node/v",
+    label: "mc-node",
     description: "OP Stack consensus-layer client",
-    intro: "**op-node** implements the [rollup-node spec](https://specs.optimism.io/protocol/rollup-node.html), functioning as the consensus layer (CL) client of an OP Stack chain. It builds, relays, and verifies the canonical L2 chain, working alongside an execution layer client such as op-reth.",
+    intro: "**mc-node** implements the [rollup-node spec](https://specs.optimism.io/protocol/rollup-node.html), functioning as the consensus layer (CL) client of an OP Stack chain. It builds, relays, and verifies the canonical L2 chain, working alongside an execution layer client such as mc-reth.",
     group: "Protocol",
     icon: "cube",
     repo: "optimism",
@@ -53,49 +53,49 @@ const COMPONENTS: Component[] = [
     prefix: "kona-node/v",
     label: "kona-node",
     description: "Rust implementation of the OP Stack rollup node",
-    intro: "**kona-node** is a Rust implementation of the [rollup-node spec](https://specs.optimism.io/protocol/rollup-node.html), backed by kona-derive. It is a Rust-native alternative to op-node.",
+    intro: "**kona-node** is a Rust implementation of the [rollup-node spec](https://specs.optimism.io/protocol/rollup-node.html), backed by kona-derive. It is a Rust-native alternative to mc-node.",
     group: "Protocol",
     icon: "circle-nodes",
     repo: "optimism",
   },
   // Execution
   {
-    slug: "op-reth",
-    prefix: "op-reth/v",
-    label: "op-reth",
+    slug: "mc-reth",
+    prefix: "mc-reth/v",
+    label: "mc-reth",
     description: "OP Stack execution layer built on Reth",
-    intro: "**op-reth** is the OP Stack execution layer (EL) built on [Reth](https://reth.rs), a modular, high-performance Rust Ethereum node. It is the recommended execution client for OP Stack chains, replacing op-geth.",
+    intro: "**mc-reth** is the OP Stack execution layer (EL) built on [Reth](https://reth.rs), a modular, high-performance Rust Ethereum node. It is the recommended execution client for OP Stack chains, replacing op-geth.",
     group: "Protocol",
     icon: "bolt",
     repo: "optimism",
   },
   // Go — consensus / sequencing
   {
-    slug: "op-batcher",
-    prefix: "op-batcher/v",
-    label: "op-batcher",
+    slug: "mc-batcher",
+    prefix: "mc-batcher/v",
+    label: "mc-batcher",
     description: "L2 batch submitter",
-    intro: "**op-batcher** is responsible for data availability — it reads unsafe blocks from the sequencer and posts transaction batches to the DA layer (L1 or Alt DA). See the [batcher spec](https://specs.optimism.io/protocol/batcher.html).",
+    intro: "**mc-batcher** is responsible for data availability — it reads unsafe blocks from the sequencer and posts transaction batches to the DA layer (L1 or Alt DA). See the [batcher spec](https://specs.optimism.io/protocol/batcher.html).",
     group: "Protocol",
     icon: "layer-group",
     repo: "optimism",
   },
   {
-    slug: "op-proposer",
-    prefix: "op-proposer/v",
-    label: "op-proposer",
+    slug: "mc-proposer",
+    prefix: "mc-proposer/v",
+    label: "mc-proposer",
     description: "L2 output root proposer",
-    intro: "**op-proposer** automates output-root proposal transactions on L1 at a regular interval, submitting claims of L2 state that enable withdrawals. See the [proposals spec](https://specs.optimism.io/protocol/proposals.html).",
+    intro: "**mc-proposer** automates output-root proposal transactions on L1 at a regular interval, submitting claims of L2 state that enable withdrawals. See the [proposals spec](https://specs.optimism.io/protocol/proposals.html).",
     group: "Protocol",
     icon: "stamp",
     repo: "optimism",
   },
   {
-    slug: "op-challenger",
-    prefix: "op-challenger/v",
-    label: "op-challenger",
+    slug: "mc-challenger",
+    prefix: "mc-challenger/v",
+    label: "mc-challenger",
     description: "Dispute game challenger",
-    intro: "**op-challenger** is a modular dispute game agent that monitors and challenges invalid fault proof games on-chain. See the [fault proof specs](https://specs.optimism.io/fault-proof/index.html).",
+    intro: "**mc-challenger** is a modular dispute game agent that monitors and challenges invalid fault proof games on-chain. See the [fault proof specs](https://specs.optimism.io/fault-proof/index.html).",
     group: "Protocol",
     icon: "shield",
     repo: "optimism",
@@ -144,11 +144,11 @@ const COMPONENTS: Component[] = [
   },
   // Tooling
   {
-    slug: "op-deployer",
-    prefix: "op-deployer/v",
-    label: "op-deployer",
+    slug: "mc-deployer",
+    prefix: "mc-deployer/v",
+    label: "mc-deployer",
     description: "OP Stack chain deployment and upgrade tool",
-    intro: "**op-deployer** automates deploying and upgrading OP Stack smart contracts. See the [usage docs](https://docs.optimism.io/chain-operators/tools/op-deployer/overview) for full configuration reference.",
+    intro: "**mc-deployer** automates deploying and upgrading OP Stack smart contracts. See the [usage docs](https://docs.optimism.io/chain-operators/tools/op-deployer/overview) for full configuration reference.",
     group: "Tooling",
     icon: "rocket",
     repo: "optimism",
@@ -286,7 +286,7 @@ const PINNED_LINK_RE =
 
 // Returns the badge form of a pinned ref (short sha for commits, the tag
 // otherwise), or null when the ref is a floating branch. Mirrors the linter's
-// parseRef, including slash-containing release tags (op-node/v1.2.3).
+// parseRef, including slash-containing release tags (mc-node/v1.2.3).
 function pinnedRef(segments: string[]): string | null {
   const [a, b] = segments;
   if (!a || FLOATING_REFS.has(a)) return null;
@@ -360,7 +360,7 @@ function processBody(body: string | null): string {
   return lines.slice(0, truncateAt).join("\n").trim();
 }
 
-// Strip the component prefix so "op-node/v1.18.2" → "v1.18.2".
+// Strip the component prefix so "mc-node/v1.18.2" → "v1.18.2".
 // All prefixes end in "/v", so slicing at prefix.length - 1 keeps the "v".
 function versionOnly(tagName: string, prefix: string): string {
   return tagName.startsWith(prefix) ? tagName.slice(prefix.length - 1) : tagName;

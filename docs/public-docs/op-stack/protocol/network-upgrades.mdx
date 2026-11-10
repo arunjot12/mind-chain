@@ -50,7 +50,7 @@ upgrade transactions it deposits, the state it changes, the block attributes it
 derives — is only defined against a chain on which every earlier upgrade is
 already active, so two upgrades sharing an activation block is an unsupported
 configuration whose combined behavior no specification covers. Activation
-timestamps must be strictly increasing in upgrade order, and `op-node` rejects
+timestamps must be strictly increasing in upgrade order, and `mc-node` rejects
 a rollup config that schedules two upgrades to activate together. See the
 [activation rules](https://specs.optimism.io/protocol/superchain-upgrades.html?utm_source=op-docs&utm_medium=docs#activation-rules)
 in the superchain upgrades specification.

@@ -36,7 +36,7 @@ OP Stack interoperability provides the following benefits:
 
 ## Interoperability architecture
 
-A pre-interop OP Stack node consists of two pieces of software: a consensus client (e.g. op-node) that drives derivation, and an execution client that processes user transactions and constructs blocks (e.g. op-geth).
+A pre-interop OP Stack node consists of two pieces of software: a consensus client (e.g. mc-node) that drives derivation, and an execution client that processes user transactions and constructs blocks (e.g. op-geth).
 
 OP Stack interop adds cross-chain message verification on top of that pipeline. Before any chain advances past a block that contains an executing message, the matching initiating message has to be reproduced from the source chain. Tracking every chain in the dependency set is on the critical path: a local block whose dependencies cannot be proved stays unsafe.
 

@@ -4,11 +4,11 @@ description: Learn about the consensus-layer sync mode.
 diataxis: explanation
 ---
 
-This page documents the consensus-layer sync mode, which is the default sync method for op-node but not the recommended approach for most node operators.
+This page documents the consensus-layer sync mode, which is the default sync method for mc-node but not the recommended approach for most node operators.
 
 ## Overview
 
-Consensus-layer sync is a sync approach where `op-node` reads transaction data from L1 and derives blocks, then inserts them into the execution client. Unlike execution-layer sync (snap sync), this method does not rely on P2P networking to download state or block data from other L2 nodes.
+Consensus-layer sync is a sync approach where `mc-node` reads transaction data from L1 and derives blocks, then inserts them into the execution client. Unlike execution-layer sync (snap sync), this method does not rely on P2P networking to download state or block data from other L2 nodes.
 
 While consensus-layer sync is still the default mode, **execution-layer sync (snap sync) is recommended** for faster synchronization and better performance.
 
@@ -27,16 +27,16 @@ This sync mode might be preferred in the following scenarios:
 
 ## Configuration
 
-### Configuration for op-node
+### Configuration for mc-node
 
-Set the following flag on `op-node`:
+Set the following flag on `mc-node`:
 
 ```shell
 --syncmode=consensus-layer
 ```
 
 <Info>
-  The `--syncmode=consensus-layer` is the default setting for `op-node`. You don't need to specify it explicitly unless you want to be explicit about the sync mode or are overriding a different configuration.
+  The `--syncmode=consensus-layer` is the default setting for `mc-node`. You don't need to specify it explicitly unless you want to be explicit about the sync mode or are overriding a different configuration.
 </Info>
 
 ### Configuration for op-geth
@@ -48,7 +48,7 @@ Set the following flag on `op-geth`:
 ```
 
 <Info>
-  The `--syncmode=full` flag is not the default setting and must be explicitly configured. This ensures blocks are inserted by `op-node` rather than synced via P2P.
+  The `--syncmode=full` flag is not the default setting and must be explicitly configured. This ensures blocks are inserted by `mc-node` rather than synced via P2P.
 </Info>
 
 ### Configuration for Nethermind
@@ -69,8 +69,8 @@ Set the following flags on `Nethermind`:
 
 The consensus-layer sync process:
 
-1. **L1 monitoring**: `op-node` continuously monitors the L1 chain for transaction batches
-2. **Block derivation**: `op-node` derives L2 blocks from the L1 transaction data
+1. **L1 monitoring**: `mc-node` continuously monitors the L1 chain for transaction batches
+2. **Block derivation**: `mc-node` derives L2 blocks from the L1 transaction data
 3. **Block insertion**: Derived blocks are inserted into the execution client one by one
 4. **State building**: The execution client builds state by executing each block sequentially
 

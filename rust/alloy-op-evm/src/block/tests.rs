@@ -211,7 +211,7 @@ impl JovianExecutorFixture {
             gas_limit,
             jovian_timestamp,
             // These Jovian execution tests run normal (non-activation) blocks; leaving the parent
-            // timestamp unset skips the fork-activation guard, matching op-reth's import path.
+            // timestamp unset skips the fork-activation guard, matching mc-reth's import path.
             parent_timestamp: None,
             // Default to a zero base fee; settlement tests opt into a non-zero one.
             base_fee: 0,
@@ -530,7 +530,7 @@ fn test_non_activation_karst_block_not_rejected() {
 
 #[test]
 fn test_none_parent_timestamp_skips_check() {
-    // With no parent timestamp (op-reth import path), the guard is skipped even though the
+    // With no parent timestamp (mc-reth import path), the guard is skipped even though the
     // block/parent would otherwise make this the Karst activation block.
     let mut db = prepare_jovian_db(0);
     let receipt_builder = OpAlloyReceiptBuilder::default();

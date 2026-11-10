@@ -8,7 +8,7 @@ diataxis: how-to
 
 For chains that are part of the public [`superchain-registry`](https://github.com/ethereum-optimism/superchain-registry), the standard `kona-client` absolute prestate published in [`standard-prestates.toml`](https://github.com/ethereum-optimism/superchain-registry/blob/main/validation/standard/standard-prestates.toml) already embeds your chain configuration. No custom build is needed.
 
-This tutorial is for the rarer case: a partner chain whose `RollupConfig` is not yet in the public registry but which still needs to run permissionless fault proofs (`cannon-kona` game type). In that case you must build a custom `kona-client` that embeds your chain's configuration, generate the absolute prestate hash from that build, and host the resulting binary at a URL `op-challenger` can fetch.
+This tutorial is for the rarer case: a partner chain whose `RollupConfig` is not yet in the public registry but which still needs to run permissionless fault proofs (`cannon-kona` game type). In that case you must build a custom `kona-client` that embeds your chain's configuration, generate the absolute prestate hash from that build, and host the resulting binary at a URL `mc-challenger` can fetch.
 
 <Info>
   Most chains are in the Superchain Registry and should use the standard prestate; follow [Generating absolute prestate and preimage files](/chain-operators/tutorials/absolute-prestate) instead. Only follow this tutorial if your chain is **not yet** in the registry. Once the chain is added to the public registry, future releases will cover it via the standard prestate and you can stop maintaining a custom build.
@@ -20,7 +20,7 @@ Before starting, ensure you have:
 
 - [Docker](https://docs.docker.com/engine/install/) running
 - [`just`](https://github.com/casey/just) installed
-- Your chain's `rollup.json`, L2 genesis, and deployment artifacts (typically produced by `op-deployer`)
+- Your chain's `rollup.json`, L2 genesis, and deployment artifacts (typically produced by `mc-deployer`)
 
 ## How kona-client picks up custom chain configurations
 
@@ -196,8 +196,8 @@ The compiled `kona-client` binary embeds the merged registry via `include_str!()
     Source the values from your chain's existing artifacts:
 
     - `genesis.*`, `block_time`, `seq_window_size`, `max_sequencer_drift`, `batch_inbox_address`, hardfork timestamps → your chain's `rollup.json`
-    - `Addresses.*` → your `op-deployer` state (`opChainDeployments[<i>]`)
-    - `Roles.*` → your `op-deployer` state's per-chain `roles` block
+    - `Addresses.*` → your `mc-deployer` state (`opChainDeployments[<i>]`)
+    - `Roles.*` → your `mc-deployer` state's per-chain `roles` block
 
     Cross-check each L1 contract address onchain (`cast call`) before committing.
   </Step>
@@ -211,11 +211,11 @@ The compiled `kona-client` binary embeds the merged registry via `include_str!()
     jq -r .pre rust/kona/prestate-artifacts-cannon/prestate-proof.json
     ```
 
-    The hash printed is your chain's custom kona absolute prestate. The build also writes a hash-named gzipped binary at `rust/kona/prestate-artifacts-cannon/0x<hash>.bin.gz` — this is the file `op-challenger` needs to fetch at dispute time.
+    The hash printed is your chain's custom kona absolute prestate. The build also writes a hash-named gzipped binary at `rust/kona/prestate-artifacts-cannon/0x<hash>.bin.gz` — this is the file `mc-challenger` needs to fetch at dispute time.
   </Step>
 
   <Step title="Verify your chain is embedded in the prestate">
-    A custom-config build that silently fails to merge your chain produces the *standard* prestate hash — and an `op-challenger` pointed at it will never agree with your games. Always confirm your chain actually made it in:
+    A custom-config build that silently fails to merge your chain produces the *standard* prestate hash — and an `mc-challenger` pointed at it will never agree with your games. Always confirm your chain actually made it in:
 
     ```bash
     # 1. The build log must list every custom chain that was merged:
@@ -238,11 +238,11 @@ The compiled `kona-client` binary embeds the merged registry via `include_str!()
 
 <Steps>
   <Step title="Host the prestate binary">
-    Upload `0x<hash>.bin.gz` to wherever you serve preimage files for `op-challenger` — typically a GCS bucket or HTTP endpoint. Files must be named by their absolute prestate hash so the challenger can resolve them on demand.
+    Upload `0x<hash>.bin.gz` to wherever you serve preimage files for `mc-challenger` — typically a GCS bucket or HTTP endpoint. Files must be named by their absolute prestate hash so the challenger can resolve them on demand.
   </Step>
 
   <Step title="Register the custom prestate as game type 8">
-    On the current (v2.4+) dispute-game contracts the absolute prestate is **not** a constructor argument — it lives in the `DisputeGameFactory`'s per-game-type `gameArgs`, appended to each game via clones-with-immutable-args. So you do **not** deploy a new implementation for a new prestate. Reuse the existing permissionless `FaultDisputeGame` implementation (a fresh op-deployer chain deploys one but leaves it unregistered) and register it for game type 8 with `gameArgs` that carry your prestate.
+    On the current (v2.4+) dispute-game contracts the absolute prestate is **not** a constructor argument — it lives in the `DisputeGameFactory`'s per-game-type `gameArgs`, appended to each game via clones-with-immutable-args. So you do **not** deploy a new implementation for a new prestate. Reuse the existing permissionless `FaultDisputeGame` implementation (a fresh mc-deployer chain deploys one but leaves it unregistered) and register it for game type 8 with `gameArgs` that carry your prestate.
 
     `gameArgs` for a permissionless game is the packed encoding (124 bytes):
 
@@ -267,7 +267,7 @@ The compiled `kona-client` binary embeds the merged registry via `include_str!()
     See [Migrating to permissionless fault proofs](/chain-operators/tutorials/migrating-permissionless) for the full role/transaction walkthrough. (On older, pre-v2.4 contracts where `absolutePrestate` was a constructor immutable, each prestate did require a fresh implementation deployment instead.)
   </Step>
 
-  <Step title="Configure op-challenger">
+  <Step title="Configure mc-challenger">
     Add the kona-specific env vars to your existing challenger config:
 
     ```bash

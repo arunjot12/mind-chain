@@ -8,7 +8,7 @@ Each Go service has its own justfile — run `just --list` in any service direct
 
 ```bash
 # Build a single service (pattern: just ./<service>/<binary>)
-just ./op-node/op-node
+just ./mc-node/mc-node
 
 # Build all Go components
 just build-go
@@ -17,8 +17,8 @@ just build-go
 ### The `op-core/superchain` bundle
 
 `op-core/superchain` `//go:embed`s `superchain-configs.zip`, which is **gitignored** (only
-its `.sha256` is committed). Any package that transitively imports it — op-node and several
-binaries, plus `op-e2e`, `op-acceptance-tests`, op-deployer, and the kona/op-reth Go
+its `.sha256` is committed). Any package that transitively imports it — mc-node and several
+binaries, plus `op-e2e`, `op-acceptance-tests`, mc-deployer, and the kona/mc-reth Go
 tests — won't compile until the bundle is built:
 
 ```
@@ -32,7 +32,7 @@ a **bare** `go build`/`go test` or a fresh checkout. To prep it manually:
 
 ```bash
 just build-superchain-go   # Go bundle only (fast; verify mode)
-just sync-superchain        # all superchain bundles (Go + kona/op-reth Rust) — the registry-bump command
+just sync-superchain        # all superchain bundles (Go + kona/mc-reth Rust) — the registry-bump command
 ```
 
 Because the zip is usually already on disk, a missing-bundle problem is invisible locally
@@ -51,7 +51,7 @@ registry consumers.
 cd <service> && just test
 
 # Test specific packages
-go test ./op-node/rollup/derive/...
+go test ./mc-node/rollup/derive/...
 
 # Run the full test suite from the repo root
 just go-tests
@@ -75,7 +75,7 @@ these Go-specific conventions:
   domain meaning; supply required dependencies at construction.
 - **Let packages provide naming context.** Prefer `derivation.Trusted` over
   `derivation.TrustedDerivation`.
-- **OP type encodings**: a change to an OP type's wire format, hash rule, or codec accept-set has to agree with `rust/op-alloy` (the types op-reth and kona consume), not just op-geth — see [Cross-implementation parity](opgeth-decoupling.md#cross-implementation-parity).
+- **OP type encodings**: a change to an OP type's wire format, hash rule, or codec accept-set has to agree with `rust/op-alloy` (the types mc-reth and kona consume), not just op-geth — see [Cross-implementation parity](opgeth-decoupling.md#cross-implementation-parity).
 - **Pointers to values**: use `ptr.New(v)` from `github.com/ethereum-optimism/optimism/op-service/ptr` to take the address of a literal or expression — common for optional `*uint64` config fields like fork-activation times (`cfg.SomeTime = ptr.New(uint64(123))`). Don't define a local `ptr`/`ptrTo` helper; the shared one avoids per-package duplicates, and a local `func ptr` collides with importing the `ptr` package in the same package.
 
 ## Linting

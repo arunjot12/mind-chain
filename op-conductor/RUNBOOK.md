@@ -2,9 +2,9 @@
 
 ### conductor configurations
 
-In order to setup op-conductor, you need to configure the following env vars for both op-conductor and op-node service:
+In order to setup op-conductor, you need to configure the following env vars for both op-conductor and mc-node service:
 
-#### op-node
+#### mc-node
 
 ```env
 OP_NODE_CONDUCTOR_ENABLED=true
@@ -24,7 +24,7 @@ OP_CONDUCTOR_METRICS_ADDR=<metrics-address> # for example 0.0.0.0
 OP_CONDUCTOR_METRICS_PORT=<metrics-port> # for example 7300
 OP_CONDUCTOR_CONSENSUS_PORT=<consensus-port> # for example 50050
 OP_CONDUCTOR_PAUSED=true # set to true to start conductor in paused state
-OP_CONDUCTOR_NODE_RPC=<node-rpc-endpoint> # for example, http://op-node:8545
+OP_CONDUCTOR_NODE_RPC=<node-rpc-endpoint> # for example, http://mc-node:8545
 OP_CONDUCTOR_EXECUTION_RPC=<execution-rpc-endpoint> # for example, http://op-geth:8545
 OP_CONDUCTOR_NETWORK=<network-name> # for example, base-mainnet, op-mainnet, etc, should be same as OP_NODE_NETWORK
 OP_CONDUCTOR_HEALTHCHECK_INTERVAL=<healthcheck-interval> # in seconds
@@ -40,7 +40,7 @@ In normal situations, you probably have a running sequencer already and you want
 1. start a completely new sequencer with above mentioned configurations and
    1. `OP_CONDUCTOR_RAFT_BOOTSTRAP=true` set on op-conductor
    2. `OP_CONDUCTOR_PAUSED=true` set on op-conductor
-   3. `OP_NODE_SEQUENCER_ENABLED=true` set on op-node
+   3. `OP_NODE_SEQUENCER_ENABLED=true` set on mc-node
 2. wait for the new sequencer to start and get synced up with the rest of the nodes
 3. once the new sequencer is synced up, manually or use automation to stop sequencing on the old sequencer and start sequencing on the new sequencer
 4. resume the conductor on the new sequencer by calling `conductor_resume` json rpc method on op-conductor
@@ -73,6 +73,6 @@ Whenever there are a disaster situation that you see no route to have 2 healthy 
 1. call `conductor_pause` json rpc method on the all conductors so that they don't attempt to start / stop sequencer
 2. choose a sequencer that can be used to resume sequencing
 3. call `conductor_overrideLeader` json rpc method on the conductor to force it to treat itself as the leader
-4. If no conductor is functioning, call `admin_overrideLeader` json rpc method on the op-node to force it to treat itself as the leader
+4. If no conductor is functioning, call `admin_overrideLeader` json rpc method on the mc-node to force it to treat itself as the leader
 5. manually start sequencing on the chosen sequencer
 6. Go back to bootstrap step to re-bootstrap the cluster.

@@ -1,6 +1,6 @@
 ---
 name: dispute-game-investigator
-description: "Read-only fault-dispute-game investigator that runs a FULL end-to-end analysis and produces a written report: identifies the actors, recomputes the canonical output root, classifies every claim correct-vs-invalid, diagnoses the responsible op-node, verifies uncountered invalid claims against the honest-actor algorithm, and reports the bond outcome. Use for a complete written analysis of a game (or a chain's in-progress games); for live Q&A during an incident use the dispute-game-investigator skill instead."
+description: "Read-only fault-dispute-game investigator that runs a FULL end-to-end analysis and produces a written report: identifies the actors, recomputes the canonical output root, classifies every claim correct-vs-invalid, diagnoses the responsible mc-node, verifies uncountered invalid claims against the honest-actor algorithm, and reports the bond outcome. Use for a complete written analysis of a game (or a chain's in-progress games); for live Q&A during an incident use the dispute-game-investigator skill instead."
 model: opus
 ---
 
@@ -16,16 +16,16 @@ The full methodology lives in **[docs/ai/dispute-game-investigation.md](../../do
 
 1. Identify the actors (proposer / challengers / our node), recalling that a signer
    may be a key pool and anyone can move on any claim.
-2. Enumerate games/claims with `op-challenger list-games`/`list-claims --format json`.
+2. Enumerate games/claims with `mc-challenger list-games`/`list-claims --format json`.
 3. Establish the canonical output root with `op-chain-ops` `check-output-root` /
    `check-super-root` (EL-only, work against public nodes).
 4. Classify every claim correct-vs-invalid via the trace-index/clamping math.
-5. Diagnose the responsible op-node with `op-challenger game-proposal-outputs`
+5. Diagnose the responsible mc-node with `mc-challenger game-proposal-outputs`
    (output-root games: output root + safe head at each game's `l1Head`; super-root and
    zk games: super root at the proposed timestamp + whether the node is past `l1Head`)
    and `check-game-block-hashes.sh`; check each load-balancer backend individually.
 6. Explain uncountered invalid claims via the honest-actor algorithm
-   (`op-challenger/game/fault/solver/solver.go` `shouldCounter`) — usually correct
+   (`mc-challenger/game/fault/solver/solver.go` `shouldCounter`) — usually correct
    behavior, not a bug.
 7. Work out the bond outcome from `claimData[i].bond` and the leftmost-uncountered-
    child rule in `FaultDisputeGame.sol`.

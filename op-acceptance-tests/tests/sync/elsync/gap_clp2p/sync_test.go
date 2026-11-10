@@ -48,7 +48,7 @@ func TestReachUnsafeTipByAppendingUnsafePayload(gt *testing.T) {
 // while maintaining correct Engine API semantics.
 func TestCLUnsafeNotRewoundOnInvalidDuringELSync(gt *testing.T) {
 	t := devtest.ParallelT(gt)
-	// Example error with op-reth:
+	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|09:41:58.089]
 	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_cl.go:279

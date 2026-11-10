@@ -4,13 +4,13 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/test"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/test"
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/transform"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	faultTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	monTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 )
 

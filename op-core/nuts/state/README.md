@@ -33,8 +33,8 @@ built from jovian-era source:
 ops/scripts/gen-seed-state.sh
 ```
 
-**Why jovian's own toolchain (not the current op-deployer):** the current
-op-deployer cannot consume jovian era contracts. Building
+**Why jovian's own toolchain (not the current mc-deployer):** the current
+mc-deployer cannot consume jovian era contracts. Building
 inside the worktree pairs the era's contracts with the era's tooling.
 
 ## Generating subsequent states: compose
@@ -79,7 +79,7 @@ per-block L1-info deposit, so they'd otherwise vary with the test's wall-clock L
 genesis time and are re-set anyway when the state is consumed.
 
 The **seed** (`jovian_state`) is **not** byte-reproducible: its worktree
-op-deployer run randomizes the CREATE2 salt, so the L1 counterpart addresses baked
+mc-deployer run randomizes the CREATE2 salt, so the L1 counterpart addresses baked
 into the cross-domain bridge predeploys (`otherMessenger`/`otherBridge`) differ per
 generation. It's committed as one specific instance. Composed states inherit those
 addresses verbatim; they're arbitrary and the activation test doesn't depend on

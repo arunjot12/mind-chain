@@ -144,7 +144,7 @@ go test ./...
 
 See [this document](./op-e2e/README.md)
 
-#### Rust (kona, op-reth, op-alloy, …)
+#### Rust (kona, mc-reth, op-alloy, …)
 
 All Rust code lives in the unified [`rust/`](./rust) Cargo workspace and is built and tested with [`just`](https://github.com/casey/just) from that directory (e.g. `cd rust && just build && just test`). See [`docs/ai/rust-dev.md`](./docs/ai/rust-dev.md) for the full build, test, lint, and workflow guide.
 
@@ -231,15 +231,15 @@ We require the [Scoped Commits](https://scopedcommits.com) format for commit mes
 [optional trailers]
 ```
 
-The scope names the component, subsystem, or area the change touches — for example `op-node`, `contracts-bedrock`, `docs`, or `ci`. For a change spanning a few components, comma-separate the scopes without spaces (`op-node,op-batcher: share event loop metrics`); for tree-wide changes, use `all`.
+The scope names the component, subsystem, or area the change touches — for example `mc-node`, `contracts-bedrock`, `docs`, or `ci`. For a change spanning a few components, comma-separate the scopes without spaces (`mc-node,mc-batcher: share event loop metrics`); for tree-wide changes, use `all`.
 
 #### Breaking changes
 
 Scoped Commits leaves project-specific metadata up to each project. In this repository, append `!` to the complete scope list when a change breaks compatibility for downstream users or operators and needs a prominent release-note callout:
 
 ```
-op-node!: remove the legacy sync mode
-op-node,op-batcher!: require authenticated control-plane RPC
+mc-node!: remove the legacy sync mode
+mc-node,mc-batcher!: require authenticated control-plane RPC
 ```
 
 This includes changes that require downstream action, such as removing or renaming a public API, CLI flag, configuration field, RPC behavior, or wire/data format. Do not mark an internal refactor that requires no downstream action.

@@ -20,9 +20,9 @@ import (
 
 	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
 	"github.com/ethereum-optimism/optimism/op-e2e/config"
-	"github.com/ethereum-optimism/optimism/op-proposer/metrics"
-	"github.com/ethereum-optimism/optimism/op-proposer/proposer"
-	"github.com/ethereum-optimism/optimism/op-proposer/proposer/source"
+	"github.com/ethereum-optimism/optimism/mc-proposer/metrics"
+	"github.com/ethereum-optimism/optimism/mc-proposer/proposer"
+	"github.com/ethereum-optimism/optimism/mc-proposer/proposer/source"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/log"

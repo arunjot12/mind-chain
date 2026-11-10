@@ -12,13 +12,13 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/stack"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 
 // rpcCallTimeout bounds each call of the RPC clients that presets give tests. It is longer than the
-// client default because op-node serves some calls from its driver loop, which can wait several
+// client default because mc-node serves some calls from its driver loop, which can wait several
 // seconds on a disk sync when a CI host's disk is busy.
 const rpcCallTimeout = 30 * time.Second
 

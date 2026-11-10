@@ -2,7 +2,7 @@ package presets
 
 import (
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	challengerConfig "github.com/ethereum-optimism/optimism/op-challenger/config"
+	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"

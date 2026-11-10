@@ -4,7 +4,7 @@ import (
 	"math/big"
 	"time"
 
-	challengerTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
+	challengerTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum-optimism/optimism/op-service/log"

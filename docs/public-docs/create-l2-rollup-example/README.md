@@ -6,12 +6,12 @@ This directory contains the complete working implementation that accompanies the
 
 This implementation deploys a fully functional OP Stack L2 rollup testnet, including:
 
-- **L1 Smart Contracts** deployed on Sepolia testnet (via op-deployer)
-- **Execution Client** (op-reth) processing transactions
-- **Consensus Client** (op-node) managing rollup consensus
-- **Batcher** (op-batcher) publishing transaction data to L1
-- **Proposer** (op-proposer) submitting state root proposals
-- **Challenger** (op-challenger) monitoring for disputes
+- **L1 Smart Contracts** deployed on Sepolia testnet (via mc-deployer)
+- **Execution Client** (mc-reth) processing transactions
+- **Consensus Client** (mc-node) managing rollup consensus
+- **Batcher** (mc-batcher) publishing transaction data to L1
+- **Proposer** (mc-proposer) submitting state root proposals
+- **Challenger** (mc-challenger) monitoring for disputes
 
 ## Prerequisites
 
@@ -58,9 +58,9 @@ mise install
    # Edit .env with your actual values (L1_RPC_URL, PRIVATE_KEY, L2_CHAIN_ID)
    ```
 
-3. **Download op-deployer**:
+3. **Download mc-deployer**:
    ```bash
-   make init    # Download op-deployer
+   make init    # Download mc-deployer
    ```
 
 4. **Deploy and start everything**:
@@ -77,7 +77,7 @@ mise install
 
    # Or manually check:
    docker-compose ps
-   docker-compose logs -f op-node
+   docker-compose logs -f mc-node
    ```
 
 ## Environment Configuration
@@ -120,41 +120,41 @@ create-l2-rollup-example/
 ├── Makefile               # Automation commands
 ├── scripts/
 │   ├── setup-rollup.sh   # Automated deployment script
-│   └── download-op-deployer.sh # op-deployer downloader
+│   └── download-mc-deployer.sh # mc-deployer downloader
 └── README.md             # This file
 ```
 
 **Generated directories** (created during deployment):
 
 ```
-deployer/                # op-deployer configuration and outputs
+deployer/                # mc-deployer configuration and outputs
 ├── .deployer/           # Deployment artifacts (genesis.json, rollup.json, etc.)
 ├── addresses/           # Generated wallet addresses
 └── .env                 # Environment variables
-batcher/                 # op-batcher configuration
+batcher/                 # mc-batcher configuration
 └── .env                 # Environment variables
-proposer/                # op-proposer configuration
+proposer/                # mc-proposer configuration
 └── .env                 # Environment variables
-challenger/              # op-challenger configuration
+challenger/              # mc-challenger configuration
 ├── .env                 # Challenger-specific environment variables
 └── data/                # Challenger data directory
 sequencer/               # op-sequencer configuration
 ├── .env                 # op-sequencer environment variables
-├── genesis.json         # L2 genesis file (initializes op-reth)
+├── genesis.json         # L2 genesis file (initializes mc-reth)
 ├── jwt.txt              # JWT secret for auth RPC
-├── rollup.json          # op-node rollup configuration
-└── op-reth-data/        # op-reth data directory (Docker named volume)
+├── rollup.json          # mc-node rollup configuration
+└── mc-reth-data/        # mc-reth data directory (Docker named volume)
 ```
 
 ## Service Ports
 
 | Service | Port | Description |
 |---------|------|-------------|
-| op-reth | 8545 | HTTP RPC endpoint |
-| op-reth | 8546 | WebSocket RPC endpoint |
-| op-reth | 8551 | Auth RPC for op-node |
-| op-node | 8547 | op-node RPC endpoint |
-| op-node | 9222 | P2P networking |
+| mc-reth | 8545 | HTTP RPC endpoint |
+| mc-reth | 8546 | WebSocket RPC endpoint |
+| mc-reth | 8551 | Auth RPC for mc-node |
+| mc-node | 8547 | mc-node RPC endpoint |
+| mc-node | 9222 | P2P networking |
 
 ## Monitoring and Logs
 
@@ -163,8 +163,8 @@ sequencer/               # op-sequencer configuration
 make logs
 
 # View specific service logs
-docker-compose logs -f op-node
-docker-compose logs -f op-reth
+docker-compose logs -f mc-node
+docker-compose logs -f mc-reth
 
 # Check service health
 make status
@@ -173,12 +173,12 @@ make status
 make restart
 
 # Restart a specific service
-docker-compose restart op-batcher
+docker-compose restart mc-batcher
 ```
 
 ## P2P Networking Configuration
 
-By default, this devnet disables P2P networking entirely to avoid validation warnings when running locally. The `--p2p.disable` flag is set on the `op-node` service in `docker-compose.yml`.
+By default, this devnet disables P2P networking entirely to avoid validation warnings when running locally. The `--p2p.disable` flag is set on the `mc-node` service in `docker-compose.yml`.
 
 <Warning>
 **For production deployments**, you must **remove** the `--p2p.disable` flag and configure P2P networking properly. P2P is essential for:
@@ -221,7 +221,7 @@ By default, this devnet disables P2P networking entirely to avoid validation war
 # Example: Quick enable P2P for testing
 sed -i '' '/--p2p.disable/d' docker-compose.yml
 # Then add back P2P flags manually in docker-compose.yml
-docker-compose restart op-node
+docker-compose restart mc-node
 ```
 
 ## Troubleshooting

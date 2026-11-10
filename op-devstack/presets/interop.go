@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	challengerConfig "github.com/ethereum-optimism/optimism/op-challenger/config"
+	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
 	"github.com/ethereum-optimism/optimism/op-core/forks"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
@@ -171,18 +171,18 @@ func NewSingleChainInteropIsthmusSuper(t devtest.T, opts ...Option) *SingleChain
 }
 
 // NewSingleChainInteropNoSupernode creates a fresh SingleChainInterop target whose
-// super roots are served by the single op-node's superroot_atTimestamp endpoint (no
-// op-supernode). The op-challenger plays super-cannon-kona games against this op-node
-// source. This exercises the "op-node as super root RPC" path end-to-end.
+// super roots are served by the single mc-node's superroot_atTimestamp endpoint (no
+// op-supernode). The mc-challenger plays super-cannon-kona games against this mc-node
+// source. This exercises the "mc-node as super root RPC" path end-to-end.
 func NewSingleChainInteropNoSupernode(t devtest.T, opts ...Option) *SingleChainInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewSingleChainInteropNoSupernode", opts, singleChainInteropNoSupernodePresetSupportedOptionKinds)
 	return singleChainInteropNoSupernodeFromRuntime(t, sysgo.NewSingleChainInteropNoSupernodeSuperRootRuntimeWithConfig(t, presetCfg))
 }
 
 // NewSingleChainInteropNoSupernodeZKDispute creates a fresh SingleChainInterop target whose super
-// roots are served by the single op-node's superroot_atTimestamp endpoint (no op-supernode),
-// running an op-challenger that plays ZK dispute games against that op-node source. This exercises
-// the "op-node as super root RPC" path for the ZK game end-to-end.
+// roots are served by the single mc-node's superroot_atTimestamp endpoint (no op-supernode),
+// running an mc-challenger that plays ZK dispute games against that mc-node source. This exercises
+// the "mc-node as super root RPC" path for the ZK game end-to-end.
 func NewSingleChainInteropNoSupernodeZKDispute(t devtest.T, opts ...Option) *SingleChainInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewSingleChainInteropNoSupernodeZKDispute", opts, 0)
 	return singleChainInteropNoSupernodeFromRuntime(t, sysgo.NewSingleChainInteropNoSupernodeZKDisputeRuntimeWithConfig(t, presetCfg))
@@ -190,7 +190,7 @@ func NewSingleChainInteropNoSupernodeZKDispute(t devtest.T, opts ...Option) *Sin
 
 // NewSingleChainInteropSuperRootAtGenesis creates a fresh SingleChainInterop
 // target where SuperPermissionedDisputeGame is installed in the permissioned
-// slot as part of the initial op-deployer apply - no post-deploy OPCMv2
+// slot as part of the initial mc-deployer apply - no post-deploy OPCMv2
 // migration runs. This exercises the initial-deploy path for super-root
 // dispute games tracked by ethereum-optimism/optimism#18729.
 func NewSingleChainInteropSuperRootAtGenesis(t devtest.T, opts ...Option) *SingleChainInterop {

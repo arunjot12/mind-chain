@@ -5,7 +5,7 @@ diataxis: how-to
 ---
 
 <Warning>
-SDM is not yet live. Stock public `op-reth` supports the SDM consensus and verification
+SDM is not yet live. Stock public `mc-reth` supports the SDM consensus and verification
 mechanism, but it does **not** implement a refund-producing policy. Enabling its operator gate does
 not cause it to issue refunds or append post-exec transactions.
 </Warning>
@@ -16,7 +16,7 @@ activates, see the [SDM explainer](/op-stack/features/sdm).
 
 ## Before you start
 
-Run versions of `op-reth`, and of `op-node` or `kona-node`, that implement the
+Run versions of `mc-reth`, and of `mc-node` or `kona-node`, that implement the
 [Lagoon hardfork](/op-stack/protocol/hardforks/lagoon).
 
 Verifier operators do not opt in to anything and have no SDM configuration. If you run verifier
@@ -94,13 +94,13 @@ This only affects blocks the sequencer builds from then on. Post-exec transactio
 chain stay valid and verifiers keep validating them, so there is nothing to coordinate with
 verifier operators and no config or hardfork change to make.
 
-## Stock `op-reth` production behavior
+## Stock `mc-reth` production behavior
 
-Released public `op-reth` uses a null refund policy. It never creates a non-empty refund payload and
+Released public `mc-reth` uses a null refund policy. It never creates a non-empty refund payload and
 never appends a post-exec transaction, even when Lagoon is active and
 `admin_setOperatorSdmOptIn(true)` has been called. The admin surface remains available for protocol
 compatibility and downstream sequencer integrations; it is not a policy-selection interface in
-stock `op-reth`.
+stock `mc-reth`.
 
 ## Refund policies and OP Enterprise
 
@@ -117,7 +117,7 @@ non-post-exec transactions under standard gas accounting to recover each transac
 breaks the spec's [validity rules](https://specs.optimism.io/protocol/lagoon/sdm.html#validity-rules).
 
 It does not recompute what the refunds should have been: that requires the sequencer's policy, which
-stock `op-reth` does not implement. The endpoint requires historical state and should not be exposed
+stock `mc-reth` does not implement. The endpoint requires historical state and should not be exposed
 on public RPC interfaces.
 
 ## Next steps

@@ -58,9 +58,9 @@ Before assuming a red check is caused by your change, rule out a failure the bra
 3. **Rebase onto latest `develop`** before deeper debugging — stale branches miss
    upstream fixes, and a rebase often clears failures that were never about your change.
 
-Worked example (#21356): `go-tests-short` failed on `op-deployer` integration tests on a
+Worked example (#21356): `go-tests-short` failed on `mc-deployer` integration tests on a
 branch that only added a new `op-core/types` package. The diff touched nothing in
-`op-deployer`; the failures were a data-dependent flake already fixed on `develop` by
+`mc-deployer`; the failures were a data-dependent flake already fixed on `develop` by
 #21396. Rebasing made CI green with no change to the branch's own work.
 
 ## Missing `op-core/superchain` bundle (`superchain-configs.zip`)
@@ -74,9 +74,9 @@ op-core/superchain/chain.go:NN: pattern superchain-configs.zip: no matching file
 means the job builds Go that transitively links `op-core/superchain` without the bundle
 it `//go:embed`s. The zip is **gitignored** and built only by the `prep-superchain` job
 (or `just build-superchain-go` locally), so **every** job that compiles an
-`op-core/superchain` linker must provision it. The linker set is large — op-node and
-several other binaries, but also `op-e2e`, `op-acceptance-tests`, `op-deployer`, and the
-`kona`/`op-reth` Go tests (`TestBundleReachability` in `op-core/superchain/deps_test.go`
+`op-core/superchain` linker must provision it. The linker set is large — mc-node and
+several other binaries, but also `op-e2e`, `op-acceptance-tests`, `mc-deployer`, and the
+`kona`/`mc-reth` Go tests (`TestBundleReachability` in `op-core/superchain/deps_test.go`
 pins the full set) — so a **Go-only** change can red-wash unrelated-looking jobs
 (`rust-e2e`) all at compile time. It passes locally and in review because the
 developer already has the zip on disk (see [go-dev.md](go-dev.md)).

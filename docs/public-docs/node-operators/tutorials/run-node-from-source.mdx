@@ -1,6 +1,6 @@
 ---
 title: Building and running an OP Stack node from source
-description: Build and run an OP Stack node (op-reth + op-node) from source code for full nodes and archive nodes.
+description: Build and run an OP Stack node (mc-reth + mc-node) from source code for full nodes and archive nodes.
 diataxis: tutorial
 ---
 
@@ -8,10 +8,10 @@ import OpGethEol from "/snippets/op-geth-eol.mdx"
 
 <OpGethEol />
 
-This tutorial walks through the full process of building and running an OP Stack node from source — op-node plus an execution client. Building from source is a flexible alternative to using pre-built Docker images and is useful if you need a specific architecture or want to inspect what you're running.
-It builds and runs op-reth and Nethermind; op-geth instructions are retained in a legacy section at the bottom for operators mid-migration.
+This tutorial walks through the full process of building and running an OP Stack node from source — mc-node plus an execution client. Building from source is a flexible alternative to using pre-built Docker images and is useful if you need a specific architecture or want to inspect what you're running.
+It builds and runs mc-reth and Nethermind; op-geth instructions are retained in a legacy section at the bottom for operators mid-migration.
 
-For permissionless chains setting up historical proofs for withdrawal proving, follow this tutorial first to get a working node, then continue with [Running op-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs).
+For permissionless chains setting up historical proofs for withdrawal proving, follow this tutorial first to get a working node, then continue with [Running mc-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs).
 
 ## Hardware requirements
 
@@ -36,13 +36,13 @@ Plan for future storage needs and choose SSDs that can handle these increasing r
 
 The build environment is managed through [mise](https://mise.jdx.dev/), which installs and manages the toolchains (Rust, Go) needed to build the monorepo. The mise configuration lives in [`mise.toml`](https://github.com/ethereum-optimism/optimism/blob/develop/mise.toml) at the monorepo root.
 
-## Build op-node and the execution client
+## Build mc-node and the execution client
 
-The Optimism Monorepo does **coordinated releases** — each release commit is tagged simultaneously across components (op-node, op-reth, kona-node, etc.). Pinning to one release tag gives you a known-good combination of all of them built from the same source state. Look up the latest tags on the [Optimism releases page](https://github.com/ethereum-optimism/optimism/releases).
+The Optimism Monorepo does **coordinated releases** — each release commit is tagged simultaneously across components (mc-node, mc-reth, kona-node, etc.). Pinning to one release tag gives you a known-good combination of all of them built from the same source state. Look up the latest tags on the [Optimism releases page](https://github.com/ethereum-optimism/optimism/releases).
 
 <Steps>
   <Step title="Clone the Optimism Monorepo">
-    The monorepo contains the source for both `op-node` and `op-reth`.
+    The monorepo contains the source for both `mc-node` and `mc-reth`.
 
     ```bash
     git clone https://github.com/ethereum-optimism/optimism.git
@@ -51,32 +51,32 @@ The Optimism Monorepo does **coordinated releases** — each release commit is t
   </Step>
 
   <Step title="Pin to a release commit">
-    Check out a recent op-node release tag — the same commit carries the matching op-reth tag. For example, `op-node/v1.18.2` is co-tagged with `op-reth/v2.2.4`:
+    Check out a recent mc-node release tag — the same commit carries the matching mc-reth tag. For example, `mc-node/v1.18.2` is co-tagged with `mc-reth/v2.2.4`:
 
     ```bash
-    git checkout op-node/v1.18.2
+    git checkout mc-node/v1.18.2
     ```
 
   </Step>
 
-  <Step title="Build op-node">
+  <Step title="Build mc-node">
     ```bash
-    cd op-node && just && cd ..
+    cd mc-node && just && cd ..
     ```
 
-    Binary: `op-node/bin/op-node` (relative to the monorepo root).
+    Binary: `mc-node/bin/mc-node` (relative to the monorepo root).
   </Step>
 
   <Step title="Build the execution client">
-    <Tabs items={['op-reth', 'Nethermind']}>
-      <Tab title="op-reth">
-        op-reth lives inside the monorepo at `rust/op-reth/` — no second `git clone` needed.
+    <Tabs items={['mc-reth', 'Nethermind']}>
+      <Tab title="mc-reth">
+        mc-reth lives inside the monorepo at `rust/mc-reth/` — no second `git clone` needed.
 
         ```bash
-        cd rust/op-reth && cargo build --release --bin op-reth && cd ../..
+        cd rust/mc-reth && cargo build --release --bin mc-reth && cd ../..
         ```
 
-        Binary: `rust/target/release/op-reth` (relative to the monorepo root). `rust/` is a Cargo workspace, so the `target/` directory lives at the workspace root, not inside the individual crate. Build outputs are gitignored, so they persist across any future `git checkout`.
+        Binary: `rust/target/release/mc-reth` (relative to the monorepo root). `rust/` is a Cargo workspace, so the `target/` directory lives at the workspace root, not inside the individual crate. Build outputs are gitignored, so they persist across any future `git checkout`.
       </Tab>
 
       <Tab title="Nethermind">
@@ -99,7 +99,7 @@ Assess if you need to configure a blob archiver service by reading [Configure a 
 
 ## Create a JWT secret
 
-The execution client and `op-node` communicate over the engine API authrpc, secured with a shared 32-byte hex secret. Both binaries must read the **same** secret file. The commands below use a relative path (`./jwt.txt`) for each binary, so the same content must exist at both launch directories.
+The execution client and `mc-node` communicate over the engine API authrpc, secured with a shared 32-byte hex secret. Both binaries must read the **same** secret file. The commands below use a relative path (`./jwt.txt`) for each binary, so the same content must exist at both launch directories.
 
 <Steps>
   <Step title="Generate the secret">
@@ -112,14 +112,14 @@ The execution client and `op-node` communicate over the engine API authrpc, secu
     This creates `optimism/jwt.txt`.
   </Step>
 
-  <Step title="Copy to the op-node launch directory">
+  <Step title="Copy to the mc-node launch directory">
     ```bash
-    cp jwt.txt op-node/jwt.txt
+    cp jwt.txt mc-node/jwt.txt
     ```
   </Step>
 
-  <Step title="Copy to the op-reth launch directory">
-    The op-reth binary lives at `rust/target/release/op-reth` and the tutorial launches it from `rust/`, so place the JWT there:
+  <Step title="Copy to the mc-reth launch directory">
+    The mc-reth binary lives at `rust/target/release/mc-reth` and the tutorial launches it from `rust/`, so place the JWT there:
 
     ```bash
     cp jwt.txt rust/jwt.txt
@@ -131,36 +131,36 @@ The two copies must remain identical — if you regenerate one side, copy it ove
 
 ## Start the execution client
 
-It's generally easier to start the execution client before `op-node`. The EL will simply not receive any blocks until `op-node` is started.
+It's generally easier to start the execution client before `mc-node`. The EL will simply not receive any blocks until `mc-node` is started.
 
-<Tabs items={['op-reth', 'Nethermind']}>
-  <Tab title="op-reth">
+<Tabs items={['mc-reth', 'Nethermind']}>
+  <Tab title="mc-reth">
     <Steps>
       <Step title="Navigate to the rust workspace directory">
-        op-reth is built into the workspace target dir, so launch from `optimism/rust/`:
+        mc-reth is built into the workspace target dir, so launch from `optimism/rust/`:
 
         ```bash
         cd /path/to/optimism/rust
         ```
 
-        The binary is then at `./target/release/op-reth`.
+        The binary is then at `./target/release/mc-reth`.
       </Step>
 
       <Step title="Set environment variables">
         ```bash
-        export DATADIR_PATH=... # Path to the desired data directory for op-reth
+        export DATADIR_PATH=... # Path to the desired data directory for mc-reth
         ```
       </Step>
 
-      <Step title="Start op-reth">
+      <Step title="Start mc-reth">
         <Info>
           For archive-node configuration (historical state for withdrawal proving), see the [OP Mainnet archive nodes](#op-mainnet-archive-nodes) section.
         </Info>
 
-        The JSON-RPC API will become available on port 8545. See the [op-reth configuration reference](/node-operators/reference/op-reth-config) for the full flag set.
+        The JSON-RPC API will become available on port 8545. See the [mc-reth configuration reference](/node-operators/reference/mc-reth-config) for the full flag set.
 
         ```bash
-        ./target/release/op-reth node \
+        ./target/release/mc-reth node \
           --chain=optimism_sepolia \
           --datadir=$DATADIR_PATH \
           --http \
@@ -200,19 +200,19 @@ It's generally easier to start the execution client before `op-node`. The EL wil
   </Tab>
 </Tabs>
 
-## Start op-node
+## Start mc-node
 
-Once your execution client is running, start `op-node`. It will connect to the EL and begin synchronizing the chain.
+Once your execution client is running, start `mc-node`. It will connect to the EL and begin synchronizing the chain.
 
 <Steps>
-  <Step title="Navigate to the op-node directory">
-    op-node is built into its own crate directory, so launch from `optimism/op-node/`:
+  <Step title="Navigate to the mc-node directory">
+    mc-node is built into its own crate directory, so launch from `optimism/mc-node/`:
 
     ```bash
-    cd /path/to/optimism/op-node
+    cd /path/to/optimism/mc-node
     ```
 
-    The binary is then at `./bin/op-node`.
+    The binary is then at `./bin/mc-node`.
   </Step>
 
   <Step title="Set environment variables">
@@ -223,21 +223,21 @@ Once your execution client is running, start `op-node`. It will connect to the E
     ```
   </Step>
 
-  <Step title="Start op-node">
+  <Step title="Start mc-node">
     <Info>
-      The `op-node` RPC should not be exposed publicly. If left exposed, it could accidentally expose admin controls to the public internet.
+      The `mc-node` RPC should not be exposed publicly. If left exposed, it could accidentally expose admin controls to the public internet.
     </Info>
 
     <Info>
-      `--syncmode=execution-layer` enables [snap sync](/node-operators/reference/consensus-layer-sync), which works for both `op-reth` and `Nethermind` and removes the need to initialize the node with a data directory.
+      `--syncmode=execution-layer` enables [snap sync](/node-operators/reference/consensus-layer-sync), which works for both `mc-reth` and `Nethermind` and removes the need to initialize the node with a data directory.
     </Info>
 
     <Info>
-      `--l2.enginekind` tells op-node which kind of execution client it is driving. The binary defaults to `reth`, so this flag is shown for clarity and can be omitted when pairing with op-reth.
+      `--l2.enginekind` tells mc-node which kind of execution client it is driving. The binary defaults to `reth`, so this flag is shown for clarity and can be omitted when pairing with mc-reth.
     </Info>
 
     ```bash
-    ./bin/op-node \
+    ./bin/mc-node \
       --l1=$L1_RPC_URL \
       --l1.rpckind=$L1_RPC_KIND \
       --l1.beacon=$L1_BEACON_URL \
@@ -249,18 +249,18 @@ Once your execution client is running, start `op-node`. It will connect to the E
     ```
 
     <Info>
-      Some L1 nodes (e.g. Erigon) do not support `eth_getProof`. Add `--l1.trustrpc` if your L1 doesn't support it — this means op-node trusts the L1 node to provide correct data.
+      Some L1 nodes (e.g. Erigon) do not support `eth_getProof`. Add `--l1.trustrpc` if your L1 doesn't support it — this means mc-node trusts the L1 node to provide correct data.
     </Info>
   </Step>
 </Steps>
 
 ## Synchronization verification
 
-Once the EL and op-node are running, you should see them begin to communicate and synchronize.
+Once the EL and mc-node are running, you should see them begin to communicate and synchronize.
 
 ### Snap sync (default)
 
-Initial synchronization can take several hours. At the start of snap sync, `op-node` will log:
+Initial synchronization can take several hours. At the start of snap sync, `mc-node` will log:
 
 ```text
 INFO [03-06|10:56:55.602] Starting EL sync
@@ -268,7 +268,7 @@ INFO [03-06|10:56:55.615] Sync progress                            reason="unsaf
 INFO [03-06|10:56:57.567] Optimistically inserting unsafe L2 execution payload to drive EL sync id=4ac160..df4d12:117076320
 ```
 
-`Starting EL sync` is shown once and the sync-progress / inserting logs repeat until done. `op-node` will log the following when finished:
+`Starting EL sync` is shown once and the sync-progress / inserting logs repeat until done. `mc-node` will log the following when finished:
 
 ```text
 lvl=info msg="Finished EL sync" sync_duration=23h25m0.370558429s finalized_block=0x4f69e83ff1407f2e2882f2526ee8a154ac326590799889cede3af04a7742f18d:116817417
@@ -276,9 +276,9 @@ lvl=info msg="Finished EL sync" sync_duration=23h25m0.370558429s finalized_block
 
 The execution client logs its own header- and state-download progress in parallel:
 
-<Tabs items={['op-reth', 'Nethermind']}>
-  <Tab title="op-reth">
-    `op-reth` logs sync stages (headers, bodies, execution, state root) with periodic progress lines. Monitor the op-reth logs to confirm it is advancing through stages alongside the op-node `Sync progress` lines.
+<Tabs items={['mc-reth', 'Nethermind']}>
+  <Tab title="mc-reth">
+    `mc-reth` logs sync stages (headers, bodies, execution, state root) with periodic progress lines. Monitor the mc-reth logs to confirm it is advancing through stages alongside the mc-node `Sync progress` lines.
   </Tab>
 
   <Tab title="Nethermind">
@@ -296,9 +296,9 @@ The execution client logs its own header- and state-download progress in paralle
 
 Full sync rebuilds the chain from genesis and can take days to weeks on mature networks. Most operators should use snap sync (above) or [bootstrap from a pre-synced snapshot](https://datadirs.optimism.io/). Full-sync configuration is client-specific:
 
-<Tabs items={['op-reth', 'Nethermind']}>
-  <Tab title="op-reth">
-    op-reth's snap sync is the recommended initialization path. For alternative sync configurations, see the [op-reth configuration reference](/node-operators/reference/op-reth-config).
+<Tabs items={['mc-reth', 'Nethermind']}>
+  <Tab title="mc-reth">
+    mc-reth's snap sync is the recommended initialization path. For alternative sync configurations, see the [mc-reth configuration reference](/node-operators/reference/mc-reth-config).
   </Tab>
 
   <Tab title="Nethermind">
@@ -317,7 +317,7 @@ Full sync rebuilds the chain from genesis and can take days to weeks on mature n
   </Tab>
 </Tabs>
 
-After the initial sync, `op-node` derives L1 batches into L2 blocks and feeds them to the execution client. You'll see logs like:
+After the initial sync, `mc-node` derives L1 batches into L2 blocks and feeds them to the execution client. You'll see logs like:
 
 ```text
 INFO [06-26|13:31:20.389] Advancing bq origin                      origin=17171d..1bc69b:8300332 originBehind=false
@@ -334,11 +334,11 @@ The execution client logs its own block-import progress in parallel; refer to it
   You only need an archive node if you need historical state. Most node operators should default to full nodes.
 </Info>
 
-For op-reth, historical state for withdrawal proving is configured via either `--rpc.eth-proof-window` (no separate proofs database; size to your dispute-game cadence) or `--proofs-history` (bounded memory, larger storage). See:
+For mc-reth, historical state for withdrawal proving is configured via either `--rpc.eth-proof-window` (no separate proofs database; size to your dispute-game cadence) or `--proofs-history` (bounded memory, larger storage). See:
 
-- [Running op-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs) — full setup for `--proofs-history` (v2) on op-reth v2.2.3+.
+- [Running mc-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs) — full setup for `--proofs-history` (v2) on mc-reth v2.2.3+.
 - [Archive node guide](/node-operators/guides/management/archive-node) — flag overview for both paths.
-- [OP Mainnet snapshots](https://datadirs.optimism.io/) — pre-synced op-reth datadirs to bootstrap from.
+- [OP Mainnet snapshots](https://datadirs.optimism.io/) — pre-synced mc-reth datadirs to bootstrap from.
 
 ### Legacy Geth (pre-Bedrock, optional)
 
@@ -385,7 +385,7 @@ Blocks and transactions included in OP Mainnet before the Bedrock Upgrade cannot
 <OpGethEol />
 
 <Accordion title="Build and run op-geth (legacy)">
-  Pair op-geth with op-node by setting `--l2.enginekind=geth` instead of `reth` in the op-node command above.
+  Pair op-geth with mc-node by setting `--l2.enginekind=geth` instead of `reth` in the mc-node command above.
 
   ### Build op-geth
 
@@ -429,7 +429,7 @@ Blocks and transactions included in OP Mainnet before the Bedrock Upgrade cannot
     --datadir=$DATADIR_PATH
   ```
 
-  The op-geth configuration reference has been retired; see the [op-reth configuration reference](/node-operators/reference/op-reth-config) for the equivalent op-reth flags.
+  The op-geth configuration reference has been retired; see the [mc-reth configuration reference](/node-operators/reference/mc-reth-config) for the equivalent mc-reth flags.
 
   ### op-geth snap-sync stages
 
@@ -447,7 +447,7 @@ Blocks and transactions included in OP Mainnet before the Bedrock Upgrade cannot
   msg="Syncing: chain download in progress" synced=100.00% chain="176.01 GiB" headers=116,817,399@45.82GiB bodies=116,817,286@52.87GiB receipts=116,817,286@77.32GiB eta=77.430ms
   ```
 
-  Once synced, op-geth logs block imports as op-node feeds payloads:
+  Once synced, op-geth logs block imports as mc-node feeds payloads:
 
   ```text
   INFO [06-26|14:02:12.974] Imported new potential chain segment     number=4,068,194 hash=a334a0..609a83 blocks=1 txs=1
@@ -459,4 +459,4 @@ Blocks and transactions included in OP Mainnet before the Bedrock Upgrade cannot
 
 *   If your node is up and running, check the [Node Metrics and Monitoring Guide](/node-operators/guides/monitoring/metrics) to keep tabs on it.
 *   If you run into problems, see the [Node Troubleshooting Guide](/node-operators/guides/troubleshooting).
-*   For permissionless chains setting up withdrawal proving, continue with [Running op-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs).
+*   For permissionless chains setting up withdrawal proving, continue with [Running mc-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs).

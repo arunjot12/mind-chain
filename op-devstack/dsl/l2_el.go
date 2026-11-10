@@ -425,7 +425,7 @@ func (el *L2ELNode) WaitL1OriginHash(label eth.BlockLabel, target eth.BlockID, a
 // VerifyWithdrawalHashChangedIn verifies that the withdrawal hash changed between the parent and current block.
 // This is used to verify that the withdrawal hash changed in the block where the withdrawal was initiated.
 //
-// Some EL backends, such as op-reth, can briefly lag in serving historical proofs for a block that has
+// Some EL backends, such as mc-reth, can briefly lag in serving historical proofs for a block that has
 // already been inserted. Retry until the proof backend catches up instead of failing immediately.
 func (el *L2ELNode) VerifyWithdrawalHashChangedIn(blockHash common.Hash) {
 	l2Client := el.inner.L2EthClient()

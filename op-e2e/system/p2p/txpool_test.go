@@ -18,7 +18,7 @@ import (
 func TestTxGossip(t *testing.T) {
 	op_e2e.InitParallel(t)
 	// Pinned to op-geth: relies on in-process geth EL-level P2P gossip
-	// (geth.WithP2P / geth.ConnectP2P), which has no op-reth equivalent here.
+	// (geth.WithP2P / geth.ConnectP2P), which has no mc-reth equivalent here.
 	cfg := e2esys.DefaultSystemConfig(t, e2esys.WithL2ELKind(services.ELKindOpGeth))
 	gethOpts := []geth.GethOption{
 		geth.WithP2P(),

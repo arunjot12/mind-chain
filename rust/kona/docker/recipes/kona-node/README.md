@@ -6,7 +6,7 @@
 > being, it is intended to be used for development purposes. Please [file an issue][new-issue] if you have any problems
 > during development.
 
-This directory contains a simple `docker-compose` setup for `kona-node` and `op-reth`, including example Grafana
+This directory contains a simple `docker-compose` setup for `kona-node` and `mc-reth`, including example Grafana
 dashboards and a default Prometheus configuration.
 
 By default, this recipe is configured to sync the [`OP Sepolia`][op-sepolia] L2.
@@ -21,7 +21,7 @@ An L1 Execution Client RPC and L1 Beacon API endpoint must be configured in your
 Once these two environment variables are set, the environment can be spun up and shut down as follows:
 
 ```sh
-# Start `kona-node`, `op-reth`, and `grafana` + `prometheus`
+# Start `kona-node`, `mc-reth`, and `grafana` + `prometheus`
 just up
 
 # Shutdown the docker compose environment
@@ -52,10 +52,10 @@ before making a PR.
 | `9223`  | `kona-node` discovery       |
 | `9002`  | `kona-node` metrics         |
 | `5060`  | `kona-node` RPC             |
-| `30303` | `op-reth` discovery         |
-| `9001`  | `op-reth` metrics           |
-| `8545`  | `op-reth` RPC               |
-| `8551`  | `op-reth` engine            |
+| `30303` | `mc-reth` discovery         |
+| `9001`  | `mc-reth` metrics           |
+| `8545`  | `mc-reth` RPC               |
+| `8551`  | `mc-reth` engine            |
 | `9090`  | `prometheus` metrics server |
 | `3000`  | `grafana` dashboard UI      |
 
@@ -63,14 +63,14 @@ before making a PR.
 
 ### Adjusting host ports
 
-Host ports for both `op-reth` and `kona-node` can be configured in [`cfg.env`](./cfg.env).
+Host ports for both `mc-reth` and `kona-node` can be configured in [`cfg.env`](./cfg.env).
 
 ### Syncing a different OP Stack chain
 
 To adjust the chain that the node is syncing, you must modify the `docker-compose.yml` file to specify the desired
 network parameters. Specifically:
 1. Ensure `L1_PROVIDER_RPC` and `L1_BEACON_API` are set to L1 clients that represent the settlement layer of the L2.
-1. `op-reth`
+1. `mc-reth`
     - `--chain` must specify the desired chain.
     - `--rollup.sequencer-http` must specify the sequencer endpoint.
 1. `kona-node`
@@ -84,5 +84,5 @@ to the `kona-node` container's entrypoint.
 Example: `export RUST_LOG=engine_builder=trace,runtime=debug`
 
 [op-sepolia]: https://sepolia-optimism.etherscan.io
-[op-reth]: https://github.com/paradigmxyz/reth
+[mc-reth]: https://github.com/paradigmxyz/reth
 [new-issue]: https://github.com/ethereum-optimism/optimism/issues/new

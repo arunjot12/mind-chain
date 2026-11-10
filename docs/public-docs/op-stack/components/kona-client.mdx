@@ -35,7 +35,7 @@ op-program has reached end of support (see
 and the kona binaries are the maintained fault proof program today.
 
 **Who runs it:** nobody invokes it by hand in production.
-[op-challenger](/op-stack/fault-proofs/challenger) runs cannon when a fault
+[mc-challenger](/op-stack/fault-proofs/challenger) runs cannon when a fault
 dispute reaches the execution-trace stage, and cannon executes the
 kona-client ELF committed to by the chain's absolute prestate. Chain
 operators pin that prestate when configuring fault proofs; developers can
@@ -45,7 +45,7 @@ also run kona-client natively through kona-host for testing.
 
 *   [Generating absolute prestate and preimage files](/chain-operators/tutorials/absolute-prestate):
     build and verify the absolute prestate, the onchain commitment to a
-    specific kona-client build, whose preimage op-challenger runs at dispute
+    specific kona-client build, whose preimage mc-challenger runs at dispute
     time.
 
 ## How-tos
@@ -57,7 +57,7 @@ also run kona-client natively through kona-host for testing.
     move an existing chain's respected game type to the Kona-based fault
     proofs.
 *   [Run a fault-proof challenger](/use-cases/run-a-fault-proof-challenger):
-    stand up the op-challenger deployment that exercises kona-client, from
+    stand up the mc-challenger deployment that exercises kona-client, from
     prestate selection through configuration and monitoring.
 
 ## Configuration & flags reference

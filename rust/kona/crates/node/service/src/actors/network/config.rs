@@ -62,7 +62,7 @@ impl NetworkConfig {
 
         // When a node sees too few new inbound sessions, discv5's auto-NAT strips `ip`/`udp` from
         // the ENR, leaving `tcp` without an address, and ignores IP votes for 6h, which takes
-        // reachable nodes off the network. op-node has no equivalent, and discv5 before 0.12
+        // reachable nodes off the network. mc-node has no equivalent, and discv5 before 0.12
         // never ran it.
         builder.auto_nat_listen_duration(None);
 

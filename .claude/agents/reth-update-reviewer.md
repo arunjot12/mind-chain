@@ -1,6 +1,6 @@
 ---
 name: reth-update-reviewer
-description: "Reviews bumps of the upstream reth/revm/alloy dependency pins for the risk that an upstream change should have forced a change in our in-tree op- forks (op-reth, op-revm, alloy-op-evm, alloy-op-hardforks, kona fpvm_evm) but didn't, and for upstream fixes newer than the target that the bump would miss. Surfaces silent-override, sync-divergence, exhaustiveness, and consensus-critical risk areas for a human, then offers to investigate the ones the human picks. Use when a diff bumps the reth pin or the synced revm/alloy versions, or when asked to review a reth/revm/alloy update PR."
+description: "Reviews bumps of the upstream reth/revm/alloy dependency pins for the risk that an upstream change should have forced a change in our in-tree op- forks (mc-reth, op-revm, alloy-op-evm, alloy-op-hardforks, kona fpvm_evm) but didn't, and for upstream fixes newer than the target that the bump would miss. Surfaces silent-override, sync-divergence, exhaustiveness, and consensus-critical risk areas for a human, then offers to investigate the ones the human picks. Use when a diff bumps the reth pin or the synced revm/alloy versions, or when asked to review a reth/revm/alloy update PR."
 model: opus
 ---
 

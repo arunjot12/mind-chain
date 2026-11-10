@@ -32,7 +32,7 @@ For the current OP Mainnet storage figures and their growth rates, see the [hard
 
 ## Node Architecture
 
-Regardless of which OP Stack network you're running a node for, all nodes share the same fundamental two-client architecture: a consensus client (rollup node, either [op-node](/op-stack/components/op-node) or [kona-node](/op-stack/components/kona-node)) paired with an execution client ([op-reth](/op-stack/components/op-reth)), communicating via the Engine API with JWT authentication.
+Regardless of which OP Stack network you're running a node for, all nodes share the same fundamental two-client architecture: a consensus client (rollup node, either [mc-node](/op-stack/components/mc-node) or [kona-node](/op-stack/components/kona-node)) paired with an execution client ([mc-reth](/op-stack/components/mc-reth)), communicating via the Engine API with JWT authentication.
 Nodes that follow every chain in an [interop](/op-stack/interop/explainer) dependency set run [op-supernode](/op-stack/interop/supernode) as the consensus layer instead.
 See the [architecture reference](/node-operators/reference/architecture) for how the components fit together and the current client support matrix.
 
@@ -56,9 +56,9 @@ Upgrade announcements, deprecations, and other changes that affect node operator
 
 ## Next steps
 
-*   [**Run a node with Docker**](/node-operators/tutorials/node-from-docker): recommended path; uses the official op-reth + op-node images.
-*   [**Build and run a node from source**](/node-operators/tutorials/run-node-from-source): covers op-reth and Nethermind.
-*   [**Run op-reth with historical proofs**](/node-operators/tutorials/reth-historical-proofs): configure op-reth's proofs-history store for permissionless withdrawal proving.
+*   [**Run a node with Docker**](/node-operators/tutorials/node-from-docker): recommended path; uses the official mc-reth + mc-node images.
+*   [**Build and run a node from source**](/node-operators/tutorials/run-node-from-source): covers mc-reth and Nethermind.
+*   [**Run mc-reth with historical proofs**](/node-operators/tutorials/reth-historical-proofs): configure mc-reth's proofs-history store for permissionless withdrawal proving.
 *   [**Consensus client configuration**](/node-operators/guides/configuration/consensus-clients): working base configuration and recommended flags for the rollup node.
 *   [**Execution client configuration**](/node-operators/guides/configuration/execution-clients): working base configuration and recommended flags for the execution client.
 *   [**Supernode configuration**](/node-operators/guides/configuration/supernode): recommended settings and a starter configuration for running op-supernode in an interop dependency set.

@@ -28,30 +28,30 @@ The predicate is a bitwise AND (`(bitmap & flag) == flag && flag != 0`) — exce
 
 ## B. Inputs — where operators supply the bitmap
 
-The bitmap has **two operator-facing input surfaces**, both in op-deployer:
+The bitmap has **two operator-facing input surfaces**, both in mc-deployer:
 
-1. **CLI flag on `op-deployer bootstrap implementations`**
-   - `--dev-feature-bitmap` (env: `DEPLOYER_DEV_FEATURE_BITMAP`), defined in `op-deployer/pkg/deployer/bootstrap/flags.go`
+1. **CLI flag on `mc-deployer bootstrap implementations`**
+   - `--dev-feature-bitmap` (env: `DEPLOYER_DEV_FEATURE_BITMAP`), defined in `mc-deployer/pkg/deployer/bootstrap/flags.go`
    - Raw 32-byte hex; default empty
    - Flows into `ImplementationsConfig.DevFeatureBitmap` and on into `DeployImplementationsInput` for L1 implementation deployment.
    - When the ZK bit is enabled, Ethereum mainnet and Sepolia default to Succinct's v6.1.0 PLONK verifier, resolved by `standard.SP1VerifierFor`. `--sp1-verifier-address` (env: `DEPLOYER_SP1_VERIFIER_ADDRESS`) overrides that release input and is required on other L1 networks.
 
 2. **Intent file (`globalDeployOverrides.devFeatureBitmap`)**
-   - Schema field on `Intent`, `op-deployer/pkg/deployer/state/intent.go`
+   - Schema field on `Intent`, `mc-deployer/pkg/deployer/state/intent.go`
    - Lives in the operator's intent TOML/JSON
    - Read by the L2 genesis pipeline.
    - All of the following applies only when `apply` deploys new implementations. With a predeployed OPCM (`opcmAddress` set), the implementations already exist and `ValidateInputs` rejects `sp1Verifier` outright, so those operators must not set the override.
    - A live ZK-enabled `apply` selects the same release-approved verifier as bootstrap on Ethereum mainnet and Sepolia; other L1 networks must set `globalDeployOverrides.sp1Verifier`, which always wins where it is set. Enabling ZK stays an explicit operator choice — the default only picks the verifier, never the feature.
    - Both surfaces read the mapping from `standard.SP1VerifierFor`, so bootstrap and apply can never drift.
-   - `op-deployer/pkg/deployer/standard/sp1-verifier.json` records, per chain, the `VERIFIER_HASH()` of that verifier, the PLONK circuit it accepts proofs for; `standard.SP1VerifierHashFor` reads it. `TestApplyDefaultsSP1VerifierOnSepolia` holds it to the chain, `VerifyOPCM` re-checks it at release, and `op-zk-proposer`'s release-pin test holds the linked sp1-sdk to it, so bumping sp1-sdk to a new circuit fails CI until the address and the file move together. The proposer also derives the hash from its SDK at runtime and pauses creation and skips proving for any adapter whose verifier hash differs.
-   - The selected raw verifier is recorded in deployment state (`State.SP1Verifier`) and never written back into intent. A resumed deployment reuses the recorded address rather than re-resolving the default, so upgrading op-deployer mid-deployment cannot swap the verifier under a chain.
+   - `mc-deployer/pkg/deployer/standard/sp1-verifier.json` records, per chain, the `VERIFIER_HASH()` of that verifier, the PLONK circuit it accepts proofs for; `standard.SP1VerifierHashFor` reads it. `TestApplyDefaultsSP1VerifierOnSepolia` holds it to the chain, `VerifyOPCM` re-checks it at release, and `op-zk-proposer`'s release-pin test holds the linked sp1-sdk to it, so bumping sp1-sdk to a new circuit fails CI until the address and the file move together. The proposer also derives the hash from its SDK at runtime and pauses creation and skips proving for any adapter whose verifier hash differs.
+   - The selected raw verifier is recorded in deployment state (`State.SP1Verifier`) and never written back into intent. A resumed deployment reuses the recorded address rather than re-resolving the default, so upgrading mc-deployer mid-deployment cannot swap the verifier under a chain.
    - Genesis deployments never select the release verifier: it does not exist in a generated genesis. They must set `sp1Verifier` explicitly, or the op-devstack builder can opt into deploying a test raw verifier during genesis.
 
-There is no other production operator-facing surface. `op-node`, `kona`, and rollup config do not take a bitmap at runtime.
+There is no other production operator-facing surface. `mc-node`, `kona`, and rollup config do not take a bitmap at runtime.
 
-### Developer-only: `op-node/rollup/toggles.go`
+### Developer-only: `mc-node/rollup/toggles.go`
 
-A third input mechanism, distinct from the bitmap, lives in `op-node/rollup/toggles.go`. It is a **source-code-edit-only** developer toggle — not exposed via config, CLI, or env var. The file holds ephemeral `Is<Feature>(time)` methods on `*Config` that map an in-development feature to its eventual hardfork timestamp:
+A third input mechanism, distinct from the bitmap, lives in `mc-node/rollup/toggles.go`. It is a **source-code-edit-only** developer toggle — not exposed via config, CLI, or env var. The file holds ephemeral `Is<Feature>(time)` methods on `*Config` that map an in-development feature to its eventual hardfork timestamp:
 
 ```go
 func (c *Config) IsL2CM(time uint64) bool {
@@ -61,7 +61,7 @@ func (c *Config) IsL2CM(time uint64) bool {
 
 The file's comment instructs developers to "replace with `return false` to disable NUT bundle execution during development." This is a temporary scaffold for the active fork scope; entries are removed after the fork is locked.
 
-What it gates is **runtime activation timing** in op-node (when NUT bundle deposit transactions are emitted at the activation block), which is orthogonal to what the bitmap gates (whether the supporting predeploys and contracts exist on a given chain at all).
+What it gates is **runtime activation timing** in mc-node (when NUT bundle deposit transactions are emitted at the activation block), which is orthogonal to what the bitmap gates (whether the supporting predeploys and contracts exist on a given chain at all).
 
 ### Test-only: per-feature controls
 
@@ -77,29 +77,29 @@ Interop, ZK and bridge hook are read via `vm.envOr(..., false)` in `packages/con
 - `test/setup/ForkL1Live.s.sol` — branches on individual `Config.devFeature*` returns
 - `test/L1/OPContractsManagerStandardValidator.t.sol` — `vm.skip()` based on flag state
 
-The env vars and default-on helper exist purely to set up local test fixtures and to skip or branch tests. They never reach a deployed chain. To exercise an opt-in feature in production you must set the bitmap via op-deployer.
+The env vars and default-on helper exist purely to set up local test fixtures and to skip or branch tests. They never reach a deployed chain. To exercise an opt-in feature in production you must set the bitmap via mc-deployer.
 
 ## C. Composition — how those inputs become a single bitmap
 
-All composition happens in op-deployer at deploy / genesis time. The central function is:
+All composition happens in mc-deployer at deploy / genesis time. The central function is:
 
-- **`buildDevFeatureBitmap()`** in `op-deployer/pkg/deployer/pipeline/l2genesis.go`
+- **`buildDevFeatureBitmap()`** in `mc-deployer/pkg/deployer/pipeline/l2genesis.go`
   - Reads `intent.GlobalDeployOverrides["devFeatureBitmap"]`
   - **Cross-validates** the interop bit against the separate `intent.UseInterop` boolean — fails the deploy if they disagree
   - Returns the bitmap to the genesis builder.
 
-What this does **not** do: it does not OR together a list of named feature toggles. The operator hands in a raw bitmap; op-deployer just validates one bit (interop) against a parallel boolean, then passes the bitmap through verbatim. The CLI flag and the intent override are independent surfaces — they are not merged; whichever subcommand runs uses its own input.
+What this does **not** do: it does not OR together a list of named feature toggles. The operator hands in a raw bitmap; mc-deployer just validates one bit (interop) against a parallel boolean, then passes the bitmap through verbatim. The CLI flag and the intent override are independent surfaces — they are not merged; whichever subcommand runs uses its own input.
 
-The Foundry test-only assembler in `FeatureFlags.sol` is a separate composition layer entirely; it is never invoked by op-deployer.
+The Foundry test-only assembler in `FeatureFlags.sol` is a separate composition layer entirely; it is never invoked by mc-deployer.
 
 ## D. Propagation — where the bitmap travels
 
-From op-deployer the bitmap fans out two ways:
+From mc-deployer the bitmap fans out two ways:
 
 1. **Into L2 genesis state** — `scripts/L2Genesis.s.sol` (Foundry script) writes the bitmap into the **`L2DevFeatureFlags` predeploy at `0x42...2D`** via `setDevFeatureBitmap()`. Only `DEPOSITOR_ACCOUNT` can write; effectively write-once at genesis.
 2. **Into L1 implementation deployment** — `scripts/deploy/DeployImplementations.s.sol` consults the bitmap to decide which implementation contracts to deploy / configure.
 
-It does **not** flow to op-node or kona at runtime. They learn about feature activation through other channels (hardfork timestamps in rollup config, primarily).
+It does **not** flow to mc-node or kona at runtime. They learn about feature activation through other channels (hardfork timestamps in rollup config, primarily).
 
 ## E. Activation — who reads it and what they gate
 
@@ -112,7 +112,7 @@ It does **not** flow to op-node or kona at runtime. They learn about feature act
 **On Go**, the bitmap is essentially deploy-time-only:
 
 - The interop cross-check in `buildDevFeatureBitmap()` noted above.
-- No runtime callers. (op-node uses hardfork timestamps, not the bitmap.)
+- No runtime callers. (mc-node uses hardfork timestamps, not the bitmap.)
 
 **The L2DevFeatureFlags predeploy API** (`src/L2/L2DevFeatureFlags.sol`):
 
@@ -122,7 +122,7 @@ It does **not** flow to op-node or kona at runtime. They learn about feature act
 
 ## F. Hardfork interaction
 
-Interop and ZK use the bitmap as their per-chain provisioning switch and have no parallel hardfork timestamp. Super-root migration also has no parallel hardfork timestamp, but it is default-on in the predicate, so its bitmap bit no longer acts as a circuit breaker. Network-wide activation timing is a separate mechanism: the hardfork timestamps mapped by the developer toggles in `op-node/rollup/toggles.go` (see section B), e.g. `IsL2CM(time)` decides **when** L2ContractsManager upgrade transactions execute across the network.
+Interop and ZK use the bitmap as their per-chain provisioning switch and have no parallel hardfork timestamp. Super-root migration also has no parallel hardfork timestamp, but it is default-on in the predicate, so its bitmap bit no longer acts as a circuit breaker. Network-wide activation timing is a separate mechanism: the hardfork timestamps mapped by the developer toggles in `mc-node/rollup/toggles.go` (see section B), e.g. `IsL2CM(time)` decides **when** L2ContractsManager upgrade transactions execute across the network.
 
 ## G. Lifecycle direction
 
@@ -135,13 +135,13 @@ Interop and ZK use the bitmap as their per-chain provisioning switch and have no
 |---|---|
 | Go constants & predicate | `op-core/devfeatures/devfeatures.go` |
 | Solidity constants & predicate | `packages/contracts-bedrock/src/libraries/DevFeatures.sol` |
-| CLI input | `op-deployer/pkg/deployer/bootstrap/flags.go` |
-| Intent input + composition | `op-deployer/pkg/deployer/pipeline/l2genesis.go` |
-| Release-approved SP1 verifier | `op-deployer/pkg/deployer/standard/standard.go` |
+| CLI input | `mc-deployer/pkg/deployer/bootstrap/flags.go` |
+| Intent input + composition | `mc-deployer/pkg/deployer/pipeline/l2genesis.go` |
+| Release-approved SP1 verifier | `mc-deployer/pkg/deployer/standard/standard.go` |
 | Genesis writer | `packages/contracts-bedrock/scripts/L2Genesis.s.sol` |
 | L2 storage | `packages/contracts-bedrock/src/L2/L2DevFeatureFlags.sol` |
 | L2 runtime reader | `packages/contracts-bedrock/src/L2/L2ContractsManager.sol` |
 | Predeploy gating | `packages/contracts-bedrock/src/libraries/Predeploys.sol` |
-| L2CM hardfork gate | `op-node/rollup/toggles.go` |
+| L2CM hardfork gate | `mc-node/rollup/toggles.go` |
 | Test-only feature controls | `packages/contracts-bedrock/scripts/libraries/Config.sol` |
 | Test bitmap assembler | `packages/contracts-bedrock/test/setup/FeatureFlags.sol` |

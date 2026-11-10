@@ -254,7 +254,7 @@ func randomRecipient() common.Address {
 }
 
 // interopTxRejected reports whether err is a known interop-transaction rejection
-// from op-geth, op-reth, or the interop filter.
+// from op-geth, mc-reth, or the interop filter.
 func interopTxRejected(err error) bool {
 	msg := err.Error()
 	switch {
@@ -264,7 +264,7 @@ func interopTxRejected(err error) bool {
 	// op-interop-filter: malformed or unrecognized access list entry
 	case strings.Contains(msg, "failed to parse access entry"):
 		return true
-	// op-reth fast-path: cached failsafe state rejects before calling the filter
+	// mc-reth fast-path: cached failsafe state rejects before calling the filter
 	case strings.Contains(msg, "interop failsafe is active"):
 		return true
 	// op-interop-filter: failsafe enabled at the filter level

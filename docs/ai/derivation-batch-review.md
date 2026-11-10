@@ -40,14 +40,14 @@ Do not report encoder-only findings unless they change data that a verifier acce
 This mapping belongs in the monorepo because repository paths change independently from protocol behavior.
 Treat each path as a starting point, then follow affected callers and callees.
 
-| Behavior | Specification | op-node | Kona |
+| Behavior | Specification | mc-node | Kona |
 | --- | --- | --- | --- |
-| Channel decompression and size bounds | [Channel format](https://specs.optimism.io/protocol/derivation.html#channel-format), [Fjord derivation](https://specs.optimism.io/protocol/fjord/derivation.html) | `op-node/rollup/derive/channel_in_reader.go`, `op-node/rollup/derive/channel.go`, `op-node/rollup/chain_spec.go` | `derive/src/stages/channel/channel_reader.rs`, `protocol/src/batch/reader.rs`, `protocol/src/brotli.rs` |
-| Batch envelope and singular batches | [Batch format](https://specs.optimism.io/protocol/derivation.html#batch-format) | `op-node/rollup/derive/channel_in_reader.go`, `op-node/rollup/derive/batch.go`, `op-node/rollup/derive/singular_batch.go` | `derive/src/stages/channel/channel_reader.rs`, `protocol/src/batch/reader.rs`, `protocol/src/batch/core.rs`, `protocol/src/batch/single.rs`, `protocol/src/batch/type.rs`, `protocol/src/batch/errors.rs` |
-| Span-batch wire format | [Span batch format](https://specs.optimism.io/protocol/delta/span-batches.html#span-batch-format) | `op-node/rollup/derive/span_batch.go`, `op-node/rollup/derive/span_batch_tx.go`, `op-node/rollup/derive/span_batch_txs.go`, `op-node/rollup/derive/span_batch_util.go` | `protocol/src/batch/raw.rs`, `protocol/src/batch/prefix.rs`, `protocol/src/batch/payload.rs`, `protocol/src/batch/transactions.rs`, `protocol/src/batch/tx_data/`, `protocol/src/batch/varint.rs`, `protocol/src/batch/bits.rs` |
-| Span conversion and overlap | [Span batch integration](https://specs.optimism.io/protocol/delta/span-batches.html#integration) | `op-node/rollup/derive/span_batch.go`, `op-node/rollup/derive/batches.go` | `protocol/src/batch/raw.rs`, `protocol/src/batch/span.rs`, `protocol/src/batch/element.rs`, `protocol/src/batch/inclusion.rs` |
-| Holocene batch streaming | [Holocene derivation](https://specs.optimism.io/protocol/holocene/derivation.html) | `op-node/rollup/derive/batch_mux.go`, `op-node/rollup/derive/base_batch_stage.go`, `op-node/rollup/derive/batch_stage.go`, `op-node/rollup/derive/batch_queue.go`, `op-node/rollup/derive/attributes_queue.go` | `derive/src/pipeline/core.rs`, `derive/src/stages/attributes_queue.rs`, `derive/src/stages/batch/batch_provider.rs`, `derive/src/stages/batch/batch_stream.rs`, `derive/src/stages/batch/batch_queue.rs`, `derive/src/stages/batch/batch_validator.rs`, `rust/kona/crates/node/service/src/actors/engine/actor.rs`, `rust/kona/crates/proof/driver/src/core.rs` |
-| Semantic batch validity | [Batch Queue](https://specs.optimism.io/protocol/derivation.html#batch-queue), [Span Batch Queue](https://specs.optimism.io/protocol/delta/span-batches.html#batch-queue) | `op-node/rollup/derive/batches.go`, `op-node/rollup/chain_spec.go`, `op-node/rollup/toggles.go`, `op-node/rollup/types.go` | `protocol/src/batch/validity.rs`, `protocol/src/batch/single.rs`, `protocol/src/batch/span.rs`, `derive/src/stages/batch/batch_validator.rs`, `genesis/src/rollup.rs` |
+| Channel decompression and size bounds | [Channel format](https://specs.optimism.io/protocol/derivation.html#channel-format), [Fjord derivation](https://specs.optimism.io/protocol/fjord/derivation.html) | `mc-node/rollup/derive/channel_in_reader.go`, `mc-node/rollup/derive/channel.go`, `mc-node/rollup/chain_spec.go` | `derive/src/stages/channel/channel_reader.rs`, `protocol/src/batch/reader.rs`, `protocol/src/brotli.rs` |
+| Batch envelope and singular batches | [Batch format](https://specs.optimism.io/protocol/derivation.html#batch-format) | `mc-node/rollup/derive/channel_in_reader.go`, `mc-node/rollup/derive/batch.go`, `mc-node/rollup/derive/singular_batch.go` | `derive/src/stages/channel/channel_reader.rs`, `protocol/src/batch/reader.rs`, `protocol/src/batch/core.rs`, `protocol/src/batch/single.rs`, `protocol/src/batch/type.rs`, `protocol/src/batch/errors.rs` |
+| Span-batch wire format | [Span batch format](https://specs.optimism.io/protocol/delta/span-batches.html#span-batch-format) | `mc-node/rollup/derive/span_batch.go`, `mc-node/rollup/derive/span_batch_tx.go`, `mc-node/rollup/derive/span_batch_txs.go`, `mc-node/rollup/derive/span_batch_util.go` | `protocol/src/batch/raw.rs`, `protocol/src/batch/prefix.rs`, `protocol/src/batch/payload.rs`, `protocol/src/batch/transactions.rs`, `protocol/src/batch/tx_data/`, `protocol/src/batch/varint.rs`, `protocol/src/batch/bits.rs` |
+| Span conversion and overlap | [Span batch integration](https://specs.optimism.io/protocol/delta/span-batches.html#integration) | `mc-node/rollup/derive/span_batch.go`, `mc-node/rollup/derive/batches.go` | `protocol/src/batch/raw.rs`, `protocol/src/batch/span.rs`, `protocol/src/batch/element.rs`, `protocol/src/batch/inclusion.rs` |
+| Holocene batch streaming | [Holocene derivation](https://specs.optimism.io/protocol/holocene/derivation.html) | `mc-node/rollup/derive/batch_mux.go`, `mc-node/rollup/derive/base_batch_stage.go`, `mc-node/rollup/derive/batch_stage.go`, `mc-node/rollup/derive/batch_queue.go`, `mc-node/rollup/derive/attributes_queue.go` | `derive/src/pipeline/core.rs`, `derive/src/stages/attributes_queue.rs`, `derive/src/stages/batch/batch_provider.rs`, `derive/src/stages/batch/batch_stream.rs`, `derive/src/stages/batch/batch_queue.rs`, `derive/src/stages/batch/batch_validator.rs`, `rust/kona/crates/node/service/src/actors/engine/actor.rs`, `rust/kona/crates/proof/driver/src/core.rs` |
+| Semantic batch validity | [Batch Queue](https://specs.optimism.io/protocol/derivation.html#batch-queue), [Span Batch Queue](https://specs.optimism.io/protocol/delta/span-batches.html#batch-queue) | `mc-node/rollup/derive/batches.go`, `mc-node/rollup/chain_spec.go`, `mc-node/rollup/toggles.go`, `mc-node/rollup/types.go` | `protocol/src/batch/validity.rs`, `protocol/src/batch/single.rs`, `protocol/src/batch/span.rs`, `derive/src/stages/batch/batch_validator.rs`, `genesis/src/rollup.rs` |
 
 Kona paths are relative to `rust/kona/crates/protocol/` unless they start with `rust/kona/`.
 All other paths are relative to the repository root.
@@ -73,7 +73,7 @@ Also run it for these changes:
 ## Derivation analysis
 
 Trace complete channel bytes through the final batch outcome.
-Trace op-node and Kona independently.
+Trace mc-node and Kona independently.
 For each affected path, determine:
 
 - Which byte strings it accepts.
@@ -85,7 +85,7 @@ For each affected path, determine:
 
 Compare both implementations with the specification first.
 Then compare their accept sets and outputs with each other.
-Follow [derivation.md](derivation.md#cross-client-wire-format-parity) for wire-format parity and codec-testing guidance. For specification-driven reviews, the [shared authority policy](spec-driven-review.md#authority) takes precedence over that section's op-node tie-breaker: report unresolved divergences with a specification-gap finding rather than selecting a client as correct.
+Follow [derivation.md](derivation.md#cross-client-wire-format-parity) for wire-format parity and codec-testing guidance. For specification-driven reviews, the [shared authority policy](spec-driven-review.md#authority) takes precedence over that section's mc-node tie-breaker: report unresolved divergences with a specification-gap finding rather than selecting a client as correct.
 
 Report the input class that a difference covers, not one example input.
 Name the first byte range, the field, or the failure mode that produces the same outcome.
@@ -102,7 +102,7 @@ In this area the sibling pairs are:
 
 - Singular-batch validity against span-batch validity, in the same client.
 - Pre-Holocene stage behavior against Holocene stage behavior, for the same wire format.
-- The same rule list in op-node against the matching list in Kona.
+- The same rule list in mc-node against the matching list in Kona.
 
 The shared guide also requires the rejection stage for each input.
 A structural decode failure can discard a whole channel.

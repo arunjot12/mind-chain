@@ -77,7 +77,7 @@ var optionKindLabels = []struct {
 	{kind: optionKindDeployer, label: "deployer options"},
 	{kind: optionKindBatcher, label: "batcher options"},
 	{kind: optionKindProposer, label: "proposer options"},
-	{kind: optionKindOpReth, label: "op-reth options"},
+	{kind: optionKindOpReth, label: "mc-reth options"},
 	{kind: optionKindGlobalL2CL, label: "L2 CL options"},
 	{kind: optionKindGlobalSyncTesterEL, label: "sync tester EL options"},
 	{kind: optionKindL1EL, label: "L1 EL options"},
@@ -164,7 +164,7 @@ const minimalPresetSupportedOptionKinds = optionKindDeployer |
 const minimalWithConductorsPresetSupportedOptionKinds = minimalPresetSupportedOptionKinds |
 	optionKindConductorFastHealthChecks
 
-// Builds on the minimal set, op-reth options included: the added node is a sync-tester EL, not a
+// Builds on the minimal set, mc-reth options included: the added node is a sync-tester EL, not a
 // sequencing candidate, so the sequencer-builds / stock-verifies split holds.
 const simpleWithSyncTesterPresetSupportedOptionKinds = minimalPresetSupportedOptionKinds |
 	optionKindGlobalSyncTesterEL

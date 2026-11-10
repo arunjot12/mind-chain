@@ -10,9 +10,9 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	opNodeFlags "github.com/ethereum-optimism/optimism/op-node/flags"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	p2pcli "github.com/ethereum-optimism/optimism/op-node/p2p/cli"
+	opNodeFlags "github.com/ethereum-optimism/optimism/mc-node/flags"
+	"github.com/ethereum-optimism/optimism/mc-node/p2p"
+	p2pcli "github.com/ethereum-optimism/optimism/mc-node/p2p/cli"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 )
 

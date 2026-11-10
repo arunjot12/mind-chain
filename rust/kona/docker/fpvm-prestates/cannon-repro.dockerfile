@@ -75,12 +75,12 @@ COPY rust/alloy-op-evm/ /app/rust/alloy-op-evm/
 COPY rust/alloy-op-hardforks/ /app/rust/alloy-op-hardforks/
 COPY rust/op-revm/ /app/rust/op-revm/
 COPY rust/op-version/ /app/rust/op-version/
-# op-reth, revm-ee-tests, op-reth-test-engine, and lokahi are workspace
+# mc-reth, revm-ee-tests, mc-reth-test-engine, and lokahi are workspace
 # members but not kona-client dependencies. We need their Cargo.toml files so
 # the workspace resolves.
-COPY rust/op-reth/ /app/rust/op-reth/
+COPY rust/mc-reth/ /app/rust/mc-reth/
 COPY rust/revm-ee-tests/ /app/rust/revm-ee-tests/
-COPY rust/op-reth-test-engine/ /app/rust/op-reth-test-engine/
+COPY rust/mc-reth-test-engine/ /app/rust/mc-reth-test-engine/
 COPY rust/lokahi/ /app/rust/lokahi/
 
 # kona-hardforks build.rs walks ancestors of CARGO_MANIFEST_DIR for

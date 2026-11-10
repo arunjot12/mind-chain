@@ -5,12 +5,12 @@
 # scratch.
 #
 # Each subpackage emits its own APK under the same name the per-service
-# configs used (op-node, op-batcher, ...), so the apko/*.yaml image configs
-# keep pulling e.g. `op-node@local` unchanged. The op-stack-go package itself
+# configs used (mc-node, mc-batcher, ...), so the apko/*.yaml image configs
+# keep pulling e.g. `mc-node@local` unchanged. The op-stack-go package itself
 # is an empty meta package.
 #
-# op-deployer is NOT here: it needs a submodule checkout and package-local
-# Forge install to embed contract artifacts (see melange/op-deployer.yaml).
+# mc-deployer is NOT here: it needs a submodule checkout and package-local
+# Forge install to embed contract artifacts (see melange/mc-deployer.yaml).
 package:
   name: op-stack-go
   version: "0.0.0"
@@ -43,42 +43,42 @@ pipeline:
   - uses: op-stack-go/sync-superchain
 
 subpackages:
-  - name: op-node
-    description: op-node — OP Stack rollup node
+  - name: mc-node
+    description: mc-node — OP Stack rollup node
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-node/cmd
-          output: op-node
+          packages: ./mc-node/cmd
+          output: mc-node
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
-          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/ethereum-optimism/optimism/op-node/version.Version=${GIT_VERSION:-v0.0.0} -X github.com/ethereum-optimism/optimism/op-node/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
+          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/ethereum-optimism/optimism/mc-node/version.Version=${GIT_VERSION:-v0.0.0} -X github.com/ethereum-optimism/optimism/mc-node/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
       - uses: strip
 
-  - name: op-batcher
-    description: op-batcher — OP Stack transaction batcher
+  - name: mc-batcher
+    description: mc-batcher — OP Stack transaction batcher
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-batcher/cmd
-          output: op-batcher
+          packages: ./mc-batcher/cmd
+          output: mc-batcher
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
           ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.0}
       - uses: strip
 
-  - name: op-proposer
-    description: op-proposer — OP Stack output proposer
+  - name: mc-proposer
+    description: mc-proposer — OP Stack output proposer
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-proposer/cmd
-          output: op-proposer
+          packages: ./mc-proposer/cmd
+          output: mc-proposer
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
@@ -99,18 +99,18 @@ subpackages:
           ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.1}
       - uses: strip
 
-  - name: op-challenger
-    description: op-challenger — OP Stack fault dispute challenger
+  - name: mc-challenger
+    description: mc-challenger — OP Stack fault dispute challenger
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-challenger/cmd
-          output: op-challenger
+          packages: ./mc-challenger/cmd
+          output: mc-challenger
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
-          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/ethereum-optimism/optimism/op-challenger/version.Version=${GIT_VERSION:-v0.1.0} -X github.com/ethereum-optimism/optimism/op-challenger/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
+          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/ethereum-optimism/optimism/mc-challenger/version.Version=${GIT_VERSION:-v0.1.0} -X github.com/ethereum-optimism/optimism/mc-challenger/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
       - uses: strip
 
   - name: op-dispute-mon

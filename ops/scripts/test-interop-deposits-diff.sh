@@ -39,7 +39,7 @@ trap 'rm -f "$go_out" "$go_err" "$rust_out" "$rust_err"' EXIT
 # on a cold module cache), which must not pollute the diff input.
 
 echo "==> running Go dumper"
-if ! (cd "$repo_root" && go run ./op-node/cmd/interop-deposits-dump) >"$go_out" 2>"$go_err"; then
+if ! (cd "$repo_root" && go run ./mc-node/cmd/interop-deposits-dump) >"$go_out" 2>"$go_err"; then
   echo "error: Go dumper failed" >&2
   cat "$go_err" >&2
   exit 2

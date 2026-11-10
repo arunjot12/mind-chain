@@ -7,13 +7,13 @@ import (
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 
 // NewSingleSupernodeWithSyncTesterRuntime builds a single-chain runtime: real
-// sequencer op-node + EL driving the chain, sync-tester service feeding a
+// sequencer mc-node + EL driving the chain, sync-tester service feeding a
 // mocked EL, and a verifier-mode supernode VN wired to that mocked EL.
 // Interop is always on; cfg.InteropActivationDelaySeconds picks at-genesis (0)
 // or post-genesis activation.

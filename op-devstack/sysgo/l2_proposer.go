@@ -1,7 +1,7 @@
 package sysgo
 
 import (
-	ps "github.com/ethereum-optimism/optimism/op-proposer/proposer"
+	ps "github.com/ethereum-optimism/optimism/mc-proposer/proposer"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 

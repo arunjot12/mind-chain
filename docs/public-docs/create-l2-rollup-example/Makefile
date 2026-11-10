@@ -9,8 +9,8 @@ help: ## Show this help message
 
 setup: ## Deploy L1 contracts and configure rollup components
 	mkdir -p deployer
-	@if [ ! -f op-deployer ]; then \
-		echo "❌ Error: op-deployer not found. Run 'make download' first."; \
+	@if [ ! -f mc-deployer ]; then \
+		echo "❌ Error: mc-deployer not found. Run 'make download' first."; \
 		exit 1; \
 	fi
 	@if [ ! -f .env ]; then \
@@ -75,11 +75,11 @@ test-l1: ## Test L1 connectivity
 deps: ## Install development dependencies with mise (optional)
 	mise install
 
-download: ## Download op-deployer binary
-	./scripts/download-op-deployer.sh
+download: ## Download mc-deployer binary
+	./scripts/download-mc-deployer.sh
 
 init: ## Initialize the project
-	./scripts/download-op-deployer.sh
+	./scripts/download-mc-deployer.sh
 	@if [ ! -f .env ]; then \
 		cp .example.env .env; \
 		echo "Please edit .env with your actual configuration values"; \

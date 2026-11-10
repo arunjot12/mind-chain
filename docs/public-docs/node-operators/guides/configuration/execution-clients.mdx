@@ -1,6 +1,6 @@
 ---
 title: Execution client configuration
-description: Configure op-reth as your OP Stack execution client and migrate off end-of-support op-geth.
+description: Configure mc-reth as your OP Stack execution client and migrate off end-of-support op-geth.
 diataxis: how-to
 ---
 
@@ -19,26 +19,26 @@ The execution client provides the EVM runtime and transaction processing for you
 The execution client is one of three pieces. Before configuring it, make sure you have:
 
 1.  **L1 endpoints** for the settlement layer of the chain you are syncing: an L1 execution RPC endpoint and an L1 Beacon API endpoint. Your consensus client reads batch data and blobs from them.
-2.  **A consensus client**, also called the rollup node: op-node or kona-node. It derives the canonical chain from L1 and drives the execution client over the Engine API. See [Consensus client configuration](/node-operators/guides/configuration/consensus-clients).
+2.  **A consensus client**, also called the rollup node: mc-node or kona-node. It derives the canonical chain from L1 and drives the execution client over the Engine API. See [Consensus client configuration](/node-operators/guides/configuration/consensus-clients).
 3.  **An execution client**, configured below.
 
 ## Execution clients
 
 <Tabs>
-  <Tab title="op-reth">
-    [op-reth](https://github.com/paradigmxyz/reth) is a Rust-based execution client and the primary supported path for OP Stack nodes going forward. The [Superchain Registry](https://github.com/ethereum-optimism/superchain-registry) chain configurations are compiled into the binary, so registry chains work by name through `--chain` (for example `--chain unichain` or `--chain unichain-sepolia`).
+  <Tab title="mc-reth">
+    [mc-reth](https://github.com/paradigmxyz/reth) is a Rust-based execution client and the primary supported path for OP Stack nodes going forward. The [Superchain Registry](https://github.com/ethereum-optimism/superchain-registry) chain configurations are compiled into the binary, so registry chains work by name through `--chain` (for example `--chain unichain` or `--chain unichain-sepolia`).
 
     ### Install
 
     Two supported install paths:
 
     *   **Docker image**, wired up end to end in [Running a Node With Docker](/node-operators/tutorials/node-from-docker).
-    *   **From source.** op-reth lives at `rust/op-reth/` inside the Optimism monorepo and builds with Cargo. Follow [Building and running an OP Stack node from source](/node-operators/tutorials/run-node-from-source), which pins op-node and op-reth to the same coordinated release tag.
+    *   **From source.** mc-reth lives at `rust/mc-reth/` inside the Optimism monorepo and builds with Cargo. Follow [Building and running an OP Stack node from source](/node-operators/tutorials/run-node-from-source), which pins mc-node and mc-reth to the same coordinated release tag.
 
     ### Minimal configuration
 
     ```bash
-    op-reth node \
+    mc-reth node \
       --chain optimism \
       --rollup.sequencer https://mainnet-sequencer.optimism.io \
       --http \
@@ -49,19 +49,19 @@ The execution client is one of three pieces. Before configuring it, make sure yo
 
     ### OP Stack specific flags
 
-    op-reth's `Rollup` flag group holds the behavior that exists only on OP Stack chains. Two matter to most operators:
+    mc-reth's `Rollup` flag group holds the behavior that exists only on OP Stack chains. Two matter to most operators:
 
     *   `--rollup.sequencer <uri>` (shown above) is the sequencer endpoint that transactions submitted to this node are forwarded to, since the sequencer is what builds blocks. Aliases: `--rollup.sequencer-http`, `--rollup.sequencer-ws`.
     *   `--rollup.disable-tx-pool-gossip` stops the node from gossiping its transaction pool to peers. Omit it on a personal node; set it on a replica you operate as a provider.
 
-    The rest of the group covers the interop filter, subblocks, and historical RPC. For the full list with the binary's own descriptions, see the [`op-reth node` flag listing](/node-operators/op-reth/cli/op-reth/node), and [Understanding the op-reth CLI](/node-operators/op-reth/cli/overview) for how the flag groups fit together.
+    The rest of the group covers the interop filter, subblocks, and historical RPC. For the full list with the binary's own descriptions, see the [`mc-reth node` flag listing](/node-operators/mc-reth/cli/mc-reth/node), and [Understanding the mc-reth CLI](/node-operators/mc-reth/cli/overview) for how the flag groups fit together.
 
     ### Subblocks
 
-    To serve pre-confirmed state from a chain that streams [Subblocks](/op-stack/features/subblocks), point op-reth at the chain's WebSocket stream:
+    To serve pre-confirmed state from a chain that streams [Subblocks](/op-stack/features/subblocks), point mc-reth at the chain's WebSocket stream:
 
     ```bash
-    op-reth node \
+    mc-reth node \
       --chain optimism \
       --rollup.sequencer https://mainnet-sequencer.optimism.io \
       --flashblocks-url wss://op-mainnet-fb-ws-pub.optimism.io/ws \
@@ -73,20 +73,20 @@ The execution client is one of three pieces. Before configuring it, make sure yo
 
     The node then answers requests carrying the `pending` block tag from subblock state, executing each subblock's transactions against its own view of the chain. It does not need the stream's `state_root`, which subblocks leave zeroed. The flag keeps its `flashblocks` spelling; `--websocket-url` is an accepted alias.
 
-    `--flashblocks-url` on its own is what an ordinary node wants. Leave `--flashblock-consensus` unset: it drives the chain forward from the stream by submitting completed sequences through `engine_newPayload`, which is a specialized topology, not an addition to a normal node following op-node. Enabling it also turns on local state-root computation for the last subblock in each sequence, which an ordinary node has no use for.
+    `--flashblocks-url` on its own is what an ordinary node wants. Leave `--flashblock-consensus` unset: it drives the chain forward from the stream by submitting completed sequences through `engine_newPayload`, which is a specialized topology, not an addition to a normal node following mc-node. Enabling it also turns on local state-root computation for the last subblock in each sequence, which an ordinary node has no use for.
 
     ### Historical proofs
 
-    Permissionless chains need ~28 days of historical state for withdrawal proving. Follow the [Running op-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs) tutorial to set up the `--proofs-history` (v2) store on op-reth v2.2.3 or later.
+    Permissionless chains need ~28 days of historical state for withdrawal proving. Follow the [Running mc-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs) tutorial to set up the `--proofs-history` (v2) store on mc-reth v2.2.3 or later.
 
     ### Pruning
 
-    op-reth defaults to an archive node. To reclaim disk, prune the state and receipt segments and keep block bodies. Body pruning is unsupported: op-reth rejects `--minimal` at startup, and `--prune.bodies.distance` is advised against. See [Pruning op-reth](/node-operators/guides/management/archive-node#pruning-op-reth).
+    mc-reth defaults to an archive node. To reclaim disk, prune the state and receipt segments and keep block bodies. Body pruning is unsupported: mc-reth rejects `--minimal` at startup, and `--prune.bodies.distance` is advised against. See [Pruning mc-reth](/node-operators/guides/management/archive-node#pruning-mc-reth).
 
     ### Complete reference
 
-    - [op-reth configuration reference](/node-operators/reference/op-reth-config)
-    - [op-reth historical proof configuration](/node-operators/reference/op-reth-historical-proof-config)
+    - [mc-reth configuration reference](/node-operators/reference/mc-reth-config)
+    - [mc-reth historical proof configuration](/node-operators/reference/mc-reth-historical-proof-config)
     - [reth.rs documentation](https://reth.rs/run/opstack)
   </Tab>
 
@@ -155,5 +155,5 @@ This file must be identical for both your execution client and your consensus cl
 
   ### Complete reference
 
-  The op-geth configuration reference has been retired; see the [op-reth configuration reference](/node-operators/reference/op-reth-config) for the equivalent op-reth flags.
+  The op-geth configuration reference has been retired; see the [mc-reth configuration reference](/node-operators/reference/mc-reth-config) for the equivalent mc-reth flags.
 </Accordion>

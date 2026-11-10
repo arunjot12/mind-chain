@@ -114,7 +114,7 @@ pub struct NodeCommand {
     #[arg(long, visible_alias = "rollup-l1-cfg", env = "KONA_NODE_L1_CHAIN_CONFIG")]
     pub l1_config_file: Option<PathBuf>,
     /// Path to a JSON file describing the interop dependency set for this
-    /// chain. Mirrors op-node's `--interop.dependency-set`. Required when the
+    /// chain. Mirrors mc-node's `--interop.dependency-set`. Required when the
     /// rollup config schedules the Lagoon hardfork; the inner
     /// `StatefulAttributesBuilder` constructor panics otherwise; turning a
     /// silent state-divergence bug into a startup crash.
@@ -362,7 +362,7 @@ impl NodeCommand {
             None if cfg.hardforks.lagoon_time.is_some() => bail!(
                 "Lagoon is scheduled for this chain (lagoon_time = {:?}), but \
                  --interop.dependency-set was not provided. Supply the dependency-set \
-                 JSON file matching op-node's --interop.dependency-set to avoid silent \
+                 JSON file matching mc-node's --interop.dependency-set to avoid silent \
                  state divergence on Lagoon activation.",
                 cfg.hardforks.lagoon_time,
             ),

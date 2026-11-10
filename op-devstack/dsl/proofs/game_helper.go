@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"time"
 
-	challengerTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	challengerTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"

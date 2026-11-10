@@ -117,7 +117,7 @@ occurs when a new `UpdateType` is added to the `SystemConfig.ConfigUpdate()` eve
 practice is to:
 
 1. Not emit the new event in the `initialize()` method (and not add an `upgrade()` method)
-1. Have the `op-node` default to some value for that config.
+1. Have the `mc-node` default to some value for that config.
 1. Add a setter function with appropriate auth checks for the new config value.
 
 This pattern has a few benefits. It enables L1 contracts to be upgraded in advance of an L2 hardfork

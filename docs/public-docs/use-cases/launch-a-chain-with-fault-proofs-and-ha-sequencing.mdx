@@ -9,10 +9,10 @@ last-reviewed: 2026-07-24
 This guide takes a chain operator from "my testnet deployment works" to a
 production launch with the two properties that are hard to retrofit: a
 fault-proof system that secures withdrawals from day one, and a sequencer
-topology with no single point of failure. It involves `op-deployer` and your
-chain's dispute game contracts on L1, a cluster of `op-node` + `op-reth`
+topology with no single point of failure. It involves `mc-deployer` and your
+chain's dispute game contracts on L1, a cluster of `mc-node` + `mc-reth`
 sequencers managed by `op-conductor`, and the L1-facing services
-(`op-batcher`, `op-proposer`, `op-challenger`, `op-dispute-mon`) that keep
+(`mc-batcher`, `mc-proposer`, `mc-challenger`, `op-dispute-mon`) that keep
 the chain posting, proposing, and defended.
 
 ## Is this guide for you?
@@ -22,7 +22,7 @@ Use this guide if:
 *   You are planning a production OP Stack chain launch: real users will
     depend on its uptime and withdraw real value through its fault-proof
     system.
-*   You control the deployment (the `op-deployer` intent and the resulting
+*   You control the deployment (the `mc-deployer` intent and the resulting
     contracts) and the infrastructure the chain's services run on.
 
 If you are deploying an OP Stack chain for the first time, run the
@@ -44,7 +44,7 @@ this guide is the reference for what a production launch involves either way.
 
 You should already have:
 
-*   A completed testnet deployment, so the `op-deployer` intent-and-apply
+*   A completed testnet deployment, so the `mc-deployer` intent-and-apply
     workflow and the per-service setup steps are familiar.
 *   Funded L1 accounts for the batcher, proposer, and challenger, managed
     under the signing posture from the
@@ -69,7 +69,7 @@ permissionless form. Read the
 
 Then read the note in
 [deploying new dispute games with OPCM](/chain-operators/tutorials/dispute-games#understanding-dispute-games)
-and take away the launch-day reality: chains deployed with `op-deployer`
+and take away the launch-day reality: chains deployed with `mc-deployer`
 initially include only the **permissioned** dispute game, in which the
 proposer and challenger are specific addresses holding
 [privileged roles](/op-stack/protocol/privileged-roles). Permissionless
@@ -78,7 +78,7 @@ tick at deployment.
 
 ## Step 2: Deploy the contracts with standard proof parameters
 
-Deploy with [op-deployer](/chain-operators/tools/op-deployer/overview),
+Deploy with [mc-deployer](/chain-operators/tools/mc-deployer/overview),
 which encodes the intent-file workflow your testnet run used. Before you
 apply, review the fault-proof entries your intent controls, catalogued in the
 [rollup deployment configuration reference](/chain-operators/reference/rollup-deployment-configuration):
@@ -92,7 +92,7 @@ which is why overriding them requires setting an intent field named
 `dangerouslyAllowCustomDisputeParameters`. Do not change them without a
 dedicated security review.
 
-Record the addresses `op-deployer` produces, in particular the
+Record the addresses `mc-deployer` produces, in particular the
 `DisputeGameFactory` proxy: the proposer, the challenger, and your
 monitoring all take it as configuration.
 
@@ -128,7 +128,7 @@ sequencer.
 
 ## Step 4: Bootstrap the conductor cluster
 
-Stand up the three sequencers (each an `op-node` + `op-reth` pair with a
+Stand up the three sequencers (each an `mc-node` + `mc-reth` pair with a
 conductor beside it), then form the cluster. The
 [op-conductor setup guide](/chain-operators/tools/op-conductor/setup) is the
 canonical stop; follow it end to end and take away:
@@ -138,7 +138,7 @@ canonical stop; follow it end to end and take away:
     others join via `conductor_addServerAsVoter` against the leader, and the
     bootstrap flag must be removed after the cluster exists so a redeploy
     cannot re-bootstrap it.
-*   The op-node side: every sequencer's op-node runs with
+*   The mc-node side: every sequencer's mc-node runs with
     `OP_NODE_CONDUCTOR_ENABLED=true`, which is what commits unsafe blocks to
     the Raft log, and the `OP_NODE_RPC_ADMIN_STATE` flag cannot be used with
     conductor.
@@ -161,15 +161,15 @@ as of 2026-07-21).
 The batcher and proposer must follow whichever sequencer is currently
 leading, not a fixed node:
 
-*   **op-batcher**: point it at the conductor RPC, whose leader-aware proxy
+*   **mc-batcher**: point it at the conductor RPC, whose leader-aware proxy
     mode (`OP_CONDUCTOR_RPC_ENABLE_PROXY`, on by default) serves the
-    necessary op-node and execution RPCs only while its node leads, per the
+    necessary mc-node and execution RPCs only while its node leads, per the
     [network design example](/chain-operators/guides/management/network-architecture#sequencers).
     Then configure it per the
     [batcher configuration guide](/chain-operators/guides/configuration/batcher);
     once the chain is live, cost tuning has
     [its own guide](/use-cases/tune-batcher-costs).
-*   **op-proposer**: configure it per the
+*   **mc-proposer**: configure it per the
     [proposer configuration guide](/chain-operators/guides/configuration/proposer),
     with `--game-factory-address` from Step 2 and `--game-type` set to your
     chain's respected game type, which is `1` (permissioned) for a standard
@@ -190,12 +190,12 @@ proposer or challenger role can participate in disputes, so the challenger
 must sign with the challenger role address from your Step 2 intent. For the
 full flag catalogue behind that setup, the
 [challenger configuration reference](/chain-operators/reference/challenger-configuration)
-is generated from the op-challenger flag definitions at each finalized
+is generated from the mc-challenger flag definitions at each finalized
 release.
 
 ### Give every service a consistent view of L1
 
-Everything in this guide consumes L1: each sequencer's op-node derives the
+Everything in this guide consumes L1: each sequencer's mc-node derives the
 chain from an L1 RPC and an L1 beacon endpoint, and the batcher, proposer,
 and challenger read and transact against L1. Redundant L1 nodes are the
 right instinct for a high-availability chain; a generic load balancer in

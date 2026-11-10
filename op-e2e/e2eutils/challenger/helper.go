@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	opgenesis "github.com/ethereum-optimism/optimism/op-core/genesis"
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	shared "github.com/ethereum-optimism/optimism/op-devstack/shared/challenger"
@@ -22,10 +22,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 
-	challenger "github.com/ethereum-optimism/optimism/op-challenger"
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
+	challenger "github.com/ethereum-optimism/optimism/mc-challenger"
+	"github.com/ethereum-optimism/optimism/mc-challenger/config"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/cliapp"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
 	"github.com/ethereum-optimism/optimism/op-service/log"
@@ -224,7 +224,7 @@ func NewChallengerConfig(t *testing.T, sys EndpointProvider, l2NodeName string, 
 		option(&cfg)
 	}
 	require.NotEmpty(t, cfg.TxMgrConfig.PrivateKey, "Missing private key for TxMgrConfig")
-	require.NoError(t, cfg.Check(), "op-challenger config should be valid")
+	require.NoError(t, cfg.Check(), "mc-challenger config should be valid")
 
 	if cfg.Cannon.VmBin != "" {
 		_, err := os.Stat(cfg.Cannon.VmBin)

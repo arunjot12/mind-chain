@@ -15,8 +15,8 @@ import (
 
 	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/loadtest"
 	sfp "github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/superfaultproofs"
-	"github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	batcherflags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	"github.com/ethereum-optimism/optimism/mc-batcher/batcher"
+	batcherflags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
@@ -257,10 +257,10 @@ func glamsterdamL1Geth(t devtest.T) presets.Option {
 func prepareGlamsterdamOpReth(t devtest.T) {
 	_, err := (rustbin.Spec{
 		SrcDir:  "rust",
-		Package: "op-reth",
-		Binary:  "op-reth",
+		Package: "mc-reth",
+		Binary:  "mc-reth",
 	}).EnsureExists(t.Ctx(), t.Logger())
-	t.Require().NoError(err, "prepare op-reth before starting the L1 fork activation clock")
+	t.Require().NoError(err, "prepare mc-reth before starting the L1 fork activation clock")
 }
 
 func spamGlamsterdamTxs(sys *presets.Minimal) {

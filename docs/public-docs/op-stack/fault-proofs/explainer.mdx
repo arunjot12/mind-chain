@@ -52,7 +52,7 @@ See the permissionless fault proofs diagram below for more details:
 Because anyone can submit a proposal, it's important that invalid proposals can be challenged.
 In [Optimistic Rollups like OP Stack Chains](/op-stack/architecture) there is a \~1 week challenge period during which users can challenge a proposal if they believe it to be incorrect.
 With the Fault Proofs upgrade to the OP Stack, challenges become permissionless and can be submitted by anyone.
-Any user can run a node for the OP Stack chain in question and use the `op-challenger` tool to participate in the dispute process.
+Any user can run a node for the OP Stack chain in question and use the `mc-challenger` tool to participate in the dispute process.
 
 ## Modular design and multi-layer security
 
@@ -86,14 +86,14 @@ As a result, the trust assumption is reduced to requiring only that the Guardian
 
 ### Since the roles of proposer and challenger will be open to everyone, are guides available outlining the best practices for running them?
 
-It's not expected that normal users run `op-proposer` to regularly propose output roots.
+It's not expected that normal users run `mc-proposer` to regularly propose output roots.
 Users would generally just propose a single output root if they need to withdraw and the chain operator isn't proposing outputs for them via direct calls to the `DisputeGameFactory` via Etherscan.
 
 <Info>
-The [`create-game`](https://github.com/ethereum-optimism/optimism/tree/develop/op-challenger#create-game) subcommand of `op-challenger` is **for testing purposes only** and should not be used in production environments. It is not intended as a replacement for proper `op-proposer` infrastructure.
+The [`create-game`](https://github.com/ethereum-optimism/optimism/tree/develop/op-challenger#create-game) subcommand of `mc-challenger` is **for testing purposes only** and should not be used in production environments. It is not intended as a replacement for proper `mc-proposer` infrastructure.
 </Info>
 
-For detailed guidance on running `op-challenger`, see the [OP-Challenger explainer](/op-stack/fault-proofs/challenger) and [how to configure challenger for your chain](/chain-operators/guides/configuration/op-challenger-config-guide).
+For detailed guidance on running `mc-challenger`, see the [OP-Challenger explainer](/op-stack/fault-proofs/challenger) and [how to configure challenger for your chain](/chain-operators/guides/configuration/mc-challenger-config-guide).
 
 ### How much ETH should a chain operator put aside to operate the Fault Proof System?
 
@@ -111,10 +111,10 @@ The capital requirements will be improved in the later stages of Fault Proofs to
 
 The bonds are sized based on the anticipated cost to post a counter-claim as well as to deter spamming invalid claims.
 As an example, on OP Sepolia, the game [`0xcf8f181497DAD07277781517A76cb131C54A1BEE`](https://sepolia.etherscan.io/address/0xcf8f181497DAD07277781517A76cb131C54A1BEE) shows the escalating bond sizes.
-The list-claims subcommand of op-challenger can also provide a good view of the claims in the game:
+The list-claims subcommand of mc-challenger can also provide a good view of the claims in the game:
 
 ```
-./op-challenger/bin/op-challenger list-claims --l1-eth-rpc <SEPOLIA_L1> --game-address 0xcf8f181497DAD07277781517A76cb131C54A1BEE
+./mc-challenger/bin/mc-challenger list-claims --l1-eth-rpc <SEPOLIA_L1> --game-address 0xcf8f181497DAD07277781517A76cb131C54A1BEE
 ```
 
 See the [specs](https://specs.optimism.io/fault-proof/stage-one/bond-incentives.html?utm_source=op-docs&utm_medium=docs) for more details.

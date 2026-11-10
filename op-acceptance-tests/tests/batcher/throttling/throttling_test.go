@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/loadtest"
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	batcherConfig "github.com/ethereum-optimism/optimism/op-batcher/config"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
+	batcherConfig "github.com/ethereum-optimism/optimism/mc-batcher/config"
 	"github.com/ethereum-optimism/optimism/op-core/predeploys"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"

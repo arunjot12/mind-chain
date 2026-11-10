@@ -1,18 +1,18 @@
 ---
 title: Enable span batches
-description: Learn how to enable span batches on your OP Stack chain by confirming Delta activation and configuring the batch type on op-batcher.
+description: Learn how to enable span batches on your OP Stack chain by confirming Delta activation and configuring the batch type on mc-batcher.
 diataxis: how-to
 ---
 
 Span batches encode a span of consecutive L2 blocks in a single batch, reducing the overhead of batch submission.
 This is especially beneficial for sparse, low-throughput chains.
-The format was introduced in the Delta network upgrade, and chains opt into it through the `op-batcher` configuration.
+The format was introduced in the Delta network upgrade, and chains opt into it through the `mc-batcher` configuration.
 For background on what span batches are and why they exist, see [Span batches](/op-stack/features/span-batches).
 
 ## Before you begin
 
 Span batches are only valid once the Delta upgrade is active on your chain.
-The `op-node` derivation pipeline drops any span batch whose L1 origin predates Delta activation, logging `dropping span batch before Delta activation`.
+The `mc-node` derivation pipeline drops any span batch whose L1 origin predates Delta activation, logging `dropping span batch before Delta activation`.
 
 <Warning>
   Do not enable span batches on the batcher before Delta is active on your chain.
@@ -23,10 +23,10 @@ The `op-node` derivation pipeline drops any span batch whose L1 origin predates 
 
 <Steps>
   <Step title="Confirm Delta is active on your chain">
-    Delta activation is recorded as `delta_time` in your chain's rollup configuration (the `rollup.json` file passed to `op-node`).
+    Delta activation is recorded as `delta_time` in your chain's rollup configuration (the `rollup.json` file passed to `mc-node`).
     Delta is active once `delta_time` is set and the L2 block timestamp has passed that value.
 
-    You can read it from the rollup configuration file directly, or query a running `op-node`:
+    You can read it from the rollup configuration file directly, or query a running `mc-node`:
 
     ```bash
     cast rpc --rpc-url <OP_NODE_RPC_URL> optimism_rollupConfig | jq .delta_time
@@ -38,8 +38,8 @@ The `op-node` derivation pipeline drops any span batch whose L1 origin predates 
     For Delta activation times on OP Mainnet and OP Sepolia, see [Network upgrades](/op-stack/protocol/network-upgrades).
   </Step>
 
-  <Step title="Set the batch type on op-batcher">
-    The `op-batcher` `--batch-type` flag (environment variable `OP_BATCHER_BATCH_TYPE`) selects the batch format: `0` for singular batches (the default) and `1` for span batches.
+  <Step title="Set the batch type on mc-batcher">
+    The `mc-batcher` `--batch-type` flag (environment variable `OP_BATCHER_BATCH_TYPE`) selects the batch format: `0` for singular batches (the default) and `1` for span batches.
 
     Set it to `1` and restart the batcher:
 

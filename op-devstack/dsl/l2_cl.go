@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
 	"github.com/ethereum-optimism/optimism/op-devstack/stack"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
+	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
 	"github.com/ethereum-optimism/optimism/op-service/apis"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
@@ -85,9 +85,9 @@ func (cl *L2CLNode) restoreManagedPeers() {
 }
 
 func (cl *L2CLNode) StartSequencer() {
-	// The op-node Sequencer.Start RPC requires the caller to pass the hash of op-node's
+	// The mc-node Sequencer.Start RPC requires the caller to pass the hash of mc-node's
 	// current unsafe head. Reading the head and issuing the start call are two separate
-	// RPCs, so any unsafe payload that op-node processes in between (e.g. blocks gossiped
+	// RPCs, so any unsafe payload that mc-node processes in between (e.g. blocks gossiped
 	// by another sequencer over p2p) invalidates the hash we just read. Retry on that
 	// specific mismatch error with a freshly-read head.
 	const maxAttempts = 10
@@ -95,7 +95,7 @@ func (cl *L2CLNode) StartSequencer() {
 loop:
 	for range maxAttempts {
 		unsafe := cl.HeadBlockRef(safety.LocalUnsafe)
-		cl.log.Info("Continue sequencing with consensus node (op-node)", "chain", cl.ChainID(), "unsafe", unsafe)
+		cl.log.Info("Continue sequencing with consensus node (mc-node)", "chain", cl.ChainID(), "unsafe", unsafe)
 		err = cl.inner.RollupAPI().StartSequencer(cl.ctx, unsafe.Hash)
 		if err == nil {
 			break

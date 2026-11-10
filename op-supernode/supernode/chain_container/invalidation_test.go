@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container/engine_controller"

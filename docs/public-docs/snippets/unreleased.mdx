@@ -19,14 +19,14 @@
   Usage:
     import { Unreleased } from "/snippets/unreleased.mdx"
 
-    <Unreleased component="op-reth" />
-    <Unreleased component="op-reth" version="v2.5.0" />
+    <Unreleased component="mc-reth" />
+    <Unreleased component="mc-reth" version="v2.5.0" />
 
   Props:
     component - required. The release-tag prefix as published on GitHub
-                Releases: "op-node", "op-batcher", "op-proposer",
-                "op-challenger", "op-conductor", "op-supernode",
-                "op-deployer", "op-reth", "kona-node".
+                Releases: "mc-node", "mc-batcher", "mc-proposer",
+                "mc-challenger", "op-conductor", "op-supernode",
+                "mc-deployer", "mc-reth", "kona-node".
     version   - optional. The finalized release that will carry the change,
                 as a full semver with the leading v ("v2.5.0"), when known.
                 The lint matches the git tag `<component>/<version>` exactly.

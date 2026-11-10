@@ -18,16 +18,16 @@ func TestMixedL2ELOptsFromEnv(t *testing.T) {
 	}{
 		{name: "unset yields no options"},
 		{name: "empty yields no options", binaryEnv: "", argsEnv: ""},
-		{name: "binary name selects that binary", binaryEnv: "op-reth-superset", wantBinary: "op-reth-superset"},
-		{name: "args reach the CLI", binaryEnv: "op-reth-superset", argsEnv: "--extra.bind=127.0.0.1:0", wantBinary: "op-reth-superset", wantArgs: []string{"--extra.bind=127.0.0.1:0"}},
-		{name: "multiple args split on whitespace", binaryEnv: "op-reth-superset", argsEnv: "  --a=1   --b=2 ", wantBinary: "op-reth-superset", wantArgs: []string{"--a=1", "--b=2"}},
+		{name: "binary name selects that binary", binaryEnv: "mc-reth-superset", wantBinary: "mc-reth-superset"},
+		{name: "args reach the CLI", binaryEnv: "mc-reth-superset", argsEnv: "--extra.bind=127.0.0.1:0", wantBinary: "mc-reth-superset", wantArgs: []string{"--extra.bind=127.0.0.1:0"}},
+		{name: "multiple args split on whitespace", binaryEnv: "mc-reth-superset", argsEnv: "  --a=1   --b=2 ", wantBinary: "mc-reth-superset", wantArgs: []string{"--a=1", "--b=2"}},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			opts, err := mixedL2ELOptsFromEnv(tc.binaryEnv, tc.argsEnv)
 			require.NoError(t, err)
 
 			if tc.wantBinary == "" {
-				require.Empty(t, opts, "stock op-reth must be used when no override is requested")
+				require.Empty(t, opts, "stock mc-reth must be used when no override is requested")
 				return
 			}
 
@@ -54,7 +54,7 @@ func TestMixedL2ELOptsFromEnvRejectsArgsWithoutBinary(t *testing.T) {
 
 // The exported resolver must read the documented variable names.
 func TestResolveMixedL2ELOptsReadsEnv(t *testing.T) {
-	t.Setenv(devstackL2ELOverrideBinaryEnv, "op-reth-superset")
+	t.Setenv(devstackL2ELOverrideBinaryEnv, "mc-reth-superset")
 	t.Setenv(devstackL2ELOverrideArgsEnv, "--extra.bind=127.0.0.1:0")
 
 	cfg := DefaultOpRethConfig()
@@ -62,7 +62,7 @@ func TestResolveMixedL2ELOptsReadsEnv(t *testing.T) {
 		opt.Apply(nil, ComponentTarget{}, cfg)
 	}
 
-	require.Equal(t, "op-reth-superset", cfg.Binary)
+	require.Equal(t, "mc-reth-superset", cfg.Binary)
 	require.Equal(t, []string{"--extra.bind=127.0.0.1:0"}, cfg.ExtraArgs)
 	require.True(t, cfg.DisableProofsHistory)
 }

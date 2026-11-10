@@ -147,7 +147,7 @@ corresponding upstream diff or an explicit explanation.
 - **Intra-repo duplicates** — ours copied from ours. Same failure mode, but there is no
   upstream version to record, so they get a plain doc note pointing at the original.
   `kona/bin/client/src/fpvm_evm/tx.rs` is the live example.
-- **Mirrored tests.** `op-reth/crates/evm/src/lib.rs` reproduces upstream test fixtures.
+- **Mirrored tests.** `mc-reth/crates/evm/src/lib.rs` reproduces upstream test fixtures.
   Real drift, low stakes; tagging them would bury the consensus-relevant entries.
 
 ## Adding a mirror

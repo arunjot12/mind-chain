@@ -6,19 +6,19 @@ import (
 	"math/big"
 	"time"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen"
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/el"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/setuputils"
-	opnodeconfig "github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	opnodeconfig "github.com/ethereum-optimism/optimism/mc-node/config"
+	"github.com/ethereum-optimism/optimism/mc-node/p2p"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/dial"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
 	"github.com/ethereum-optimism/optimism/op-service/log"
@@ -32,7 +32,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// l2Node holds per-chain resources for a single L2 node. The chain's op-node lives inside the
+// l2Node holds per-chain resources for a single L2 node. The chain's mc-node lives inside the
 // supernode and is reached via a supernode-prefixed CL URL.
 type l2Node struct {
 	name         string
@@ -79,7 +79,7 @@ func (s *interopE2ESystem) L2GethClient(id string, name string) *ethclient.Clien
 
 // L2RollupEndpoint returns the chain's CL RPC endpoint, served by the supernode at
 // <supernode-base>/<chainID>. The name argument is unused — every chain has a single
-// supernode-owned op-node.
+// supernode-owned mc-node.
 func (s *interopE2ESystem) L2RollupEndpoint(id string, name string) endpoint.RPC {
 	return endpoint.URL(s.chainURL(s.l2s[id].chainID))
 }
@@ -101,7 +101,7 @@ func (s *interopE2ESystem) L2RollupClient(id string, name string) *sources.Rollu
 }
 
 // newL2 sets up the per-chain state needed before the supernode boots: keys, the L2 EL (op-geth),
-// and an empty node map. The op-node is configured via newSupernodeNodeConfig and started by
+// and an empty node map. The mc-node is configured via newSupernodeNodeConfig and started by
 // the supernode; the batcher is started after the supernode is up.
 func (s *interopE2ESystem) newL2(id string, l2Out *interopgen.L2Output) l2Net {
 	operatorKeys := s.newOperatorKeysForL2(l2Out)
@@ -116,8 +116,8 @@ func (s *interopE2ESystem) newL2(id string, l2Out *interopgen.L2Output) l2Net {
 	}
 }
 
-// newSupernodeNodeConfig builds the per-chain op-node configuration that the supernode runs
-// internally as the chain's virtual op-node.
+// newSupernodeNodeConfig builds the per-chain mc-node configuration that the supernode runs
+// internally as the chain's virtual mc-node.
 func (s *interopE2ESystem) newSupernodeNodeConfig(l2 l2Net, depSet depset.DependencySet) *opnodeconfig.Config {
 	p2pKey := l2.operatorKeys[devkeys.SequencerP2PRole]
 	p2pSigner := &p2p.PreparedSigner{Signer: opsigner.NewLocalSigner(&p2pKey)}
@@ -160,7 +160,7 @@ func (s *interopE2ESystem) newSupernodeNodeConfig(l2 l2Net, depSet depset.Depend
 		ExperimentalOPStackAPI:          true,
 		IgnoreMissingPectraBlobSchedule: false,
 	}
-	require.NoError(s.t, cfg.Check(), "invalid supernode op-node config for chain %s", l2.chainID)
+	require.NoError(s.t, cfg.Check(), "invalid supernode mc-node config for chain %s", l2.chainID)
 	return cfg
 }
 

@@ -8,10 +8,10 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
 ## Inputs
 
 - L1 EL RPC (games live on L1) and an L2 EL RPC for the chain. The rollup-node RPC is
-  useful but optional — **op-node** (`optimism_outputAtBlock` / `optimism_safeHeadAtL1Block`)
-  for output-root games; **op-node or op-supernode** (`superroot_atTimestamp`) for super-root
+  useful but optional — **mc-node** (`optimism_outputAtBlock` / `optimism_safeHeadAtL1Block`)
+  for output-root games; **mc-node or op-supernode** (`superroot_atTimestamp`) for super-root
   games.
-- The `op-challenger` binary: `just op-challenger` (builds `./op-challenger/bin/op-challenger`).
+- The `mc-challenger` binary: `just mc-challenger` (builds `./mc-challenger/bin/mc-challenger`).
 
 ## Steps
 
@@ -20,8 +20,8 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
    signer may be a key pool, and anyone can move on any claim — never infer "side"
    from an address; chess-clock parity is by depth.
 
-2. **Enumerate.** `op-challenger list-games --game-factory-address <f> --l1-eth-rpc <l1> --format json`
-   and `op-challenger list-claims --game-address <g> --l1-eth-rpc <l1> --format json`.
+2. **Enumerate.** `mc-challenger list-games --game-factory-address <f> --l1-eth-rpc <l1> --format json`
+   and `mc-challenger list-claims --game-address <g> --l1-eth-rpc <l1> --format json`.
    (In text, `Value` is `Hash.TerminalString()` — a repeated short hash means the same
    output root, from clamping.)
 
@@ -50,10 +50,10 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
      `l1Head` — at step 0 when the timestamp's `VerifiedRequiredL1 > l1Head` (or it has no block),
      or at the specific step where a chain's `optimistic.RequiredL1 > l1Head` (or that chain has
      no block) — and it stays invalid thereafter, so the exact step it flips at matters. See
-     `op-challenger/game/fault/trace/super/provider.go`.
+     `mc-challenger/game/fault/trace/super/provider.go`.
 
-5. **Diagnose the responsible op-node** (chain-agnostic):
-   - `op-challenger game-proposal-outputs --l1-eth-rpc <l1> --rollup-rpc <rollup> --superroot-rpc <supernode> --game-factory-address <f>`
+5. **Diagnose the responsible mc-node** (chain-agnostic):
+   - `mc-challenger game-proposal-outputs --l1-eth-rpc <l1> --rollup-rpc <rollup> --superroot-rpc <supernode> --game-factory-address <f>`
      (or pass explicit game addresses; pass either RPC flag alone if every game needs only that
      one). Per **output-root game** (`--rollup-rpc`): the node's `optimism_outputAtBlock` and
      `optimism_safeHeadAtL1Block` at the game's `l1Head`, with `rootMatch` / `safeHeadAtOrAboveBlock`
@@ -72,7 +72,7 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
      `AnchorStateRegistry` (op-dispute-mon alerts on it). For zk games `rootMatch` covers only the
      root: the challenger also challenges any child of a parent that resolved CHALLENGER_WINS, so
      check the parent's status with `list-games`.
-   - `op-challenger/scripts/check-game-block-hashes.sh <node-rpc> <ref-rpc> <blocks…>` — block-hash
+   - `mc-challenger/scripts/check-game-block-hashes.sh <node-rpc> <ref-rpc> <blocks…>` — block-hash
      cross-check (a mismatch = real divergence).
 
    Behind a load balancer, check each backend separately — one bad backend makes a
@@ -82,12 +82,12 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
 
    The `optimism_outputAtBlock` / `optimism_safeHeadAtL1Block` queries apply to **output-root
    games** only. For **super-root games** the data source is `superroot_atTimestamp` on the
-   op-node **or op-supernode**; `game-proposal-outputs` reports the root match and node sync,
+   mc-node **or op-supernode**; `game-proposal-outputs` reports the root match and node sync,
    and the step-level comparison follows the super-root rules in §4 (the response carries the
    `RequiredL1` / `VerifiedRequiredL1` that determine when the trace turns invalid).
 
 6. **Check uncountered invalid claims against the honest actor — don't assume they're fine.**
-   The honest-actor algorithm (`op-challenger/game/fault/solver/solver.go` `shouldCounter`)
+   The honest-actor algorithm (`mc-challenger/game/fault/solver/solver.go` `shouldCounter`)
    intentionally leaves many invalid claims uncountered: it counters a dishonest claim only when
    its parent is honest, or the parent was countered by us and the claim is at/left of our
    counter; it ignores claims to the right of our leftmost counter and all descendants of an
@@ -105,7 +105,7 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
 
 ## Common causes
 
-- Incomplete safe-head DB / lagging op-node behind a load balancer — clamps and disputes
+- Incomplete safe-head DB / lagging mc-node behind a load balancer — clamps and disputes
   valid proposals; LB flapping makes one challenger emit both roots and self-contradict
   (looks like a bug, isn't).
 - Diverged node (wrong chain — block hashes mismatch), or misconfig (wrong rollup config /

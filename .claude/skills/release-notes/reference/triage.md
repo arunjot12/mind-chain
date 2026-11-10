@@ -12,8 +12,8 @@ For the Go services:
 
 `op-core/` and `op-service/` hold code shared by every Go service, by the test harnesses
 (`op-devstack`, `op-e2e`, `op-acceptance-tests`) and by tools that ship separately
-(`op-deployer`, `op-chain-ops`). So a draft picks up many commits that never reach the
-binary — the op-batcher v1.16.13 draft listed 21 PRs, of which 8 touched nothing op-batcher
+(`mc-deployer`, `op-chain-ops`). So a draft picks up many commits that never reach the
+binary — the mc-batcher v1.16.13 draft listed 21 PRs, of which 8 touched nothing mc-batcher
 compiles. The `kona-*` components and `op-zk-proposer` filter on all of `rust/kona/**`,
 `rust/op-alloy/**` and `rust/alloy-op*/**`, so a kona-node draft picks up kona-client,
 kona-host and kona-sp1 work too.
@@ -22,7 +22,7 @@ kona-host and kona-sp1 work too.
 
 **Not** "did this PR touch `<component>/`". Shared code is compiled into the binary, so a
 change under `op-service/` or `op-core/` can absolutely change how the component behaves —
-`op-service/txmgr`, `op-service/bgpo` and `op-core/fees` all reach op-batcher.
+`op-service/txmgr`, `op-service/bgpo` and `op-core/fees` all reach mc-batcher.
 
 The right question: **does this PR change code compiled into this binary, and does that
 change alter behaviour an operator would notice?** Downstream Go importers do not count —
@@ -45,7 +45,7 @@ release `required` for the chains it names.
 
 A `DEPS` row listing paths rather than "(manifest only)" changed something else too, which
 was not compiled in. Check the lock diff against the component's dependency set before
-dropping it — #22714 looked like kona work but moved `hickory-resolver`, which op-reth links
+dropping it — #22714 looked like kona work but moved `hickory-resolver`, which mc-reth links
 for DNS discovery, off a High advisory.
 
 ## The judgment pass on LINKED rows
@@ -64,10 +64,10 @@ excluded by path, so `LINKED` Rust rows still need this check by hand.
 
 **Linkage proves the package is compiled in, not that the changed function is on the
 component's runtime path.** This is the trap that survives the mechanical pass.
-`op-core/fees` is genuinely linked into op-batcher, but the Jovian DA-footprint work
+`op-core/fees` is genuinely linked into mc-batcher, but the Jovian DA-footprint work
 (#22163, #22219) is reached from the `op-chain-ops/cmd/check-*` tools, not from anything the
 batcher runs — both were cut with the note "doesn't affect the batcher". Similarly,
-`op-node/rollup/derive` is linked into op-batcher, but a derivation-only change there is not
+`mc-node/rollup/derive` is linked into mc-batcher, but a derivation-only change there is not
 batcher-facing. Ask what the component does, not just what it links:
 
 ```bash
@@ -93,7 +93,7 @@ grep -rn "<ChangedSymbol>" <component>/ --include='*.go' | grep -v _test.go
   not a user-facing surface
 
 **Keep a cross-component PR** when the component embeds the other one. op-supernode runs
-virtual op-nodes, so op-node's follow-source reorg metrics belong in the supernode notes even
+virtual op-nodes, so mc-node's follow-source reorg metrics belong in the supernode notes even
 though the PR touches no `op-supernode/` path.
 
 **A change confined to an unreleased feature is cut entirely.** Keep it only if it also
@@ -126,20 +126,20 @@ Drop each draft PR that one of those commits backported, because the previous re
 already shipped it. `op-contracts/v8.0.0` listed #20919, which `op-contracts/v7.0.0` had
 already shipped as #20925.
 
-## op-contracts and op-deployer
+## op-contracts and mc-deployer
 
-The op-contracts note gets what changes onchain. The op-deployer note gets what changes for
+The op-contracts note gets what changes onchain. The mc-deployer note gets what changes for
 a user of the tool, including changes to the contract scripts it runs. A PR that does both
-gets an entry in each note. The op-deployer note links to the op-contracts release and does
+gets an entry in each note. The mc-deployer note links to the op-contracts release and does
 not repeat its changes.
 
 For op-contracts, `LINKED` means a contract under `src/` or the candidate L2 upgrade bundle
-changed. Keep every bundle change: `op-core/nuts` snapshots it for the fork, and op-node and
+changed. Keep every bundle change: `op-core/nuts` snapshots it for the fork, and mc-node and
 kona execute it. Drop a change that only bumps a contract's version. `DEPS` means
 `foundry.toml` or a `lib/` pin changed; read each one, because it can change the deployed
 bytecode.
 
-For op-deployer, `LINKED` also covers the contract scripts that its Go code runs, and their
+For mc-deployer, `LINKED` also covers the contract scripts that its Go code runs, and their
 imports, from `forge tree`. The import graph comes from the current checkout, so a script
 deleted during the release range does not match; check such a row by hand.
 
@@ -159,20 +159,20 @@ Renovate/dependabot bumps with no security label: drop.
 
 Two published releases, checked against their regenerated raw drafts:
 
-- **`op-node/v1.19.4`** — 32 PRs raw, 15 published. Dropped: op-dispute-mon and op-challenger
+- **`mc-node/v1.19.4`** — 32 PRs raw, 15 published. Dropped: op-dispute-mon and mc-challenger
   work, kona changes, dependabot bumps, test fixes, a stale-TODO removal, two dev-feature
   toggle removals.
-- **`op-batcher/v1.16.12`** — 23 PRs raw, 1 published. Almost the entire draft was other
-  components' work reaching op-batcher's include paths.
+- **`mc-batcher/v1.16.12`** — 23 PRs raw, 1 published. Almost the entire draft was other
+  components' work reaching mc-batcher's include paths.
 
 Regenerate any published release's raw draft to check a call:
 
 ```bash
-GITHUB_TOKEN=$(gh auth token) mise exec -- just release-notes op-node v1.19.3 v1.19.4
+GITHUB_TOKEN=$(gh auth token) mise exec -- just release-notes mc-node v1.19.3 v1.19.4
 ```
 
 The v1.19.5 train is the closest reference for current practice. Surviving PR counts:
-op-node 10 of 30, op-batcher 6 of 21, op-supernode 8 of 24, kona-node 6 of 17.
+mc-node 10 of 30, mc-batcher 6 of 21, op-supernode 8 of 24, kona-node 6 of 17.
 
 ## Drafts with more than one section
 

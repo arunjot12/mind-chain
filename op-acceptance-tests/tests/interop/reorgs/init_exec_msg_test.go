@@ -175,7 +175,7 @@ func TestReorgInitExecMsg(gt *testing.T) {
 		require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
 	}
 
-	// continue sequencing with op-node
+	// continue sequencing with mc-node
 	sys.L2ACL.StartSequencer()
 
 	// start batchers on chain A and on chain B

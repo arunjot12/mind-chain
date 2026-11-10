@@ -51,7 +51,7 @@ transaction. Read the [deposit flow explanation](/op-stack/bridging/deposit-flow
 and take away:
 
 *   The encapsulation chain: your contract calls a messenger, the messenger
-    calls the portal, the portal emits the event, and `op-node` turns the
+    calls the portal, the portal emits the event, and `mc-node` turns the
     event into an L2 transaction. Each layer you use adds convenience and
     safety on top of the one below it.
 *   That deposits are included by derivation, not by the sequencer's grace:

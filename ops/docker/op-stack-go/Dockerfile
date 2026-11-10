@@ -9,7 +9,7 @@
 # It will default to the target platform.
 ARG TARGET_BASE_IMAGE=chainguard/static:latest
 
-# op-challenger runs on Wolfi: glibc for kona-host, busybox for the chart's
+# mc-challenger runs on Wolfi: glibc for kona-host, busybox for the chart's
 # /bin/sh entrypoint, plus a bundled musl loader for the musl-linked cannon embeds.
 ARG CHALLENGER_TARGET_BASE_IMAGE=chainguard/wolfi-base:latest@sha256:02dab76bd852a70556b5b2002195c8a5fdab77d323c433bf6642aab080489795
 
@@ -22,14 +22,14 @@ ARG TARGETARCH
 # apk has no built-in download retry; loop so a transient CDN drop doesn't flake CI (~5 min budget).
 RUN n=0; until apk add --no-cache curl bash git jq; do n=$((n+1)); [ "$n" -ge 15 ] && exit 1; echo "apk add retry $n/15 in 20s" >&2; sleep 20; done
 
-COPY ./op-deployer/pkg/deployer/forge/version.json /tmp/op-deployer-versions.json
+COPY ./mc-deployer/pkg/deployer/forge/version.json /tmp/mc-deployer-versions.json
 
 # Verify forge checksums
 RUN <<-EOF
     #!/bin/bash
     set -e
 
-    FOUNDRY_VERSION="$(jq -r '.forge' /tmp/op-deployer-versions.json)"
+    FOUNDRY_VERSION="$(jq -r '.forge' /tmp/mc-deployer-versions.json)"
     FOUNDRY_PLATFORM=alpine_${TARGETARCH}
     FOUNDRY_URL="https://github.com/foundry-rs/foundry/releases/download/${FOUNDRY_VERSION}/foundry_${FOUNDRY_VERSION}_${FOUNDRY_PLATFORM}.tar.gz"
     DOWNLOAD_PATH="/tmp/forge.tar.gz"
@@ -39,7 +39,7 @@ RUN <<-EOF
 
     # Ensure the checksum matches our expectations
     ACTUAL_SHA="$(sha256sum "${DOWNLOAD_PATH}" | awk '{print $1}')"
-    EXPECTED_SHA="$(jq -r --arg arch "${FOUNDRY_PLATFORM}" '.checksums[$arch]' /tmp/op-deployer-versions.json)"
+    EXPECTED_SHA="$(jq -r --arg arch "${FOUNDRY_PLATFORM}" '.checksums[$arch]' /tmp/mc-deployer-versions.json)"
 
     [ "${ACTUAL_SHA}" == "${EXPECTED_SHA}" ] || (echo "Forge checksum mismatch: Expected $EXPECTED_SHA, got $ACTUAL_SHA" && exit 1)
 
@@ -132,30 +132,30 @@ ARG OP_WHEEL_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
   cd op-wheel && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_WHEEL_VERSION" just op-wheel
 
-FROM --platform=$BUILDPLATFORM builder AS op-node-builder
+FROM --platform=$BUILDPLATFORM builder AS mc-node-builder
 ARG OP_NODE_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-node && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_NODE_VERSION" just op-node
+  cd mc-node && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_NODE_VERSION" just mc-node
 
-FROM --platform=$BUILDPLATFORM builder AS op-challenger-builder
+FROM --platform=$BUILDPLATFORM builder AS mc-challenger-builder
 ARG OP_CHALLENGER_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-challenger && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_CHALLENGER_VERSION" just op-challenger
+  cd mc-challenger && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_CHALLENGER_VERSION" just mc-challenger
 
 FROM --platform=$BUILDPLATFORM builder AS op-dispute-mon-builder
 ARG OP_DISPUTE_MON_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
   cd op-dispute-mon && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DISPUTE_MON_VERSION" just op-dispute-mon
 
-FROM --platform=$BUILDPLATFORM builder AS op-batcher-builder
+FROM --platform=$BUILDPLATFORM builder AS mc-batcher-builder
 ARG OP_BATCHER_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-batcher && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_BATCHER_VERSION" just op-batcher
+  cd mc-batcher && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_BATCHER_VERSION" just mc-batcher
 
-FROM --platform=$BUILDPLATFORM builder AS op-proposer-builder
+FROM --platform=$BUILDPLATFORM builder AS mc-proposer-builder
 ARG OP_PROPOSER_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-proposer && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_PROPOSER_VERSION" just op-proposer
+  cd mc-proposer && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_PROPOSER_VERSION" just mc-proposer
 
 FROM --platform=$BUILDPLATFORM builder AS op-conductor-builder
 ARG OP_CONDUCTOR_VERSION=v0.0.0
@@ -183,7 +183,7 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 
 # Compile contracts in a glibc-based image (solc requires glibc, crashes on Alpine musl).
 # Uses BUILDPLATFORM so it runs natively (no QEMU). Contract artifacts are platform-independent.
-FROM --platform=$BUILDPLATFORM golang:1.26.5-bookworm AS op-deployer-contracts
+FROM --platform=$BUILDPLATFORM golang:1.26.5-bookworm AS mc-deployer-contracts
 ARG BUILDARCH
 ENV GOFLAGS=-mod=readonly
 RUN apt-get -o Acquire::Retries=8 update && apt-get -o Acquire::Retries=8 install -y --no-install-recommends curl jq git && rm -rf /var/lib/apt/lists/*
@@ -196,13 +196,13 @@ COPY . /app
 # Install forge for the build platform (linux/glibc variant)
 RUN <<-EOF
     set -e
-    FOUNDRY_VERSION="$(jq -r '.forge' op-deployer/pkg/deployer/forge/version.json)"
+    FOUNDRY_VERSION="$(jq -r '.forge' mc-deployer/pkg/deployer/forge/version.json)"
     FOUNDRY_PLATFORM=linux_${BUILDARCH}
     FOUNDRY_URL="https://github.com/foundry-rs/foundry/releases/download/${FOUNDRY_VERSION}/foundry_${FOUNDRY_VERSION}_${FOUNDRY_PLATFORM}.tar.gz"
     DOWNLOAD_PATH="/tmp/forge.tar.gz"
     curl -fL --retry 5 --retry-all-errors --retry-delay 2 -o "${DOWNLOAD_PATH}" "${FOUNDRY_URL}"
     ACTUAL_SHA="$(sha256sum "${DOWNLOAD_PATH}" | awk '{print $1}')"
-    EXPECTED_SHA="$(jq -r --arg arch "${FOUNDRY_PLATFORM}" '.checksums[$arch]' op-deployer/pkg/deployer/forge/version.json)"
+    EXPECTED_SHA="$(jq -r --arg arch "${FOUNDRY_PLATFORM}" '.checksums[$arch]' mc-deployer/pkg/deployer/forge/version.json)"
     [ "${ACTUAL_SHA}" = "${EXPECTED_SHA}" ] || (echo "Forge checksum mismatch: Expected $EXPECTED_SHA, got $ACTUAL_SHA" && exit 1)
     tar -xzf "${DOWNLOAD_PATH}" -C /usr/local/bin forge
     rm "${DOWNLOAD_PATH}"
@@ -227,17 +227,17 @@ EOF
 # Compile contracts and create artifacts tarball
 RUN cd packages/contracts-bedrock && forge build --skip "/**/test/**"
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  go run ./op-deployer/pkg/deployer/artifacts/cmd/mktar \
+  go run ./mc-deployer/pkg/deployer/artifacts/cmd/mktar \
     -base ./packages/contracts-bedrock \
-    -out ./op-deployer/pkg/deployer/artifacts/forge-artifacts/artifacts.tzst \
+    -out ./mc-deployer/pkg/deployer/artifacts/forge-artifacts/artifacts.tzst \
     --exclude="*.t.sol"
 
-FROM --platform=$BUILDPLATFORM builder AS op-deployer-builder
+FROM --platform=$BUILDPLATFORM builder AS mc-deployer-builder
 ARG OP_DEPLOYER_VERSION=v0.0.0
 # Copy pre-compiled contract artifacts from the glibc-based contracts stage
-COPY --from=op-deployer-contracts /app/op-deployer/pkg/deployer/artifacts/forge-artifacts/artifacts.tzst op-deployer/pkg/deployer/artifacts/forge-artifacts/artifacts.tzst
+COPY --from=mc-deployer-contracts /app/mc-deployer/pkg/deployer/artifacts/forge-artifacts/artifacts.tzst mc-deployer/pkg/deployer/artifacts/forge-artifacts/artifacts.tzst
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  just GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DEPLOYER_VERSION" op-deployer/build-go
+  just GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DEPLOYER_VERSION" mc-deployer/build-go
 
 FROM --platform=$BUILDPLATFORM builder AS op-dripper-builder
 ARG OP_DRIPPER_VERSION=v0.0.0
@@ -296,21 +296,21 @@ USER 0
 COPY --from=op-wheel-builder /app/op-wheel/bin/op-wheel /usr/local/bin/
 CMD ["op-wheel"]
 
-FROM $TARGET_BASE_IMAGE AS op-node-target
+FROM $TARGET_BASE_IMAGE AS mc-node-target
 USER 0
-COPY --from=op-node-builder /app/op-node/bin/op-node /usr/local/bin/
-CMD ["op-node"]
+COPY --from=mc-node-builder /app/mc-node/bin/mc-node /usr/local/bin/
+CMD ["mc-node"]
 
 # The historical multicannon embeds are Alpine/musl-linked and Wolfi ships no musl
 # package, so bundle the loader+libc (as the melange multicannon pipeline does).
 FROM alpine:3.21@sha256:48b0309ca019d89d40f670aa1bc06e426dc0931948452e8491e3d65087abc07d AS musl-libs
 RUN mkdir -p /musl && cp -a /lib/ld-musl-*.so.1 /lib/libc.musl-*.so.1 /musl/
 
-# Also produce an op-challenger loaded with kona
-FROM $CHALLENGER_TARGET_BASE_IMAGE AS op-challenger-target
+# Also produce an mc-challenger loaded with kona
+FROM $CHALLENGER_TARGET_BASE_IMAGE AS mc-challenger-target
 RUN attempt=1; delay=1; until apk add --no-cache ca-certificates-bundle ca-certificates busybox glibc libgcc libstdc++ openssl; do [ "$attempt" -ge 11 ] && exit 1; echo "apk add attempt $attempt/11 failed; retrying in ${delay}s" >&2; sleep "$delay"; attempt=$((attempt+1)); delay=$((delay*2)); [ "$delay" -le 60 ] || delay=60; done
 COPY --from=musl-libs /musl/ /lib/
-COPY --from=op-challenger-builder /app/op-challenger/bin/op-challenger /usr/local/bin/
+COPY --from=mc-challenger-builder /app/mc-challenger/bin/mc-challenger /usr/local/bin/
 # Copy in cannon
 COPY --from=cannon-builder /app/cannon/bin/cannon /usr/local/bin/
 ENV OP_CHALLENGER_CANNON_BIN=/usr/local/bin/cannon
@@ -318,22 +318,22 @@ ENV OP_CHALLENGER_CANNON_BIN=/usr/local/bin/cannon
 COPY --from=kona-host-builder /kona-host /usr/local/bin/kona-host
 ENV OP_CHALLENGER_ASTERISC_KONA_SERVER=/usr/local/bin/kona-host
 ENV OP_CHALLENGER_CANNON_KONA_SERVER=/usr/local/bin/kona-host
-CMD ["op-challenger"]
+CMD ["mc-challenger"]
 
 FROM $TARGET_BASE_IMAGE AS op-dispute-mon-target
 USER 0
 COPY --from=op-dispute-mon-builder /app/op-dispute-mon/bin/op-dispute-mon /usr/local/bin/
 CMD ["op-dispute-mon"]
 
-FROM $TARGET_BASE_IMAGE AS op-batcher-target
+FROM $TARGET_BASE_IMAGE AS mc-batcher-target
 USER 0
-COPY --from=op-batcher-builder /app/op-batcher/bin/op-batcher /usr/local/bin/
-CMD ["op-batcher"]
+COPY --from=mc-batcher-builder /app/mc-batcher/bin/mc-batcher /usr/local/bin/
+CMD ["mc-batcher"]
 
-FROM $TARGET_BASE_IMAGE AS op-proposer-target
+FROM $TARGET_BASE_IMAGE AS mc-proposer-target
 USER 0
-COPY --from=op-proposer-builder /app/op-proposer/bin/op-proposer /usr/local/bin/
-CMD ["op-proposer"]
+COPY --from=mc-proposer-builder /app/mc-proposer/bin/mc-proposer /usr/local/bin/
+CMD ["mc-proposer"]
 
 FROM $TARGET_BASE_IMAGE AS op-conductor-target
 USER 0
@@ -360,12 +360,12 @@ USER 0
 COPY --from=op-test-sequencer-builder /app/op-test-sequencer/bin/op-test-sequencer /usr/local/bin/
 CMD ["op-test-sequencer"]
 
-FROM dhi.io/alpine-base:3.23 AS op-deployer-target
+FROM dhi.io/alpine-base:3.23 AS mc-deployer-target
 USER 0
 COPY --from=builder_foundry /usr/local/bin/forge /usr/local/bin/
-COPY --from=op-deployer-builder /app/op-deployer/bin/op-deployer /usr/local/bin/
+COPY --from=mc-deployer-builder /app/mc-deployer/bin/mc-deployer /usr/local/bin/
 ENV FORGE_ENV=alpine
-CMD ["op-deployer"]
+CMD ["mc-deployer"]
 
 FROM $TARGET_BASE_IMAGE AS op-dripper-target
 USER 0

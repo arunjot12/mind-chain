@@ -50,17 +50,17 @@ The design of the `op-conductor` provides the following guarantees:
 *   **Admin RPC:** Provides administrative RPCs for manual recovery scenarios,
     including, but not limited to: stopping the leadership vote and removing itself
     from the cluster.
-*   **Health RPC:** Offers health RPCs for the `op-node` to determine whether it
+*   **Health RPC:** Offers health RPCs for the `mc-node` to determine whether it
     should allow the publishing of transactions and unsafe blocks.
 
 ### Sequencer health monitoring
 
-*   Continuously monitors the health of the sequencer (op-node) to ensure
+*   Continuously monitors the health of the sequencer (mc-node) to ensure
     optimal performance and reliability.
 
 ### Control loop management
 
-*   Implements a control loop to manage the status of the sequencer (op-node),
+*   Implements a control loop to manage the status of the sequencer (mc-node),
     including starting and stopping operations based on different scenarios and
     health checks.
 

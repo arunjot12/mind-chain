@@ -20,7 +20,7 @@ An orderly shutdown is done in the reverse order to the order in which component
       Wait until you see `Batch Submitter stopped` in batcher's output before you stop the process.
   </Step>
 
-  <Step title="Stop `op-proposer`">
+  <Step title="Stop `mc-proposer`">
   To stop the proposer, terminate the process directly. This can be done by:
   
   *   Pressing **Ctrl+C** in the terminal running the process
@@ -29,11 +29,11 @@ An orderly shutdown is done in the reverse order to the order in which component
   Ensure that the proposer process has terminated completely before proceeding to stop other components.
   </Step>
 
-  <Step title="Stop `op-node`">
+  <Step title="Stop `mc-node`">
   This component is stateless, so you can just stop the process.
   </Step>
 
-  <Step title="Stop `op-reth`">
+  <Step title="Stop `mc-reth`">
   Use **CTRL-C** (SIGINT) so the execution client shuts down gracefully and flushes its database. Killing the process abruptly can leave the database in an inconsistent state and cause problems on the next start.
   </Step>
 </Steps>
@@ -42,16 +42,16 @@ An orderly shutdown is done in the reverse order to the order in which component
 
 To restart the blockchain, use the same order of components you did when you initialized it.
 <Steps>
-  <Step title="Start `op-reth`">
+  <Step title="Start `mc-reth`">
   
   </Step>
 
-  <Step title="Start `op-node`">
+  <Step title="Start `mc-node`">
   
   </Step>
 
-  <Step title="Start `op-batcher`">
-  If `op-batcher` is still running and you just stopped it using RPC, you can start it with this command:
+  <Step title="Start `mc-batcher`">
+  If `mc-batcher` is still running and you just stopped it using RPC, you can start it with this command:
   
       ```sh
       curl -d '{"id":0,"jsonrpc":"2.0","method":"admin_startBatcher","params":[]}' \
@@ -59,11 +59,11 @@ To restart the blockchain, use the same order of components you did when you ini
       ```
   </Step>
 
-  <Step title="Start `op-proposer`">
+  <Step title="Start `mc-proposer`">
   Start the proposer using the appropriate command. Here's an example:
   
     ```sh
-    ./bin/op-proposer \
+    ./bin/mc-proposer \
       --poll-interval=12s \
       --rpc.port=8560 \
       --rollup-rpc=http://localhost:8547 \
@@ -83,32 +83,32 @@ To restart the blockchain, use the same order of components you did when you ini
 <Info>
 Synchronization takes time
 
-`op-batcher` might have warning messages similar to:
+`mc-batcher` might have warning messages similar to:
 
 ```
 WARN [03-21|14:13:55.248] Error calculating L2 block range         err="failed to get sync status: Post \"http://localhost:8547\": context deadline exceeded"
 WARN [03-21|14:13:57.328] Error calculating L2 block range         err="failed to get sync status: Post \"http://localhost:8547\": context deadline exceeded"
 ```
 
-This means that `op-node` is not yet synchronized up to the present time.
+This means that `mc-node` is not yet synchronized up to the present time.
 Just wait until it is.
 
 </Info>
 
 ## Getting your rollup config
 
-Use this tool to get your rollup config from `op-node`. This will only work if your chain is **already** in the [superchain-registry](https://github.com/ethereum-optimism/superchain-registry/blob/main/chainList.json) and `op-node` has been updated to pull those changes in from the registry.
+Use this tool to get your rollup config from `mc-node`. This will only work if your chain is **already** in the [superchain-registry](https://github.com/ethereum-optimism/superchain-registry/blob/main/chainList.json) and `mc-node` has been updated to pull those changes in from the registry.
 
 <Info>
 This script will NOT work for chain operators trying to generate this data in order to submit it to the registry.
 </Info>
 
 <Steps>
-  <Step title="Get your rollup config from `op-node`">
+  <Step title="Get your rollup config from `mc-node`">
   You'll need to run this tool:
   
   ```
-  ./bin/op-node networks dump-rollup-config --network=op-sepolia   
+  ./bin/mc-node networks dump-rollup-config --network=op-sepolia   
   {
     "genesis": {
       "l1": {
@@ -156,36 +156,36 @@ This script will NOT work for chain operators trying to generate this data in or
 
 ## Adding nodes
 
-To add nodes to the rollup, you need to initialize `op-node` and `op-reth`, similar to what you did for the first node.
-You should *not* add an `op-batcher` because there should be only one.
+To add nodes to the rollup, you need to initialize `mc-node` and `mc-reth`, similar to what you did for the first node.
+You should *not* add an `mc-batcher` because there should be only one.
 <Steps>
   <Step title="Configure the OS and prerequisites as you did for the first node">
   
   </Step>
 
-  <Step title="Install `op-reth` and `op-node` as you did for the first node">
+  <Step title="Install `mc-reth` and `mc-node` as you did for the first node">
   
   </Step>
 
   <Step title="Copy from the first node these files:">
   ```bash
-      ~/op-reth/genesis.json
-      ~/optimism/op-node/rollup.json
+      ~/mc-reth/genesis.json
+      ~/optimism/mc-node/rollup.json
       ```
   </Step>
 
   <Step title="Create a new `jwt.txt` file as a shared secret:">
   ```bash
-      cd ~/op-reth
+      cd ~/mc-reth
       openssl rand -hex 32 > jwt.txt
-      cp jwt.txt ~/optimism/op-node
+      cp jwt.txt ~/optimism/mc-node
       ```
   </Step>
 
-  <Step title="Initialize the new op-reth:">
+  <Step title="Initialize the new mc-reth:">
   ```bash
-      cd ~/op-reth
-      op-reth init --chain=./genesis.json --datadir=./datadir
+      cd ~/mc-reth
+      mc-reth init --chain=./genesis.json --datadir=./datadir
       ```
   </Step>
 
@@ -194,13 +194,13 @@ You should *not* add an `op-batcher` because there should be only one.
       If you already have peer to peer synchronization, add the new node to the `--p2p.static` list so it can synchronize.
   </Step>
 
-  <Step title="Start `op-reth` (using the same command line you used on the initial node)">
+  <Step title="Start `mc-reth` (using the same command line you used on the initial node)">
   <Info>
-  **Important:** Make sure to configure the `--rollup.sequencer` flag (alias `--rollup.sequencer-http`) to point to your sequencer node. This endpoint is crucial because `op-reth` will route `eth_sendRawTransaction` calls to this URL. The OP Stack does not currently have a public mempool, so configuring this is required if you want your node to support transaction submission.
+  **Important:** Make sure to configure the `--rollup.sequencer` flag (alias `--rollup.sequencer-http`) to point to your sequencer node. This endpoint is crucial because `mc-reth` will route `eth_sendRawTransaction` calls to this URL. The OP Stack does not currently have a public mempool, so configuring this is required if you want your node to support transaction submission.
   </Info>
   </Step>
 
-  <Step title="Start `op-node` (using the same command line you used on the initial node)">
+  <Step title="Start `mc-node` (using the same command line you used on the initial node)">
   
   </Step>
 </Steps>

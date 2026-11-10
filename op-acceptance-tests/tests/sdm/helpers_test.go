@@ -158,15 +158,15 @@ func assertFixtureVerifierReceipts(t devtest.T, sys *sdmtest.RethSystem, block *
 	}
 }
 
-// assertPostExecTxHashIsCanonical asserts op-reth serves and resolves the post-exec tx (and its
+// assertPostExecTxHashIsCanonical asserts mc-reth serves and resolves the post-exec tx (and its
 // receipt) under the hash Go's PostExecTx.Hash() produces — keccak256(0x7D || Data). Hashing via
-// Hash() rather than a hand-rolled keccak checks the Go hasher and op-reth agree — the cross-client
+// Hash() rather than a hand-rolled keccak checks the Go hasher and mc-reth agree — the cross-client
 // guarantee op-service/sources relies on.
 func assertPostExecTxHashIsCanonical(t devtest.T, l2EL *dsl.L2ELNode, postExecTx *sdmpkg.RPCTransaction) {
 	wantHash := gethtypes.NewTx(&gethtypes.PostExecTx{Data: []byte(postExecTx.Input)}).Hash()
 
 	t.Require().Equal(wantHash, postExecTx.Hash,
-		"op-reth-served post-exec tx hash %s must equal PostExecTx.Hash() %s (keccak256(0x7D || Data), matching TxDeposit)",
+		"mc-reth-served post-exec tx hash %s must equal PostExecTx.Hash() %s (keccak256(0x7D || Data), matching TxDeposit)",
 		postExecTx.Hash, wantHash)
 
 	rpcClient := l2EL.Escape().L2EthClient().RPC()
@@ -175,13 +175,13 @@ func assertPostExecTxHashIsCanonical(t devtest.T, l2EL *dsl.L2ELNode, postExecTx
 	err := rpcClient.CallContext(t.Ctx(), &txRaw, "eth_getTransactionByHash", wantHash)
 	t.Require().NoError(err, "eth_getTransactionByHash RPC failed for canonical hash %s", wantHash)
 	t.Require().False(isNullJSONResult(txRaw),
-		"op-reth must resolve the post-exec tx under its canonical hash %s", wantHash)
+		"mc-reth must resolve the post-exec tx under its canonical hash %s", wantHash)
 
 	var receiptRaw json.RawMessage
 	err = rpcClient.CallContext(t.Ctx(), &receiptRaw, "eth_getTransactionReceipt", wantHash)
 	t.Require().NoError(err, "eth_getTransactionReceipt RPC failed for canonical hash %s", wantHash)
 	t.Require().False(isNullJSONResult(receiptRaw),
-		"op-reth must resolve the post-exec receipt under its canonical hash %s", wantHash)
+		"mc-reth must resolve the post-exec receipt under its canonical hash %s", wantHash)
 }
 
 // isNullJSONResult reports whether a raw JSON-RPC result is absent (null or empty) — i.e. not found.

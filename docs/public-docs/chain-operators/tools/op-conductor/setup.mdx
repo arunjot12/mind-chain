@@ -51,7 +51,7 @@ This setup guide has the following assumptions:
         OP_CONDUCTOR_METRICS_ENABLED: 'true'
         OP_CONDUCTOR_METRICS_PORT: '7300'
         OP_CONDUCTOR_NETWORK: '<network>'
-        OP_CONDUCTOR_NODE_RPC: '<op-node url or ip>:8545'
+        OP_CONDUCTOR_NODE_RPC: '<mc-node url or ip>:8545'
         OP_CONDUCTOR_RAFT_SERVER_ID: 'unique raft server id'
         OP_CONDUCTOR_RAFT_STORAGE_DIR: /conductor/raft
         OP_CONDUCTOR_RPC_ADDR: 0.0.0.0
@@ -73,12 +73,12 @@ This setup guide has the following assumptions:
       Pause `sequencer-0` &` sequencer-2` conductors with [conductor_pause](/chain-operators/tools/op-conductor/reference#conductor_pause) RPC request.
     </Step>
   
-    <Step title="Update op-node configuration and switch the active sequencer">
-        Deploy an `op-node` config update to all sequencers that enables conductor. Use
+    <Step title="Update mc-node configuration and switch the active sequencer">
+        Deploy an `mc-node` config update to all sequencers that enables conductor. Use
         a blue/green style deployment workflow that switches the active sequencer to
         `sequencer-1`:
       
-        *   all sequencer op-node configs:
+        *   all sequencer mc-node configs:
       
             ```yaml
             OP_NODE_CONDUCTOR_ENABLED: "true" # this is what commits unsafe blocks to the raft logs
@@ -106,13 +106,13 @@ This setup guide has the following assumptions:
         1.  raft cluster follower
         2.  sequencer is stopped
         3.  conductor is paused
-        4.  conductor enabled in op-node config
+        4.  conductor enabled in mc-node config
   
     *   `sequencer-1`
         1.  raft cluster leader
         2.  sequencer is active
         3.  conductor is paused
-        4.  conductor enabled in op-node config
+        4.  conductor enabled in mc-node config
 
   
     </Step>
@@ -140,13 +140,13 @@ This setup guide has the following assumptions:
     1. raft cluster follower
     2. sequencer is stopped
     3. conductor is active
-    4. conductor enabled in op-node config
+    4. conductor enabled in mc-node config
 
     **`sequencer-0`:**
     1. raft cluster leader
     2. sequencer is active
     3. conductor is active
-    4. conductor enabled in op-node config
+    4. conductor enabled in mc-node config
 
     </Step>
   

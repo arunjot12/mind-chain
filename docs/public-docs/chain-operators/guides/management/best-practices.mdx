@@ -13,15 +13,15 @@ off-chain components.
 
 Chain and node operators should always run the latest production releases of the OP Stack's off-chain components. The latest notes and changelogs can be found on GitHub:
 
-*   [OP monorepo releases](https://github.com/ethereum-optimism/optimism/releases) (includes `op-node` and other Go-based OP components)
+*   [OP monorepo releases](https://github.com/ethereum-optimism/optimism/releases) (includes `mc-node` and other Go-based OP components)
 *   [op-geth releases](https://github.com/ethereum-optimism/op-geth/releases) (standalone repository)
 *   [op-contracts releases](https://github.com/ethereum-optimism/optimism/releases) (look for tags starting with `op-contracts/`)
 
 Some guidelines when picking versions:
 
 *   **Production releases** are always tagged with `<component-name>/v<semver>` for a specific OP component, for example:
-    *   `op-node/v1.7.5` for the `op-node`
-    *   `op-challenger/v1.0.0` for the `op-challenger`
+    *   `mc-node/v1.7.5` for the `mc-node`
+    *   `mc-challenger/v1.0.0` for the `mc-challenger`
 
 *   **Monorepo releases** typically use a simple `v<semver>` format (e.g. `v1.7.7`) to indicate that all Go-based OP Stack components (in `op-*`) have been updated together. These do **not** include new L1 contract releases.
 
@@ -34,7 +34,7 @@ Always consult release notes for additional details or upgrade instructions.
 ## Keep deployment artifacts
 
 After deploying your contracts on Ethereum, you should keep a record of all the deployment artifacts. 
-This is will be all the [op-deployer](/chain-operators/tools/op-deployer/overview.mdx) artifacts, as well as the release tag and commit hash of `op-deployer` and `op-contracts`.
+This is will be all the [mc-deployer](/chain-operators/tools/mc-deployer/overview.mdx) artifacts, as well as the release tag and commit hash of `mc-deployer` and `op-contracts`.
 You will need these artifacts to add your chain to the [Superchain Registry](/op-stack/protocol/superchain-registry).
 
 ## Incremental upgrade rollouts
@@ -70,7 +70,7 @@ GETH_TXPOOL_LIFETIME: "1h"
 GETH_TXPOOL_NOLOCALS: "true"
 ```
 
-For additional information about these flags, check out our [Execution Layer Configuration Options](/node-operators/reference/op-reth-config) doc.
+For additional information about these flags, check out our [Execution Layer Configuration Options](/node-operators/reference/mc-reth-config) doc.
 
 ## Write your own runbooks
 
@@ -79,9 +79,9 @@ You'll want to setup metrics endpoints and monitoring on your key components of 
 
 ## Assumptions
 
-### op-proposer assumes archive mode
+### mc-proposer assumes archive mode
 
-The `op-proposer` currently assumes that `op-geth` is being run in archive
+The `mc-proposer` currently assumes that `op-geth` is being run in archive
 mode. This will likely be updated in a future network upgrade, but it is
 necessary for L2 withdrawals at the moment.
 

@@ -9,8 +9,8 @@ import (
 )
 
 // TestSingleChainSuperFaultProofsFromOpNode runs the single-chain super-fault-proof smoke
-// test with super roots served by op-node instead of op-supernode. It exercises the FPP and
-// the challenger trace provider against the op-node superroot_atTimestamp source.
+// test with super roots served by mc-node instead of op-supernode. It exercises the FPP and
+// the challenger trace provider against the mc-node superroot_atTimestamp source.
 func TestSingleChainSuperFaultProofsFromOpNode(gt *testing.T) {
 	t := devtest.SerialT(gt)
 	sys := presets.NewSingleChainInteropNoSupernode(t)

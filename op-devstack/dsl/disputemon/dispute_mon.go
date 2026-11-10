@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	devtestmetrics "github.com/ethereum-optimism/optimism/op-devstack/devtest/metrics"
 	"github.com/ethereum-optimism/optimism/op-service/client"

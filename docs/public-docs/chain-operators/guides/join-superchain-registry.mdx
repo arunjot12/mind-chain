@@ -20,7 +20,7 @@ section, and if this page and that document ever disagree, the registry repo
 wins.
 
 Joining gets you more than a listing: once your chain is in the registry, its
-config is embedded in downstream releases of `op-node` and `op-geth`, so nodes
+config is embedded in downstream releases of `mc-node` and `op-geth`, so nodes
 can join your network with the `--network` / `--op-network` flags and can
 inherit Superchain-wide hardfork activations automatically. See the
 [superchain-registry explainer](/op-stack/protocol/superchain-registry) for how
@@ -35,9 +35,9 @@ that works.
     prerequisite
     ([ops.md](https://github.com/ethereum-optimism/superchain-registry/blob/main/docs/ops.md#adding-a-chain)).
 *   **Standard chains must be deployed with
-    [op-deployer](/chain-operators/tools/op-deployer/overview).** A chain is
+    [mc-deployer](/chain-operators/tools/mc-deployer/overview).** A chain is
     only considered standard in the registry if it was deployed with
-    op-deployer, which also produces the `state.json` file the registry
+    mc-deployer, which also produces the `state.json` file the registry
     tooling consumes
     ([ops.md](https://github.com/ethereum-optimism/superchain-registry/blob/main/docs/ops.md#0-standard-chains-deploy-your-chain-with-op-deployer)).
     Chains deployed another way follow the [custom-chain path](#custom-chains)
@@ -64,10 +64,10 @@ that works.
     ```
 
     where `<shortname>` is your chain's short name (for example `op`) and the
-    state file is the `state.json` produced by op-deployer. This writes two
+    state file is the `state.json` produced by mc-deployer. This writes two
     files to the `.staging` directory: `<shortname>.toml` and
     `<shortname>.json.zst`. If you deployed with custom contracts, pass your
-    op-deployer version as a third argument — supported values live in the
+    mc-deployer version as a third argument — supported values live in the
     registry's `versions.json`.
     ([ops.md](https://github.com/ethereum-optimism/superchain-registry/blob/main/docs/ops.md#3-generate-a-config-from-your-state-file))
   </Step>
@@ -100,7 +100,7 @@ that works.
 
 ## Custom Chains
 
-If your chain was not deployed with op-deployer (for example, a heavily
+If your chain was not deployed with mc-deployer (for example, a heavily
 modified deployment), you must write the config file by hand instead of
 generating it: copy the example config into `.staging`, substitute every field
 for your chain (custom chains set `superchain_level = 0` and
@@ -121,5 +121,5 @@ and the registry's
 ## Next Steps
 
 *   [The superchain-registry explainer](/op-stack/protocol/superchain-registry)
-*   [Deploy your chain with op-deployer](/chain-operators/tools/op-deployer/overview)
+*   [Deploy your chain with mc-deployer](/chain-operators/tools/mc-deployer/overview)
 *   [Registry operations documentation](https://github.com/ethereum-optimism/superchain-registry/blob/main/docs/ops.md) (canonical)

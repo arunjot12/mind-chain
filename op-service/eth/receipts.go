@@ -12,7 +12,7 @@ import (
 )
 
 // DecodeRawReceipts decodes receipts and adds additional blocks metadata.
-// The contract-deployment addresses are not set however (high cost, depends on nonce values, unused by op-node).
+// The contract-deployment addresses are not set however (high cost, depends on nonce values, unused by mc-node).
 // The OP JSON-only fee fields (L1GasPrice, OperatorFeeScalar, ...) are not part
 // of the consensus encoding and remain nil; the consensus-encoded deposit
 // receipt fields (DepositNonce, DepositReceiptVersion) are decoded.

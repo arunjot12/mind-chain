@@ -31,7 +31,7 @@ export IMPL_SALT=$(openssl rand -hex 32)
 
 ## Failed to find the L2 Heads to start from
 
-`op-node` fails to execute the derivation process with the following error:
+`mc-node` fails to execute the derivation process with the following error:
 
 ```text
 WARN [02-16|21:22:02.868] Derivation process temporary error       attempts=14 err="stage 0 failed resetting: temp: failed to find the L2 Heads to start from: failed to fetch L2 block by hash 0x0000000000000000000000000000000000000000000000000000000000000000: failed to determine block-hash of hash 0x0000000000000000000000000000000000000000000000000000000000000000, could not get payload: not found"
@@ -39,21 +39,21 @@ WARN [02-16|21:22:02.868] Derivation process temporary error       attempts=14 e
 
 ### Solution
 
-This error can occur when the data directory for `op-reth` becomes corrupted (for example, as a result of a computer crash).
+This error can occur when the data directory for `mc-reth` becomes corrupted (for example, as a result of a computer crash).
 You will need to reinitialize the data directory.
 
-If you are following the tutorial for [Creating Your Own L2 Rollup](/chain-operators/tutorials/create-l2-rollup), make sure to rerun the commands within the [Spin up sequencer](/chain-operators/tutorials/create-l2-rollup/op-reth-setup) section.
+If you are following the tutorial for [Creating Your Own L2 Rollup](/chain-operators/tutorials/create-l2-rollup), make sure to rerun the commands within the [Spin up sequencer](/chain-operators/tutorials/create-l2-rollup/mc-reth-setup) section.
 
 If you are not following the tutorial, make sure to take the following steps:
 
-1.  Stop `op-node` and `op-reth`.
-2.  Delete the corresponding `op-reth` data directory.
-3.  Reinitialize `op-reth` with the `genesis.json` file: `op-reth init --chain=./genesis.json --datadir=./datadir`.
-4.  Restart `op-reth` and `op-node`.
+1.  Stop `mc-node` and `mc-reth`.
+2.  Delete the corresponding `mc-reth` data directory.
+3.  Reinitialize `mc-reth` with the `genesis.json` file: `mc-reth init --chain=./genesis.json --datadir=./datadir`.
+4.  Restart `mc-reth` and `mc-node`.
 
 ## Batcher unable to publish transaction
 
-`op-batcher` fails to publish transactions with the following error:
+`mc-batcher` fails to publish transactions with the following error:
 
 ```text
 INFO [03-21|14:22:32.754] publishing transaction                   service=batcher txHash=2ace6d..7eb248 nonce=2516 gasTipCap=2,340,741 gasFeeCap=172,028,434,515
@@ -62,5 +62,5 @@ ERROR[03-21|14:22:32.844] unable to publish transaction            service=batch
 
 ### Solution
 
-You will observe this error if the `op-batcher` runs out of ETH to publish transactions to L1.
-This problem can be resolved by sending additional ETH to the `op-batcher` address.
+You will observe this error if the `mc-batcher` runs out of ETH to publish transactions to L1.
+This problem can be resolved by sending additional ETH to the `mc-batcher` address.

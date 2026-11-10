@@ -40,7 +40,7 @@ For more information on these monitors and how to use them, [check out the repo]
 
 Chain operators should consider running `op-dispute-mon`. It's an essential security monitoring service that tracks game statuses, providing visibility over the last 28 days.
 
-`dispute-mon` is set up and built the same way as `op-challenger`. This means that you can run it the same way (run `make op-dispute-mon` in the directory).
+`dispute-mon` is set up and built the same way as `mc-challenger`. This means that you can run it the same way (run `make op-dispute-mon` in the directory).
 
 A basic configuration option would look like this:
 
@@ -57,7 +57,7 @@ OP_DISPUTE_MON_GAME_FACTORY_ADDRESS=..
 OP_DISPUTE_MON_HONEST_ACTORS=..
 ```
 
-`OP_DISPUTE_MON_HONEST_ACTORS` is a CSV (no spaces) list of addresses that are used for the honest `op-challenger` instances.
+`OP_DISPUTE_MON_HONEST_ACTORS` is a CSV (no spaces) list of addresses that are used for the honest `mc-challenger` instances.
 
 Additional flags:
 
@@ -69,7 +69,7 @@ You can find more info on `op-dispute-mon` on [the repo](https://github.com/ethe
 
 ## Offchain component monitoring
 
-Offchain monitoring allows chain operators to monitor the operation and behavior of nodes and other offchain components. Some of the more common components that you'll likely want to monitor include `op-node`, `op-geth`, `op-proposer`, `op-batcher`, and `op-challenger`.
+Offchain monitoring allows chain operators to monitor the operation and behavior of nodes and other offchain components. Some of the more common components that you'll likely want to monitor include `mc-node`, `op-geth`, `mc-proposer`, `mc-batcher`, and `mc-challenger`.
 The general steps for enabling offchain monitoring are pretty consistent for all the OP components:
 
 1.  Expose the monitoring port by enabling the `--metrics.enabled` flag
@@ -78,33 +78,33 @@ The general steps for enabling offchain monitoring are pretty consistent for all
 4.  Save the data in `influxdb`
 5.  Share the data with [Grafana](https://grafana.com/) to build your custom dashboard
 
-### `op-node`
+### `mc-node`
 
-`op-node` metrics and monitoring is detailed in the [Node Metrics and Monitoring](/node-operators/guides/monitoring/metrics) guide. To enable metrics, pass the `--metrics.enabled` flag to `op-node` and follow the steps above for customization options.
-See [this curated list](/operators/node-operators/management/metrics#important-metrics) for important metrics to track specifically for `op-node`.
+`mc-node` metrics and monitoring is detailed in the [Node Metrics and Monitoring](/node-operators/guides/monitoring/metrics) guide. To enable metrics, pass the `--metrics.enabled` flag to `mc-node` and follow the steps above for customization options.
+See [this curated list](/operators/node-operators/management/metrics#important-metrics) for important metrics to track specifically for `mc-node`.
 
 ### `op-geth`
 
 To enable metrics, pass the `--metrics.enabled` flag to the op-geth. You can customize the metrics port and address via the `--metrics.port` and `--metrics.addr` flags, respectively.
 
-### `op-proposer`
+### `mc-proposer`
 
-To enable metrics, pass the `--metrics.enabled` flag to the op-proposer. You can customize the metrics port and address via the `--metrics.port` and `--metrics.addr` flags, respectively.
+To enable metrics, pass the `--metrics.enabled` flag to the mc-proposer. You can customize the metrics port and address via the `--metrics.port` and `--metrics.addr` flags, respectively.
 
 You can find more information about these flags in our [Proposer configuration doc](/operators/chain-operators/configuration/proposer#metricsenabled).
 
-### `op-batcher`
+### `mc-batcher`
 
-To enable metrics, pass the `--metrics.enabled` flag to the op-batcher. You can customize the metrics port and address via the `--metrics.port` and `--metrics.addr` flags, respectively.
+To enable metrics, pass the `--metrics.enabled` flag to the mc-batcher. You can customize the metrics port and address via the `--metrics.port` and `--metrics.addr` flags, respectively.
 
 You can find more information about these flags in our [Batcher configuration doc](/operators/chain-operators/configuration/proposer#metricsenabled).
 
-### `op-challenger`
+### `mc-challenger`
 
-The `op-challenger` operates as the *honest actor* in the fault dispute system and defends the chain by securing the `OptimismPortal` and ensuring the game always resolves to the correct state of the chain.
-For verifying the legitimacy of claims, `op-challenger` relies on a synced, trusted rollup node as well as a trace provider (e.g., [Cannon](/op-stack/fault-proofs/cannon)). See the [OP-Challenger Explainer](/op-stack/fault-proofs/challenger) for more information on this service.
+The `mc-challenger` operates as the *honest actor* in the fault dispute system and defends the chain by securing the `OptimismPortal` and ensuring the game always resolves to the correct state of the chain.
+For verifying the legitimacy of claims, `mc-challenger` relies on a synced, trusted rollup node as well as a trace provider (e.g., [Cannon](/op-stack/fault-proofs/cannon)). See the [OP-Challenger Explainer](/op-stack/fault-proofs/challenger) for more information on this service.
 
-To enable metrics, pass the `--metrics.enabled` flag to `op-challenger` and follow the steps above for customization options.
+To enable metrics, pass the `--metrics.enabled` flag to `mc-challenger` and follow the steps above for customization options.
 
 ```
     --metrics.addr value                (default: "0.0.0.0")               ($OP_CHALLENGER_METRICS_ADDR)

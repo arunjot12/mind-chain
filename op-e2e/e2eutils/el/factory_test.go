@@ -15,20 +15,20 @@ func TestInitL2GenesisInputValidation(t *testing.T) {
 		wantErr string
 	}{
 		{
-			name:   "op-reth in-memory genesis",
+			name:   "mc-reth in-memory genesis",
 			config: L2Config{Kind: services.ELKindOpReth, Genesis: &opgenesis.Genesis{}},
 		},
 		{
-			name:   "op-reth genesis path",
+			name:   "mc-reth genesis path",
 			config: L2Config{Kind: services.ELKindOpReth, GenesisJSONPath: "genesis.json"},
 		},
 		{
-			name:    "op-reth missing genesis",
+			name:    "mc-reth missing genesis",
 			config:  L2Config{Kind: services.ELKindOpReth},
 			wantErr: "set exactly one of Genesis or GenesisJSONPath",
 		},
 		{
-			name: "op-reth conflicting genesis inputs",
+			name: "mc-reth conflicting genesis inputs",
 			config: L2Config{
 				Kind:            services.ELKindOpReth,
 				Genesis:         &opgenesis.Genesis{},

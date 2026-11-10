@@ -16,7 +16,7 @@ challenger/
 optimism/
 
 # Downloaded binaries
-op-deployer
+mc-deployer
 
 # Logs
 *.log

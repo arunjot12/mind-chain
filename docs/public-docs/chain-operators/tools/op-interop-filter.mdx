@@ -18,7 +18,7 @@ audit-source:
   op-interop-filter is the service chain operators will run to validate interop transactions for the execution layer, and the interfaces described here may continue to evolve as the rollout progresses.
 </Info>
 
-*op-interop-filter* is a lightweight service that validates interop executing messages so that an execution layer (EL) client — op-reth — can reject invalid cross-chain transactions before they reach the sequencer's transaction pool.
+*op-interop-filter* is a lightweight service that validates interop executing messages so that an execution layer (EL) client — mc-reth — can reject invalid cross-chain transactions before they reach the sequencer's transaction pool.
 
 It is the service a chain operator runs to answer the `interop_checkAccessList` RPC that the EL calls on every interop transaction.
 
@@ -43,7 +43,7 @@ graph LR
   classDef filter fill:#FFE
   classDef transparent fill:none,stroke:none
 
-  EL["Execution layer<br/>(op-reth)"]
+  EL["Execution layer<br/>(mc-reth)"]
   Filter["op-interop-filter"]
   L2A["L2 RPC<br/>Chain A"]
   L2B["L2 RPC<br/>Chain B"]
@@ -57,7 +57,7 @@ graph LR
   class Filter filter
 ```
 
-The EL points at the filter through op-reth's `--rollup.interop-http` flag and calls the filter's `interop_checkAccessList` method to validate each interop transaction.
+The EL points at the filter through mc-reth's `--rollup.interop-http` flag and calls the filter's `interop_checkAccessList` method to validate each interop transaction.
 
 This is a different job from what [op-supernode](/op-stack/interop/supernode) does.
 The supernode operates at the consensus layer (CL): it verifies that a block's cross-chain dependencies have been reproduced from L1, then promotes the block to *safe* through the chain's own CL.

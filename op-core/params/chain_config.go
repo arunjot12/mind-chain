@@ -2,7 +2,7 @@
 // import it as opparams.
 //
 // This package must stay free of op-core/superchain, which embeds the generated
-// registry bundle: packages that only need config types (notably op-node/rollup)
+// registry bundle: packages that only need config types (notably mc-node/rollup)
 // must not pull the bundle into their build closure. The registry-backed loading
 // lives in op-core/superchain, which imports this package one-way.
 package params

@@ -168,21 +168,21 @@ func (s *TwoL2SupernodeInterop) BootstrapLightSequencersViaVNHandoff() {
 // test.
 //
 // When WithInteropFilter() is set the test is skipped on op-geth: the interop filter
-// is only supported with op-reth, since op-geth does not call the interop_ namespace.
+// is only supported with mc-reth, since op-geth does not call the interop_ namespace.
 func NewTwoL2SupernodeInterop(t devtest.T, delaySeconds uint64, opts ...Option) *TwoL2SupernodeInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewTwoL2SupernodeInterop", opts, twoL2SupernodeInteropPresetSupportedOptionKinds)
 	if presetCfg.UseInteropFilter {
-		sysgo.SkipOnOpGeth(t, "interop filter is only supported with op-reth")
+		sysgo.SkipOnOpGeth(t, "interop filter is only supported with mc-reth")
 	}
 	return twoL2SupernodeInteropFromRuntime(t, sysgo.NewTwoL2SupernodeInteropRuntimeWithConfig(t, delaySeconds, presetCfg))
 }
 
 // NewTwoL2SupernodeLightSequencerInterop creates a two-L2 interop setup where
-// light op-node CLs sequence blocks and the shared supernode derives safe heads.
+// light mc-node CLs sequence blocks and the shared supernode derives safe heads.
 func NewTwoL2SupernodeLightSequencerInterop(t devtest.T, delaySeconds uint64, opts ...Option) *TwoL2SupernodeInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewTwoL2SupernodeLightSequencerInterop", opts, twoL2SupernodeLightSequencerPresetSupportedOptionKinds)
 	if presetCfg.UseInteropFilter {
-		sysgo.SkipOnOpGeth(t, "interop filter is only supported with op-reth")
+		sysgo.SkipOnOpGeth(t, "interop filter is only supported with mc-reth")
 	}
 	return twoL2SupernodeInteropFromRuntime(t, sysgo.NewTwoL2SupernodeLightSequencerInteropRuntimeWithConfig(t, delaySeconds, presetCfg))
 }
@@ -278,7 +278,7 @@ func (s *SameTimestampTestSetup) IncludeAndValidate(txsA, txsB []*txplan.Planned
 	require.NotNil(s.t, s.TestSequencer, "TestSequencer is required for deterministic timestamp tests")
 
 	// Assign nonces deterministically within each same-timestamp block. Relying on
-	// mempool-visible pending nonces is racy across clients, and op-reth is stricter
+	// mempool-visible pending nonces is racy across clients, and mc-reth is stricter
 	// about underpriced replacement transactions than op-geth.
 	baseNonceA := s.Alice.PendingNonce()
 	for i, ptx := range txsA {

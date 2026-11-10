@@ -13,12 +13,12 @@ import (
 	"time"
 
 	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/inspect"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/inspect"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
+	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 
@@ -101,7 +101,7 @@ var (
 	errorLogHandler   slog.Handler
 
 	// allocTypeOnce guards lazy, on-demand generation of each alloc type's
-	// genesis data. Each alloc type runs a full op-deployer genesis pipeline
+	// genesis data. Each alloc type runs a full mc-deployer genesis pipeline
 	// across every L2 hardfork mode, which is several minutes of CPU work.
 	// Generating only the alloc types a test binary actually requests keeps a
 	// binary that uses a single alloc type (e.g. the opgeth fuzz targets) from
@@ -110,7 +110,7 @@ var (
 )
 
 // ensureAllocType generates the genesis data for the given alloc type if it has
-// not been generated yet. Generation is expensive (a full op-deployer pipeline
+// not been generated yet. Generation is expensive (a full mc-deployer pipeline
 // per L2 hardfork mode), so it runs lazily and exactly once per alloc type. A
 // test binary therefore only pays for the alloc types its tests actually use,
 // instead of every alloc type up front. Logs are kept at error level during

@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 
 	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 )
@@ -44,7 +44,7 @@ func TestSupernodeVerifierCatchesUpFromCold(gt *testing.T) {
 }
 
 // Same cold catch-up under ELSync mode. Mirror of TestSyncTesterELSync with
-// the verifier op-node replaced by a supernode VN.
+// the verifier mc-node replaced by a supernode VN.
 func TestSupernodeVerifierELSyncsFromCold(gt *testing.T) {
 	t := devtest.ParallelT(gt)
 	sys := presets.NewSingleSupernodeWithSyncTester(t,

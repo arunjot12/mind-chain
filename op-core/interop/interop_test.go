@@ -9,7 +9,7 @@ import (
 
 // TestFailsafeErrorCode verifies failsafe has a dedicated RPC error code that
 // clients can detect by code rather than by matching the message string. This
-// code is a deployment contract with op-reth and proxyd, so it must not change.
+// code is a deployment contract with mc-reth and proxyd, so it must not change.
 func TestFailsafeErrorCode(t *testing.T) {
 	require.Equal(t, -320602, GetErrorCode(ErrFailsafeEnabled),
 		"failsafe must map to the dedicated -320602 code")

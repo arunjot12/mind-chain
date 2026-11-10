@@ -42,7 +42,7 @@ The OP Stack's unique, modular design allows the decoupling of the FPP and FPVM,
 
 The Fault Proof Program (FPP) is one of the modules in the OP Stack's fault proof system. 
 It is a combination of both the consensus and execution "parts" of the protocol in a single process. This means Engine API calls that would normally be made over HTTP are instead made as direct method calls to the execution client code.
-The default for this system component is `kona-client`, a Rust implementation combining `kona-node` and `op-reth`. Its predecessor `op-program` (a combination of `op-geth` and `op-node`, written in Go) has reached end-of-support and does not support the now-active Karst hardfork. See [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation).
+The default for this system component is `kona-client`, a Rust implementation combining `kona-node` and `mc-reth`. Its predecessor `op-program` (a combination of `op-geth` and `mc-node`, written in Go) has reached end-of-support and does not support the now-active Karst hardfork. See [End of Support for op-geth and op-program](/notices/archive/op-geth-deprecation).
 These both implement a fault proof program that runs through the rollup state-transition to verify an L2 output from L1 inputs. This verifiable output can then resolve a disputed output on L1.
 
 The FPP is designed so that it can be run in a deterministic way such that two invocations with the same input data will result in not only the same output, but the same program execution trace. This allows it to be run in an onchain VM as part of the dispute resolution process.

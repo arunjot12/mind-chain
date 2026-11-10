@@ -73,9 +73,9 @@ To preserve the two-word `FEE_SCALARS` event payload without requiring a hardfor
 
 Chain operators must coordinate the L1 contract cutover with the services that propose, challenge, and monitor Fault Proofs.
 
-* Switch `op-proposer` to the new Super Root RPC and game type at the contract cutover.
-* Update `op-proposer` dashboards and alerts that use `op_proposer_default_refs_number{layer="l2"}` to `op_proposer_default_proposed_sequence_number`.
-* Configure `op-challenger` and `op-dispute-mon` to support Super Root Dispute Games while retaining the configuration needed to finish games already in progress.
+* Switch `mc-proposer` to the new Super Root RPC and game type at the contract cutover.
+* Update `mc-proposer` dashboards and alerts that use `op_proposer_default_refs_number{layer="l2"}` to `op_proposer_default_proposed_sequence_number`.
+* Configure `mc-challenger` and `op-dispute-mon` to support Super Root Dispute Games while retaining the configuration needed to finish games already in progress.
 * For permissionless Fault Proofs, stage the reviewed `kona-client` Interop variant prestate before the cutover.
 * Update operational tooling that calls the removed `SystemConfig` functions.
 
@@ -83,9 +83,9 @@ The [OP Stack component changes](#prepare-op-stack-components), [`SystemConfig` 
 
 ### Node Operators
 
-Upgrade 20 has no L2 hardfork, and it does not require an `op-node` or `op-reth` configuration change to follow the chain.
-If the node also provides a Super Root RPC to Fault Proof services, keep that endpoint reachable during and after the cutover, and run `op-node` with `--safedb.path` enabled and populated through derivation.
-See the [`op-node` row](#prepare-op-stack-components) for details.
+Upgrade 20 has no L2 hardfork, and it does not require an `mc-node` or `mc-reth` configuration change to follow the chain.
+If the node also provides a Super Root RPC to Fault Proof services, keep that endpoint reachable during and after the cutover, and run `mc-node` with `--safedb.path` enabled and populated through derivation.
+See the [`mc-node` row](#prepare-op-stack-components) for details.
 
 ### App Developers and Infrastructure Integrators
 
@@ -119,13 +119,13 @@ Treat the listed version as a minimum for every component except `kona-client`, 
 
 | Component | Version | Required change |
 | --- | --- | --- |
-| `op-challenger` | [v1.9.5](https://github.com/ethereum-optimism/optimism/releases/tag/op-challenger%2Fv1.9.5) | Add `--superroot-rpc` (`OP_CHALLENGER_SUPERROOT_RPC`) and keep the existing game types so the challenger can finish games already in progress. On a permissionless chain, append `super-cannon-kona` to `--game-types` (`OP_CHALLENGER_GAME_TYPES`) and configure the reviewed Kona Interop prestate, as described in [Locate or build the absolute prestate](#locate-or-build-the-absolute-prestate). On a permissioned chain, do not add `super-permissioned`; the simplified game does not require a trace type, and `op-challenger` handles its lifecycle automatically. |
+| `mc-challenger` | [v1.9.5](https://github.com/ethereum-optimism/optimism/releases/tag/op-challenger%2Fv1.9.5) | Add `--superroot-rpc` (`OP_CHALLENGER_SUPERROOT_RPC`) and keep the existing game types so the challenger can finish games already in progress. On a permissionless chain, append `super-cannon-kona` to `--game-types` (`OP_CHALLENGER_GAME_TYPES`) and configure the reviewed Kona Interop prestate, as described in [Locate or build the absolute prestate](#locate-or-build-the-absolute-prestate). On a permissioned chain, do not add `super-permissioned`; the simplified game does not require a trace type, and `mc-challenger` handles its lifecycle automatically. |
 | `op-dispute-mon` | [v1.6.0](https://github.com/ethereum-optimism/optimism/releases/tag/op-dispute-mon%2Fv1.6.0) | Add `--superroot-rpc` (`OP_DISPUTE_MON_SUPERROOT_RPC`). Keep `--rollup-rpc` while Output Root Dispute Games remain in progress. |
-| `op-proposer` | [v1.16.4](https://github.com/ethereum-optimism/optimism/releases/tag/op-proposer%2Fv1.16.4) | Switch at the contract upgrade cutover, as described in [Update order](#update-order). Replace `--rollup-rpc` with `--superroot-rpcs` (`OP_PROPOSER_SUPERROOT_RPCS`) and set `OP_PROPOSER_GAME_TYPE=5` for a permissioned chain or `OP_PROPOSER_GAME_TYPE=9` for a permissionless chain. |
-| `kona-client` | [v1.7.0](https://github.com/ethereum-optimism/optimism/releases/tag/kona-client%2Fv1.7.0) exactly | Permissionless chains only. This release produces the `SUPER_CANNON_KONA` absolute prestate. Build or locate the Interop variant prestate from this exact tag and host it for `op-challenger`, as described in [Locate or build the absolute prestate](#locate-or-build-the-absolute-prestate). A later tag produces a different hash that does not match the reviewed Upgrade 20 value. |
-| `op-node` | [v1.19.6](https://github.com/ethereum-optimism/optimism/releases/tag/op-node%2Fv1.19.6) | No hardfork activation, so an `op-node` that only serves the chain needs no configuration change. An `op-node` that serves the Super Root RPC to Fault Proof services must run with `--safedb.path` enabled and populated through derivation; `superroot_atTimestamp` cannot serve a non-genesis timestamp without SafeDB. |
-| `op-reth` | [2.4.4](https://github.com/ethereum-optimism/optimism/releases/tag/op-reth%2Fv2.4.4) | No Upgrade 20 configuration change is required, and there is no hardfork activation. |
-| `op-batcher` | [v1.16.13](https://github.com/ethereum-optimism/optimism/releases/tag/op-batcher%2Fv1.16.13) | No Upgrade 20 configuration change is required. |
+| `mc-proposer` | [v1.16.4](https://github.com/ethereum-optimism/optimism/releases/tag/op-proposer%2Fv1.16.4) | Switch at the contract upgrade cutover, as described in [Update order](#update-order). Replace `--rollup-rpc` with `--superroot-rpcs` (`OP_PROPOSER_SUPERROOT_RPCS`) and set `OP_PROPOSER_GAME_TYPE=5` for a permissioned chain or `OP_PROPOSER_GAME_TYPE=9` for a permissionless chain. |
+| `kona-client` | [v1.7.0](https://github.com/ethereum-optimism/optimism/releases/tag/kona-client%2Fv1.7.0) exactly | Permissionless chains only. This release produces the `SUPER_CANNON_KONA` absolute prestate. Build or locate the Interop variant prestate from this exact tag and host it for `mc-challenger`, as described in [Locate or build the absolute prestate](#locate-or-build-the-absolute-prestate). A later tag produces a different hash that does not match the reviewed Upgrade 20 value. |
+| `mc-node` | [v1.19.6](https://github.com/ethereum-optimism/optimism/releases/tag/op-node%2Fv1.19.6) | No hardfork activation, so an `mc-node` that only serves the chain needs no configuration change. An `mc-node` that serves the Super Root RPC to Fault Proof services must run with `--safedb.path` enabled and populated through derivation; `superroot_atTimestamp` cannot serve a non-genesis timestamp without SafeDB. |
+| `mc-reth` | [2.4.4](https://github.com/ethereum-optimism/optimism/releases/tag/op-reth%2Fv2.4.4) | No Upgrade 20 configuration change is required, and there is no hardfork activation. |
+| `mc-batcher` | [v1.16.13](https://github.com/ethereum-optimism/optimism/releases/tag/op-batcher%2Fv1.16.13) | No Upgrade 20 configuration change is required. |
 
 `op_proposer_default_proposed_sequence_number` replaces `op_proposer_default_refs_number` as the metric for the latest proposal sequence number.
 The replacement metric is already available before Upgrade 20, so operators can update dashboards before the contract cutover.
@@ -133,14 +133,14 @@ Remove `layer` and `type` label filters when updating queries because the replac
 The metric reports an L2 block number for Output Root proposals and a Unix timestamp for Super Root proposals.
 
 The Super Root RPC must return a root for the chain or dependency set that the Dispute Game covers.
-For a single-chain upgrade, use the chain's `op-node` RPC endpoint or the chain-specific endpoint exposed by an `op-supernode`.
+For a single-chain upgrade, use the chain's `mc-node` RPC endpoint or the chain-specific endpoint exposed by an `op-supernode`.
 
 ### Update order
 
 Sequence the service updates around the L1 contract cutover:
 
-* Update `op-challenger` and `op-dispute-mon` **before** the L1 contract cutover. Both services need the Super Root configuration in place when the first Super Root Dispute Game is created.
-* Switch `op-proposer` **at the cutover**, or immediately after it. The proposer cannot propose against the new game type until the contracts are upgraded, and it logs proposal errors from the cutover until it is switched, so do not leave a deliberate gap.
+* Update `mc-challenger` and `op-dispute-mon` **before** the L1 contract cutover. Both services need the Super Root configuration in place when the first Super Root Dispute Game is created.
+* Switch `mc-proposer` **at the cutover**, or immediately after it. The proposer cannot propose against the new game type until the contracts are upgraded, and it logs proposal errors from the cutover until it is switched, so do not leave a deliberate gap.
 
 ## Update `SystemConfig` integrations
 
@@ -242,7 +242,7 @@ Permissionless chains need the Upgrade 20 `kona-client` Interop variant absolute
   </Step>
 
   <Step title="Upload your new preimage file">
-    Upload the new preimage file to wherever you store your other absolute preimage files. This is the location `--prestates-url` points at. `op-challenger` fetches the file from there when it needs to play a game.
+    Upload the new preimage file to wherever you store your other absolute preimage files. This is the location `--prestates-url` points at. `mc-challenger` fetches the file from there when it needs to play a game.
 
     Rename the file so the absolute prestate hash is the filename, for example `0x031ac6f15c19010da258f5cb633ef6ca9318c2d0f244bea6b2045ce6b790e1df.bin.gz`.
 
@@ -255,7 +255,7 @@ Permissionless chains need the Upgrade 20 `kona-client` Interop variant absolute
     A custom prestate must be hosted at a URL reachable by every challenger that participates on the chain.
   </Step>
 
-  <Step title="Configure op-challenger for super-cannon-kona">
+  <Step title="Configure mc-challenger for super-cannon-kona">
     Add `super-cannon-kona` to the game types, keeping the existing entries so the challenger can finish games already in progress:
 
     ```bash
@@ -283,7 +283,7 @@ Permissionless chains need the Upgrade 20 `kona-client` Interop variant absolute
     --cannon-kona-depset-config=/path/to/depset.json   # only if --network is not set
     ```
 
-    If you do not use the standard OP Labs `op-challenger` Docker image, set the `kona-host` binary path, built from the same release as the configured prestate:
+    If you do not use the standard OP Labs `mc-challenger` Docker image, set the `kona-host` binary path, built from the same release as the configured prestate:
 
     ```bash
     OP_CHALLENGER_CANNON_KONA_SERVER=/path/to/kona-host
@@ -317,7 +317,7 @@ The [Output Root to Super Root upgrade runbook](/chain-operators/tutorials/upgra
 
 Before the cutover:
 
-* Confirm `op-proposer`, `op-challenger`, and `op-dispute-mon` start with the staged Super Root configuration and can reach the configured Super Root RPC.
+* Confirm `mc-proposer`, `mc-challenger`, and `op-dispute-mon` start with the staged Super Root configuration and can reach the configured Super Root RPC.
 * On a permissionless chain, reproduce the `kona-client` Interop variant prestate and confirm its hash matches the reviewed Upgrade 20 value.
 * Run integration tests that cover every direct `SystemConfig` call and every withdrawal or Dispute Game code path listed in this notice.
 

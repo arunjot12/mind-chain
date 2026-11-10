@@ -3,7 +3,7 @@ package conductor
 import (
 	"testing"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"

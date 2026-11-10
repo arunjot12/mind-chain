@@ -61,7 +61,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
 
     /// @notice Storage slot that the unsafe block signer is stored at.
     ///         Storing it at this deterministic storage slot allows for decoupling the storage
-    ///         layout from the way that `solc` lays out storage. The `op-node` uses a storage
+    ///         layout from the way that `solc` lays out storage. The `mc-node` uses a storage
     ///         proof to fetch this value.
     /// @dev    NOTE: this value will be migrated to another storage slot in a future version.
     ///         User input should not be placed in storage in this contract until this migration
@@ -95,7 +95,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
     /// @notice Legacy slot for the batch inbox address, which lives only in the rollup config.
     bytes32 internal constant LEGACY_BATCH_INBOX_SLOT = bytes32(uint256(keccak256("systemconfig.batchinbox")) - 1);
 
-    /// @notice Storage slot for block at which the op-node can start searching for logs from.
+    /// @notice Storage slot for block at which the mc-node can start searching for logs from.
     bytes32 public constant START_BLOCK_SLOT = bytes32(uint256(keccak256("systemconfig.startBlock")) - 1);
 
     /// @notice The maximum gas limit that can be set for L2 blocks. This limit is used to enforce that the blocks
@@ -103,7 +103,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
     ///         optimizations and improvements are made to the system at large.
     uint64 internal constant MAX_GAS_LIMIT = 500_000_000;
 
-    /// @notice Fixed L2 gas overhead. Ignored by op-node after Ecotone.
+    /// @notice Fixed L2 gas overhead. Ignored by mc-node after Ecotone.
     /// @custom:deprecated No longer writable, and `setGasConfigEcotone` emits zero in its place.
     ///                    Retained so offchain readers of the getter keep working.
     uint256 public overhead;
@@ -389,7 +389,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
 
         scalar = (uint256(0x01) << 248) | (uint256(_blobbasefeeScalar) << 32) | _basefeeScalar;
 
-        // Emit zero for the deprecated overhead, which op-node ignores after Ecotone. The word
+        // Emit zero for the deprecated overhead, which mc-node ignores after Ecotone. The word
         // stays because consumers expect 64 bytes of event data.
         bytes memory data = abi.encode(uint256(0), scalar);
         emit ConfigUpdate(VERSION, UpdateType.FEE_SCALARS, data);
@@ -500,7 +500,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
 
     /// @notice An internal setter for the resource config.
     ///         Ensures that the config is sane before storing it by checking for invariants.
-    ///         In the future, this method may emit an event that the `op-node` picks up
+    ///         In the future, this method may emit an event that the `mc-node` picks up
     ///         for when the resource config is changed.
     /// @param _config The new resource config.
     function _setResourceConfig(IResourceMetering.ResourceConfig memory _config) internal {

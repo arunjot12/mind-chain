@@ -185,7 +185,7 @@ func startZKProposer(
 
 	// The proposer checks and loads program artifacts at
 	// OP_ZK_PROPOSER_PRESTATES_URL/<vkey>.agg.bin.gz, .range.bin.gz, and
-	// .log.bin.gz, mirroring op-challenger's --prestates-url convention. The
+	// .log.bin.gz, mirroring mc-challenger's --prestates-url convention. The
 	// aggregation vkey embeds the range program's vkey, which embeds the
 	// log-commitment program's vkey, so it keys all three ELFs. Devstack
 	// publishes the real ELFs, gzipped, when KONA_SP1_ELF_DIR is set; otherwise

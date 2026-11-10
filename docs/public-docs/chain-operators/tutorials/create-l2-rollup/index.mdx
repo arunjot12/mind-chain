@@ -8,7 +8,7 @@ diataxis: tutorial
   **Learn the OP Stack — stop 6 of 14.**
   You've covered the foundations: what the stack is, how it differs from
   Ethereum, and which components make it up. In this first project you
-  deploy a rollup testnet with op-deployer and start each component
+  deploy a rollup testnet with mc-deployer and start each component
   yourself. Work through every part of the series, then continue to
   [Transaction flow](/op-stack/transactions/transaction-flow).
 </Info>
@@ -26,11 +26,11 @@ Basic familiarity with Docker is also recommended.
 By the end of this tutorial, you'll have a complete OP Stack testnet with:
 
 *   **L1 Smart Contracts** deployed on Sepolia testnet
-*   **Execution Client** (op-reth) processing transactions
-*   **Consensus Client** (op-node) managing rollup consensus
-*   **Batcher** (op-batcher) publishing transaction data to L1
-*   **Proposer** (op-proposer) submitting state root proposals
-*   **Challenger** (op-challenger) monitoring for disputes
+*   **Execution Client** (mc-reth) processing transactions
+*   **Consensus Client** (mc-node) managing rollup consensus
+*   **Batcher** (mc-batcher) publishing transaction data to L1
+*   **Proposer** (mc-proposer) submitting state root proposals
+*   **Challenger** (mc-challenger) monitoring for disputes
 
 ## Before you start
 
@@ -116,7 +116,7 @@ You can either use a node provider like [Alchemy](https://www.alchemy.com/) (eas
         *   [Infura Faucet](https://www.infura.io/faucet/sepolia)
         *   [Paradigm Faucet](https://faucet.paradigm.xyz/)
         
-*   **L1 RPC URL** - An RPC endpoint to connect to the Sepolia network. You can get this from node providers like [Alchemy](https://www.alchemy.com/), [Infura](https://www.infura.io/). This is required so `op-deployer` and other services can read from and send transactions to L1.
+*   **L1 RPC URL** - An RPC endpoint to connect to the Sepolia network. You can get this from node providers like [Alchemy](https://www.alchemy.com/), [Infura](https://www.infura.io/). This is required so `mc-deployer` and other services can read from and send transactions to L1.
 
 <Info>
   **Testnet Only**: This guide is for **testnet deployment only**.
@@ -155,7 +155,7 @@ If you want to get started quickly, you can use the complete working implementat
 
 3.  **Run the automated setup:**
     ```bash
-    make init    # Download op-deployer
+    make init    # Download mc-deployer
     make setup   # Deploy contracts and generate configs
     make up      # Start all services
     make test-l1 # Verify L1 connectivity
@@ -180,11 +180,11 @@ To keep your rollup deployment organized, we'll create a dedicated directory str
 
 ```bash
 rollup/
-├── deployer/        # op-deployer files and contracts
-├── sequencer/  # op-reth and op-node
-├── batcher/    # op-batcher configuration
-├── proposer/   # op-proposer setup
-└── challenger/ # op-challenger files
+├── deployer/        # mc-deployer files and contracts
+├── sequencer/  # mc-reth and mc-node
+├── batcher/    # mc-batcher configuration
+├── proposer/   # mc-proposer setup
+└── challenger/ # mc-challenger files
 ```
 
 Each component's documentation will show you how the directory structure evolves as you add files and configurations.
@@ -198,44 +198,44 @@ Each component's documentation will show you how the directory structure evolves
 The manual path is organized into sequential steps that build upon each other:
 
 <Steps>
-<Step title="Spin up op-deployer">
+<Step title="Spin up mc-deployer">
 
-Install op-deployer, deploy L1 contracts, and prepare your environment
+Install mc-deployer, deploy L1 contracts, and prepare your environment
 
-[Go to op-deployer setup →](/chain-operators/tutorials/create-l2-rollup/op-deployer-setup)
+[Go to mc-deployer setup →](/chain-operators/tutorials/create-l2-rollup/mc-deployer-setup)
 </Step>
 
 <Step title="Spin up sequencer">
 
-Set up and run op-reth and op-node (the execution and consensus layers)
+Set up and run mc-reth and mc-node (the execution and consensus layers)
 
-[Go to sequencer setup →](/chain-operators/tutorials/create-l2-rollup/op-reth-setup)
+[Go to sequencer setup →](/chain-operators/tutorials/create-l2-rollup/mc-reth-setup)
 </Step>
 
 <Step title="Spin up batcher">
 
-Configure and start op-batcher for L1 data publishing
+Configure and start mc-batcher for L1 data publishing
 
-[Go to batcher setup →](/chain-operators/tutorials/create-l2-rollup/op-batcher-setup)
+[Go to batcher setup →](/chain-operators/tutorials/create-l2-rollup/mc-batcher-setup)
 </Step>
 
 <Step title="Spin up proposer">
 
-Set up op-proposer for state root submissions
+Set up mc-proposer for state root submissions
 
-[Go to proposer setup →](/chain-operators/tutorials/create-l2-rollup/op-proposer-setup)
+[Go to proposer setup →](/chain-operators/tutorials/create-l2-rollup/mc-proposer-setup)
 </Step>
 
 <Step title="Spin up challenger">
 
-Configure op-challenger for dispute resolution monitoring
+Configure mc-challenger for dispute resolution monitoring
 
-[Go to challenger setup →](/chain-operators/tutorials/create-l2-rollup/op-challenger-setup)
+[Go to challenger setup →](/chain-operators/tutorials/create-l2-rollup/mc-challenger-setup)
 </Step>
 </Steps>
 
-<Card title="Spin up op-deployer" href="/chain-operators/tutorials/create-l2-rollup/op-deployer-setup">
-  Already have your dependencies? Get started and spin up op-deployer
+<Card title="Spin up mc-deployer" href="/chain-operators/tutorials/create-l2-rollup/mc-deployer-setup">
+  Already have your dependencies? Get started and spin up mc-deployer
 </Card>
 
 ***

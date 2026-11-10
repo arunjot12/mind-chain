@@ -46,13 +46,13 @@ type MixedL2ELKind string
 
 const (
 	MixedL2ELOpGeth MixedL2ELKind = "op-geth"
-	MixedL2ELOpReth MixedL2ELKind = "op-reth"
+	MixedL2ELOpReth MixedL2ELKind = "mc-reth"
 )
 
 type MixedL2CLKind string
 
 const (
-	MixedL2CLOpNode MixedL2CLKind = "op-node"
+	MixedL2CLOpNode MixedL2CLKind = "mc-node"
 	MixedL2CLKona   MixedL2CLKind = "kona-node"
 )
 
@@ -63,10 +63,10 @@ func SkipOnOpGeth(t devtest.T, reason string) {
 	}
 }
 
-// SkipOnOpReth skips the test when the L2 execution layer is op-reth
+// SkipOnOpReth skips the test when the L2 execution layer is mc-reth
 func SkipOnOpReth(t devtest.T, reason string) {
 	if devstackL2ELKind() == MixedL2ELOpReth {
-		t.Skipf("skipping on op-reth: %s", reason)
+		t.Skipf("skipping on mc-reth: %s", reason)
 	}
 }
 
@@ -98,7 +98,7 @@ func devstackL2CLKind() MixedL2CLKind {
 }
 
 // ResolveMixedL2CLKind returns the L2 CL kind requested via DEVSTACK_L2CL_KIND,
-// defaulting to op-node when the variable is unset. Tests that build explicit
+// defaulting to mc-node when the variable is unset. Tests that build explicit
 // MixedSingleChainNodeSpec lists use this so they honor the same env-driven CL
 // selection as the higher-level single-chain presets (see startL2CLForKey).
 func ResolveMixedL2CLKind() MixedL2CLKind {
@@ -113,18 +113,18 @@ const (
 	devstackL2ELOverrideArgsEnv   = "DEVSTACK_L2EL_OVERRIDE_ARGS"
 )
 
-// ResolveMixedL2ELOpts returns the op-reth options requested via the environment:
+// ResolveMixedL2ELOpts returns the mc-reth options requested via the environment:
 // DEVSTACK_L2EL_OVERRIDE_BINARY names a CLI-superset binary to launch instead of the
-// default "op-reth", and DEVSTACK_L2EL_OVERRIDE_ARGS carries whitespace-separated extra CLI
+// default "mc-reth", and DEVSTACK_L2EL_OVERRIDE_ARGS carries whitespace-separated extra CLI
 // arguments for it. The returned slice is empty when both are unset, so callers get stock
-// op-reth.
+// mc-reth.
 //
 // This is the EL-side counterpart to ResolveMixedL2CLKind: it lets a suite outside this
 // repo re-run these tests against its own EL build without forking the test bodies. The
 // named binary is resolved through the usual rustbin env overrides (see OpRethWithBinary),
 // whose variable name derives from the binary name — "my-builder" reads
 // RUST_BINARY_PATH_MY_BUILDER, leaving the stock verifiers' RUST_BINARY_PATH_OP_RETH
-// untouched. Naming the override "op-reth" would collapse that distinction, but such an
+// untouched. Naming the override "mc-reth" would collapse that distinction, but such an
 // override selects the default binary anyway.
 //
 // A superset binary that binds a listener the harness knows nothing about needs the args
@@ -133,9 +133,9 @@ const (
 // a stale value in the environment would otherwise silently alter a stock run.
 //
 // Proofs history is disabled whenever a binary is named: the mixed runtime enables it on
-// every op-reth node, but a superset binary that replaces the payload service cannot host
-// op-reth's proof-history launcher, so leaving it on would either be silently ignored or
-// refused at startup. A suite that needs it should run stock op-reth.
+// every mc-reth node, but a superset binary that replaces the payload service cannot host
+// mc-reth's proof-history launcher, so leaving it on would either be silently ignored or
+// refused at startup. A suite that needs it should run stock mc-reth.
 func ResolveMixedL2ELOpts(t devtest.T) []OpRethOption {
 	opts, err := mixedL2ELOptsFromEnv(
 		os.Getenv(devstackL2ELOverrideBinaryEnv),
@@ -176,10 +176,10 @@ type MixedSingleChainNodeSpec struct {
 	// by deriving from L1. Used to exercise the derivation/force-build path (FCU-with-attributes)
 	// rather than the consolidation path. Defaults to false (fully peered).
 	IsolateFromL2P2P bool
-	// OpRethOpts are per-node op-reth options applied AFTER the shared cfg.OpRethOptions, only to
+	// OpRethOpts are per-node mc-reth options applied AFTER the shared cfg.OpRethOptions, only to
 	// this node's EL. Use for options that must not reach every node — e.g. a per-node binary
 	// override (OpRethWithBinary) or a flag a single node should receive while its peers reject it.
-	// Ignored for non-op-reth EL kinds.
+	// Ignored for non-mc-reth EL kinds.
 	OpRethOpts []OpRethOption
 }
 
@@ -192,7 +192,7 @@ type MixedSingleChainPresetConfig struct {
 	BatcherOptions             []BatcherOption
 	OpRethOptions              []OpRethOption
 	// InteropAtGenesis activates the Lagoon hardfork at genesis on the L2 chain and provides
-	// the resulting dependency set to op-node CL startup. Required by any test that exercises
+	// the resulting dependency set to mc-node CL startup. Required by any test that exercises
 	// interop-gated consensus features (e.g. SDM PostExec) without a supervisor.
 	InteropAtGenesis bool
 }
@@ -399,7 +399,7 @@ func buildMixedOpRethNode(
 	OpRethOptionBundle(opts).Apply(t, NewComponentTarget(key, l2Net.ChainID()), opRethCfg)
 	elBinary := opRethCfg.Binary
 	if elBinary == "" {
-		elBinary = "op-reth"
+		elBinary = "mc-reth"
 	}
 
 	execPath, err := rustbin.Spec{
@@ -451,7 +451,7 @@ func buildMixedOpRethNode(
 		"--chain=" + chainConfigPath,
 	}
 	err = exec.Command(execPath, initArgs...).Run()
-	t.Require().NoError(err, "must init op-reth node")
+	t.Require().NoError(err, "must init mc-reth node")
 
 	if !opRethCfg.DisableProofsHistory {
 		proofHistoryDir := filepath.Join(tempDir, "proof-history")
@@ -464,7 +464,7 @@ func buildMixedOpRethNode(
 			"--proofs-history.storage-path=" + proofHistoryDir,
 		}
 		initOut, initErr := exec.Command(execPath, initProofsArgs...).CombinedOutput()
-		t.Require().NoError(initErr, "must init op-reth proof history: %s", string(initOut))
+		t.Require().NoError(initErr, "must init mc-reth proof history: %s", string(initOut))
 
 		args = append(
 			args,
@@ -501,10 +501,10 @@ func startMixedOpRethNode(
 	opts ...OpRethOption,
 ) *OpReth {
 	node := buildMixedOpRethNode(t, l2Net, key, jwtPath, jwtSecret, metricsRegistrar, opts...)
-	t.Logger().Info("Starting op-reth", "name", key, "chain", l2Net.ChainID())
+	t.Logger().Info("Starting mc-reth", "name", key, "chain", l2Net.ChainID())
 	node.Start()
 	t.Cleanup(node.Stop)
-	t.Logger().Info("op-reth is ready", "name", key, "chain", l2Net.ChainID(), "userRPC", node.userRPC, "authRPC", node.authRPC)
+	t.Logger().Info("mc-reth is ready", "name", key, "chain", l2Net.ChainID(), "userRPC", node.userRPC, "authRPC", node.authRPC)
 	return node
 }
 
@@ -522,11 +522,11 @@ func startMixedOpRethNodeWithInteropURL(
 ) *OpReth {
 	opts = append(opts, OpRethWithInteropURL(interopURL))
 	node := buildMixedOpRethNode(t, l2Net, key, jwtPath, jwtSecret, metricsRegistrar, opts...)
-	t.Logger().Info("Starting op-reth with interop filter URL",
+	t.Logger().Info("Starting mc-reth with interop filter URL",
 		"name", key, "chain", l2Net.ChainID(), "interopURL", interopURL)
 	node.Start()
 	t.Cleanup(node.Stop)
-	t.Logger().Info("op-reth is ready", "name", key, "chain", l2Net.ChainID(), "userRPC", node.userRPC, "authRPC", node.authRPC)
+	t.Logger().Info("mc-reth is ready", "name", key, "chain", l2Net.ChainID(), "userRPC", node.userRPC, "authRPC", node.authRPC)
 	return node
 }
 
@@ -571,7 +571,7 @@ func startMixedKonaNode(
 		propagateEnvVarOrDefault("KONA_NODE_RPC_PORT", "0"),
 		propagateEnvVarOrDefault("KONA_NODE_RPC_WS_ENABLED", "true"),
 		// Acceptance tests drive the sequencer via the admin API (StartSequencer, etc.), which
-		// kona only registers when admin is enabled. op-node's devstack node enables it too.
+		// kona only registers when admin is enabled. mc-node's devstack node enables it too.
 		propagateEnvVarOrDefault("KONA_NODE_RPC_ENABLE_ADMIN", "true"),
 		propagateEnvVarOrDefault("KONA_LOG_LEVEL", "3"),
 		propagateEnvVarOrDefault("KONA_LOG_STDOUT_FORMAT", "json"),
@@ -582,7 +582,7 @@ func startMixedKonaNode(
 
 	// When Interop/Lagoon is scheduled, kona-node refuses to start without an interop
 	// dependency set (to avoid silent state divergence at activation). Mirror the depset
-	// op-node receives by serializing it to JSON — the format matches what kona expects.
+	// mc-node receives by serializing it to JSON — the format matches what kona expects.
 	if depSet != nil {
 		depSetData, err := json.Marshal(depSet)
 		t.Require().NoError(err, "must marshal interop dependency set")

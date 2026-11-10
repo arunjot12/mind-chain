@@ -11,9 +11,9 @@ import (
 	opservice "github.com/ethereum-optimism/optimism/op-service"
 	"github.com/urfave/cli/v2"
 
-	opnode "github.com/ethereum-optimism/optimism/op-node"
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
-	opnodeflags "github.com/ethereum-optimism/optimism/op-node/flags"
+	opnode "github.com/ethereum-optimism/optimism/mc-node"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
+	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
 	"github.com/ethereum-optimism/optimism/op-service/cliapp"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/log"

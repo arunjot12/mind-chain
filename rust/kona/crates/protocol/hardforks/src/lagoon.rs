@@ -176,7 +176,7 @@ mod tests {
         // The build script generates the bundle with a capitalized fork name
         // ("interop" → "Interop"), so the qualified intent on the kona side is
         // "Interop 0: ...". This matches the hardcoded intent literals in
-        // op-node's lagoon_activation_transactions.go to preserve
+        // mc-node's lagoon_activation_transactions.go to preserve
         // source_hash determinism. The bundle prefix stays concept-level
         // "Interop" even though the fork was renamed to Lagoon.
         let expected_intent = "Interop 0: Deploy StorageSetter Implementation";

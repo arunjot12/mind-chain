@@ -4,14 +4,14 @@
 #
 # `just release-notes` filters by include-path (go.*, op-core/**, op-service/**, or all of
 # rust/kona/**, rust/op-alloy/**, rust/alloy-op*/**), which is far broader than any one
-# binary. But a change under op-service/ or op-core/ can absolutely change how op-batcher
-# behaves — txmgr, bgpo and fees are all linked in — so "did it touch op-batcher/" is the
+# binary. But a change under op-service/ or op-core/ can absolutely change how mc-batcher
+# behaves — txmgr, bgpo and fees are all linked in — so "did it touch mc-batcher/" is the
 # wrong question. The right one is "is the changed package in this binary's transitive
 # dependency set", which `go list -deps` and `cargo tree` answer exactly.
 #
 # A component's image does not always ship one binary. `just release-paths <component>`
-# names every unit that ships, and linkage is the union across all of them: op-challenger's
-# image carries the Go op-challenger and cannon binaries alongside the Rust kona-host, so
+# names every unit that ships, and linkage is the union across all of them: mc-challenger's
+# image carries the Go mc-challenger and cannon binaries alongside the Rust kona-host, so
 # resolving only the Go side tags every kona-only PR '--' and silently drops derivation and
 # interop changes from the notes.
 #
@@ -102,7 +102,7 @@ artifacts_of() {
         awk -F'\t' '$1 != "shared" && $1 != "" { print $1 }' | awk '!seen[$0]++'
 }
 
-# op-deployer runs contract scripts that its linked Go code names as string literals.
+# mc-deployer runs contract scripts that its linked Go code names as string literals.
 # `forge tree` gives their imports without a compile. Contract source and libraries are
 # left out: the op-contracts release covers them.
 resolve_contract_scripts() {
@@ -134,14 +134,14 @@ resolve_contract_scripts() {
                 for (p in seen)
                     if (p !~ /^(src|interfaces|lib)\//) print "packages/contracts-bedrock/" p
             }' > "$workdir/scripts" ||
-        echo "warning: could not resolve op-deployer's contract scripts; script-only PRs will be tagged '--'" >&2
+        echo "warning: could not resolve mc-deployer's contract scripts; script-only PRs will be tagged '--'" >&2
 }
 
 case "${component:-}" in
     '') ;;
     op-contracts)
         contracts=1 ;;
-    kona-*|op-reth|op-zk-proposer)
+    kona-*|mc-reth|op-zk-proposer)
         # Rust-native: release-paths labels these by path (rust/kona, rust/op-alloy), not
         # by artifact, so the crate is the component itself.
         if resolve_rust "$component" "$workdir/one"; then
@@ -193,7 +193,7 @@ fi
 if [ -s "$workdir/deps" ]; then
     sort -u -o "$workdir/deps" "$workdir/deps"
 fi
-if [ "$component" = op-deployer ] && [ "$have_go" = 1 ]; then
+if [ "$component" = mc-deployer ] && [ "$have_go" = 1 ]; then
     resolve_contract_scripts
 fi
 
@@ -273,7 +273,7 @@ for f in "$workdir"/pr-*; do
                 if (best != "") {
                     # Drop what the crate does not compile. A denylist, not an allowlist of
                     # src/: crates here compile plenty from outside it -- kona embeds its
-                    # registry snapshots from etc/, op-reth its dev genesis from res/, and
+                    # registry snapshots from etc/, mc-reth its dev genesis from res/, and
                     # the hardforks build script includes build_helpers.rs beside itself.
                     rest = substr(path, length(best) + 2)
                     if (rest ~ /^(tests|benches|examples|scripts|testdata|proof-bench)\//) return ""
@@ -293,7 +293,7 @@ for f in "$workdir"/pr-*; do
         NR == 1 { num = $1; author = $2; count = $3; title = $4; next }
         {
             all[$0] = 1
-            # Every component embeds the registry, and the Go and op-reth archives are
+            # Every component embeds the registry, and the Go and mc-reth archives are
             # generated at build time -- a pin bump is a gitlink plus a checksum, so nothing
             # resolves as linked, though a new activation time is usually the most
             # consequential change in the release. Matched by exact path so an unrelated

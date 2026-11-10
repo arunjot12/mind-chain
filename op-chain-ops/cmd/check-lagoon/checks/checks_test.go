@@ -23,7 +23,7 @@ func TestInteropTxRejected(t *testing.T) {
 			want: true,
 		},
 		{
-			name: "op-reth fast-path failsafe",
+			name: "mc-reth fast-path failsafe",
 			err:  errors.New("interop failsafe is active"),
 			want: true,
 		},

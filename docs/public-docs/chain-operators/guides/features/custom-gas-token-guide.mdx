@@ -19,7 +19,7 @@ There is currently no migration path from legacy CGT to CGT v2, though one is pl
 
 Before deploying a CGT chain, ensure you have:
 
-*   **OP Deployer installed**: See [Install op-deployer](/chain-operators/tools/op-deployer/installation) for setup instructions
+*   **OP Deployer installed**: See [Install mc-deployer](/chain-operators/tools/mc-deployer/installation) for setup instructions
 *   **L1 RPC endpoint**: Access to an Ethereum L1 node for deployment
 *   **Funded deployer account**: ETH for L1 gas costs during deployment
 *   **Token design**: Clear plan for your native asset (supply, distribution, bridging mechanism)
@@ -31,10 +31,10 @@ Deploying a CGT chain follows the standard OP Stack deployment process with addi
 
 <Steps>
   <Step title="Initialize your intent file">
-    Create a new intent file using OP Deployer's [init command](/chain-operators/tools/op-deployer/usage/init):
+    Create a new intent file using OP Deployer's [init command](/chain-operators/tools/mc-deployer/usage/init):
 
     ```bash
-    op-deployer init \
+    mc-deployer init \
       --l1-chain-id <chain ID of your L1> \
       --l2-chain-ids <comma separated list of chain IDs for your L2s> \
       --intent-type custom
@@ -109,10 +109,10 @@ Deploying a CGT chain follows the standard OP Stack deployment process with addi
   </Step>
 
   <Step title="Deploy L1 contracts">
-    Deploy your L1 contracts using OP Deployer's [apply command](/chain-operators/tools/op-deployer/usage/apply)
+    Deploy your L1 contracts using OP Deployer's [apply command](/chain-operators/tools/mc-deployer/usage/apply)
 
     ```bash
-    op-deployer apply \
+    mc-deployer apply \
       --l1-rpc-url <your L1 RPC URL> \
       --private-key <your deployer private key>
     ```
@@ -125,14 +125,14 @@ Deploying a CGT chain follows the standard OP Stack deployment process with addi
   </Step>
 
   <Step title="(Optional) Verify L1 contracts">
-    Optionally you can use OP Deployer's [verify command](/chain-operators/tools/op-deployer/usage/verify) to verify your L1 contracts on Blockscout or Etherscan.
+    Optionally you can use OP Deployer's [verify command](/chain-operators/tools/mc-deployer/usage/verify) to verify your L1 contracts on Blockscout or Etherscan.
   </Step>
 
   <Step title="Create genesis file with CGT configuration">
-    After L1 deployment completes, initialize your L2 genesis with OP Deployer's [apply command](/chain-operators/tools/op-deployer/usage/apply):
+    After L1 deployment completes, initialize your L2 genesis with OP Deployer's [apply command](/chain-operators/tools/mc-deployer/usage/apply):
 
     ```bash
-    op-deployer apply \
+    mc-deployer apply \
       --deployment-target genesis
     ```
 
@@ -248,4 +248,4 @@ Create clear documentation for your users covering:
 ## Resources
 
 *   [Custom Gas Token feature overview](/op-stack/features/custom-gas-token)
-*   [OP Deployer documentation](/chain-operators/tools/op-deployer/overview)
+*   [OP Deployer documentation](/chain-operators/tools/mc-deployer/overview)

@@ -5,7 +5,7 @@ diataxis: explanation
 ---
 Sunnyside Labs (formerly Test in Prod) and OP Labs have researched whether we can drop OP Chains' block time to one second.
 
-To validate if dropping the block time is safe, we should check if nodes can build a block under a second when the block spends maximum gas in the production environment–i.e., block building time should take less than one second when the block spends maximum gas. We benchmarked the block-building time of every block at Base and grouped the data in various gas ranges using multiple clients–op-geth & op-reth.
+To validate if dropping the block time is safe, we should check if nodes can build a block under a second when the block spends maximum gas in the production environment–i.e., block building time should take less than one second when the block spends maximum gas. We benchmarked the block-building time of every block at Base and grouped the data in various gas ranges using multiple clients–op-geth & mc-reth.
 
 ## Method and raw data
 
@@ -25,11 +25,11 @@ The following benchmarks are available in this [notebook](https://github.com/tes
 
 Figures 1 and 2 show the Base nodes' block-building time distribution with op-geth archive node & full node from block 5492540 to 9816497. We can see that the average block building time takes 0.58 and 0.36 seconds each for blocks that spent 25M \~ 30M gas, which is less than one second.
 
-| ![Figure 3: op-reth / archive node / block 5492540 \~ 9816497.](/public/img/op-stack/protocol/block-time-research-figure-3.png) |
+| ![Figure 3: mc-reth / archive node / block 5492540 \~ 9816497.](/public/img/op-stack/protocol/block-time-research-figure-3.png) |
 | :----------------------------------------------------------------------------------------------------------------------: |
-|                              **Figure 3**: op-reth / archive node / block 5492540 \~ 9816497                             |
+|                              **Figure 3**: mc-reth / archive node / block 5492540 \~ 9816497                             |
 
-Figure 3 shows the Base nodes' block-building time distribution using the op-reth archive node from block 5492540 to 9816497. Compared to op-geth's archive node, we can see that op-reth shows a better performance in all ranges.
+Figure 3 shows the Base nodes' block-building time distribution using the mc-reth archive node from block 5492540 to 9816497. Compared to op-geth's archive node, we can see that mc-reth shows a better performance in all ranges.
 
 | ![Figure 4: op-geth / archive node / block 13686867 \~ 15074141.](/public/img/op-stack/protocol/block-time-research-figure-4.png) |
 | :------------------------------------------------------------------------------------------------------------------------: |

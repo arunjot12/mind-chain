@@ -20,7 +20,7 @@ import (
 
 const fixedPolicyArg = "--testing.sdm-fixed-policy"
 
-// FixedPolicyOpRethOption enables op-reth's hidden deterministic SDM test policy. When a target is
+// FixedPolicyOpRethOption enables mc-reth's hidden deterministic SDM test policy. When a target is
 // supplied, calls to it make the policy return an excessive refund for fault-containment tests.
 func FixedPolicyOpRethOption(excessiveRefundTarget string) sysgo.OpRethOption {
 	if excessiveRefundTarget != "" {
@@ -29,8 +29,8 @@ func FixedPolicyOpRethOption(excessiveRefundTarget string) sysgo.OpRethOption {
 	return sysgo.OpRethWithExtraArgs(fixedPolicyArg)
 }
 
-// RethSystem bundles the DSL frontends an SDM acceptance test drives: an op-reth sequencer, a
-// stock op-reth verifier, the batcher, and an L2 funder, all on a single Interop/SDM chain.
+// RethSystem bundles the DSL frontends an SDM acceptance test drives: an mc-reth sequencer, a
+// stock mc-reth verifier, the batcher, and an L2 funder, all on a single Interop/SDM chain.
 type RethSystem struct {
 	L1EL         *dsl.L1ELNode
 	L2EL         *dsl.L2ELNode
@@ -46,7 +46,7 @@ type RethSystem struct {
 // with the test-only fixed policy enabled on its sequencer. The no-supernode preset applies
 // OpRethOptions only to the sequencer target; its super roots and all proof consumers remain stock.
 func NewFixedPolicySingleChainFaultProofSystem(t devtest.T) *presets.SingleChainInterop {
-	sysgo.SkipOnOpGeth(t, "SDM PostExec is op-reth only")
+	sysgo.SkipOnOpGeth(t, "SDM PostExec is mc-reth only")
 
 	sys := presets.NewSingleChainInteropNoSupernode(t,
 		presets.WithOpRethOption(FixedPolicyOpRethOption("")),
@@ -58,7 +58,7 @@ func NewFixedPolicySingleChainFaultProofSystem(t devtest.T) *presets.SingleChain
 
 // FinishRethSystem wraps a built MixedSingleChainRuntime in DSL frontends, derives the verifier
 // refs + an L2 funder, and (when optInSDM is true) opts the sequencer in via
-// admin_setOperatorSdmOptIn. Shared by the stock-op-reth builder and any external premium-sequencer
+// admin_setOperatorSdmOptIn. Shared by the stock-mc-reth builder and any external premium-sequencer
 // builder so both produce an identical RethSystem regardless of which EL binary the sequencer runs.
 //
 // The returned system's batcher starts stopped; tests start it explicitly (sys.L2Batcher.Start())
@@ -66,7 +66,7 @@ func NewFixedPolicySingleChainFaultProofSystem(t devtest.T) *presets.SingleChain
 func FinishRethSystem(t devtest.T, runtime *sysgo.MixedSingleChainRuntime, optInSDM bool) *RethSystem {
 	frontends := presets.NewMixedSingleChainFrontends(t, runtime)
 	frontends.L2Batcher.Stop()
-	t.Require().Len(frontends.Nodes, 2, "SDM op-reth system must include sequencer and verifier nodes")
+	t.Require().Len(frontends.Nodes, 2, "SDM mc-reth system must include sequencer and verifier nodes")
 
 	var verifierEL *dsl.L2ELNode
 	var verifierCL *dsl.L2CLNode
@@ -91,7 +91,7 @@ func FinishRethSystem(t devtest.T, runtime *sysgo.MixedSingleChainRuntime, optIn
 		FunderL2:     frontends.FunderL2,
 	}
 
-	// Local PostExec production requires the sequencer's op-reth to be opted in via
+	// Local PostExec production requires the sequencer's mc-reth to be opted in via
 	// admin_setOperatorSdmOptIn; nothing else flips this on. Verifier nodes do not need to
 	// opt in — they accept PostExec txs by chain spec rule alone. (The Interop/Lagoon
 	// protocol gate is scheduled separately by the caller.)
@@ -110,7 +110,7 @@ func SetSDMEnabled(t devtest.T, l2EL *dsl.L2ELNode, enabled bool) {
 	t.Require().NoError(err, "admin_setOperatorSdmOptIn(%v) RPC failed", enabled)
 }
 
-// VerifyOpReth checks the L2 execution layer client is op-reth by calling
+// VerifyOpReth checks the L2 execution layer client is mc-reth by calling
 // web3_clientVersion via the L2EthClient's RPC and asserting it contains "reth".
 func VerifyOpReth(t devtest.T, l2EL *dsl.L2ELNode) string {
 	rpcClient := l2EL.Escape().L2EthClient().RPC()
@@ -121,14 +121,14 @@ func VerifyOpReth(t devtest.T, l2EL *dsl.L2ELNode) string {
 	lower := strings.ToLower(clientVersion)
 	t.Require().True(
 		strings.Contains(lower, "reth"),
-		"FATAL: Expected op-reth execution client, but got: %q. "+
-			"This test MUST run on op-reth. "+
-			"Set DEVSTACK_L2EL_KIND=op-reth or ensure op-reth binary is available.",
+		"FATAL: Expected mc-reth execution client, but got: %q. "+
+			"This test MUST run on mc-reth. "+
+			"Set DEVSTACK_L2EL_KIND=mc-reth or ensure mc-reth binary is available.",
 		clientVersion,
 	)
 	t.Require().False(
 		strings.Contains(lower, "geth"),
-		"FATAL: Detected op-geth (%q) but this test requires op-reth.", clientVersion,
+		"FATAL: Detected op-geth (%q) but this test requires mc-reth.", clientVersion,
 	)
 
 	return clientVersion

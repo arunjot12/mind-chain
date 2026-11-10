@@ -5,7 +5,7 @@ from the urfave/cli flag definitions the OP Stack Go services actually register.
 The docs pages import these snippets instead of hand-transcribing `--help`
 output, so the published flag catalogs cannot silently fall behind a release.
 
-Covered components: op-batcher, op-node, op-proposer, op-challenger,
+Covered components: mc-batcher, mc-node, mc-proposer, mc-challenger,
 op-conductor — every first-party Go service with a flag reference page.
 
 ## Usage
@@ -20,7 +20,7 @@ To limit a run to specific components (used when regenerating one component
 at its release tag):
 
 ```bash
-go run ./docs/public-docs/scripts/gen-flags -only op-node
+go run ./docs/public-docs/scripts/gen-flags -only mc-node
 ```
 
 To verify the committed snippets without rewriting them (exits nonzero on any
@@ -39,15 +39,15 @@ just build-superchain-go
 
 ## How it works
 
-- `main.go` imports each component's composed flag slice (e.g. for op-batcher,
-  `op-batcher/flags.Flags` — including the op-service flag families appended in
+- `main.go` imports each component's composed flag slice (e.g. for mc-batcher,
+  `mc-batcher/flags.Flags` — including the op-service flag families appended in
   its `init()`) and renders one snippet per component:
   `snippets/generated/<component>-flags.mdx`.
 - Flag name, usage, default, and environment variable come from urfave/cli's
   own `DocGenerationFlag` accessors, so the output matches `--help` semantics.
-  Hidden flags (including the deprecated op-node flags) are skipped.
+  Hidden flags (including the deprecated mc-node flags) are skipped.
 - `manifest.json` records, per component, the finalized release tag each
-  snippet was generated at (e.g. `op-batcher/v1.16.11`) and the SHA-256 of the
+  snippet was generated at (e.g. `mc-batcher/v1.16.11`) and the SHA-256 of the
   snippet bytes written at generation time. The snippet's provenance line
   names the same tag. All three are updated together, only on regeneration.
 
@@ -76,7 +76,7 @@ published:
 1. Check out that tag and regenerate from it — or, if working from another
    commit, verify the flag-defining packages are identical to the tag first
    (`git diff <tag> HEAD -- <paths>`): the component's `flags/` package (and,
-   for op-challenger, its `config/` defaults) plus the op-service flag
+   for mc-challenger, its `config/` defaults) plus the op-service flag
    families it appends (`op-service/rpc`, `op-service/log`,
    `op-service/metrics`, `op-service/oppprof`, `op-service/txmgr`,
    `op-service/flags`, `op-alt-da`, as applicable per component).
@@ -131,19 +131,19 @@ Known residual gaps (accepted, by design):
 - The required-flag lists are mirrored in `main.go` because the components do
   not export them. A rename fails the generator's sanity check; adding a brand
   new required flag without updating the mirror would list it as optional.
-  (op-challenger's mirror also includes `l2-eth-rpc`, which its
+  (mc-challenger's mirror also includes `l2-eth-rpc`, which its
   `CheckRequired` enforces unconditionally from outside its required slice.)
 - `-check` verifies snippet integrity against the manifest hash, not
   regeneration parity with the tag — a regeneration mistakenly run from
   non-tag source would pass `-check`. The review gate on regeneration PRs and
   the tag-parity procedure above are the guards.
-- op-batcher's `--compressor` option list (`compressor.KindKeys`) is built
+- mc-batcher's `--compressor` option list (`compressor.KindKeys`) is built
   from map iteration, so its order changes on every process start — in
-  `op-batcher --help` itself, not just here. The generator sorts that one
+  `mc-batcher --help` itself, not just here. The generator sorts that one
   list (`canonicalizeUsage` in `main.go`) so output is deterministic; the
   proper fix is sorting `KindKeys` at the source (one line in
-  `op-batcher/compressor/compressors.go`), proposed as a follow-up.
-- The `--network` usage string (op-node, op-challenger, op-conductor)
+  `mc-batcher/compressor/compressors.go`), proposed as a follow-up.
+- The `--network` usage string (mc-node, mc-challenger, op-conductor)
   enumerates the chains bundled from the superchain-registry, which changes
   with every registry submodule bump — independent of component releases.
   `canonicalizeUsage` replaces the enumerated list with a stable pointer at

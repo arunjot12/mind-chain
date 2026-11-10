@@ -43,7 +43,7 @@ services:
     container_name: reth
     build:
       context: .
-      dockerfile: op-reth/op-reth.dockerfile
+      dockerfile: mc-reth/mc-reth.dockerfile
     ports:
       - "${OP_RETH_METRICS_PORT:-9001}:${OP_RETH_METRICS_PORT:-9001}"
       - "${OP_RETH_DISCOVERY_PORT:-30303}:${OP_RETH_DISCOVERY_PORT:-30303}/udp"

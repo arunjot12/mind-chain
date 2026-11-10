@@ -12,7 +12,7 @@ import (
 )
 
 // PayloadSource fetches L2 execution payloads from an execution node. It is
-// the L2 block currency of the op-batcher: opaque transaction bytes that
+// the L2 block currency of the mc-batcher: opaque transaction bytes that
 // round-trip OP Stack synthetic transactions without go-ethereum's typed
 // decoding.
 type PayloadSource interface {

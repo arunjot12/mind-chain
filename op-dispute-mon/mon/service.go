@@ -19,7 +19,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/extract"
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/version"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/dial"
 	"github.com/ethereum-optimism/optimism/op-service/httputil"

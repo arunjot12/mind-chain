@@ -7,7 +7,7 @@ Network Upgrade Transaction (NUT) bundles define the L2 deposit transactions tha
 | File | Purpose |
 |------|---------|
 | `fork_lock.toml` | Lock file mapping fork names to bundle paths, sha256 hashes, and source commits |
-| `bundles/<fork>_nut_bundle.json` | Embedded bundle consumed by op-node and kona-node at fork activation |
+| `bundles/<fork>_nut_bundle.json` | Embedded bundle consumed by mc-node and kona-node at fork activation |
 
 ## Workflow
 

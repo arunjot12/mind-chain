@@ -13,7 +13,7 @@ diataxis: reference
   Re-run `pnpm prebuild` to refresh.
 */}
 
-**kona-node** is a Rust implementation of the [rollup-node spec](https://specs.optimism.io/protocol/rollup-node.html), backed by kona-derive. It is a Rust-native alternative to op-node.
+**kona-node** is a Rust implementation of the [rollup-node spec](https://specs.optimism.io/protocol/rollup-node.html), backed by kona-derive. It is a Rust-native alternative to mc-node.
 
 <Update label="October 1, 2026" description="v1.7.1" tags={["Latest", "Stable"]}>
 
@@ -21,7 +21,7 @@ diataxis: reference
 
 > [!NOTE]
 >
-> `kona-node` is not production-ready. Production deployments should use `op-node`.
+> `kona-node` is not production-ready. Production deployments should use `mc-node`.
 
 [View full release on GitHub →](https://github.com/ethereum-optimism/optimism/releases/tag/kona-node/v1.7.1)
 
@@ -32,7 +32,7 @@ diataxis: reference
 ## Overview
 
 > [!NOTE]
-> `kona-node` is not production ready. Production deployments should prefer op-node.
+> `kona-node` is not production ready. Production deployments should prefer mc-node.
 
 [View full release on GitHub →](https://github.com/ethereum-optimism/optimism/releases/tag/kona-node/v1.7.0)
 
@@ -81,10 +81,10 @@ diataxis: reference
 >
 > The following Mainnet chains will activate on **1783526401 (Wed Jul 8 2026 16:00:01 UTC)**, pending governance approval: op, ink, zora, mode, lisk, metal, unichain, soneium, ethernity, tbn
 >
-> **Reminder:** op-geth has reached [end of support](https://docs.optimism.io/notices/op-geth-deprecation), so you must be running op-reth to support the karst activation. For more details on this network upgrade see our [notice page](https://docs.optimism.io/notices/upgrade-19).
+> **Reminder:** op-geth has reached [end of support](https://docs.optimism.io/notices/op-geth-deprecation), so you must be running mc-reth to support the karst activation. For more details on this network upgrade see our [notice page](https://docs.optimism.io/notices/upgrade-19).
 
 > [!IMPORTANT]
-> **Operators must use op-reth/v2.3.2 with this release.** Prior versions of op-reth will not work with this version of kona-node after Karst due to a new engine API method (`getPayloadV5`) used after Karst. See the [notice page](https://docs.optimism.io/notices/upgrade-19) for more details about recommended versions (including flashblocks components).
+> **Operators must use mc-reth/v2.3.2 with this release.** Prior versions of mc-reth will not work with this version of kona-node after Karst due to a new engine API method (`getPayloadV5`) used after Karst. See the [notice page](https://docs.optimism.io/notices/upgrade-19) for more details about recommended versions (including flashblocks components).
 
 [View full release on GitHub →](https://github.com/ethereum-optimism/optimism/releases/tag/kona-node/v1.6.1)
 
@@ -101,7 +101,7 @@ diataxis: reference
 >
 > The following Mainnet chains will optimistically activate on **`1783526401` (Wed Jul 8 2026 16:00:01 UTC)**, pending governance approval: op, ink, zora, mode, lisk, metal, unichain, soneium, ethernity, tbn
 >
-> **Reminder**: op-geth has reached [end of support](https://docs.optimism.io/notices/op-geth-deprecation), so you must be running op-reth to support the karst activation. For more details on this network upgrade see our [notice page](https://docs.optimism.io/notices/upgrade-19).
+> **Reminder**: op-geth has reached [end of support](https://docs.optimism.io/notices/op-geth-deprecation), so you must be running mc-reth to support the karst activation. For more details on this network upgrade see our [notice page](https://docs.optimism.io/notices/upgrade-19).
 
 Besides the Karst hardfork timestamps, this release also includes a few bug fixes.
 
@@ -160,7 +160,7 @@ This version includes Superchain Registry updates for Worldchain and is a requir
 This is a recommended release containing correctness and stability fixes for kona-node.
 
    ## What's Changed in kona-node/v1.2.15
-   * fix(kona/protocol): add bounds checks in `read_tx_data` for truncated and oversized payloads, preventing malformed payload panics and aligning behavior with op-node
+   * fix(kona/protocol): add bounds checks in `read_tx_data` for truncated and oversized payloads, preventing malformed payload panics and aligning behavior with mc-node
  ([#19904](https://github.com/ethereum-optimism/optimism/pull/19904))
    * fix(kona/derive): reset the indexed traversal pipeline on Holocene activation so interop clients apply required system config updates correctly ([#19905](https://github.com/ethereum-optimism/optimism/pull/19905))
    * fix(kona-node): handle a missing L1 origin block in the sequencer by recovering with an engine reset instead of panicking ([#19945](https://github.com/ethereum-optimism/optimism/pull/19945))
@@ -185,7 +185,7 @@ This is a recommended release containing correctness and stability fixes for kon
 ## What's Changed in kona-node/v1.2.14
 * fix(kona/derive): use walked-back system config on pipeline reset by @sebastianst in [#19792](https://github.com/ethereum-optimism/optimism/pull/19792)
 * fix(op-alloy): resolve `NetworkWallet` conflict with alloy 1.8 by @suchapalaver in [#19756](https://github.com/ethereum-optimism/optimism/pull/19756)
-* feat(op-reth): Drop interop transactions after reorg by @wwared in [#19814](https://github.com/ethereum-optimism/optimism/pull/19814)
+* feat(mc-reth): Drop interop transactions after reorg by @wwared in [#19814](https://github.com/ethereum-optimism/optimism/pull/19814)
 * feat(kona-host): add directory-based kv store compatible with op-program by @ajsutton in [#19803](https://github.com/ethereum-optimism/optimism/pull/19803)
 * chore(kona): remove dead interop_message_expiry_window from RollupConfig by @digorithm in [#19810](https://github.com/ethereum-optimism/optimism/pull/19810)
 * fix(kona): use configurable message expiry window in MessageGraph by @digorithm in [#19765](https://github.com/ethereum-optimism/optimism/pull/19765)
@@ -214,7 +214,7 @@ This is an optional release.
 ## What's Changed in kona-node/v1.2.12
 
 > [!NOTE] 
-> This release contains fixes to the derivation pipeline to guard against malicious behavior from the op-batcher
+> This release contains fixes to the derivation pipeline to guard against malicious behavior from the mc-batcher
 
 * chore(cannon): migrate Makefile to justfile by @ajsutton in [#19474](https://github.com/ethereum-optimism/optimism/pull/19474)
 * fix(kona/derive): add over-fill check in BlobSource::load_blobs by @ajsutton in [#19364](https://github.com/ethereum-optimism/optimism/pull/19364)
@@ -226,7 +226,7 @@ This is an optional release.
 * kona(derive): remove dead EthereumDataSourceVariant file by @ajsutton in [#19341](https://github.com/ethereum-optimism/optimism/pull/19341)
 * feat(kona): add Karst hardfork support by @maurelian in [#19372](https://github.com/ethereum-optimism/optimism/pull/19372)
 * chore(kona): remove deprecated supervisor crates by @theochap in [#19290](https://github.com/ethereum-optimism/optimism/pull/19290)
-* op-reth: bump reth/op-reth to v1.11.1 and MSRV to 1.92 by @theochap in [#19292](https://github.com/ethereum-optimism/optimism/pull/19292)
+* mc-reth: bump reth/mc-reth to v1.11.1 and MSRV to 1.92 by @theochap in [#19292](https://github.com/ethereum-optimism/optimism/pull/19292)
 
 **Full Changelog**: https://github.com/ethereum-optimism/optimism/compare/kona-node/v1.2.11-rc.2...kona-node/v1.2.12
 

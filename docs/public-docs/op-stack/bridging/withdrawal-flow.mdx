@@ -24,7 +24,7 @@ Withdrawals require the user to submit three transactions:
 sequenceDiagram
     participant User
     participant L2 as L2 (L2ToL1MessagePasser)
-    participant Prop as op-proposer
+    participant Prop as mc-proposer
     participant DGF as L1 (DisputeGameFactory)
     participant Portal as L1 (OptimismPortal)
 
@@ -75,7 +75,7 @@ You can read the full [withdrawal specifications here](https://specs.optimism.io
     *   `gasLimit` - Gas limit for the transaction, the system guarantees that at least this amount of gas will be available to the transaction on L1. Note that if the gas limit is not enough, or if the L1 finalizing transaction does not have enough gas to provide that gas limit, the finalizing transaction returns a failure, it does not revert.
     *   `data` - The calldata for the withdrawal transaction
 
-4.  When `op-proposer`proposes a new `output`, the output proposal includes the [output root](https://specs.optimism.io/glossary.html?utm_source=op-docs\&utm_medium=docs#l2-output-root), provided as part of the block by `op-node`.
+4.  When `mc-proposer`proposes a new `output`, the output proposal includes the [output root](https://specs.optimism.io/glossary.html?utm_source=op-docs\&utm_medium=docs#l2-output-root), provided as part of the block by `mc-node`.
     This new output root commits to the state of the `sentMessages` mapping in the `L2ToL1MessagePasser` contract's storage on L2, and it can be used to prove the presence of a pending withdrawal within it.
 
 ## Withdrawal proving transaction

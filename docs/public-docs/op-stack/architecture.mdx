@@ -65,13 +65,13 @@ graph TB
 
   user -->|transactions| seq
   user -->|deposits| portal
-  seq -->|op-batcher posts data| da
+  seq -->|mc-batcher posts data| da
   da -->|derivation| seq
   da -->|derivation| ver
   portal -->|forced inclusion| seq
   portal -->|forced inclusion| ver
-  seq -->|op-proposer posts output roots| dgf
-  chal[op-challenger<br/>see game type below] -->|disputes proposals| dgf
+  seq -->|mc-proposer posts output roots| dgf
+  chal[mc-challenger<br/>see game type below] -->|disputes proposals| dgf
 
   class l1c l1
   class l2c chain
@@ -90,18 +90,18 @@ The OP Stack is a set of separate services rather than one program.
 
 | Component | Role | Who runs it | What happens without it |
 | --- | --- | --- | --- |
-| [op-node](/op-stack/components/op-node) or [kona-node](/op-stack/components/kona-node) | Consensus layer. Sets each block's L1 origin and deposits; derives the chain from L1 | Operator (sequencer); anyone (verifier) | No blocks are built or derived |
-| [op-reth](/op-stack/components/op-reth) | Execution layer. Holds the mempool, orders and executes transactions, holds state | Whoever runs the rollup node; one per node | No state transition |
-| [op-batcher](/op-stack/components/op-batcher) | Posts L2 transaction data to the DA layer | Operator | The safe head stops advancing; the chain cannot be derived |
-| [op-proposer](/op-stack/components/op-proposer) | Posts output roots (commitments to L2 state) to L1 | Operator, or anyone on a permissionless chain | No new withdrawals can be proven |
-| [op-challenger](/op-stack/components/op-challenger) | Disputes invalid proposals, defends valid ones | Operator, or anyone on a permissionless chain | Invalid proposals go unchallenged |
+| [mc-node](/op-stack/components/mc-node) or [kona-node](/op-stack/components/kona-node) | Consensus layer. Sets each block's L1 origin and deposits; derives the chain from L1 | Operator (sequencer); anyone (verifier) | No blocks are built or derived |
+| [mc-reth](/op-stack/components/mc-reth) | Execution layer. Holds the mempool, orders and executes transactions, holds state | Whoever runs the rollup node; one per node | No state transition |
+| [mc-batcher](/op-stack/components/mc-batcher) | Posts L2 transaction data to the DA layer | Operator | The safe head stops advancing; the chain cannot be derived |
+| [mc-proposer](/op-stack/components/mc-proposer) | Posts output roots (commitments to L2 state) to L1 | Operator, or anyone on a permissionless chain | No new withdrawals can be proven |
+| [mc-challenger](/op-stack/components/mc-challenger) | Disputes invalid proposals, defends valid ones | Operator, or anyone on a permissionless chain | Invalid proposals go unchallenged |
 | [op-conductor](/op-stack/components/op-conductor) | Leader election across a sequencer cluster | Operator (optional) | A sequencer failure stalls production until manual failover |
-| [op-deployer](/op-stack/components/op-deployer) | Deploys the chain's L1 contracts | Operator | No contracts on L1, so no chain |
+| [mc-deployer](/op-stack/components/mc-deployer) | Deploys the chain's L1 contracts | Operator | No contracts on L1, so no chain |
 
 The consensus and execution clients run as a pair, one to one, connected over
-the Engine API. Two implementations of the consensus role exist, op-node in Go
+the Engine API. Two implementations of the consensus role exist, mc-node in Go
 and kona-node in Rust, which is what client diversity looks like at this layer.
-Upgrades of the deployed contracts do not go through op-deployer; see
+Upgrades of the deployed contracts do not go through mc-deployer; see
 [Upgrading the contracts](/op-stack/protocol/smart-contracts#upgrading-the-contracts).
 
 The security argument rests on **verifiers** being unprivileged. Anyone can run
@@ -120,12 +120,12 @@ and how long each stage takes, see
 ```mermaid
 sequenceDiagram
     participant User
-    participant EL as Execution client (op-reth)
-    participant CL as Rollup node (op-node)
-    participant Batcher as op-batcher
+    participant EL as Execution client (mc-reth)
+    participant CL as Rollup node (mc-node)
+    participant Batcher as mc-batcher
     participant L1 as Ethereum
     participant Ver as Verifiers
-    participant Prop as op-proposer
+    participant Prop as mc-proposer
 
     User->>EL: Submit transaction to the mempool
     CL->>EL: Set the block's L1 origin and deposits
@@ -144,11 +144,11 @@ sequenceDiagram
 | 2 | Rollup node | Fixes the block's L1 origin and prepends any deposits due this epoch | Deposit prefix set |
 | 3 | Execution client | Selects the remaining transactions from its mempool, executes them, seals the block | Ordering decided, new state root |
 | 4 | Rollup node | Relays the block to peers | Verifiers see it as **unsafe** |
-| 5 | op-batcher | Compresses blocks into channels, splits into frames, posts to the DA layer | Data available on the DA layer |
+| 5 | mc-batcher | Compresses blocks into channels, splits into frames, posts to the DA layer | Data available on the DA layer |
 | 6 | Verifier rollup node | Derives the block from the posted data, independently of the sequencer | Block is **safe** |
 | 7 | Ethereum | Finalizes the block holding the data | Block is **finalized** |
-| 8 | op-proposer | Submits an output root to `DisputeGameFactory` on an interval, creating a dispute game | A claim withdrawals can be proven against |
-| 9 | op-challenger | Checks the proposal against its own synced node and counters it if wrong | Game resolves for or against the proposal |
+| 8 | mc-proposer | Submits an output root to `DisputeGameFactory` on an interval, creating a dispute game | A claim withdrawals can be proven against |
+| 9 | mc-challenger | Checks the proposal against its own synced node and counters it if wrong | Game resolves for or against the proposal |
 
 The sequencer's mempool is private, unlike L1 Ethereum's public one, which
 limits the MEV opportunities a public pending-transaction pool creates.

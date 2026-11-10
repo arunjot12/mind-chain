@@ -26,7 +26,7 @@ func TestFollowL2_Safe_Finalized_CurrentL1(gt *testing.T) {
 	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/follow_l2/sync_test.go:18
 	// assertions.go:387:             	Error:      	Should be true
 	// assertions.go:387:             	Test:       	TestFollowL2_Safe_Finalized_CurrentL1
-	// assertions.go:387:             	Messages:   	single-chain test sequencer requires an op-node CL node
+	// assertions.go:387:             	Messages:   	single-chain test sequencer requires an mc-node CL node
 	sysgo.SkipOnKonaNode(t, "not supported")
 	sys := newSingleChainTwoVerifiersFollowL2(t)
 	logger := t.Logger()
@@ -80,7 +80,7 @@ func TestFollowL2_ReorgRecovery(gt *testing.T) {
 	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/follow_l2/sync_test.go:60
 	// assertions.go:387:             	Error:      	Should be true
 	// assertions.go:387:             	Test:       	TestFollowL2_ReorgRecovery
-	// assertions.go:387:             	Messages:   	single-chain test sequencer requires an op-node CL node
+	// assertions.go:387:             	Messages:   	single-chain test sequencer requires an mc-node CL node
 	sysgo.SkipOnKonaNode(t, "not supported")
 	sys := newSingleChainTwoVerifiersFollowL2(t)
 	require := t.Require()
@@ -143,7 +143,7 @@ func TestFollowL2_ReorgRecovery(gt *testing.T) {
 
 	// Need to poll until the L2CL detects L1 Reorg and trigger L2 Reorg
 	// What happens:
-	//  L2CL detects L1 Reorg and reset the pipeline. op-node example logs: "reset: detected L1 reorg"
+	//  L2CL detects L1 Reorg and reset the pipeline. mc-node example logs: "reset: detected L1 reorg"
 	//  L2ELB detects L2 reorg and replaces the original block. The replacement
 	//  block at this height may also come from a different parent chain, so only
 	//  assert that the original block is replaced before checking convergence.
@@ -179,7 +179,7 @@ func TestFollowL2_WithoutCLP2P(gt *testing.T) {
 	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/follow_l2/sync_test.go:136
 	// assertions.go:387:             	Error:      	Should be true
 	// assertions.go:387:             	Test:       	TestFollowL2_WithoutCLP2P
-	// assertions.go:387:             	Messages:   	single-chain test sequencer requires an op-node CL nod
+	// assertions.go:387:             	Messages:   	single-chain test sequencer requires an mc-node CL nod
 	sysgo.SkipOnKonaNode(t, "not supported")
 	sys := newSingleChainTwoVerifiersFollowL2(t)
 	require := t.Require()

@@ -22,10 +22,10 @@ An Alt-DA Mode OP Stack chain enables a chain operator to post and read data to 
 
 You should use at least the following compatible op\* versions when running your chain.
 
-*   op-node/v1.9.1
-*   op-proposer/v1.9.1
-*   op-batcher/v1.9.1
-*   Latest version of op-reth (see the [execution clients guide](/node-operators/guides/configuration/execution-clients))
+*   mc-node/v1.9.1
+*   mc-proposer/v1.9.1
+*   mc-batcher/v1.9.1
+*   Latest version of mc-reth (see the [execution clients guide](/node-operators/guides/configuration/execution-clients))
 
 <OpGethEol />
 
@@ -42,9 +42,9 @@ You should use at least the following compatible op\* versions when running your
     *   Near DA's docs on how to run the [Near DA Server](https://github.com/Nuffle-Labs/data-availability/blob/84b484de98f58a91bf12c8abe8df27f5e753f63a/docs/OP-Alt-DA.md)
   </Step>
 
-  <Step title="Configure your `op-node`">
-  *   Spin up your OP chain as usual but set `--altda.enabled=true` and point both `op-batcher` and `op-node` to the DA server.
-    *   No configuration changes are required for your execution client (`op-reth`) or `op-proposer`.
+  <Step title="Configure your `mc-node`">
+  *   Spin up your OP chain as usual but set `--altda.enabled=true` and point both `mc-batcher` and `mc-node` to the DA server.
+    *   No configuration changes are required for your execution client (`mc-reth`) or `mc-proposer`.
   
     ```
        Alt-DA (EXPERIMENTAL)
@@ -95,7 +95,7 @@ You should use at least the following compatible op\* versions when running your
         ```
   
     <Info>
-      Some initial scalar values must be set early on in the deploy config in [Step 2](#configure-your-op-node). And then at a later point, chain operators can update the scalar values with an L1 transaction.
+      Some initial scalar values must be set early on in the deploy config in [Step 2](#configure-your-mc-node). And then at a later point, chain operators can update the scalar values with an L1 transaction.
     </Info>
   </Step>
 </Steps>
@@ -103,7 +103,7 @@ You should use at least the following compatible op\* versions when running your
 ## For node operators (full and archive nodes)
 
 *   Run a DA server as laid out in [Step 1](#setup-your-da-server)
-*   Provide the same  `--altda.enabled=true, --altda.da-server...` on `op-node` as listed in [Step 2](#configure-your-op-node)
+*   Provide the same  `--altda.enabled=true, --altda.da-server...` on `mc-node` as listed in [Step 2](#configure-your-mc-node)
 
 ## Inclusion criteria
 
@@ -169,7 +169,7 @@ Replace either of the above configurations with:
 
 ### CLI parameters
 
-Update the following CLI parameters for both `op-node` and `op-batcher`:
+Update the following CLI parameters for both `mc-node` and `mc-batcher`:
 
 | Former CLI param          | Current CLI param        |
 | ------------------------- | ------------------------ |
@@ -180,7 +180,7 @@ Update the following CLI parameters for both `op-node` and `op-batcher`:
 
 ### Environment variables
 
-#### op-node
+#### mc-node
 
 | Former env var                  | Current env var                |
 | ------------------------------- | ------------------------------ |
@@ -189,7 +189,7 @@ Update the following CLI parameters for both `op-node` and `op-batcher`:
 | `OP_NODE_PLASMA_VERIFY_ON_READ` | `OP_NODE_ALTDA_VERIFY_ON_READ` |
 | `OP_NODE_PLASMA_DA_SERVICE`     | `OP_NODE_ALTDA_DA_SERVICE`     |
 
-#### op-batcher
+#### mc-batcher
 
 | Former env var                     | Current env var                   |
 | ---------------------------------- | --------------------------------- |

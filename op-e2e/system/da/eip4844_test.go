@@ -18,11 +18,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
+	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
 	gethutils "github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/transactions"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
 	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum-optimism/optimism/op-service/testutils"
@@ -39,7 +39,7 @@ import (
 var maxBlobsPerBlock = params.DefaultCancunBlobConfig.Max
 
 // TestSystem4844E2E* run the SystemE2E test with 4844 enabled on L1, and active on the rollup in
-// the op-batcher and verifier.  It submits a txpool-blocking transaction before running
+// the mc-batcher and verifier.  It submits a txpool-blocking transaction before running
 // each test to ensure the batcher is able to clear it.
 func TestSystem4844E2E_Calldata(t *testing.T) {
 	testSystem4844E2E(t, false, batcherFlags.CalldataType)

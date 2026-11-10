@@ -51,7 +51,7 @@ pub struct HardForkConfig {
     pub holocene_time: Option<u64>,
     /// `pectra_blob_schedule_time` sets the activation time for the activation of the Pectra blob
     /// fee schedule for the L1 block info transaction. This is an optional fork, only present
-    /// on OP Stack sepolia chains that observed the L1 Pectra network upgrade with `op-node`
+    /// on OP Stack sepolia chains that observed the L1 Pectra network upgrade with `mc-node`
     /// <=v1.11.1 sequencing the network.
     ///
     /// Active if `pectra_blob_schedule_time` != None && L2 block timestamp >=
@@ -170,7 +170,7 @@ impl HardForkConfig {
     }
 
     /// Activates every fork up to and including `fork` at genesis (timestamp 0), leaving later
-    /// forks unset. Mirrors op-node's `Config.ActivateAtGenesis`. The optional Pectra blob schedule
+    /// forks unset. Mirrors mc-node's `Config.ActivateAtGenesis`. The optional Pectra blob schedule
     /// is not part of the mainline sequence and is never touched.
     pub fn activate_at_genesis(&mut self, fork: OpHardfork) {
         for f in OpHardfork::VARIANTS.iter().copied() {

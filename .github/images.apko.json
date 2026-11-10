@@ -66,8 +66,8 @@
     "multicannon": {
       "config": "melange/multicannon.yaml"
     },
-    "op-deployer": {
-      "config": "melange/op-deployer.yaml",
+    "mc-deployer": {
+      "config": "melange/mc-deployer.yaml",
       "source": {
         "repository": "ethereum-optimism/optimism",
         "path": "."
@@ -76,47 +76,47 @@
     }
   },
   "images": {
-    "op-node": {
+    "mc-node": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-node/**"
+        "mc-node/**"
       ],
       "nexus_paths": [
-        "apko/op-node.yaml"
+        "apko/mc-node.yaml"
       ],
-      "smoke_test": "op-node --version"
+      "smoke_test": "mc-node --version"
     },
-    "op-batcher": {
+    "mc-batcher": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-batcher/**"
+        "mc-batcher/**"
       ],
       "nexus_paths": [
-        "apko/op-batcher.yaml"
+        "apko/mc-batcher.yaml"
       ],
-      "smoke_test": "op-batcher --version"
+      "smoke_test": "mc-batcher --version"
     },
-    "op-proposer": {
+    "mc-proposer": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-proposer/**"
+        "mc-proposer/**"
       ],
       "nexus_paths": [
-        "apko/op-proposer.yaml"
+        "apko/mc-proposer.yaml"
       ],
-      "smoke_test": "op-proposer --version"
+      "smoke_test": "mc-proposer --version"
     },
     "op-conductor": {
       "type": "go",
@@ -126,7 +126,7 @@
       ],
       "paths": [
         "op-conductor/**",
-        "op-node/**"
+        "mc-node/**"
       ],
       "nexus_paths": [
         "apko/op-conductor.yaml"
@@ -211,7 +211,7 @@
       ],
       "paths": [
         "op-supernode/**",
-        "op-node/**"
+        "mc-node/**"
       ],
       "nexus_paths": [
         "apko/op-supernode.yaml"
@@ -246,7 +246,7 @@
       ],
       "smoke_test": "da-server --version"
     },
-    "op-challenger": {
+    "mc-challenger": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
@@ -255,15 +255,15 @@
         "op-stack-rust"
       ],
       "paths": [
-        "op-challenger/**",
+        "mc-challenger/**",
         "cannon/**",
         "op-preimage/**",
         "rust/kona/**"
       ],
       "nexus_paths": [
-        "apko/op-challenger.yaml"
+        "apko/mc-challenger.yaml"
       ],
-      "smoke_test": "op-challenger --version,cannon --help,cannon load-elf --type multithreaded64-5 --help,kona-host --help"
+      "smoke_test": "mc-challenger --version,cannon --help,cannon load-elf --type multithreaded64-5 --help,kona-host --help"
     },
     "kona-node": {
       "type": "rust",
@@ -345,7 +345,7 @@
       ],
       "smoke_test": "lokahi --version"
     },
-    "op-reth": {
+    "mc-reth": {
       "type": "rust",
       "verify_version": true,
       "needs_melange": [
@@ -355,27 +355,27 @@
         "rust/**"
       ],
       "nexus_paths": [
-        "apko/op-reth.yaml"
+        "apko/mc-reth.yaml"
       ],
-      "smoke_test": "op-reth --version"
+      "smoke_test": "mc-reth --version"
     },
-    "op-deployer": {
+    "mc-deployer": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
-        "op-deployer"
+        "mc-deployer"
       ],
       "paths": [
-        "op-deployer/**",
+        "mc-deployer/**",
         "packages/contracts-bedrock/**"
       ],
       "nexus_paths": [
-        "melange/op-deployer.yaml",
-        "apko/op-deployer.yaml",
-        "melange/pipelines/op-deployer/embed-artifacts.yaml",
-        "melange/pipelines/op-deployer/install-forge.yaml"
+        "melange/mc-deployer.yaml",
+        "apko/mc-deployer.yaml",
+        "melange/pipelines/mc-deployer/embed-artifacts.yaml",
+        "melange/pipelines/mc-deployer/install-forge.yaml"
       ],
-      "smoke_test": "op-deployer --version,forge --version"
+      "smoke_test": "mc-deployer --version,forge --version"
     }
   }
 }

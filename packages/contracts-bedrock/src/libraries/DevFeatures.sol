@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 /// @notice Library of constants representing development features. We use a 32 byte bitmap because
-///         it's easier to integrate with op-deployer. Note that users should typically set a
+///         it's easier to integrate with mc-deployer. Note that users should typically set a
 ///         single nibble to 1 and the rest to zero, which gives us 64 potential features, like:
 ///         0x0000000000000000000000000000000000000000000000000000000000000001
 ///         0x0000000000000000000000000000000000000000000000000000000000000010

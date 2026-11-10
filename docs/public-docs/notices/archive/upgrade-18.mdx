@@ -14,7 +14,7 @@ Upgrade 18 is a proposed network upgrade for OP Stack chains, which **introduces
 ## What's included in Upgrade 18
 
 Upgrade 18 introduces the following changes:
-* **Cannon + Kona game type support:** adds a new fault dispute game type `CANNON_KONA` (8) alongside `CANNON` (0) increasing the redundancy and diversity in the fault proof layer. This is a Rust-based fault proof implementation where `kona-client` (`kona-node` + `op-reth`) can operate alongside `op-program` (`op-node` + `op-geth`). Both game types use Cannon as the FPVM and the same dispute game implementation (`FaultDisputeGame.sol`). This upgrade does not change the respected game type.
+* **Cannon + Kona game type support:** adds a new fault dispute game type `CANNON_KONA` (8) alongside `CANNON` (0) increasing the redundancy and diversity in the fault proof layer. This is a Rust-based fault proof implementation where `kona-client` (`kona-node` + `mc-reth`) can operate alongside `op-program` (`mc-node` + `op-geth`). Both game types use Cannon as the FPVM and the same dispute game implementation (`FaultDisputeGame.sol`). This upgrade does not change the respected game type.
 * **Custom Gas Token v2 (CGT v2):** introduces an `isCustomGasToken()` flag and two new predeploys (`NativeAssetLiquidity` and `LiquidityController`) to support non-ETH native fee currencies configured at genesis (available in `op-contracts/v6.0.0`).
 * **Creator Pattern Dispute Game Refactor:** simplifies the chain deployment by introducing clone-with-immutable-arguments (CWIA) for dispute game contracts. This change removes the need for chain-specific deployments, reducing operational overhead while preserving safety and upgradeability across chains, and reducing gas costs to ensure all operations stay below the EIP-7825 transaction gas limit cap.
 
@@ -62,7 +62,7 @@ Update the following components:
 
 | Component       | Version | Notes |
 | -------------- | ------- | ----- |
-| `op-challenger` | [`op-challenger/v1.9.0`](https://github.com/ethereum-optimism/optimism/releases/tag/op-challenger%2Fv1.9.0) | Must be updated **prior** to the upgrade for permissionless fault proof chains. |
+| `mc-challenger` | [`mc-challenger/v1.9.0`](https://github.com/ethereum-optimism/optimism/releases/tag/op-challenger%2Fv1.9.0) | Must be updated **prior** to the upgrade for permissionless fault proof chains. |
 | `op-dispute-mon` | [`op-dispute-mon/v1.5.0`](https://github.com/ethereum-optimism/optimism/releases/tag/op-dispute-mon%2Fv1.5.0) | Must be updated **prior** to the upgrade for permissionless fault proof chains. |
 | `op-contracts` | `op-contracts/v6.0.0` | [op-contracts/v6.0.0-rc.1](https://github.com/ethereum-optimism/optimism/releases/tag/op-contracts%2Fv6.0.0-rc.1) will be finalized if it gets governance approval. |
 
@@ -128,11 +128,11 @@ Chains running permissionless fault proofs must ensure challengers are Kona-read
 
     You'll find the new kona cannon file at `prestate-artifacts-cannon/prestate.bin.gz`. Rename that file to have the absolute prestate hash as the filename so it looks like `0x0323914d3050e80c3d09da528be54794fde60cd26849cd3410dde0da7cd7d4fa.bin.gz`.
 
-    Upload those file to where you're storing your other absolute preimage files. This should be the location where you're pointing your `--prestates-url` at. The `op-challenger` will grab this file and use it when it needs to challenge games.
+    Upload those file to where you're storing your other absolute preimage files. This should be the location where you're pointing your `--prestates-url` at. The `mc-challenger` will grab this file and use it when it needs to challenge games.
   </Step>
 
-  <Step title="Configure op-challenger for cannon-kona">
-    Ensure `op-challenger` is updated and configured to support Kona games. 
+  <Step title="Configure mc-challenger for cannon-kona">
+    Ensure `mc-challenger` is updated and configured to support Kona games. 
     Include `cannon-kona` in trace types:
 
       ```bash
@@ -155,7 +155,7 @@ Chains running permissionless fault proofs must ensure challengers are Kona-read
     --cannon-kona-prestates-url=<CANNON_KONA_PRESTATES_URL>
     ```
 
-    If not using the standard OP Labs `op-challenger` Docker image, set the `kona-host` binary path:
+    If not using the standard OP Labs `mc-challenger` Docker image, set the `kona-host` binary path:
 
     ```bash
     OP_CHALLENGER_CANNON_KONA_SERVER=/path/to/kona-host
@@ -169,7 +169,7 @@ Chains running permissionless fault proofs must ensure challengers are Kona-read
 
 ## Execute the L1 Contract Upgrade
 
-Once your `op-challenger` is ready (and Kona-ready if permissionless), you can execute the upgrade transaction. This should be done by making a delegatecall to the `upgrade()` function of the OP Contract Manager at the address listed in [the registry](https://github.com/ethereum-optimism/superchain-registry/blob/main/validation/standard/standard-versions-mainnet.toml).
+Once your `mc-challenger` is ready (and Kona-ready if permissionless), you can execute the upgrade transaction. This should be done by making a delegatecall to the `upgrade()` function of the OP Contract Manager at the address listed in [the registry](https://github.com/ethereum-optimism/superchain-registry/blob/main/validation/standard/standard-versions-mainnet.toml).
 
 Please simulate and validate the expected output prior to executing the transaction.
 

@@ -15,21 +15,21 @@
     "op-chain-ops/**"
   ],
   "images": {
-    "op-node": {
+    "mc-node": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-node",
-      "paths": ["op-node/**"]
+      "target": "mc-node",
+      "paths": ["mc-node/**"]
     },
-    "op-batcher": {
+    "mc-batcher": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-batcher",
-      "paths": ["op-batcher/**"]
+      "target": "mc-batcher",
+      "paths": ["mc-batcher/**"]
     },
     "op-faucet": {
       "type": "go",
@@ -39,21 +39,21 @@
       "target": "op-faucet",
       "paths": ["op-faucet/**"]
     },
-    "op-proposer": {
+    "mc-proposer": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-proposer",
-      "paths": ["op-proposer/**"]
+      "target": "mc-proposer",
+      "paths": ["mc-proposer/**"]
     },
-    "op-challenger": {
+    "mc-challenger": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-challenger",
-      "paths": ["op-challenger/**", "cannon/**", "op-preimage/**", "rust/kona/**"]
+      "target": "mc-challenger",
+      "paths": ["mc-challenger/**", "cannon/**", "op-preimage/**", "rust/kona/**"]
     },
     "op-dispute-mon": {
       "type": "go",
@@ -69,7 +69,7 @@
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
       "target": "op-conductor",
-      "paths": ["op-conductor/**", "op-node/**"]
+      "paths": ["op-conductor/**", "mc-node/**"]
     },
     "da-server": {
       "type": "go",
@@ -85,7 +85,7 @@
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
       "target": "op-supernode",
-      "paths": ["op-supernode/**", "op-node/**"]
+      "paths": ["op-supernode/**", "mc-node/**"]
     },
     "op-test-sequencer": {
       "type": "go",
@@ -95,13 +95,13 @@
       "target": "op-test-sequencer",
       "paths": ["op-test-sequencer/**"]
     },
-    "op-deployer": {
+    "mc-deployer": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-deployer",
-      "paths": ["op-deployer/**", "packages/contracts-bedrock/**"]
+      "target": "mc-deployer",
+      "paths": ["mc-deployer/**", "packages/contracts-bedrock/**"]
     },
     "op-dripper": {
       "type": "go",
@@ -159,12 +159,12 @@
       "target": "op-zk-proposer",
       "paths": ["rust/**"]
     },
-    "op-reth": {
+    "mc-reth": {
       "type": "rust",
       "check": "rust",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-reth",
+      "target": "mc-reth",
       "paths": ["rust/**"]
     }
   }

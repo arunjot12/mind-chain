@@ -4,9 +4,9 @@ This file is the source of truth. Changing the style means editing it, not infer
 convention from one release.
 
 The target is a **curated change list**, as in
-[`op-node/v1.19.6`](https://github.com/ethereum-optimism/optimism/releases/tag/op-node%2Fv1.19.6)
+[`mc-node/v1.19.6`](https://github.com/ethereum-optimism/optimism/releases/tag/op-node%2Fv1.19.6)
 and
-[`op-reth/v2.4.3`](https://github.com/ethereum-optimism/optimism/releases/tag/op-reth%2Fv2.4.3).
+[`mc-reth/v2.4.3`](https://github.com/ethereum-optimism/optimism/releases/tag/op-reth%2Fv2.4.3).
 Read those two before drafting.
 
 ## Shape
@@ -28,7 +28,7 @@ Read those two before drafting.
 
 ## Other changes
 
-### Derivation                 <!-- op-node or kona derivation changes, first -->
+### Derivation                 <!-- mc-node or kona derivation changes, first -->
 - <Self-contained description> (#NNNNN)
 
 ### Features
@@ -83,7 +83,7 @@ is `kona-node`, whose callout should always be:
 ```markdown
 > [!NOTE]
 >
-> `kona-node` is not production-ready. Production deployments should use `op-node`.
+> `kona-node` is not production-ready. Production deployments should use `mc-node`.
 ```
 
 ## Impact, not implementation
@@ -198,7 +198,7 @@ short name and the required action stated plainly:
 ```markdown
 ## Breaking changes
 
-- **`--cannon-kona-experimental-witness-endpoint` flag removed** (#20498). The `debug_executePayload`-based witness path is now the default for kona-cannon games. Operators passing this flag must remove it before upgrading — op-challenger will reject it as unknown.
+- **`--cannon-kona-experimental-witness-endpoint` flag removed** (#20498). The `debug_executePayload`-based witness path is now the default for kona-cannon games. Operators passing this flag must remove it before upgrading — mc-challenger will reject it as unknown.
 ```
 
 **State the action, not why the old behaviour was wrong.** The entry exists so an operator
@@ -227,9 +227,9 @@ the exact values, and say what happens to a node that upgrades late:
 Saying which chains are *not* affected matters as much as which are: most readers of the
 note operate a different chain and should be able to stop reading at that sentence.
 
-## op-contracts and op-deployer
+## op-contracts and mc-deployer
 
-These notes follow the same shape and rules, with the differences below. Each op-deployer
+These notes follow the same shape and rules, with the differences below. Each mc-deployer
 release embeds the artifacts of one op-contracts release and deploys it by default.
 
 ### The Overview sentence
@@ -243,14 +243,14 @@ instead, in an `> [!IMPORTANT]` callout:
 > This is the op-contracts release for [Upgrade 20](<governance post>). It contains <what kind of changes>.
 ```
 
-The op-deployer release that first ships an op-contracts release names both:
+The mc-deployer release that first ships an op-contracts release names both:
 
 ```markdown
 > [!IMPORTANT]
-> This is the op-deployer release for [op-contracts/v8.0.0](https://github.com/ethereum-optimism/optimism/releases/tag/op-contracts%2Fv8.0.0) ([Upgrade 20](<governance post>)). It deploys op-contracts/v8.0.0. It contains <what kind of changes>.
+> This is the mc-deployer release for [op-contracts/v8.0.0](https://github.com/ethereum-optimism/optimism/releases/tag/op-contracts%2Fv8.0.0) ([Upgrade 20](<governance post>)). It deploys op-contracts/v8.0.0. It contains <what kind of changes>.
 ```
 
-A later op-deployer release for the same contracts uses the standard recommendation
+A later mc-deployer release for the same contracts uses the standard recommendation
 vocabulary and callout type, and still names the op-contracts release it embeds. The
 upgrade notice under `docs/public-docs/notices/` links the governance post; otherwise ask
 the release manager.
@@ -267,8 +267,8 @@ so a reader can check deployed implementations against it:
 
 ## Tags, links and images
 
-The release **title** is `<component> <version>`, with a space — `op-node v1.19.6`, not the
-tag's slash form `op-node/v1.19.6`.
+The release **title** is `<component> <version>`, with a space — `mc-node v1.19.6`, not the
+tag's slash form `mc-node/v1.19.6`.
 
 For a finalized release the heading, the compare link's right side and the image tag all
 carry the plain version — never `-rc.N`.

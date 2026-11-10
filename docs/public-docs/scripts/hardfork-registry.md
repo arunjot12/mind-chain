@@ -60,8 +60,8 @@ hardfork_activation_sepolia: 1781712001
 hardfork_notice: /notices/archive/upgrade-19
 hardfork_upgrade_number: 19
 hardfork_min_versions:
-  - op-node v1.19.1
-  - op-reth v2.3.3
+  - mc-node v1.19.1
+  - mc-reth v2.3.3
 hardfork_min_versions_source: "[Upgrade 19 notice](/notices/archive/upgrade-19)"
 ---
 ```

@@ -1,7 +1,7 @@
 package mon
 
 import (
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 )
 

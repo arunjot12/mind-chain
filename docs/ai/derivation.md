@@ -7,7 +7,7 @@ See [go-dev.md](go-dev.md) for general Go build, test, and lint workflow and
 
 The same derivation logic is implemented twice:
 
-- **Go (op-node)**: the reference consensus-layer node, under `op-node/rollup/`.
+- **Go (mc-node)**: the reference consensus-layer node, under `mc-node/rollup/`.
 - **Rust (kona)**: **kona-node** (`rust/kona/bin/node`) is the Rust consensus-layer node;
   **kona-client** (`rust/kona/bin/client`) is the Rust fault proof program. Both drive the
   same derivation pipeline, implemented in the **kona-derive** crate
@@ -15,7 +15,7 @@ The same derivation logic is implemented twice:
 
 ## Scope
 
-The derivation pipeline lives primarily under `op-node/rollup/` (Go) and
+The derivation pipeline lives primarily under `mc-node/rollup/` (Go) and
 `rust/kona/crates/protocol/derive` (Rust). It reads deposits, batches, and channel data from
 L1 and applies them to produce the L2 chain.
 
@@ -38,7 +38,7 @@ blocks:
    payload attributes (**consolidation**), the block is promoted to safe and derivation
    progresses to the next batch / L1 block without re-executing. Otherwise the payload
    attributes are sent to the execution layer to build and execute the block. In Go this
-   matching lives in `op-node/rollup/attributes/` (`AttributesMatchBlock`).
+   matching lives in `mc-node/rollup/attributes/` (`AttributesMatchBlock`).
 
 Other recurring concerns:
 
@@ -51,11 +51,11 @@ Both clients' derivation rules are configured by consensus parameters in `rollup
 `RollupConfig` (Rust), which can be loaded from the
 [superchain-registry](https://github.com/ethereum-optimism/superchain-registry). Adding a
 field that comes from the registry means wiring it through **every** ingestion enumeration on
-**both** clients — not just the config struct and the op-deployer/deploy-config
+**both** clients — not just the config struct and the mc-deployer/deploy-config
 (`DeployConfig.RollupConfig`) path:
 
-- **op-node (Go)**: the TOML-decoded `superchain.HardforkConfig` (`op-core/superchain`) **and**
-  the `superchain.ChainConfig` → `rollup.Config` conversion in `op-node/superchain/superchain.go`
+- **mc-node (Go)**: the TOML-decoded `superchain.HardforkConfig` (`op-core/superchain`) **and**
+  the `superchain.ChainConfig` → `rollup.Config` conversion in `mc-node/superchain/superchain.go`
   (`applyHardforks` / `rollupConfigFromRegistry`).
 - **kona (Rust)**: `HardForkConfig` / `ChainConfig::as_rollup_config`
   (`rust/kona/crates/protocol/genesis`).
@@ -91,12 +91,12 @@ transactions while decoding or constructing a `SpanBatch`, and keep post-Holocen
 processing limited to prefix and extraction checks. A span may cross a fork boundary; only singular
 batches emitted after the safe head are candidates for validation.
 
-Add new per-block transaction rules to `checkSingularBatch` (op-node) and
+Add new per-block transaction rules to `checkSingularBatch` (mc-node) and
 `SingleBatch::check_batch` (kona), where singular batches from both wire formats converge. Rejecting
 during `DeriveSpanBatch` can discard valid later elements before the batch stage has selected the
 singular batches that actually apply. The legacy pre-Holocene batch queue has no singular-streaming
 batch stage, so it still performs its historical full-span transaction checks. Keep those legacy
-checks aligned between op-node and Kona.
+checks aligned between mc-node and Kona.
 
 ## Cross-client wire-format parity
 
@@ -104,11 +104,11 @@ Both clients decode the same batcher-controlled bytes, so their decoders must ac
 the same byte set. A byte string that one client decodes and the other rejects splits derivation on
 identical L1 data.
 
-- **The spec is the reference; op-node is the incumbent.** Decide what is correct from the
-  [specs](https://specs.optimism.io). op-node additionally defines what OP Mainnet currently does,
+- **The spec is the reference; mc-node is the incumbent.** Decide what is correct from the
+  [specs](https://specs.optimism.io). mc-node additionally defines what OP Mainnet currently does,
   so where the spec is silent or ambiguous its behavior is the tie-breaker — but a decoder that
   contradicts the spec, or looks outright buggy, is a finding to raise rather than something to
-  mirror into kona. Either way, take a spec/op-node disagreement to the user before encoding a
+  mirror into kona. Either way, take a spec/mc-node disagreement to the user before encoding a
   choice in either client.
 - **Verify a codec's accept-set, don't infer it from the format name.** Wire formats come in
   families that differ on exactly the inputs a batcher controls. Span-batch `uvarint` is a protobuf
@@ -116,9 +116,9 @@ identical L1 data.
   minimal-only multiformats variant instead and rejects them. Span-batch fields go through
   `read_uvarint` (`rust/kona/crates/protocol/protocol/src/batch/varint.rs`), a port of Go's
   `binary.ReadUvarint`. Before trusting any decoder on this path, diff its accept-set against
-  op-node's over a generated corpus — a spec citation does not distinguish two families.
+  mc-node's over a generated corpus — a spec citation does not distinguish two families.
 - **Pin every decision in both suites.** When changing either decoder, add the same byte vector to
-  the kona and op-node tests so the pair stays locked together.
+  the kona and mc-node tests so the pair stays locked together.
 
 ## Testing Requirements
 

@@ -16,7 +16,7 @@ fail() {
   echo "FAIL: ${1}" >&2
   echo "  subject:  '${subject}'" >&2
   echo "  expected: '<scope>[!]: <description>' where scope names the component or area changed" >&2
-  echo "  examples: 'op-node: handle unsafe head reorgs', 'op-node!: remove legacy sync mode', 'op-node,op-batcher: share event loop metrics'" >&2
+  echo "  examples: 'mc-node: handle unsafe head reorgs', 'mc-node!: remove legacy sync mode', 'mc-node,mc-batcher: share event loop metrics'" >&2
   echo "  see https://scopedcommits.com and CONTRIBUTING.md" >&2
   exit 1
 }

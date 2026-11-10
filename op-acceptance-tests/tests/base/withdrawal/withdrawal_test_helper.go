@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
 	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
@@ -12,7 +12,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl/proofs"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	ps "github.com/ethereum-optimism/optimism/op-proposer/proposer"
+	ps "github.com/ethereum-optimism/optimism/mc-proposer/proposer"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 )
@@ -89,7 +89,7 @@ func TestWithdrawal(gt *testing.T, gameType gameTypes.GameType, extra ...presets
 	t := devtest.ParallelT(gt)
 	if gameType == gameTypes.SuperPermissionedGameType || gameType == gameTypes.SuperCannonKonaGameType {
 		// TODO(#21861): Enable this when kona-node supports superroot_atTimestamp
-		sysgo.SkipOnKonaNode(t, "super-root proposals require op-node superroot RPC")
+		sysgo.SkipOnKonaNode(t, "super-root proposals require mc-node superroot RPC")
 	}
 	env := newWithdrawalTestEnv(t, gameType, extra...)
 	bridge := env.bridge

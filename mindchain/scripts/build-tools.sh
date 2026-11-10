@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds op-deployer v0.8.1 and cannon v1.6.0 from releases/ into ./bin
+# Builds mc-deployer v0.8.1 and cannon v1.6.0 from releases/ into ./bin
 # Needs: go, just, forge (versions: releases/*/mise.toml)
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
@@ -12,11 +12,11 @@ make cannon GITCOMMIT="$GITCOMMIT" GITDATE="$GITDATE" VERSION="$CANNON_VERSION"
 cp bin/cannon "$ROOT/bin/cannon"
 echo "cannon $CANNON_VERSION -> bin/cannon"
 
-cd "$ROOT/releases/op-deployer-v0.8.1/op-deployer"
+cd "$ROOT/releases/mc-deployer-v0.8.1/mc-deployer"
 # Build the chain-config bundle from v0.8.1's own superchain-registry (git would
 # otherwise point the sync script at the root repo's registry).
-SUPERCHAIN_REGISTRY_DIR="$ROOT/releases/op-deployer-v0.8.1/superchain-registry" \
+SUPERCHAIN_REGISTRY_DIR="$ROOT/releases/mc-deployer-v0.8.1/superchain-registry" \
   bash ../op-core/superchain/sync-superchain.sh
 just GITCOMMIT="$GITCOMMIT" GITDATE="$GITDATE" VERSION="$OP_DEPLOYER_VERSION" build
-cp bin/op-deployer "$ROOT/bin/op-deployer"
-echo "op-deployer $OP_DEPLOYER_VERSION -> bin/op-deployer"
+cp bin/mc-deployer "$ROOT/bin/mc-deployer"
+echo "mc-deployer $OP_DEPLOYER_VERSION -> bin/mc-deployer"

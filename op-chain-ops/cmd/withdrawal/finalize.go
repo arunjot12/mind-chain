@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	bindingspreview "github.com/ethereum-optimism/optimism/op-node/bindings/preview"
-	"github.com/ethereum-optimism/optimism/op-node/withdrawals"
+	bindingspreview "github.com/ethereum-optimism/optimism/mc-node/bindings/preview"
+	"github.com/ethereum-optimism/optimism/mc-node/withdrawals"
 	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
 	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/common"

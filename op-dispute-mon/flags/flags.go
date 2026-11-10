@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	challengerFlags "github.com/ethereum-optimism/optimism/op-challenger/flags"
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
+	challengerFlags "github.com/ethereum-optimism/optimism/mc-challenger/flags"
+	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
 	"github.com/ethereum-optimism/optimism/op-service/flags"
 	"github.com/urfave/cli/v2"
 
@@ -45,7 +45,7 @@ var (
 	SuperRootRpcFlag = &cli.StringSliceFlag{
 		Name:    "superroot-rpc",
 		Aliases: []string{"supernode-rpc"},
-		Usage:   "HTTP provider URLs for super root RPC sources (op-node or op-supernode). Multiple URLs can be specified for redundancy.",
+		Usage:   "HTTP provider URLs for super root RPC sources (mc-node or op-supernode). Multiple URLs can be specified for redundancy.",
 		EnvVars: prefixEnvVars("SUPERROOT_RPC", "SUPERNODE_RPC"),
 	}
 	GameFactoryAddressFlag = &cli.StringFlag{

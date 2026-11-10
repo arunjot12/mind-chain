@@ -4,17 +4,17 @@
 
 !/cannon
 !/op-core
-!/op-batcher
+!/mc-batcher
 !/op-chain-ops
-!/op-deployer
+!/mc-deployer
 !/op-dripper
-!/op-challenger
+!/mc-challenger
 !/packages/contracts-bedrock
 !/op-dispute-mon
 !/op-conductor
-!/op-node
+!/mc-node
 !/op-preimage
-!/op-proposer
+!/mc-proposer
 !/op-service
 !/op-supervisor
 !/op-supernode

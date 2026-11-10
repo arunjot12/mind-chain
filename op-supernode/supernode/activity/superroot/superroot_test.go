@@ -477,7 +477,7 @@ func TestSuperroot_AtTimestamp_OptimisticErrorFailsRPC_VerifiedHit(t *testing.T)
 	}
 	s := newSuperroot(chains, reader)
 	_, err := (&superrootAPI{s: s}).AtTimestamp(context.Background(), 123)
-	require.Error(t, err, "optimistic-branch transport error must fail the RPC even with a verified hit (silently emitting a partial map would corrupt op-challenger step>0 logic)")
+	require.Error(t, err, "optimistic-branch transport error must fail the RPC even with a verified hit (silently emitting a partial map would corrupt mc-challenger step>0 logic)")
 }
 
 func TestSuperroot_AtTimestamp_OptimisticErrorFailsRPC_UnverifiedMiss(t *testing.T) {

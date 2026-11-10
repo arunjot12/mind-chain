@@ -157,7 +157,7 @@ func TestEIP7825TxGasLimitCap(gt *testing.T) {
 
 	t.Run("post-karst", func(t devtest.T) {
 		t.Parallel()
-		// Live chain is on Karst — op-reth's RPC rejects a tx with gas > 2^24
+		// Live chain is on Karst — mc-reth's RPC rejects a tx with gas > 2^24
 		// at submission time, so it never lands on-chain. Nothing for kona to
 		// validate.
 		sys := presets.NewMinimal(t, presets.WithDeployerOptions(sysgo.WithKarstAtGenesis, sysgo.WithForkAtL1Genesis(forks.Osaka)))
@@ -429,7 +429,7 @@ func spamL1Txs(sys *presets.Minimal) {
 func runSpam(t devtest.T, eoas []*dsl.SyncEOA, blockTime time.Duration, to common.Address) {
 	eoasRR := loadtest.NewRoundRobin(eoas)
 	spammer := loadtest.SpammerFunc(func(t devtest.T) error {
-		// Max tx size in op-geth and op-reth mempools is 128 kB per tx.
+		// Max tx size in op-geth and mc-reth mempools is 128 kB per tx.
 		// We leave an 8 kB buffer for tx data outside the calldata.
 		const calldataSize = 120 * 1024
 		_, err := eoasRR.Get().Include(t,

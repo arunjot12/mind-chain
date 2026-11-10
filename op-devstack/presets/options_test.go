@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/stretchr/testify/require"
@@ -104,15 +104,15 @@ func TestUnsupportedPresetOptionKinds(t *testing.T) {
 			want:      0,
 		},
 		{
-			name:      "minimal allows op-reth options",
+			name:      "minimal allows mc-reth options",
 			supported: minimalPresetSupportedOptionKinds,
-			opts:      WithOpRethOption(sysgo.OpRethWithBinary("op-reth-superset")),
+			opts:      WithOpRethOption(sysgo.OpRethWithBinary("mc-reth-superset")),
 			want:      0,
 		},
 		{
-			name:      "conductors allow op-reth options",
+			name:      "conductors allow mc-reth options",
 			supported: minimalWithConductorsPresetSupportedOptionKinds,
-			opts:      WithOpRethOption(sysgo.OpRethWithBinary("op-reth-superset")),
+			opts:      WithOpRethOption(sysgo.OpRethWithBinary("mc-reth-superset")),
 			want:      0,
 		},
 		{
@@ -158,13 +158,13 @@ func TestUnsupportedPresetOptionKinds(t *testing.T) {
 			want:      optionKindZKProposer,
 		},
 		{
-			name:      "single chain supernode proofs reject op-reth options",
+			name:      "single chain supernode proofs reject mc-reth options",
 			supported: supernodeProofsPresetSupportedOptionKinds,
 			opts:      WithOpRethOption(sysgo.OpRethWithExtraArgs("--testing.sdm-fixed-policy")),
 			want:      optionKindOpReth,
 		},
 		{
-			name:      "single chain no-supernode proofs accept op-reth options",
+			name:      "single chain no-supernode proofs accept mc-reth options",
 			supported: singleChainInteropNoSupernodePresetSupportedOptionKinds,
 			opts:      WithOpRethOption(sysgo.OpRethWithExtraArgs("--testing.sdm-fixed-policy")),
 			want:      0,

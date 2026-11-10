@@ -10,7 +10,7 @@ agent, which executes the process here).
 
 ## Why a dedicated guide
 
-The OP Stack Rust crates — `op-reth`, `op-revm`, `alloy-op-evm`, `alloy-op-hardforks`,
+The OP Stack Rust crates — `mc-reth`, `op-revm`, `alloy-op-evm`, `alloy-op-hardforks`,
 and kona's `fpvm_evm` — are **in-tree forks** (see [rust-dev.md](rust-dev.md), "Migrated,
 not vendored") that override, duplicate, or exhaustively match behaviour from the generic
 upstream crates they pin. An update is a pin bump, so the dangerous change lives upstream,
@@ -116,10 +116,10 @@ after it is a bug we knowingly ship. Sweep forward as well:
    and add the commits of newer release tags that are not on `main`. Partition and read
    the range like the full-range sweep, one agent per partition, every commit.
 2. Record each commit that fixes a bug, vulnerability, or liveness or correctness issue
-   that exists at the new pin in code op-reth, op-revm or kona runs. Generic node
+   that exists at the new pin in code mc-reth, op-revm or kona runs. Generic node
    subsystems (networking, storage, engine tree, RPC) count even without an op-
    override. Confirm the defect in the pinned source and name the op- site, or the
-   subsystem op-reth enables. Flag fixes to a consensus-critical surface (risk E) as
+   subsystem mc-reth enables. Flag fixes to a consensus-critical surface (risk E) as
    aggressively as full-range findings.
 3. For each reth finding, test whether it cherry-picks cleanly and builds on the new
    pin, and list the commits it depends on. A picked fix goes on the fork's `op-*` branch
@@ -199,10 +199,10 @@ executed" do not hold.
 **6. A per-account storage root is consensus.**
 Upstream precondition: provider storage-root reads serve only RPC, so upstream tolerates
 divergence there that it would never accept in the state root. Since Isthmus the header's
-`withdrawalsRoot` is the L2ToL1MessagePasser storage root, which op-reth computes through
-`StorageRootProvider::storage_root` (`rust/op-reth/crates/consensus/src/validation/isthmus.rs`)
-when building (`rust/op-reth/crates/evm/src/build.rs`) and validating
-(`rust/op-reth/crates/node/src/engine.rs`) a block. Any upstream change to that method, to
+`withdrawalsRoot` is the L2ToL1MessagePasser storage root, which mc-reth computes through
+`StorageRootProvider::storage_root` (`rust/mc-reth/crates/consensus/src/validation/isthmus.rs`)
+when building (`rust/mc-reth/crates/evm/src/build.rs`) and validating
+(`rust/mc-reth/crates/node/src/engine.rs`) a block. Any upstream change to that method, to
 the providers that implement it (including overlay code it shares with `storage_proof` and
 `storage_multiproof`), or to how trie tables are persisted (partial persistence, state
 masking, overlay construction) is consensus-affecting for OP even when every upstream
@@ -327,7 +327,7 @@ a **minor** bump, `op-revm` at `20.x` only by a major.
 So: **if the adaptation diff changes a `version =` line in one of our published crates,
 say so in the review.** It is a release-coordination item, not just a manifest edit.
 
-The op-reth crates (`op-reth`, `reth-optimism-*`, `reth-op`) and the `op-alloy*` crates
+The mc-reth crates (`mc-reth`, `reth-optimism-*`, `reth-op`) and the `op-alloy*` crates
 are each versioned as a group (UPDATING-RETH step 4): flag a `version =` change that moves
 only part of a family, and check whether sibling crates changed their public API without a
 bump.

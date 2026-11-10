@@ -1,6 +1,6 @@
 ---
 name: dispute-game-investigator
-description: Investigate an OP Stack fault dispute game during (or after) an incident — answer the user's questions and diagnose: why a challenger is disagreeing, doing a lot of moves, or contradicting itself; whether a proposal is valid; which op-node is at fault; and (after the fact) who wins the bonds. Read-only.
+description: Investigate an OP Stack fault dispute game during (or after) an incident — answer the user's questions and diagnose: why a challenger is disagreeing, doing a lot of moves, or contradicting itself; whether a proposal is valid; which mc-node is at fault; and (after the fact) who wins the bonds. Read-only.
 ---
 
 # Dispute Game Investigator
@@ -9,7 +9,7 @@ description: Investigate an OP Stack fault dispute game during (or after) an inc
 
 - **During an incident**, to answer questions and diagnose: a challenger disagreeing
   with a proposal or another challenger, performing many moves, or contradicting itself;
-  whether the in-progress proposals are valid; which op-node is responsible.
+  whether the in-progress proposals are valid; which mc-node is responsible.
 - **After the fact**, for specifics like the bond outcome.
 
 ## How to use it
@@ -28,9 +28,9 @@ Read-only: investigate and explain; never make moves, resolve, fund, or restart 
 
 ## Tooling
 
-- `op-challenger list-games`/`list-claims --format json` — enumerate games/claims.
+- `mc-challenger list-games`/`list-claims --format json` — enumerate games/claims.
 - `op-chain-ops/cmd/check-output-root` and `check-super-root` — canonical output root (EL-only, work against public nodes).
-- `op-challenger game-proposal-outputs` — per-game node view: `outputAtBlock` + `safeHeadAtL1Block`
+- `mc-challenger game-proposal-outputs` — per-game node view: `outputAtBlock` + `safeHeadAtL1Block`
   for output-root games (`--rollup-rpc`; spots an incomplete safe-head DB), super root + node
   sync for super-root and zk games (`--superroot-rpc`).
-- `op-challenger/scripts/check-game-block-hashes.sh` — block-hash cross-check, node vs reference.
+- `mc-challenger/scripts/check-game-block-hashes.sh` — block-hash cross-check, node vs reference.

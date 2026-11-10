@@ -1,7 +1,7 @@
 package stack
 
 import (
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
+	"github.com/ethereum-optimism/optimism/mc-challenger/config"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 )
 

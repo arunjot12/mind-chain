@@ -1,4 +1,4 @@
-# Multicannon multiplexer only (monorepo op-challenger-target cannon COPY).
+# Multicannon multiplexer only (monorepo mc-challenger-target cannon COPY).
 # Historical embeds: melange/pipelines/cannon/build-multicannon.yaml
 package:
   name: multicannon

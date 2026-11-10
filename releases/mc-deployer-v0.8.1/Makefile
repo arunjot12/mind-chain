@@ -1,0 +1,3 @@
+DEPRECATED_TARGETS := help build build-go build-contracts build-customlint lint-go lint-go-fix check-op-geth-version golang-docker mc-node-docker mc-batcher-docker op-stack-go-requested-docker docker-builder-clean docker-builder cross-mc-node contracts-bedrock-docker submodules mc-node generate-mocks-mc-node generate-mocks-op-service mc-batcher mc-proposer mc-challenger op-dispute-mon op-supernode op-interop-filter cannon reproducible-prestate-kona reproducible-prestate mod-tidy clean nuke test-unit semgrep-ci make-pre-test go-tests go-tests-short go-tests-short-ci go-tests-ci go-tests-fraud-proofs-ci test update-op-geth compute-git-versions
+
+include ./justfiles/deprecated.mk

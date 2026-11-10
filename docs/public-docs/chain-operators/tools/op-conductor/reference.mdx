@@ -358,7 +358,7 @@ ClusterMembership returns the current cluster membership configuration.
 ### conductor_active
 
 <Info>
-  API called by `op-node`.
+  API called by `mc-node`.
 </Info>
 
 Active returns true if the op-conductor is active (not paused or stopped).
@@ -382,11 +382,11 @@ Active returns true if the op-conductor is active (not paused or stopped).
 ### conductor_commitUnsafePayload
 
 <Info>
-  API called by `op-node`.
+  API called by `mc-node`.
 </Info>
 
 CommitUnsafePayload commits an unsafe payload (latest head) to the consensus
-layer. This method is typically called by the op-node to commit execution payload envelopes.
+layer. This method is typically called by the mc-node to commit execution payload envelopes.
 
 <Tabs>
   <Tab title="curl">

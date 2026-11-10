@@ -20,9 +20,9 @@
 //
 //	go run ./docs/public-docs/scripts/gen-deploy-config
 //
-// Regeneration is keyed to finalized op-deployer releases (op-deployer is the
+// Regeneration is keyed to finalized mc-deployer releases (mc-deployer is the
 // released tool that derives and emits the DeployConfig): the snippet is
-// generated from the genesis package source at the op-deployer release tag
+// generated from the genesis package source at the mc-deployer release tag
 // recorded in manifest.json — see README.md in this directory for the
 // procedure, including how to point -source at the tag's source when develop
 // has moved past it. Pass -check to verify the committed snippet matches the
@@ -390,7 +390,7 @@ func render(groups []group, tag string) (string, error) {
   DeployConfig struct tree in op-chain-ops/genesis at the release tag below.
   Do not hand-edit; regenerate per
   docs/public-docs/scripts/gen-deploy-config/README.md when a new finalized
-  op-deployer release is published:
+  mc-deployer release is published:
 
     go run ./docs/public-docs/scripts/gen-deploy-config
 */}

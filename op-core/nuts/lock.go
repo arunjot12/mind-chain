@@ -85,7 +85,7 @@ func WriteLockFile(lockPath string, locks ForkLock) error {
 
 	_, err = fmt.Fprint(f, `
 # REVIEWER NOTE: Changes to this file affect which NUT bundles are embedded
-# into op-node and kona-node for hardfork activations. Review carefully.
+# into mc-node and kona-node for hardfork activations. Review carefully.
 `)
 	if err != nil {
 		return err

@@ -8,7 +8,7 @@ import { LibString } from "@solady/utils/LibString.sol";
 
 /// @title NetworkUpgradeTxns
 /// @notice Standard library for generating Network Upgrade Transaction (NUT) artifacts.
-///         Generates simplified JSON format that is converted to deposit transactions by op-node.
+///         Generates simplified JSON format that is converted to deposit transactions by mc-node.
 library NetworkUpgradeTxns {
     using stdJson for string;
 
@@ -24,8 +24,8 @@ library NetworkUpgradeTxns {
     }
 
     /// @notice Represents a single Network Upgrade Transaction
-    ///         This struct is serialized to JSON and later converted to a DepositTx by op-node.
-    ///         See op-node/rollup/derive/parse_upgrade_transactions.go for conversion logic.
+    ///         This struct is serialized to JSON and later converted to a DepositTx by mc-node.
+    ///         See mc-node/rollup/derive/parse_upgrade_transactions.go for conversion logic.
     /// @dev Fields MUST be in alphabetical order for JSON parseJson/abi.decode to work.
     /// @dev The `intent` field MUST be a simple human-readable string (no special or non-ASCII
     ///      characters) to avoid JSON serialization issues in the NUT bundle artifact.

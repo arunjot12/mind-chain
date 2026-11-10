@@ -21,7 +21,7 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 
 	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
 	"github.com/ethereum-optimism/optimism/op-service/apis"
 	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
@@ -342,7 +342,7 @@ func CheckEIP7939(ctx context.Context, logger log.Logger, l2 apis.EthCode, baseP
 }
 
 // CheckEIP7825 verifies the post-Karst transaction-gas-limit cap of 2^24:
-// op-reth's RPC must reject a tx whose gas limit exceeds the cap at submission
+// mc-reth's RPC must reject a tx whose gas limit exceeds the cap at submission
 // time, so the tx never lands on chain. Returns no block range because no tx
 // is included — the cap is a tx-validity rule, not an EVM rule, so there is
 // nothing for kona-host to cross-check.

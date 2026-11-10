@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 )
 
@@ -122,8 +122,8 @@ func singleChainMultiNodeFromRuntime(t devtest.T, runtime *sysgo.SingleChainRunt
 // The dump is best-effort — its only purpose is diagnostics for #20649, so any
 // RPC error is logged and ignored.
 //
-// op-geth and op-reth both implement eth_syncing but with different schemas
-// (op-geth: fine-grained snap-sync counters; op-reth: alloy SyncInfo plus a
+// op-geth and mc-reth both implement eth_syncing but with different schemas
+// (op-geth: fine-grained snap-sync counters; mc-reth: alloy SyncInfo plus a
 // stages list). Dumping the raw JSON sidesteps the schema difference — the
 // human reading the CI log gets whichever shape the EL produced.
 func runInitialSyncChecks(t devtest.T, verifierEL *dsl.L2ELNode, isELSync bool, checks ...dsl.CheckFunc) {

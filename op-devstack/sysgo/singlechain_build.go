@@ -19,12 +19,12 @@ import (
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	opNodeFlags "github.com/ethereum-optimism/optimism/op-node/flags"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	p2pcli "github.com/ethereum-optimism/optimism/op-node/p2p/cli"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
+	"github.com/ethereum-optimism/optimism/mc-node/config"
+	opNodeFlags "github.com/ethereum-optimism/optimism/mc-node/flags"
+	"github.com/ethereum-optimism/optimism/mc-node/p2p"
+	p2pcli "github.com/ethereum-optimism/optimism/mc-node/p2p/cli"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
+	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
 	"github.com/ethereum-optimism/optimism/op-service/clock"
 	"github.com/ethereum-optimism/optimism/op-service/dial"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
@@ -96,11 +96,11 @@ func applyConfigPrefundedL2(t devtest.T, keys devkeys.Keys, l1ChainID, l2ChainID
 func startL2ELForKey(t devtest.T, l2Net *L2Network, jwtPath string, jwtSecret [32]byte, key string, identity *ELNodeIdentity, opts ...OpRethOption) L2ELNode {
 	switch k := devstackL2ELKind(); k {
 	case MixedL2ELOpGeth:
-		// op-reth options have no analogue on these kinds. Dropping them silently would make a
+		// mc-reth options have no analogue on these kinds. Dropping them silently would make a
 		// binary override look like it took effect on a node that never saw it.
-		t.Require().Empty(opts, "op-reth options cannot be applied to EL kind %q", k)
+		t.Require().Empty(opts, "mc-reth options cannot be applied to EL kind %q", k)
 		return startL2ELNode(t, l2Net, jwtPath, jwtSecret, key, identity)
-	case "", MixedL2ELOpReth: // unset (default) or explicit op-reth
+	case "", MixedL2ELOpReth: // unset (default) or explicit mc-reth
 		return startMixedOpRethNode(t, l2Net, key, jwtPath, jwtSecret, nil, opts...)
 	default:
 		t.Require().FailNow("unsupported L2 EL kind", "unknown DEVSTACK_L2EL_KIND %q", k)
@@ -130,7 +130,7 @@ func startL2CLForKey(
 	switch devstackL2CLKind() {
 	case MixedL2CLKona:
 		return startMixedKonaNode(t, keys, l1Net, l2Net, l1EL, l1CL, l2EL, clKey, elKey, isSequencer, nil)
-	default: // op-node
+	default: // mc-node
 		return startL2CLNode(t, keys, l1Net, l2Net, l1EL, l1CL, l2EL, jwtSecret, l2CLNodeStartConfig{
 			Key:            clKey,
 			IsSequencer:    isSequencer,
@@ -188,7 +188,7 @@ func startStoppedSequencerCL(
 			t, keys, l1Net, l2Net, l1EL, l1CL, l2EL, key, key, true, nil,
 			extraEnv...,
 		)
-	default: // op-node
+	default: // mc-node
 		return startL2CLNode(t, keys, l1Net, l2Net, l1EL, l1CL, l2EL, jwtSecret, l2CLNodeStartConfig{
 			Key:              key,
 			IsSequencer:      true,
@@ -297,7 +297,7 @@ type l2CLNodeStartConfig struct {
 }
 
 // renewableP2PSignerSetup mints a fresh signer on every SetupSigner call, so
-// an op-node that is stopped and started again (which closes the previous
+// an mc-node that is stopped and started again (which closes the previous
 // signer) can keep signing gossip after the restart.
 type renewableP2PSignerSetup struct {
 	priv *ecdsa.PrivateKey
@@ -345,7 +345,7 @@ func startL2CLNode(
 
 	logger := t.Logger().New("component", "l2cl-"+startCfg.Key)
 
-	// Build P2P config through the same path as sysgo op-node setup.
+	// Build P2P config through the same path as sysgo mc-node setup.
 	fs := flag.NewFlagSet("", flag.ContinueOnError)
 	for _, f := range opNodeFlags.P2PFlags(opNodeFlags.EnvVarPrefix) {
 		require.NoError(f.Apply(fs))
@@ -431,7 +431,7 @@ func startL2CLNode(
 			SkipSyncStartCheck:             false,
 			SupportsPostFinalizationELSync: false,
 			L2FollowSourceEndpoint:         cfg.FollowSource,
-			// Mirror op-node/service.go: a follow-mode sequencer needs a single
+			// Mirror mc-node/service.go: a follow-mode sequencer needs a single
 			// initial engine reset to trigger block building (TryInitialResetEngineForSequencer).
 			NeedInitialResetEngine: cfg.IsSequencer && cfg.FollowSource != "",
 			OffsetELSafe:           cfg.OffsetELSafe,

@@ -3,13 +3,13 @@ package sync_tester_hfs
 import (
 	"testing"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
 	"github.com/ethereum-optimism/optimism/op-core/forks"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/presets"
 	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 
 	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
@@ -36,7 +36,7 @@ func simpleWithSyncTesterOpts() []presets.Option {
 
 func TestSyncTesterHardforks(gt *testing.T) {
 	t := devtest.ParallelT(gt)
-	// Example error with op-reth:
+	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|10:08:04.055]
 	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/check.go:26

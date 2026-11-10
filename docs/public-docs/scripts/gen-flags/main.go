@@ -34,16 +34,16 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	batcherflags "github.com/ethereum-optimism/optimism/op-batcher/flags"
-	challengerflags "github.com/ethereum-optimism/optimism/op-challenger/flags"
+	batcherflags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
+	challengerflags "github.com/ethereum-optimism/optimism/mc-challenger/flags"
 	conductorflags "github.com/ethereum-optimism/optimism/op-conductor/flags"
-	nodeflags "github.com/ethereum-optimism/optimism/op-node/flags"
-	proposerflags "github.com/ethereum-optimism/optimism/op-proposer/flags"
+	nodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
+	proposerflags "github.com/ethereum-optimism/optimism/mc-proposer/flags"
 )
 
 // component describes one service whose flags are rendered into a snippet.
 type component struct {
-	// name is the service name, e.g. "op-batcher". The snippet is written to
+	// name is the service name, e.g. "mc-batcher". The snippet is written to
 	// <snippets-dir>/generated/<name>-flags.mdx and the release tag is looked
 	// up under this key in manifest.json.
 	name string
@@ -58,30 +58,30 @@ type component struct {
 
 var components = []component{
 	{
-		name:  "op-batcher",
+		name:  "mc-batcher",
 		flags: batcherflags.Flags,
-		// Mirrors requiredFlags in op-batcher/flags/flags.go.
+		// Mirrors requiredFlags in mc-batcher/flags/flags.go.
 		required: []string{"l1-eth-rpc", "l2-eth-rpc", "rollup-rpc"},
 	},
 	{
-		name:  "op-node",
+		name:  "mc-node",
 		flags: nodeflags.Flags,
-		// Mirrors requiredFlags in op-node/flags/flags.go. op-node additionally
+		// Mirrors requiredFlags in mc-node/flags/flags.go. mc-node additionally
 		// requires exactly one of --network / --rollup.config at startup
 		// (opflags.CheckRequiredXor); that pair is kept in the optional table
 		// and called out in the reference page's prose instead.
 		required: []string{"l1", "l2", "l2.jwt-secret"},
 	},
 	{
-		name:  "op-proposer",
+		name:  "mc-proposer",
 		flags: proposerflags.Flags,
-		// Mirrors requiredFlags in op-proposer/flags/flags.go.
+		// Mirrors requiredFlags in mc-proposer/flags/flags.go.
 		required: []string{"l1-eth-rpc"},
 	},
 	{
-		name:  "op-challenger",
+		name:  "mc-challenger",
 		flags: challengerflags.Flags,
-		// Mirrors requiredFlags in op-challenger/flags/flags.go, plus
+		// Mirrors requiredFlags in mc-challenger/flags/flags.go, plus
 		// l2-eth-rpc, which CheckRequired enforces unconditionally even though
 		// the component keeps it in its optional slice. CheckRequired enforces
 		// further flags conditionally (per game type, and one of
@@ -110,7 +110,7 @@ var components = []component{
 
 // manifest maps component name -> provenance of its committed snippet: the
 // finalized release tag recorded in the provenance line (e.g.
-// "op-batcher/v1.16.11") and the SHA-256 of the snippet bytes written at
+// "mc-batcher/v1.16.11") and the SHA-256 of the snippet bytes written at
 // regeneration time. The tag is bumped, and the snippet + hash regenerated,
 // when a new finalized (non-rc) component release is published.
 //
@@ -151,7 +151,7 @@ func main() {
 		}
 		for name := range selected {
 			if !known[name] {
-				fatalf("unknown component %q in -only (known: op-batcher, op-node, op-proposer, op-challenger, op-conductor)", name)
+				fatalf("unknown component %q in -only (known: mc-batcher, mc-node, mc-proposer, mc-challenger, op-conductor)", name)
 			}
 		}
 	}
@@ -329,10 +329,10 @@ flag definitions. %[4]d flags: %[5]d required, %[6]d optional.
 // stable across runs and registry bumps, so regeneration is byte-stable and
 // keyed only to component releases.
 //
-//   - op-batcher builds the --compressor option list from map iteration
-//     (op-batcher/compressor.KindKeys via slices.Collect(maps.Keys(...))), so
+//   - mc-batcher builds the --compressor option list from map iteration
+//     (mc-batcher/compressor.KindKeys via slices.Collect(maps.Keys(...))), so
 //     its order changes on every process start — including in
-//     `op-batcher --help` itself. Sort that one list here. Remove this once
+//     `mc-batcher --help` itself. Sort that one list here. Remove this once
 //     KindKeys is sorted upstream (proposed as a follow-up to the B1 slice).
 //   - The --network usage string enumerates chaincfg.AvailableNetworks(),
 //     which is read from the superchain-registry bundle
@@ -342,7 +342,7 @@ flag definitions. %[4]d flags: %[5]d required, %[6]d optional.
 //     construction. Replace the enumerated list with a stable pointer at the
 //     registry; `<component> --help` always shows the bundled list.
 func canonicalizeUsage(component, flagName, usage string) string {
-	if component == "op-batcher" && flagName == "compressor" {
+	if component == "mc-batcher" && flagName == "compressor" {
 		const marker = "Valid options: "
 		if i := strings.Index(usage, marker); i >= 0 {
 			head, list := usage[:i+len(marker)], usage[i+len(marker):]

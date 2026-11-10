@@ -15,10 +15,10 @@ interop-smoke: (go_build "./bin/interop-smoke" "./cmd/interop-smoke" "-ldflags" 
 # Run tests
 test: (go_test "./...")
 
-# Build op-deployer binary
-op-deployer:
-    just ../op-deployer/build
-    mkdir -p ./bin && ln -f ../op-deployer/bin/op-deployer ./bin/op-deployer
+# Build mc-deployer binary
+mc-deployer:
+    just ../mc-deployer/build
+    mkdir -p ./bin && ln -f ../mc-deployer/bin/mc-deployer ./bin/mc-deployer
 
 # Run fuzzing tests
 [private]

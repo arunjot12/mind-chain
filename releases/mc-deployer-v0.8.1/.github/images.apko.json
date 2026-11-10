@@ -1,0 +1,376 @@
+{
+  "shared_paths": [
+    ".github/images.apko.json",
+    ".github/workflows/build-images.apko.yaml",
+    "melange/pipelines/**",
+    "melange/op-stack-go.yaml",
+    "melange/op-stack-rust.yaml",
+    "melange/multicannon.yaml"
+  ],
+  "shared_go_paths": [
+    "go.mod",
+    "go.sum",
+    "op-service/**",
+    "op-core/**",
+    "op-chain-ops/**"
+  ],
+  "shared_rust_paths": [
+    "rust/**"
+  ],
+  "melange_archs": [
+    "x86_64",
+    "aarch64"
+  ],
+  "apko_archs": "amd64,arm64",
+  "release": {
+    "tag_regex": "^([^/]+)/(v.+)$",
+    "service_match": 1,
+    "version_match": 2,
+    "publish_tag": "${version}",
+    "source_ref": "${ref_name}"
+  },
+  "default_runners": {
+    "x86_64": "ubuntu-24.04",
+    "aarch64": "ubuntu-24.04-arm"
+  },
+  "smoke_runners": {
+    "amd64": "ubuntu-24.04",
+    "arm64": "ubuntu-24.04-arm"
+  },
+  "melange": {
+    "op-stack-go": {
+      "config": "melange/op-stack-go.yaml"
+    },
+    "op-stack-rust": {
+      "config": "melange/op-stack-rust.yaml",
+      "source": {
+        "repository": "ethereum-optimism/optimism",
+        "path": "."
+      },
+      "source_submodules": "recursive",
+      "runners": {
+        "x86_64": "oplabs-ubuntu-x86",
+        "aarch64": "oplabs-ubuntu-arm"
+      },
+      "use_gha_cache": true,
+      "cache_key_files": [
+        "rust/Cargo.lock",
+        "rust/op-rbuilder/Cargo.lock",
+        "rust/rollup-boost/Cargo.lock"
+      ]
+    },
+    "multicannon": {
+      "config": "melange/multicannon.yaml"
+    },
+    "mc-deployer": {
+      "config": "melange/mc-deployer.yaml",
+      "source": {
+        "repository": "ethereum-optimism/optimism",
+        "path": "."
+      },
+      "source_submodules": "recursive"
+    }
+  },
+  "images": {
+    "mc-node": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "mc-node/**"
+      ],
+      "nexus_paths": [
+        "apko/mc-node.yaml"
+      ],
+      "smoke_test": "mc-node --version"
+    },
+    "mc-batcher": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "mc-batcher/**"
+      ],
+      "nexus_paths": [
+        "apko/mc-batcher.yaml"
+      ],
+      "smoke_test": "mc-batcher --version"
+    },
+    "mc-proposer": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "mc-proposer/**"
+      ],
+      "nexus_paths": [
+        "apko/mc-proposer.yaml"
+      ],
+      "smoke_test": "mc-proposer --version"
+    },
+    "op-conductor": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-conductor/**",
+        "mc-node/**"
+      ],
+      "nexus_paths": [
+        "apko/op-conductor.yaml"
+      ],
+      "smoke_test": "op-conductor --version"
+    },
+    "op-dispute-mon": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-dispute-mon/**"
+      ],
+      "nexus_paths": [
+        "apko/op-dispute-mon.yaml"
+      ],
+      "smoke_test": "op-dispute-mon --version"
+    },
+    "op-dripper": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-dripper/**"
+      ],
+      "nexus_paths": [
+        "apko/op-dripper.yaml"
+      ],
+      "smoke_test": "op-dripper --version"
+    },
+    "op-faucet": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-faucet/**"
+      ],
+      "nexus_paths": [
+        "apko/op-faucet.yaml"
+      ],
+      "smoke_test": "op-faucet --version"
+    },
+    "op-interop-filter": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-interop-filter/**"
+      ],
+      "nexus_paths": [
+        "apko/op-interop-filter.yaml"
+      ],
+      "smoke_test": "op-interop-filter --version"
+    },
+    "op-interop-mon": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-interop-mon/**"
+      ],
+      "nexus_paths": [
+        "apko/op-interop-mon.yaml"
+      ],
+      "smoke_test": "op-interop-mon --version"
+    },
+    "op-supernode": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-supernode/**",
+        "mc-node/**"
+      ],
+      "nexus_paths": [
+        "apko/op-supernode.yaml"
+      ],
+      "smoke_test": "op-supernode --version"
+    },
+    "op-test-sequencer": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-test-sequencer/**"
+      ],
+      "nexus_paths": [
+        "apko/op-test-sequencer.yaml"
+      ],
+      "smoke_test": "op-test-sequencer --version"
+    },
+    "da-server": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go"
+      ],
+      "paths": [
+        "op-alt-da/**"
+      ],
+      "nexus_paths": [
+        "apko/da-server.yaml"
+      ],
+      "smoke_test": "da-server --version"
+    },
+    "mc-challenger": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-go",
+        "multicannon",
+        "op-stack-rust"
+      ],
+      "paths": [
+        "mc-challenger/**",
+        "cannon/**",
+        "op-preimage/**",
+        "rust/kona/**"
+      ],
+      "nexus_paths": [
+        "apko/mc-challenger.yaml"
+      ],
+      "smoke_test": "mc-challenger --version,cannon --help,cannon load-elf --type multithreaded64-5 --help,kona-host --help"
+    },
+    "kona-node": {
+      "type": "rust",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-rust"
+      ],
+      "paths": [
+        "rust/**"
+      ],
+      "nexus_paths": [
+        "apko/kona-node.yaml"
+      ],
+      "smoke_test": "kona-node --version"
+    },
+    "kona-host": {
+      "type": "rust",
+      "needs_melange": [
+        "op-stack-rust"
+      ],
+      "paths": [
+        "rust/**"
+      ],
+      "nexus_paths": [
+        "apko/kona-host.yaml"
+      ],
+      "smoke_test": "kona-host --help"
+    },
+    "kona-client": {
+      "type": "rust",
+      "needs_melange": [
+        "op-stack-rust"
+      ],
+      "paths": [
+        "rust/**"
+      ],
+      "nexus_paths": [
+        "apko/kona-client.yaml"
+      ],
+      "smoke_test": "kona-client --help"
+    },
+    "kona-sp1-proposer": {
+      "type": "rust",
+      "needs_melange": [
+        "op-stack-rust"
+      ],
+      "paths": [
+        "rust/**"
+      ],
+      "nexus_paths": [
+        "apko/kona-sp1-proposer.yaml"
+      ],
+      "smoke_test": "kona-sp1-proposer --version"
+    },
+    "mc-reth": {
+      "type": "rust",
+      "verify_version": true,
+      "needs_melange": [
+        "op-stack-rust"
+      ],
+      "paths": [
+        "rust/**"
+      ],
+      "nexus_paths": [
+        "apko/mc-reth.yaml"
+      ],
+      "smoke_test": "mc-reth --version"
+    },
+    "op-rbuilder": {
+      "type": "rust",
+      "needs_melange": [
+        "op-stack-rust"
+      ],
+      "paths": [
+        "rust/**"
+      ],
+      "nexus_paths": [
+        "apko/op-rbuilder.yaml"
+      ],
+      "smoke_test": "/app/rbuilder --help"
+    },
+    "rollup-boost": {
+      "type": "rust",
+      "needs_melange": [
+        "op-stack-rust"
+      ],
+      "paths": [
+        "rust/**"
+      ],
+      "nexus_paths": [
+        "apko/rollup-boost.yaml"
+      ],
+      "smoke_test": "rollup-boost --help"
+    },
+    "mc-deployer": {
+      "type": "go",
+      "verify_version": true,
+      "needs_melange": [
+        "mc-deployer"
+      ],
+      "paths": [
+        "mc-deployer/**",
+        "packages/contracts-bedrock/**"
+      ],
+      "nexus_paths": [
+        "melange/mc-deployer.yaml",
+        "apko/mc-deployer.yaml",
+        "melange/pipelines/mc-deployer/embed-artifacts.yaml",
+        "melange/pipelines/mc-deployer/install-forge.yaml"
+      ],
+      "smoke_test": "mc-deployer --version,forge --version"
+    }
+  }
+}

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node/runcfg"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
+	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node/runcfg"
+	"github.com/ethereum-optimism/optimism/mc-node/p2p"
 	"github.com/ethereum-optimism/optimism/op-service/endpoint"
 )
 
@@ -15,11 +15,11 @@ type ELKind string
 
 const (
 	ELKindOpGeth ELKind = "op-geth"
-	ELKindOpReth ELKind = "op-reth"
+	ELKindOpReth ELKind = "mc-reth"
 )
 
 // DefaultELKind returns the L2 EL backend selected by the OP_E2E_L2_EL_KIND
-// environment variable, defaulting to op-reth. A non-empty but unrecognized
+// environment variable, defaulting to mc-reth. A non-empty but unrecognized
 // value panics rather than silently misconfiguring the suite.
 func DefaultELKind() ELKind {
 	switch v := os.Getenv("OP_E2E_L2_EL_KIND"); v {

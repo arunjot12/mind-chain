@@ -56,18 +56,18 @@ For options on what to point `--l1.beacon-fallbacks` at — running your own non
 </Info>
 
 Configure each EL to retain at least 7 days of block and receipt history.
-A full archive is not required — see the [op-reth configuration reference](/node-operators/reference/op-reth-config) for the granular `--prune.*` flags that let you keep block and receipt history without enabling transaction indexing or world-state history.
+A full archive is not required — see the [mc-reth configuration reference](/node-operators/reference/mc-reth-config) for the granular `--prune.*` flags that let you keep block and receipt history without enabling transaction indexing or world-state history.
 
-If you also run op-challenger for permissionless fault proofs, the same ELs additionally need historical proofs enabled — see [Running op-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs).
+If you also run mc-challenger for permissionless fault proofs, the same ELs additionally need historical proofs enabled — see [Running mc-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs).
 
 ### Pair op-supernode with a Light CL fleet
 
-For operators running more than a handful of nodes, the deployable pattern is to concentrate the expensive multi-chain derivation work on supernodes and run the rest of the fleet as op-node or kona-node instances in Light CL mode.
+For operators running more than a handful of nodes, the deployable pattern is to concentrate the expensive multi-chain derivation work on supernodes and run the rest of the fleet as mc-node or kona-node instances in Light CL mode.
 Each supernode (or HA pool of supernodes) acts as the safe source for a fleet of Light CLs.
 The fleet points at the supernode's `optimism_syncStatus` RPC over the `--l2.follow.source` flag and inherits its safe and finalized view, while keeping its own unsafe-head progression over P2P.
 Larger operators often run several such supernode-plus-fleet groups for blast-radius isolation, regional placement, or staged rollouts.
 
-See the [specialized op-node topology notice](/notices/specialized-node-topology) for the fleet side of this pattern, and the [supernode explainer](/op-stack/interop/supernode#op-supernode-and-light-cl) for the architecture overview.
+See the [specialized mc-node topology notice](/notices/specialized-node-topology) for the fleet side of this pattern, and the [supernode explainer](/op-stack/interop/supernode#op-supernode-and-light-cl) for the architecture overview.
 
 Set `--disable-p2p=true` on the supernode when the fleet handles unsafe-head P2P gossip on its own.
 Leave P2P enabled (the default) when the supernode is the only node in the topology.
@@ -107,7 +107,7 @@ OP_SUPERNODE_L1_BEACON_FALLBACKS: <your-l1-beacon-archiver-rpc>
 # Shared JWT secret for every virtual node's engine connection
 OP_SUPERNODE_VN_ALL_L2_ENGINE_AUTH: /etc/op/jwt-secret.txt
 
-# Per-chain: chain identity, engine RPC, and engine kind (reth when the chain's EL is op-reth)
+# Per-chain: chain identity, engine RPC, and engine kind (reth when the chain's EL is mc-reth)
 OP_SUPERNODE_VN_11155420_NETWORK: op-sepolia
 OP_SUPERNODE_VN_11155420_L2_ENGINE_RPC: <op-sepolia-engine-rpc>
 OP_SUPERNODE_VN_11155420_L2_ENGINE_KIND: reth
@@ -126,7 +126,7 @@ OP_SUPERNODE_METRICS_ADDR: 0.0.0.0
 OP_SUPERNODE_METRICS_PORT: "7300"
 ```
 
-For chains that are not in op-node's built-in network registry, replace `--vn.<chainID>.network` with `--vn.<chainID>.rollup.config=<path-to-rollup-config.json>`.
+For chains that are not in mc-node's built-in network registry, replace `--vn.<chainID>.network` with `--vn.<chainID>.rollup.config=<path-to-rollup-config.json>`.
 
 Every flag in the example — and everything else the binary accepts, including P2P, interop verification, JSON-RPC, logging, and metrics options — is catalogued with syntax, examples, and environment-variable names in the [op-supernode configuration reference](/node-operators/reference/op-supernode-config).
 
@@ -136,7 +136,7 @@ Every flag in the example — and everything else the binary accepts, including 
 * Read the [op-supernode configuration reference](/node-operators/reference/op-supernode-config) for the complete flag and environment-variable catalogue.
 * Read the [interop prep notice](/notices/interop-prep) for the node-operator action checklist for the OP Sepolia and Unichain Sepolia activation.
 * Read the [supernode explainer](/op-stack/interop/supernode) for what op-supernode is and why it exists.
-* Read the [specialized op-node topology notice](/notices/specialized-node-topology) for the operator-facing pattern of running Light CL fleets that follow a supernode safe source.
+* Read the [specialized mc-node topology notice](/notices/specialized-node-topology) for the operator-facing pattern of running Light CL fleets that follow a supernode safe source.
 * Read the [interop explainer](/op-stack/interop/explainer) for how cross-chain messaging works at the protocol level.
-* Read the [op-node configuration reference](/node-operators/reference/op-node-config) for the full set of flags available under the `--vn.*` namespace.
+* Read the [mc-node configuration reference](/node-operators/reference/mc-node-config) for the full set of flags available under the `--vn.*` namespace.
 * See the [op-supernode source](https://github.com/ethereum-optimism/optimism/tree/develop/op-supernode) in the monorepo for implementation detail.

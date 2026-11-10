@@ -74,8 +74,8 @@ Each PR is tagged `LINKED` (changed a package compiled into the binary, and whic
 changed function is on the component's runtime path.
 
 A component whose image ships more than one binary resolves all of them and tags against the
-union, reading the shipping units from `just release-paths`. op-challenger covers the Go
-op-challenger and cannon binaries plus the Rust kona-host, so a kona-only change is `LINKED`,
+union, reading the shipping units from `just release-paths`. mc-challenger covers the Go
+mc-challenger and cannon binaries plus the Rust kona-host, so a kona-only change is `LINKED`,
 not `--`.
 
 If every Go row comes back `?`, `go list` failed. In a fresh worktree the usual cause is the
@@ -179,7 +179,7 @@ object to exist; when the tag has no draft, create one instead:
 gh release create <tag> --draft --title '<component> <version>' --notes-file /tmp/<component>-notes.md
 ```
 
-The title takes a space, not the tag's slash — `op-node v1.19.6`. Add `--prerelease` for an
+The title takes a space, not the tag's slash — `mc-node v1.19.6`. Add `--prerelease` for an
 RC. Add `--latest=false` for `op-contracts`, because the latest release is kept for the
 non-contract components. A draft's URL is an `untagged-<hash>` link until it is published —
 that is normal, and `gh release view <tag>` still resolves it.

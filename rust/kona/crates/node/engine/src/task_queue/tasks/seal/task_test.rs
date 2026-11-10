@@ -86,7 +86,7 @@ enum Rejection {
     ReplacementFailed,
 }
 
-/// Only derived payloads under Holocene are replaced with their deposits-only block, as op-node
+/// Only derived payloads under Holocene are replaced with their deposits-only block, as mc-node
 /// does. A sequencer drops its own rejected payload and builds the next one.
 #[rstest]
 #[case::derived(true, true, false, Rejection::ReplacementFailed)]

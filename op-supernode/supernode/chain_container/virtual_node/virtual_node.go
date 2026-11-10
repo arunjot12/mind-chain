@@ -7,10 +7,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	opnodecfg "github.com/ethereum-optimism/optimism/op-node/config"
-	opmetrics "github.com/ethereum-optimism/optimism/op-node/metrics"
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
+	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
+	opmetrics "github.com/ethereum-optimism/optimism/mc-node/metrics"
+	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
+	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/google/uuid"
@@ -20,7 +20,7 @@ import (
 // metrics registered by virtual nodes.
 const VIRTUAL_NODE_CHAIN_ID_LABEL = "virtual_node_chain_id"
 
-// defaultInnerNodeFactory is the default factory that creates a real op-node
+// defaultInnerNodeFactory is the default factory that creates a real mc-node
 func defaultInnerNodeFactory(ctx context.Context, cfg *opnodecfg.Config, log oplog.Logger, appVersion string, m *opmetrics.Metrics, initOverload *rollupNode.InitializationOverrides) (innerNode, error) {
 	var overrides rollupNode.InitializationOverrides
 	if initOverload != nil {
@@ -73,7 +73,7 @@ type simpleVirtualNode struct {
 	appVersion string
 
 	inner            innerNode                           // Inner node instance
-	cfg              *opnodecfg.Config                   // op-node config for the virtual node
+	cfg              *opnodecfg.Config                   // mc-node config for the virtual node
 	initOverload     *rollupNode.InitializationOverrides // Shared resources which are overridden by the supernode
 	innerNodeFactory innerNodeFactory                    // Factory function to create inner node (overloadable for testing)
 
@@ -146,7 +146,7 @@ func (v *simpleVirtualNode) Start(ctx context.Context) error {
 	<-runCtx.Done()
 
 	// Update state under lock, but do NOT hold the lock during inner.Stop().
-	// inner.Stop() drains the op-node event system, which may call back into
+	// inner.Stop() drains the mc-node event system, which may call back into
 	// this VirtualNode (e.g. SyncStatus via EngineController.FinalizedHead).
 	// SyncStatus needs v.mu, so holding it here would deadlock.
 	v.mu.Lock()

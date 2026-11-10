@@ -1,0 +1,75 @@
+---
+title: mc-challenger
+description: Canonical hub for mc-challenger, the OP Stack dispute game challenge service, covering what it does, who runs it, and where its guides, releases, source, and spec live.
+diataxis: explanation
+---
+
+mc-challenger is the OP Stack's dispute game challenge service
+that monitors fault dispute games on L1, defends valid output proposals, and
+challenges invalid ones.
+
+## Overview
+
+mc-challenger watches the games created through the `DisputeGameFactory` (on
+a fault proof chain, every output proposal is a dispute game). Checking each
+claim against a trusted, synced rollup node, it defends proposals it agrees
+with, posts counterclaims against those it does not, resolves claims and
+games once the game clocks expire, and claims the bonds paid out to it. When
+a dispute is bisected down to a single VM instruction, mc-challenger runs the
+fault proof VM, [cannon](/op-stack/components/cannon), executing kona-client
+with kona-host serving preimage data, to prove that instruction onchain. For
+a deeper walkthrough of this behavior, see the
+[OP-Challenger explainer](/op-stack/fault-proofs/challenger).
+
+It exists because fault proofs only secure withdrawals if someone actually
+responds to invalid claims before the game clocks run out. mc-challenger is
+the implementation of the dispute protocol's *honest actor*: it defends the
+chain by ensuring games resolve to the correct state, which is what the
+`OptimismPortal` ultimately trusts for withdrawals.
+
+**Who runs it:** chain operators run at least one challenger to defend their
+chain, and on a permissionless fault proof chain anyone can run one. A
+challenger needs a synced, trusted rollup node to verify claims against, and
+a funded account to post bonds from.
+
+## Get started
+
+*   [Spin up challenger](/chain-operators/tutorials/create-l2-rollup/mc-challenger-setup):
+    set up and configure mc-challenger as part of standing up an OP Stack
+    chain.
+
+## How-tos
+
+*   [How to configure challenger for your chain](/chain-operators/guides/configuration/mc-challenger-config-guide):
+    the configuration options that matter in production.
+*   [Run a fault-proof challenger](/use-cases/run-a-fault-proof-challenger):
+    the whole operational path in one pass: bond budgeting, prestate
+    selection, infrastructure, configuration, and monitoring.
+*   [Generating absolute prestate and preimage files](/chain-operators/tutorials/absolute-prestate):
+    build and verify the prestate mc-challenger runs at dispute time.
+*   [Migrating to permissionless fault proofs](/chain-operators/tutorials/migrating-permissionless):
+    upgrade and test mc-challenger as part of the migration.
+
+## Configuration & flags reference
+
+*   [Challenger configuration reference](/chain-operators/reference/challenger-configuration):
+    every CLI flag and environment variable, with flag tables generated from
+    the mc-challenger release named on the page. The
+    [configuration guide](/chain-operators/guides/configuration/mc-challenger-config-guide)
+    above covers the production-relevant options.
+
+## Releases
+
+*   [mc-challenger release history](/releases/mc-challenger)
+
+## Source & spec links
+
+*   [Source: `mc-challenger/`](https://github.com/ethereum-optimism/optimism/tree/develop/op-challenger)
+    in the Optimism monorepo; its
+    [README](https://github.com/ethereum-optimism/optimism/blob/develop/op-challenger/README.md)
+    documents the quickstart and the manual-testing subcommands
+    (`create-game`, `move`, `resolve`, `list-games`, `run-trace`, and more).
+*   [Honest challenger specification](https://specs.optimism.io/fault-proof/stage-one/honest-challenger-fdg.html):
+    the normative behavior mc-challenger implements.
+*   [Fault dispute game specification](https://specs.optimism.io/fault-proof/stage-one/fault-dispute-game.html):
+    the game it plays.

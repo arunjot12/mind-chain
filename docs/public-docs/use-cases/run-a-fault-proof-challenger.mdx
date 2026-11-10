@@ -1,6 +1,6 @@
 ---
 title: Run a fault-proof challenger
-description: Stand up an op-challenger that defends your OP Stack chain, from bond budgeting and prestate selection through infrastructure, configuration, and monitoring.
+description: Stand up an mc-challenger that defends your OP Stack chain, from bond budgeting and prestate selection through infrastructure, configuration, and monitoring.
 diataxis: how-to
 content-type: solution-guide
 last-reviewed: 2026-07-24
@@ -10,8 +10,8 @@ This guide takes an operator who wants an honest challenger defending an OP
 Stack chain and walks the whole path in one pass: what the challenger does and
 spends, the version and prestate choices that decide whether it can win games,
 the four pieces of infrastructure it depends on, and how to confirm it is
-actually defending the chain. It involves `op-challenger`, the Cannon VM with
-a kona-client prestate, an `op-node` with SafeDB, an `op-reth` archive node,
+actually defending the chain. It involves `mc-challenger`, the Cannon VM with
+a kona-client prestate, an `mc-node` with SafeDB, an `mc-reth` archive node,
 and your chain's dispute game contracts on L1.
 
 ## Is this guide for you?
@@ -25,7 +25,7 @@ Use this guide if:
 
 If you are creating a new chain and setting up the challenger as one step of
 that, follow the
-[challenger step of the create L2 rollup tutorial](/chain-operators/tutorials/create-l2-rollup/op-challenger-setup)
+[challenger step of the create L2 rollup tutorial](/chain-operators/tutorials/create-l2-rollup/mc-challenger-setup)
 inside that series instead. If you want to understand how dispute games work
 before operating anything, start with the
 [fault proofs explainer](/op-stack/fault-proofs/explainer). If you are
@@ -55,10 +55,10 @@ You should already have:
 The challenger is the honest actor in the dispute system: an autonomous agent
 that monitors every game, defends valid proposals, challenges invalid ones,
 and resolves games so bonds pay out. Read the
-[op-challenger explainer](/op-stack/fault-proofs/challenger) and take away:
+[mc-challenger explainer](/op-stack/fault-proofs/challenger) and take away:
 
 *   The five responsibilities (monitor, defend, challenge, resolve, claim
-    bonds), and that the challenger acts on whatever its trusted `op-node`
+    bonds), and that the challenger acts on whatever its trusted `mc-node`
     reports, so the integrity of your rollup node is the integrity of your
     challenger.
 *   That the respected game type is `cannon-kona` (run with kona-host), and
@@ -101,10 +101,10 @@ than the exact starting balance.
 The challenger refuses to interact with games whose absolute prestate it does
 not have, and playing with the wrong prestate loses games, so version
 selection is a correctness decision, not housekeeping. Check the
-[op-challenger release history](/releases/op-challenger) for the latest
+[mc-challenger release history](/releases/mc-challenger) for the latest
 release, then read the
-[version guidance in the configuration guide](/chain-operators/guides/configuration/op-challenger-config-guide#finding-the-current-stable-releases)
-and take away which op-challenger, op-reth, and kona-client versions are
+[version guidance in the configuration guide](/chain-operators/guides/configuration/mc-challenger-config-guide#finding-the-current-stable-releases)
+and take away which mc-challenger, mc-reth, and kona-client versions are
 compatible with your chain's deployment.
 
 Then choose your configuration path:
@@ -125,7 +125,7 @@ covers embedding your chain's configuration.
 
 The challenger consumes four services, and each has a requirement beyond
 "reachable RPC". Read the
-[key configuration flags](/chain-operators/guides/configuration/op-challenger-config-guide#configuration-setup)
+[key configuration flags](/chain-operators/guides/configuration/mc-challenger-config-guide#configuration-setup)
 in the configuration guide and take away, per endpoint:
 
 *   **L1 RPC** (`--l1-eth-rpc`): a trusted node that can absorb heavy request
@@ -136,10 +136,10 @@ in the configuration guide and take away, per endpoint:
     outputs regularly, the roughly 18-day blob retention window is enough; if
     proposals can stall longer than that, a blob archiver is required or the
     challenger can be pushed into an unwinnable position.
-*   **L2 archive node** (`--l2-eth-rpc`): an op-reth archive node with the
+*   **L2 archive node** (`--l2-eth-rpc`): an mc-reth archive node with the
     debug API and the historical-proofs store enabled and seeded before first
     start, sized to cover the dispute window (28 days or more).
-*   **Rollup node** (`--rollup-rpc`): an op-node with SafeDB enabled
+*   **Rollup node** (`--rollup-rpc`): an mc-node with SafeDB enabled
     (`--safedb.path`). Take away the warning about never restoring the SafeDB
     from a snapshot: a SafeDB that disagrees with L1 makes the challenger
     attack valid outputs, and the challenger cannot detect the condition.
@@ -155,7 +155,7 @@ the canonical stop. Choose your deployment form:
 | You want the packaged path                                      | The Docker image      | The image embeds the kona server and Cannon executable, so the server flag and binaries ship pre-wired.                     |
 
 Follow the matching tab of the
-[challenger configuration guide](/chain-operators/guides/configuration/op-challenger-config-guide)
+[challenger configuration guide](/chain-operators/guides/configuration/mc-challenger-config-guide)
 end to end. It covers the environment file, the startup script or compose
 file, and the flag-by-flag explanations. Keep the guide's `--trace-type`
 value, which includes the `cannon-kona` game type from Step 1, and use the
@@ -180,7 +180,7 @@ Give the challenger a few minutes against live games, then confirm each layer:
 *   **Startup health**: logs show successful connection to all four
     endpoints and the prestate loading without warnings; the challenger
     refuses to play games whose prestate it lacks, and says so in the logs.
-*   **Game visibility**: `op-challenger list-games` (against your L1 RPC and
+*   **Game visibility**: `mc-challenger list-games` (against your L1 RPC and
     game factory) returns the chain's games; `list-claims` shows the claims
     of any in-progress game. These read-only subcommands use the same
     configuration as the running service, so they double as configuration
@@ -195,12 +195,12 @@ Give the challenger a few minutes against live games, then confirm each layer:
 
 ## Next steps
 
-*   [op-challenger readme](https://github.com/ethereum-optimism/optimism/blob/develop/op-challenger/README.md):
+*   [mc-challenger readme](https://github.com/ethereum-optimism/optimism/blob/develop/op-challenger/README.md):
     subcommand reference (create-game, move, resolve, run-trace) and devnet
     walkthroughs beyond configuration. In-repo document on `develop`, as of
     2026-07-18.
 *   [Challenger configuration reference](/chain-operators/reference/challenger-configuration):
-    the rendered flag catalogue, generated from the op-challenger flag
+    the rendered flag catalogue, generated from the mc-challenger flag
     definitions at the release tag named on the page and regenerated when a
     new finalized release is published.
 *   [Honest challenger specification](https://specs.optimism.io/fault-proof/stage-one/honest-challenger-fdg.html?utm_source=op-docs&utm_medium=docs):

@@ -47,7 +47,7 @@ where
     }
 
     /// Walks back the L2 chain to find the correct L1 origin for a pipeline reset.
-    /// This mirrors op-node's `initialReset` algorithm.
+    /// This mirrors mc-node's `initialReset` algorithm.
     pub(crate) async fn initial_reset(
         &mut self,
         l2_safe_head: L2BlockInfo,

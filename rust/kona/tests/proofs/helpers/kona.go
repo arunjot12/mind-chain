@@ -9,12 +9,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
 	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	"github.com/ethereum-optimism/optimism/op-devstack/shared/rustbin"
 	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum-optimism/optimism/mc-node/rollup"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
 	"github.com/ethereum/go-ethereum/params"
@@ -45,12 +45,12 @@ func writeConfig[T any](t helpers.Testing, workDir string, name string, cfg *T, 
 }
 
 // writeDepset writes a dependency set holding one entry per supplied rollup config, in the JSON
-// shape that both op-node's --interop.dependency-set and kona's --depset-cfg read.
+// shape that both mc-node's --interop.dependency-set and kona's --depset-cfg read.
 //
 // kona-host super always needs a dependency set: StatefulAttributesBuilder consults it to decide
 // whether an interop activation block carries the multi-chain wrapper deposits, and the host
 // refuses to run without one once Lagoon is scheduled. Synthesizing it from the rollup configs
-// gives kona the same one-chain set NewL2FaultProofEnv hands the sequencer, so op-node and kona
+// gives kona the same one-chain set NewL2FaultProofEnv hands the sequencer, so mc-node and kona
 // agree on the activation block's contents.
 func writeDepset(t helpers.Testing, path string, rollupCfgs []*rollup.Config) {
 	dependencies := make(map[eth.ChainID]*depset.StaticConfigDependency, len(rollupCfgs))

@@ -22,9 +22,9 @@ import (
 // against regression.
 func TestMaxSafeLagStallAndResume(gt *testing.T) {
 	t := devtest.ParallelT(gt)
-	// max-safe-lag is enforced inside op-node's Go sequencer; kona-node has its
+	// max-safe-lag is enforced inside mc-node's Go sequencer; kona-node has its
 	// own sequencer implementation and is out of scope for this regression test.
-	sysgo.SkipOnKonaNode(t, "max-safe-lag is op-node only")
+	sysgo.SkipOnKonaNode(t, "max-safe-lag is mc-node only")
 	const maxSafeLag = uint64(20)
 	// This test does not need fault proofs; using the NoFaultProofs variant
 	// avoids requiring cannon prestate artifacts in local test runs.

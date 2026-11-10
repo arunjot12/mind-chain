@@ -108,7 +108,7 @@ flowchart LR
     class sequencer chain
 ```
 
-*   **`op-node`** drives block building through the engine API, exactly as it does on a chain without subblocks.
+*   **`mc-node`** drives block building through the engine API, exactly as it does on a chain without subblocks.
 *   **The execution client** executes the block and publishes a subblock every 200 ms while it does so.
 *   **`flashblocks-websocket-proxy`** relays the stream from the active sequencer to RPC providers.
 *   **`op-conductor`** *(optional)* manages a multi-sequencer setup so only the healthy leader's stream reaches the proxy.
@@ -118,7 +118,7 @@ Consuming them is not restricted: any node can follow the stream, and any applic
 
 ### The Flashblocks stack
 
-Before subblocks, pre-confirmations were produced by the Flashblocks stack: `rollup-boost` coordinating between the consensus layer and two execution clients, with `op-rbuilder` building blocks and `op-reth` standing by as a fallback builder.
+Before subblocks, pre-confirmations were produced by the Flashblocks stack: `rollup-boost` coordinating between the consensus layer and two execution clients, with `op-rbuilder` building blocks and `mc-reth` standing by as a fallback builder.
 
 <Warning>
   The Flashblocks stack may still run, but OP Labs offers **no support** for it.

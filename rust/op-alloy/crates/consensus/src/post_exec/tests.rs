@@ -329,7 +329,7 @@ fn post_exec_envelope_rpc_deserialize_ignores_extra_fields() {
 }
 
 // Coverage for `parse_post_exec_payload_from_transactions`, the shared consensus structure
-// check used by op-reth's payload builder, the kona executor and the post-exec replay path.
+// check used by mc-reth's payload builder, the kona executor and the post-exec replay path.
 // Each test pins one of the four structural rules (and the two accepting cases).
 const PARSE_BLOCK: u64 = 100;
 

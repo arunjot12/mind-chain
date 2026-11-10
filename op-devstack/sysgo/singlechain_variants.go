@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
+	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
 	opconductor "github.com/ethereum-optimism/optimism/op-conductor/conductor"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-service/dial"
@@ -215,7 +215,7 @@ func connectSingleChainCLPeer(t devtest.T, sourceCL, targetCL L2CLNode) {
 
 func replaceSingleChainTestSequencer(t devtest.T, runtime *SingleChainRuntime, name string, node *SingleChainNodeRuntime) {
 	l2CL, ok := node.CL.(*OpNode)
-	t.Require().True(ok, "single-chain test sequencer requires an op-node CL node")
+	t.Require().True(ok, "single-chain test sequencer requires an mc-node CL node")
 	testSequencer := startTestSequencer(
 		t,
 		runtime.Keys,
@@ -242,8 +242,8 @@ func addSingleChainOpNode(
 	return addSingleChainOpNodeWithELOpts(t, runtime, name, isSequencer, followSource, nil, l2Opts...)
 }
 
-// addSingleChainOpNodeWithELOpts adds a node whose EL takes op-reth options. Passing none yields a
-// stock op-reth, which is what lets a preset keep an independent check on blocks built by an
+// addSingleChainOpNodeWithELOpts adds a node whose EL takes mc-reth options. Passing none yields a
+// stock mc-reth, which is what lets a preset keep an independent check on blocks built by an
 // overridden binary.
 func addSingleChainOpNodeWithELOpts(
 	t devtest.T,

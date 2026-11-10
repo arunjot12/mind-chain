@@ -13,16 +13,16 @@ import (
 	"time"
 
 	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	challengerConfig "github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts/gameargs"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/cannon"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/outputs"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/prestates"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/super"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-challenger/metrics"
+	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts/gameargs"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/cannon"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/outputs"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/prestates"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/super"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
+	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
+	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
+	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
 	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum-optimism/optimism/op-service/log"
 
@@ -31,7 +31,7 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/stretchr/testify/require"
 
-	challengerTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
+	challengerTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
 	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum-optimism/optimism/op-devstack/dsl/contract"
@@ -770,7 +770,7 @@ func (a *GameHelperEOA) Address() common.Address {
 	return a.EOA.Address()
 }
 
-// ethClientHeaderProvider is an adapter for the L1Client interface used in op-node and devstack to
+// ethClientHeaderProvider is an adapter for the L1Client interface used in mc-node and devstack to
 // the HeaderProvider interface used in challenger
 type ethClientHeaderProvider struct {
 	client apis.EthClient
