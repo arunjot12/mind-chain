@@ -207,7 +207,7 @@ submodules:
   git submodule update --init --recursive
 
 # Builds mc-node binary.
-mc-node:
+mc-node: build-superchain-go
   just ./mc-node/mc-node
 
 # Generates mocks for mc-node.
