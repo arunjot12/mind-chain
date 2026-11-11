@@ -4,7 +4,7 @@ import (
 	"math/big"
 	"testing"
 
-	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
+	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
 	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
 	"github.com/ethereum-optimism/optimism/rust/kona/tests/proofs/helpers"
 	"github.com/ethereum/go-ethereum/common"

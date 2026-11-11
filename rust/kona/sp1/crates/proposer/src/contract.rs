@@ -150,7 +150,7 @@ impl TryFrom<u8> for BondDistributionMode {
 }
 
 /// Decoded ZK game args (140-byte packed layout from `LibGameArgs.sol`;
-/// mirrors `mc-challenger/game/fault/contracts/gameargs` `ZKGameArgs`).
+/// mirrors `op-challenger/game/fault/contracts/gameargs` `ZKGameArgs`).
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ZKGameArgs {
     /// Absolute prestate hash committing to the ZK program being verified.
@@ -225,7 +225,7 @@ mod tests {
     }
 
     /// Same test vectors as Go's `TestZKGameArgsPack`
-    /// (mc-challenger/game/fault/contracts/gameargs).
+    /// (op-challenger/game/fault/contracts/gameargs).
     #[test]
     fn zk_game_args_decode() {
         let prestate = b256!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");

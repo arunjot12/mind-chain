@@ -148,7 +148,7 @@ impl AttributesMatch {
                 block_tx_hash = %block_tx.tx_hash(),
                 "Checking attributes transaction against block transaction",
             );
-            // Compare the raw bytes, as mc-node does: bytes that merely decode to the same
+            // Compare the raw bytes, as op-node does: bytes that merely decode to the same
             // transaction are still a mismatch.
             if attr_tx_bytes.as_ref() == block_tx.inner.inner.inner().encoded_2718().as_slice() {
                 continue;
@@ -675,7 +675,7 @@ mod tests {
     }
 
     /// Attribute transaction bytes must equal the block transaction's encoding byte for byte, as
-    /// mc-node compares. Bytes that merely decode to the same transaction (a typed body without
+    /// op-node compares. Bytes that merely decode to the same transaction (a typed body without
     /// its type byte) are a mismatch.
     #[test]
     fn test_attributes_mismatch_non_canonical_transaction_encoding() {

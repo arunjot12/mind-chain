@@ -31,7 +31,7 @@ services:
         find /etc/grafana/provisioning/dashboards/ -name '*.json' -exec sed -i 's/$${DS_PROMETHEUS}/Prometheus/g' {} \+ &&
         /run.sh"
 
-  mc-reth:
+  op-reth:
     restart: unless-stopped
     image: ${OP_RETH_NODE_IMAGE:-us-docker.pkg.dev/oplabs-tools-artifacts/images/op-reth:develop}
     depends_on:
@@ -61,7 +61,7 @@ services:
     image: ${KONA_NODE_IMAGE:-us-docker.pkg.dev/oplabs-tools-artifacts/images/kona-node:develop}
     depends_on:
       - prometheus
-      - mc-reth
+      - op-reth
     ports:
       - "${KONA_NODE_DISCOVERY_PORT:-9223}:9223/tcp" # discovery
       - "${KONA_NODE_DISCOVERY_PORT:-9223}:9223/udp" # discovery
@@ -81,7 +81,7 @@ services:
       node
       --l1 $L1_PROVIDER_RPC
       --l1-beacon $L1_BEACON_API
-      --l2 http://mc-reth:8551
+      --l2 http://op-reth:8551
       --l2-engine-jwt-secret /root/jwt/jwt.hex
       --rpc.port 5060
       --p2p.listen.tcp 9223

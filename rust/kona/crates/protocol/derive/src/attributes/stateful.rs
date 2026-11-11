@@ -50,7 +50,7 @@ where
     ///
     /// Panics if `rcfg.hardforks.lagoon_time.is_some() && dependency_set.is_none()`.
     /// A chain that has interop scheduled must have a dependency set provided,
-    /// otherwise the builder would silently diverge from mc-node on interop
+    /// otherwise the builder would silently diverge from op-node on interop
     /// activation (emitting different number of upgrade transactions, or the wrong
     /// ordering). See issue #19311.
     pub fn new(
@@ -64,7 +64,7 @@ where
             !(rcfg.hardforks.lagoon_time.is_some() && dependency_set.is_none()),
             "StatefulAttributesBuilder: interop is scheduled for this chain \
              (lagoon_time = {:?}) but no DependencySet was provided. \
-             This would silently diverge from mc-node on interop activation.",
+             This would silently diverge from op-node on interop activation.",
             rcfg.hardforks.lagoon_time,
         );
         Self {
@@ -202,8 +202,8 @@ where
             // chain activating Lagoon. The setFeature and ETHLiquidity funding wrappers are
             // interop-specific: they additionally require the interop feature, and a
             // multi-chain dependency set, which is what signals the L2ContractsManager to
-            // activate the Interop-gated contracts. Matches mc-node's gate at
-            // mc-node/rollup/derive/attributes.go.
+            // activate the Interop-gated contracts. Matches op-node's gate at
+            // op-node/rollup/derive/attributes.go.
             // `dependency_set` is guaranteed Some(_) here because the constructor
             // panics when lagoon_time.is_some() && dependency_set.is_none().
             let dependency_set = self.dependency_set.as_ref().expect(
@@ -722,7 +722,7 @@ mod tests {
         // When a receipt contains a malformed system config log, update_with_receipts
         // returns an error. This must NOT halt the pipeline — the error should be
         // logged as a warning and attributes building should continue successfully.
-        // This matches mc-node's attributes.go:97-99 which uses a blank identifier
+        // This matches op-node's attributes.go:97-99 which uses a blank identifier
         // assignment: `_ = UpdateSystemConfigWithL1Receipts(...)`.
         let block_time = 10;
         let timestamp = 100;
@@ -792,7 +792,7 @@ mod tests {
     //
     // The Interop bundle executes for all chains. Multi-chain dependency sets
     // additionally emit the setFeature and ETHLiquidity funding wrappers. Go reference:
-    // mc-node/rollup/derive/attributes.go.
+    // op-node/rollup/derive/attributes.go.
     // ---------------------------------------------------------------------------
 
     /// Hardforks through Karst active at 50 and Lagoon at 102. Everything before Lagoon must

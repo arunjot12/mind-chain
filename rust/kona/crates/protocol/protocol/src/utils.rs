@@ -63,7 +63,7 @@ pub fn to_system_config(
     // gas limit so the upgrade transactions exceed the normal budget. Subtract it back here so the
     // reconstructed config holds the steady-state limit. This runs during reconstruction, before
     // update_with_receipts in the caller, so a setGasLimit in the same block's L1 origin takes
-    // precedence. Mirrors mc-node's PayloadToSystemConfig.
+    // precedence. Mirrors op-node's PayloadToSystemConfig.
     let gas_to_strip = upgrade_gas_to_strip(rollup_config, block.header.timestamp);
     if gas_to_strip > 0 {
         cfg.gas_limit = cfg.gas_limit.checked_sub(gas_to_strip).ok_or(
@@ -153,7 +153,7 @@ mod tests {
     use kona_genesis::{ChainGenesis, HardForkConfig};
 
     /// `HardForkConfig` with every fork through Jovian active at genesis, plus Karst at
-    /// `karst_time` — matching the mc-node upgrade-gas test's `ActivateAtGenesis(Jovian)`
+    /// `karst_time` — matching the op-node upgrade-gas test's `ActivateAtGenesis(Jovian)`
     /// schedule (Jovian must be active before Karst can activate).
     fn karst_at(karst_time: u64) -> HardForkConfig {
         let mut hardforks = HardForkConfig::default();

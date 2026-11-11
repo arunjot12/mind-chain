@@ -20,7 +20,7 @@ Assuming you are on Ubuntu and your user is member of the group `docker`, first 
 If the last step fails due to missing packages, you can run `just setup-ubuntu`
 and then run `just init` again.  This will install the required packages for
 Ubuntu.  `just init` will also set up a virtual network, and finally spin up
-`kona-node`, `mc-reth`, `prometheus` and `grafana`.
+`kona-node`, `op-reth`, `prometheus` and `grafana`.
 
 ## Normal usage
 

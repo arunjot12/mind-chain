@@ -29,7 +29,7 @@ impl SpanBatchBits {
     /// # Consensus-critical
     ///
     /// Truncated input is rejected with [`SpanBatchError::BitfieldTooShort`] rather than
-    /// zero-padded. Op-node's `decodeSpanBatchBits` (in `mc-node/rollup/derive/span_batch_util.go`)
+    /// zero-padded. Op-node's `decodeSpanBatchBits` (in `op-node/rollup/derive/span_batch_util.go`)
     /// uses `io.ReadFull` and returns `io.ErrUnexpectedEOF` on short input; Kona must reject the
     /// same input to avoid cross-client L2 state divergence.
     pub fn decode(b: &mut &[u8], bit_length: usize) -> Result<Self, SpanBatchError> {

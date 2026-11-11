@@ -103,7 +103,7 @@ pub struct ProposerConfig {
     pub l1_rpc: Url,
 
     /// The RPC URL serving `superroot_atTimestamp`, provided by an op-supernode
-    /// or a single-chain mc-node. Multiple URLs are accepted for redundancy
+    /// or a single-chain op-node. Multiple URLs are accepted for redundancy
     pub superroot_rpcs: Vec<Url>,
 
     /// The address of the `DisputeGameFactory` contract.
@@ -112,7 +112,7 @@ pub struct ProposerConfig {
     /// Base URL of a prestate artifact directory, accepting `file://` and
     /// `http(s)://` URIs. Each prestate is keyed by the game's
     /// `absolutePrestate()` hash and maps to the three [`PrestatePrograms`]
-    /// ELFs, following the mc-challenger `--prestates-url` convention:
+    /// ELFs, following the op-challenger `--prestates-url` convention:
     /// - `<url>/<vkey>.agg.bin.gz` (super-aggregation program)
     /// - `<url>/<vkey>.range.bin.gz` (super-range program)
     /// - `<url>/<vkey>.log.bin.gz` (log-commitment program)
@@ -736,7 +736,7 @@ pub async fn load_prestate(base: &Url, prestate: B256) -> Result<PrestateProgram
 }
 
 /// Maximum time for fetching a single prestate artifact, matching
-/// mc-challenger's prestate download timeout. Bounds the creation gate:
+/// op-challenger's prestate download timeout. Bounds the creation gate:
 /// a hung prestates server must not stall the proposer's schedule loop.
 const ARTIFACT_FETCH_TIMEOUT: std::time::Duration = std::time::Duration::from_secs(60);
 

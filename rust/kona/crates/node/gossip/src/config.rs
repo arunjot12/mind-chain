@@ -110,22 +110,22 @@ pub fn default_config() -> Config {
 /// unauthenticated remote peers, so the bound must be enforced before decompression.
 ///
 /// Op-node applies the same `snappy.DecodedLen(...) <= maxGossipSize` bound in both its
-/// gossipsub `message_id_fn` and its topic validator (in `mc-node/p2p/gossip.go`).
+/// gossipsub `message_id_fn` and its topic validator (in `op-node/p2p/gossip.go`).
 pub(crate) fn snappy_decompressed_len_within_bound(data: &[u8]) -> Option<usize> {
     snap::raw::decompress_len(data).ok().filter(|&n| n <= MAX_GOSSIP_SIZE)
 }
 
 /// Message-id domain separator for a frame that decompressed within [`MAX_GOSSIP_SIZE`], matching
-/// mc-node's `MessageDomainValidSnappy`.
+/// op-node's `MessageDomainValidSnappy`.
 const MESSAGE_DOMAIN_VALID_SNAPPY: [u8; 4] = [1, 0, 0, 0];
 
-/// Message-id domain separator for an oversized or undecompressable frame, matching mc-node's
+/// Message-id domain separator for an oversized or undecompressable frame, matching op-node's
 /// `MessageDomainInvalidSnappy`.
 const MESSAGE_DOMAIN_INVALID_SNAPPY: [u8; 4] = [0, 0, 0, 0];
 
 /// Computes the [`MessageId`] of a `gossipsub` message.
 ///
-/// Mirrors mc-node's `BuildMsgIdFn`: the id is
+/// Mirrors op-node's `BuildMsgIdFn`: the id is
 /// `sha256(domain || uint64_le(topic.len()) || topic || payload)[..20]`, where `payload` is the
 /// decompressed frame under the valid-snappy domain when it decompresses within
 /// [`MAX_GOSSIP_SIZE`], otherwise the raw frame under the invalid-snappy domain. Binding the topic
@@ -164,7 +164,7 @@ fn compute_message_id(msg: &Message) -> MessageId {
 mod tests {
     use super::*;
 
-    /// Recomputes mc-node's message-id construction for a topic + payload, used to pin
+    /// Recomputes op-node's message-id construction for a topic + payload, used to pin
     /// `compute_message_id`'s exact byte layout.
     fn expected_message_id(domain: [u8; 4], topic: &str, payload: &[u8]) -> Vec<u8> {
         let topic_len = (topic.len() as u64).to_le_bytes();
@@ -240,7 +240,7 @@ mod tests {
     }
 
     /// Golden vectors computed independently of this crate (Python `hashlib`), pinning byte-parity
-    /// with mc-node's `BuildMsgIdFn`: `sha256(domain || uint64_le(topic.len()) || topic ||
+    /// with op-node's `BuildMsgIdFn`: `sha256(domain || uint64_le(topic.len()) || topic ||
     /// payload)`.
     #[test]
     fn compute_message_id_matches_op_node_golden_vectors() {
@@ -340,7 +340,7 @@ mod tests {
 
     #[test]
     fn snappy_len_bound_accepts_up_to_and_including_max() {
-        // Exactly `MAX_GOSSIP_SIZE` is within bound (inclusive), matching mc-node.
+        // Exactly `MAX_GOSSIP_SIZE` is within bound (inclusive), matching op-node.
         let at_max = snap::raw::Encoder::new().compress_vec(&vec![0u8; MAX_GOSSIP_SIZE]).unwrap();
         assert_eq!(snappy_decompressed_len_within_bound(&at_max), Some(MAX_GOSSIP_SIZE));
 

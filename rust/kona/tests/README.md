@@ -50,8 +50,8 @@ just acceptance-tests CL_TYPE EL_TYPE
 ```
 
 Where:
-- `CL_TYPE`: Consensus layer type (`kona` or `mc-node`)
-- `EL_TYPE`: Execution layer type (`mc-reth` or `op-geth`)
+- `CL_TYPE`: Consensus layer type (`kona` or `op-node`)
+- `EL_TYPE`: Execution layer type (`op-reth` or `op-geth`)
 
 ### Other Recipes
 
@@ -59,7 +59,7 @@ Where:
 
 - `just build-kona`: Builds the kona-node binary.
 
-- `just build-reth`: Builds the mc-reth binary.
+- `just build-reth`: Builds the op-reth binary.
 
 - `just action-tests-single`: Runs action tests for the single-chain client program.
 

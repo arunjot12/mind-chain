@@ -123,7 +123,7 @@ impl<'a> MessageRules<'a> {
     /// initiating chain produced at `initiating_timestamp`.
     ///
     /// Derivation only accepts an L2 block at `parent.timestamp + block_time`, so block `n` has
-    /// timestamp `genesis.l2_time + (n - genesis.l2.number) * block_time`. mc-node's span-batch
+    /// timestamp `genesis.l2_time + (n - genesis.l2.number) * block_time`. op-node's span-batch
     /// overlap check and super-root construction (`TargetBlockNumber`) rely on the same grid.
     /// An identifier off this grid cannot reference a real log, so it is rejected before any
     /// history lookup. Together with the expiry window, this bounds every lookup to the window.

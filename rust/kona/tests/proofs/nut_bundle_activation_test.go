@@ -11,7 +11,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-core/predeploys"
 	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
 	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum-optimism/optimism/rust/kona/tests/proofs/helpers"
 	"github.com/ethereum/go-ethereum/common"
@@ -173,7 +173,7 @@ func testActivationBlockNUTBundle(gt *testing.T, testCfg *helpers.TestCfg[forks.
 		"upgrade gas must not persist past the %s activation block", fork)
 
 	// Advance the safe head across the post-activation block and prove that span too, so
-	// kona-client itself verifies the gas-limit revert — not just mc-node's assertion above.
+	// kona-client itself verifies the gas-limit revert — not just op-node's assertion above.
 	env.BatchMineAndSync(t)
 	l2SafeHead = env.Sequencer.L2Safe()
 	require.Equal(t, bigs.Uint64Strict(postActivation.Number), l2SafeHead.Number,

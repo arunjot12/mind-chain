@@ -51,7 +51,7 @@ impl Handler for BlockHandler {
     fn handle(&mut self, msg: Message) -> (MessageAcceptance, Option<OpExecutionPayloadEnvelope>) {
         // Reject frames whose Snappy header declares a decompressed size over MAX_GOSSIP_SIZE
         // before decoding. The decoder would otherwise pre-allocate the declared length (up to
-        // roughly 4 GiB) from a tiny frame. This mirrors mc-node's gossip topic validator.
+        // roughly 4 GiB) from a tiny frame. This mirrors op-node's gossip topic validator.
         if snappy_decompressed_len_within_bound(&msg.data).is_none() {
             kona_macros::inc!(counter, crate::Metrics::INVALID_MESSAGE, "reason" => "invalid_snappy_length");
             debug!(target: "gossip", len = msg.data.len(), "Rejecting Snappy frame with invalid declared length before decode");

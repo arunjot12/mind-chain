@@ -87,7 +87,7 @@ pub struct RollupNode {
     /// locally instead of fetched back from the execution layer.
     pub(crate) l2_block_buffer: BufferedL2Provider,
     /// The interop dependency set for this chain.
-    /// Mirrors mc-node's `--interop.dependency-set`.
+    /// Mirrors op-node's `--interop.dependency-set`.
     /// [`StatefulAttributesBuilder`] constructor panics otherwise.
     pub(crate) dependency_set: Option<Arc<DependencySet>>,
 }
@@ -612,7 +612,7 @@ impl RollupNode {
 
 /// Registers the admin API namespace on `modules`, but only when `enable_admin` is set.
 ///
-/// The admin API is opt-in via `--rpc.enable-admin`, matching mc-node's admin namespace.
+/// The admin API is opt-in via `--rpc.enable-admin`, matching op-node's admin namespace.
 fn merge_admin_module(
     modules: &mut RpcModule<()>,
     enable_admin: bool,

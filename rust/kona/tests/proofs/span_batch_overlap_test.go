@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TestSpanBatchOverlapContent pins the span batch overlap content rule, in both mc-node (driving
+// TestSpanBatchOverlapContent pins the span batch overlap content rule, in both op-node (driving
 // derivation below) and kona-client (replaying the same L1 data as the fault proof program): a
 // span batch whose overlap section disagrees with the safe chain must be dropped as a whole, so
 // that its elements past the safe head cannot be applied. Pre-Holocene, the rule has always been
@@ -33,7 +33,7 @@ import (
 //     equivocating channel's tail must not win over the canonical chain.
 //
 // The fault proof program then replays the same L1 data with honest claims taken from the
-// mc-node-derived chain at every height 0..3. Height 3 is where a client without the overlap
+// op-node-derived chain at every height 0..3. Height 3 is where a client without the overlap
 // rule derives 3* instead of the canonical block 3 and rejects the honest claim, pinning that
 // the Go and Rust implementations enforce the same rule.
 func TestSpanBatchOverlapContent(gt *testing.T) {

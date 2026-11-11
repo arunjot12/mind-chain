@@ -68,7 +68,7 @@ pub(in crate::task_queue) async fn build_and_seal<EngineClient_: EngineClient>(
 }
 
 /// Handles `attributes` that the engine rejected, at forkchoiceUpdated or at newPayload, by the
-/// rules of mc-node's `onBuildInvalid`. mc-node applies these rules at forkchoiceUpdated; at
+/// rules of op-node's `onBuildInvalid`. op-node applies these rules at forkchoiceUpdated; at
 /// newPayload it applies only the derived and Holocene rule, while kona-node also keeps rejected
 /// deposits-only attributes critical there.
 ///

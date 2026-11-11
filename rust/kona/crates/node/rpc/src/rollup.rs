@@ -1,6 +1,6 @@
 //! Implements the rollup client rpc endpoints. These endpoints serve data about the rollup state.
 //!
-//! Implemented in the mc-node in <https://github.com/ethereum-optimism/optimism/blob/174e55f0a1e73b49b80a561fd3fedd4fea5770c6/op-service/sources/rollupclient.go#L16>
+//! Implemented in the op-node in <https://github.com/ethereum-optimism/optimism/blob/174e55f0a1e73b49b80a561fd3fedd4fea5770c6/op-service/sources/rollupclient.go#L16>
 
 use alloy_eips::BlockNumberOrTag;
 use async_trait::async_trait;
@@ -44,7 +44,7 @@ impl<EngineRpcClient_: EngineRpcClient> RollupRpc<EngineRpcClient_> {
         Self { version, engine_client, l1_watcher_sender }
     }
 
-    // Important note: we zero-out the fields that can't be derived yet to follow mc-node's
+    // Important note: we zero-out the fields that can't be derived yet to follow op-node's
     // behaviour.
     fn sync_status_from_actor_queries(
         l1_sync_status: L1State,

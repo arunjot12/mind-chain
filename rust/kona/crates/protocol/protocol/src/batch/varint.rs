@@ -1,6 +1,6 @@
 //! Base128 varint decoding for span-batch `uvarint` fields.
 //!
-//! The decoder below is a local port of mc-node's `binary.ReadUvarint` rather than a crate call.
+//! The decoder below is a local port of op-node's `binary.ReadUvarint` rather than a crate call.
 //! Crates that decode this format identically do exist — `prost`, `leb128` and `integer-encoding`
 //! all match it byte for byte — but `leb128` and `integer-encoding` are `std`-only, and `prost`
 //! takes an `unsafe` fast path and allocates a `DecodeError` when it rejects. Both matter because
@@ -12,7 +12,7 @@
 //!
 //! The accept-set is pinned per field by conformance vectors in the `prefix`, `payload` and
 //! `transactions` test modules, shared byte for byte with
-//! `mc-node/rollup/derive/span_batch_test.go`.
+//! `op-node/rollup/derive/span_batch_test.go`.
 
 /// Maximum number of bytes in the Base128 varint encoding of a `u64`.
 const MAX_VARINT_LEN_64: usize = 10;
@@ -25,13 +25,13 @@ const MAX_VARINT_LEN_64: usize = 10;
 /// form (`[0x01]`). At most `MAX_VARINT_LEN_64` bytes are read, and the tenth byte terminates the
 /// varint only if it is `0x00` or `0x01`, since a larger terminator would set bits above 63.
 ///
-/// This accepts exactly the encodings mc-node's `binary.ReadUvarint` accepts. The two decoders
+/// This accepts exactly the encodings op-node's `binary.ReadUvarint` accepts. The two decoders
 /// must agree: a span batch that one client decodes and the other rejects splits derivation on
 /// identical L1 data.
 pub(super) fn read_uvarint(buf: &[u8]) -> Option<(u64, &[u8])> {
     let mut value = 0u64;
     let mut shift = 0u32;
-    // The read bound does double duty: it is mc-node's `MaxVarintLen64` limit, and it caps every
+    // The read bound does double duty: it is op-node's `MaxVarintLen64` limit, and it caps every
     // shift that executes at 63, so none can overflow. (A tenth continuation byte still leaves
     // `shift` at 70, but the loop ends before it is used again.)
     for (i, &byte) in buf.iter().take(MAX_VARINT_LEN_64).enumerate() {

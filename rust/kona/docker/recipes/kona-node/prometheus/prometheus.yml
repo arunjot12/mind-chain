@@ -1,8 +1,8 @@
 scrape_configs:
-  - job_name: mc-reth
+  - job_name: op-reth
     scrape_interval: 5s
     static_configs:
-      - targets: ['mc-reth:9001', 'localhost:9001', 'host.docker.internal:9001']
+      - targets: ['op-reth:9001', 'localhost:9001', 'host.docker.internal:9001']
   - job_name: kona-node
     scrape_interval: 5s
     static_configs:

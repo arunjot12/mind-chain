@@ -4,7 +4,7 @@ import (
 	"math/big"
 	"testing"
 
-	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
+	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
 	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
 	"github.com/ethereum-optimism/optimism/op-core/predeploys"
 	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"

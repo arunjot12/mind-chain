@@ -342,7 +342,7 @@ mod test {
 
     #[test]
     fn test_decode_invalid_is_last() {
-        // Mirrors mc-node's TestFrameUnmarshalInvalidIsLast: any byte other than 0 or 1
+        // Mirrors op-node's TestFrameUnmarshalInvalidIsLast: any byte other than 0 or 1
         // for `is_last` must be rejected, per the derivation spec.
         let frame = Frame { id: [0xFF; 16], number: 0xEE, data: vec![0xDD; 16], is_last: true };
         let mut encoded = frame.encode();

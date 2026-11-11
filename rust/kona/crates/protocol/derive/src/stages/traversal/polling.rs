@@ -271,7 +271,7 @@ pub(crate) mod tests {
         // block2 has a receipt with a log from L1_SYS_CONFIG_ADDR that has only
         // 1 topic instead of the required >= 3, triggering a syscfg update error.
         // The fix under test makes this error non-fatal: advance_origin warns and
-        // continues (matching mc-node's l1_traversal.go:78-82 behaviour).
+        // continues (matching op-node's l1_traversal.go:78-82 behaviour).
         let first = b256!("3333333333333333333333333333333333333333333333333333333333333333");
         let second = b256!("4444444444444444444444444444444444444444444444444444444444444444");
         // block1: child of genesis (parent_hash = 0x0 = genesis.hash)

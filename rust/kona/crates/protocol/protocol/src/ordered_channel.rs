@@ -2,7 +2,7 @@
 //!
 //! An [`OrderedChannel`] enforces strict sequential frame ordering, rejecting any frame whose
 //! number does not match the expected next frame. This is the post-Holocene channel type, matching
-//! `mc-node`'s `requireInOrder` behavior.
+//! `op-node`'s `requireInOrder` behavior.
 
 use alloc::vec::Vec;
 use alloy_primitives::Bytes;
@@ -24,7 +24,7 @@ pub enum ReadError {
 ///
 /// Unlike [`Channel`], which accepts frames out of order and checks contiguity at read time,
 /// `OrderedChannel` rejects any frame whose number does not equal the current frame count.
-/// This matches `mc-node`'s Holocene behavior where `requireInOrder` is true.
+/// This matches `op-node`'s Holocene behavior where `requireInOrder` is true.
 ///
 /// [`Channel`]: crate::Channel
 #[derive(Debug, Clone)]
