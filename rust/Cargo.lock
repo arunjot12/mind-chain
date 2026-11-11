@@ -9008,6 +9008,64 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0e7465ac9959cc2b1404e8e2367b43684a6d13790fe23056cc8c6c5a6b7bcb94"
 
 [[package]]
+name = "mc-reth"
+version = "2.0.0"
+dependencies = [
+ "eyre",
+ "op-version",
+ "reth-cli-util",
+ "reth-db",
+ "reth-node-builder",
+ "reth-node-core",
+ "reth-optimism-chainspec",
+ "reth-optimism-cli",
+ "reth-optimism-consensus",
+ "reth-optimism-evm",
+ "reth-optimism-forks",
+ "reth-optimism-node",
+ "reth-optimism-payload-builder",
+ "reth-optimism-primitives",
+ "reth-optimism-rpc",
+ "tempfile",
+ "tracing",
+]
+
+[[package]]
+name = "mc-reth-proof-bench"
+version = "1.11.0"
+dependencies = [
+ "alloy-primitives",
+ "anyhow",
+ "clap",
+ "futures",
+ "hdrhistogram",
+ "reqwest 0.13.2",
+ "reth-cli-runner",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "mc-reth-test-engine"
+version = "0.1.0"
+dependencies = [
+ "alloy-consensus 2.4.2",
+ "alloy-eips 2.5.0",
+ "alloy-genesis",
+ "alloy-primitives",
+ "reth-db",
+ "reth-db-common",
+ "reth-node-api",
+ "reth-optimism-chainspec",
+ "reth-optimism-node",
+ "reth-optimism-primitives",
+ "reth-provider",
+ "reth-storage-api",
+ "thiserror 2.0.18",
+]
+
+[[package]]
 name = "md-5"
 version = "0.10.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9888,64 +9946,6 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2 0.10.9",
- "thiserror 2.0.18",
-]
-
-[[package]]
-name = "mc-reth"
-version = "2.0.0"
-dependencies = [
- "eyre",
- "op-version",
- "reth-cli-util",
- "reth-db",
- "reth-node-builder",
- "reth-node-core",
- "reth-optimism-chainspec",
- "reth-optimism-cli",
- "reth-optimism-consensus",
- "reth-optimism-evm",
- "reth-optimism-forks",
- "reth-optimism-node",
- "reth-optimism-payload-builder",
- "reth-optimism-primitives",
- "reth-optimism-rpc",
- "tempfile",
- "tracing",
-]
-
-[[package]]
-name = "mc-reth-proof-bench"
-version = "1.11.0"
-dependencies = [
- "alloy-primitives",
- "anyhow",
- "clap",
- "futures",
- "hdrhistogram",
- "reqwest 0.13.2",
- "reth-cli-runner",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "mc-reth-test-engine"
-version = "0.1.0"
-dependencies = [
- "alloy-consensus 2.4.2",
- "alloy-eips 2.5.0",
- "alloy-genesis",
- "alloy-primitives",
- "reth-db",
- "reth-db-common",
- "reth-node-api",
- "reth-optimism-chainspec",
- "reth-optimism-node",
- "reth-optimism-primitives",
- "reth-provider",
- "reth-storage-api",
  "thiserror 2.0.18",
 ]
 
