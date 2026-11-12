@@ -9,7 +9,7 @@ func main() {
 	if len(os.Args) != 1 {
 		panic("expected 1 arg")
 	}
-	if os.Args[0] != "op-program" {
+	if os.Args[0] != "mc-program" {
 		panic("unexpected arg0")
 	}
 

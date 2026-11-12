@@ -11,13 +11,13 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 )
 

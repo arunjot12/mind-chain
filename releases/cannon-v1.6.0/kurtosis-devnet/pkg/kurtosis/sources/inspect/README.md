@@ -136,7 +136,7 @@ Complete environment data including services and file artifacts:
   "UserServices": {
     "op-node-chain0-sequencer": {
       "Labels": {
-        "app": "op-node",
+        "app": "mc-node",
         "chain": "chain0",
         "role": "sequencer"
       },

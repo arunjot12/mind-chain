@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
 )
 
 func TestInteropDevRecipeBuild(t *testing.T) {

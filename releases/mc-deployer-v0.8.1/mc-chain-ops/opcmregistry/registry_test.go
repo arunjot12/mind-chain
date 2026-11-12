@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 func TestParseSemver(t *testing.T) {

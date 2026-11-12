@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	cc "github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	cc "github.com/mindchain/mind-chain/mc-supernode/supernode/chain_container"
 	"github.com/stretchr/testify/require"
 )
 

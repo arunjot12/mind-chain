@@ -12,9 +12,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 func TestDurationRecorded(t *testing.T) {

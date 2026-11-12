@@ -10,14 +10,14 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts/metrics"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/prestates"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts/metrics"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/prestates"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
 )
 
 type OnChainPrestateFetcher struct {

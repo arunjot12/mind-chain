@@ -4,11 +4,11 @@ import (
 	"context"
 	"crypto/ecdsa"
 
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm/program"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 type walletV2 interface {

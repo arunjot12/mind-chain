@@ -4,10 +4,10 @@ import (
 	_ "embed"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 //go:embed abis/PreimageOracle-1.0.0.json

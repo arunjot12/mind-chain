@@ -4,12 +4,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 // TestUnsafeGapFillAfterSafeReorg demonstrates the sequence:
@@ -22,8 +22,8 @@ func TestUnsafeGapFillAfterSafeReorg(gt *testing.T) {
 	// Example error with kona-node:
 	//
 	// assertions.go:387:             ERROR[03-30|22:17:00.549]
-	// assertions.go:387:             	Error Trace:	/op-devstack/dsl/l2_el.go:204
-	// assertions.go:387:             	            				/op-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:78
+	// assertions.go:387:             	Error Trace:	/mc-devstack/dsl/l2_el.go:204
+	// assertions.go:387:             	            				/mc-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:78
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	operation failed permanently after 30 attempts: expected head to reorg 0xae5a516a6654d4ee6a2edfb9a8e2db12106991b1a29fbb3953dd5afb8a60914e:12, but got 0xae5a516a6654d4ee6a2edfb9a8e2db12106991b1a29fbb3953dd5afb8a60914e:12
 	// assertions.go:387:             	Test:       	TestUnsafeGapFillAfterSafeReorg
@@ -118,8 +118,8 @@ func TestUnsafeGapFillAfterUnsafeReorg_RestartL2CL(gt *testing.T) {
 	// Example error with kona-node:
 	//
 	// assertions.go:387:             ERROR[03-30|22:17:07.231]
-	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_el.go:204
-	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:211
+	// assertions.go:387:             	Error Trace:	/optimism/mc-devstack/dsl/l2_el.go:204
+	// assertions.go:387:             	            				/optimism/mc-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:211
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	operation failed permanently after 30 attempts: expected head to reorg 0x893d77533b0ff9b37a92090679bf256d987b4535f06186ec71f29e68ddccd9a5:14, but got 0x893d77533b0ff9b37a92090679bf256d987b4535f06186ec71f29e68ddccd9a5:14
 	// assertions.go:387:             	Test:       	TestUnsafeGapFillAfterUnsafeReorg_RestartL2CL
@@ -127,8 +127,8 @@ func TestUnsafeGapFillAfterUnsafeReorg_RestartL2CL(gt *testing.T) {
 	// Example error with mc-reth:
 	//
 	// assertions.go:387:
-	// Error Trace:	/op-devstack/dsl/l2_el.go:430
-	//             				/op-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:218
+	// Error Trace:	/mc-devstack/dsl/l2_el.go:430
+	//             				/mc-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:218
 	// Error:      	Received unexpected error:
 	//             	operation failed permanently after 50 attempts: expected head to match: unsafe
 	// Test:       	TestUnsafeGapFillAfterUnsafeReorg_RestartL2CL
@@ -271,8 +271,8 @@ func TestUnsafeGapFillAfterUnsafeReorg_RestartCLP2P(gt *testing.T) {
 	// Example error with kona-node:
 	//
 	// assertions.go:387:             ERROR[03-31|11:15:39.398]
-	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_el.go:204
-	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:356
+	// assertions.go:387:             	Error Trace:	/optimism/mc-devstack/dsl/l2_el.go:204
+	// assertions.go:387:             	            				/optimism/mc-acceptance-tests/tests/sync/elsync/reorg/sync_test.go:356
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	operation failed permanently after 30 attempts: expected head to reorg 0x166970054ad16ad090210e5d1045538eeccd2afd88ea991b010de026d0106870:18, but got 0x166970054ad16ad090210e5d1045538eeccd2afd88ea991b010de026d0106870:18
 	// assertions.go:387:             	Test:       	TestUnsafeGapFillAfterUnsafeReorg_RestartCLP2P

@@ -1,13 +1,13 @@
 package proofs
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl/contract"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl/contract"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-service/txintent/bindings"
 )
 
 type SuperFaultDisputeGame struct {

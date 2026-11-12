@@ -1,10 +1,10 @@
 package presets
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 func WithSyncTesterELInitialState(fcu eth.FCUState) stack.CommonOption {

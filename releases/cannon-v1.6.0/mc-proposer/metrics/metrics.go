@@ -9,9 +9,9 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	txmetrics "github.com/ethereum-optimism/optimism/op-service/txmgr/metrics"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	txmetrics "github.com/mindchain/mind-chain/mc-service/txmgr/metrics"
 )
 
 const Namespace = "op_proposer"
@@ -87,7 +87,7 @@ func NewMetrics(procName string) *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: ns,
 			Name:      "up",
-			Help:      "1 if the op-proposer has finished starting up",
+			Help:      "1 if the mc-proposer has finished starting up",
 		}),
 	}
 }
@@ -101,7 +101,7 @@ func (m *Metrics) StartBalanceMetrics(l log.Logger, client *ethclient.Client, ac
 }
 
 // RecordInfo sets a pseudo-metric that contains versioning and
-// config info for the op-proposer.
+// config info for the mc-proposer.
 func (m *Metrics) RecordInfo(version string) {
 	m.info.WithLabelValues(version).Set(1)
 }

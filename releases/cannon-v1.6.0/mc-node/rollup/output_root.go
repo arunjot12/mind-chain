@@ -3,8 +3,8 @@ package rollup
 import (
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/op-node/bindings"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-node/bindings"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var ErrNilProof = errors.New("output root proof is nil")

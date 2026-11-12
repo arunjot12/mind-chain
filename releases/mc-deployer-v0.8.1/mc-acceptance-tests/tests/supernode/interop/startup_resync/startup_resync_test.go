@@ -1,4 +1,4 @@
-// Package startup_resync contains acceptance tests for the op-supernode
+// Package startup_resync contains acceptance tests for the mc-supernode
 // interop startup rework's cold-start resync path: stopping the supernode,
 // deleting its on-disk data dir, and starting a fresh supernode against the
 // same chain containers and virtual nodes.
@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 const (

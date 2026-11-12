@@ -6,24 +6,24 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/env"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/env"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/broadcaster"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/broadcaster"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	opcrypto "github.com/ethereum-optimism/optimism/op-service/crypto"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	opcrypto "github.com/mindchain/mind-chain/mc-service/crypto"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 	"github.com/urfave/cli/v2"
 )
 

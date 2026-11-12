@@ -20,10 +20,10 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	opeth "github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	opeth "github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 type Beacon interface {

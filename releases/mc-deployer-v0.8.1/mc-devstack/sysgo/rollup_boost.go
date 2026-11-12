@@ -9,13 +9,13 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/shared/rustbin"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/logpipe"
-	"github.com/ethereum-optimism/optimism/op-service/tasks"
-	"github.com/ethereum-optimism/optimism/op-service/testutils/tcpproxy"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/shared/rustbin"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/logpipe"
+	"github.com/mindchain/mind-chain/mc-service/tasks"
+	"github.com/mindchain/mind-chain/mc-service/testutils/tcpproxy"
 )
 
 // RollupBoostNode is a lightweight sysgo-managed process wrapper around a rollup-boost

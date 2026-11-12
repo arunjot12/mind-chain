@@ -8,8 +8,8 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
 )
 
 // minimalValidAllocs builds the smallest alloc set that passes CheckL2GenesisAllocs:

@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // The BatchStage implements the Holocene-derivation batch stage.

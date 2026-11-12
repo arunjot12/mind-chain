@@ -1,6 +1,6 @@
 # check-lagoon
 
-Smoke tests for interop cross-chain messaging and the op-interop-filter failsafe.
+Smoke tests for interop cross-chain messaging and the mc-interop-filter failsafe.
 
 ## Commands
 

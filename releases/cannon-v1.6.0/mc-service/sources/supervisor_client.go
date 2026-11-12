@@ -9,10 +9,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 type SupervisorClient struct {

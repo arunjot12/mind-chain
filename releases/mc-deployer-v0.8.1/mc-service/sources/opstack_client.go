@@ -3,10 +3,10 @@ package sources
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
 )
 
 type OPStackClient struct {

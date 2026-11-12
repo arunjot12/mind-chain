@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/forks"
 )
 
 func TestForkOverridesAtGenesis(t *testing.T) {

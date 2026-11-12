@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/holiman/uint256"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -20,10 +20,10 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/locks"
-	"github.com/ethereum-optimism/optimism/op-service/plan"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/locks"
+	"github.com/mindchain/mind-chain/mc-service/plan"
 )
 
 type PlannedTx struct {

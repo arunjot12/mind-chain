@@ -6,8 +6,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/forge"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/forge"
 )
 
 type DeployDisputeGameInput struct {

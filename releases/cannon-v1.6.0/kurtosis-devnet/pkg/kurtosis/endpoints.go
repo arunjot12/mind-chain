@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/inspect"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/spec"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/inspect"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/spec"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 )
 
 // ServiceFinder is the main entry point for finding services and their endpoints
@@ -314,7 +314,7 @@ func reorderNodes(nodes []descriptors.Node) []descriptors.Node {
 	// - either there are nodes in the list that contain a label "sequencer",
 	//   and then one of them must be the first node
 	// - or there are no nodes with the label "sequencer", and there are some
-	//   with el type "op-geth" and cl type "op-node". Then one of them must be
+	//   with el type "op-geth" and cl type "mc-node". Then one of them must be
 	//   the first node
 	// - or none of the above, and then we keep the order as is
 
@@ -336,7 +336,7 @@ func reorderNodes(nodes []descriptors.Node) []descriptors.Node {
 		return moveNodeToFront(nodes, sequencerIndex)
 	}
 
-	// If no sequencer found, look for nodes with el type "op-geth" and cl type "op-node"
+	// If no sequencer found, look for nodes with el type "op-geth" and cl type "mc-node"
 	var opGethOpNodeIndex int = -1
 	for i, node := range nodes {
 		if node.Services != nil {
@@ -348,8 +348,8 @@ func reorderNodes(nodes []descriptors.Node) []descriptors.Node {
 				hasOpGeth = true
 			}
 
-			// Check for op-node service
-			if node.Labels != nil && node.Labels["clType"] == "op-node" {
+			// Check for mc-node service
+			if node.Labels != nil && node.Labels["clType"] == "mc-node" {
 				hasOpNode = true
 			}
 
@@ -360,7 +360,7 @@ func reorderNodes(nodes []descriptors.Node) []descriptors.Node {
 		}
 	}
 
-	// If we found a node with both op-geth and op-node, move it to the front
+	// If we found a node with both op-geth and mc-node, move it to the front
 	if opGethOpNodeIndex >= 0 {
 		return moveNodeToFront(nodes, opGethOpNodeIndex)
 	}

@@ -11,19 +11,19 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/mc-node/metrics"
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	gethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 type discardEmitter struct{}

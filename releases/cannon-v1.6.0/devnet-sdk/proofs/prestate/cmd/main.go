@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/proofs/prestate"
+	"github.com/mindchain/mind-chain/devnet-sdk/proofs/prestate"
 )
 
 type chainConfig struct {

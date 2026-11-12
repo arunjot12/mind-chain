@@ -58,7 +58,7 @@ build *ARGS: lint-fix-no-fail
 build-dev *ARGS: lint-fix-no-fail
   just forge-build-dev {{ARGS}}
 
-# Builds the go-ffi tool for contract tests. go-ffi links op-core/superchain, so build
+# Builds the go-ffi tool for contract tests. go-ffi links mc-core/superchain, so build
 # its //go:embed'd (gitignored) bundle from the submodule first.
 build-go-ffi:
   cd ../../ && just build-superchain-go

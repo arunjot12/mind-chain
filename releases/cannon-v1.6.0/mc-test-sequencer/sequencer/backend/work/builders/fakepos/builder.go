@@ -3,14 +3,14 @@ package fakepos
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
 	"github.com/ethereum/go-ethereum/beacon/engine"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/eth/catalyst"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 type Beacon interface {

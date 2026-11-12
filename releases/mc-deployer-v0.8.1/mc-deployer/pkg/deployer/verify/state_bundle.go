@@ -7,8 +7,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 )
 
 func getContractBundleFromState(filepath string) (map[string]common.Address, error) {

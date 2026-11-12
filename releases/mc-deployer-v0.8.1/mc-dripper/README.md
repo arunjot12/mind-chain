@@ -1,4 +1,4 @@
-# op-dripper
+# mc-dripper
 
 A service designed to execute Drippie drips from a given EOA. It will only trigger based on the configured drips of the passed drippie address.
 
@@ -27,6 +27,6 @@ Settings to configure to ensure transactions are landing / the service is keepin
 Basic service with no transaction configuration
 
 ```bash
-op-dripper --drippie-address=0x... --l1-eth-rpc=https://... --private-key=0x...
+mc-dripper --drippie-address=0x... --l1-eth-rpc=https://... --private-key=0x...
 ```
 

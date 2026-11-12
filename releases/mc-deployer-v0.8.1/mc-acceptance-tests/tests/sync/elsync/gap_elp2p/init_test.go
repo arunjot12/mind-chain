@@ -1,10 +1,10 @@
 package gap_elp2p
 
 import (
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 func gapELP2POpts() []presets.Option {

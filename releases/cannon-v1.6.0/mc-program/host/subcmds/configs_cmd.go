@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
-	"github.com/ethereum-optimism/optimism/op-program/chainconfig"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/superchain"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-program/chainconfig"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/urfave/cli/v2"
 )
 

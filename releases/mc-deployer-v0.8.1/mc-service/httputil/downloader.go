@@ -6,7 +6,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 type Downloader struct {

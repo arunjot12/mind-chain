@@ -6,16 +6,16 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	opflags "github.com/ethereum-optimism/optimism/op-service/flags"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	opflags "github.com/mindchain/mind-chain/mc-service/flags"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // Flags
@@ -93,7 +93,7 @@ var (
 	}
 	BeaconCheckIgnore = &cli.BoolFlag{
 		Name:     "l1.beacon.ignore",
-		Usage:    "When false, halts op-node startup if the healthcheck to the Beacon-node endpoint fails.",
+		Usage:    "When false, halts mc-node startup if the healthcheck to the Beacon-node endpoint fails.",
 		Required: false,
 		Value:    false,
 		EnvVars:  prefixEnvVars("L1_BEACON_IGNORE"),
@@ -364,7 +364,7 @@ var (
 	/* Interop flags, experimental. */
 	InteropRPCAddr = &cli.StringFlag{
 		Name: "interop.rpc.addr",
-		Usage: "Interop Websocket-only RPC listening address, for supervisor service to manage syncing of the op-node." +
+		Usage: "Interop Websocket-only RPC listening address, for supervisor service to manage syncing of the mc-node." +
 			"Applies only to Interop-enabled networks. Optional, disabled if left empty. " +
 			"Do not enable if you do not run a supervisor service.",
 		EnvVars:  prefixEnvVars("INTEROP_RPC_ADDR"),
@@ -376,7 +376,7 @@ var (
 		Usage: "Interop RPC listening port, to serve supervisor syncing." +
 			"Applies only to Interop-enabled networks.",
 		EnvVars:  prefixEnvVars("INTEROP_RPC_PORT"),
-		Value:    9645, // Note: op-service/rpc/cli.go uses 8545 as the default.
+		Value:    9645, // Note: mc-service/rpc/cli.go uses 8545 as the default.
 		Category: InteropCategory,
 	}
 	InteropJWTSecret = &cli.StringFlag{
@@ -480,7 +480,7 @@ var Flags []cli.Flag
 
 var rpcDefaults = oprpc.CLIConfig{
 	ListenAddr:  "0.0.0.0", // TODO(#16487): Switch to 127.0.0.1
-	ListenPort:  9545,      // op-node defaults to a different port than ethereum EL (8545)
+	ListenPort:  9545,      // mc-node defaults to a different port than ethereum EL (8545)
 	EnableAdmin: false,
 }
 

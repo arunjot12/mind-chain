@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/common"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 )
 
 var (

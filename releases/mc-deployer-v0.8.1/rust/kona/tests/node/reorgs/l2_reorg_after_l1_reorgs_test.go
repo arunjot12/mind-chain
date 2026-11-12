@@ -4,15 +4,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
-	node_utils "github.com/ethereum-optimism/optimism/rust/kona/tests/node/utils"
 	"github.com/ethereum/go-ethereum/common"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
+	node_utils "github.com/mindchain/mind-chain/rust/kona/tests/node/utils"
 	"github.com/stretchr/testify/require"
 )
 

@@ -1,8 +1,8 @@
 package sysgo
 
 import (
-	ps "github.com/ethereum-optimism/optimism/mc-proposer/proposer"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	ps "github.com/mindchain/mind-chain/mc-proposer/proposer"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type L2Proposer struct {

@@ -11,8 +11,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/mc-node/p2p/store"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
+	"github.com/mindchain/mind-chain/mc-node/p2p/store"
+	"github.com/mindchain/mind-chain/mc-service/clock"
 )
 
 type UnbanMetrics interface {

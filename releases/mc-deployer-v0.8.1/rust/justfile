@@ -616,8 +616,8 @@ MIPS64_LINKER := env('CARGO_TARGET_MIPS64_UNKNOWN_NONE_LINKER', 'mips64-linux-gn
 # Prestate variants, as `<cargo bin>:<artifacts dir>` pairs. The build side
 # derives everything from this; the artifacts dir names are additionally
 # hardcoded by rust/kona/.gitignore, ops/prestate-reproducibility/build-prestates.sh,
-# .circleci/continue/rust-e2e.yml, op-e2e/config/init.go and
-# op-devstack/{shared/challenger,sysgo}, so renaming one means updating those too.
+# .circleci/continue/rust-e2e.yml, mc-e2e/config/init.go and
+# mc-devstack/{shared/challenger,sysgo}, so renaming one means updating those too.
 KONA_PRESTATE_VARIANTS := "kona-client:prestate-artifacts-cannon kona-client-int:prestate-artifacts-cannon-interop"
 
 # Print the prestate variants as `<cargo bin> <artifacts dir>` lines. This is
@@ -797,7 +797,7 @@ build-kona-prestates-auto:
       docker)
         # The Docker build builds cannon as a stage and exports only the prestate
         # dirs, but consumers of this recipe also expect the host binary the
-        # native path leaves at cannon/bin/cannon — op-devstack points the
+        # native path leaves at cannon/bin/cannon — mc-devstack points the
         # challenger's VmBin there (shared/challenger/challenger.go). Built first
         # so a broken Go toolchain fails before the long Docker build, and
         # exactly as build-kona-prestates does it: cannon/justfile's relative

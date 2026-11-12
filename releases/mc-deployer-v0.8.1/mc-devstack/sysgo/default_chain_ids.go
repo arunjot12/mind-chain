@@ -1,6 +1,6 @@
 package sysgo
 
-import "github.com/ethereum-optimism/optimism/op-service/eth"
+import "github.com/mindchain/mind-chain/mc-service/eth"
 
 var (
 	DefaultL1ID  = eth.ChainIDFromUInt64(900)

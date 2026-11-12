@@ -3,13 +3,13 @@ package kt
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/kt/fs"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/interfaces"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/kurtosis_core_rpc_api_bindings"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/lib/enclaves"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/lib/services"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/lib/starlark_run_config"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/devnet-sdk/kt/fs"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/interfaces"
 	"github.com/spf13/afero"
 )
 

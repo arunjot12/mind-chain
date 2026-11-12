@@ -7,15 +7,15 @@ import (
 	"math/big"
 	"math/rand/v2"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/super"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/super"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // Simulate a dispute game created roughly 16 days ago on a proposal that was ~7 days old

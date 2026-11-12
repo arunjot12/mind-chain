@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/txpool"
 
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 type TestBatchSubmitter struct {

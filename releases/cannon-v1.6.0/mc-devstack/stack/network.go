@@ -3,7 +3,7 @@ package stack
 import (
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // Network is an interface to an ethereum chain and its resources, with common properties between L1 and L2.

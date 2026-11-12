@@ -10,8 +10,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
 )
 
 // CheckL2AllocsOpts configures CheckL2GenesisAllocs.

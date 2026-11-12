@@ -1,12 +1,12 @@
 package presets
 
 import (
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/intentbuilder"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 )
 
 // WithJovianAtGenesis configures all L2s to activate the Jovian fork at genesis in sysgo mode.

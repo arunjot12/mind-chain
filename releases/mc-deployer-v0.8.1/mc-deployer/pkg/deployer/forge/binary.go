@@ -16,8 +16,8 @@ import (
 	"regexp"
 	"runtime"
 
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 //go:embed version.json

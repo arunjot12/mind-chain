@@ -8,16 +8,16 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/mc-batcher/compressor"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-batcher/compressor"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 const (

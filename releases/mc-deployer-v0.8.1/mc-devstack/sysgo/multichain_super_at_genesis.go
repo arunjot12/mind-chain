@@ -1,9 +1,9 @@
 package sysgo
 
 import (
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/devfeatures"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 )
 
 func withSuperRootGamesAtGenesisDeployerFeatures(cfg PresetConfig) PresetConfig {

@@ -4,19 +4,19 @@ import (
 	"context"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
 	"github.com/urfave/cli/v2"
 
 	"github.com/ethereum/go-ethereum/log"
 
-	challenger "github.com/ethereum-optimism/optimism/op-challenger"
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-challenger/flags"
-	"github.com/ethereum-optimism/optimism/op-challenger/version"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	challenger "github.com/mindchain/mind-chain/mc-challenger"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-challenger/flags"
+	"github.com/mindchain/mind-chain/mc-challenger/version"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 var (
@@ -45,7 +45,7 @@ func run(ctx context.Context, args []string, action ConfiguredLifecycle) error {
 	app := cli.NewApp()
 	app.Version = VersionWithMeta
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
-	app.Name = "op-challenger"
+	app.Name = "mc-challenger"
 	app.Usage = "Challenge outputs"
 	app.Description = "Ensures that on chain outputs are correct."
 	app.Commands = []*cli.Command{
@@ -63,7 +63,7 @@ func run(ctx context.Context, args []string, action ConfiguredLifecycle) error {
 		if err != nil {
 			return nil, err
 		}
-		logger.Info("Starting op-challenger", "version", VersionWithMeta)
+		logger.Info("Starting mc-challenger", "version", VersionWithMeta)
 
 		cfg, err := flags.NewConfigFromCLI(ctx, logger)
 		if err != nil {

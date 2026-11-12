@@ -13,14 +13,14 @@ import (
 	"strings"
 	"time"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	gethrpc "github.com/ethereum/go-ethereum/rpc"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 // StateBloatBin is a tiny contract with run(uint256 n), which writes n stable storage slots.
@@ -39,7 +39,7 @@ func EncodeRun(n uint64) []byte {
 	return data
 }
 
-// Caller is the subset shared by go-ethereum RPC clients and op-service RPC wrappers.
+// Caller is the subset shared by go-ethereum RPC clients and mc-service RPC wrappers.
 type Caller interface {
 	CallContext(ctx context.Context, result any, method string, args ...any) error
 }

@@ -7,10 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/elsync"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/session"
 	"github.com/google/uuid"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/elsync"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/session"
 )
 
 var ErrInvalidSessionIDFormat = errors.New("invalid UUID")

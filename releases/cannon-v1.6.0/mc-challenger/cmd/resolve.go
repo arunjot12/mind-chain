@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/flags"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/flags"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 	"github.com/urfave/cli/v2"
 )
 

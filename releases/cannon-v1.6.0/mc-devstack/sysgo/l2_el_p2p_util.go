@@ -7,10 +7,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/p2p"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/testreq"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/testreq"
 )
 
 func WithL2ELP2PConnection(l2EL1ID, l2EL2ID stack.L2ELNodeID) stack.Option[*Orchestrator] {

@@ -4,13 +4,13 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/opnode"
-	"github.com/ethereum-optimism/optimism/mc-node/config"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/testutils/tcpproxy"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/opnode"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/testutils/tcpproxy"
 )
 
 type OpNode struct {

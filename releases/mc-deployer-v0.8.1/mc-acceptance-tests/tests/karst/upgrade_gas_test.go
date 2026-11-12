@@ -3,10 +3,10 @@ package karst
 import (
 	"testing"
 
-	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	opforks "github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 // karstUpgradeGasOffset schedules Karst a few blocks after L2 genesis so the test can

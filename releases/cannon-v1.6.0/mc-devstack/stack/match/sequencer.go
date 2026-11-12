@@ -3,8 +3,8 @@ package match
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
 func WithSequencerActive(ctx context.Context) stack.Matcher[stack.L2CLNodeID, stack.L2CLNode] {

@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded"
 )
 
 type ExpectationMutator func(t *testing.T, e *ExpectedState)

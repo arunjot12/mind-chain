@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-node/p2p/monitor/mocks"
-	clock2 "github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/libp2p/go-libp2p/core/peer"
+	"github.com/mindchain/mind-chain/mc-node/p2p/monitor/mocks"
+	clock2 "github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 )
 

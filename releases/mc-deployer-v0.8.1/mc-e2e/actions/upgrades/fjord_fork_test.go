@@ -6,22 +6,22 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 var (

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type SyncStatusProvider interface {

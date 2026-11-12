@@ -3,7 +3,7 @@ package custom_gas_token
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 )
 
 // TestCGT_IntrospectionViaL1Block verifies that the L2 L1Block predeploy reports

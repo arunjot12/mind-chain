@@ -7,19 +7,19 @@ import (
 	"testing"
 	"time"
 
-	stypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	stypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack/match"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/predeploys"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/stack/match"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/predeploys"
 )
 
 func TestPostInbox(gt *testing.T) {

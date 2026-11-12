@@ -1,12 +1,12 @@
 package l2
 
 import (
-	interopTypes "github.com/ethereum-optimism/optimism/op-program/client/interop/types"
-	l2Types "github.com/ethereum-optimism/optimism/op-program/client/l2/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/hashicorp/golang-lru/v2/simplelru"
+	interopTypes "github.com/mindchain/mind-chain/mc-program/client/interop/types"
+	l2Types "github.com/mindchain/mind-chain/mc-program/client/l2/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // blockCacheSize should be set large enough to handle the pipeline reset process of walking back from L2 head to find

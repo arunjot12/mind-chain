@@ -6,9 +6,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 type InteropFilterQueryAPI interface {

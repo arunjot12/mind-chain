@@ -7,12 +7,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/mc-node/metrics"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 // TestSafeL2Head_EmptyVerifier_DoesNotDropToGenesis exercises bug B.

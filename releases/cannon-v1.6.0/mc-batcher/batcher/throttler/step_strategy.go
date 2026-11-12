@@ -3,7 +3,7 @@ package throttler
 import (
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/config"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
 )
 
 // StepStrategy implements binary on/off throttling (existing behavior)

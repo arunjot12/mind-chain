@@ -5,15 +5,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/status"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/status"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
 )
 
 type SyncDeriver struct {

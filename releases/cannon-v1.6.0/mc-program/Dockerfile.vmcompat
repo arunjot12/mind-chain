@@ -25,7 +25,7 @@ COPY ./go.mod ./go.sum ./
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build go mod download
 COPY . /app
 
-# Run the op-program analysis
-WORKDIR /app/op-program
+# Run the mc-program analysis
+WORKDIR /app/mc-program
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
   make "analyze-op-program-client-${VM_TARGET}"

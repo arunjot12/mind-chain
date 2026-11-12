@@ -57,7 +57,7 @@ func findMonorepoRoot(testPath string) (string, error) {
 	// Only search up 10 directories
 	// Avoids infinite recursion if the root isn't found for some reason.
 	// 10 is enough to cover deeply-nested test packages (e.g.
-	// op-acceptance-tests/tests/supernode/interop/backfill/happy/ is 6
+	// mc-acceptance-tests/tests/supernode/interop/backfill/happy/ is 6
 	// levels deep); 6 used to be enough before those were added.
 	for i := 0; i < 10; i++ {
 		_, err := os.Stat(path + testPath)

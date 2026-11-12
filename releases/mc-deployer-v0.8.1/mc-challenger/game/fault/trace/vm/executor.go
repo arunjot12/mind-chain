@@ -12,14 +12,14 @@ import (
 	"strings"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
-	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 )
 
 const (

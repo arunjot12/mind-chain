@@ -33,9 +33,9 @@ build-deps:
 # Defaults `-count=1` and `-timeout 30m` are applied only when not already set in args,
 # so callers can override either (e.g. `just test -count=10 -run TestFoo ./...`).
 # Examples:
-#   just test ./op-acceptance-tests/tests/base/...
-#   just test -run TestMyTest ./op-acceptance-tests/tests/base/
-#   just test -count=10 -run TestMyTest ./op-acceptance-tests/tests/base/
+#   just test ./mc-acceptance-tests/tests/base/...
+#   just test -run TestMyTest ./mc-acceptance-tests/tests/base/
+#   just test -count=10 -run TestMyTest ./mc-acceptance-tests/tests/base/
 [positional-arguments]
 test *args: build-deps
     #!/usr/bin/env bash
@@ -102,8 +102,8 @@ acceptance-test:
         exit 1
     fi
 
-    LOG_ROOT="{{REPO_ROOT}}/op-acceptance-tests/logs"
-    RESULTS_DIR="{{REPO_ROOT}}/op-acceptance-tests/results"
+    LOG_ROOT="{{REPO_ROOT}}/mc-acceptance-tests/logs"
+    RESULTS_DIR="{{REPO_ROOT}}/mc-acceptance-tests/results"
     mkdir -p "$LOG_ROOT" "$RESULTS_DIR"
     LOG_DIR="$LOG_ROOT/testrun-$(date -u +%Y%m%d-%H%M%S)"
     mkdir -p "$LOG_DIR/failed"
@@ -111,12 +111,12 @@ acceptance-test:
 
     FLAKY_REPORT="$LOG_DIR/flaky-tests.txt"
     if command -v rg >/dev/null 2>&1; then
-        rg -n "MarkFlaky\\(" ./op-acceptance-tests/tests > "$FLAKY_REPORT" || true
+        rg -n "MarkFlaky\\(" ./mc-acceptance-tests/tests > "$FLAKY_REPORT" || true
     else
-        grep -RIn "MarkFlaky(" ./op-acceptance-tests/tests > "$FLAKY_REPORT" || true
+        grep -RIn "MarkFlaky(" ./mc-acceptance-tests/tests > "$FLAKY_REPORT" || true
     fi
 
-    TEST_PACKAGES=("./op-acceptance-tests/tests/...")
+    TEST_PACKAGES=("./mc-acceptance-tests/tests/...")
 
     # CircleCI test-level splitting: when running under `parallelism: N > 1`,
     # split the test set across CIRCLE_NODE_TOTAL nodes using historical timings

@@ -9,7 +9,7 @@ import (
 	"github.com/BurntSushi/toml"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/util"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/util"
 )
 
 // InspectService handles the core inspection functionality

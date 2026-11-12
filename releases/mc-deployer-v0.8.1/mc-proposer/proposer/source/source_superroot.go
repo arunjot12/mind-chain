@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var ErrNoSuperRootData = errors.New("super root RPC response has no super root data")

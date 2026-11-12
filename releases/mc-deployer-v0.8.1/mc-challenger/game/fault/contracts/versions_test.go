@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
-	batchingTest "github.com/ethereum-optimism/optimism/op-service/sources/batching/test"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
+	batchingTest "github.com/mindchain/mind-chain/mc-service/sources/batching/test"
 	"github.com/stretchr/testify/require"
 )
 

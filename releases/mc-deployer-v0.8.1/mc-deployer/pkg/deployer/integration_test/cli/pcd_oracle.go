@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 func pcdSuperRootFromArtifacts(artifacts []pcdChainArtifacts) (common.Hash, uint64, error) {
@@ -95,11 +95,11 @@ func pcdSuperRootFromArtifacts(artifacts []pcdChainArtifacts) (common.Hash, uint
 		})
 	}
 
-	// The aggregation follows (*SuperRootMigrator).calculateSuperRoot in op-chain-ops/script/check_super_root.go.
+	// The aggregation follows (*SuperRootMigrator).calculateSuperRoot in mc-chain-ops/script/check_super_root.go.
 	return common.Hash(eth.SuperRoot(eth.NewSuperV1(genesisTime, chainOutputs...))), genesisTime, nil
 }
 
-// pcdOutputRoot follows CalculateOutputRoot in op-chain-ops/cmd/check-output-root/main.go.
+// pcdOutputRoot follows CalculateOutputRoot in mc-chain-ops/cmd/check-output-root/main.go.
 func pcdOutputRoot(header *types.Header) eth.Bytes32 {
 	return eth.OutputRoot(&eth.OutputV0{
 		StateRoot:                eth.Bytes32(header.Root),

@@ -1,15 +1,15 @@
 package sysgo
 
 import (
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
-	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-core/devfeatures"
+	opforks "github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/intentbuilder"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // NewSingleSupernodeWithSyncTesterRuntime builds a single-chain runtime: real

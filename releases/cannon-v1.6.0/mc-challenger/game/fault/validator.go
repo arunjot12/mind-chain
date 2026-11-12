@@ -5,10 +5,10 @@ import (
 	"context"
 	"fmt"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
 	"github.com/ethereum/go-ethereum/common"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 )
 
 type PrestateLoader = func(ctx context.Context) (common.Hash, error)

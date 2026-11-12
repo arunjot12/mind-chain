@@ -16,10 +16,10 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/ethereum/go-ethereum/trie"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 // opL2BlockAndReceipts builds a minimal L2 block — one deposit tx and one user

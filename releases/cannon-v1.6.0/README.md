@@ -67,31 +67,31 @@ The Optimism Immunefi program offers up to $2,000,042 for in-scope critical vuln
 ├── <a href="./devnet-sdk">devnet-sdk</a>: Comprehensive toolkit for standardized devnet interactions
 ├── <a href="./docs">docs</a>: A collection of documents including audits and post-mortems
 ├── <a href="./kurtosis-devnet">kurtosis-devnet</a>: OP-Stack Kurtosis devnet
-├── <a href="./op-acceptance-tests">op-acceptance-tests</a>: Acceptance tests and configuration for OP Stack
-├── <a href="./op-alt-da">op-alt-da</a>: Alternative Data Availability mode (beta)
-├── <a href="./op-batcher">op-batcher</a>: L2-Batch Submitter, submits bundles of batches to L1
-├── <a href="./op-chain-ops">op-chain-ops</a>: State surgery utilities
-├── <a href="./op-challenger">op-challenger</a>: Dispute game challenge agent
-├── <a href="./op-conductor">op-conductor</a>: High-availability sequencer service
-├── <a href="./op-deployer">op-deployer</a>: CLI tool for deploying and upgrading OP Stack smart contracts
-├── <a href="./op-devstack">op-devstack</a>: Flexible test frontend for integration and acceptance testing
-├── <a href="./op-dispute-mon">op-dispute-mon</a>: Off-chain service to monitor dispute games
-├── <a href="./op-dripper">op-dripper</a>: Controlled token distribution service
-├── <a href="./op-e2e">op-e2e</a>: End-to-End testing of all bedrock components in Go
-├── <a href="./op-faucet">op-faucet</a>: Dev-faucet with support for multiple chains
-├── <a href="./op-fetcher">op-fetcher</a>: Data fetching utilities
-├── <a href="./op-interop-mon">op-interop-mon</a>: Interoperability monitoring service
-├── <a href="./op-node">op-node</a>: Rollup consensus-layer client
-├── <a href="./op-preimage">op-preimage</a>: Go bindings for Preimage Oracle
-├── <a href="./op-program">op-program</a>: Fault proof program
-├── <a href="./op-proposer">op-proposer</a>: L2-Output Submitter, submits proposals to L1
-├── <a href="./op-service">op-service</a>: Common codebase utilities
-├── <a href="./op-supervisor">op-supervisor</a>: Service to monitor chains and determine cross-chain message safety
-├── <a href="./op-sync-tester">op-sync-tester</a>: Sync testing utilities
-├── <a href="./op-test-sequencer">op-test-sequencer</a>: Test sequencer for development
-├── <a href="./op-up">op-up</a>: Deployment and management utilities
-├── <a href="./op-validator">op-validator</a>: Tool for validating Optimism chain configurations and deployments
-├── <a href="./op-wheel">op-wheel</a>: Database utilities
+├── <a href="./mc-acceptance-tests">mc-acceptance-tests</a>: Acceptance tests and configuration for OP Stack
+├── <a href="./mc-alt-da">mc-alt-da</a>: Alternative Data Availability mode (beta)
+├── <a href="./mc-batcher">mc-batcher</a>: L2-Batch Submitter, submits bundles of batches to L1
+├── <a href="./mc-chain-ops">mc-chain-ops</a>: State surgery utilities
+├── <a href="./mc-challenger">mc-challenger</a>: Dispute game challenge agent
+├── <a href="./mc-conductor">mc-conductor</a>: High-availability sequencer service
+├── <a href="./mc-deployer">mc-deployer</a>: CLI tool for deploying and upgrading OP Stack smart contracts
+├── <a href="./mc-devstack">mc-devstack</a>: Flexible test frontend for integration and acceptance testing
+├── <a href="./mc-dispute-mon">mc-dispute-mon</a>: Off-chain service to monitor dispute games
+├── <a href="./mc-dripper">mc-dripper</a>: Controlled token distribution service
+├── <a href="./mc-e2e">mc-e2e</a>: End-to-End testing of all bedrock components in Go
+├── <a href="./mc-faucet">mc-faucet</a>: Dev-faucet with support for multiple chains
+├── <a href="./mc-fetcher">mc-fetcher</a>: Data fetching utilities
+├── <a href="./mc-interop-mon">mc-interop-mon</a>: Interoperability monitoring service
+├── <a href="./mc-node">mc-node</a>: Rollup consensus-layer client
+├── <a href="./mc-preimage">mc-preimage</a>: Go bindings for Preimage Oracle
+├── <a href="./mc-program">mc-program</a>: Fault proof program
+├── <a href="./mc-proposer">mc-proposer</a>: L2-Output Submitter, submits proposals to L1
+├── <a href="./mc-service">mc-service</a>: Common codebase utilities
+├── <a href="./mc-supervisor">mc-supervisor</a>: Service to monitor chains and determine cross-chain message safety
+├── <a href="./mc-sync-tester">mc-sync-tester</a>: Sync testing utilities
+├── <a href="./mc-test-sequencer">mc-test-sequencer</a>: Test sequencer for development
+├── <a href="./mc-up">mc-up</a>: Deployment and management utilities
+├── <a href="./mc-validator">mc-validator</a>: Tool for validating Optimism chain configurations and deployments
+├── <a href="./mc-wheel">mc-wheel</a>: Database utilities
 ├── <a href="./ops">ops</a>: Various operational packages
 ├── <a href="./packages">packages</a>
 │   ├── <a href="./packages/contracts-bedrock">contracts-bedrock</a>: OP Stack smart contracts
@@ -106,8 +106,8 @@ Please read this section carefully if you're planning to fork or make frequent P
 ### Production Releases
 
 Production releases are always tags, versioned as `<component-name>/v<semver>`.
-For example, an `op-node` release might be versioned as `op-node/v1.1.2`, and  smart contract releases might be versioned as `op-contracts/v1.0.0`.
-Release candidates are versioned in the format `op-node/v1.1.2-rc.1`.
+For example, an `mc-node` release might be versioned as `mc-node/v1.1.2`, and  smart contract releases might be versioned as `op-contracts/v1.0.0`.
+Release candidates are versioned in the format `mc-node/v1.1.2-rc.1`.
 We always start with `rc.1` rather than `rc`.
 
 For contract releases, refer to the GitHub release notes for a given release which will list the specific contracts being released. Not all contracts are considered production ready within a release and many are under active development.
@@ -126,11 +126,11 @@ See the [Node Software Releases](https://docs.optimism.io/builders/node-operator
 
 The full set of components that have releases are:
 
-- `op-batcher`
+- `mc-batcher`
 - `op-contracts`
-- `op-challenger`
-- `op-node`
-- `op-proposer`
+- `mc-challenger`
+- `mc-node`
+- `mc-proposer`
 
 All other components and packages should be considered development components only and do not have releases.
 

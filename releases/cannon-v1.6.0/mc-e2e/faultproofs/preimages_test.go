@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"testing"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/challenger"
-	"github.com/ethereum-optimism/optimism/op-program/client/boot"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/challenger"
+	"github.com/mindchain/mind-chain/mc-program/client/boot"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/disputegame"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/disputegame"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 	"github.com/stretchr/testify/require"
 )
 
@@ -25,7 +25,7 @@ func TestLocalPreimages(t *testing.T) {
 		{key: boot.L2ClaimLocalIndex},
 		{key: boot.L2ClaimBlockNumberLocalIndex},
 		// We don't check client.L2ChainIDLocalIndex because e2e tests use a custom chain configuration
-		// which requires using a custom chain ID indicator so op-program will load the full rollup config and
+		// which requires using a custom chain ID indicator so mc-program will load the full rollup config and
 		// genesis from the preimage oracle
 	}
 	for _, test := range tests {

@@ -1,8 +1,8 @@
 package driver
 
-import "github.com/ethereum-optimism/optimism/op-node/rollup/sequencing"
+import "github.com/mindchain/mind-chain/mc-node/rollup/sequencing"
 
-// aliases to not disrupt op-conductor code
+// aliases to not disrupt mc-conductor code
 var (
 	ErrSequencerAlreadyStarted = sequencing.ErrSequencerAlreadyStarted
 	ErrSequencerAlreadyStopped = sequencing.ErrSequencerAlreadyStopped

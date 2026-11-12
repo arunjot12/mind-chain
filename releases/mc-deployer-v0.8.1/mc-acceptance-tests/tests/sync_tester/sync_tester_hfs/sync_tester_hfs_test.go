@@ -3,16 +3,16 @@ package sync_tester_hfs
 import (
 	"testing"
 
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 func ptrToUint64(v uint64) *uint64 {
@@ -39,8 +39,8 @@ func TestSyncTesterHardforks(gt *testing.T) {
 	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|10:08:04.055]
-	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/check.go:26
-	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync_tester/sync_tester_hfs/sync_tester_hfs_test.go:54
+	// assertions.go:387:             	Error Trace:	/optimism/mc-devstack/dsl/check.go:26
+	// assertions.go:387:             	            				/optimism/mc-acceptance-tests/tests/sync_tester/sync_tester_hfs/sync_tester_hfs_test.go:54
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	operation failed permanently after 42 attempts: expected head to advance: unsafe
 	// assertions.go:387:             	Test:       	TestSyncTesterHardforks

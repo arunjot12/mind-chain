@@ -11,11 +11,11 @@ package sdmtest
 import (
 	"strings"
 
-	sdmpkg "github.com/ethereum-optimism/optimism/op-chain-ops/pkg/sdm"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	sdmpkg "github.com/mindchain/mind-chain/mc-chain-ops/pkg/sdm"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 // RethSystem bundles the DSL frontends an SDM acceptance test drives: an mc-reth sequencer, a

@@ -3,10 +3,10 @@ package interopgen
 import (
 	"testing"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/devfeatures"
 	"github.com/stretchr/testify/require"
 )
 

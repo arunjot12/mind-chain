@@ -7,10 +7,10 @@ _LDFLAGSSTRING := "'" + trim(
     "-X main.Version=" + VERSION + " " + \
     "") + "'"
 
-BINARY := "./bin/op-interop-mon"
+BINARY := "./bin/mc-interop-mon"
 
-# Build op-interop-mon binary
-op-interop-mon: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
+# Build mc-interop-mon binary
+mc-interop-mon: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
 
 # Clean build artifacts
 clean:

@@ -4,12 +4,12 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	transactions "github.com/ethereum-optimism/optimism/op-e2e/e2eutils/transactions"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	transactions "github.com/mindchain/mind-chain/mc-e2e/e2eutils/transactions"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum/common"

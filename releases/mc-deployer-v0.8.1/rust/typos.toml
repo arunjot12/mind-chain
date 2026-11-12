@@ -115,5 +115,5 @@ Iy = "Iy"
 Pn = "Pn"
 BA = "BA"
 
-# op-e2e Go identifiers (kona/tests/proofs action tests)
+# mc-e2e Go identifiers (kona/tests/proofs action tests)
 dfault = "dfault"

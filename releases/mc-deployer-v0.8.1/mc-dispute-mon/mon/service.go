@@ -8,26 +8,26 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/bonds"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
-	rpcclient "github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/bonds"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
+	rpcclient "github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/config"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/metrics"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/extract"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/version"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/config"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/metrics"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/extract"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/version"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
 )
 
 type Service struct {
@@ -173,7 +173,7 @@ func (s *Service) initL1Client(ctx context.Context, cfg *config.Config) error {
 	s.l1RPC = rpcclient.NewBaseRPCClient(l1RPC, rpcclient.WithCallTimeout(30*time.Second))
 	s.l1Caller = batching.NewMultiCaller(s.l1RPC, batching.DefaultBatchSize)
 	// The RPC is trusted because the majority of data comes from contract calls which are not verified even when the
-	// RPC is untrusted and also avoids needing to update op-dispute-mon for L1 hard forks that change the header.
+	// RPC is untrusted and also avoids needing to update mc-dispute-mon for L1 hard forks that change the header.
 	// Note that receipts are never fetched so the RPCKind has no actual effect.
 	clCfg := sources.L1ClientSimpleConfig(true, sources.RPCKindAny, 100)
 	l1Client, err := sources.NewL1Client(s.l1RPC, s.logger, s.metrics, clCfg)

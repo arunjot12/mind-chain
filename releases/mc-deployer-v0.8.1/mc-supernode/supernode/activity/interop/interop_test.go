@@ -9,16 +9,16 @@ import (
 	"testing"
 	"time"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity"
-	cc "github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	gethlog "github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity"
+	cc "github.com/mindchain/mind-chain/mc-supernode/supernode/chain_container"
 	"github.com/stretchr/testify/require"
 )
 
@@ -57,7 +57,7 @@ func (h *interopTestHarness) WithActivation(ts uint64) *interopTestHarness {
 	return h
 }
 
-// WithLogBackfillDepth sets op-supernode's --interop.log-backfill-depth for the built Interop.
+// WithLogBackfillDepth sets mc-supernode's --interop.log-backfill-depth for the built Interop.
 func (h *interopTestHarness) WithLogBackfillDepth(d time.Duration) *interopTestHarness {
 	h.logBackfillDepth = d
 	return h

@@ -36,7 +36,7 @@ func ensureDir(dirPath string) error {
 }
 
 // findMonorepoRoot finds the relative path to the monorepo root
-// Different tests might be nested in subdirectories of the op-e2e dir.
+// Different tests might be nested in subdirectories of the mc-e2e dir.
 func findMonorepoRoot(testPath string) (string, error) {
 	path := "./"
 	// Only search up 6 directories

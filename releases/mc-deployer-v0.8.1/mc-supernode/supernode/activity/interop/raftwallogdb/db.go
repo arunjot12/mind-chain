@@ -16,10 +16,10 @@ import (
 	"github.com/hashicorp/raft"
 	wal "github.com/hashicorp/raft-wal"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
 )
 
 // Entry layout for a sealed block (raft-wal stores all of this in a single Log entry):

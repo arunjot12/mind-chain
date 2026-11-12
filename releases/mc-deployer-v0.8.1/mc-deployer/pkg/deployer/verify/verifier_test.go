@@ -11,8 +11,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 func bootstrapContractAddresses() map[string]common.Address {

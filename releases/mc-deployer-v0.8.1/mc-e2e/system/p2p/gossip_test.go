@@ -13,16 +13,16 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/opnode"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/helpers"
-	rollupNode "github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/mc-node/p2p"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/opnode"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-e2e/system/helpers"
+	rollupNode "github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-node/rollup/driver"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 // TestSystemMockP2P sets up a L1 Geth node, a rollup node, and a L2 geth node and then confirms that

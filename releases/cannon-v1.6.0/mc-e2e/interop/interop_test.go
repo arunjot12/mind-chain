@@ -8,25 +8,25 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts/metrics"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/helpers"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	gethCore "github.com/ethereum/go-ethereum/core"
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-chain-ops/interopgen"
+	"github.com/mindchain/mind-chain/mc-e2e/system/helpers"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 // setupAndRun is a helper function that sets up a SuperSystem

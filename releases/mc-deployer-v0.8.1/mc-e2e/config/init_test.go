@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
 )
 
 // TestDeployConfigConcurrentMutationIsolated stresses DeployConfig() from many

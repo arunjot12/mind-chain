@@ -20,11 +20,11 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (

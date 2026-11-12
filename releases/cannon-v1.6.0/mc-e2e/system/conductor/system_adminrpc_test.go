@@ -12,13 +12,13 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 func TestStopStartSequencer(t *testing.T) {

@@ -5,26 +5,26 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/config"
+	"github.com/mindchain/mind-chain/mc-e2e/config"
 
-	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	upgradesHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/upgrades/helpers"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
+	actionsHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	upgradesHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/upgrades/helpers"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	"github.com/ethereum-optimism/optimism/op-e2e/bindingspreview"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/mc-proposer/proposer/source"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	"github.com/mindchain/mind-chain/mc-e2e/bindingspreview"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-proposer/proposer/source"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 // TestProposerBatchType run each proposer-related test case in singular batch mode and span batch mode.

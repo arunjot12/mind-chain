@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/lmittmann/w3"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
 )
 
 type UpgradeOPChainInput struct {

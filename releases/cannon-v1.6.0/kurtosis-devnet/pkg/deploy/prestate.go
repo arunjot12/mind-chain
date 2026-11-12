@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/build"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/build"
 )
 
 type PrestateInfo struct {
@@ -31,7 +31,7 @@ func (h *localPrestateHolder) GetPrestateInfo(ctx context.Context) (*PrestateInf
 		return h.info, nil
 	}
 
-	prestatePath := []string{"proofs", "op-program", "cannon"}
+	prestatePath := []string{"proofs", "mc-program", "cannon"}
 	prestateURL := h.urlBuilder(prestatePath...)
 
 	// Create build directory with the final path structure

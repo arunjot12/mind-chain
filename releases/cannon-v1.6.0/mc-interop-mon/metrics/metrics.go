@@ -3,7 +3,7 @@ package metrics
 import (
 	"github.com/prometheus/client_golang/prometheus"
 
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 const Namespace = "op_interop_mon"
@@ -69,7 +69,7 @@ func NewMetrics(procName string) *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: ns,
 			Name:      "up",
-			Help:      "1 if the op-interop-mon has finished starting up",
+			Help:      "1 if the mc-interop-mon has finished starting up",
 		}),
 		messageStatus: *factory.NewGaugeVec(prometheus.GaugeOpts{
 			Namespace: ns,

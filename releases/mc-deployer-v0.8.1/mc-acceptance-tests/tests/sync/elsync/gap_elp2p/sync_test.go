@@ -3,13 +3,13 @@ package gap_elp2p
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // TestL2ELP2PCanonicalChainAdvancedByFCU verifies the interaction between NewPayload,
@@ -60,8 +60,8 @@ func TestL2ELP2PCanonicalChainAdvancedByFCU(gt *testing.T) {
 	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|09:58:15.522]
-	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_el.go:64
-	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/elsync/gap_elp2p/sync_test.go:111
+	// assertions.go:387:             	Error Trace:	/optimism/mc-devstack/dsl/l2_el.go:64
+	// assertions.go:387:             	            				/optimism/mc-acceptance-tests/tests/sync/elsync/gap_elp2p/sync_test.go:111
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	failed to determine block-hash of hash 0x8b94830f261ef4568bc2ba248f52b27f9a7c366e8157794c93bdd05ca4735564, could not get payload: not found
 	// assertions.go:387:             	Test:       	TestL2ELP2PCanonicalChainAdvancedByFCU
@@ -409,7 +409,7 @@ func TestInvalidPayloadThroughCLP2P(gt *testing.T) {
 	// Example error with kona-node:
 	//
 	// assertions.go:387:             ERROR[03-31|10:42:03.034]
-	// assertions.go:387:             	Error Trace:	/Users/josh/repos/optimism/op-acceptance-tests/tests/sync/elsync/gap_elp2p/sync_test.go:436
+	// assertions.go:387:             	Error Trace:	/Users/josh/repos/optimism/mc-acceptance-tests/tests/sync/elsync/gap_elp2p/sync_test.go:436
 	// assertions.go:387:             	Error:      	An error is expected but got nil.
 	// assertions.go:387:             	Test:       	TestInvalidPayloadThroughCLP2P
 	// assertions.go:387:

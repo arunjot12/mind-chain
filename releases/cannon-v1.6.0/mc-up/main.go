@@ -17,22 +17,22 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/shim"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack/match"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/log/logfilter"
-	"github.com/ethereum-optimism/optimism/op-service/testreq"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/shim"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/stack/match"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log/logfilter"
+	"github.com/mindchain/mind-chain/mc-service/testreq"
 	"github.com/urfave/cli/v2"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -52,7 +52,7 @@ var (
 	envPrefix = "OP_UP"
 	dirFlag   = &cli.PathFlag{
 		Name:    "dir",
-		Usage:   "the path to the op-up directory, which is used for caching among other things.",
+		Usage:   "the path to the mc-up directory, which is used for caching among other things.",
 		EnvVars: opservice.PrefixEnvVar(envPrefix, "DIR"),
 		Value: func() string {
 			parentDir, err := os.UserHomeDir()
@@ -62,7 +62,7 @@ var (
 					return "error: could not find home or working directories"
 				}
 			}
-			return filepath.Join(parentDir, ".op-up")
+			return filepath.Join(parentDir, ".mc-up")
 		}(),
 	}
 )
@@ -81,7 +81,7 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) error {
 	app.Writer = stdout
 	app.ErrWriter = stderr
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, VersionMeta)
-	app.Name = "op-up"
+	app.Name = "mc-up"
 	app.Usage = "deploys an in-memory OP Stack devnet."
 	app.Flags = cliapp.ProtectFlags([]cli.Flag{dirFlag})
 	// The default OnUsageError behavior will print the error twice: once in the cli package and
@@ -103,7 +103,7 @@ func runOpUp(ctx context.Context, stderr io.Writer, opUpDir string) error {
 	fmt.Fprintf(stderr, "%s\n", asciiArt)
 
 	if err := os.MkdirAll(opUpDir, 0o755); err != nil {
-		return fmt.Errorf("create the op-up dir: %w", err)
+		return fmt.Errorf("create the mc-up dir: %w", err)
 	}
 	deployerCacheDir := filepath.Join(opUpDir, "deployer", "cache")
 	if err := os.MkdirAll(deployerCacheDir, 0o755); err != nil {

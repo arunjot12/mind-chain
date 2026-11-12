@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
 	bolt "go.etcd.io/bbolt"
 )

@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 	"github.com/stretchr/testify/require"
 )
 

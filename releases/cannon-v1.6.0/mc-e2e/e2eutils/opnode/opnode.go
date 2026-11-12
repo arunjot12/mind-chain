@@ -5,15 +5,15 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-node/metrics"
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node"
-	"github.com/ethereum-optimism/optimism/op-node/node/runcfg"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/services"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	rollupNode "github.com/mindchain/mind-chain/mc-node/node"
+	"github.com/mindchain/mind-chain/mc-node/node/runcfg"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type Opnode struct {
@@ -64,7 +64,7 @@ func NewOpnode(l log.Logger, c *config.Config, errFn func(error)) (*Opnode, erro
 			if err := cycle.Stop(postCtx); err != nil {
 				errFn(err)
 			}
-			l.Warn("closed op-node!")
+			l.Warn("closed mc-node!")
 		}()
 	}
 	node, err := rollupNode.New(context.Background(), c, l, "", metrics.NewMetrics(""))

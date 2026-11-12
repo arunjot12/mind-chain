@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-node/p2p/gating"
+	"github.com/mindchain/mind-chain/mc-node/p2p/gating"
 
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/p2p/discover"
@@ -22,7 +22,7 @@ import (
 	"github.com/libp2p/go-libp2p/core/metrics"
 	cmgr "github.com/libp2p/go-libp2p/p2p/net/connmgr"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 )
 
 var DefaultBootnodes = []string{

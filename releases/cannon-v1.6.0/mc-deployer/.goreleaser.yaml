@@ -3,7 +3,7 @@
 
 version: 2
 
-project_name: op-deployer
+project_name: mc-deployer
 
 before:
   hooks:
@@ -11,8 +11,8 @@ before:
 
 builds:
   - id: main
-    main: ./cmd/op-deployer
-    binary: op-deployer
+    main: ./cmd/mc-deployer
+    binary: mc-deployer
     env:
       - CGO_ENABLED=0
     goos:
@@ -29,8 +29,8 @@ builds:
     ldflags:
       - -X main.GitCommit={{ .FullCommit }}
       - -X main.GitDate={{ .CommitDate }}
-      - -X github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/version.Version={{ .Version }}
-      - -X github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/version.Meta=
+      - -X github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/version.Version={{ .Version }}
+      - -X github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/version.Meta=
 
 archives:
   - format: tar.gz
@@ -56,5 +56,5 @@ release:
   make_latest: false
 
 monorepo:
-  tag_prefix: op-deployer/
-  dir: op-deployer
+  tag_prefix: mc-deployer/
+  dir: mc-deployer

@@ -10,13 +10,13 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/fetcher"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/matrix"
-	keccakTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/types"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/fetcher"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/matrix"
+	keccakTypes "github.com/mindchain/mind-chain/mc-challenger/game/keccak/types"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 	"github.com/stretchr/testify/require"
 )
 

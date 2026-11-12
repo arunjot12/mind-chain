@@ -6,11 +6,11 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-interop-mon/flags"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	"github.com/mindchain/mind-chain/mc-interop-mon/flags"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 type CLIConfig struct {
@@ -18,11 +18,11 @@ type CLIConfig struct {
 	DependencySetPath string
 	PollInterval      time.Duration
 
-	// InteropFilterEndpoint, when set, enables a read-only cross-check against the op-interop-filter.
+	// InteropFilterEndpoint, when set, enables a read-only cross-check against the mc-interop-filter.
 	InteropFilterEndpoint  string
 	InteropFilterMinSafety string
 
-	// SupernodeEndpoints, when set, enable read-only observation of op-supernode liveness,
+	// SupernodeEndpoints, when set, enable read-only observation of mc-supernode liveness,
 	// per-chain heads, and cross-safety violations.
 	SupernodeEndpoints []string
 

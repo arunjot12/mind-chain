@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	keccakTypes "github.com/ethereum-optimism/optimism/op-challenger/game/keccak/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	keccakTypes "github.com/mindchain/mind-chain/mc-challenger/game/keccak/types"
 )
 
 type Challenger interface {

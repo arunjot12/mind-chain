@@ -11,18 +11,18 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/holiman/uint256"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/inspect"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testreq"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/inspect"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/intentbuilder"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testreq"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 )
 
 // funderMnemonicIndex the funding account is not one of the 30 standard account, but still derived from a user-key.
@@ -399,7 +399,7 @@ func (wb *worldBuilder) Build() {
 		Version: 1,
 	}
 
-	// Work-around of op-deployer design issue.
+	// Work-around of mc-deployer design issue.
 	// We use the same deployer key for all L1 and L2 chains we deploy here.
 	deployerKey, err := wb.keys.Secret(devkeys.DeployerRole.Key(big.NewInt(0)))
 	wb.require.NoError(err, "need deployer key")

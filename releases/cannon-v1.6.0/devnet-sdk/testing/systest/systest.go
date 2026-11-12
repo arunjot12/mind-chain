@@ -6,8 +6,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/shell/env"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/system"
+	"github.com/mindchain/mind-chain/devnet-sdk/shell/env"
+	"github.com/mindchain/mind-chain/devnet-sdk/system"
 )
 
 // envGetter abstracts environment variable access

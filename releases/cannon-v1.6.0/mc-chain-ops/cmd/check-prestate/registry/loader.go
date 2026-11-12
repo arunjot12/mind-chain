@@ -6,8 +6,8 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/util"
 	"github.com/ethereum/go-ethereum/superchain"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/util"
 )
 
 const (

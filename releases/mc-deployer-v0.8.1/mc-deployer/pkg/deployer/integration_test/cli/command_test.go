@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 	"github.com/stretchr/testify/require"
 )
 

@@ -7,11 +7,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/controller/kt"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/controller/surface"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/devnet-sdk/controller/kt"
+	"github.com/mindchain/mind-chain/devnet-sdk/controller/surface"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 )
 
 type surfaceGetter func() (surface.ControlSurface, error)

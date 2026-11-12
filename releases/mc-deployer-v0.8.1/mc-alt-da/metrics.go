@@ -1,7 +1,7 @@
 package altda
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

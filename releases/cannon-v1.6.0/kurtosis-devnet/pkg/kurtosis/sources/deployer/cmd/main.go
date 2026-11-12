@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/deployer"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/deployer"
 )
 
 func main() {

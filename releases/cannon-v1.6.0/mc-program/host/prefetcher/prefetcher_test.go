@@ -18,18 +18,18 @@ import (
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	hostTypes "github.com/ethereum-optimism/optimism/op-program/host/types"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	hostTypes "github.com/mindchain/mind-chain/mc-program/host/types"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	"github.com/ethereum-optimism/optimism/op-program/client/l1"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2"
-	"github.com/ethereum-optimism/optimism/op-program/client/mpt"
-	hostcommon "github.com/ethereum-optimism/optimism/op-program/host/common"
-	"github.com/ethereum-optimism/optimism/op-program/host/kvstore"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	"github.com/mindchain/mind-chain/mc-program/client/l1"
+	"github.com/mindchain/mind-chain/mc-program/client/l2"
+	"github.com/mindchain/mind-chain/mc-program/client/mpt"
+	hostcommon "github.com/mindchain/mind-chain/mc-program/host/common"
+	"github.com/mindchain/mind-chain/mc-program/host/kvstore"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 var (

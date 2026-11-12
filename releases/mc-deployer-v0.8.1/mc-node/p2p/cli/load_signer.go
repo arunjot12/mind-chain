@@ -7,10 +7,10 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/mc-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
+	"github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
 )
 
 // LoadSignerSetup loads a configuration for a Signer to be set up later

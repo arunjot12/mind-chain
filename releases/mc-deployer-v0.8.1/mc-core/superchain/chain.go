@@ -3,7 +3,6 @@ package superchain
 import (
 	"archive/zip"
 	"bytes"
-	_ "embed"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -15,11 +14,8 @@ import (
 
 	"github.com/klauspost/compress/zstd"
 
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 )
-
-//go:embed superchain-configs.zip
-var builtInConfigData []byte
 
 var BuiltInConfigs *ChainConfigLoader
 
@@ -203,9 +199,31 @@ func (c *Chain) populateGenesis() {
 	c.genesis = out
 }
 
+// emptyConfigBundle returns a config bundle with no chains. Mind Chain does not
+// ship the upstream superchain-registry: every service is configured from its own
+// rollup config and genesis files, so built-in lookups by name or chain ID report
+// ErrUnknownChain.
+func emptyConfigBundle() []byte {
+	var buf bytes.Buffer
+	zw := zip.NewWriter(&buf)
+	for name, content := range map[string]string{"dictionary": "", "chains.json": "{}"} {
+		w, err := zw.Create(name)
+		if err != nil {
+			panic(err)
+		}
+		if _, err := io.WriteString(w, content); err != nil {
+			panic(err)
+		}
+	}
+	if err := zw.Close(); err != nil {
+		panic(err)
+	}
+	return buf.Bytes()
+}
+
 func init() {
 	var err error
-	BuiltInConfigs, err = NewChainConfigLoader(builtInConfigData)
+	BuiltInConfigs, err = NewChainConfigLoader(emptyConfigBundle())
 	if err != nil {
 		panic(err)
 	}

@@ -3,8 +3,8 @@ package derive
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/testutils/fuzzerutils"
 	fuzz "github.com/google/gofuzz"
+	"github.com/mindchain/mind-chain/mc-service/testutils/fuzzerutils"
 	"github.com/stretchr/testify/require"
 )
 

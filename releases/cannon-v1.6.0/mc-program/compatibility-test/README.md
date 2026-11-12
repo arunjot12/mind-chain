@@ -1,6 +1,6 @@
 # Compatibility Test Baseline
 
-These baselines are used as part of the `run-vm-compat` task to check op-program for any unsupported
+These baselines are used as part of the `run-vm-compat` task to check mc-program for any unsupported
 opcodes or syscalls.
 
 ## Simplifying `vm-compat` Output

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/ethereum-optimism/optimism/op-service/logmods"
+	"github.com/mindchain/mind-chain/mc-service/logmods"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 )

@@ -12,13 +12,13 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	opmetrics "github.com/ethereum-optimism/optimism/op-node/metrics"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
+	opmetrics "github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
 )
 
 type syncStatusEnum int
@@ -63,7 +63,7 @@ type OriginSelectorForceResetter interface {
 }
 
 // CrossUpdateHandler handles both cross-unsafe and cross-safe L2 head changes.
-// Nil check required because op-program omits this handler.
+// Nil check required because mc-program omits this handler.
 type CrossUpdateHandler interface {
 	OnCrossUnsafeUpdate(ctx context.Context, crossUnsafe eth.L2BlockRef, localUnsafe eth.L2BlockRef)
 	OnCrossSafeUpdate(ctx context.Context, crossSafe eth.L2BlockRef, localSafe eth.L2BlockRef)
@@ -254,14 +254,14 @@ func (e *EngineController) SetCrossUpdateHandler(handler CrossUpdateHandler) {
 }
 
 func (e *EngineController) onUnsafeUpdate(ctx context.Context, crossUnsafe, localUnsafe eth.L2BlockRef) {
-	// Nil check required because op-program omits this handler.
+	// Nil check required because mc-program omits this handler.
 	if e.crossUpdateHandler != nil {
 		e.crossUpdateHandler.OnCrossUnsafeUpdate(ctx, crossUnsafe, localUnsafe)
 	}
 }
 
 func (e *EngineController) onSafeUpdate(ctx context.Context, crossSafe, localSafe eth.L2BlockRef) {
-	// Nil check required because op-program omits this handler.
+	// Nil check required because mc-program omits this handler.
 	if e.crossUpdateHandler != nil {
 		e.crossUpdateHandler.OnCrossSafeUpdate(ctx, crossSafe, localSafe)
 	}
@@ -339,10 +339,10 @@ func (e *EngineController) checkForkchoiceUpdatedStatus(status eth.ExecutePayloa
 	return status == eth.ExecutionValid
 }
 
-// initializeUnknowns is important to give the op-node EngineController engine state.
+// initializeUnknowns is important to give the mc-node EngineController engine state.
 // Pre-interop, the initial reset triggered a find-sync-start, and filled the forkchoice.
 // This still happens, but now overrides what may be initialized here.
-// Post-interop, the op-supervisor may diff the forkchoice state against the supervisor DB,
+// Post-interop, the mc-supervisor may diff the forkchoice state against the supervisor DB,
 // to determine where to perform the initial reset to.
 func (e *EngineController) initializeUnknowns(ctx context.Context) error {
 	if e.unsafeHead == (eth.L2BlockRef{}) {

@@ -7,7 +7,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
 )
 
 type Lifecycle interface {

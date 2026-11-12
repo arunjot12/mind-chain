@@ -1,14 +1,14 @@
 package sdm
 
 import (
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/sdm/sdmtest"
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/sdm/sdmtest"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/intentbuilder"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 )
 
 func newSDMRethSystem(t devtest.T, sdmEnabled bool) *sdmtest.RethSystem {

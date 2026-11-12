@@ -1,6 +1,6 @@
 # E2E tests for mc-reth
 
-This folder contains the end-to-end testing resources for mc-reth. Tests run against in-process `op-devstack` systems (sysgo).
+This folder contains the end-to-end testing resources for mc-reth. Tests run against in-process `mc-devstack` systems (sysgo).
 
 This README documents common workflows and justfile recipes used to build artifacts and run e2e tests.
 

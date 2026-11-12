@@ -15,7 +15,7 @@ Generating the first SuperRoot used for an Interop migration
 A SuperRoot with this script can be generated at a provided timestamp or if none is provided then the SuperRoot nearest to the current finalized timestamp will be found.
 
 ```bash
-go run op-chain-ops/cmd/check-super-root/main.go --rpc-endpoints $RPC_URL_1,$RPC_URL_2
+go run mc-chain-ops/cmd/check-super-root/main.go --rpc-endpoints $RPC_URL_1,$RPC_URL_2
 ```
 
 Output:
@@ -38,7 +38,7 @@ Alternatively, you can use environment variables to configure the script:
 A SuperRoot can be validated with the script and providing the timestamp the SuperRoot was created for:
 
 ```bash
-go run op-chain-ops/cmd/check-super-root/main.go --rpc-endpoints $RPC_URL_1,$RPC_URL_2 --timestamp $SUPER_ROOT_TIMESTAMP
+go run mc-chain-ops/cmd/check-super-root/main.go --rpc-endpoints $RPC_URL_1,$RPC_URL_2 --timestamp $SUPER_ROOT_TIMESTAMP
 ```
 
 The output should match the above

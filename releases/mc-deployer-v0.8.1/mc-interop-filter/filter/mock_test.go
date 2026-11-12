@@ -12,12 +12,12 @@ import (
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-core/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // mockChainIngester is an in-memory implementation of ChainIngester for testing.

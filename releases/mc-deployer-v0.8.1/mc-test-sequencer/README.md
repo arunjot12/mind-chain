@@ -1,4 +1,4 @@
-# op-test-sequencer
+# mc-test-sequencer
 
 This is a test service for block sequencing.
 This service is in active development.
@@ -8,15 +8,15 @@ This service is in active development.
 ### Build from source
 
 ```bash
-# from op-test-sequencer dir:
-just op-test-sequencer
-./bin/op-test-sequencer --help
+# from mc-test-sequencer dir:
+just mc-test-sequencer
+./bin/mc-test-sequencer --help
 ```
 
 ### Run from source
 
 ```bash
-# from op-test-sequencer dir:
+# from mc-test-sequencer dir:
 go run ./cmd --help
 ```
 

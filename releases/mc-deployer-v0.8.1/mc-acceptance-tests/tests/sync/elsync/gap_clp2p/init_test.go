@@ -1,11 +1,11 @@
 package gap_clp2p
 
 import (
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
 )
 
 func gapCLP2POpts() []presets.Option {

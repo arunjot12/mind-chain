@@ -4,19 +4,19 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
 
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/env"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/env"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/broadcaster"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/broadcaster"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 
 	"github.com/ethereum/go-ethereum/common"
 )

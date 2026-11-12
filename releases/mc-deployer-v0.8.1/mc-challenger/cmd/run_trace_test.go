@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/mc-challenger/runner"
 	"github.com/ethereum/go-ethereum/common"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-challenger/runner"
 	"github.com/stretchr/testify/require"
 )
 

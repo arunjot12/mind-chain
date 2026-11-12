@@ -8,9 +8,9 @@ import (
 	gethparams "github.com/ethereum/go-ethereum/params"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	opparams "github.com/ethereum-optimism/optimism/op-core/params"
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	opparams "github.com/mindchain/mind-chain/mc-core/params"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
 )
 
 // timestampForks lists the timestamp-based forks the ChainConfig carries a field

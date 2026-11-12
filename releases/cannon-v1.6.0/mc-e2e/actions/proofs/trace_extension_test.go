@@ -3,10 +3,10 @@ package proofs
 import (
 	"testing"
 
-	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/proofs/helpers"
-	"github.com/ethereum-optimism/optimism/op-program/client/claim"
 	"github.com/ethereum/go-ethereum/common"
+	actionsHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/proofs/helpers"
+	"github.com/mindchain/mind-chain/mc-program/client/claim"
 	"github.com/stretchr/testify/require"
 )
 
@@ -34,9 +34,9 @@ func runSafeHeadTraceExtensionTest(gt *testing.T, testCfg *helpers.TestCfg[any])
 	env.RunFaultProofProgram(t, l2SafeHead.Number.Uint64(), testCfg.CheckResult, params...)
 }
 
-// Test_ProgramAction_SafeHeadTraceExtension checks that op-program correctly handles the trace extension case where
+// Test_ProgramAction_SafeHeadTraceExtension checks that mc-program correctly handles the trace extension case where
 // the claimed l2 block number is after the safe head. The honest actor should repeat the output root from the safe head
-// and op-program should consider it valid even though the claimed l2 block number is not reached.
+// and mc-program should consider it valid even though the claimed l2 block number is not reached.
 // Output roots other than from the safe head should be invalid if the claimed l2 block number is not reached.
 func Test_ProgramAction_SafeHeadTraceExtension(gt *testing.T) {
 	matrix := helpers.NewMatrix[any]()

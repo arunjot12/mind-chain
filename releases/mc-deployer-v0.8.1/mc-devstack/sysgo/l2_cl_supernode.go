@@ -10,13 +10,13 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testutils/tcpproxy"
-	snconfig "github.com/ethereum-optimism/optimism/op-supernode/config"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity/interop"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testutils/tcpproxy"
+	snconfig "github.com/mindchain/mind-chain/mc-supernode/config"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity/interop"
 )
 
 var errSupernodeNotRunning = errors.New("sysgo: supernode is not running")

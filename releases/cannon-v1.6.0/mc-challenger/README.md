@@ -1,6 +1,6 @@
-# op-challenger
+# mc-challenger
 
-The `op-challenger` is a modular **op-stack** challenge agent written in
+The `mc-challenger` is a modular **op-stack** challenge agent written in
 golang for dispute games including, but not limited to, attestation games,
 fault games, and validity games. To learn more about dispute games, visit
 the [fault proof specs][proof-specs].
@@ -9,32 +9,32 @@ the [fault proof specs][proof-specs].
 
 ## Quickstart
 
-To build the `op-challenger`, run `make` (which executes the `make build`
+To build the `mc-challenger`, run `make` (which executes the `make build`
 [Makefile](./Makefile) target). To view a list of available commands and
-options, run `./bin/op-challenger --help`.
+options, run `./bin/mc-challenger --help`.
 
 ## Usage
 
-`op-challenger` is configurable via command line flags and environment
+`mc-challenger` is configurable via command line flags and environment
 variables. The help menu shows the available config options and can be
-accessed by running `./op-challenger --help`.
+accessed by running `./mc-challenger --help`.
 
 ### Running with Cannon on Local Devnet
 
-To run `op-challenger` against the local devnet, first clean and run
+To run `mc-challenger` against the local devnet, first clean and run
 the devnet. From the root of the repository run:
 
 ```shell
 cd kurtosis-devnet && just simple-devnet
 ```
 
-Then build the `op-challenger` with `make op-challenger`.
+Then build the `mc-challenger` with `make mc-challenger`.
 
-Run the `op-challenger` with:
+Run the `mc-challenger` with:
 
 ```shell
 DISPUTE_GAME_FACTORY=$(jq -r .DisputeGameFactoryProxy .devnet/addresses.json)
-./op-challenger/bin/op-challenger \
+./mc-challenger/bin/mc-challenger \
   --trace-type cannon \
   --l1-eth-rpc http://localhost:8545 \
   --rollup-rpc http://localhost:9546 \
@@ -43,8 +43,8 @@ DISPUTE_GAME_FACTORY=$(jq -r .DisputeGameFactoryProxy .devnet/addresses.json)
   --cannon-rollup-config .devnet/rollup.json  \
   --cannon-l2-genesis .devnet/genesis-l2.json \
   --cannon-bin ./cannon/bin/cannon \
-  --cannon-server ./op-program/bin/op-program \
-  --cannon-prestate ./op-program/bin/prestate.bin.gz \
+  --cannon-server ./mc-program/bin/mc-program \
+  --cannon-prestate ./mc-program/bin/prestate.bin.gz \
   --l2-eth-rpc http://localhost:9545 \
   --mnemonic "test test test test test test test test test test test junk" \
   --hd-path "m/44'/60'/0'/0/8" \
@@ -74,7 +74,7 @@ kurtosis enclave rm simple-devnet
 
 ## Subcommands
 
-The `op-challenger` has a few subcommands to interact with on-chain
+The `mc-challenger` has a few subcommands to interact with on-chain
 fault dispute games. The subcommands support game creation, performing
 game moves, and viewing fault dispute game data. They should not be
 used in production and are intended to provide convenient manual testing.
@@ -82,7 +82,7 @@ used in production and are intended to provide convenient manual testing.
 ### create-game
 
 ```shell
-./bin/op-challenger create-game \
+./bin/mc-challenger create-game \
   --l1-eth-rpc <L1_ETH_RPC> \
   --game-factory-address <GAME_FACTORY_ADDRESS> \
   --output-root <OUTPUT_ROOT> \
@@ -111,7 +111,7 @@ The `move` subcommand can be run with either the `--attack` or `--defend` flag,
 but not both.
 
 ```shell
-./bin/op-challenger move \
+./bin/mc-challenger move \
   --l1-eth-rpc <L1_ETH_RPC> \
   --game-address <GAME_ADDRESS> \
   --attack \
@@ -137,7 +137,7 @@ Performs a move to either attack or defend the latest claim in the specified gam
 ### resolve-claim
 
 ```shell
-./bin/op-challenger resolve-claim \
+./bin/mc-challenger resolve-claim \
   --l1-eth-rpc <L1_ETH_RPC> \
   --game-address <GAME_ADDRESS> \
   --claim <CLAIM_INDEX> \
@@ -155,7 +155,7 @@ not yet resolvable. If the claim is resolved successfully, the result is printed
 ### resolve
 
 ```shell
-./bin/op-challenger resolve \
+./bin/mc-challenger resolve \
   --l1-eth-rpc <L1_ETH_RPC> \
   --game-address <GAME_ADDRESS> \
   <SIGNER_ARGS>
@@ -172,7 +172,7 @@ If the game is resolved successfully, the result is printed.
 ### list-games
 
 ```shell
-./bin/op-challenger list-games \
+./bin/mc-challenger list-games \
   --l1-eth-rpc <L1_ETH_RPC> \
   --game-factory-address <GAME_FACTORY_ADDRESS>
 ```
@@ -188,7 +188,7 @@ list of predefined networks.
 ### list-claims
 
 ```shell
-./bin/op-challenger list-claims \
+./bin/mc-challenger list-claims \
   --l1-eth-rpc <L1_ETH_RPC> \
   --game-address <GAME_ADDRESS>
 ```
@@ -201,7 +201,7 @@ Prints the list of current claims in a dispute game.
 ### run-trace
 
 ```shell
-./bin/op-challenger run-trace \
+./bin/mc-challenger run-trace \
   --network=<NETWORK_NAME> \
   --l1-eth-rpc=<L1_ETH_RPC> \
   --l1-beacon=<L1_BEACON> \
@@ -225,7 +225,7 @@ Testing utility that continuously runs the specified trace providers against rea
 configured with multiple different prestates. This allows testing both the current and potential future prestates with
 the fault proofs virtual machine used by the trace provider.
 
-The same CLI options as `op-challenger` itself are supported to configure the trace providers. The additional `--run`
+The same CLI options as `mc-challenger` itself are supported to configure the trace providers. The additional `--run`
 option allows specifying which prestates to use. The format is `traceType/name/prestateHash` where traceType is the
 trace type to use with the prestate (e.g cannon or asterisc-kona), name is an arbitrary name for the prestate to use
 when reporting metrics and prestateHash is the hex encoded absolute prestate commitment to use. If name is omitted the

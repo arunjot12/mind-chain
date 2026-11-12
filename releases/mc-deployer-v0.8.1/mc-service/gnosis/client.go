@@ -9,10 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr/metrics"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-service/txmgr/metrics"
 
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -22,6 +21,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 type GnosisClient struct {

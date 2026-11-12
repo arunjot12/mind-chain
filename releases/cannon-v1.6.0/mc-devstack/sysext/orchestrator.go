@@ -4,11 +4,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/shell/env"
-	"github.com/ethereum-optimism/optimism/op-devstack/compat"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/devnet-sdk/shell/env"
+	"github.com/mindchain/mind-chain/mc-devstack/compat"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 const defaultDevnetUrl = "kt://interop-devnet"

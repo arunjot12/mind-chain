@@ -3,13 +3,13 @@ package safeheaddb_elsync
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 func TestPreserveDatabaseOnCLResync(gt *testing.T) {
@@ -17,9 +17,9 @@ func TestPreserveDatabaseOnCLResync(gt *testing.T) {
 	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|09:40:50.281]
-	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/sysgo/l2_el_p2p_util.go:61
-	// assertions.go:387:             	            				/optimism/op-devstack/dsl/l2_el.go:281
-	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/safeheaddb_clsync/safeheaddb_test.go:42
+	// assertions.go:387:             	Error Trace:	/optimism/mc-devstack/sysgo/l2_el_p2p_util.go:61
+	// assertions.go:387:             	            				/optimism/mc-devstack/dsl/l2_el.go:281
+	// assertions.go:387:             	            				/optimism/mc-acceptance-tests/tests/safeheaddb_clsync/safeheaddb_test.go:42
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	context deadline exceeded
 	// assertions.go:387:             	Test:       	TestPreserveDatabaseOnCLResync

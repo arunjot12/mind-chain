@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var _ eth.ELSyncPolicy = (*WindowSyncPolicy)(nil)

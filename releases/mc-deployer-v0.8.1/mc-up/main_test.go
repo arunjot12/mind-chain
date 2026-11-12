@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 	"github.com/stretchr/testify/require"
 )
 
@@ -23,7 +23,7 @@ func TestRun(t *testing.T) {
 	go func() {
 		defer wg.Done()
 		defer close(errCh)
-		if err := run(ctx, []string{"op-up", "--dir", t.TempDir()}, io.Discard, io.Discard); err != nil {
+		if err := run(ctx, []string{"mc-up", "--dir", t.TempDir()}, io.Discard, io.Discard); err != nil {
 			errCh <- err
 		}
 	}()

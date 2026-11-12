@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-service/apis"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 	"github.com/libp2p/go-libp2p/core/peer"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 	"github.com/stretchr/testify/require"
 )
 

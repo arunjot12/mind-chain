@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"

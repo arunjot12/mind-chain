@@ -11,10 +11,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	"github.com/ethereum-optimism/optimism/op-e2e/fastlz"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-service/predeploys"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -22,6 +18,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient/simulated"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	"github.com/mindchain/mind-chain/mc-e2e/fastlz"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-service/predeploys"
 	"github.com/stretchr/testify/require"
 )
 

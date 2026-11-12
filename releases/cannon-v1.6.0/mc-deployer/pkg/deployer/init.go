@@ -7,9 +7,9 @@ import (
 	"path"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 
-	op_service "github.com/ethereum-optimism/optimism/op-service"
+	op_service "github.com/mindchain/mind-chain/mc-service"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/urfave/cli/v2"
@@ -69,7 +69,7 @@ func InitCLI() func(ctx *cli.Context) error {
 			return err
 		}
 
-		fmt.Printf("Successfully initialized op-deployer intent in directory: %s\n", outdir)
+		fmt.Printf("Successfully initialized mc-deployer intent in directory: %s\n", outdir)
 		return nil
 	}
 }

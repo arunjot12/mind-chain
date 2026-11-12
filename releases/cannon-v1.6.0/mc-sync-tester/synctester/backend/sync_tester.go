@@ -8,8 +8,6 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/metrics"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/beacon/engine"
 	"github.com/ethereum/go-ethereum/common"
@@ -21,11 +19,13 @@ import (
 	"github.com/ethereum/go-ethereum/miner"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-sync-tester/metrics"
 
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/config"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/session"
-	sttypes "github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/types"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/frontend"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/config"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/session"
+	sttypes "github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/types"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/frontend"
 )
 
 type SyncTester struct {

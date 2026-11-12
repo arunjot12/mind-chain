@@ -3,10 +3,10 @@ package safeheaddb_elsync
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 func TestTruncateDatabaseOnELResync(gt *testing.T) {
@@ -50,7 +50,7 @@ func TestNotTruncateDatabaseOnRestartWithExistingDatabase(gt *testing.T) {
 	preRestartSafeBlock := sys.L2CLB.SafeL2BlockRef().Number
 	sys.L2CLB.VerifySafeHeadDatabaseMatches(sys.L2CL, dsl.WithMinRequiredL2Block(preRestartSafeBlock))
 
-	// Restart the verifier op-node, but not the EL so the existing chain data is not deleted.
+	// Restart the verifier mc-node, but not the EL so the existing chain data is not deleted.
 	sys.L2CLB.Stop()
 
 	sys.L2CL.Advanced(types.LocalSafe, 3, 30)

@@ -5,11 +5,11 @@ import (
 	"io"
 	"sync/atomic"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/frontend"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/frontend"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 type MockBackend struct {

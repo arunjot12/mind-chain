@@ -8,15 +8,15 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/exec"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/memory"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded"
-	mtutil "github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded/testutil"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/program"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/testutil"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/exec"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/memory"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded"
+	mtutil "github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded/testutil"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/program"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/testutil"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 )
 
 const syscallInsn = uint32(0x00_00_00_0c)

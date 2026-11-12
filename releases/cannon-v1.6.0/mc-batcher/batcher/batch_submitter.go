@@ -6,14 +6,14 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/flags"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-batcher/flags"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // Main is the entrypoint into the Batch Submitter.
-// This method returns a cliapp.LifecycleAction, to create an op-service CLI-lifecycle-managed batch-submitter with.
+// This method returns a cliapp.LifecycleAction, to create an mc-service CLI-lifecycle-managed batch-submitter with.
 func Main(version string) cliapp.LifecycleAction {
 	return func(cliCtx *cli.Context, closeApp context.CancelCauseFunc) (cliapp.Lifecycle, error) {
 		if err := flags.CheckRequired(cliCtx); err != nil {

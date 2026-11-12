@@ -10,8 +10,8 @@ import (
 	"sync"
 
 	"github.com/cockroachdb/pebble"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (

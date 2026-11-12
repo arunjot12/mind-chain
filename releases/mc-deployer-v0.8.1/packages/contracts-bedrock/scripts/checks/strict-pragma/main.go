@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/packages/contracts-bedrock/scripts/checks/common"
+	"github.com/mindchain/mind-chain/packages/contracts-bedrock/scripts/checks/common"
 )
 
 // Patterns to detect contract types and pragma

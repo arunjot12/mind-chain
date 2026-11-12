@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/forge"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/forge"
 )
 
 // PermissionedCannonFallbackPrestatePlaceholder matches the historical bytes32(hex"dead") anchor.

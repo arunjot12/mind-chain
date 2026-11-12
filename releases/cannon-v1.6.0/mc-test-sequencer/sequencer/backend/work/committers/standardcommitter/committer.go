@@ -6,14 +6,14 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 // Committer commits blocks with the op-stack commit API.
-// This can be an op-node that processes and persists the block as canonical.
+// This can be an mc-node that processes and persists the block as canonical.
 type Committer struct {
 	api     apis.CommitAPI
 	onClose func()

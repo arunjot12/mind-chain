@@ -6,15 +6,15 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-batcher/flags"
-	"github.com/ethereum-optimism/optimism/op-batcher/metrics"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-batcher/metrics"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
 )
 
 var (
@@ -29,7 +29,7 @@ func main() {
 	app := cli.NewApp()
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-batcher"
+	app.Name = "mc-batcher"
 	app.Usage = "Batch Submitter Service"
 	app.Description = "Service for generating and submitting L2 tx batches to L1"
 	app.Action = cliapp.LifecycleCmd(batcher.Main(Version))

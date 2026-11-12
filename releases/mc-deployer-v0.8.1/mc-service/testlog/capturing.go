@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/logmods"
+	"github.com/mindchain/mind-chain/mc-service/logmods"
 )
 
 // CapturedAttributes forms a chain of inherited attributes, to traverse on captured log records.

@@ -3,12 +3,12 @@ package batching
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 type ContractCall struct {

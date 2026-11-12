@@ -5,8 +5,8 @@ import (
 	"errors"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // ChannelAssembler assembles frames into a raw channel. It replaces the ChannelBank since Holocene.

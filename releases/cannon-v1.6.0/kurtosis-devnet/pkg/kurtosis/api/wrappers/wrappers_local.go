@@ -6,8 +6,8 @@ package wrappers
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/interfaces"
 	"github.com/kurtosis-tech/kurtosis/api/golang/engine/lib/kurtosis_context"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/interfaces"
 )
 
 func GetDefaultKurtosisContext() (interfaces.KurtosisContextInterface, error) {

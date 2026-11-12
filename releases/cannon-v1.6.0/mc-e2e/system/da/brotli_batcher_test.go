@@ -7,22 +7,22 @@ import (
 	"testing"
 	"time"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-e2e/system/helpers"
 
 	"github.com/stretchr/testify/require"
 
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/log"
+	batcherFlags "github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 func setupAliceAccount(t *testing.T, cfg e2esys.SystemConfig, sys *e2esys.System, ethPrivKey *ecdsa.PrivateKey) {

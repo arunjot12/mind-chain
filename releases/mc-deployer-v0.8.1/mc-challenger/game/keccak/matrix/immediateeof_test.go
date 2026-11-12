@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 	"github.com/stretchr/testify/require"
 )
 

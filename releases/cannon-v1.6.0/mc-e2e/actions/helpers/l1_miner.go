@@ -3,7 +3,7 @@ package helpers
 import (
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-program/host/prefetcher"
+	"github.com/mindchain/mind-chain/mc-program/host/prefetcher"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -18,8 +18,8 @@ import (
 	"github.com/ethereum/go-ethereum/trie"
 	"github.com/ethereum/go-ethereum/triedb"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/blobstore"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/blobstore"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // L1Miner wraps a L1Replica with instrumented block building ability.
@@ -108,7 +108,7 @@ func (s *L1Miner) ActL1StartBlock(timeDelta uint64) Action {
 			root := crypto.Keccak256Hash([]byte("fake-beacon-block-root"), header.Number.Bytes())
 			header.ParentBeaconRoot = &root
 
-			// Copied from op-program/client/l2/engineapi/block_processor.go
+			// Copied from mc-program/client/l2/engineapi/block_processor.go
 			// TODO(client-pod#826)
 			// Unfortunately this is not part of any Geth environment setup,
 			// we just have to apply it, like how the Geth block-builder worker does.

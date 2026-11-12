@@ -3,14 +3,14 @@ package preinterop
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl/proofs"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl/proofs"
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 func TestChallengerPlaysGame(gt *testing.T) {

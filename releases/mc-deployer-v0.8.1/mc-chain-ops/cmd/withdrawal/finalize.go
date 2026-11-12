@@ -4,14 +4,14 @@ import (
 	"errors"
 	"fmt"
 
-	bindingspreview "github.com/ethereum-optimism/optimism/mc-node/bindings/preview"
-	"github.com/ethereum-optimism/optimism/mc-node/withdrawals"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/lmittmann/w3"
+	bindingspreview "github.com/mindchain/mind-chain/mc-node/bindings/preview"
+	"github.com/mindchain/mind-chain/mc-node/withdrawals"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 	"github.com/urfave/cli/v2"
 )
 

@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/disputegame"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
 	"github.com/ethereum/go-ethereum/common"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/disputegame"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
 	"github.com/stretchr/testify/require"
 )
 

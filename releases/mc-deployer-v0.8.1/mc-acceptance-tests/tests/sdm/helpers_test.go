@@ -4,14 +4,14 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/sdm/sdmtest"
-	sdmpkg "github.com/ethereum-optimism/optimism/op-chain-ops/pkg/sdm"
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	gethtypes "github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/sdm/sdmtest"
+	sdmpkg "github.com/mindchain/mind-chain/mc-chain-ops/pkg/sdm"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
 )
 
 // getOPGasRefund reads the opGasRefund field from a transaction receipt via
@@ -152,7 +152,7 @@ func assertFixtureVerifierReceipts(t devtest.T, sys *sdmtest.RethSystem, block *
 // assertPostExecTxHashIsCanonical asserts mc-reth serves and resolves the post-exec tx (and its
 // receipt) under the hash Go's PostExecTx.Hash() produces — keccak256(0x7D || Data). Hashing via
 // Hash() rather than a hand-rolled keccak checks the Go hasher and mc-reth agree — the cross-client
-// guarantee op-service/sources relies on.
+// guarantee mc-service/sources relies on.
 func assertPostExecTxHashIsCanonical(t devtest.T, l2EL *dsl.L2ELNode, postExecTx *sdmpkg.RPCTransaction) {
 	wantHash := gethtypes.NewTx(&gethtypes.PostExecTx{Data: []byte(postExecTx.Input)}).Hash()
 

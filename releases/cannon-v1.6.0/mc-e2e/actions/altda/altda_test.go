@@ -5,9 +5,9 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/config"
+	"github.com/mindchain/mind-chain/mc-e2e/config"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -15,15 +15,15 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-alt-da/bindings"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-alt-da/bindings"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 // Devnet allocs should have alt-da mode enabled for these tests to pass

@@ -7,13 +7,13 @@ import (
 	"io"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-service/binary"
+	"github.com/mindchain/mind-chain/mc-service/binary"
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/db/entrydb"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/db/entrydb"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 type EntryStore interface {

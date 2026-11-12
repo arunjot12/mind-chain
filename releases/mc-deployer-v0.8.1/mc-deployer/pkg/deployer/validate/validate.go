@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 	"github.com/urfave/cli/v2"
 )
 

@@ -13,10 +13,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 var (
@@ -28,14 +28,14 @@ var (
 	l2EthRpc                = "http://example.com:9545"
 	supervisorRpc           = "http://example.com/supervisor"
 	cannonBin               = "./bin/cannon"
-	cannonServer            = "./bin/op-program"
+	cannonServer            = "./bin/mc-program"
 	cannonPreState          = "./pre.json"
 	cannonKonaServer        = "./bin/kona-host"
 	cannonKonaPreState      = "./cannon-kona-pre.json"
 	datadir                 = "./test_data"
 	rollupRpc               = "http://example.com:8555"
 	asteriscBin             = "./bin/asterisc"
-	asteriscServer          = "./bin/op-program"
+	asteriscServer          = "./bin/mc-program"
 	asteriscPreState        = "./pre.json"
 )
 
@@ -361,8 +361,8 @@ func TestAsteriscOpProgramRequiredArgs(t *testing.T) {
 		})
 
 		t.Run("Valid", func(t *testing.T) {
-			cfg := configForArgs(t, addRequiredArgsExcept(traceType, "--asterisc-server", "--asterisc-server=./op-program"))
-			require.Equal(t, "./op-program", cfg.Asterisc.Server)
+			cfg := configForArgs(t, addRequiredArgsExcept(traceType, "--asterisc-server", "--asterisc-server=./mc-program"))
+			require.Equal(t, "./mc-program", cfg.Asterisc.Server)
 		})
 	})
 
@@ -974,8 +974,8 @@ func TestCannonRequiredArgs(t *testing.T) {
 			})
 
 			t.Run("Valid", func(t *testing.T) {
-				cfg := configForArgs(t, addRequiredArgsExcept(traceType, "--cannon-server", "--cannon-server=./op-program"))
-				require.Equal(t, "./op-program", cfg.Cannon.Server)
+				cfg := configForArgs(t, addRequiredArgsExcept(traceType, "--cannon-server", "--cannon-server=./mc-program"))
+				require.Equal(t, "./mc-program", cfg.Cannon.Server)
 			})
 		})
 
@@ -1247,7 +1247,7 @@ func configForArgs(t *testing.T, cliArgs []string) config.Config {
 func dryRunWithArgs(cliArgs []string) (log.Logger, config.Config, error) {
 	cfg := new(config.Config)
 	var logger log.Logger
-	fullArgs := append([]string{"op-challenger"}, cliArgs...)
+	fullArgs := append([]string{"mc-challenger"}, cliArgs...)
 	testErr := errors.New("dry-run")
 	err := run(context.Background(), fullArgs, func(ctx context.Context, log log.Logger, config *config.Config) (cliapp.Lifecycle, error) {
 		logger = log

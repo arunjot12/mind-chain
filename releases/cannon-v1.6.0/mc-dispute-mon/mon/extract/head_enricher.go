@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	monTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/common"
+	monTypes "github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 )
 
 var _ Enricher = (*L1HeadBlockNumEnricher)(nil)

@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
 )
 
 // TestFlzCompressLen uses op-geth's full set of FlzCompressLen reference vectors.

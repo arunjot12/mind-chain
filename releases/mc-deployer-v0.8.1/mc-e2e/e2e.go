@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
 )
 
 func RunMain(m *testing.M) {

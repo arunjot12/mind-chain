@@ -1,8 +1,8 @@
 package noopsigner
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/signer"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work"
+	"github.com/mindchain/mind-chain/mc-service/signer"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work"
 )
 
 type NoopSignedBlock struct {

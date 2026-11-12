@@ -3,7 +3,7 @@ package script
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script/addresses"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script/addresses"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"

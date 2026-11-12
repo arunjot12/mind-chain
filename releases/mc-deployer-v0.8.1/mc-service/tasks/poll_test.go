@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/clock"
 )
 
 const eventualTimeout = 10 * time.Second

@@ -9,7 +9,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 type priceBumpTest struct {

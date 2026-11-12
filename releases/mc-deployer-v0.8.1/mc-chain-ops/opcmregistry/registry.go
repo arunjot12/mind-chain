@@ -22,9 +22,9 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/sources/caching"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/sources/caching"
 )
 
 // Configuration

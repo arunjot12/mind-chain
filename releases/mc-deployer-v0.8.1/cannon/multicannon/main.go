@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/cannon/multicannon/version"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/cannon/multicannon/version"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
 	"github.com/urfave/cli/v2"
 )
 

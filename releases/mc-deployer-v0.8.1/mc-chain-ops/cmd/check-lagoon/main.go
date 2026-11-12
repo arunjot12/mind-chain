@@ -16,14 +16,14 @@ import (
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-lagoon/checks"
-	op_service "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-lagoon/checks"
+	op_service "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 const prefix = "CHECK_LAGOON"
@@ -53,7 +53,7 @@ var (
 	}
 	FilterAdminRPC = &cli.StringSliceFlag{
 		Name:    "filter.admin-rpc",
-		Usage:   "op-interop-filter admin RPC URLs (repeat for multiple filters)",
+		Usage:   "mc-interop-filter admin RPC URLs (repeat for multiple filters)",
 		EnvVars: op_service.PrefixEnvVar(prefix, "FILTER_ADMIN_RPC"),
 	}
 	FilterJWTSecret = &cli.StringSliceFlag{

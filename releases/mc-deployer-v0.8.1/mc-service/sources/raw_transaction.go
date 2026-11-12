@@ -11,13 +11,13 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 // RawTransaction is a canonical binary-encoded transaction — a typed-tx
 // envelope, or the RLP of a legacy transaction — that (un)marshals the
 // eth_getBlockBy* JSON transaction-object form. The OP Stack synthetic classes
-// (0x7E deposit, 0x7D post-exec) are codec'd by op-core/types; everything else
+// (0x7E deposit, 0x7D post-exec) are codec'd by mc-core/types; everything else
 // by go-ethereum. Keeping block transactions in this form lets an L2 block
 // round-trip without go-ethereum's types.Transaction ever holding an OP
 // synthetic transaction: the transactions-trie leaf of a typed transaction IS

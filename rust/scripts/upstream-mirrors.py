@@ -9,7 +9,7 @@ Tag grammar, in the doc comment of the mirroring item:
 
     /// UPSTREAM-MIRROR(<kind>): <crate>@<version> <upstream::symbol::path>
 
-  <kind>     override | copy | delegate | set | port   (see docs/ai/reth-upstream-mirrors.md)
+  <kind>     override | copy | delegate | set | port
   <crate>    crates.io package name, or `reth` for the git-pinned family
   <version>  exact semver for crates.io; `rev:<sha7>`, `v<semver>`, `op-<base>-<n>` or
              `pre-<pr>` for reth

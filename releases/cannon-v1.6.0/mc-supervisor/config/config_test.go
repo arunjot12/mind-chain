@@ -5,11 +5,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/syncnode"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/syncnode"
 )
 
 func TestDefaultConfigIsValid(t *testing.T) {

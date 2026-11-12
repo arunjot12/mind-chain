@@ -8,7 +8,7 @@ import (
 	"sort"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // MessageExpiryTimeSecondsInterop is a post-Interop constant for the minimum age of a message before it can be considered executable.

@@ -5,17 +5,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-interop-mon/monitor"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-interop-mon/monitor"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 	"github.com/stretchr/testify/assert"
 )
 
-// TestInteropMon is testing that the op-interop-mon metrics are correctly collected
+// TestInteropMon is testing that the mc-interop-mon metrics are correctly collected
 func TestInteropMon(gt *testing.T) {
 	t := devtest.ParallelT(gt)
 	sys := presets.NewTwoL2SupernodeInterop(t, 0)
@@ -27,7 +27,7 @@ func TestInteropMon(gt *testing.T) {
 
 	require := t.Require()
 
-	// Start op-interop-mon in the test context and attach to the devstack
+	// Start mc-interop-mon in the test context and attach to the devstack
 	im, err := monitor.InteropMonitorServiceFromClients(t.Ctx(), "test", &monitor.CLIConfig{
 		PollInterval: 50 * time.Millisecond,
 		L2Rpcs:       []string{}, // unused here
@@ -55,7 +55,7 @@ func TestInteropMon(gt *testing.T) {
 		checker := opmetrics.NewMetricChecker(t, im.Metrics.(opmetrics.RegistryMetricer).Registry())
 		checker.FindByName("op_interop_mon_default_message_status")
 	}, 2*time.Minute, 100*time.Millisecond)
-	t.Log("op-interop-mon metrics check successful")
+	t.Log("mc-interop-mon metrics check successful")
 
 	require.NoError(im.Stop(t.Ctx()))
 }

@@ -3,9 +3,9 @@ package txinclude
 import (
 	"math/big"
 
-	opfees "github.com/ethereum-optimism/optimism/op-core/fees"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/core/types"
+	opfees "github.com/mindchain/mind-chain/mc-core/fees"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // TxBudget provides budgeting helpers oriented around a transaction's lifecycle.

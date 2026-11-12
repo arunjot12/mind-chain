@@ -1,10 +1,10 @@
-# `op-service`
+# `mc-service`
 
 Issues: [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-service)
 
 Pull requests: [monorepo](https://github.com/ethereum-optimism/optimism/pulls?q=is%3Aopen+is%3Apr+label%3AA-op-service)
 
-`op-service` is a collection of Go utilities to build OP-Stack services with.
+`mc-service` is a collection of Go utilities to build OP-Stack services with.
 
 ```text
 ├── accounting      - accounting utilities
@@ -58,7 +58,7 @@ Pull requests: [monorepo](https://github.com/ethereum-optimism/optimism/pulls?q=
 
 ## Usage
 
-From `op-service` dir:
+From `mc-service` dir:
 ```bash
 # Run Go tests
 make test
@@ -74,8 +74,8 @@ Provide solid reusable building blocks for all OP-Stack Go services.
 
 ### Vision
 
-- Remove unused utilities: `op-service` itself needs to stay maintainable.
-- Make all Go services consistent: `op-service` modules can be used to simplify and improve more Go services.
+- Remove unused utilities: `mc-service` itself needs to stay maintainable.
+- Make all Go services consistent: `mc-service` modules can be used to simplify and improve more Go services.
 
 ## Design principles
 
@@ -85,5 +85,5 @@ Provide solid reusable building blocks for all OP-Stack Go services.
 
 ## Testing
 
-Each op-service package has its own unit-testing.
-More advanced utils, such as the transaction manager, are covered in `op-e2e` as well.
+Each mc-service package has its own unit-testing.
+More advanced utils, such as the transaction manager, are covered in `mc-e2e` as well.

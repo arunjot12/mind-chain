@@ -8,14 +8,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/asterisc"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/split"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-challenger/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/asterisc"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/split"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 func NewOutputAsteriscTraceAccessor(

@@ -8,12 +8,12 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/conductor"
-	"github.com/ethereum-optimism/optimism/op-conductor/flags"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-conductor/conductor"
+	"github.com/mindchain/mind-chain/mc-conductor/flags"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 var (
@@ -28,9 +28,9 @@ func main() {
 	app := cli.NewApp()
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-conductor"
+	app.Name = "mc-conductor"
 	app.Usage = "Optimism Sequencer Conductor Service"
-	app.Description = "op-conductor help sequencer to run in highly available mode"
+	app.Description = "mc-conductor help sequencer to run in highly available mode"
 	app.Action = cliapp.LifecycleCmd(OpConductorMain)
 	app.Commands = []*cli.Command{}
 

@@ -3,8 +3,8 @@ package metrics
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-batcher/config"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 	"github.com/stretchr/testify/require"
 )
 

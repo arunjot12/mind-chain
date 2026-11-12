@@ -9,8 +9,8 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	txmetrics "github.com/ethereum-optimism/optimism/op-service/txmgr/metrics"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	txmetrics "github.com/mindchain/mind-chain/mc-service/txmgr/metrics"
 )
 
 const Namespace = "op_dripper"
@@ -81,7 +81,7 @@ func NewMetrics(procName string) *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: ns,
 			Name:      "up",
-			Help:      "1 if the op-dripper has finished starting up",
+			Help:      "1 if the mc-dripper has finished starting up",
 		}),
 	}
 }

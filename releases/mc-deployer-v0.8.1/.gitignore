@@ -20,8 +20,8 @@ dist
 artifacts
 cache
 
-!op-chain-ops/foundry/testdata/srcmaps/cache
-!op-chain-ops/foundry/testdata/srcmaps/artifacts
+!mc-chain-ops/foundry/testdata/srcmaps/cache
+!mc-chain-ops/foundry/testdata/srcmaps/artifacts
 
 !mc-deployer/pkg/deployer/artifacts
 
@@ -65,5 +65,5 @@ crytic-export
 
 # Locally-built superchain bundles, generated from the superchain-registry submodule.
 # The binary archives are gitignored; only their .sha256 (and generated text) are committed.
-op-core/superchain/superchain-configs.zip
+mc-core/superchain/superchain-configs.zip
 rust/mc-reth/crates/chainspec/res/superchain-configs.tar

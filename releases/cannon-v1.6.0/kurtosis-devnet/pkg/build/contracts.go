@@ -14,9 +14,9 @@ import (
 	"text/template"
 	"time"
 
-	ktfs "github.com/ethereum-optimism/optimism/devnet-sdk/kt/fs"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/enclave"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/util"
+	ktfs "github.com/mindchain/mind-chain/devnet-sdk/kt/fs"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/enclave"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/util"
 	"github.com/spf13/afero"
 	"go.opentelemetry.io/otel"
 )
@@ -316,7 +316,7 @@ func (b *ContractBuilder) createArtifactReaders(dir string) ([]*ktfs.ArtifactFil
 // populateContractsArtifact populates the temporary directory with required contract files
 func (b *ContractBuilder) populateContractsArtifact(contractsDir, tempDir string) error {
 	// Handle forge-artifacts directories - exclude *.t.sol directories as we don't need tests.
-	// op-deployer will need contracts and scripts.
+	// mc-deployer will need contracts and scripts.
 	forgeArtifactsPath := filepath.Join(contractsDir, "forge-artifacts")
 	exists, err := afero.DirExists(b.fs, forgeArtifactsPath)
 	if err != nil {

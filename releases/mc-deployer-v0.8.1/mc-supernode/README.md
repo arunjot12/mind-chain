@@ -6,7 +6,7 @@ Run multiple OP Stack chains in a single process. OP Supernode virtualizes OP No
 
 ### Chain Containers
 
-Chain Containers represent the concerns of one specific chain being managed by `op-supernode`.
+Chain Containers represent the concerns of one specific chain being managed by `mc-supernode`.
 
 #### Chain Isolation / Interfacing
 
@@ -15,7 +15,7 @@ Chain containers manage the runtime of the CL as a local process called a "Virtu
 only by `mc-node` itself.
 Chain Containers provide a stable interface to get data from the chain or affect the chain without needing to operate on the internals of
 that chain.
-Chain Containers also allow for multiple chains to be derived inside of the same `op-supernode`. Because they are isolated,
+Chain Containers also allow for multiple chains to be derived inside of the same `mc-supernode`. Because they are isolated,
 running many chains worth of derivation is trivial.
 
 #### Shared Chain Resources
@@ -37,12 +37,12 @@ See [this document](./safety-labels.md).
 #### Flag Configuration Tips
 
 Because `mc-node` is the only implementation of Virtual Nodes presently, it gets special treatment when the application starts up.
-Specifically, all flags found in `mc-node` are upstreamed with namespacing into the `op-supernode` flags.
+Specifically, all flags found in `mc-node` are upstreamed with namespacing into the `mc-supernode` flags.
 This allows for *roughly* 1:1 setup and behavior between Node and Supernode, with the caveats listed below.
 
 - To set a value for one chain, use `--vn.<chainID>.<flag>`
 - To set a value for *all* chains, use `--vn.all.<flag>`
-- Some behaviors are expected to be configured at the `op-supernode` level and are not respected the usual way when the application starts:
+- Some behaviors are expected to be configured at the `mc-supernode` level and are not respected the usual way when the application starts:
   - `l1` and `l1.beacon` are used to create the shared L1 client. Any L1 configuration will not be respected by a Virtual Node.
   - Log and Metric settings are passed down to the Virtual node from the top level Log/Metric flags, and individual chain settings may not be respected.
   - `p2p` is enabled/disabled at the top level. While enabled, listen ports default to `0` (dynamic) to prevent collisions. Non-zero `--vn.all.p2p.listen.tcp` / `--vn.all.p2p.listen.udp` values are rejected because they would be reused by every virtual node. Use the per-chain `--vn.<chainID>.p2p.listen.tcp` / `--vn.<chainID>.p2p.listen.udp` flags when fixed ports are required.
@@ -50,7 +50,7 @@ This allows for *roughly* 1:1 setup and behavior between Node and Supernode, wit
 Example launch of Supernode:
 
 ```bash
-./bin/op-supernode \
+./bin/mc-supernode \
   --l1='...' \
   --l1.beacon='...' \
   --disable-p2p=true \
@@ -71,15 +71,15 @@ Environment variables may be used, but at present their names include inappropri
 
 ### Activities
 
-Activities represent the concerns of `op-supernode` which fall outside of any one chain, and are modular plugins to the capabilities of the software.
+Activities represent the concerns of `mc-supernode` which fall outside of any one chain, and are modular plugins to the capabilities of the software.
 
 #### RPC Activities
 
-Components which expose RPC functionality and register as an Activity will have their RPC namespaces registered against the `op-supernode` root.
+Components which expose RPC functionality and register as an Activity will have their RPC namespaces registered against the `mc-supernode` root.
 
 #### Runnable Activities
 
-Components which expose Start/Stop are given a goroutine to work during `op-supernode` runtime.
+Components which expose Start/Stop are given a goroutine to work during `mc-supernode` runtime.
 
 #### Current Activities:
 
@@ -96,5 +96,5 @@ Components which expose Start/Stop are given a goroutine to work during `op-supe
 Build:
 
 ```bash
-just op-supernode
+just mc-supernode
 ```

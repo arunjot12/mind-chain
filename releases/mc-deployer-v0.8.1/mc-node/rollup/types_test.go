@@ -20,11 +20,11 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	opparams "github.com/ethereum-optimism/optimism/op-core/params"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	opparams "github.com/mindchain/mind-chain/mc-core/params"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 func randConfig() *Config {
@@ -77,7 +77,7 @@ func TestConfigJSON(t *testing.T) {
 
 // TestConfigChainOpConfigJSONWireFormat pins the on-the-wire serialization of the
 // ChainOpConfig field. Its type moved from op-geth's params.OptimismConfig to
-// op-core/params.OptimismConfig; the JSON must remain byte-for-byte identical.
+// mc-core/params.OptimismConfig; the JSON must remain byte-for-byte identical.
 func TestConfigChainOpConfigJSONWireFormat(t *testing.T) {
 	config := randConfig()
 	config.ChainOpConfig = &opparams.OptimismConfig{

@@ -3,17 +3,17 @@ package standardbuilder
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/closer"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/closer"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 type Config struct {

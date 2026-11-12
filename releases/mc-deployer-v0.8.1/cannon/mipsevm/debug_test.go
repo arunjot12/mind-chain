@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 )
 
 func TestDebugInfo_Serialization(t *testing.T) {

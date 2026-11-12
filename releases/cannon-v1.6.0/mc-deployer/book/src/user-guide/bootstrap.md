@@ -4,9 +4,9 @@
 
 Bootstrap commands are used to deploy global singletons and implementation contracts for new superchains.
 The deployed contracts can then be used with future invocations of `apply` so that new L2 chains can join that superchain.
-Most users won't need to use these commands, since `op-deployer apply` will automatically use standard predeployed contracts for the L1/settlement-layer you are deploying on. However, you will need to use bootstrap commands if you're creating a new superchain.
+Most users won't need to use these commands, since `mc-deployer apply` will automatically use standard predeployed contracts for the L1/settlement-layer you are deploying on. However, you will need to use bootstrap commands if you're creating a new superchain.
 
-There are several bootstrap commands available, which you can view by running `op-deployer bootstrap --help`. We'll
+There are several bootstrap commands available, which you can view by running `mc-deployer bootstrap --help`. We'll
 focus on the most important ones, which should be run in the sequence listed below.
 
 **It is safe to call these commands from a hot wallet.** None of the contracts deployed by these command are "ownable,"
@@ -15,7 +15,7 @@ so the deployment address has no further control over the system.
 # 1. bootstrap superchain
 
 ```shell
-op-deployer bootstrap superchain \
+mc-deployer bootstrap superchain \
   --l1-rpc-url="<rpc url>" \
   --private-key="<contract deployer private key>" \
   --outfile="./.deployer/bootstrap_superchain.json" \
@@ -47,7 +47,7 @@ This command will deploy several contracts, and output a JSON like the one below
 # 2. bootstrap implementations
 
 ```shell
-op-deployer bootstrap implementations \
+mc-deployer bootstrap implementations \
   --l1-rpc-url="<rpc url>" \
   --outfile="./.deployer/bootstrap_implementations.json" \
   --private-key="<contract deployer private key>" \
@@ -62,7 +62,7 @@ op-deployer bootstrap implementations \
 
 This command will deploy implementations, blueprints, and the OPCM. Deployments are (for the most part)
 deterministic, so contracts will only be deployed once per chain as long as the implementation and constructor args
-remain the same. This applies to the `op-deployer apply` pipeline - that is, if someone else ran `op-deployer bootstrap implementations`
+remain the same. This applies to the `mc-deployer apply` pipeline - that is, if someone else ran `mc-deployer bootstrap implementations`
 at some point on a given L1 chain, then the `apply` pipeline will re-use those implementations.
 
 The command will output a JSON like the one below:

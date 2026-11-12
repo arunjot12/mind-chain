@@ -3,7 +3,7 @@ package broadcaster
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
 )
 
 type discardBroadcaster struct {

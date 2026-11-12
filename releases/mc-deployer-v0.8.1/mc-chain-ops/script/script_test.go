@@ -14,9 +14,9 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script/addresses"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script/addresses"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script/forking"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script/forking"
 	"github.com/stretchr/testify/mock"
 
 	"github.com/holiman/uint256"
@@ -28,8 +28,8 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 //go:generate ./testdata/generate.sh

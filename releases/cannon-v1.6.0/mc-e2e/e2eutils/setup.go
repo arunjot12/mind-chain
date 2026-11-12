@@ -6,21 +6,21 @@ import (
 	"path"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/config/secrets"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-e2e/config/secrets"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 
 	"github.com/stretchr/testify/require"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-e2e/config"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-e2e/config"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var testingJWTSecret = [32]byte{123}

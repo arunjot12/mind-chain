@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	shared "github.com/ethereum-optimism/optimism/op-devstack/shared/challenger"
-	"github.com/ethereum-optimism/optimism/op-service/crypto"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	shared "github.com/mindchain/mind-chain/mc-devstack/shared/challenger"
+	"github.com/mindchain/mind-chain/mc-service/crypto"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/stretchr/testify/require"
@@ -21,15 +21,15 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/log"
 
-	challenger "github.com/ethereum-optimism/optimism/op-challenger"
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	challenger "github.com/mindchain/mind-chain/mc-challenger"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 type EndpointProvider interface {
@@ -210,7 +210,7 @@ func NewChallengerConfig(t *testing.T, sys EndpointProvider, l2NodeName string, 
 		option(&cfg)
 	}
 	require.NotEmpty(t, cfg.TxMgrConfig.PrivateKey, "Missing private key for TxMgrConfig")
-	require.NoError(t, cfg.Check(), "op-challenger config should be valid")
+	require.NoError(t, cfg.Check(), "mc-challenger config should be valid")
 
 	if cfg.Cannon.VmBin != "" {
 		_, err := os.Stat(cfg.Cannon.VmBin)
@@ -218,7 +218,7 @@ func NewChallengerConfig(t *testing.T, sys EndpointProvider, l2NodeName string, 
 	}
 	if cfg.Cannon.Server != "" {
 		_, err := os.Stat(cfg.Cannon.Server)
-		require.NoError(t, err, "op-program should be built. Make sure you've run make cannon-prestates")
+		require.NoError(t, err, "mc-program should be built. Make sure you've run make cannon-prestates")
 	}
 	if cfg.CannonAbsolutePreState != "" {
 		_, err := os.Stat(cfg.CannonAbsolutePreState)

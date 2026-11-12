@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 )
 
 func DeployImplementations(env *Env, intent *state.Intent, st *state.State) error {

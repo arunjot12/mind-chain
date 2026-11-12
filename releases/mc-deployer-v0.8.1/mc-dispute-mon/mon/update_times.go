@@ -3,8 +3,8 @@ package mon
 import (
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
+	"github.com/mindchain/mind-chain/mc-service/clock"
 )
 
 type UpdateTimeMetrics interface {

@@ -3,11 +3,11 @@ package config
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work/builders/fakepos"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work/builders/noopbuilder"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work/builders/standardbuilder"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work/builders/fakepos"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work/builders/noopbuilder"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work/builders/standardbuilder"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 type BuilderEntry struct {

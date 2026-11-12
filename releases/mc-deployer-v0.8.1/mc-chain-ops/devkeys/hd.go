@@ -4,8 +4,8 @@ import (
 	"crypto/ecdsa"
 	"fmt"
 
+	hdwallet "github.com/arunjot12/go-ethereum-hdwallet"
 	"github.com/base/go-bip39"
-	hdwallet "github.com/ethereum-optimism/go-ethereum-hdwallet"
 
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"

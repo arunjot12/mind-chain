@@ -38,7 +38,7 @@ environment:
   environment:
     CGO_ENABLED: "0"
 
-# op-core/superchain embed prep runs once before any subpackage go/build.
+# mc-core/superchain embed prep runs once before any subpackage go/build.
 pipeline:
   - uses: op-stack-go/sync-superchain
 
@@ -54,7 +54,7 @@ subpackages:
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
-          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/ethereum-optimism/optimism/mc-node/version.Version=${GIT_VERSION:-v0.0.0} -X github.com/ethereum-optimism/optimism/mc-node/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
+          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/mindchain/mind-chain/mc-node/version.Version=${GIT_VERSION:-v0.0.0} -X github.com/mindchain/mind-chain/mc-node/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
       - uses: strip
 
   - name: mc-batcher
@@ -85,14 +85,14 @@ subpackages:
           ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.0}
       - uses: strip
 
-  - name: op-conductor
-    description: op-conductor — OP Stack sequencer conductor
+  - name: mc-conductor
+    description: mc-conductor — OP Stack sequencer conductor
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-conductor/cmd
-          output: op-conductor
+          packages: ./mc-conductor/cmd
+          output: mc-conductor
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
@@ -110,101 +110,101 @@ subpackages:
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
-          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/ethereum-optimism/optimism/mc-challenger/version.Version=${GIT_VERSION:-v0.1.0} -X github.com/ethereum-optimism/optimism/mc-challenger/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
+          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/mindchain/mind-chain/mc-challenger/version.Version=${GIT_VERSION:-v0.1.0} -X github.com/mindchain/mind-chain/mc-challenger/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
       - uses: strip
 
-  - name: op-dispute-mon
-    description: op-dispute-mon — OP Stack dispute monitor
+  - name: mc-dispute-mon
+    description: mc-dispute-mon — OP Stack dispute monitor
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-dispute-mon/cmd
-          output: op-dispute-mon
+          packages: ./mc-dispute-mon/cmd
+          output: mc-dispute-mon
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
-          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/ethereum-optimism/optimism/op-dispute-mon/version.Version=${GIT_VERSION:-v0.0.0} -X github.com/ethereum-optimism/optimism/op-dispute-mon/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
+          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X github.com/mindchain/mind-chain/mc-dispute-mon/version.Version=${GIT_VERSION:-v0.0.0} -X github.com/mindchain/mind-chain/mc-dispute-mon/version.Meta=$(if [ -n "${GIT_VERSION}" ]; then printf ""; else printf "dev"; fi)
       - uses: strip
 
-  - name: op-dripper
-    description: op-dripper — OP Stack drippie executor
+  - name: mc-dripper
+    description: mc-dripper — OP Stack drippie executor
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-dripper/cmd
-          output: op-dripper
-          go-package: go-1.26
-          # /usr/local/bin, where upstream's images install binaries.
-          prefix: usr/local
-          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.0}
-      - uses: strip
-
-  - name: op-faucet
-    description: op-faucet — OP Stack faucet service
-    pipeline:
-      - uses: go/build
-        with:
-          modroot: .
-          packages: ./op-faucet/cmd
-          output: op-faucet
+          packages: ./mc-dripper/cmd
+          output: mc-dripper
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
           ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.0}
       - uses: strip
 
-  - name: op-interop-filter
-    description: op-interop-filter — OP Stack interop message filter
+  - name: mc-faucet
+    description: mc-faucet — OP Stack faucet service
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-interop-filter/cmd
-          output: op-interop-filter
+          packages: ./mc-faucet/cmd
+          output: mc-faucet
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
           ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.0}
       - uses: strip
 
-  - name: op-interop-mon
-    description: op-interop-mon — OP Stack interop monitor
+  - name: mc-interop-filter
+    description: mc-interop-filter — OP Stack interop message filter
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-interop-mon/cmd
-          output: op-interop-mon
+          packages: ./mc-interop-filter/cmd
+          output: mc-interop-filter
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
           ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.0}
       - uses: strip
 
-  - name: op-supernode
-    description: op-supernode — OP Stack supernode
+  - name: mc-interop-mon
+    description: mc-interop-mon — OP Stack interop monitor
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-supernode/cmd
-          output: op-supernode
+          packages: ./mc-interop-mon/cmd
+          output: mc-interop-mon
+          go-package: go-1.26
+          # /usr/local/bin, where upstream's images install binaries.
+          prefix: usr/local
+          ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.0.0}
+      - uses: strip
+
+  - name: mc-supernode
+    description: mc-supernode — OP Stack supernode
+    pipeline:
+      - uses: go/build
+        with:
+          modroot: .
+          packages: ./mc-supernode/cmd
+          output: mc-supernode
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
           ldflags: -s -w -X main.GitCommit=${GIT_COMMIT:-unknown} -X main.GitDate=${GIT_DATE:-0} -X main.Version=${GIT_VERSION:-v0.1.1}
       - uses: strip
 
-  - name: op-test-sequencer
-    description: op-test-sequencer — OP Stack test sequencer
+  - name: mc-test-sequencer
+    description: mc-test-sequencer — OP Stack test sequencer
     pipeline:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-test-sequencer/cmd
-          output: op-test-sequencer
+          packages: ./mc-test-sequencer/cmd
+          output: mc-test-sequencer
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.
           prefix: usr/local
@@ -217,7 +217,7 @@ subpackages:
       - uses: go/build
         with:
           modroot: .
-          packages: ./op-alt-da/cmd/daserver
+          packages: ./mc-alt-da/cmd/daserver
           output: da-server
           go-package: go-1.26
           # /usr/local/bin, where upstream's images install binaries.

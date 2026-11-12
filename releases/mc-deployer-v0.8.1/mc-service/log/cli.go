@@ -14,10 +14,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
-	"github.com/ethereum-optimism/optimism/op-service/log/logfilter"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
+	"github.com/mindchain/mind-chain/mc-service/log/logfilter"
 )
 
 const (

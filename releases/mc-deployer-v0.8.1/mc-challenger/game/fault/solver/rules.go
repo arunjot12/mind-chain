@@ -8,9 +8,9 @@ import (
 	"math/big"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 )
 
 var challengerAddr = common.Address(bytes.Repeat([]byte{0xaa}, 20))

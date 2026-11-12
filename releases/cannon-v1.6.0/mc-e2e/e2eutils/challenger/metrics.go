@@ -3,7 +3,7 @@ package challenger
 import (
 	"sync/atomic"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
 )
 
 type CapturingMetrics struct {

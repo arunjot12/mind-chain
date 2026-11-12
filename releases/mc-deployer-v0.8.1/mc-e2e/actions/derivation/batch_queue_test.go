@@ -3,20 +3,20 @@ package derivation
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/config"
+	"github.com/mindchain/mind-chain/mc-e2e/config"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	upgradesHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/upgrades/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/log"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	batcherFlags "github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	upgradesHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/upgrades/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 )
 

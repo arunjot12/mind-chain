@@ -3,8 +3,8 @@ package pipeline
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 )
 
 func PreinstallL1DevGenesis(env *Env, intent *state.Intent, st *state.State) error {

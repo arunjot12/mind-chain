@@ -1,8 +1,8 @@
 package shim
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 )
 
 // ClusterConfig is the config to create a default cluster object

@@ -10,7 +10,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 
 	"github.com/ethereum/go-ethereum/log"
 )

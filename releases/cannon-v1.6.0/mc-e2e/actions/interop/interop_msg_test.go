@@ -6,21 +6,21 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/bindings"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/constants"
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/interop/dsl"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
-	"github.com/ethereum-optimism/optimism/op-service/txintent"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/bindings"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/constants"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/interop/dsl"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
+	"github.com/mindchain/mind-chain/mc-service/txintent"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 	"github.com/stretchr/testify/require"
 
-	suptypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	suptypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 // BlockBuilder helps txplan to be integrated with intra block building functionality.
@@ -555,8 +555,8 @@ func TestBreakTimestampInvariant(gt *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, uint64(0), localUnsafe.Number, "unsafe chain needs to be rewound")
 
-	// Make the op-node do the processing to build the replacement
-	t.Log("Expecting op-node to build replacement block")
+	// Make the mc-node do the processing to build the replacement
+	t.Log("Expecting mc-node to build replacement block")
 	actors.ChainB.Sequencer.ActL2PipelineFull(t)
 	actors.ChainB.Sequencer.SyncSupervisor(t)
 	actors.Supervisor.ProcessFull(t)

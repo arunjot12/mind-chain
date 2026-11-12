@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
 	"github.com/ethereum/go-ethereum/core"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
 	"github.com/stretchr/testify/require"
 )
 

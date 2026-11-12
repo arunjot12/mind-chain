@@ -6,12 +6,12 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	opflags "github.com/ethereum-optimism/optimism/op-service/flags"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	opflags "github.com/mindchain/mind-chain/mc-service/flags"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 const EnvVarPrefix = "OP_CONDUCTOR"
@@ -83,7 +83,7 @@ var (
 	}
 	NodeRPC = &cli.StringFlag{
 		Name:    "node.rpc",
-		Usage:   "HTTP provider URL for op-node",
+		Usage:   "HTTP provider URL for mc-node",
 		EnvVars: opservice.PrefixEnvVar(EnvVarPrefix, "NODE_RPC"),
 	}
 	ExecutionRPC = &cli.StringFlag{

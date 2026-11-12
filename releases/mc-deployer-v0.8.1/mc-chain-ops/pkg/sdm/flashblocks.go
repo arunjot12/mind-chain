@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/coder/websocket"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // FlashblockSummary captures the per-flashblock fields useful when comparing a final block

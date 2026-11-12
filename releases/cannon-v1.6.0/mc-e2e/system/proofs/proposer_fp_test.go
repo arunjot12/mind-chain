@@ -6,18 +6,18 @@ import (
 	"testing"
 	"time"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/config"
+	"github.com/mindchain/mind-chain/mc-e2e/config"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts/metrics"
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts/metrics"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
 	"github.com/stretchr/testify/require"
 )
 

@@ -7,28 +7,28 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-program/chainconfig"
-	"github.com/ethereum-optimism/optimism/op-program/client/boot"
-	"github.com/ethereum-optimism/optimism/op-program/client/interop/types"
-	"github.com/ethereum-optimism/optimism/op-program/client/l1"
-	test2 "github.com/ethereum-optimism/optimism/op-program/client/l1/test"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2/test"
-	"github.com/ethereum-optimism/optimism/op-program/client/tasks"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/cross"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
-	supervisortypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common"
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/trie"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-program/chainconfig"
+	"github.com/mindchain/mind-chain/mc-program/client/boot"
+	"github.com/mindchain/mind-chain/mc-program/client/interop/types"
+	"github.com/mindchain/mind-chain/mc-program/client/l1"
+	test2 "github.com/mindchain/mind-chain/mc-program/client/l1/test"
+	"github.com/mindchain/mind-chain/mc-program/client/l2"
+	"github.com/mindchain/mind-chain/mc-program/client/l2/test"
+	"github.com/mindchain/mind-chain/mc-program/client/tasks"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/cross"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
+	supervisortypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )
@@ -660,7 +660,7 @@ func TestPanicIfAgreedPrestateIsAfterGameTimestamp(t *testing.T) {
 }
 
 func TestHazardSet_ExpiredMessageShortCircuitsInclusionCheck(t *testing.T) {
-	// This test is also covered by safe_update_test.go in op-supervisor.
+	// This test is also covered by safe_update_test.go in mc-supervisor.
 	// However, since this short-circuit behavior is critical for fault proofs, we doubly assert the desired behavior here to prevent a regression.
 
 	runTest := func(t *testing.T, expiryWindow uint64, expectInclusionCheck bool) {

@@ -7,23 +7,23 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/op-service/flags"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/superchain"
+	"github.com/mindchain/mind-chain/mc-service/flags"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 const EnvVarPrefix = "OP_CHALLENGER"
@@ -66,7 +66,7 @@ var (
 	SuperRootRpcFlag = &cli.StringFlag{
 		Name:    "superroot-rpc",
 		Aliases: []string{"supernode-rpc"},
-		Usage:   "HTTP provider URL for a super root RPC source (op-supernode for interop; mc-node for single-chain). Must cover the full dependency set, else correct proposals won't match and the challenger over-challenges.",
+		Usage:   "HTTP provider URL for a super root RPC source (mc-supernode for interop; mc-node for single-chain). Must cover the full dependency set, else correct proposals won't match and the challenger over-challenges.",
 		EnvVars: prefixEnvVars("SUPERROOT_RPC", "SUPERNODE_RPC"),
 	}
 	RollupRpcFlag = &cli.StringFlag{

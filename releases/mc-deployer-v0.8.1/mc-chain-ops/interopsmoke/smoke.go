@@ -2,8 +2,8 @@
 // RPCs of two live interoperable L2 chains: chain identity, ETH transfers,
 // cross-chain ETH bridging, and valid/invalid executing-message checks.
 //
-// It is exposed both as the standalone op-chain-ops/cmd/interop-smoke tool and
-// as the `smoke-interop` subcommand of op-up.
+// It is exposed both as the standalone mc-chain-ops/cmd/interop-smoke tool and
+// as the `smoke-interop` subcommand of mc-up.
 package interopsmoke
 
 import (
@@ -27,24 +27,24 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/interopbridge"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	opclient "github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/log/logfilter"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
-	"github.com/ethereum-optimism/optimism/op-service/txintent"
-	txIntentBindings "github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/interopbridge"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	opclient "github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log/logfilter"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
+	"github.com/mindchain/mind-chain/mc-service/txintent"
+	txIntentBindings "github.com/mindchain/mind-chain/mc-service/txintent/bindings"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 const smokeWaitTimeout = 60 * time.Second
@@ -504,7 +504,7 @@ func withSmokeEnv(cliCtx *cli.Context, name string, fn func(env *smokeEnv) error
 }
 
 // Command returns the `smoke-interop` command tree for embedding in a host
-// CLI such as op-up. envPrefix scopes the flag environment variables
+// CLI such as mc-up. envPrefix scopes the flag environment variables
 // (e.g. "OP_UP" -> OP_UP_SMOKE_L2A_RPC).
 func Command(envPrefix string) *cli.Command {
 	return &cli.Command{

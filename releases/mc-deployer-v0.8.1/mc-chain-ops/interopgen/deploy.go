@@ -14,16 +14,16 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis/beacondeposit"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/manage"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis/beacondeposit"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/devfeatures"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/manage"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (

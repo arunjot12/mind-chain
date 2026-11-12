@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script/addresses"
 	"github.com/holiman/uint256"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script/addresses"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
@@ -28,10 +28,10 @@ import (
 	"github.com/ethereum/go-ethereum/triedb"
 	"github.com/ethereum/go-ethereum/triedb/hashdb"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script/forking"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/srcmap"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script/forking"
+	"github.com/mindchain/mind-chain/mc-chain-ops/srcmap"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 // jumpHistory is the amount of successful jumps to track for debugging.

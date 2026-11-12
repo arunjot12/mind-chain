@@ -6,8 +6,8 @@ import (
 	"encoding/binary"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 	"github.com/stretchr/testify/require"
 )
 

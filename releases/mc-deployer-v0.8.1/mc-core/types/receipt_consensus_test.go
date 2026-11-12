@@ -12,7 +12,7 @@ import (
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/ethereum/go-ethereum/trie"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 // consensusReceiptCases covers every receipts-root encoding arm: legacy,

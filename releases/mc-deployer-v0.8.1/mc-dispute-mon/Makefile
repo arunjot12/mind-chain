@@ -1,3 +1,3 @@
-DEPRECATED_TARGETS := op-dispute-mon clean test
+DEPRECATED_TARGETS := mc-dispute-mon clean test
 
 include ../justfiles/deprecated.mk

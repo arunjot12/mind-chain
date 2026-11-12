@@ -11,14 +11,14 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txintent"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txintent"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 func setupInteropFilterTest(t devtest.T) *presets.TwoL2SupernodeInterop {
@@ -33,7 +33,7 @@ func interopTxRejectedError(err error) bool {
 	if strings.Contains(msg, "transaction filtered out") {
 		return true
 	}
-	// op-interop-filter: malformed or unrecognized access list entry
+	// mc-interop-filter: malformed or unrecognized access list entry
 	if strings.Contains(msg, "failed to parse access entry") {
 		return true
 	}
@@ -41,7 +41,7 @@ func interopTxRejectedError(err error) bool {
 	if strings.Contains(msg, "interop failsafe is active") {
 		return true
 	}
-	// op-interop-filter: failsafe enabled at the filter level
+	// mc-interop-filter: failsafe enabled at the filter level
 	if strings.Contains(msg, "failsafe is enabled") {
 		return true
 	}

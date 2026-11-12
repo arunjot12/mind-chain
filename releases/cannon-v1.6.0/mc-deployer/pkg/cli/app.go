@@ -1,15 +1,15 @@
 package cli
 
 import (
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/bootstrap"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/clean"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/inspect"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/manage"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/upgrade"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/verify"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/bootstrap"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/clean"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/inspect"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/manage"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/verify"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 	"github.com/urfave/cli/v2"
 )
 
@@ -17,7 +17,7 @@ import (
 func NewApp(versionWithMeta string) *cli.App {
 	app := cli.NewApp()
 	app.Version = versionWithMeta
-	app.Name = "op-deployer"
+	app.Name = "mc-deployer"
 	app.Usage = "Tool to configure and deploy OP Chains."
 	app.Flags = cliapp.ProtectFlags(deployer.GlobalFlags)
 	app.Commands = []*cli.Command{

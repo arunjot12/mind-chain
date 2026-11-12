@@ -12,25 +12,25 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/inspect"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/inspect"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/config/secrets"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-e2e/config/secrets"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	op_service "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	op_service "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 
 	_ "embed"
 )
@@ -191,7 +191,7 @@ func DeployConfig(allocType AllocType) *genesis.DeployConfig {
 }
 
 func init() {
-	// Used by the rust team, to skip legacy op-e2e init. Not used by devstack acceptance tests.
+	// Used by the rust team, to skip legacy mc-e2e init. Not used by devstack acceptance tests.
 	if os.Getenv("DISABLE_OP_E2E_LEGACY") == "true" {
 		return
 	}

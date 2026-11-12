@@ -8,10 +8,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	"github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 func execTriggerAt(timestamp uint64) *ExecTrigger {

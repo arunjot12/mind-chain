@@ -4,21 +4,21 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-service/testutils/tcpproxy"
+	"github.com/mindchain/mind-chain/mc-service/testutils/tcpproxy"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/shim"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	supervisorConfig "github.com/ethereum-optimism/optimism/op-supervisor/config"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/syncnode"
+	"github.com/mindchain/mind-chain/mc-devstack/shim"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	supervisorConfig "github.com/mindchain/mind-chain/mc-supervisor/config"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/syncnode"
 )
 
 type OpSupervisor struct {

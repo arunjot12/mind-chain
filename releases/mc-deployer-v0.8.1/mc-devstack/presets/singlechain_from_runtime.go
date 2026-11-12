@@ -7,14 +7,14 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // Initial-sync-check budgets for singleChainMultiNodeFromRuntime. Attempts are

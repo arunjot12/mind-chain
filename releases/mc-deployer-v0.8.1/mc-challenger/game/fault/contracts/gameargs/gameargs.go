@@ -7,8 +7,8 @@ import (
 	"math/big"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 const (

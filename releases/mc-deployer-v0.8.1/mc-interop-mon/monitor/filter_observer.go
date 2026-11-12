@@ -5,10 +5,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-core/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
 )
 
 // filterNonVerdictCodes are interop-filter JSON-RPC error codes that are not a
@@ -24,7 +24,7 @@ var filterNonVerdictCodes = map[int]struct{}{
 }
 
 // FilterObserver cross-checks the monitor's independent verdict against the
-// op-interop-filter (read-only). It never gates monitor behaviour; it only emits
+// mc-interop-filter (read-only). It never gates monitor behaviour; it only emits
 // divergence and failsafe metrics for observability.
 type FilterObserver struct {
 	filter  FilterChecker

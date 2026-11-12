@@ -1,10 +1,10 @@
 package bootstrap
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 	"github.com/urfave/cli/v2"
 )
 

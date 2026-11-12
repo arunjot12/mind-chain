@@ -5,12 +5,12 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-core/devfeatures"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 )
 

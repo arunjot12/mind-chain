@@ -6,18 +6,18 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	opflags "github.com/ethereum-optimism/optimism/op-service/flags"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	opflags "github.com/mindchain/mind-chain/mc-service/flags"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // Flags

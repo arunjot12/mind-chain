@@ -3,8 +3,8 @@ package withdrawal
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/base/withdrawal"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/base/withdrawal"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
 )
 
 func TestWithdrawal_CannonKona(gt *testing.T) {

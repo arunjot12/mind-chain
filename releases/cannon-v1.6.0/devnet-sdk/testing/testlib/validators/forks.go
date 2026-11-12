@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/system"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/testing/systest"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/devnet-sdk/system"
+	"github.com/mindchain/mind-chain/devnet-sdk/testing/systest"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 )
 
 // getChainConfig is a helper function that retrieves the ForkConfig for a specific L2 chain.

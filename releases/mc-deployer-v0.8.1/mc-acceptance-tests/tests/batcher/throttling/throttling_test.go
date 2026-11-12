@@ -6,16 +6,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/loadtest"
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	batcherConfig "github.com/ethereum-optimism/optimism/mc-batcher/config"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop/loadtest"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	batcherConfig "github.com/mindchain/mind-chain/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 const blockSizeLimit = 5_000

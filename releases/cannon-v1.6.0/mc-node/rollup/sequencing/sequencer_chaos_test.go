@@ -15,14 +15,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 // ChaoticEngine simulates what the Engine deriver would do, upon events from the sequencer.
@@ -348,7 +348,7 @@ func testSequencerChaosWithSeed(t *testing.T, seed int64) {
 
 		// Consume a random amount of events. Take a 10% chance to stop at an event without continuing draining (!!!).
 		// If using a synchronous executor it would be completely drained during regular operation,
-		// but once we use a parallel executor in the actual op-node Driver,
+		// but once we use a parallel executor in the actual mc-node Driver,
 		// then there may be unprocessed events before checking the next scheduled sequencing action.
 		// What makes this difficult for the sequencer is that it may decide to emit a sequencer-action,
 		// while previous emitted events are not processed yet. This helps identify bad state dependency assumptions.

@@ -10,12 +10,12 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/system"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/devnet-sdk/system"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
 type HeaderProvider interface {

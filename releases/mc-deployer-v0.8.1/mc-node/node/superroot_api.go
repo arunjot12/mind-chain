@@ -8,12 +8,12 @@ import (
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // superrootAPI serves `superroot_atTimestamp` for mc-node's single rollup chain,
-// the non-interop counterpart to op-supernode's superroot activity. Lets dispute
+// the non-interop counterpart to mc-supernode's superroot activity. Lets dispute
 // infra point `--supernode-rpc` at mc-node and get `len(ChainIDs) == 1`.
 type superrootAPI struct {
 	cfg    *rollup.Config
@@ -54,7 +54,7 @@ func (s *superrootAPI) atTimestamp(ctx context.Context, timestamp uint64) (eth.S
 
 	resp := responseSkeleton(status, chainID)
 
-	// Omit the chain past LocalSafeL2, matching op-supernode.
+	// Omit the chain past LocalSafeL2, matching mc-supernode.
 	if blockNum > status.LocalSafeL2.Number {
 		return resp, nil
 	}

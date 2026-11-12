@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive/params"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive/params"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // AltDADataSource is a data source that fetches inputs from a AltDA provider given

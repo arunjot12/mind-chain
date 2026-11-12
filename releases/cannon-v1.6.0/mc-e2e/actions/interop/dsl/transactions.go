@@ -3,14 +3,14 @@ package dsl
 import (
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/bindingspreview"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/inbox"
-	stypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/bindingspreview"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/inbox"
+	stypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 	"github.com/stretchr/testify/require"
 )
 

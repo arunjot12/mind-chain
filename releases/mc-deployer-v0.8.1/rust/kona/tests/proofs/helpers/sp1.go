@@ -5,13 +5,13 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/op-devstack/shared/rustbin"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-devstack/shared/rustbin"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // sp1RangeExecutorPath is the path to a pre-built kona-sp1-range-executor binary. The binary loads

@@ -5,10 +5,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop/indexing"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop/indexing"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 type SubSystem interface {

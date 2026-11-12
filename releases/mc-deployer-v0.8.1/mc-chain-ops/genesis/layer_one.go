@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis/beacondeposit"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis/beacondeposit"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
 )
 
 // PrecompileCount represents the number of precompile addresses

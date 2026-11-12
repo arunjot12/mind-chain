@@ -1,10 +1,10 @@
 package presets
 
 import (
-	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	challengerConfig "github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 func minimalFromRuntime(t devtest.T, runtime *sysgo.SingleChainRuntime) *Minimal {

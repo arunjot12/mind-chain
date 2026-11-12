@@ -4,16 +4,16 @@ import (
 	"encoding/binary"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/proofs/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	"github.com/ethereum-optimism/optimism/op-program/client/claim"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/consensus/misc/eip1559"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	actionsHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/proofs/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	"github.com/mindchain/mind-chain/mc-program/client/claim"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 )
 

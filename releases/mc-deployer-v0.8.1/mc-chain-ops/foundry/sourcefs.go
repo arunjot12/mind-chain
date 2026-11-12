@@ -11,7 +11,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/srcmap"
+	"github.com/mindchain/mind-chain/mc-chain-ops/srcmap"
 )
 
 // SourceMapFS wraps an FS to provide source-maps.

@@ -8,12 +8,12 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 var (
@@ -21,7 +21,7 @@ var (
 	validL1BeaconUrl                      = "http://localhost:9000"
 	validGameFactoryAddress               = common.Address{0x23}
 	validCannonBin                        = "./bin/cannon"
-	validCannonOpProgramBin               = "./bin/op-program"
+	validCannonOpProgramBin               = "./bin/mc-program"
 	validCannonNetwork                    = "mainnet"
 	validCannonAbsolutePreState           = "pre.json"
 	validCannonAbsolutePreStateBaseURL, _ = url.Parse("http://localhost/foo/")
@@ -31,7 +31,7 @@ var (
 	validSupervisorRpc                    = "http://localhost/supervisor"
 
 	validAsteriscBin                        = "./bin/asterisc"
-	validAsteriscOpProgramBin               = "./bin/op-program"
+	validAsteriscOpProgramBin               = "./bin/mc-program"
 	validAsteriscNetwork                    = "mainnet"
 	validAsteriscAbsolutePreState           = "pre.json"
 	validAsteriscAbsolutePreStateBaseURL, _ = url.Parse("http://localhost/bar/")

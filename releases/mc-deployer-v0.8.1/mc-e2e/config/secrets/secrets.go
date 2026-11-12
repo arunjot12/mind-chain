@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	hdwallet "github.com/ethereum-optimism/go-ethereum-hdwallet"
+	hdwallet "github.com/arunjot12/go-ethereum-hdwallet"
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"

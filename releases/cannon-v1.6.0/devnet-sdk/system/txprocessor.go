@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"math/big"
 
-	sdkTypes "github.com/ethereum-optimism/optimism/devnet-sdk/types"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+	sdkTypes "github.com/mindchain/mind-chain/devnet-sdk/types"
 )
 
 // EthClient defines the interface for interacting with Ethereum node

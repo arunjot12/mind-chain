@@ -5,9 +5,9 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/session"
 	"github.com/google/uuid"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/session"
 	"github.com/stretchr/testify/require"
 )
 

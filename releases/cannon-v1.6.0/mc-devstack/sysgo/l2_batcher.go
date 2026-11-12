@@ -7,17 +7,17 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-devstack/shim"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/setuputils"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	batcherFlags "github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-devstack/shim"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/setuputils"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 type L2Batcher struct {

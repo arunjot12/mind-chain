@@ -1,10 +1,10 @@
 package contracts
 
 import (
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/registry/client"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/registry/empty"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/interfaces"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/registry/client"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/registry/empty"
+	"github.com/mindchain/mind-chain/devnet-sdk/interfaces"
 )
 
 // NewClientRegistry creates a new Registry that uses the provided client

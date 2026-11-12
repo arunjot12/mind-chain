@@ -3,8 +3,8 @@ package frontend
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type SyncBackend interface {

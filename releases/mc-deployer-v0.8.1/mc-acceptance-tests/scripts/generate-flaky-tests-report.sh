@@ -88,7 +88,7 @@ fi
 
 # Filter to only include acceptance tests
 echo "Filtering for acceptance tests only..."
-API_RESPONSE=$(echo "$API_RESPONSE" | jq '.flaky_tests = (.flaky_tests | map(select(.classname | startswith("github.com/ethereum-optimism/optimism/op-acceptance-tests/tests"))))')
+API_RESPONSE=$(echo "$API_RESPONSE" | jq '.flaky_tests = (.flaky_tests | map(select(.classname | startswith("github.com/mindchain/mind-chain/mc-acceptance-tests/tests"))))')
 
 # Save the raw response for debugging
 echo "$API_RESPONSE" > "$OUTPUT_DIR/flaky_tests.json"

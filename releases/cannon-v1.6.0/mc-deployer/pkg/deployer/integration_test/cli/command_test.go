@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 	"github.com/stretchr/testify/require"
 )
 
@@ -190,19 +190,19 @@ func TestCommandParsing(t *testing.T) {
 			name:           "help command",
 			args:           []string{"--help"},
 			expectError:    false,
-			expectContains: []string{"op-deployer", "Tool to configure and deploy OP Chains"}, // From cli/app.go app.Usage
+			expectContains: []string{"mc-deployer", "Tool to configure and deploy OP Chains"}, // From cli/app.go app.Usage
 		},
 		{
 			name:           "version command",
 			args:           []string{"--version"},
 			expectError:    false,
-			expectContains: []string{"op-deployer", "v0.0.0"}, // Version should contain app name and version format
+			expectContains: []string{"mc-deployer", "v0.0.0"}, // Version should contain app name and version format
 		},
 		{
 			name:           "no command",
 			args:           []string{},
 			expectError:    false,                                                             // Shows help
-			expectContains: []string{"op-deployer", "Tool to configure and deploy OP Chains"}, // From cli/app.go app.Usage
+			expectContains: []string{"mc-deployer", "Tool to configure and deploy OP Chains"}, // From cli/app.go app.Usage
 		},
 	}
 

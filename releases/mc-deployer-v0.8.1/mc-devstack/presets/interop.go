@@ -5,15 +5,15 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl/proofs"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/intentbuilder"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	challengerConfig "github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl/proofs"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/intentbuilder"
+	"github.com/mindchain/mind-chain/mc-service/clock"
 )
 
 type SingleChainInterop struct {
@@ -106,7 +106,7 @@ func (s *SimpleInterop) proofValidationContext() (devtest.T, *dsl.L1ELNode, []*d
 	return s.T, s.L1EL, s.L2Networks()
 }
 
-// Supernode returns the op-supernode backing this system's super roots. SimpleInterop
+// Supernode returns the mc-supernode backing this system's super roots. SimpleInterop
 // is always supernode-backed, so this exposes supernode-only test controls (e.g.
 // interop pause/resume) that are not part of the SuperRootSource interface.
 func (s *SimpleInterop) Supernode() *dsl.Supernode {
@@ -120,28 +120,28 @@ func (s *SingleChainInterop) StandardBridge(l2Chain *dsl.L2Network) *dsl.Standar
 }
 
 // NewSimpleInterop creates a fresh SimpleInterop target for the current
-// test using the super-root proofs system backed by op-supernode.
+// test using the super-root proofs system backed by mc-supernode.
 func NewSimpleInterop(t devtest.T, opts ...Option) *SimpleInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewSimpleInterop", opts, twoL2SupernodeProofsPresetSupportedOptionKinds)
 	return simpleInteropFromSupernodeProofsRuntime(t, sysgo.NewTwoL2SupernodeProofsRuntimeWithConfig(t, true, presetCfg))
 }
 
 // NewSingleChainInterop creates a fresh SingleChainInterop target for the
-// current test using the single-chain super-root proofs system backed by op-supernode.
+// current test using the single-chain super-root proofs system backed by mc-supernode.
 func NewSingleChainInterop(t devtest.T, opts ...Option) *SingleChainInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewSingleChainInterop", opts, supernodeProofsPresetSupportedOptionKinds)
 	return singleChainInteropFromSupernodeProofsRuntime(t, sysgo.NewSingleChainSupernodeProofsRuntimeWithConfig(t, true, presetCfg))
 }
 
 // NewSimpleInteropIsthmusSuper creates a fresh SimpleInterop target for the current test
-// using the Isthmus super-root system backed by op-supernode.
+// using the Isthmus super-root system backed by mc-supernode.
 func NewSimpleInteropIsthmusSuper(t devtest.T, opts ...Option) *SimpleInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewSimpleInteropIsthmusSuper", opts, twoL2SupernodeProofsPresetSupportedOptionKinds)
 	return simpleInteropFromSupernodeProofsRuntime(t, sysgo.NewTwoL2SupernodeProofsRuntimeWithConfig(t, false, presetCfg))
 }
 
 // NewSingleChainInteropIsthmusSuper creates a fresh SingleChainInterop target for the
-// current test using the single-chain Isthmus super-root system backed by op-supernode.
+// current test using the single-chain Isthmus super-root system backed by mc-supernode.
 func NewSingleChainInteropIsthmusSuper(t devtest.T, opts ...Option) *SingleChainInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewSingleChainInteropIsthmusSuper", opts, supernodeProofsPresetSupportedOptionKinds)
 	return singleChainInteropFromSupernodeProofsRuntime(t, sysgo.NewSingleChainSupernodeProofsRuntimeWithConfig(t, false, presetCfg))
@@ -149,7 +149,7 @@ func NewSingleChainInteropIsthmusSuper(t devtest.T, opts ...Option) *SingleChain
 
 // NewSingleChainInteropNoSupernode creates a fresh SingleChainInterop target whose
 // super roots are served by the single mc-node's superroot_atTimestamp endpoint (no
-// op-supernode). The mc-challenger plays super-cannon-kona games against this mc-node
+// mc-supernode). The mc-challenger plays super-cannon-kona games against this mc-node
 // source. This exercises the "mc-node as super root RPC" path end-to-end.
 func NewSingleChainInteropNoSupernode(t devtest.T, opts ...Option) *SingleChainInterop {
 	presetCfg, _ := collectSupportedPresetConfig(t, "NewSingleChainInteropNoSupernode", opts, singleChainInteropNoSupernodePresetSupportedOptionKinds)
@@ -157,7 +157,7 @@ func NewSingleChainInteropNoSupernode(t devtest.T, opts ...Option) *SingleChainI
 }
 
 // NewSingleChainInteropNoSupernodeZKDispute creates a fresh SingleChainInterop target whose super
-// roots are served by the single mc-node's superroot_atTimestamp endpoint (no op-supernode),
+// roots are served by the single mc-node's superroot_atTimestamp endpoint (no mc-supernode),
 // running an mc-challenger that plays ZK dispute games against that mc-node source. This exercises
 // the "mc-node as super root RPC" path for the ZK game end-to-end.
 func NewSingleChainInteropNoSupernodeZKDispute(t devtest.T, opts ...Option) *SingleChainInterop {

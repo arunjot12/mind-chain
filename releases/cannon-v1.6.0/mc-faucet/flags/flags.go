@@ -5,13 +5,13 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-faucet/config"
-	fconf "github.com/ethereum-optimism/optimism/op-faucet/faucet/backend/config"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	"github.com/mindchain/mind-chain/mc-faucet/config"
+	fconf "github.com/mindchain/mind-chain/mc-faucet/faucet/backend/config"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 const EnvVarPrefix = "OP_FAUCET"

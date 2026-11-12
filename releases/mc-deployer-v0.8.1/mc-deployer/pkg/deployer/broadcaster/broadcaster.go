@@ -3,9 +3,9 @@ package broadcaster
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
 )
 
 type Broadcaster interface {

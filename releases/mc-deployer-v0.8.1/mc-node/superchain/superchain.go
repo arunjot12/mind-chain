@@ -1,6 +1,6 @@
 // Package superchain loads OP-Stack rollup configs from the superchain-registry.
 // It is kept separate from mc-node/rollup so that the many packages depending on
-// the rollup config types do not pull in op-core/superchain, which embeds the
+// the rollup config types do not pull in mc-core/superchain, which embeds the
 // multi-megabyte superchain config bundle and must generate it before it compiles.
 package superchain
 
@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"math/big"
 
-	opparams "github.com/ethereum-optimism/optimism/op-core/params"
-	registry "github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	opparams "github.com/mindchain/mind-chain/mc-core/params"
+	registry "github.com/mindchain/mind-chain/mc-core/superchain"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // LoadOPStackRollupConfig loads the rollup configuration of the requested chain ID from the superchain-registry.

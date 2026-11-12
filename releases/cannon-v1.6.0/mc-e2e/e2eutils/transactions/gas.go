@@ -3,9 +3,9 @@ package transactions
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-service/errutil"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-service/errutil"
 )
 
 // TxBuilder creates and sends a transaction using the supplied bind.TransactOpts.

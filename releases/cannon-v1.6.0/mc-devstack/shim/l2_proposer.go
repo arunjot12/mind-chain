@@ -1,8 +1,8 @@
 package shim
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-service/client"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-service/client"
 )
 
 type L2ProposerConfig struct {

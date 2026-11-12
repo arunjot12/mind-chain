@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/holiman/uint256"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 	"github.com/stretchr/testify/require"
 )
 

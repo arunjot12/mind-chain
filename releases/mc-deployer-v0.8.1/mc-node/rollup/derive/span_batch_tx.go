@@ -11,7 +11,7 @@ import (
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/holiman/uint256"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 type spanBatchTxData interface {

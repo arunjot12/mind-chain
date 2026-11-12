@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/bindings"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/interfaces"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/types"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/bindings"
+	"github.com/mindchain/mind-chain/devnet-sdk/interfaces"
+	"github.com/mindchain/mind-chain/devnet-sdk/types"
 )
 
 // ClientRegistry is a Registry implementation that uses an ethclient.Client

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/types"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"

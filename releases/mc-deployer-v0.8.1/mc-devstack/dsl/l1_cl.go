@@ -1,6 +1,6 @@
 package dsl
 
-import "github.com/ethereum-optimism/optimism/op-devstack/stack"
+import "github.com/mindchain/mind-chain/mc-devstack/stack"
 
 // L1CLNode wraps a stack.L1CLNode interface for DSL operations
 type L1CLNode struct {

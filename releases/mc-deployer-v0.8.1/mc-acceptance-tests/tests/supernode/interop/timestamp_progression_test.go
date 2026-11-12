@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-service/clock"
 )
 
 // TestSupernodeInteropVerifiedAt tests that the VerifiedAt endpoint returns

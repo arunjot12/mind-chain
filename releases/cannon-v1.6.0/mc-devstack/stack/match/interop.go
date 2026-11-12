@@ -1,6 +1,6 @@
 package match
 
-import "github.com/ethereum-optimism/optimism/op-devstack/stack"
+import "github.com/mindchain/mind-chain/mc-devstack/stack"
 
 // L2ChainA is an alias for the first L2 network.
 var L2ChainA = First[stack.L2NetworkID, stack.L2Network]()

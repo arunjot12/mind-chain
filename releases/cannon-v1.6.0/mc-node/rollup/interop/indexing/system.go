@@ -12,15 +12,15 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	gethrpc "github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/rpc"
-	supervisortypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/rpc"
+	supervisortypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 // indexingEventStream abstracts the event stream functionality for testing
@@ -51,7 +51,7 @@ type EngineController interface {
 	PromoteFinalized(ctx context.Context, ref eth.L2BlockRef)
 }
 
-// IndexingMode makes the op-node managed by an op-supervisor,
+// IndexingMode makes the mc-node managed by an mc-supervisor,
 // by serving sync work and updating the canonical chain based on instructions.
 type IndexingMode struct {
 	log log.Logger

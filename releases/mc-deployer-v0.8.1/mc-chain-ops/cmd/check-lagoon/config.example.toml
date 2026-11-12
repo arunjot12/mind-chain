@@ -17,7 +17,7 @@ iterations = 3
 # How long to wait for the initiating message to propagate before the blocked relay.
 propagation-wait = "6s"
 # Dotted flag names (--filter.admin-rpc, --filter.jwt-secret) map to a [filter] table.
-# Add one entry per op-interop-filter instance; jwt-secret values are 32-byte hex (0x optional).
+# Add one entry per mc-interop-filter instance; jwt-secret values are 32-byte hex (0x optional).
 [filter]
 admin-rpc = ["http://localhost:8420", "http://localhost:8421"]
 jwt-secret = ["0x<32-byte-hex-secret-1>", "0x<32-byte-hex-secret-2>"]

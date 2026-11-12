@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"math/bits"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/memory"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/memory"
 )
 
 const (

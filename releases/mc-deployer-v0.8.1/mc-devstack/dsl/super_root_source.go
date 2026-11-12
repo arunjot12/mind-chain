@@ -6,14 +6,14 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // SuperRootSource is the super-root query surface the dispute-game DSL needs. It is
-// satisfied by both op-supernode (interop, multi-chain) and mc-node (non-interop,
+// satisfied by both mc-supernode (interop, multi-chain) and mc-node (non-interop,
 // single-chain), letting the same dispute-game tests run against either source.
 type SuperRootSource interface {
 	QueryAPI() apis.SupernodeQueryAPI

@@ -1,8 +1,8 @@
 package mon
 
 import (
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
 )
 
 type GameTypeMetrics interface {

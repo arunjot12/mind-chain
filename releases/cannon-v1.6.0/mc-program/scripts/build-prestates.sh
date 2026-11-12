@@ -17,7 +17,7 @@ git clone https://github.com/ethereum-optimism/optimism --recurse-submodules
 STATES_DIR="${SCRIPTS_DIR}/../temp/states"
 LOGS_DIR="${SCRIPTS_DIR}/../temp/logs"
 REPO_DIR="${TMP_DIR}/optimism"
-BIN_DIR="${REPO_DIR}/op-program/bin/"
+BIN_DIR="${REPO_DIR}/mc-program/bin/"
 VERSIONS_FILE="${STATES_DIR}/versions.json"
 
 mkdir -p "${STATES_DIR}" "${LOGS_DIR}"
@@ -25,7 +25,7 @@ mkdir -p "${STATES_DIR}" "${LOGS_DIR}"
 cd "${REPO_DIR}"
 
 VERSIONS_JSON="[]"
-readarray -t VERSIONS < <(git tag --list 'op-program/v*' --sort taggerdate)
+readarray -t VERSIONS < <(git tag --list 'mc-program/v*' --sort taggerdate)
 
 for VERSION in "${VERSIONS[@]}"
 do

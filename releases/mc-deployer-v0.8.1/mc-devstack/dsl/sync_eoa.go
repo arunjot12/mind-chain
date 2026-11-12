@@ -1,9 +1,9 @@
 package dsl
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-service/txinclude"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-service/txinclude"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 // SyncEOA plans transactions for an account and submits them through a

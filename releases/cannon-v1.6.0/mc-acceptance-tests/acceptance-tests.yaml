@@ -10,15 +10,15 @@ gates:
   - id: isthmus
     description: "Isthmus network tests."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/isthmus
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/isthmus
         timeout: 6h
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/isthmus/operator_fee
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/isthmus/operator_fee
         timeout: 6h
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/isthmus/withdrawal_root
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/isthmus/withdrawal_root
         timeout: 20m
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/isthmus/erc20_bridge
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/isthmus/erc20_bridge
         timeout: 10m
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/isthmus/pectra
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/isthmus/pectra
         timeout: 10m
 
   - id: base
@@ -26,22 +26,22 @@ gates:
     inherits:
       - isthmus
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/base
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/base/deposit
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/base
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/base/deposit
         timeout: 10m
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/base/chain
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/base/chain
         timeout: 10m
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/ecotone
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/ecotone
         timeout: 10m
       # TODO(infra#401): Re-enable the test when the sysext missing toolset is implemented
-      #- package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/base/withdrawal
+      #- package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/base/withdrawal
       #  timeout: 10m
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/fjord
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/fjord
 
   - id: conductor
     description: "Sanity/smoke acceptance tests for networks with conductors."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/base/conductor
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/base/conductor
         timeout: 10m
 
   - id: pre-interop
@@ -50,7 +50,7 @@ gates:
     description: "Pre-interop network tests."
     tests:
       - name: TestInteropReadiness
-        package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/isthmus/preinterop
+        package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/isthmus/preinterop
         timeout: 20m
 
   - id: interop
@@ -58,18 +58,18 @@ gates:
       - base
     description: "Interop network tests."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop
         timeout: 10m
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/message
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop/message
         timeout: 30m
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/sync
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/smoke
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/contract
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop/sync
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop/smoke
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop/contract
 
   - id: interop-loadtest
     description: "Interop network loadtests."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop/loadtest
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop/loadtest
         timeout: 10m
 
   - id: flashblocks
@@ -77,7 +77,7 @@ gates:
       - base
     description: "Flashblocks network tests."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/flashblocks
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/flashblocks
         timeout: 5m
 
   - id: flashblocks-with-isthmus
@@ -85,13 +85,13 @@ gates:
       - base
     description: "Flashblocks network tests with Isthmus."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/flashblocks
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/flashblocks
         timeout: 5m
 
   - id: sync-test-op-node
-    description: "Sync tests for op-node with external networks via the op-sync-tester - tests run daily."
+    description: "Sync tests for mc-node with external networks via the mc-sync-tester - tests run daily."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/sync_tester/sync_tester_ext_el
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/sync_tester/sync_tester_ext_el
         timeout: 30m
 
   - id: jovian
@@ -99,5 +99,5 @@ gates:
       - base
     description: "Jovian network tests."
     tests:
-      - package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/jovian
+      - package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/jovian
         timeout: 10m

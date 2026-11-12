@@ -6,8 +6,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
 	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
 )
 
 type contractArtifact struct {

@@ -23,10 +23,10 @@ against the *initiating* chain's block, that:
 These checks together are equivalent to the `MessageChecksum` binding used by `interop_checkAccessList`.
 
 The chain set and the message expiry window are sourced from an interop dependency-set JSON file via
-`--dependency-set` (the same format consumed by `op-supernode` / `mc-node`).
+`--dependency-set` (the same format consumed by `mc-supernode` / `mc-node`).
 
-This service belongs to the post-`op-supervisor` interop topology: `op-supernode` (consensus layer,
-makes the cross-chain safety decision), Light CL follower nodes, and `op-interop-filter` (execution
+This service belongs to the post-`op-supervisor` interop topology: `mc-supernode` (consensus layer,
+makes the cross-chain safety decision), Light CL follower nodes, and `mc-interop-filter` (execution
 layer, holds the failsafe and answers `interop_checkAccessList`). The monitor optionally cross-checks
 the interop-filter and supernode read-only (see flags) but never depends on them to function.
 
@@ -40,7 +40,7 @@ observability metrics. They degrade gracefully if the observed service is unreac
   `filter_divergence_total{executing_chain_id,initiating_chain_id,monitor_status,filter_status}` when
   the filter disagrees with the monitor. Also polls `admin_getFailsafeEnabled` into the
   `interop_filter_failsafe` gauge.
-- `--supernode-endpoints` (repeatable): for each `op-supernode`, probes `heartbeat_check` into
+- `--supernode-endpoints` (repeatable): for each `mc-supernode`, probes `heartbeat_check` into
   `supernode_up{endpoint}`, records per-chain `supernode_safe_head{chain_id,level}` (levels
   `cross_safe` and `finalized`) from `supernode_syncStatus`, and increments
   `cross_safety_violations_total{executing_chain_id,initiating_chain_id,level}` when a bad executing
@@ -73,7 +73,7 @@ flowchart TD
   end
 
   %% Main Monitoring Group
-  subgraph service["op-interop-mon"]
+  subgraph service["mc-interop-mon"]
     s[Service Routing]
     m[Metric Collector]
     fa[Chain A Finder]

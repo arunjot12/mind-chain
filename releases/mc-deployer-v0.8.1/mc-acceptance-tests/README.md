@@ -9,7 +9,7 @@ The supported execution path is:
 - `just` or `just acceptance-test`
 - `gotestsum -- go test ./tests/...`
 
-`devtest.T.MarkFlaky(...)` is used for tests that should downgrade failures to skips in the normal acceptance run. Set `DEVNET_FAIL_FLAKY_TESTS=true` to force those tests to fail normally. Acceptance runs also emit a `flaky-tests.txt` artifact in `op-acceptance-tests/logs/...` listing the current `MarkFlaky(...)` call sites.
+`devtest.T.MarkFlaky(...)` is used for tests that should downgrade failures to skips in the normal acceptance run. Set `DEVNET_FAIL_FLAKY_TESTS=true` to force those tests to fail normally. Acceptance runs also emit a `flaky-tests.txt` artifact in `mc-acceptance-tests/logs/...` listing the current `MarkFlaky(...)` call sites.
 
 ## Dependencies
 
@@ -20,7 +20,7 @@ Install repo tools via `mise` as documented in the repository root. Local accept
 ### Quick Start
 
 ```bash
-cd op-acceptance-tests
+cd mc-acceptance-tests
 just
 ```
 

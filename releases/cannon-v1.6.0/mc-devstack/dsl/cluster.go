@@ -1,6 +1,6 @@
 package dsl
 
-import "github.com/ethereum-optimism/optimism/op-devstack/stack"
+import "github.com/mindchain/mind-chain/mc-devstack/stack"
 
 // Cluster wraps a stack.Cluster interface for DSL operations
 type Cluster struct {

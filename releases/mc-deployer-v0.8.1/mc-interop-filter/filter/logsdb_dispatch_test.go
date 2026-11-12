@@ -11,13 +11,13 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/stretchr/testify/require"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-interop-filter/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-interop-filter/metrics"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
 )
 
 // fakeLogsDB satisfies the LogsDB interface and lets tests inject specific
@@ -82,7 +82,7 @@ func fetchedBlock(num, ts uint64, parent common.Hash) blockFetch {
 // TestWriteFetchedBlock_WriteErrorDispatch pins the sentinel-dispatch contract
 // for paths the integration suite cannot reach: AddLog/SealBlock returning
 // ErrConflict / ErrDataCorruption / ErrInvalidLog. These can't be produced
-// by a real on-disk logsdb through op-interop-filter's normal control flow
+// by a real on-disk logsdb through mc-interop-filter's normal control flow
 // because writeFetchedBlock pre-checks block number and parent hash before
 // calling either method.
 func TestWriteFetchedBlock_WriteErrorDispatch(t *testing.T) {

@@ -1,8 +1,8 @@
 // Package state provides the frozen pre-fork L2 predeploy state artifacts that
 // the NUT bundle activation test boots from.
 //
-// It is deliberately a separate package from op-core/nuts: mc-node and kona-node
-// import op-core/nuts for the embedded bundles, and the state JSON is large
+// It is deliberately a separate package from mc-core/nuts: mc-node and kona-node
+// import mc-core/nuts for the embedded bundles, and the state JSON is large
 // (hundreds of KB per fork). Keeping the embed here means the state ships only in
 // test binaries that import this package, not in the node binaries.
 package state
@@ -14,7 +14,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/forks"
 )
 
 // State files are named after the fork they represent (the state as of that

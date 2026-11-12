@@ -16,13 +16,13 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	opcoreparams "github.com/ethereum-optimism/optimism/op-core/params"
-	opparams "github.com/ethereum-optimism/optimism/mc-node/params"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	opcoreparams "github.com/mindchain/mind-chain/mc-core/params"
+	opparams "github.com/mindchain/mind-chain/mc-node/params"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (
@@ -745,7 +745,7 @@ func (d *L2CoreDeployConfig) Check(log log.Logger) error {
 
 // AltDADeployConfig configures optional AltDA functionality.
 type AltDADeployConfig struct {
-	// UseAltDA is a flag that indicates if the system is using op-alt-da
+	// UseAltDA is a flag that indicates if the system is using mc-alt-da
 	UseAltDA bool `json:"useAltDA" toml:"useAltDA"`
 	// DACommitmentType specifies the allowed commitment
 	DACommitmentType string `json:"daCommitmentType" toml:"daCommitmentType"`

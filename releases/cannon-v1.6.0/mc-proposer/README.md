@@ -1,4 +1,4 @@
-# `op-proposer`
+# `mc-proposer`
 
 Issues: [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-proposer)
 
@@ -14,7 +14,7 @@ Specs:
 - [`withdrawals`](https://github.com/ethereum-optimism/specs/blob/main/specs/protocol/withdrawals.md)
 - [`fault-proof/stage-one/bridge-integration.md`](https://github.com/ethereum-optimism/specs/blob/main/specs/fault-proof/stage-one/bridge-integration.md)
 
-The `op-proposer` is a light-weight service to automate output-root proposal transactions on regular interval.
+The `mc-proposer` is a light-weight service to automate output-root proposal transactions on regular interval.
 Each proposal transaction submits a claim of the L2 state to L1.
 
 Chains with a pre-Fault-Proof deployment make proposal-transactions towards a pre-fault-proofs `OptimismPortal` deployment.
@@ -29,7 +29,7 @@ with an inclusion-proof of a withdrawn message (as registered in the L2 withdraw
 ## Quickstart
 
 ```bash
-go run ./op-proposer/cmd \
+go run ./mc-proposer/cmd \
         --l1-eth-rpc http://l1:8545 \
       --rollup-rpc: http://op-node:8545 \
       --game-factory-address=changeme \
@@ -46,28 +46,28 @@ On test networks, `--allow-non-finalized` may be used to make proposals sooner, 
 ### Build from source
 
 ```bash
-# from op-proposer dir:
-just op-proposer
+# from mc-proposer dir:
+just mc-proposer
 
-./bin/op-proposer --help
+./bin/mc-proposer --help
 ```
 
 ### Run from source
 
 ```bash
-# from op-proposer dir:
+# from mc-proposer dir:
 go run ./cmd --help
 ```
 
 ### Build docker image
 
-See `op-proposer` docker-bake target.
+See `mc-proposer` docker-bake target.
 
 ## Overview
 
 <!-- description of *how* this module implements the spec -->
 
-The op-proposer relays subjective `finalized` blocks (irreversible, as locally verified)
+The mc-proposer relays subjective `finalized` blocks (irreversible, as locally verified)
 to L1 by constructing and submitting proposals.
 The proposed claims can then be resolved, and used for withdrawals on L1.
 
@@ -76,11 +76,11 @@ sequenceDiagram
 autonumber
 
 participant portal as OptimismPortal (v2)<br/> contract
-participant challenger as op-challenger
+participant challenger as mc-challenger
 participant claim as Fault Dispute Game<br/> contract
 participant dgf as Dispute Game Factory<br/> contract on L1
-participant proposer as op-proposer
-participant opnode as op-node
+participant proposer as mc-proposer
+participant opnode as mc-node
 participant el as Execution Engine<br/> (e.g. op-geth)
 
 proposer ->>opnode: query output-root
@@ -94,20 +94,20 @@ challenger ->> claim: resolve (or counter) claim
 portal -->> claim: proveWithdrawalTransaction checks game state
 ```
 
-The `op-proposer` itself is a light-weight loop to maintain this relay:
+The `mc-proposer` itself is a light-weight loop to maintain this relay:
 schedule when to propose, inspect what to propose, transact on L1 to proposer, and repeat.
 
 ## Product
 
 ### Optimization target
 
-The `op-proposer` code optimizes for simplicity.
+The `mc-proposer` code optimizes for simplicity.
 
 Proposals are few and far-between, commonly only at a 1 hour interval.
 Proposal execution speed affects tests more than it does production, and thus not a primary optimization target.
 
 Most costs are made in the proposal contract execution,
-not the operation of the op-proposer, and thus not the primary optimization concern.
+not the operation of the mc-proposer, and thus not the primary optimization concern.
 
 Proposals are critical to safety however, and simplicity is thus important to this service.
 
@@ -117,7 +117,7 @@ The pre-fault-proof proposal functionality is effectively unused code, and may b
 Solutions for alternative proving systems are a work in progress.
 
 With the proposed withdrawals-root feature (see [Isthmus upgrade feature]),
-the op-node will soon no longer have to query the storage separately
+the mc-node will soon no longer have to query the storage separately
 from the block-header that it constructs an output-root for.
 This lowers the requirements to run a proposer,
 since no archive-node is required anymore to determine the withdrawals-root.
@@ -125,14 +125,14 @@ since no archive-node is required anymore to determine the withdrawals-root.
 [Isthmus upgrade feature]: https://github.com/ethereum-optimism/specs/blob/main/specs/protocol/isthmus/exec-engine.md#l2tol1messagepasser-storage-root-in-header
 
 Testing of this service may be further improved by decoupling the scheduling and processing.
-Better encapsulated processing would lend itself better to [op-e2e](../op-e2e) action-tests.
+Better encapsulated processing would lend itself better to [mc-e2e](../mc-e2e) action-tests.
 
 
 ## Design principles
 
 <!-- design choices / trade-offs -->
 
-- Reuse the transaction-management: this is the most complicated part of the op-proposer, but is common with other services.
+- Reuse the transaction-management: this is the most complicated part of the mc-proposer, but is common with other services.
 - Keep the proposal flow simple: given that we only expect one transaction per hour,
   but the transaction is a critical claim, we have a strong preference for safety over liveness.
 
@@ -140,15 +140,15 @@ Better encapsulated processing would lend itself better to [op-e2e](../op-e2e) a
 
 <!-- Risks & error handling -->
 
-While disabled by default, the op-proposer is capable of submitting proposals too eagerly.
+While disabled by default, the mc-proposer is capable of submitting proposals too eagerly.
 A proposal for unfinalized L2 state that does not hold true later may result in an invalid claim on L1,
 and thus in dispute-game penalties.
 
-Assuming finality, the op-proposer is only really subject to liveness failures:
+Assuming finality, the mc-proposer is only really subject to liveness failures:
 - to L1 RPC failure (mitigated with redundancy in L1 RPC)
 - local temporary failure, e.g. offline execution engine (mitigated with alerts)
   or odd tx-inclusion situations (mitigated with fresh state upon restart).
 
 ## Testing
 
-The `op-proposer` integration is covered in system `op-e2e` tests.
+The `mc-proposer` integration is covered in system `mc-e2e` tests.

@@ -1,4 +1,4 @@
-name: github.com/ethereum-optimism/optimism/kurtosis-devnet/fileserver
+name: github.com/mindchain/mind-chain/kurtosis-devnet/fileserver
 description: |-
   Kurtosis package for serving files from the build directory
 replace: {}

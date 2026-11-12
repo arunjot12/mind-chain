@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"strings"
 
-	challengerFlags "github.com/ethereum-optimism/optimism/mc-challenger/flags"
-	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
-	"github.com/ethereum-optimism/optimism/op-service/flags"
+	challengerFlags "github.com/mindchain/mind-chain/mc-challenger/flags"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-service/flags"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/config"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/config"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
 )
 
 const (
@@ -45,7 +45,7 @@ var (
 	SuperRootRpcFlag = &cli.StringSliceFlag{
 		Name:    "superroot-rpc",
 		Aliases: []string{"supernode-rpc"},
-		Usage:   "HTTP provider URLs for super root RPC sources (mc-node or op-supernode). Multiple URLs can be specified for redundancy.",
+		Usage:   "HTTP provider URLs for super root RPC sources (mc-node or mc-supernode). Multiple URLs can be specified for redundancy.",
 		EnvVars: prefixEnvVars("SUPERROOT_RPC", "SUPERNODE_RPC"),
 	}
 	GameFactoryAddressFlag = &cli.StringFlag{

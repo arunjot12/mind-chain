@@ -7,18 +7,18 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/rpc"
 	gethrpc "github.com/ethereum/go-ethereum/rpc"
 	"github.com/gorilla/websocket"
+	"github.com/mindchain/mind-chain/mc-service/rpc"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/superevents"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	gethevent "github.com/ethereum/go-ethereum/event"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/superevents"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 type backend interface {
@@ -449,7 +449,7 @@ func (m *ManagedNode) resetIfInconsistent() {
 		return
 	}
 	if errors.Is(localSafeMatchErr, types.ErrFuture) {
-		m.log.Debug("node is ahead of op-supervisor local-safe data")
+		m.log.Debug("node is ahead of mc-supervisor local-safe data")
 		return // resetIfAhead will handle this
 	}
 	m.log.Warn("Last seen block from node is inconsistent with supervisor local-safe blocks",

@@ -1,8 +1,8 @@
 package frontend
 
 import (
-	ftypes "github.com/ethereum-optimism/optimism/op-faucet/faucet/backend/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	ftypes "github.com/mindchain/mind-chain/mc-faucet/faucet/backend/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type AdminBackend interface {

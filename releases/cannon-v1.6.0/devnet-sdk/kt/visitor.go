@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/images"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/manifest"
+	"github.com/mindchain/mind-chain/devnet-sdk/images"
+	"github.com/mindchain/mind-chain/devnet-sdk/manifest"
 )
 
 const (
@@ -219,7 +219,7 @@ func (v *KurtosisVisitor) getComponentImage(l2 *l2Visitor, name string) string {
 func (v *KurtosisVisitor) BuildKurtosisParams(l2 *l2Visitor) {
 	// Set deployer params
 	v.params.OptimismPackage.OpContractDeployerParams = OpContractDeployerParams{
-		Image:              v.repository.GetImage("op-deployer", l2.deployment.deployer.version),
+		Image:              v.repository.GetImage("mc-deployer", l2.deployment.deployer.version),
 		L1ArtifactsLocator: l2.deployment.l1Contracts.locator,
 		L2ArtifactsLocator: l2.deployment.l2Contracts.locator,
 	}
@@ -241,20 +241,20 @@ func (v *KurtosisVisitor) BuildKurtosisParams(l2 *l2Visitor) {
 				{
 					ElType:  "op-geth",
 					ElImage: v.getComponentImage(l2, "op-geth"),
-					ClType:  "op-node",
-					ClImage: v.getComponentImage(l2, "op-node"),
+					ClType:  "mc-node",
+					ClImage: v.getComponentImage(l2, "mc-node"),
 					Count:   1,
 				},
 			},
 			NetworkParams: networkParams,
 			BatcherParams: BatcherParams{
-				Image: v.getComponentImage(l2, "op-batcher"),
+				Image: v.getComponentImage(l2, "mc-batcher"),
 			},
 			ChallengerParams: ChallengerParams{
-				Image: v.getComponentImage(l2, "op-challenger"),
+				Image: v.getComponentImage(l2, "mc-challenger"),
 			},
 			ProposerParams: ProposerParams{
-				Image:            v.getComponentImage(l2, "op-proposer"),
+				Image:            v.getComponentImage(l2, "mc-proposer"),
 				GameType:         defaultGameType,
 				ProposalInterval: defaultProposalInterval,
 			},

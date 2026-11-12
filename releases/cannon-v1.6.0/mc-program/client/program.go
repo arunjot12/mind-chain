@@ -5,16 +5,16 @@ import (
 	"io"
 	"os"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	"github.com/ethereum-optimism/optimism/op-program/client/boot"
-	"github.com/ethereum-optimism/optimism/op-program/client/claim"
-	"github.com/ethereum-optimism/optimism/op-program/client/interop"
-	"github.com/ethereum-optimism/optimism/op-program/client/l1"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2"
-	"github.com/ethereum-optimism/optimism/op-program/client/tasks"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/ethdb/memorydb"
 	"github.com/ethereum/go-ethereum/log"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	"github.com/mindchain/mind-chain/mc-program/client/boot"
+	"github.com/mindchain/mind-chain/mc-program/client/claim"
+	"github.com/mindchain/mind-chain/mc-program/client/interop"
+	"github.com/mindchain/mind-chain/mc-program/client/l1"
+	"github.com/mindchain/mind-chain/mc-program/client/l2"
+	"github.com/mindchain/mind-chain/mc-program/client/tasks"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 type Config struct {

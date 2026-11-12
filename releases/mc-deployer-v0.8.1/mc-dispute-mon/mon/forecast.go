@@ -4,12 +4,12 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/metrics"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/transform"
-	monTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/metrics"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/transform"
+	monTypes "github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
 )
 
 var (

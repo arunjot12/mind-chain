@@ -1,7 +1,7 @@
 optimism_package:
   faucet:
     enabled: true
-    image: {{ localDockerImage "op-faucet" }}
+    image: {{ localDockerImage "mc-faucet" }}
   chains:
     op-kurtosis:
       participants:
@@ -12,15 +12,15 @@ optimism_package:
           el_builder:
             type: op-rbuilder
           cl_builder:
-            type: op-node
-            image: {{ localDockerImage "op-node" }}
+            type: mc-node
+            image: {{ localDockerImage "mc-node" }}
           mev_params:
             enabled: true
           cl:
-            type: op-node
-            image: {{ localDockerImage "op-node" }}
+            type: mc-node
+            image: {{ localDockerImage "mc-node" }}
           conductor_params:
-            image: {{ localDockerImage "op-conductor" }}
+            image: {{ localDockerImage "mc-conductor" }}
             enabled: true
             bootstrap: true
             paused: true
@@ -35,15 +35,15 @@ optimism_package:
           el_builder:
             type: op-rbuilder
           cl_builder:
-            type: op-node
-            image: {{ localDockerImage "op-node" }}
+            type: mc-node
+            image: {{ localDockerImage "mc-node" }}
           mev_params:
             enabled: true
           cl:
-            type: op-node
-            image: {{ localDockerImage "op-node" }}
+            type: mc-node
+            image: {{ localDockerImage "mc-node" }}
           conductor_params:
-            image: {{ localDockerImage "op-conductor" }}
+            image: {{ localDockerImage "mc-conductor" }}
             enabled: true
             paused: true
             admin: true
@@ -67,22 +67,22 @@ optimism_package:
       flashblocks_rpc_params:
         type: op-reth
       batcher_params:
-        image: {{ localDockerImage "op-batcher" }}
+        image: {{ localDockerImage "mc-batcher" }}
         extra_params: []
       proposer_params:
-        image: {{ localDockerImage "op-proposer" }}
+        image: {{ localDockerImage "mc-proposer" }}
         extra_params: []
         game_type: 1
         proposal_interval: 10m
   challengers:
     challenger:
       enabled: true
-      image: {{ localDockerImage "op-challenger" }}
+      image: {{ localDockerImage "mc-challenger" }}
       participants: "*"
       cannon_prestates_url: {{ localPrestate.URL }}
       cannon_trace_types: ["cannon", "permissioned"]
   op_contract_deployer_params:
-    image: {{ localDockerImage "op-deployer" }}
+    image: {{ localDockerImage "mc-deployer" }}
     l1_artifacts_locator: {{ localContractArtifacts "l1" }}
     l2_artifacts_locator: {{ localContractArtifacts "l2" }}
     overrides:

@@ -3,8 +3,8 @@ package boot
 import (
 	"encoding/binary"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
 	"github.com/ethereum/go-ethereum/common"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 )
 
 type mockBootstrapOracle struct {

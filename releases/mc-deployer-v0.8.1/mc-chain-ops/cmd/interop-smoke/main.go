@@ -9,8 +9,8 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/interopsmoke"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	"github.com/mindchain/mind-chain/mc-chain-ops/interopsmoke"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 var (

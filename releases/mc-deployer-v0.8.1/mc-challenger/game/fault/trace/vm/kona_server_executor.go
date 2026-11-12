@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
 )
 
 type KonaExecutor struct {

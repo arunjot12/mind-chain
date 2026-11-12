@@ -1,7 +1,7 @@
 // Package fees implements the OP-Stack L1 data-availability cost and operator-fee
 // calculations. It is pure arithmetic over byte counts and big integers. It depends on
 // go-ethereum's core/types and params for the transaction envelope and EIP-2028 gas schedule,
-// and on op-core/types to classify OP Stack transaction types.
+// and on mc-core/types to classify OP Stack transaction types.
 //
 // It covers the L1 cost functions from Bedrock through Fjord and the Isthmus and Jovian
 // operator-fee formulas. Consumers import the package as opfees.

@@ -10,9 +10,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/build"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/enclave"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/tmpl"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/build"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/enclave"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/tmpl"
 )
 
 var (
@@ -152,7 +152,7 @@ func (f *Templater) localPrestateOption(ctx context.Context, buildWg *sync.WaitG
 			}()
 		}
 		if f.prestate.info == nil {
-			prestatePath := []string{"proofs", "op-program", "cannon"}
+			prestatePath := []string{"proofs", "mc-program", "cannon"}
 			return &PrestateInfo{
 				URL: f.urlBuilder(prestatePath...),
 				Hashes: map[string]string{

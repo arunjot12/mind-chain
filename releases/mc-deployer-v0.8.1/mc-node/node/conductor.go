@@ -9,17 +9,17 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	conductorRpc "github.com/ethereum-optimism/optimism/op-conductor/rpc"
-	"github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/mc-node/metrics"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/conductor"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/locks"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
+	conductorRpc "github.com/mindchain/mind-chain/mc-conductor/rpc"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/rollup/conductor"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/locks"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
-// ConductorClient is a client for the op-conductor RPC service.
+// ConductorClient is a client for the mc-conductor RPC service.
 type ConductorClient struct {
 	cfg     *config.Config
 	metrics *metrics.Metrics
@@ -35,7 +35,7 @@ type ConductorClient struct {
 
 var _ conductor.SequencerConductor = &ConductorClient{}
 
-// NewConductorClient returns a new conductor client for the op-conductor RPC service.
+// NewConductorClient returns a new conductor client for the mc-conductor RPC service.
 func NewConductorClient(cfg *config.Config, log log.Logger, metrics *metrics.Metrics) conductor.SequencerConductor {
 	return &ConductorClient{
 		cfg:     cfg,

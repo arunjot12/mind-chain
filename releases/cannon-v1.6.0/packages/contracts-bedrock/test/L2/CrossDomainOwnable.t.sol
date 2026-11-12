@@ -79,7 +79,7 @@ contract CrossDomainOwnable_PortalIntegration_Test is CommonTest, CrossDomainOwn
             _data: abi.encodeCall(XDomainSetter.set, (1))
         });
 
-        // Simulate the operation of the `op-node` by parsing data from logs
+        // Simulate the operation of the `mc-node` by parsing data from logs
         VmSafe.Log[] memory logs = vm.getRecordedLogs();
         // Only 1 log emitted
         assertEq(logs.length, 1);

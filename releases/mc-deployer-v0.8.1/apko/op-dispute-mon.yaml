@@ -6,7 +6,7 @@ contents:
   packages:
     - ca-certificates-bundle
     - wolfi-baselayout
-    - op-dispute-mon@local
+    - mc-dispute-mon@local
     - busybox
     - apk-tools
 
@@ -26,9 +26,9 @@ accounts:
   run-as: 0
 
 # No entrypoint, bare-name cmd: matches the upstream image contract
-# (CMD ["op-dispute-mon"], resolved via PATH).
-cmd: op-dispute-mon
+# (CMD ["mc-dispute-mon"], resolved via PATH).
+cmd: mc-dispute-mon
 
 annotations:
   org.opencontainers.image.source: https://github.com/ethereum-optimism/optimism
-  org.opencontainers.image.title: op-dispute-mon
+  org.opencontainers.image.title: mc-dispute-mon

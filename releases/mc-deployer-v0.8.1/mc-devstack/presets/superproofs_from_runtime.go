@@ -1,12 +1,12 @@
 package presets
 
 import (
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	challengerConfig "github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 func attachChallenger(t devtest.T, l2Net *dsl.L2Network, name string, chainID eth.ChainID, cfg *challengerConfig.Config) {

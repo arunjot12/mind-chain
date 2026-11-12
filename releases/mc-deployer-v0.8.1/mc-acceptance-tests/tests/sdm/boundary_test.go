@@ -3,14 +3,14 @@ package sdm
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/sdm/sdmtest"
-	sdmpkg "github.com/ethereum-optimism/optimism/op-chain-ops/pkg/sdm"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/sdm/sdmtest"
+	sdmpkg "github.com/mindchain/mind-chain/mc-chain-ops/pkg/sdm"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // boundaryLagoonOffset schedules Lagoon a few blocks after L2 genesis so the test

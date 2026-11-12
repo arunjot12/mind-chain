@@ -6,7 +6,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 )
 
 var _ cliapp.Lifecycle = &Service{}

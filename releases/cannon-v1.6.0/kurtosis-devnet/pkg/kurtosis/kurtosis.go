@@ -6,15 +6,15 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	devnetTypes "github.com/ethereum-optimism/optimism/devnet-sdk/types"
-	apiInterfaces "github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/interfaces"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/run"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/wrappers"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/deployer"
-	srcInterfaces "github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/interfaces"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/spec"
-	autofixTypes "github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/types"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	devnetTypes "github.com/mindchain/mind-chain/devnet-sdk/types"
+	apiInterfaces "github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/interfaces"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/run"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/wrappers"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/deployer"
+	srcInterfaces "github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/interfaces"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/spec"
+	autofixTypes "github.com/mindchain/mind-chain/kurtosis-devnet/pkg/types"
 )
 
 const (

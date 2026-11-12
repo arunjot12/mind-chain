@@ -5,19 +5,19 @@ import (
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
 	"github.com/ethereum/go-ethereum/common"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 	"github.com/stretchr/testify/require"
 )
 
@@ -129,12 +129,12 @@ func sequenceBlockWithL1Origin(t devtest.T, ts apis.TestSequencerControlAPI, par
 		opt := txplan.Combine(to, txplan.WithStaticNonce(nonce))
 		ptx := txplan.NewPlannedTx(opt)
 		signed_tx, err := ptx.Signed.Eval(t.Ctx())
-		require.NoError(t, err, "Expected to be able to evaluate a planned transaction on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to evaluate a planned transaction on mc-test-sequencer, but got error")
 		txdata, err := signed_tx.MarshalBinary()
-		require.NoError(t, err, "Expected to be able to marshal a signed transaction on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to marshal a signed transaction on mc-test-sequencer, but got error")
 
 		err = ts.IncludeTx(t.Ctx(), txdata)
-		require.NoError(t, err, "Expected to be able to include a signed transaction on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to include a signed transaction on mc-test-sequencer, but got error")
 	}
 
 	require.NoError(t, ts.Next(t.Ctx()))

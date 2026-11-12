@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"runtime"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 )
 
 func main() {

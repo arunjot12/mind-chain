@@ -4,7 +4,7 @@ import (
 	"maps"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 )
 
 type FactoryFunc func(Config) (derive.Compressor, error)

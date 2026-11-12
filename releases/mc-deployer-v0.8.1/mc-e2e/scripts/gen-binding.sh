@@ -20,7 +20,7 @@ if [[ ! -f "${ARTIFACT_PATH}" ]]; then
 fi
 
 OUTPUT_BASENAME="$(echo "${CONTRACT}" | tr '[:upper:]' '[:lower:]')"
-OUTPUT_PATH="op-e2e/bindings/${OUTPUT_BASENAME}.go"
+OUTPUT_PATH="mc-e2e/bindings/${OUTPUT_BASENAME}.go"
 
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "${TMPDIR}"' EXIT

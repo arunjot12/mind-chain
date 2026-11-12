@@ -3,15 +3,15 @@ package inspect
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 	"github.com/urfave/cli/v2"
 )
 
@@ -40,7 +40,7 @@ func GenesisCLI(cliCtx *cli.Context) error {
 
 func GenesisAndRollup(globalState *state.State, chainID common.Hash) (*core.Genesis, *rollup.Config, error) {
 	if globalState.AppliedIntent == nil {
-		return nil, nil, fmt.Errorf("chain state is not applied - run op-deployer apply")
+		return nil, nil, fmt.Errorf("chain state is not applied - run mc-deployer apply")
 	}
 
 	chainIntent, err := globalState.AppliedIntent.Chain(chainID)

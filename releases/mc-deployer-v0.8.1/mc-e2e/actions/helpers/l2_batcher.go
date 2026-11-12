@@ -18,16 +18,16 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/mc-batcher/compressor"
-	batcherFlags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	derive_params "github.com/ethereum-optimism/optimism/mc-node/rollup/derive/params"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-batcher/compressor"
+	batcherFlags "github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	derive_params "github.com/mindchain/mind-chain/mc-node/rollup/derive/params"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 type SyncStatusAPI interface {

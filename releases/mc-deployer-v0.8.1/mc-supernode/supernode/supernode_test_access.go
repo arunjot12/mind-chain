@@ -3,7 +3,7 @@ package supernode
 // Test-only Supernode methods. Production code paths must not call these.
 
 import (
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity/interop"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity/interop"
 )
 
 // InteropActivity returns the registered interop activity, or nil if interop

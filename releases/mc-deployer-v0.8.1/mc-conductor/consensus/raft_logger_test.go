@@ -8,7 +8,7 @@ import (
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 func TestRaftLoggerUsesAppLogLevel(t *testing.T) {

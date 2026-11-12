@@ -6,7 +6,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 )
 
 func validateSimpleInteropPresetConfig(t devtest.T, cfg PresetConfig, l2Nets ...*L2Network) {

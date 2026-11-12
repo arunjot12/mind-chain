@@ -9,7 +9,7 @@
 # It will default to the target platform.
 ARG TARGET_BASE_IMAGE=alpine:3.20
 
-# The ubuntu target base image is used for the op-challenger build with kona and asterisc.
+# The ubuntu target base image is used for the mc-challenger build with kona and asterisc.
 ARG UBUNTU_TARGET_BASE_IMAGE=ubuntu:22.04
 
 # The version of kona to use.
@@ -39,7 +39,7 @@ COPY ./mise.toml .
 RUN mise trust
 RUN mise install -v -y just && cp $(mise which just) /usr/local/bin/just && just --version
 # mise does not install the alpine binary for forge, so we download it manually
-COPY ./op-deployer/pkg/deployer/forge/version.json /tmp/op-deployer-versions.json
+COPY ./mc-deployer/pkg/deployer/forge/version.json /tmp/op-deployer-versions.json
 RUN set -e && \
     FORGE_VERSION=$(jq -r '.forge' /tmp/op-deployer-versions.json) && \
     mkdir -p /usr/local/bin && \
@@ -110,80 +110,80 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 FROM --platform=$BUILDPLATFORM builder AS op-program-builder
 ARG OP_PROGRAM_VERSION=v0.0.0
 # note: we only build the host, that's all the user needs. No Go MIPS cross-build in docker
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-program && make op-program-host  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-program && make op-program-host  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_PROGRAM_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-wheel-builder
 ARG OP_WHEEL_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-wheel && make op-wheel  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-wheel && make mc-wheel  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_WHEEL_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-node-builder
 ARG OP_NODE_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-node && make op-node  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-node && make mc-node  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_NODE_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-challenger-builder
 ARG OP_CHALLENGER_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-challenger && make op-challenger  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-challenger && make mc-challenger  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_CHALLENGER_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-dispute-mon-builder
 ARG OP_DISPUTE_MON_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-dispute-mon && make op-dispute-mon  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-dispute-mon && make mc-dispute-mon  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_DISPUTE_MON_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-batcher-builder
 ARG OP_BATCHER_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-batcher && make op-batcher  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-batcher && make mc-batcher  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_BATCHER_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-proposer-builder
 ARG OP_PROPOSER_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-proposer && make op-proposer  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-proposer && make mc-proposer  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_PROPOSER_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-conductor-builder
 ARG OP_CONDUCTOR_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-conductor && make op-conductor  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-conductor && make mc-conductor  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_CONDUCTOR_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS da-server-builder
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-alt-da && make da-server  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-alt-da && make da-server  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE
 
 FROM --platform=$BUILDPLATFORM builder AS op-supervisor-builder
 ARG OP_SUPERVISOR_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-supervisor && make op-supervisor  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-supervisor && make mc-supervisor  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_SUPERVISOR_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-test-sequencer-builder
 ARG OP_TEST_SEQUENCER_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-test-sequencer && make op-test-sequencer  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-test-sequencer && make mc-test-sequencer  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE  VERSION="$OP_TEST_SEQUENCER_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-deployer-builder
 ARG OP_DEPLOYER_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build just \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DEPLOYER_VERSION" \
-  op-deployer/build-go
+  mc-deployer/build-go
 
 FROM --platform=$BUILDPLATFORM builder AS op-dripper-builder
 ARG OP_DRIPPER_VERSION=v0.0.0
-RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd op-dripper && make op-dripper  \
+RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build cd mc-dripper && make mc-dripper  \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DRIPPER_VERSION"
 
 FROM --platform=$BUILDPLATFORM builder AS op-faucet-builder
 ARG OP_FAUCET_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build just \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_FAUCET_VERSION" \
-  op-faucet/op-faucet
+  mc-faucet/mc-faucet
 
 FROM --platform=$BUILDPLATFORM builder AS op-interop-mon-builder
 ARG OP_INTEROP_MON_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build just \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_INTEROP_MON_VERSION" \
-  op-interop-mon/op-interop-mon
+  mc-interop-mon/mc-interop-mon
 
 FROM $TARGET_BASE_IMAGE AS cannon-target
 COPY --from=cannon-builder /app/cannon/bin/cannon /usr/local/bin/
@@ -191,30 +191,30 @@ COPY --from=cannon-builder /app/cannon/multicannon/embeds/* /usr/local/bin/
 CMD ["cannon"]
 
 FROM $TARGET_BASE_IMAGE AS op-program-target
-COPY --from=op-program-builder /app/op-program/bin/op-program /usr/local/bin/
-CMD ["op-program"]
+COPY --from=op-program-builder /app/mc-program/bin/mc-program /usr/local/bin/
+CMD ["mc-program"]
 
 FROM $TARGET_BASE_IMAGE AS op-wheel-target
-COPY --from=op-wheel-builder /app/op-wheel/bin/op-wheel /usr/local/bin/
-CMD ["op-wheel"]
+COPY --from=op-wheel-builder /app/mc-wheel/bin/mc-wheel /usr/local/bin/
+CMD ["mc-wheel"]
 
 FROM $TARGET_BASE_IMAGE AS op-node-target
-COPY --from=op-node-builder /app/op-node/bin/op-node /usr/local/bin/
-CMD ["op-node"]
+COPY --from=op-node-builder /app/mc-node/bin/mc-node /usr/local/bin/
+CMD ["mc-node"]
 
 # Make the kona docker image published by upstream available as a source to copy kona from.
 FROM ghcr.io/op-rs/kona/kona-host:$KONA_VERSION AS kona
 # Make the asterisc docker image published by upstream available as a source to copy asterisc from.
 FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/asterisc:$ASTERISC_VERSION AS asterisc
 
-# Also produce an op-challenger loaded with kona and asterisc using ubuntu
+# Also produce an mc-challenger loaded with kona and asterisc using ubuntu
 FROM $UBUNTU_TARGET_BASE_IMAGE AS op-challenger-target
 RUN apt-get update && apt-get install -y --no-install-recommends musl openssl ca-certificates
-COPY --from=op-challenger-builder /app/op-challenger/bin/op-challenger /usr/local/bin/
-# Copy in op-program and cannon
-COPY --from=op-program-builder /app/op-program/bin/op-program /usr/local/bin/
-ENV OP_CHALLENGER_ASTERISC_SERVER=/usr/local/bin/op-program
-ENV OP_CHALLENGER_CANNON_SERVER=/usr/local/bin/op-program
+COPY --from=op-challenger-builder /app/mc-challenger/bin/mc-challenger /usr/local/bin/
+# Copy in mc-program and cannon
+COPY --from=op-program-builder /app/mc-program/bin/mc-program /usr/local/bin/
+ENV OP_CHALLENGER_ASTERISC_SERVER=/usr/local/bin/mc-program
+ENV OP_CHALLENGER_CANNON_SERVER=/usr/local/bin/mc-program
 COPY --from=cannon-builder /app/cannon/bin/cannon /usr/local/bin/
 ENV OP_CHALLENGER_CANNON_BIN=/usr/local/bin/cannon
 # Copy in kona and asterisc
@@ -223,50 +223,50 @@ ENV OP_CHALLENGER_ASTERISC_KONA_SERVER=/usr/local/bin/kona-host
 ENV OP_CHALLENGER_CANNON_KONA_SERVER=/usr/local/bin/kona-host
 COPY --from=asterisc /usr/local/bin/asterisc /usr/local/bin/
 ENV OP_CHALLENGER_ASTERISC_BIN=/usr/local/bin/asterisc
-CMD ["op-challenger"]
+CMD ["mc-challenger"]
 
 FROM $TARGET_BASE_IMAGE AS op-dispute-mon-target
-COPY --from=op-dispute-mon-builder /app/op-dispute-mon/bin/op-dispute-mon /usr/local/bin/
-CMD ["op-dispute-mon"]
+COPY --from=op-dispute-mon-builder /app/mc-dispute-mon/bin/mc-dispute-mon /usr/local/bin/
+CMD ["mc-dispute-mon"]
 
 FROM $TARGET_BASE_IMAGE AS op-batcher-target
-COPY --from=op-batcher-builder /app/op-batcher/bin/op-batcher /usr/local/bin/
-CMD ["op-batcher"]
+COPY --from=op-batcher-builder /app/mc-batcher/bin/mc-batcher /usr/local/bin/
+CMD ["mc-batcher"]
 
 FROM $TARGET_BASE_IMAGE AS op-proposer-target
-COPY --from=op-proposer-builder /app/op-proposer/bin/op-proposer /usr/local/bin/
-CMD ["op-proposer"]
+COPY --from=op-proposer-builder /app/mc-proposer/bin/mc-proposer /usr/local/bin/
+CMD ["mc-proposer"]
 
 FROM $TARGET_BASE_IMAGE AS op-conductor-target
-COPY --from=op-conductor-builder /app/op-conductor/bin/op-conductor /usr/local/bin/
-CMD ["op-conductor"]
+COPY --from=op-conductor-builder /app/mc-conductor/bin/mc-conductor /usr/local/bin/
+CMD ["mc-conductor"]
 
 FROM $TARGET_BASE_IMAGE AS da-server-target
-COPY --from=da-server-builder /app/op-alt-da/bin/da-server /usr/local/bin/
+COPY --from=da-server-builder /app/mc-alt-da/bin/da-server /usr/local/bin/
 CMD ["da-server"]
 
 FROM $TARGET_BASE_IMAGE AS op-supervisor-target
-COPY --from=op-supervisor-builder /app/op-supervisor/bin/op-supervisor /usr/local/bin/
-CMD ["op-supervisor"]
+COPY --from=op-supervisor-builder /app/mc-supervisor/bin/mc-supervisor /usr/local/bin/
+CMD ["mc-supervisor"]
 
 FROM $TARGET_BASE_IMAGE AS op-test-sequencer-target
-COPY --from=op-test-sequencer-builder /app/op-test-sequencer/bin/op-test-sequencer /usr/local/bin/
-CMD ["op-test-sequencer"]
+COPY --from=op-test-sequencer-builder /app/mc-test-sequencer/bin/mc-test-sequencer /usr/local/bin/
+CMD ["mc-test-sequencer"]
 
 FROM $TARGET_BASE_IMAGE AS op-deployer-target
 RUN apk add --no-cache ca-certificates
-COPY --from=op-deployer-builder /usr/local/bin/forge /app/op-deployer/bin/op-deployer /usr/local/bin/
+COPY --from=op-deployer-builder /usr/local/bin/forge /app/mc-deployer/bin/mc-deployer /usr/local/bin/
 ENV FORGE_ENV=alpine
-CMD ["op-deployer"]
+CMD ["mc-deployer"]
 
 FROM $TARGET_BASE_IMAGE AS op-dripper-target
-COPY --from=op-dripper-builder /app/op-dripper/bin/op-dripper /usr/local/bin/
-CMD ["op-dripper"]
+COPY --from=op-dripper-builder /app/mc-dripper/bin/mc-dripper /usr/local/bin/
+CMD ["mc-dripper"]
 
 FROM $TARGET_BASE_IMAGE AS op-faucet-target
-COPY --from=op-faucet-builder /app/op-faucet/bin/op-faucet /usr/local/bin/
-CMD ["op-faucet"]
+COPY --from=op-faucet-builder /app/mc-faucet/bin/mc-faucet /usr/local/bin/
+CMD ["mc-faucet"]
 
 FROM $TARGET_BASE_IMAGE AS op-interop-mon-target
-COPY --from=op-interop-mon-builder /app/op-interop-mon/bin/op-interop-mon /usr/local/bin/
-CMD ["op-interop-mon"]
+COPY --from=op-interop-mon-builder /app/mc-interop-mon/bin/mc-interop-mon /usr/local/bin/
+CMD ["mc-interop-mon"]

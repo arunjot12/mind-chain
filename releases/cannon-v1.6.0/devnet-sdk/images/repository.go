@@ -17,12 +17,12 @@ func NewRepository() *Repository {
 	return &Repository{
 		mapping: map[string]string{
 			// OP Labs images
-			"op-deployer":   opLabsToolsRegistry,
+			"mc-deployer":   opLabsToolsRegistry,
 			"op-geth":       opLabsToolsRegistry,
-			"op-node":       opLabsToolsRegistry,
-			"op-batcher":    opLabsToolsRegistry,
-			"op-proposer":   opLabsToolsRegistry,
-			"op-challenger": opLabsToolsRegistry,
+			"mc-node":       opLabsToolsRegistry,
+			"mc-batcher":    opLabsToolsRegistry,
+			"mc-proposer":   opLabsToolsRegistry,
+			"mc-challenger": opLabsToolsRegistry,
 			// Paradigm images
 			"op-reth": paradigmRegistry,
 		},

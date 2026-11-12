@@ -1,17 +1,16 @@
 package standard
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/ethereum-optimism/superchain-registry/validation"
-
 	"github.com/ethereum/go-ethereum/superchain"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	op_service "github.com/ethereum-optimism/optimism/op-service"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	op_service "github.com/mindchain/mind-chain/mc-service"
 
 	"github.com/ethereum/go-ethereum/common"
 )
@@ -50,39 +49,6 @@ var VaultMinWithdrawalAmount = mustHexBigFromHex("0x8ac7230489e80000")
 
 var GovernanceTokenOwner = common.HexToAddress("0xDeaDDEaDDeAdDeAdDEAdDEaddeAddEAdDEAdDEad")
 
-func L1VersionsFor(chainID uint64) (validation.Versions, error) {
-	switch chainID {
-	case 1:
-		return validation.StandardVersionsMainnet, nil
-	case 11155111:
-		return validation.StandardVersionsSepolia, nil
-	default:
-		return nil, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
-}
-
-func GuardianAddressFor(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.Guardian), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.Guardian), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
-}
-
-func ChallengerAddressFor(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.Challenger), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.Challenger), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
-}
-
 func SuperchainFor(chainID uint64) (superchain.Superchain, error) {
 	switch chainID {
 	case 1:
@@ -94,26 +60,6 @@ func SuperchainFor(chainID uint64) (superchain.Superchain, error) {
 	}
 }
 
-func OPCMImplAddressFor(chainID uint64, tag string) (common.Address, error) {
-	versionsData, err := L1VersionsFor(chainID)
-	if err != nil {
-		return common.Address{}, fmt.Errorf("unsupported chainID: %d", chainID)
-	}
-	versionData, ok := versionsData[validation.Semver(tag)]
-	if !ok {
-		return common.Address{}, fmt.Errorf("unsupported tag for chainID %d: %s", chainID, tag)
-	}
-	if versionData.OPContractsManager.Address != nil {
-		// op-contracts/v1.8.0 and earlier use proxied opcm
-		return common.Address(*versionData.OPContractsManager.Address), nil
-	}
-	if versionData.OPContractsManager.ImplementationAddress != nil {
-		// op-contracts/v2.0.0-rc.1 and later use non-proxied opcm
-		return common.Address(*versionData.OPContractsManager.ImplementationAddress), nil
-	}
-	return common.Address{}, fmt.Errorf("OPContractsManager address is nil for tag %s", tag)
-}
-
 // SuperchainProxyAdminAddrFor returns the address of the Superchain ProxyAdmin for the given chain ID.
 // These have been verified to be the ProxyAdmin addresses on Mainnet and Sepolia.
 // DO NOT MODIFY THIS METHOD WITHOUT CLEARING IT WITH THE EVM SAFETY TEAM.
@@ -123,39 +69,6 @@ func SuperchainProxyAdminAddrFor(chainID uint64) (common.Address, error) {
 		return common.HexToAddress("0x543bA4AADBAb8f9025686Bd03993043599c6fB04"), nil
 	case 11155111:
 		return common.HexToAddress("0x189aBAAaa82DfC015A588A7dbaD6F13b1D3485Bc"), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
-}
-
-func L1ProxyAdminOwner(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.L1ProxyAdminOwner), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.L1ProxyAdminOwner), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
-}
-
-func L2ProxyAdminOwner(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.L2ProxyAdminOwner), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.L2ProxyAdminOwner), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
-}
-
-func ProtocolVersionsOwner(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.ProtocolVersionsOwner), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.ProtocolVersionsOwner), nil
 	default:
 		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
 	}
@@ -195,4 +108,39 @@ func mustHexBigFromHex(hex string) *hexutil.Big {
 	num := hexutil.MustDecodeBig(hex)
 	hexBig := hexutil.Big(*num)
 	return &hexBig
+}
+
+// ErrNoStandardSuperchain is returned by every lookup of the upstream "standard"
+// Superchain values (Optimism's shared contracts, roles and contract-manager
+// releases on Ethereum mainnet and Sepolia). Mind Chain does not ship the upstream
+// superchain-registry, so standard intents are unsupported: use a custom intent
+// with Mind Chain's own roles and contract addresses.
+var ErrNoStandardSuperchain = errors.New("standard Superchain values are not available in Mind Chain; use a custom intent")
+
+func noStandardSuperchain(chainID uint64) error {
+	return fmt.Errorf("%w (L1 chain ID %d)", ErrNoStandardSuperchain, chainID)
+}
+
+func GuardianAddressFor(chainID uint64) (common.Address, error) {
+	return common.Address{}, noStandardSuperchain(chainID)
+}
+
+func ChallengerAddressFor(chainID uint64) (common.Address, error) {
+	return common.Address{}, noStandardSuperchain(chainID)
+}
+
+func OPCMImplAddressFor(chainID uint64, tag string) (common.Address, error) {
+	return common.Address{}, fmt.Errorf("OPCM for tag %s: %w", tag, noStandardSuperchain(chainID))
+}
+
+func L1ProxyAdminOwner(chainID uint64) (common.Address, error) {
+	return common.Address{}, noStandardSuperchain(chainID)
+}
+
+func L2ProxyAdminOwner(chainID uint64) (common.Address, error) {
+	return common.Address{}, noStandardSuperchain(chainID)
+}
+
+func ProtocolVersionsOwner(chainID uint64) (common.Address, error) {
+	return common.Address{}, noStandardSuperchain(chainID)
 }

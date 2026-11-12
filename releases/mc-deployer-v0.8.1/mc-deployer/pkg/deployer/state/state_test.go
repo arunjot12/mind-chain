@@ -5,12 +5,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
 	"github.com/stretchr/testify/require"
 )
 

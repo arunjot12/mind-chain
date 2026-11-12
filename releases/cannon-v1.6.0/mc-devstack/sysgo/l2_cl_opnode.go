@@ -13,28 +13,28 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/shim"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack/match"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/opnode"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	opNodeFlags "github.com/ethereum-optimism/optimism/op-node/flags"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	p2pcli "github.com/ethereum-optimism/optimism/op-node/p2p/cli"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop"
-	nodeSync "github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testutils/tcpproxy"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/shim"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/stack/match"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/opnode"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	opNodeFlags "github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	p2pcli "github.com/mindchain/mind-chain/mc-node/p2p/cli"
+	"github.com/mindchain/mind-chain/mc-node/rollup/driver"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testutils/tcpproxy"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 )
 
 type OpNode struct {
@@ -110,12 +110,12 @@ func (n *OpNode) Start() {
 		})
 		n.interopEndpoint = "ws://" + n.interopProxy.Addr()
 	}
-	n.logger.Info("Starting op-node")
+	n.logger.Info("Starting mc-node")
 	opNode, err := opnode.NewOpnode(n.logger, n.cfg, func(err error) {
-		n.p.Require().NoError(err, "op-node critical error")
+		n.p.Require().NoError(err, "mc-node critical error")
 	})
-	n.p.Require().NoError(err, "op-node failed to start")
-	n.logger.Info("Started op-node")
+	n.p.Require().NoError(err, "mc-node failed to start")
+	n.logger.Info("Started mc-node")
 	n.opNode = opNode
 
 	n.userProxy.SetUpstream(ProxyAddr(n.p.Require(), opNode.UserRPC().RPC()))
@@ -134,9 +134,9 @@ func (n *OpNode) Stop() {
 	}
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel() // force-quit
-	n.logger.Info("Closing op-node")
+	n.logger.Info("Closing mc-node")
 	closeErr := n.opNode.Stop(ctx)
-	n.logger.Info("Closed op-node", "err", closeErr)
+	n.logger.Info("Closed mc-node", "err", closeErr)
 
 	n.opNode = nil
 }

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-service/log/logfilter"
-	"github.com/ethereum-optimism/optimism/op-service/logmods"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-service/log/logfilter"
+	"github.com/mindchain/mind-chain/mc-service/logmods"
 )
 
 // WithLogLevel sets the global minimum log-level.

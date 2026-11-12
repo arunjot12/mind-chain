@@ -5,9 +5,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/config"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/config"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 )
 
 func Main(ctx context.Context, logger log.Logger, cfg *config.Config) (cliapp.Lifecycle, error) {

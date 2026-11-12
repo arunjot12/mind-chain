@@ -8,11 +8,11 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-core/nuts"
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/nuts"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 // Network Upgrade Transactions (NUTs) are read from a JSON file and

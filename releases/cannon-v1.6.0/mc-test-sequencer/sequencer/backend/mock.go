@@ -3,10 +3,10 @@ package backend
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work/builders/noopbuilder"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/frontend"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work/builders/noopbuilder"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/frontend"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 type MockBackend struct{}

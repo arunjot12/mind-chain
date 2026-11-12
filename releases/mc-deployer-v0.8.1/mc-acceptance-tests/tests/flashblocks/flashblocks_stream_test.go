@@ -4,12 +4,12 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // TestFlashblocksStream checks that block numbers and indices always increase across both the
@@ -21,15 +21,15 @@ func TestFlashblocksStream(gt *testing.T) {
 	// Example error with kona-node:
 	//
 	// assertions.go:387:             ERROR[03-30|22:44:52.250]
-	// assertions.go:387:             	Error Trace:	/home/circleci/project/op-devstack/sysgo/l2_cl_kona.go:99
-	// assertions.go:387:             	            				/home/circleci/project/op-devstack/sysgo/mixed_runtime.go:456
-	// assertions.go:387:             	            				/home/circleci/project/op-devstack/sysgo/singlechain_build.go:182
-	// assertions.go:387:             	            				/home/circleci/project/op-devstack/sysgo/singlechain_build.go:276
-	// assertions.go:387:             	            				/home/circleci/project/op-devstack/sysgo/singlechain_flashblocks.go:36
-	// assertions.go:387:             	            				/home/circleci/project/op-devstack/sysgo/singlechain_runtime.go:105
-	// assertions.go:387:             	            				/home/circleci/project/op-devstack/sysgo/singlechain_flashblocks.go:53
-	// assertions.go:387:             	            				/home/circleci/project/op-devstack/presets/flashblocks.go:43
-	// assertions.go:387:             	            				/home/circleci/project/op-acceptance-tests/tests/flashblocks/flashblocks_stream_test.go:26
+	// assertions.go:387:             	Error Trace:	/home/circleci/project/mc-devstack/sysgo/l2_cl_kona.go:99
+	// assertions.go:387:             	            				/home/circleci/project/mc-devstack/sysgo/mixed_runtime.go:456
+	// assertions.go:387:             	            				/home/circleci/project/mc-devstack/sysgo/singlechain_build.go:182
+	// assertions.go:387:             	            				/home/circleci/project/mc-devstack/sysgo/singlechain_build.go:276
+	// assertions.go:387:             	            				/home/circleci/project/mc-devstack/sysgo/singlechain_flashblocks.go:36
+	// assertions.go:387:             	            				/home/circleci/project/mc-devstack/sysgo/singlechain_runtime.go:105
+	// assertions.go:387:             	            				/home/circleci/project/mc-devstack/sysgo/singlechain_flashblocks.go:53
+	// assertions.go:387:             	            				/home/circleci/project/mc-devstack/presets/flashblocks.go:43
+	// assertions.go:387:             	            				/home/circleci/project/mc-acceptance-tests/tests/flashblocks/flashblocks_stream_test.go:26
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	context deadline exceeded
 	// assertions.go:387:             	Test:       	TestFlashblocksStream

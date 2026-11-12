@@ -3,9 +3,9 @@ package withdrawal
 import (
 	"testing"
 
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-devstack/compat"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-devstack/compat"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
 )
 
 func TestMain(m *testing.M) {
@@ -16,7 +16,7 @@ func TestMain(m *testing.M) {
 		presets.WithProposerGameType(faultTypes.FastGameType),
 		// Fast game for test
 		presets.WithFastGame(),
-		// Deployer must be L1PAO to make op-deployer happy
+		// Deployer must be L1PAO to make mc-deployer happy
 		presets.WithDeployerMatchL1PAO(),
 		// Guardian must be L1PAO to make AnchorStateRegistry's setRespectedGameType method work
 		presets.WithGuardianMatchL1PAO(),

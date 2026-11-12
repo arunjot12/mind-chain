@@ -3,12 +3,12 @@ package deployer
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/artifacts"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 
-	op_service "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	op_service "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 	"github.com/urfave/cli/v2"
 )
 
@@ -88,12 +88,13 @@ var (
 	}
 	IntentTypeFlag = &cli.StringFlag{
 		Name: IntentTypeFlagName,
-		Usage: fmt.Sprintf("Intent config type to use. Options: %s (default), %s, %s",
-			state.IntentTypeStandard,
+		Usage: fmt.Sprintf("Intent config type to use. Options: %s (default), %s, %s. "+
+			"The standard types need upstream Superchain values that Mind Chain does not ship.",
 			state.IntentTypeCustom,
+			state.IntentTypeStandard,
 			state.IntentTypeStandardOverrides),
 		EnvVars: PrefixEnvVar("INTENT_TYPE"),
-		Value:   string(state.IntentTypeStandard),
+		Value:   string(state.IntentTypeCustom),
 		Aliases: []string{
 			"intent-config-type",
 		},

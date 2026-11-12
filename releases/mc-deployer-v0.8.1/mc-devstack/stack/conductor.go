@@ -1,8 +1,8 @@
 package stack
 
 import (
-	conductorRpc "github.com/ethereum-optimism/optimism/op-conductor/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	conductorRpc "github.com/mindchain/mind-chain/mc-conductor/rpc"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type Conductor interface {

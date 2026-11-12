@@ -5,12 +5,12 @@ import (
 	"os"
 	"sync/atomic"
 
-	hdwallet "github.com/ethereum-optimism/go-ethereum-hdwallet"
+	hdwallet "github.com/arunjot12/go-ethereum-hdwallet"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 )
 
 const (

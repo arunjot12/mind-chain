@@ -3,7 +3,7 @@ package match
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 // MatchFn implements stack.Matcher, checking all elements at once.

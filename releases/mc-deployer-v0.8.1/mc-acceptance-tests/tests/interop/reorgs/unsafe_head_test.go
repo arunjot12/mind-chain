@@ -5,16 +5,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 	"github.com/stretchr/testify/require"
 )
 
-// TestReorgUnsafeHead starts an interop chain with an op-test-sequencer, which takes control over sequencing the L2 chain and introduces a reorg on the unsafe head
+// TestReorgUnsafeHead starts an interop chain with an mc-test-sequencer, which takes control over sequencing the L2 chain and introduces a reorg on the unsafe head
 func TestReorgUnsafeHead(gt *testing.T) {
 	t := devtest.ParallelT(gt)
 	ctx := t.Ctx()
@@ -62,7 +62,7 @@ func TestReorgUnsafeHead(gt *testing.T) {
 				Parent:   parentOfUnsafeHead.Hash,
 				L1Origin: nil,
 			})
-			require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 
 			// include simple transfer tx in opened block
 			{
@@ -70,16 +70,16 @@ func TestReorgUnsafeHead(gt *testing.T) {
 				opt := txplan.Combine(to)
 				ptx := txplan.NewPlannedTx(opt)
 				signed_tx, err := ptx.Signed.Eval(ctx)
-				require.NoError(t, err, "Expected to be able to evaluate a planned transaction on op-test-sequencer, but got error")
+				require.NoError(t, err, "Expected to be able to evaluate a planned transaction on mc-test-sequencer, but got error")
 				txdata, err := signed_tx.MarshalBinary()
-				require.NoError(t, err, "Expected to be able to marshal a signed transaction on op-test-sequencer, but got error")
+				require.NoError(t, err, "Expected to be able to marshal a signed transaction on mc-test-sequencer, but got error")
 
 				err = ia.IncludeTx(ctx, txdata)
-				require.NoError(t, err, "Expected to be able to include a signed transaction on op-test-sequencer, but got error")
+				require.NoError(t, err, "Expected to be able to include a signed transaction on mc-test-sequencer, but got error")
 			}
 
 			err = ia.Next(ctx)
-			require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 		}
 	}
 
@@ -95,15 +95,15 @@ func TestReorgUnsafeHead(gt *testing.T) {
 
 	// sequence a second block extending the confirmed conflicting head
 	{
-		l.Info("Sequencing with op-test-sequencer (no L1 origin override)")
+		l.Info("Sequencing with mc-test-sequencer (no L1 origin override)")
 		err := ia.New(ctx, seqtypes.BuildOpts{
 			Parent:   conflictingHead.Hash,
 			L1Origin: nil,
 		})
-		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 
 		err = ia.Next(ctx)
-		require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 	}
 
 	// Before resuming mc-node sequencing, wait until the CL's sync status reflects the

@@ -3,28 +3,28 @@
 *
 
 !/cannon
-!/op-core
+!/mc-core
 !/mc-batcher
-!/op-chain-ops
+!/mc-chain-ops
 !/mc-deployer
-!/op-dripper
+!/mc-dripper
 !/mc-challenger
 !/packages/contracts-bedrock
-!/op-dispute-mon
-!/op-conductor
+!/mc-dispute-mon
+!/mc-conductor
 !/mc-node
-!/op-preimage
+!/mc-preimage
 !/mc-proposer
-!/op-service
+!/mc-service
 !/op-supervisor
-!/op-supernode
-!/op-interop-filter
-!/op-test-sequencer
-!/op-wheel
-!/op-alt-da
-!/op-faucet
-!/op-interop-mon
-# op-stack-go services embed op-core/superchain/superchain-configs.zip, regenerated
+!/mc-supernode
+!/mc-interop-filter
+!/mc-test-sequencer
+!/mc-wheel
+!/mc-alt-da
+!/mc-faucet
+!/mc-interop-mon
+# op-stack-go services embed mc-core/superchain/superchain-configs.zip, regenerated
 # in the build from this submodule's data (the zip itself is gitignored).
 !/superchain-registry/superchain
 !/rust
@@ -35,7 +35,7 @@ rust/.git
 !/go.sum
 !/justfiles
 !/mise.toml
-!/op-e2e/e2eutils
+!/mc-e2e/e2eutils
 !./ops/scripts/install_mise.sh
 
 **/bin

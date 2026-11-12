@@ -19,7 +19,7 @@ Your chain **must** be owned by a smart contract for `upgrade` to work because t
 Use the `upgrade` command like this:
 
 ```shell
-op-deployer upgrade <version> \
+mc-deployer upgrade <version> \
   --config <path to config JSON>
 ```
 

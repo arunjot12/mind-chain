@@ -16,8 +16,8 @@ import (
 	"regexp"
 	"runtime"
 
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 //go:embed version.json
@@ -28,7 +28,7 @@ type VersionConfig struct {
 	Checksums map[string]string `json:"checksums"`
 }
 
-// StandardVersion is the Foundry version that op-deployer will download if it's not found on PATH.
+// StandardVersion is the Foundry version that mc-deployer will download if it's not found on PATH.
 var StandardVersion string
 
 // checksums map the OS/architecture to the expected checksum of the binary.
@@ -147,7 +147,7 @@ func homedirCachePather() (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("could not find home directory: %w", err)
 	}
-	return path.Join(homeDir, ".op-deployer", "cache"), nil
+	return path.Join(homeDir, ".mc-deployer", "cache"), nil
 }
 
 func staticChecksummer(expChecksum string) func(r io.Reader) error {

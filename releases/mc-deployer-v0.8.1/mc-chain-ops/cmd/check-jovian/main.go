@@ -14,16 +14,16 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-core/eip1559"
-	opfees "github.com/ethereum-optimism/optimism/op-core/fees"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	op_service "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr/metrics"
+	"github.com/mindchain/mind-chain/mc-core/eip1559"
+	opfees "github.com/mindchain/mind-chain/mc-core/fees"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	op_service "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-service/txmgr/metrics"
 )
 
 func main() {
@@ -248,12 +248,12 @@ func checkExtraData(ctx context.Context, env *actionEnv) error {
 
 	extra := latest.Extra
 
-	// Validate using op-core's validation function
+	// Validate using mc-core's validation function
 	if err := eip1559.ValidateJovianExtraData(extra); err != nil {
 		return fmt.Errorf("invalid extraData format: %w", err)
 	}
 
-	// Decode the validated extra data using op-core's decode function
+	// Decode the validated extra data using mc-core's decode function
 	denominator, elasticity, minBaseFee := eip1559.DecodeJovianExtraData(extra)
 
 	env.log.Info("ExtraData format test: success",

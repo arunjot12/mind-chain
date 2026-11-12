@@ -9,14 +9,14 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txinclude"
-	"github.com/ethereum-optimism/optimism/op-service/txintent"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
-	suptypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txinclude"
+	"github.com/mindchain/mind-chain/mc-service/txintent"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
+	suptypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 type makeInvalidInitMsgFn func(suptypes.Message) suptypes.Message

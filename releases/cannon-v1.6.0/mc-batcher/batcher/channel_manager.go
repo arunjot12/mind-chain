@@ -6,14 +6,14 @@ import (
 	"io"
 	"math"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/metrics"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/queue"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-batcher/metrics"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/queue"
 )
 
 var ErrReorg = errors.New("block does not extend existing chain")
@@ -74,7 +74,7 @@ func (s *channelManager) SetChannelOutFactory(outFactory ChannelOutFactory) {
 }
 
 // Clear clears the entire state of the channel manager.
-// It is intended to be used before launching op-batcher and after an L2 reorg.
+// It is intended to be used before launching mc-batcher and after an L2 reorg.
 func (s *channelManager) Clear(l1OriginLastSubmittedChannel eth.BlockID) {
 	s.log.Trace("clearing channel manager state")
 	s.blocks.Clear()

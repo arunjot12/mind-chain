@@ -17,10 +17,10 @@ dist
 artifacts
 cache
 
-!op-chain-ops/foundry/testdata/srcmaps/cache
-!op-chain-ops/foundry/testdata/srcmaps/artifacts
+!mc-chain-ops/foundry/testdata/srcmaps/cache
+!mc-chain-ops/foundry/testdata/srcmaps/artifacts
 
-!op-deployer/pkg/deployer/artifacts
+!mc-deployer/pkg/deployer/artifacts
 
 packages/contracts-bedrock/deployments/anvil
 

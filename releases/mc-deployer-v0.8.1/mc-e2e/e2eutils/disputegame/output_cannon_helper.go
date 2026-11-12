@@ -6,18 +6,18 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/outputs"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/challenger"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/outputs"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/challenger"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 type OutputCannonGameHelper struct {

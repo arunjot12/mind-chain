@@ -3,4 +3,4 @@ optimism_package:
     op-kurtosis:
       whatakey:
       - el_type: op-geth
-        cl_type: op-node
+        cl_type: mc-node

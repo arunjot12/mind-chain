@@ -8,11 +8,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/mc-node/metrics"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	rolluptest "github.com/ethereum-optimism/optimism/mc-node/rollup/test"
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	rolluptest "github.com/mindchain/mind-chain/mc-node/rollup/test"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 func TestChannelStage_NextData(t *testing.T) {

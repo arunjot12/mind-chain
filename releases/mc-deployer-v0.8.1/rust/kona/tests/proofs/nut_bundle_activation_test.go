@@ -5,19 +5,19 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	nutsstate "github.com/ethereum-optimism/optimism/op-core/nuts/state"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/rust/kona/tests/proofs/helpers"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	nutsstate "github.com/mindchain/mind-chain/mc-core/nuts/state"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	actionsHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/rust/kona/tests/proofs/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -139,7 +139,7 @@ func testActivationBlockNUTBundle(gt *testing.T, testCfg *helpers.TestCfg[forks.
 	// Skip the post-activation checks below for Lagoon/Interop:
 	//   - the fault proof needs dependency-set wiring in op-program / kona-host single; the Lagoon
 	//     activation transition is exercised by TestInteropFaultProofs_ActivationBoundary in
-	//     op-acceptance-tests (kona-host super) instead;
+	//     mc-acceptance-tests (kona-host super) instead;
 	//   - the gas-limit revert isn't asserted here because Lagoon's activation block can also carry
 	//     multi-chain wrapper gas (setFeature + ETHLiquidity funding) that the reconstruction path
 	//     can't strip without the dependency set (see this PR's Scope/caveats).
@@ -232,7 +232,7 @@ func activateFork(t actionsHelpers.Testing, testCfg *helpers.TestCfg[forks.Name]
 	}
 
 	alloc, err := nutsstate.PreForkState(fork)
-	require.NoErrorf(t, err, "no committed pre-fork state for %s — generate the predecessor fork's state (see op-core/nuts/state)", fork)
+	require.NoErrorf(t, err, "no committed pre-fork state for %s — generate the predecessor fork's state (see mc-core/nuts/state)", fork)
 	testCfg.Allocs = &e2eutils.AllocParams{
 		PrefundTestUsers:            true,
 		L2Alloc:                     alloc,

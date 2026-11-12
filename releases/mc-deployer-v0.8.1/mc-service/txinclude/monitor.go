@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 // Monitor is a ReceiptGetter that will continue looking for a receipt even when

@@ -5,20 +5,20 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/bindings"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/constants"
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack/match"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txintent"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/bindings"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/constants"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/stack/match"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txintent"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 	"github.com/stretchr/testify/require"
 )
 
@@ -142,7 +142,7 @@ func TestReorgInitExecMsg(gt *testing.T) {
 			Parent:   parentOfHeadToReorgA.Hash,
 			L1Origin: &l1OriginHash,
 		})
-		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 
 		// include simple transfer tx in opened block
 		{
@@ -150,19 +150,19 @@ func TestReorgInitExecMsg(gt *testing.T) {
 			opt := txplan.Combine(to)
 			ptx := txplan.NewPlannedTx(opt)
 			signed_tx, err := ptx.Signed.Eval(ctx)
-			require.NoError(t, err, "Expected to be able to evaluate a planned transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to evaluate a planned transaction on mc-test-sequencer, but got error")
 			txdata, err := signed_tx.MarshalBinary()
-			require.NoError(t, err, "Expected to be able to marshal a signed transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to marshal a signed transaction on mc-test-sequencer, but got error")
 
 			err = ia.IncludeTx(ctx, txdata)
-			require.NoError(t, err, "Expected to be able to include a signed transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to include a signed transaction on mc-test-sequencer, but got error")
 		}
 
 		err = ia.Next(ctx)
-		require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 	}
 
-	// sequence a second block with op-test-sequencer
+	// sequence a second block with mc-test-sequencer
 	{
 		unsafe := sys.L2ELA.BlockRefByLabel(eth.Unsafe)
 		l.Info("Current unsafe ref", "unsafeHead", unsafe)
@@ -170,13 +170,13 @@ func TestReorgInitExecMsg(gt *testing.T) {
 			Parent:   unsafe.Hash,
 			L1Origin: nil,
 		})
-		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 
 		err = ia.Next(ctx)
-		require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 	}
 
-	// continue sequencing with op-node
+	// continue sequencing with mc-node
 	sys.L2CLA.StartSequencer()
 
 	// start batchers on chain A and on chain B

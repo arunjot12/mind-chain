@@ -4,10 +4,10 @@ import (
 	"context"
 	_ "embed"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 //go:embed abis/FaultDisputeGame-1.3.1.json

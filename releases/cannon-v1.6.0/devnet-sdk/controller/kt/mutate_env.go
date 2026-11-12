@@ -3,8 +3,8 @@ package kt
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/interfaces"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/interfaces"
 )
 
 // a hack because some L2 services are duplicated across chains

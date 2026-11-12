@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/types"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/util"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/superchain"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/types"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/util"
 	"golang.org/x/mod/modfile"
 )
 
@@ -30,7 +30,7 @@ func (p *OPProgramPrestate) FindVersions(log log.Logger, prestateVersion string)
 	superChainRegistryCommit string,
 	prestateConfigs *superchain.ChainConfigLoader,
 ) {
-	prestateTag := fmt.Sprintf("op-program/v%s", prestateVersion)
+	prestateTag := fmt.Sprintf("mc-program/v%s", prestateVersion)
 	log.Info("Found prestate tag", "tag", prestateTag)
 	fppCommitInfo = types.NewCommitInfo("ethereum-optimism", "optimism", prestateTag, "develop", "")
 

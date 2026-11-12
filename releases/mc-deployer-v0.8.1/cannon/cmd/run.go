@@ -18,15 +18,15 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
-	mipsexec "github.com/ethereum-optimism/optimism/cannon/mipsevm/exec"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/program"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/versions"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
-	"github.com/ethereum-optimism/optimism/op-service/serialize"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
+	mipsexec "github.com/mindchain/mind-chain/cannon/mipsevm/exec"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/program"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/versions"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/serialize"
 )
 
 var (

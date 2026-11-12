@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 // L2CLNode wraps a stack.L2CLNode interface for DSL operations
@@ -59,7 +59,7 @@ func (cl *L2CLNode) Stop() {
 
 func (cl *L2CLNode) StartSequencer() {
 	unsafe := cl.HeadBlockRef(types.LocalUnsafe)
-	cl.log.Info("Continue sequencing with consensus node (op-node)", "chain", cl.ChainID(), "unsafe", unsafe)
+	cl.log.Info("Continue sequencing with consensus node (mc-node)", "chain", cl.ChainID(), "unsafe", unsafe)
 
 	err := cl.inner.RollupAPI().StartSequencer(cl.ctx, unsafe.Hash)
 	cl.require.NoError(err, fmt.Sprintf("Expected to be able to start sequencer on chain %d", cl.ChainID()))

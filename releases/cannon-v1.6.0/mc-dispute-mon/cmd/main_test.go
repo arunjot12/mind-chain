@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/config"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/superchain"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/config"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 	"github.com/stretchr/testify/require"
 )
 
@@ -284,7 +284,7 @@ func configForArgs(t *testing.T, cliArgs []string) config.Config {
 func dryRunWithArgs(cliArgs []string) (log.Logger, config.Config, error) {
 	cfg := new(config.Config)
 	var logger log.Logger
-	fullArgs := append([]string{"op-dispute-mon"}, cliArgs...)
+	fullArgs := append([]string{"mc-dispute-mon"}, cliArgs...)
 	testErr := errors.New("dry-run")
 	err := run(context.Background(), fullArgs, func(ctx context.Context, log log.Logger, config *config.Config) (cliapp.Lifecycle, error) {
 		logger = log

@@ -8,8 +8,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/enclave"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/tmpl"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/enclave"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/tmpl"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -257,7 +257,7 @@ func TestRenderTemplate_PlainYamlFile(t *testing.T) {
           el:
             type: op-geth
           cl:
-            type: op-node
+            type: mc-node
       network_params:
         network: "kurtosis"
         network_id: "2151908"
@@ -268,7 +268,7 @@ func TestRenderTemplate_PlainYamlFile(t *testing.T) {
           el:
             type: op-geth
           cl:
-            type: op-node
+            type: mc-node
       network_params:
         network: "kurtosis"
         network_id: "2151909"

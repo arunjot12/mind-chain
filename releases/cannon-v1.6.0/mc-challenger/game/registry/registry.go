@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/claims"
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/scheduler"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/claims"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/scheduler"
+	"github.com/mindchain/mind-chain/mc-challenger/game/types"
 )
 
 var ErrUnsupportedGameType = errors.New("unsupported game type")

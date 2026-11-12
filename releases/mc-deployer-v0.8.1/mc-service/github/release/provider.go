@@ -20,8 +20,8 @@ import (
 	"strings"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 // BinaryProvider is a small abstraction around downloading a specific name

@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
 // standardPrestatesUrl is the URL to the TOML file in superchain registry that defines the list of standard prestates

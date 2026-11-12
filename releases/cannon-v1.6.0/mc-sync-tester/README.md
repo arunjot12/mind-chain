@@ -1,13 +1,13 @@
-# op-sync-tester
+# mc-sync-tester
 
 ## Usage
 
 ### Build from source
 
 ```bash
-# from op-sync-tester dir:
-just op-sync-tester
-./bin/op-sync-tester --help
+# from mc-sync-tester dir:
+just mc-sync-tester
+./bin/mc-sync-tester --help
 ```
 
 ### Run from source

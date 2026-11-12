@@ -3,8 +3,8 @@ package metrics
 import (
 	"strconv"
 
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -75,7 +75,7 @@ func NewMetrics() *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: Namespace,
 			Name:      "up",
-			Help:      "1 if the op-conductor has finished starting up",
+			Help:      "1 if the mc-conductor has finished starting up",
 		}),
 		healthChecks: factory.NewCounterVec(prometheus.CounterOpts{
 			Namespace: Namespace,

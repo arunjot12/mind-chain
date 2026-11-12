@@ -5,9 +5,6 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-program/client/l2/engineapi"
-	l2Types "github.com/ethereum-optimism/optimism/op-program/client/l2/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/consensus"
 	"github.com/ethereum/go-ethereum/consensus/beacon"
@@ -20,6 +17,9 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/triedb"
+	"github.com/mindchain/mind-chain/mc-program/client/l2/engineapi"
+	l2Types "github.com/mindchain/mind-chain/mc-program/client/l2/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (

@@ -64,7 +64,7 @@ Example:
 ```yaml
 ...
   op_contract_deployer_params:
-    image: {{ localDockerImage "op-deployer" }}
+    image: {{ localDockerImage "mc-deployer" }}
     l1_artifacts_locator: {{ localContractArtifacts "l1" }}
     l2_artifacts_locator: {{ localContractArtifacts "l2" }}
 ...

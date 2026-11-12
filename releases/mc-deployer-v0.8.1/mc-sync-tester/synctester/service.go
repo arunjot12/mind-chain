@@ -12,17 +12,17 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/google/uuid"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/config"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/metrics"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-sync-tester/config"
+	"github.com/mindchain/mind-chain/mc-sync-tester/metrics"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend"
 
-	sttypes "github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/types"
+	sttypes "github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/types"
 )
 
 type serviceBackend interface {

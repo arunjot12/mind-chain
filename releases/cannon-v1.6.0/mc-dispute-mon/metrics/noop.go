@@ -4,9 +4,9 @@ import (
 	"math/big"
 	"time"
 
-	contractMetrics "github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts/metrics"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
 	"github.com/ethereum/go-ethereum/common"
+	contractMetrics "github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts/metrics"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 type NoopMetricsImpl struct {

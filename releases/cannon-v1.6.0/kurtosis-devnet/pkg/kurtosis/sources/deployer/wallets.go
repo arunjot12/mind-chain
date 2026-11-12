@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"io"
 
-	ktfs "github.com/ethereum-optimism/optimism/devnet-sdk/kt/fs"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
+	ktfs "github.com/mindchain/mind-chain/devnet-sdk/kt/fs"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
 	"gopkg.in/yaml.v3"
 )
 

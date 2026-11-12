@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-program/verify"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-program/verify"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var opSepoliaChainID = eth.ChainIDFromUInt64(11155420)

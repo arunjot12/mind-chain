@@ -113,7 +113,7 @@ func TestFjordL1CostParity(t *testing.T) {
 			gethFee, _ := types.NewL1CostFuncFjord(p.L1BaseFee, p.L1BlobBaseFee, p.BaseFeeScalar, p.BlobFeeScalar)(
 				types.RollupCostData{FastLzSize: fastLzSize})
 			got := L1CostFjord(RollupCostData{FastLzSize: fastLzSize}, p)
-			require.Zero(t, gethFee.Cmp(got), "fastLzSize=%d params=%+v: op-geth %s, op-core %s", fastLzSize, p, gethFee, got)
+			require.Zero(t, gethFee.Cmp(got), "fastLzSize=%d params=%+v: op-geth %s, mc-core %s", fastLzSize, p, gethFee, got)
 		}
 	}
 }

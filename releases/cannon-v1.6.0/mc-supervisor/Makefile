@@ -1,3 +1,3 @@
-DEPRECATED_TARGETS := op-supervisor clean test
+DEPRECATED_TARGETS := mc-supervisor clean test
 
 include ../justfiles/deprecated.mk

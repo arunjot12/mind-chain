@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
 	"github.com/urfave/cli/v2"
 )
 

@@ -4,18 +4,18 @@ import (
 	"context"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-proposer/flags"
-	"github.com/ethereum-optimism/optimism/op-proposer/metrics"
-	"github.com/ethereum-optimism/optimism/op-proposer/proposer"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-proposer/flags"
+	"github.com/mindchain/mind-chain/mc-proposer/metrics"
+	"github.com/mindchain/mind-chain/mc-proposer/proposer"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
 )
 
 var (
@@ -30,7 +30,7 @@ func main() {
 	app := cli.NewApp()
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-proposer"
+	app.Name = "mc-proposer"
 	app.Usage = "L2 Output Submitter"
 	app.Description = "Service for generating and proposing L2 Outputs"
 	app.Action = cliapp.LifecycleCmd(proposer.Main(Version))

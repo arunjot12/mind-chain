@@ -9,18 +9,18 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-program/chainconfig"
-	"github.com/ethereum-optimism/optimism/op-program/client/boot"
-	"github.com/ethereum-optimism/optimism/op-program/host/config"
-	"github.com/ethereum-optimism/optimism/op-program/host/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-program/chainconfig"
+	"github.com/mindchain/mind-chain/mc-program/client/boot"
+	"github.com/mindchain/mind-chain/mc-program/host/config"
+	"github.com/mindchain/mind-chain/mc-program/host/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
@@ -496,7 +496,7 @@ func configForArgs(t *testing.T, cliArgs []string) *config.Config {
 func runWithArgs(cliArgs []string) (log.Logger, *config.Config, error) {
 	cfg := new(config.Config)
 	var logger log.Logger
-	fullArgs := append([]string{"op-program"}, cliArgs...)
+	fullArgs := append([]string{"mc-program"}, cliArgs...)
 	err := run(fullArgs, func(log log.Logger, config *config.Config) error {
 		logger = log
 		cfg = config

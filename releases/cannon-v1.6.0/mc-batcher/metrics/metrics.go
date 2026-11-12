@@ -11,11 +11,11 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/config"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	txmetrics "github.com/ethereum-optimism/optimism/op-service/txmgr/metrics"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	txmetrics "github.com/mindchain/mind-chain/mc-service/txmgr/metrics"
 )
 
 const Namespace = "op_batcher"
@@ -157,7 +157,7 @@ func NewMetrics(procName string) *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: ns,
 			Name:      "up",
-			Help:      "1 if the op-batcher has finished starting up",
+			Help:      "1 if the mc-batcher has finished starting up",
 		}),
 
 		channelEvs: opmetrics.NewEventVec(factory, ns, "", "channel", "Channel", []string{"stage"}),
@@ -327,7 +327,7 @@ func (m *Metrics) StartBalanceMetrics(l log.Logger, client *ethclient.Client, ac
 }
 
 // RecordInfo sets a pseudo-metric that contains versioning and
-// config info for the op-batcher.
+// config info for the mc-batcher.
 func (m *Metrics) RecordInfo(version string) {
 	m.info.WithLabelValues(version).Set(1)
 }

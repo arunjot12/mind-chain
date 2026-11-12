@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/claims"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/scheduler"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/claims"
+	"github.com/mindchain/mind-chain/mc-challenger/game/scheduler"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
 )
 
 var ErrUnsupportedGameType = errors.New("unsupported game type")

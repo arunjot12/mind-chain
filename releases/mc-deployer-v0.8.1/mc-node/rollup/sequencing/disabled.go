@@ -6,7 +6,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-service/event"
+	"github.com/mindchain/mind-chain/mc-service/event"
 )
 
 var ErrSequencerNotEnabled = errors.New("sequencer is not enabled")

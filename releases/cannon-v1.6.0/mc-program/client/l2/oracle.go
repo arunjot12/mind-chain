@@ -3,16 +3,16 @@ package l2
 import (
 	"fmt"
 
-	interopTypes "github.com/ethereum-optimism/optimism/op-program/client/interop/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rlp"
+	interopTypes "github.com/mindchain/mind-chain/mc-program/client/interop/types"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	l2Types "github.com/ethereum-optimism/optimism/op-program/client/l2/types"
-	"github.com/ethereum-optimism/optimism/op-program/client/mpt"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/predeploys"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	l2Types "github.com/mindchain/mind-chain/mc-program/client/l2/types"
+	"github.com/mindchain/mind-chain/mc-program/client/mpt"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/predeploys"
 )
 
 // StateOracle defines the high-level API used to retrieve L2 state data pre-images

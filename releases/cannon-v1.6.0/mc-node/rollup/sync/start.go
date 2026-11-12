@@ -32,9 +32,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
 type L1Chain interface {
@@ -104,9 +104,9 @@ func currentHeads(ctx context.Context, cfg *rollup.Config, l2 L2Chain) (*FindHea
 // the finalized, unsafe and safe L2 blocks.
 //
 //   - The *unsafe L2 block*: This is the highest L2 block whose L1 origin is a *plausible*
-//     extension of the canonical L1 chain (as known to the op-node).
+//     extension of the canonical L1 chain (as known to the mc-node).
 //   - The *safe L2 block*: This is the highest L2 block whose epoch's sequencing window is
-//     complete within the canonical L1 chain (as known to the op-node).
+//     complete within the canonical L1 chain (as known to the mc-node).
 //   - The *finalized L2 block*: This is the L2 block which is known to be fully derived from
 //     finalized L1 block data.
 //

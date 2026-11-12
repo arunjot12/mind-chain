@@ -6,10 +6,10 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/registry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/types"
-	"github.com/ethereum-optimism/optimism/op-core/superchain"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/registry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/types"
+	"github.com/mindchain/mind-chain/mc-core/superchain"
 )
 
 type KonaPrestate struct {
@@ -40,7 +40,7 @@ func (p *KonaPrestate) FindVersions(log log.Logger, prestateVersion string) (
 
 	// kona has its own build process to convert superchain-registry config into a custom JSON format it uses.
 	// Rather than re-implement that custom JSON format and work out how to convert it to the go format
-	// (which could be brittle), we clone the superchain registry at the same commit and run op-core's
+	// (which could be brittle), we clone the superchain registry at the same commit and run mc-core's
 	// sync-superchain.sh to convert it to the go format directly — the same conversion the build uses.
 	configs, err := registry.SuperchainConfigsForCommit(superChainRegistryCommit)
 	if err != nil {
@@ -53,7 +53,7 @@ func (p *KonaPrestate) FindVersions(log log.Logger, prestateVersion string) (
 // fetchSuperchainRegistryCommit returns the superchain-registry commit SHA that
 // the kona-client release identified by ref was built against.
 //
-// For tags that still carry the legacy `op-core/superchain/superchain-registry-commit.txt`
+// For tags that still carry the legacy `mc-core/superchain/superchain-registry-commit.txt`
 // pin (v1.5.1 up to the submodule-coupling change) it reads that file — preferred
 // when present so historical prestate checks are unchanged. For newer tags the
 // canonical pin is the superchain-registry git submodule, so it reads the submodule
@@ -66,7 +66,7 @@ func fetchSuperchainRegistryCommit(ref string) (string, error) {
 	}
 
 	// Legacy pinned-commit file, present on older tags.
-	const legacyPath = "op-core/superchain/superchain-registry-commit.txt"
+	const legacyPath = "mc-core/superchain/superchain-registry-commit.txt"
 	if stdout, _, err := runGit("show", fmt.Sprintf("%s:%s", ref, legacyPath)); err == nil {
 		if sha := strings.TrimSpace(stdout); sha != "" {
 			return sha, nil

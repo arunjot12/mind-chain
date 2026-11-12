@@ -3,8 +3,8 @@ package status
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // L1Tracker implements the L1Fetcher interface while proactively maintaining a reorg-aware cache

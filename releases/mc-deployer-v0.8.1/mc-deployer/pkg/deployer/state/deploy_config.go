@@ -5,9 +5,9 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
 
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 
 	"github.com/ethereum/go-ethereum/rpc"
 
@@ -15,9 +15,9 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 var l2GenesisBlockBaseFeePerGas = hexutil.Big(*(big.NewInt(1000000000)))

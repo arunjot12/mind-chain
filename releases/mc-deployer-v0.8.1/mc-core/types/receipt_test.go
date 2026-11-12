@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	gethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 func uint64Ptr(v uint64) *uint64 { return &v }

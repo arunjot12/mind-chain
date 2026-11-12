@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

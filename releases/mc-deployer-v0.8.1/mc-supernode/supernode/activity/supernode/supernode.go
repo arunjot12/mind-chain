@@ -3,11 +3,11 @@ package supernode
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity/internal/syncstatus"
-	cc "github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container"
 	gethlog "github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity/internal/syncstatus"
+	cc "github.com/mindchain/mind-chain/mc-supernode/supernode/chain_container"
 )
 
 var _ activity.RPCActivity = (*Activity)(nil)

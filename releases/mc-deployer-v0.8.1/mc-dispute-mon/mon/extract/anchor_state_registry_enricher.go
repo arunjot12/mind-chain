@@ -4,11 +4,11 @@ import (
 	"context"
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	monTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	monTypes "github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 )
 
 var _ CommonEnricher = (*AnchorStateRegistryEnricher)(nil)

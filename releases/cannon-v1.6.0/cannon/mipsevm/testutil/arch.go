@@ -8,9 +8,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/exec"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/memory"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/exec"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/memory"
 )
 
 type Word = arch.Word

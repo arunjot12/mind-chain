@@ -5,11 +5,11 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/fake"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/interfaces"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/run"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/lib/services"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/fake"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/interfaces"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/run"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

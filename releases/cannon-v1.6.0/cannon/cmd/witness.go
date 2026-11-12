@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"os"
 
-	factory "github.com/ethereum-optimism/optimism/cannon/mipsevm/versions"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	factory "github.com/mindchain/mind-chain/cannon/mipsevm/versions"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 	"github.com/urfave/cli/v2"
 )
 

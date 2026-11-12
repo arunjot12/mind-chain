@@ -8,12 +8,12 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/upgrade/embedded"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade/embedded"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 // defaultInitBond matches Deploy.s.sol DEFAULT_INIT_BOND (0.08 ether).

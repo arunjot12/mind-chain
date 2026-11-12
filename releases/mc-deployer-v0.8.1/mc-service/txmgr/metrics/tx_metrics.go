@@ -3,11 +3,11 @@ package metrics
 import (
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
 
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

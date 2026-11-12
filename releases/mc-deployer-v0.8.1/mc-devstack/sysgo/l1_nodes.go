@@ -1,10 +1,10 @@
 package sysgo
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/fakebeacon"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/fakebeacon"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type L1ELNode interface {

@@ -10,16 +10,16 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/op-devstack/shared/rustbin"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/crypto"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	"github.com/mindchain/mind-chain/mc-devstack/shared/rustbin"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/crypto"
 )
 
 type Option func(ctx context.Context, cfg *config.Config) error
@@ -283,13 +283,13 @@ func applyCommonChallengerOpts(ctx context.Context, cfg *config.Config, options 
 }
 
 // findMonorepoRoot finds the relative path to the monorepo root
-// Different tests might be nested in subdirectories of the op-e2e dir.
+// Different tests might be nested in subdirectories of the mc-e2e dir.
 func findMonorepoRoot() (string, error) {
 	path := "./"
 	// Only search a limited number of directories
 	// Avoids infinite recursion if the root isn't found for some reason
 	for i := 0; i < 10; i++ {
-		_, err := os.Stat(path + "op-devstack")
+		_, err := os.Stat(path + "mc-devstack")
 		if errors.Is(err, os.ErrNotExist) {
 			path = path + "../"
 			continue

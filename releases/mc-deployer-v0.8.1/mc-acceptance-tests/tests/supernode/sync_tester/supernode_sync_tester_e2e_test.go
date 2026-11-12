@@ -3,13 +3,13 @@ package supernode_sync_tester
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // All safety heads of a supernode VN driven by a sync-tester EL advance

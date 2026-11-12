@@ -16,22 +16,22 @@ import (
 	"github.com/hashicorp/raft"
 	"github.com/pkg/errors"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/client"
-	"github.com/ethereum-optimism/optimism/op-conductor/consensus"
-	"github.com/ethereum-optimism/optimism/op-conductor/health"
-	"github.com/ethereum-optimism/optimism/op-conductor/metrics"
-	conductorrpc "github.com/ethereum-optimism/optimism/op-conductor/rpc"
-	"github.com/ethereum-optimism/optimism/op-conductor/rpc/ws"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	opclient "github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	"github.com/mindchain/mind-chain/mc-conductor/client"
+	"github.com/mindchain/mind-chain/mc-conductor/consensus"
+	"github.com/mindchain/mind-chain/mc-conductor/health"
+	"github.com/mindchain/mind-chain/mc-conductor/metrics"
+	conductorrpc "github.com/mindchain/mind-chain/mc-conductor/rpc"
+	"github.com/mindchain/mind-chain/mc-conductor/rpc/ws"
+	"github.com/mindchain/mind-chain/mc-node/rollup/driver"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	opclient "github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 var (
@@ -152,7 +152,7 @@ func (c *OpConductor) initSequencerControl(ctx context.Context) error {
 			errCode := rpcErr.ErrorCode()
 			errText := strings.ToLower(err.Error())
 			if errCode == -32601 || strings.Contains(errText, "method not found") { // method not found error
-				c.log.Warn("Warning: conductorEnabled method not found, please upgrade your op-node to the latest version, continuing...")
+				c.log.Warn("Warning: conductorEnabled method not found, please upgrade your mc-node to the latest version, continuing...")
 				return true, nil
 			}
 		}
@@ -770,7 +770,7 @@ func (oc *OpConductor) action() {
 		// Try to stop sequencer first, but since sequencer is not healthy, we may not be able to stop it.
 		// In this case, it's fine to continue to try to transfer leadership to another server. This is safe because
 		// 1. if leadership transfer succeeded, then we'll retry and enter case !status.leader && status.healthy && status.active, which will try to stop sequencer.
-		// 2. even if the retry continues to fail and current server stays in active sequencing mode, it would be safe because our hook in op-node will prevent it from committing any new blocks to the network via p2p (if it's not leader any more)
+		// 2. even if the retry continues to fail and current server stays in active sequencing mode, it would be safe because our hook in mc-node will prevent it from committing any new blocks to the network via p2p (if it's not leader any more)
 		if e := oc.stopSequencer(); e != nil {
 			result = multierror.Append(result, e)
 		}
@@ -866,20 +866,20 @@ func (oc *OpConductor) startSequencer() error {
 	ctx := context.Background()
 
 	// When starting sequencer, we need to make sure that the current node has the latest unsafe head from the consensus protocol
-	// If not, then we wait for the unsafe head to catch up or gossip it to op-node manually from op-conductor.
+	// If not, then we wait for the unsafe head to catch up or gossip it to mc-node manually from mc-conductor.
 	unsafeInCons, unsafeInNode, err := oc.compareUnsafeHead(ctx)
-	// if there's a mismatch, try to post the unsafe head to op-node
+	// if there's a mismatch, try to post the unsafe head to mc-node
 	if errors.Is(err, ErrUnsafeHeadMismatch) && uint64(unsafeInCons.ExecutionPayload.BlockNumber)-unsafeInNode.NumberU64() == 1 {
-		// tries to post the unsafe head to op-node when head is only 1 block behind (most likely due to gossip delay)
+		// tries to post the unsafe head to mc-node when head is only 1 block behind (most likely due to gossip delay)
 		oc.log.Debug(
-			"posting unsafe head to op-node",
+			"posting unsafe head to mc-node",
 			"consensus_num", uint64(unsafeInCons.ExecutionPayload.BlockNumber),
 			"consensus_hash", unsafeInCons.ExecutionPayload.BlockHash.Hex(),
 			"node_num", unsafeInNode.NumberU64(),
 			"node_hash", unsafeInNode.Hash().Hex(),
 		)
 		if err := oc.ctrl.PostUnsafePayload(ctx, unsafeInCons); err != nil {
-			oc.log.Error("failed to post unsafe head payload envelope to op-node", "err", err)
+			oc.log.Error("failed to post unsafe head payload envelope to mc-node", "err", err)
 			return err
 		}
 	} else if err != nil {
@@ -919,7 +919,7 @@ func (oc *OpConductor) compareUnsafeHead(ctx context.Context) (*eth.ExecutionPay
 	oc.log.Debug("comparing unsafe head", "consensus", uint64(unsafeInCons.ExecutionPayload.BlockNumber), "node", unsafeInNode.NumberU64())
 	if unsafeInCons.ExecutionPayload.BlockHash != unsafeInNode.Hash() {
 		oc.log.Warn(
-			"latest unsafe block in consensus is not the same as the one in op-node",
+			"latest unsafe block in consensus is not the same as the one in mc-node",
 			"consensus_hash", unsafeInCons.ExecutionPayload.BlockHash,
 			"consensus_num", uint64(unsafeInCons.ExecutionPayload.BlockNumber),
 			"node_hash", unsafeInNode.Hash(),

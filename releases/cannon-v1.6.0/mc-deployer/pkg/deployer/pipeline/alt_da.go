@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"math/big"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
 	"github.com/ethereum/go-ethereum/common"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 )
 
 func DeployAltDA(env *Env, intent *state.Intent, st *state.State, chainID common.Hash) error {

@@ -9,26 +9,26 @@
 # If you modify the configs in any way, please also update the help text below.
 OP_UP_VERSION="${OP_UP_VERSION:-0.2.0}" # The default version is hardcoded for now.
 OP_UP_REPO="${OP_UP_REPO:-ethereum-optimism/optimism}"
-OP_UP_DIR="${OP_UP_DIR:-"${HOME}/.op-up"}"
+OP_UP_DIR="${OP_UP_DIR:-"${HOME}/.mc-up"}"
 
 if [ "$#" != 0 ]; then
-  echo "The op-up installer.
+  echo "The mc-up installer.
 
-When no parameters are passed, the op-up command is installed from GitHub.
+When no parameters are passed, the mc-up command is installed from GitHub.
 Anything else causes this help text to be printed.
 
 The installation is configured via environment variables:
 
 OP_UP_REPO:
-  The GitHub repo from which to download op-up.
+  The GitHub repo from which to download mc-up.
   (default: ${OP_UP_REPO})
 
 OP_UP_VERSION:
-  The semver-formatted version of the op-up command to install.
+  The semver-formatted version of the mc-up command to install.
   (default: ${OP_UP_VERSION})
 
 OP_UP_DIR:
-  The main directory for the op-up command. The install directory is \"\${OP_UP_DIR}/bin\".
+  The main directory for the mc-up command. The install directory is \"\${OP_UP_DIR}/bin\".
   (default: ${OP_UP_DIR})
 
 NO_COLOR:
@@ -133,7 +133,7 @@ esac
 
 # Download the binary.
 
-_binary_name="op-up"
+_binary_name="mc-up"
 
 _target="${_ostype}-${_cputype}"
 say "downloading for target ${_target}..."
@@ -188,6 +188,6 @@ case ":${PATH}:" in
         echo "export PATH=\"\${PATH}:${_install_dir}\"" >> "$_profile"
     fi
     say 'updated PATH'
-    shout "run 'source ${_profile}' or start a new terminal session to use op-up"
+    shout "run 'source ${_profile}' or start a new terminal session to use mc-up"
 
 esac

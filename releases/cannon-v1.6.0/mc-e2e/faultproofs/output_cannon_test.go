@@ -6,16 +6,16 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-e2e/config"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/challenger"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/disputegame"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/disputegame/preimage"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	oppreimage "github.com/ethereum-optimism/optimism/op-preimage"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-e2e/config"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/challenger"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/disputegame"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/disputegame/preimage"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	oppreimage "github.com/mindchain/mind-chain/mc-preimage"
 	"github.com/stretchr/testify/require"
 )
 
@@ -151,7 +151,7 @@ func testOutputCannonStepWithLargePreimage(t *testing.T, allocType config.AllocT
 	t.Cleanup(sys.Close)
 
 	// Manually send a tx from the correct batcher key to the batcher input with very large (invalid) data
-	// This forces op-program to load a large preimage.
+	// This forces mc-program to load a large preimage.
 	sys.BatcherHelper().SendLargeInvalidBatch(ctx)
 
 	require.NoError(t, sys.BatchSubmitter.Start(ctx))

@@ -3,15 +3,6 @@ package tasks
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	cldr "github.com/ethereum-optimism/optimism/op-program/client/driver"
-	"github.com/ethereum-optimism/optimism/op-program/client/l1"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2/engineapi"
-	"github.com/ethereum-optimism/optimism/op-program/client/mpt"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -19,6 +10,15 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	cldr "github.com/mindchain/mind-chain/mc-program/client/driver"
+	"github.com/mindchain/mind-chain/mc-program/client/l1"
+	"github.com/mindchain/mind-chain/mc-program/client/l2"
+	"github.com/mindchain/mind-chain/mc-program/client/l2/engineapi"
+	"github.com/mindchain/mind-chain/mc-program/client/mpt"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type L2Source interface {

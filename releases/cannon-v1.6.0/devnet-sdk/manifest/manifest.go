@@ -37,7 +37,7 @@ var _ ContractsAcceptor = (*Contracts)(nil)
 
 // L2Deployment represents deployment configuration
 type L2Deployment struct {
-	OpDeployer  *Component             `yaml:"op-deployer"`
+	OpDeployer  *Component             `yaml:"mc-deployer"`
 	L1Contracts *Contracts             `yaml:"l1-contracts"`
 	L2Contracts *Contracts             `yaml:"l2-contracts"`
 	Overrides   map[string]interface{} `yaml:"overrides"`

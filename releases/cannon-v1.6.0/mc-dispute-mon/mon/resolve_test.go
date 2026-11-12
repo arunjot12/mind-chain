@@ -4,14 +4,14 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/test"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/transform"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/test"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/transform"
 	"github.com/stretchr/testify/require"
 
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	monTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	monTypes "github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
 )
 
 func TestResolver_Resolve(t *testing.T) {

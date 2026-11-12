@@ -5,21 +5,21 @@ import (
 	"fmt"
 	"path"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/broadcaster"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/broadcaster"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
 
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 )
 
 type Env struct {
@@ -86,7 +86,7 @@ type Stage func(ctx context.Context, env *Env, bundle ArtifactsBundle, intent *s
 
 func RenderGenesisAndRollup(globalState *state.State, chainID common.Hash, useGlobalIntent *state.Intent) (*core.Genesis, *rollup.Config, error) {
 	if useGlobalIntent == nil && globalState.AppliedIntent == nil {
-		return nil, nil, fmt.Errorf("chain state is not applied - run op-deployer apply")
+		return nil, nil, fmt.Errorf("chain state is not applied - run mc-deployer apply")
 	}
 
 	globalIntent := useGlobalIntent

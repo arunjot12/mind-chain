@@ -7,19 +7,19 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txintent"
-	"github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txintent"
+	"github.com/mindchain/mind-chain/mc-service/txintent/bindings"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 	"github.com/stretchr/testify/require"
 )
 
@@ -117,7 +117,7 @@ func testReorgInvalidExecMsg(gt *testing.T, txModifierFn func(msg *messages.Mess
 	var execTx *txintent.IntentTx[*txintent.ExecTrigger, *txintent.InteropOutput]
 	var execSignedTx *types.Transaction
 	var execTxEncoded []byte
-	// prepare and include invalid executing message on chain B via the op-test-sequencer (no other way to force-include an invalid message)
+	// prepare and include invalid executing message on chain B via the mc-test-sequencer (no other way to force-include an invalid message)
 	{
 		execTx = txintent.NewIntent[*txintent.ExecTrigger, *txintent.InteropOutput](alice.Plan())
 		execTx.Content.DependOn(&initTx.Result)
@@ -145,32 +145,32 @@ func testReorgInvalidExecMsg(gt *testing.T, txModifierFn func(msg *messages.Mess
 		l.Info("executing message signed", "to", execSignedTx.To(), "nonce", execSignedTx.Nonce(), "data", len(execSignedTx.Data()))
 
 		execTxEncoded, err = execSignedTx.MarshalBinary()
-		require.NoError(t, err, "Expected to be able to marshal a signed transaction on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to marshal a signed transaction on mc-test-sequencer, but got error")
 	}
 
 	// sequence a new block with an invalid executing msg on chain A
 	{
-		l.Info("Building chain A with op-test-sequencer, and include invalid exec msg", "chain", sys.L2A.ChainID(), "unsafeHead", latestUnsafe_A)
+		l.Info("Building chain A with mc-test-sequencer, and include invalid exec msg", "chain", sys.L2A.ChainID(), "unsafeHead", latestUnsafe_A)
 
 		err := ia.New(ctx, seqtypes.BuildOpts{
 			Parent:   latestUnsafe_A,
 			L1Origin: nil,
 		})
-		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 
 		// include invalid executing msg in opened block
 		err = ia.IncludeTx(ctx, execTxEncoded)
-		require.NoError(t, err, "Expected to be able to include a signed transaction on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to include a signed transaction on mc-test-sequencer, but got error")
 
 		err = ia.Next(ctx)
-		require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 	}
 
 	// record divergence block numbers and original refs for future validation checks
 	var divergenceBlockNumber_A uint64
 	var originalHash_A common.Hash
 	var originalParentHash_A common.Hash
-	// sequence a second block with op-test-sequencer
+	// sequence a second block with mc-test-sequencer
 	{
 		currentUnsafeRef := sys.L2ELA.BlockRefByLabel(eth.Unsafe)
 
@@ -179,12 +179,12 @@ func testReorgInvalidExecMsg(gt *testing.T, txModifierFn func(msg *messages.Mess
 		divergenceBlockNumber_A = currentUnsafeRef.Number
 		originalHash_A = currentUnsafeRef.Hash
 		originalParentHash_A = currentUnsafeRef.ParentHash
-		l.Info("Continue building chain A with another block with op-test-sequencer", "chain", sys.L2A.ChainID(), "unsafeHead", currentUnsafeRef, "parent", currentUnsafeRef.ParentID())
+		l.Info("Continue building chain A with another block with mc-test-sequencer", "chain", sys.L2A.ChainID(), "unsafeHead", currentUnsafeRef, "parent", currentUnsafeRef.ParentID())
 		err := ia.New(ctx, seqtypes.BuildOpts{
 			Parent:   currentUnsafeRef.Hash,
 			L1Origin: nil,
 		})
-		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 
 		// include simple transfer tx in opened block
 		{
@@ -192,16 +192,16 @@ func testReorgInvalidExecMsg(gt *testing.T, txModifierFn func(msg *messages.Mess
 			opt := txplan.Combine(to)
 			ptx := txplan.NewPlannedTx(opt)
 			signed_tx, err := ptx.Signed.Eval(ctx)
-			require.NoError(t, err, "Expected to be able to evaluate a planned transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to evaluate a planned transaction on mc-test-sequencer, but got error")
 			txdata, err := signed_tx.MarshalBinary()
-			require.NoError(t, err, "Expected to be able to marshal a signed transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to marshal a signed transaction on mc-test-sequencer, but got error")
 
 			err = ia.IncludeTx(ctx, txdata)
-			require.NoError(t, err, "Expected to be able to include a signed transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to include a signed transaction on mc-test-sequencer, but got error")
 		}
 
 		err = ia.Next(ctx)
-		require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 		// Wait for the mc-node to observe the block the test-sequencer just committed
 		// before handing sequencing back to it via StartSequencer.
 		expectedUnsafe := sys.L2ELA.BlockRefByLabel(eth.Unsafe)

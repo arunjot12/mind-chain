@@ -1,18 +1,18 @@
-# `op-supervisor`
+# `mc-supervisor`
 
 Issues: [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-supervisor)
 
 Pull requests: [monorepo](https://github.com/ethereum-optimism/optimism/pulls?q=is%3Aopen+is%3Apr+label%3AA-op-supervisor)
 
 User docs:
-- [op-supervisor](https://docs.optimism.io/stack/interop/op-supervisor)
+- [mc-supervisor](https://docs.optimism.io/stack/interop/op-supervisor)
 
 Specs:
 - [interop specs]
 
-`op-supervisor` is a service to monitor chains, and quickly determine
+`mc-supervisor` is a service to monitor chains, and quickly determine
 cross-chain message safety, for native interoperability.
-The `op-supervisor` functions as a [superchain backend], implementing the [interop specs].
+The `mc-supervisor` functions as a [superchain backend], implementing the [interop specs].
 
 [superchain backend]: https://github.com/ethereum-optimism/design-docs/blob/main/protocol/superchain-backend.md
 [interop specs]: https://github.com/ethereum-optimism/specs/tree/main/specs/interop
@@ -23,13 +23,13 @@ The `op-supervisor` functions as a [superchain backend], implementing the [inter
 ## Quickstart
 
 ```bash
-make op-supervisor
+make mc-supervisor
 
 # Key configurables:
 # datadir: where to store indexed interop data
 # dependency-set: where to find chain dependencies (this format is changing, and may be fully onchain in a later iteration)
 # l2-rpcs: L2 RPC endpoints to fetch data from (optional, can also be added using the `admin_addL2RPC in the admin-RPC)
-./bin/op-supervisor \
+./bin/mc-supervisor \
   --datadir="./op-supervisor-data" \
   --dependency-set="./my-network-configs/dependency-set.json" \
   --l2-rpcs="ws://example1:8545,ws://example2:8545" \
@@ -42,21 +42,21 @@ make op-supervisor
 ### Build from source
 
 ```bash
-# from op-supervisor dir:
-make op-supervisor
-./bin/op-supervisor --help
+# from mc-supervisor dir:
+make mc-supervisor
+./bin/mc-supervisor --help
 ```
 
 ### Run from source
 
 ```bash
-# from op-supervisor dir:
+# from mc-supervisor dir:
 go run ./cmd --help
 ```
 
 ### Build docker image
 
-See `op-supervisor` docker-bake target.
+See `mc-supervisor` docker-bake target.
 
 ## Overview
 
@@ -70,7 +70,7 @@ There are 3 stages of block safety:
 
 **Pre-interop**, the only dependency is DA (data availability), i.e. the batch data to derive the chain from.
 **Post-interop**, other L2s may be a dependency also.
-The op-supervisor tracks these dependencies, to maintain a global view of cross-chain message safety.
+The mc-supervisor tracks these dependencies, to maintain a global view of cross-chain message safety.
 
 New blocks are considered `local unsafe`: sufficient to process the block locally, without guarantees.
 Once the L2 dependencies are met we consider it `cross unsafe`: still missing DA, but forming a valid messaging graph.
@@ -96,7 +96,7 @@ flowchart TD
 
 ### Control flow
 
-Op-nodes, or any compatible consensus-layer L2 node can interact with op-supervisor in two modes:
+Op-nodes, or any compatible consensus-layer L2 node can interact with mc-supervisor in two modes:
 
 #### Indexing Mode
 
@@ -106,18 +106,18 @@ This is done to give the supervisor a clear picture of the data across multiple 
 Indexing nodes can be thought of integral to the supervisor. There must be *at least* one indexing node per chain connected
 to a supervisor for it to supply accurate data.
 
-The Supervisor subscribes to events from the op-node in order to react appropriately.
-In turn, op-supervisor sends signals to the op-node to manage its derivation pipeline or maintain databases:
+The Supervisor subscribes to events from the mc-node in order to react appropriately.
+In turn, mc-supervisor sends signals to the mc-node to manage its derivation pipeline or maintain databases:
 
-| op-node event | op-supervisor control |
+| mc-node event | mc-supervisor control |
 |-------|---------|
 | When new unsafe blocks are added  | Supervisor fetches receipts for database indexing |
 | When a new safe block is derived from an L1 block | Supervisor records the L1:L2 derivation information to the database |
 | When an L1 block is fully derived | Supervisor provides the next L1 block |
 | When the node resets is derivation pipeline | Supervisor provides a reset signal targeting blocks known in the database |
 
-Additionally, the supervisor sends control signals to the op-node triggered by *database updates* in order to inform the node of cross-safety levels:
-| database event | op-supervisor control |
+Additionally, the supervisor sends control signals to the mc-node triggered by *database updates* in order to inform the node of cross-safety levels:
+| database event | mc-supervisor control |
 |-------|---------|
 | New cross-unsafe head  | Supervisor sends the head to the node, where it is recorded as the cross-unsafe head |
 | New cross-safe head  | Supervisor sends the head to the node, where it is recorded as the cross-safe head |
@@ -130,7 +130,7 @@ In this way, all indexing nodes are guaranteed to share the same L1 chain, and t
 #### Following Mode
 (Following mode is in development)
 
-In following mode, an `op-node` continues to handle derivation and L1 discovery as it would without a supervisor.
+In following mode, an `mc-node` continues to handle derivation and L1 discovery as it would without a supervisor.
 However, it calls out to the supervisor periodically to update its cross-heads. Following nodes do not affect the supervisor's data in any way.
 
 In this way, following nodes can optimistically follow cross-safety without requiring the larger infrastructure of multiple nodes and a supervisor.
@@ -142,8 +142,8 @@ In this way, following nodes can optimistically follow cross-safety without requ
 sequenceDiagram
 autonumber
 
-participant super as op-supervisor
-participant node as op-node (indexing)
+participant super as mc-supervisor
+participant node as mc-node (indexing)
 participant geth as op-geth
 
 super ->> node: RPC connection established
@@ -168,8 +168,8 @@ super ->> node: Next L1 Provided
 sequenceDiagram
 autonumber
 
-participant super as op-supervisor
-participant node as op-node (indexing)
+participant super as mc-supervisor
+participant node as mc-node (indexing)
 participant p2p as p2p
 
 p2p ->> node: New unsafe block from gossip network
@@ -181,7 +181,7 @@ Note over super: Index log events for unsafe block
 
 ### Databases
 
-The op-supervisor maintains a few databases:
+The mc-supervisor maintains a few databases:
 - Log database (`events` kind): per chain, we maintain a running list of log-events,
   separated by block-seals.
   I.e. this persists the cross-L2 dependency information.
@@ -192,7 +192,7 @@ The op-supervisor maintains a few databases:
   became cross-safe, given all the L2 data available, at which L1 block.
   I.e. this persists the merged results of verifying both DA and cross-L2 dependencies.
 
-Additionally, the op-supervisor tracks `cross unsafe` in memory, not persisting it to a database:
+Additionally, the mc-supervisor tracks `cross unsafe` in memory, not persisting it to a database:
 it can quickly reproduce this after data-loss by verifying if cross-L2 dependencies
 are met by `unsafe` data, starting from the latest known `cross safe` block.
 
@@ -212,7 +212,7 @@ The database can be searched with binary lookups, and written with O(1) appends.
 flowchart TD
     user-->opnode
     user-->opgeth
-    opnode[op-node]==block checks==>frontend[frontend RPC]
+    opnode[mc-node]==block checks==>frontend[frontend RPC]
     opgeth[op-geth]==tx-pool checks==>frontend
 
     frontend<==>backend
@@ -273,7 +273,7 @@ and requires dependencies on DA to be consolidated with the dependencies on cros
 
 ### Optimization target
 
-The `op-supervisor` implementation optimizes safe determination of cross-chain message safety,
+The `mc-supervisor` implementation optimizes safe determination of cross-chain message safety,
 with fast feedback to readers.
 
 Data is indexed fast and optimistically to have a minimum level of feedback about a message or block.
@@ -282,17 +282,17 @@ follow up with asynchronous full verification of the safety.
 
 ### Vision
 
-The `op-supervisor` is actively changing.
+The `mc-supervisor` is actively changing.
 The most immediate changes are that to the architecture and data flow, as outlined in [design-doc 171].
 
-Further background on the design-choices of op-supervisor can be found in the
+Further background on the design-choices of mc-supervisor can be found in the
 [superchain backend design-doc](https://github.com/ethereum-optimism/design-docs/blob/main/protocol/superchain-backend.md).
 
 ## Design principles
 
 - Each indexing or safety kind of change is encapsulated in its own asynchronous job.
 - Increments in indexing and safety are propagated, such that other follow-up work can be triggered without delay.
-- A read-only subset of the API is served, sufficient for nodes to stay in sync, assuming a healthy op-supervisor.
+- A read-only subset of the API is served, sufficient for nodes to stay in sync, assuming a healthy mc-supervisor.
 - Databases are rewound trivially by dropping trailing information.
 - Databases can be copied at any time, for convenient snapshots.
 
@@ -348,6 +348,6 @@ sequenceDiagram
 
 ## Testing
 
-- `op-e2e/interop`: Go interop system-tests, focused on offchain aspects of services to run end to end.
-- `op-e2e/actions/interop`: Go interop action-tests, focused on onchain aspects such as safety and state-transition.
+- `mc-e2e/interop`: Go interop system-tests, focused on offchain aspects of services to run end to end.
+- `mc-e2e/actions/interop`: Go interop action-tests, focused on onchain aspects such as safety and state-transition.
 - `kurtosis-devnet/interop.yaml`: Kurtosis configuration to run interoperable chains locally.

@@ -1,17 +1,17 @@
 // Package params holds the OP-Stack-specific chain configuration types. Consumers
 // import it as opparams.
 //
-// This package must stay free of op-core/superchain, which embeds the generated
+// This package must stay free of mc-core/superchain, which embeds the generated
 // registry bundle: packages that only need config types (notably mc-node/rollup)
 // must not pull the bundle into their build closure. The registry-backed loading
-// lives in op-core/superchain, which imports this package one-way.
+// lives in mc-core/superchain, which imports this package one-way.
 package params
 
 import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/forks"
 )
 
 const (
@@ -29,7 +29,7 @@ const (
 // is carried as rollup.Config.ChainOpConfig, which is serialised on the wire, so the
 // encoding must stay byte-for-byte identical.
 //
-// Unlike other op-core types, OptimismConfig keeps its Optimism prefix: it is the
+// Unlike other mc-core types, OptimismConfig keeps its Optimism prefix: it is the
 // type of the ChainConfig.Optimism field, and the type name pairs with the field.
 type OptimismConfig struct {
 	EIP1559Elasticity        uint64  `json:"eip1559Elasticity"`

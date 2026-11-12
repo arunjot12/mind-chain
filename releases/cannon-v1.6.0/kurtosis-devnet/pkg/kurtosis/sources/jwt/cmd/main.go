@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/jwt"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/jwt"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 	"github.com/urfave/cli/v2"
 )
 

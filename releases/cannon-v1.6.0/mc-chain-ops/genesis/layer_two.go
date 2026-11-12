@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math/big"
 
-	hdwallet "github.com/ethereum-optimism/go-ethereum-hdwallet"
+	hdwallet "github.com/arunjot12/go-ethereum-hdwallet"
 	"github.com/holiman/uint256"
 
 	"github.com/ethereum/go-ethereum/accounts"
@@ -13,9 +13,9 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/predeploys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/predeploys"
 )
 
 type L2AllocsMode string

@@ -8,7 +8,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 type Metrics interface {

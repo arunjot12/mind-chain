@@ -8,10 +8,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/solc"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/solc"
 )
 
 // Artifact represents a foundry compilation artifact.

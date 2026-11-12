@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	shared "github.com/ethereum-optimism/optimism/op-devstack/shared/challenger"
-	"github.com/ethereum-optimism/optimism/op-service/crypto"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	shared "github.com/mindchain/mind-chain/mc-devstack/shared/challenger"
+	"github.com/mindchain/mind-chain/mc-service/crypto"
 
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/stretchr/testify/require"
@@ -22,14 +22,14 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/log"
 
-	challenger "github.com/ethereum-optimism/optimism/mc-challenger"
-	"github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	challenger "github.com/mindchain/mind-chain/mc-challenger"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 type EndpointProvider interface {
@@ -133,7 +133,7 @@ func handleOptError(t *testing.T, opt shared.Option) Option {
 }
 
 // withPermissionedCannonVMConfig wires the base Cannon VM config (VM binary and genesis files) with
-// a dummy absolute prestate. op-e2e does not run the legacy Cannon game type; this base config only
+// a dummy absolute prestate. mc-e2e does not run the legacy Cannon game type; this base config only
 // exists to satisfy the challenger's config validation. The permissioned game type that uses it
 // skips prestate validation and resolves without reaching step(); output games use cannon-kona,
 // which configures its own prestate.

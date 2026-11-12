@@ -6,14 +6,14 @@ import (
 	"testing"
 	"time"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/challenger"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/disputegame"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/challenger"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/disputegame"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
 	"github.com/stretchr/testify/require"
 )
 

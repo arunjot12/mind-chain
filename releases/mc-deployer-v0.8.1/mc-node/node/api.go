@@ -5,20 +5,20 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
 
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/mc-node/version"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/rpc"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/version"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/rpc"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
 )
 
 type l2EthClient interface {
@@ -86,7 +86,7 @@ func (n *adminAPI) SequencerActive(ctx context.Context) (bool, error) {
 }
 
 // PostUnsafePayload is a special API that allows posting an unsafe payload to the L2 derivation pipeline.
-// It should only be used by op-conductor for sequencer failover scenarios.
+// It should only be used by mc-conductor for sequencer failover scenarios.
 func (n *adminAPI) PostUnsafePayload(ctx context.Context, envelope *eth.ExecutionPayloadEnvelope) error {
 	payload := envelope.ExecutionPayload
 	if actual, ok := envelope.CheckBlockHash(); !ok {

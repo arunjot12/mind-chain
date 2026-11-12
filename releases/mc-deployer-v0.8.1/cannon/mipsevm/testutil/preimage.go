@@ -3,7 +3,7 @@ package testutil
 import (
 	"github.com/ethereum/go-ethereum/crypto"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 )
 
 func Keccak256Preimage(data []byte) [32]byte {

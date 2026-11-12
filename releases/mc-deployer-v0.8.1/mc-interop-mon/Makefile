@@ -1,3 +1,3 @@
-DEPRECATED_TARGETS := op-interop-mon clean test
+DEPRECATED_TARGETS := mc-interop-mon clean test
 
 include ../justfiles/deprecated.mk

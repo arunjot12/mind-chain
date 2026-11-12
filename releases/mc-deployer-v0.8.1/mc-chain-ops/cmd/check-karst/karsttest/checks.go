@@ -1,5 +1,5 @@
 // Package karsttest implements the post-Karst conformance checks shared between
-// the op-acceptance-tests acceptance suite and the check-karst CLI. Each
+// the mc-acceptance-tests acceptance suite and the check-karst CLI. Each
 // Check{EIPName} function sends the relevant transactions, asserts the expected
 // receipt status, and returns the L2 block range exercised so callers can run
 // kona-host cross-checks (acceptance tests) or simply verify the checks ran
@@ -21,15 +21,15 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
-	"github.com/ethereum-optimism/optimism/op-service/txintent/contractio"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/txintent/bindings"
+	"github.com/mindchain/mind-chain/mc-service/txintent/contractio"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 // CLZBytecode is EVM init code that computes CLZ(1) and returns the 32-byte

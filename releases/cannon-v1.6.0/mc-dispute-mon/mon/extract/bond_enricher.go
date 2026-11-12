@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	monTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	monTypes "github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 	"golang.org/x/exp/maps"
 )
 

@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"math"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-program/chainconfig"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-program/chainconfig"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // CustomChainIDIndicator is used to detect when the program should load custom chain configuration

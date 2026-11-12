@@ -3,8 +3,8 @@ package throttler
 import (
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/config"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
 )
 
 // QuadraticStrategy implements quadratic throttling for more aggressive scaling

@@ -3,12 +3,12 @@ package solver
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/transform"
-	disputeTypes "github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/transform"
+	disputeTypes "github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
 	"github.com/stretchr/testify/require"
 )
 

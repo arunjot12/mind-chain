@@ -29,8 +29,8 @@ The rollup node software and associated services, including:
 - **mc-batcher**: L2 batch submitter
 - **mc-proposer**: L2 output submitter
 - **mc-challenger**: Dispute game challenge agent
-- **op-conductor**: High-availability sequencer service
-- **op-supernode**: Multi-chain consensus-layer host that runs multiple OP Stack chains in a single process and performs in-process cross-chain safety verification
+- **mc-conductor**: High-availability sequencer service
+- **mc-supernode**: Multi-chain consensus-layer host that runs multiple OP Stack chains in a single process and performs in-process cross-chain safety verification
 
 ### Smart Contracts (`packages/contracts-bedrock`)
 
@@ -52,8 +52,8 @@ The OP Stack includes significant Rust implementations:
 
 ### Development and Testing Infrastructure
 
-- **op-e2e**: End-to-end testing framework
-- **op-acceptance-tests**: Acceptance test suite
+- **mc-e2e**: End-to-end testing framework
+- **mc-acceptance-tests**: Acceptance test suite
 
 ## Subdirectory Instructions
 
@@ -62,7 +62,7 @@ Some subdirectories have their own CLAUDE.md with domain-specific conventions. R
 - `rust/kona/CLAUDE.md` — Kona Rust workspace: build commands (`just b/t/l/f`), code style, architecture overview
 - `rust/` — read before working in that area; links to [docs/ai/rust-dev.md](docs/ai/rust-dev.md)
 - `packages/contracts-bedrock/` — read before working in that area; links to [docs/ai/contract-dev.md](docs/ai/contract-dev.md)
-- `op-acceptance-tests/` — read before working in that area; links to [docs/ai/acceptance-tests.md](docs/ai/acceptance-tests.md)
+- `mc-acceptance-tests/` — read before working in that area; links to [docs/ai/acceptance-tests.md](docs/ai/acceptance-tests.md)
 - `mc-node/rollup/derive/` — read before working in that area; links to [docs/ai/derivation.md](docs/ai/derivation.md)
 - `rust/kona/crates/protocol/` — read before working in that area; links to [docs/ai/derivation.md](docs/ai/derivation.md)
 - `.circleci/` and `.github/` — read before editing CI config; links to [docs/ai/ci-config-review.md](docs/ai/ci-config-review.md)
@@ -87,7 +87,7 @@ More detailed guidance for AI agents can be found in:
 - [docs/ai/devfeatures.md](docs/ai/devfeatures.md) - The `DevFeatures` bitmap system gating in-development smart contract features: where the bitmap is supplied, composed, propagated, and read. Only relevant for contract development and mc-deployer — not needed for client (mc-node / mc-reth / kona) work
 - [docs/ai/acceptance-tests.md](docs/ai/acceptance-tests.md) - Building and running acceptance tests locally
 - [docs/ai/writing-acceptance-tests.md](docs/ai/writing-acceptance-tests.md) - Writing new acceptance tests: DSL patterns, naming, what to avoid
-- [docs/ai/opgeth-decoupling.md](docs/ai/opgeth-decoupling.md) - op-geth decoupling plan: consult when doing any op-geth decoupling work — migrating OP Stack–specific code out of op-geth into `op-core/*`, retiring op-geth-backed execution in tests/tooling, or removing fork-only API uses — so the monorepo can depend on upstream go-ethereum (scope: the whole monorepo — single go.mod; tracking issue #20257)
+- [docs/ai/opgeth-decoupling.md](docs/ai/opgeth-decoupling.md) - op-geth decoupling plan: consult when doing any op-geth decoupling work — migrating OP Stack–specific code out of op-geth into `mc-core/*`, retiring op-geth-backed execution in tests/tooling, or removing fork-only API uses — so the monorepo can depend on upstream go-ethereum (scope: the whole monorepo — single go.mod; tracking issue #20257)
 
 ## External References
 

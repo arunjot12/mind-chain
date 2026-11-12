@@ -7,16 +7,16 @@ import (
 	"sync/atomic"
 	"time"
 
-	opfees "github.com/ethereum-optimism/optimism/op-core/fees"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/signer"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/lmittmann/w3"
+	opfees "github.com/mindchain/mind-chain/mc-core/fees"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/signer"
 )
 
 // CostOracle implements OPCostOracle, estimating the OP-specific costs of a transaction —

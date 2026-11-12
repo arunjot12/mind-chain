@@ -3,7 +3,7 @@ package kt
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/manifest"
+	"github.com/mindchain/mind-chain/devnet-sdk/manifest"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
 )
@@ -17,8 +17,8 @@ l1:
   chain_id: 11155111
 l2:
   deployment:
-    op-deployer:
-      version: op-deployer/v0.0.11
+    mc-deployer:
+      version: mc-deployer/v0.0.11
     l1-contracts:
       locator: https://storage.googleapis.com/oplabs-contract-artifacts/artifacts-v1-c3f2e2adbd52a93c2c08cab018cd637a4e203db53034e59c6c139c76b4297953.tar.gz
       version: 984bae9146398a2997ec13757bfe2438ca8f92eb
@@ -30,18 +30,18 @@ l2:
       granite_time_offset: 0
       holocene_time_offset: 0
   components:
-    op-node:
-      version: op-node/v1.10.2
+    mc-node:
+      version: mc-node/v1.10.2
     op-geth:
       version: op-geth/v1.101411.4-rc.4
     op-reth:
       version: op-reth/v1.1.5
-    op-proposer:
-      version: op-proposer/v1.10.0-rc.2
-    op-batcher:
-      version: op-batcher/v1.10.0
-    op-challenger:
-      version: op-challenger/v1.3.1-rc.4
+    mc-proposer:
+      version: mc-proposer/v1.10.0-rc.2
+    mc-batcher:
+      version: mc-batcher/v1.10.0
+    mc-challenger:
+      version: mc-challenger/v1.3.1-rc.4
   chains:
   - name: alpaca-0
     chain_id: 11155111100000
@@ -56,7 +56,7 @@ l2:
 						{
 							ElType:  "op-geth",
 							ElImage: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:v1.101411.4-rc.4",
-							ClType:  "op-node",
+							ClType:  "mc-node",
 							ClImage: "us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.10.2",
 							Count:   1,
 						},

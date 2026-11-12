@@ -5,13 +5,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/challenger"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/disputegame"
-	"github.com/ethereum-optimism/optimism/op-e2e/interop"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/challenger"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/disputegame"
+	"github.com/mindchain/mind-chain/mc-e2e/interop"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
 	"github.com/stretchr/testify/require"
 )
 

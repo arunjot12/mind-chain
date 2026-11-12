@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/cli"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/cli"
 )
 
 // RunCLI provides a testable interface for running the mc-deployer CLI

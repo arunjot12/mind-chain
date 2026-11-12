@@ -10,17 +10,17 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/client"
-	clientmocks "github.com/ethereum-optimism/optimism/op-conductor/client/mocks"
-	mocks "github.com/ethereum-optimism/optimism/op-conductor/health/mocks"
-	"github.com/ethereum-optimism/optimism/op-conductor/metrics"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	p2pMocks "github.com/ethereum-optimism/optimism/op-node/p2p/mocks"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-conductor/client"
+	clientmocks "github.com/mindchain/mind-chain/mc-conductor/client/mocks"
+	mocks "github.com/mindchain/mind-chain/mc-conductor/health/mocks"
+	"github.com/mindchain/mind-chain/mc-conductor/metrics"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	p2pMocks "github.com/mindchain/mind-chain/mc-node/p2p/mocks"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 const (

@@ -4,10 +4,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/sdm/sdmtest"
-	sfp "github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/superfaultproofs"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/sdm/sdmtest"
+	sfp "github.com/mindchain/mind-chain/mc-acceptance-tests/tests/superfaultproofs"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
 )
 
 func TestInteropSingleChainFaultProofs(gt *testing.T) {

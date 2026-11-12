@@ -1,7 +1,7 @@
 package dsl
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 type TestSequencer struct {

@@ -56,7 +56,7 @@ returning objects that represent something in the system is ok. e.g.
 ```go
 claim := game.RootClaim()
 
-// Waits for op-challenger to counter the root claim and returns a value representing that counter claim
+// Waits for mc-challenger to counter the root claim and returns a value representing that counter claim
 // which can expose further verification or action methods.
 counter := claim.VerifyCountered()
 counter.VerifyClaimant(honestChallenger)

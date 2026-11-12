@@ -3,7 +3,7 @@ package dsl
 import (
 	"golang.org/x/sync/errgroup"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // SafetyHeadsAdvancement is the per-level delta and attempt budget for

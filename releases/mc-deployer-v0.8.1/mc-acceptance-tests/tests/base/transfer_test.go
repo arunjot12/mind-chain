@@ -4,13 +4,13 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 func TestTransfer(gt *testing.T) {
-	// Create a test environment using op-devstack
+	// Create a test environment using mc-devstack
 	t := devtest.ParallelT(gt)
 	sys := presets.NewMinimal(t)
 

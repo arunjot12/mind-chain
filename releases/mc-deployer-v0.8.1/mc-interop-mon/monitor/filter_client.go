@@ -6,11 +6,11 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // FilterChecker is the read-only interop-filter surface the observer needs.
@@ -22,7 +22,7 @@ type FilterChecker interface {
 	Close()
 }
 
-// FilterClient calls the op-interop-filter public RPC (read-only). It delegates the
+// FilterClient calls the mc-interop-filter public RPC (read-only). It delegates the
 // access-list check to the canonical sources.InteropFilterClient so the monitor stays
 // in sync with the filter's RPC signature.
 type FilterClient struct {

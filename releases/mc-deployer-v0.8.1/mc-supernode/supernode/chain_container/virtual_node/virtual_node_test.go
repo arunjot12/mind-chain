@@ -9,13 +9,13 @@ import (
 	"testing"
 	"time"
 
-	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
-	opmetrics "github.com/ethereum-optimism/optimism/mc-node/metrics"
-	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	gethlog "github.com/ethereum/go-ethereum/log"
+	opnodecfg "github.com/mindchain/mind-chain/mc-node/config"
+	opmetrics "github.com/mindchain/mind-chain/mc-node/metrics"
+	rollupNode "github.com/mindchain/mind-chain/mc-node/node"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/stretchr/testify/require"
 )
 

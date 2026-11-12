@@ -4,13 +4,13 @@
 !go.*
 # internal dependencies
 !cannon/
-!op-alt-da/
-!op-node/
-!op-preimage/
-!op-program/
-!op-service/
-!op-supervisor/
-!op-test-sequencer
+!mc-alt-da/
+!mc-node/
+!mc-preimage/
+!mc-program/
+!mc-service/
+!mc-supervisor/
+!mc-test-sequencer
 
 **/bin
 **/testdata

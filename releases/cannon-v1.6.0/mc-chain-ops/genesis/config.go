@@ -16,11 +16,11 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	opparams "github.com/ethereum-optimism/optimism/op-node/params"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	opparams "github.com/mindchain/mind-chain/mc-node/params"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (
@@ -630,7 +630,7 @@ type L2CoreDeployConfig struct {
 	// BatchInboxAddress is the L1 account that batches are sent to.
 	BatchInboxAddress common.Address `json:"batchInboxAddress"`
 
-	// SystemConfigStartBlock represents the block at which the op-node should start syncing
+	// SystemConfigStartBlock represents the block at which the mc-node should start syncing
 	// from. It is an override to set this value on legacy networks where it is not set by
 	// default. It can be removed once all networks have this value set in their storage.
 	SystemConfigStartBlock uint64 `json:"systemConfigStartBlock"`
@@ -668,7 +668,7 @@ func (d *L2CoreDeployConfig) Check(log log.Logger) error {
 
 // AltDADeployConfig configures optional AltDA functionality.
 type AltDADeployConfig struct {
-	// UseAltDA is a flag that indicates if the system is using op-alt-da
+	// UseAltDA is a flag that indicates if the system is using mc-alt-da
 	UseAltDA bool `json:"useAltDA" toml:"useAltDA"`
 	// DACommitmentType specifies the allowed commitment
 	DACommitmentType string `json:"daCommitmentType" toml:"daCommitmentType"`

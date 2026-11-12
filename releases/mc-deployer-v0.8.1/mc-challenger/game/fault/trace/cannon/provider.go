@@ -13,12 +13,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/mc-challenger/kvstore"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/kvstore"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 type CannonTraceProvider struct {

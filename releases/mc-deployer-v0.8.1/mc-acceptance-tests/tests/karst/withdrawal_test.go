@@ -3,11 +3,11 @@ package karst
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/base/withdrawal"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	opforks "github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/base/withdrawal"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	opforks "github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 // TestWithdrawal_Karst creates a withdrawal from the L2StandardBridge and

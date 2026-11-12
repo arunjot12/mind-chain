@@ -1,3 +1,3 @@
-DEPRECATED_TARGETS := op-wheel
+DEPRECATED_TARGETS := mc-wheel
 
 include ../justfiles/deprecated.mk

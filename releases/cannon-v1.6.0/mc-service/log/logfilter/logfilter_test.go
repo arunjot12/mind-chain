@@ -11,10 +11,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	. "github.com/ethereum-optimism/optimism/op-service/log/logfilter"
-	"github.com/ethereum-optimism/optimism/op-service/logmods"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/tri"
+	. "github.com/mindchain/mind-chain/mc-service/log/logfilter"
+	"github.com/mindchain/mind-chain/mc-service/logmods"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/tri"
 )
 
 type CtxTestKeyType struct{}

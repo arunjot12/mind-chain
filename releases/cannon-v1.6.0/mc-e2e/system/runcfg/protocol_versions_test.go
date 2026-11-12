@@ -8,20 +8,20 @@ import (
 	"testing"
 	"time"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/eth/ethconfig"
 	"github.com/ethereum/go-ethereum/node"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 	"github.com/stretchr/testify/require"
 )
 
@@ -79,7 +79,7 @@ func TestRequiredProtocolVersionChangeAndHalt(t *testing.T) {
 	// to speed up the test, make it reload the config more often, and do not impose a long conf depth
 	cfg.Nodes["verifier"].RuntimeConfigReloadInterval = time.Second * 5
 	cfg.Nodes["verifier"].Driver.VerifierConfDepth = 1
-	// configure halt in verifier op-node
+	// configure halt in verifier mc-node
 	cfg.Nodes["verifier"].RollupHalt = "major"
 	// configure halt in verifier op-geth node
 	cfg.GethOptions["verifier"] = append(cfg.GethOptions["verifier"], []geth.GethOption{
@@ -124,9 +124,9 @@ func TestRequiredProtocolVersionChangeAndHalt(t *testing.T) {
 		return struct{}{}, nil
 	})
 	require.NoError(t, err)
-	t.Log("verified that op-node closed!")
-	// Checking if the engine is down is not trivial in op-e2e.
-	// In op-geth we have halting tests covering the Engine API, in op-e2e we instead check if the API stops.
+	t.Log("verified that mc-node closed!")
+	// Checking if the engine is down is not trivial in mc-e2e.
+	// In op-geth we have halting tests covering the Engine API, in mc-e2e we instead check if the API stops.
 	_, err = retry.Do(context.Background(), 10, retry.Fixed(time.Second*10), func() (struct{}, error) {
 		available := client.IsURLAvailable(context.Background(), sys.NodeEndpoint("verifier").(endpoint.HttpRPC).HttpRPC(), 5*time.Second)
 		if !available { // waiting for client to stop responding to RPC requests (slow dials with timeout don't count)

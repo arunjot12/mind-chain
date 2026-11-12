@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/memory"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/register"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/memory"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/register"
 )
 
 const WordSizeBytes = arch.WordSizeBytes
@@ -39,7 +39,7 @@ func PatchStack(st mipsevm.FPVMState) error {
 	_ = st.GetMemory().SetMemoryRange(envp0Offset, bytes.NewReader(envar))
 
 	argv0Offset := envp0Offset + Word(len(envar))
-	programName := append([]byte("op-program"), 0x0)
+	programName := append([]byte("mc-program"), 0x0)
 	programName = pad(programName)
 	_ = st.GetMemory().SetMemoryRange(argv0Offset, bytes.NewReader(programName))
 

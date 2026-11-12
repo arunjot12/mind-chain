@@ -3,10 +3,10 @@ package metrics
 import (
 	"github.com/prometheus/client_golang/prometheus"
 
-	ftypes "github.com/ethereum-optimism/optimism/op-faucet/faucet/backend/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	txmetrics "github.com/ethereum-optimism/optimism/op-service/txmgr/metrics"
+	ftypes "github.com/mindchain/mind-chain/mc-faucet/faucet/backend/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	txmetrics "github.com/mindchain/mind-chain/mc-service/txmgr/metrics"
 )
 
 const Namespace = "op_faucet"
@@ -56,7 +56,7 @@ func newMetrics(procName string, registry *prometheus.Registry) *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: ns,
 			Name:      "up",
-			Help:      "1 if op-faucet has finished starting up",
+			Help:      "1 if mc-faucet has finished starting up",
 		}),
 
 		TxMetrics: txmetrics.MakeTxMetrics(ns, factory),

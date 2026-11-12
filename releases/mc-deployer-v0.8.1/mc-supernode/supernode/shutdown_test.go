@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/resources"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/resources"
 	"github.com/stretchr/testify/require"
 )
 

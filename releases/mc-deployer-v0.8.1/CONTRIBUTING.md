@@ -142,7 +142,7 @@ go test ./...
 
 #### Running e2e tests (Go)
 
-See [this document](./op-e2e/README.md)
+See [this document](./mc-e2e/README.md)
 
 #### Rust (kona, mc-reth, op-alloy, …)
 

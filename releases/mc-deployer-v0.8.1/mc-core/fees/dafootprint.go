@@ -7,8 +7,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/core/types"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 const (

@@ -17,7 +17,7 @@ The first step to deploying a custom Superchain is to bootstrap it onto an L1. T
 - Deploy contract implementations that will be shared among all OP Chains deployed using this Superchain.
 - Set up ownership so that you can control the Superchain.
 
-You will use the `bootstrap` [family][bootstrap] of commands on `op-deployer` to do this.
+You will use the `bootstrap` [family][bootstrap] of commands on `mc-deployer` to do this.
 
 [bootstrap]: ../user-guide/bootstrap.md
 
@@ -35,7 +35,7 @@ The choice is up to the deployer. Note that you **cannot** share a Superchain ac
 To begin, bootstrap the Superchain onto your chosen L1 with the following command:
 
 ```shell
-op-deployer bootstrap superchain \
+mc-deployer bootstrap superchain \
   --l1-rpc-url="<rpc url>" \
   --private-key="<contract deployer private key>" \
   --artifacts-locator="<locator>" \
@@ -71,7 +71,7 @@ already exist on the L1.
 To deploy the implementations, use the following command:
 
 ```shell
-op-deployer bootstrap implementations \
+mc-deployer bootstrap implementations \
   --artifacts-locator="<locator, should be the same as the one used in bootstrap superchain>" \
   --l1-rpc-url="<rpc url>" \
   --outfile="<path to outfile>" \
@@ -139,7 +139,7 @@ To run the upgrade command, use the following:
 > Upgrading between non-standard contract versions is not supported.
 
 ```shell
-op-deployer upgrade <version> \
+mc-deployer upgrade <version> \
   --config <path to config JSON> \
   --l1-rpc-url="<rpc url>"
 ```

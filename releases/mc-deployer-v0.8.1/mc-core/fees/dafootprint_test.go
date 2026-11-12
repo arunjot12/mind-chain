@@ -11,7 +11,7 @@ import (
 	"github.com/holiman/uint256"
 	"github.com/stretchr/testify/require"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 // jovianL1AttributesData builds Jovian-length L1-attributes calldata with the Jovian selector

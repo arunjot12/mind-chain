@@ -1,8 +1,8 @@
-## op-conductor runbook
+## mc-conductor runbook
 
 ### conductor configurations
 
-In order to setup op-conductor, you need to configure the following env vars for both op-conductor and mc-node service:
+In order to setup mc-conductor, you need to configure the following env vars for both mc-conductor and mc-node service:
 
 #### mc-node
 
@@ -11,7 +11,7 @@ OP_NODE_CONDUCTOR_ENABLED=true
 OP_NODE_CONDUCTOR_RPC=<conductor-rpc-endpoint> # for example http://conductor:8545
 ```
 
-#### op-conductor
+#### mc-conductor
 
 ```env
 # prefix for the server id, used to identify the server in the raft cluster
@@ -38,23 +38,23 @@ OP_CONDUCTOR_RAFT_BOOTSTRAP=true/false # set to true if you want to bootstrap th
 In normal situations, you probably have a running sequencer already and you want to turn it into a HA cluster. What you need to do in this situation is to:
 
 1. start a completely new sequencer with above mentioned configurations and
-   1. `OP_CONDUCTOR_RAFT_BOOTSTRAP=true` set on op-conductor
-   2. `OP_CONDUCTOR_PAUSED=true` set on op-conductor
+   1. `OP_CONDUCTOR_RAFT_BOOTSTRAP=true` set on mc-conductor
+   2. `OP_CONDUCTOR_PAUSED=true` set on mc-conductor
    3. `OP_NODE_SEQUENCER_ENABLED=true` set on mc-node
 2. wait for the new sequencer to start and get synced up with the rest of the nodes
 3. once the new sequencer is synced up, manually or use automation to stop sequencing on the old sequencer and start sequencing on the new sequencer
-4. resume the conductor on the new sequencer by calling `conductor_resume` json rpc method on op-conductor
+4. resume the conductor on the new sequencer by calling `conductor_resume` json rpc method on mc-conductor
 5. set `OP_CONDUCTOR_RAFT_BOOTSTRAP=false` on the sequencer so that it doesn't attempt to bootstrap the cluster during redeploy
 
 Now you have a single HA sequencer which treats itself as the cluster leader! Next steps would be to add more sequencers to the cluster depending on your needs. For example, we want a 3-node cluster, you can follow the same process to add 2 more sequencers.
 
 1. start a new sequencer with
-   1. `OP_CONDUCTOR_RAFT_BOOTSTRAP=false` set on op-conductor
-   2. `OP_CONDUCTOR_PAUSED=true` set on op-conductor
+   1. `OP_CONDUCTOR_RAFT_BOOTSTRAP=false` set on mc-conductor
+   2. `OP_CONDUCTOR_PAUSED=true` set on mc-conductor
 2. wait for the new sequencer to start and get synced up with the rest of the nodes
 3. once the new sequencer is synced up, manually or use automation to add it to the cluster by calling `conductor_addServerAsVoter` json rpc method on the leader sequencer
 4. call `conductor_clusterMembership` json rpc method on the leader sequencer to get the updated cluster membership
-5. resume the conductor on the new sequencer by calling `conductor_resume` json rpc method on op-conductor
+5. resume the conductor on the new sequencer by calling `conductor_resume` json rpc method on mc-conductor
 
 Once finished, you should have a 3-node HA sequencer cluster!
 
@@ -62,7 +62,7 @@ Once finished, you should have a 3-node HA sequencer cluster!
 
 For every redeploy, depending on your underlying infrastructure, you need to make sure to:
 
-1. `OP_CONDUCTOR_PAUSED=true` set on op-conductor so that conductor doesn't attempt to control sequencer while it's still syncing / redeploying
+1. `OP_CONDUCTOR_PAUSED=true` set on mc-conductor so that conductor doesn't attempt to control sequencer while it's still syncing / redeploying
 2. make sure sequencer is caught up with the rest of the nodes (this step isn't strictly necessary as conductor could handle this, but from a HA perspective, it does not make sense to have a sequencer that is lagging behind to join the cluster to potentially become the leader)
 3. resume conductor after it's caught up with the rest of the nodes so that conductor can start managing the sequencer
 

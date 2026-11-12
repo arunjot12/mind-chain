@@ -6,13 +6,13 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
-// BuildInteropDepSet converts the intent chain list into an op-core static dependency set.
+// BuildInteropDepSet converts the intent chain list into an mc-core static dependency set.
 func BuildInteropDepSet(chains []*state.ChainIntent) (*depset.StaticConfigDependencySet, error) {
 	return buildInteropDepSet(chains, depset.NewStaticConfigDependencySet)
 }

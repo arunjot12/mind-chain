@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/config"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
 	"github.com/stretchr/testify/require"
 )
 

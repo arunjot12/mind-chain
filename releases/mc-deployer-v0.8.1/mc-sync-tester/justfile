@@ -8,10 +8,10 @@ _LDFLAGSSTRING := "'" + trim(
     "-X main.Meta=" + VERSION_META + " " + \
     "") + "'"
 
-BINARY := "./bin/op-sync-tester"
+BINARY := "./bin/mc-sync-tester"
 
-# Build op-sync-tester binary
-op-sync-tester: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
+# Build mc-sync-tester binary
+mc-sync-tester: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
 
 # Clean build artifacts
 clean:

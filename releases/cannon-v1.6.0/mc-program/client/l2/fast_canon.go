@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"math"
 
-	l2Types "github.com/ethereum-optimism/optimism/op-program/client/l2/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/consensus"
 	"github.com/ethereum/go-ethereum/consensus/beacon"
@@ -19,6 +17,8 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/triedb"
 	"github.com/hashicorp/golang-lru/v2/simplelru"
+	l2Types "github.com/mindchain/mind-chain/mc-program/client/l2/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // historicalCacheSize is the number of cached eip-2935 historical block lookups

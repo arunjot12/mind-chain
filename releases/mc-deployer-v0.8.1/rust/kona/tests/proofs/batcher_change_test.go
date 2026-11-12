@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/rust/kona/tests/proofs/helpers"
+	actionsHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/rust/kona/tests/proofs/helpers"
 )
 
 // TestBatcherChangeWithinChannelTimeout verifies that after a

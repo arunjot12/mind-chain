@@ -8,18 +8,18 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/mc-node/node/tracer"
-	"github.com/ethereum-optimism/optimism/mc-node/p2p"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
 	"github.com/ethereum/go-ethereum/params"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	"github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-node/node/tracer"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/driver"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 type Config struct {
@@ -84,7 +84,7 @@ type Config struct {
 	IgnoreMissingPectraBlobSchedule bool
 	FetchWithdrawalRootFromState    bool
 
-	// Experimental. Enables new opstack RPC namespace. Used by op-test-sequencer.
+	// Experimental. Enables new opstack RPC namespace. Used by mc-test-sequencer.
 	ExperimentalOPStackAPI bool
 }
 

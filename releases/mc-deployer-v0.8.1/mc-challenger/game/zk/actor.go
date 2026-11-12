@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/generic"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/generic"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 var (

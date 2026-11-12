@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"os"
 
-	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node/runcfg"
-	"github.com/ethereum-optimism/optimism/mc-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
+	rollupNode "github.com/mindchain/mind-chain/mc-node/node/runcfg"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
 )
 
-// ELKind selects which execution-layer backend op-e2e runs as the L2 EL.
+// ELKind selects which execution-layer backend mc-e2e runs as the L2 EL.
 type ELKind string
 
 const (

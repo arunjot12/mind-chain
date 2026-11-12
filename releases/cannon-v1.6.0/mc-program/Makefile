@@ -8,21 +8,21 @@ LDFLAGSSTRING +=-X main.GitDate=$(GITDATE)
 
 # op-program-client version must ALWAYS be set to the same value (v0.0.0) to ensure exact build is reproducible
 PC_LDFLAGSSTRING := $(LDFLAGSSTRING)
-PC_LDFLAGSSTRING +=-X github.com/ethereum-optimism/optimism/op-program/version.Version=v0.0.0
-PC_LDFLAGSSTRING +=-X github.com/ethereum-optimism/optimism/op-program/version.Meta=
+PC_LDFLAGSSTRING +=-X github.com/mindchain/mind-chain/mc-program/version.Version=v0.0.0
+PC_LDFLAGSSTRING +=-X github.com/mindchain/mind-chain/mc-program/version.Meta=
 
-LDFLAGSSTRING +=-X github.com/ethereum-optimism/optimism/op-program/version.Version=$(VERSION)
-LDFLAGSSTRING +=-X github.com/ethereum-optimism/optimism/op-program/version.Meta=$(VERSION_META)
+LDFLAGSSTRING +=-X github.com/mindchain/mind-chain/mc-program/version.Version=$(VERSION)
+LDFLAGSSTRING +=-X github.com/mindchain/mind-chain/mc-program/version.Meta=$(VERSION_META)
 
 COMPAT_DIR := temp/compat
 
-op-program: \
+mc-program: \
 	op-program-host \
 	op-program-client \
 	op-program-client-mips
 
 op-program-host:
-	env GO111MODULE=on GOOS=$(TARGETOS) GOARCH=$(TARGETARCH) CGO_ENABLED=0 go build -v -ldflags "$(LDFLAGSSTRING)" -o ./bin/op-program ./host/cmd/main.go
+	env GO111MODULE=on GOOS=$(TARGETOS) GOARCH=$(TARGETARCH) CGO_ENABLED=0 go build -v -ldflags "$(LDFLAGSSTRING)" -o ./bin/mc-program ./host/cmd/main.go
 
 op-program-client:
 	env GO111MODULE=on GOOS=$(TARGETOS) GOARCH=$(TARGETARCH) go build -v -ldflags "$(PC_LDFLAGSSTRING)" -o ./bin/op-program-client ./client/cmd/main.go
@@ -44,7 +44,7 @@ op-program-client-riscv:
 	env GO111MODULE=on GOOS=linux GOARCH=riscv64 go build -v -gcflags="all=-d=softfloat" -ldflags "$(PC_LDFLAGSSTRING)" -o ./bin/op-program-client-riscv.elf ./client/cmd/main.go
 
 check-custom-chains: op-program-host
-	./bin/op-program configs check-custom-chains
+	./bin/mc-program configs check-custom-chains
 
 reproducible-prestate: check-custom-chains
 	@docker build --build-arg GO_VERSION=1.24.2-alpine3.21 --build-arg EXPORT_TARGET=next  --output ./bin/ --progress plain -f Dockerfile.repro ../
@@ -145,7 +145,7 @@ run-vm-compat:
 	@docker build --build-arg GO_VERSION=1.24.2-alpine3.21 --build-arg VM_TARGET=next --progress plain -f Dockerfile.vmcompat ../
 
 .PHONY: \
-	op-program \
+	mc-program \
 	op-program-host \
 	op-program-client \
 	op-program-client-mips \

@@ -6,10 +6,10 @@ import (
 	"math"
 	"strings"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	"github.com/ethereum-optimism/optimism/op-service/flags"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	"github.com/mindchain/mind-chain/mc-service/flags"
 	"github.com/urfave/cli/v2"
 )
 

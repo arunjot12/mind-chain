@@ -12,7 +12,7 @@ optimism_package:
   interop:
     enabled: true
     supervisor_params:
-      image: {{ dig "overrides" "images" "op_supervisor" (localDockerImage "op-supervisor") $context }}
+      image: {{ dig "overrides" "images" "op_supervisor" (localDockerImage "mc-supervisor") $context }}
       extra_params:
       - {{ dig "overrides" "flags" "log_level" "!!str" $context }}
 {{ end }}
@@ -22,7 +22,7 @@ optimism_package:
       {{ include "l2.yaml" (dict "chain_id" $l2_id "overrides" $overrides "nodes" $l2.nodes) }}
   {{ end }}
   op_contract_deployer_params:
-    image: {{ dig "overrides" "images" "op_deployer" (localDockerImage "op-deployer") $context }}
+    image: {{ dig "overrides" "images" "op_deployer" (localDockerImage "mc-deployer") $context }}
     l1_artifacts_locator: {{ dig "overrides" "urls" "l1_artifacts" (localContractArtifacts "l1") $context }}
     l2_artifacts_locator: {{ dig "overrides" "urls" "l2_artifacts" (localContractArtifacts "l2") $context }}
 {{ if $interop }}

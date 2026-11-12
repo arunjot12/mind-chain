@@ -18,16 +18,16 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-batcher/compressor"
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	derive_params "github.com/ethereum-optimism/optimism/op-node/rollup/derive/params"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-batcher/compressor"
+	batcherFlags "github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	derive_params "github.com/mindchain/mind-chain/mc-node/rollup/derive/params"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 type SyncStatusAPI interface {
@@ -92,9 +92,9 @@ type L2BlockRefs interface {
 
 // L2Batcher buffers and submits L2 batches to L1.
 //
-// TODO: note the batcher shares little logic/state with actual op-batcher,
+// TODO: note the batcher shares little logic/state with actual mc-batcher,
 // tests should only use this actor to build batch contents for rollup node actors to consume,
-// until the op-batcher is refactored and can be covered better.
+// until the mc-batcher is refactored and can be covered better.
 type L2Batcher struct {
 	log log.Logger
 

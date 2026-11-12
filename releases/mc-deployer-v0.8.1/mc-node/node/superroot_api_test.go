@@ -10,10 +10,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 const (
@@ -140,7 +140,7 @@ func TestSuperrootAPI_BeyondUnsafe(t *testing.T) {
 }
 
 func TestSuperrootAPI_BeyondLocalSafe_OmitsChain(t *testing.T) {
-	// Block 55: between LocalSafeL2 (50) and UnsafeL2 (60). op-supernode omits the
+	// Block 55: between LocalSafeL2 (50) and UnsafeL2 (60). mc-supernode omits the
 	// chain here; we do too.
 	f := newFixture(t)
 	f.expectBlockRef(55, common.Hash{0x55}, eth.BlockID{Number: 180})

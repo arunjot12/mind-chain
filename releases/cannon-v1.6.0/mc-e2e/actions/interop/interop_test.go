@@ -8,14 +8,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/interop/dsl"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/emit"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop/indexing"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	stypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/interop/dsl"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/emit"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop/indexing"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	stypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 func TestFullInterop(gt *testing.T) {
@@ -116,8 +116,8 @@ func TestFullInterop(gt *testing.T) {
 		h := chain.SequencerEngine.L2Chain().CurrentSafeBlock().Hash()
 		require.Equal(t, head.Hash, h)
 
-		// Finalize L1, and see if the supervisor updates the op-node finality accordingly.
-		// The supervisor then determines finality, which the op-node can use.
+		// Finalize L1, and see if the supervisor updates the mc-node finality accordingly.
+		// The supervisor then determines finality, which the mc-node can use.
 		actors.L1Miner.ActL1SafeNext(t)
 		actors.L1Miner.ActL1FinalizeNext(t)
 		chain.Sequencer.ActL1SafeSignal(t) // TODO old source of finality
@@ -282,19 +282,19 @@ func TestInteropLocalSafeInvalidation(gt *testing.T) {
 
 	// Signal the supervisor there is a new L1 block
 	actors.Supervisor.SignalLatestL1(t)
-	// sync the op-node, to signal that derivation needs the new L1 block
+	// sync the mc-node, to signal that derivation needs the new L1 block
 	t.Log("awaiting L1-exhaust event")
 	actors.ChainB.Sequencer.ActL2PipelineFull(t)
-	// sync the supervisor, so it can pass the L1 block to op-node
+	// sync the supervisor, so it can pass the L1 block to mc-node
 	t.Log("awaiting supervisor to provide L1 data")
 	actors.ChainB.Sequencer.SyncSupervisor(t)
 	actors.Supervisor.ProcessFull(t)
-	// sync the op-node, so it derives the local-safe head
+	// sync the mc-node, so it derives the local-safe head
 	t.Log("awaiting node to sync")
 	actors.ChainB.Sequencer.ActL2PipelineFull(t)
 	// Both L2 blocks were derived from the same L1 batch, and should have been processed into local-safe updates
 	require.Equal(t, uint64(2), actors.ChainB.Sequencer.SyncStatus().LocalSafeL2.Number)
-	// Make the supervisor process the derivation work from the op-node.
+	// Make the supervisor process the derivation work from the mc-node.
 	// It should determine that the local-safe block needs replacement.
 	t.Log("Expecting supervisor to sync and catch local-safe dependency issue")
 	actors.ChainB.Sequencer.SyncSupervisor(t)
@@ -304,8 +304,8 @@ func TestInteropLocalSafeInvalidation(gt *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, uint64(0), localUnsafe.Number, "unsafe chain needs to be rewound")
 
-	// Make the op-node do the processing to build the replacement
-	t.Log("Expecting op-node to build replacement block")
+	// Make the mc-node do the processing to build the replacement
+	t.Log("Expecting mc-node to build replacement block")
 	actors.ChainB.Sequencer.ActL2PipelineFull(t)
 	// Make the supervisor pick up the replacement
 	actors.ChainB.Sequencer.SyncSupervisor(t)
@@ -318,7 +318,7 @@ func TestInteropLocalSafeInvalidation(gt *testing.T) {
 	require.Equal(t, uint64(1), crossSafe.Derived.Number)
 
 	actors.ChainB.Sequencer.ActL2PipelineFull(t)
-	// check op-node head matches replacement block
+	// check mc-node head matches replacement block
 	status := actors.ChainB.Sequencer.SyncStatus()
 	require.Equal(t, crossSafe.Derived, status.SafeL2.ID())
 

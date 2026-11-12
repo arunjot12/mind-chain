@@ -23,7 +23,7 @@ cannon:
 # Build the op-program-client elf binaries
 op-program-client-mips:
     #!/bin/bash
-    cd ../op-program
+    cd ../mc-program
     make op-program-client-mips \
         GOOS=linux \
         GOARCH=mips \
@@ -35,8 +35,8 @@ op-program-client-mips:
 # Generate the prestate proof containing the absolute pre-state hash.
 prestate TYPE CLIENT_SUFFIX PRESTATE_SUFFIX: cannon op-program-client-mips
     #!/bin/bash
-    go run /app/op-program/builder/main.go build-prestate \
-        --program-elf /app/op-program/bin/op-program-client{{CLIENT_SUFFIX}}.elf \
+    go run /app/mc-program/builder/main.go build-prestate \
+        --program-elf /app/mc-program/bin/op-program-client{{CLIENT_SUFFIX}}.elf \
         --version {{TYPE}}\
         --suffix {{PRESTATE_SUFFIX}}
 

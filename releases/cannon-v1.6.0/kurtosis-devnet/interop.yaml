@@ -1,13 +1,13 @@
 {{- $local_images := dict
-  "op_node" (localDockerImage "op-node")
-  "op_batcher" (localDockerImage "op-batcher")
-  "op_challenger" (localDockerImage "op-challenger")
-  "op_conductor" (localDockerImage "op-conductor")
-  "op_proposer" (localDockerImage "op-proposer")
-  "op_deployer" (localDockerImage "op-deployer")
-  "op_supervisor" (localDockerImage "op-supervisor")
-  "op_faucet" (localDockerImage "op-faucet")
-  "op_interop_mon" (localDockerImage "op-interop-mon")
+  "op_node" (localDockerImage "mc-node")
+  "op_batcher" (localDockerImage "mc-batcher")
+  "op_challenger" (localDockerImage "mc-challenger")
+  "op_conductor" (localDockerImage "mc-conductor")
+  "op_proposer" (localDockerImage "mc-proposer")
+  "op_deployer" (localDockerImage "mc-deployer")
+  "op_supervisor" (localDockerImage "mc-supervisor")
+  "op_faucet" (localDockerImage "mc-faucet")
+  "op_interop_mon" (localDockerImage "mc-interop-mon")
 -}}
 {{- $urls := dict
   "prestate" (localPrestate.URL)
@@ -60,7 +60,7 @@ optimism_package:
             min_mem: 0
             max_mem: 0
           cl:
-            type: op-node
+            type: mc-node
             image: {{ $local_images.op_node }}
             log_level: ""
             extra_env_vars: {}

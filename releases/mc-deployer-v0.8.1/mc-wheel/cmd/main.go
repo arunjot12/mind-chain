@@ -4,13 +4,13 @@ import (
 	"errors"
 	"os"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 	"github.com/urfave/cli/v2"
 
 	"github.com/ethereum/go-ethereum/log"
 
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	wheel "github.com/ethereum-optimism/optimism/op-wheel"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	wheel "github.com/mindchain/mind-chain/mc-wheel"
 )
 
 var (
@@ -22,7 +22,7 @@ var (
 func main() {
 	app := cli.NewApp()
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-wheel"
+	app.Name = "mc-wheel"
 	app.Usage = "Optimism Wheel is a CLI tool for the execution engine"
 	app.Description = "Optimism Wheel is a CLI tool to direct the engine one way or the other with Engine API routines."
 	app.Flags = []cli.Flag{wheel.GlobalGethLogLvlFlag}

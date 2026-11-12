@@ -15,7 +15,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"golang.org/x/mod/modfile"
 
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
@@ -130,7 +130,7 @@ func FindMonorepoRoot(startDir string) (string, error) {
 			if err != nil {
 				return "", fmt.Errorf("parsing go.mod: %w", err)
 			}
-			if modFile.Module.Mod.Path == "github.com/ethereum-optimism/optimism" {
+			if modFile.Module.Mod.Path == "github.com/mindchain/mind-chain" {
 				return dir, nil
 			}
 		}

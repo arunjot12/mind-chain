@@ -7,7 +7,7 @@ configuring the base fee scalar and blob base fee scalars separately.
 
 #### Usage
 
-Build and run using the [Makefile](../../Makefile) `ecotone-scalar` target. Inside of `/op-chain-ops`, run:
+Build and run using the [Makefile](../../Makefile) `ecotone-scalar` target. Inside of `/mc-chain-ops`, run:
 ```sh
 make ecotone-scalar
 ```

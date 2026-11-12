@@ -19,12 +19,12 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto/kzg4844"
 
-	client_mocks "github.com/ethereum-optimism/optimism/op-service/client/mocks"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources/mocks"
+	client_mocks "github.com/mindchain/mind-chain/mc-service/client/mocks"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources/mocks"
 )
 
-//go:generate mockery --srcpkg=github.com/ethereum-optimism/optimism/op-service/apis --name BeaconClient --with-expecter=true
+//go:generate mockery --srcpkg=github.com/mindchain/mind-chain/mc-service/apis --name BeaconClient --with-expecter=true
 
 func makeTestBlob(index uint64) (eth.IndexedBlobHash, *eth.Blob) {
 	blob := kzg4844.Blob{}

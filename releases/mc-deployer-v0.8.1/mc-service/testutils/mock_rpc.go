@@ -4,7 +4,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/ethereum-optimism/optimism/op-service/client"
+	"github.com/mindchain/mind-chain/mc-service/client"
 	"github.com/stretchr/testify/mock"
 
 	"github.com/ethereum/go-ethereum"

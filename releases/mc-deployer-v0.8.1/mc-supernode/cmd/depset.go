@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supernode/config"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	opnodecfg "github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supernode/config"
 )
 
 // applySupernodeDependencySet loads the supernode-level dependency set (if a

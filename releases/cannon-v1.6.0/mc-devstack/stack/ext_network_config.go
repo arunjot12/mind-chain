@@ -1,6 +1,6 @@
 package stack
 
-import "github.com/ethereum-optimism/optimism/op-service/eth"
+import "github.com/mindchain/mind-chain/mc-service/eth"
 
 type ExtNetworkConfig struct {
 	L2NetworkName      string

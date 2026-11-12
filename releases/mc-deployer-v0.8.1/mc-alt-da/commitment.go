@@ -6,8 +6,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive/params"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive/params"
 )
 
 // ErrInvalidCommitment is returned when the commitment cannot be parsed into a known commitment type.

@@ -10,12 +10,12 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-interop-filter/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-interop-filter/metrics"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // Test constants

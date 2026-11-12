@@ -12,9 +12,9 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// BuildOpProgramClient builds the `op-program` client executable and returns the path to the resulting executable
+// BuildOpProgramClient builds the `mc-program` client executable and returns the path to the resulting executable
 func BuildOpProgramClient(t *testing.T) string {
-	clientPath, err := filepath.Abs("../../../op-program/bin/op-program-client")
+	clientPath, err := filepath.Abs("../../../mc-program/bin/op-program-client")
 	require.NoError(t, err)
 
 	_, err = os.Stat(clientPath)
@@ -27,11 +27,11 @@ func BuildOpProgramClient(t *testing.T) string {
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, "make", "op-program-client")
-	cmd.Dir = "../../../op-program"
+	cmd.Dir = "../../../mc-program"
 	var out strings.Builder
 	cmd.Stdout = &out
 	cmd.Stderr = &out
 	require.NoErrorf(t, cmd.Run(), "Failed to build op-program-client: %v", &out)
 	t.Log("Built op-program-client successfully")
-	return "../../../op-program/bin/op-program-client"
+	return "../../../mc-program/bin/op-program-client"
 }

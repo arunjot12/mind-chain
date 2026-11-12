@@ -11,7 +11,7 @@ func TestConfigCheckRollupBoostAndNextMutuallyExclusive(t *testing.T) {
 		ConsensusAddr:                 "127.0.0.1",
 		ConsensusPort:                 9000,
 		RaftServerID:                  "server-1",
-		RaftStorageDir:                "/tmp/op-conductor",
+		RaftStorageDir:                "/tmp/mc-conductor",
 		NodeRPC:                       "http://node.example",
 		ExecutionRPC:                  "http://exec.example",
 		RollupBoostEnabled:            true,

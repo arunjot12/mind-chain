@@ -3,7 +3,6 @@
     "docker-bake.hcl",
     ".github/workflows/build-images.yaml",
     ".github/images.json",
-    ".github/actions/docker-build-prep/**",
     "ops/scripts/compute-git-versions.sh"
   ],
   "shared_go_paths": [

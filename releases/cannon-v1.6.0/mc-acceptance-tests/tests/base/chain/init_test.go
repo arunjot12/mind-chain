@@ -3,7 +3,7 @@ package chain
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
 )
 
 func TestMain(m *testing.M) {

@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/util"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/util"
 )
 
 // standardPrestatesURL points to the TOML file in the superchain-registry that defines the list of standard prestates.

@@ -3,7 +3,7 @@ package engine
 import (
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // BuildStartResult contains the result of starting a block-building job.

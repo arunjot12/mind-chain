@@ -3,9 +3,9 @@ package bindings
 import (
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	supTypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	supTypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 type ABIIdentifier struct {

@@ -3,10 +3,10 @@ package offset_el_safe
 import (
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
 )
 
 const testOffset = 10 * time.Second

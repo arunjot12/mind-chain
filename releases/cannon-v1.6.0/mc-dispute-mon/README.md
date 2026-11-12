@@ -1,33 +1,33 @@
-# op-dispute-mon
+# mc-dispute-mon
 
-The `op-dispute-mon` is an off-chain service to monitor dispute games.
+The `mc-dispute-mon` is an off-chain service to monitor dispute games.
 
 ## Quickstart
 
 Clone this repo. Then run:
 
 ```shell
-make op-dispute-mon
+make mc-dispute-mon
 ```
 
-This will build the `op-dispute-mon` binary which can be run with
-`./op-dispute-mon/bin/op-dispute-mon`.
+This will build the `mc-dispute-mon` binary which can be run with
+`./mc-dispute-mon/bin/mc-dispute-mon`.
 
 ## Usage
 
-`op-dispute-mon` is configurable via command line flags and environment variables. The help menu
-shows the available config options and can be accessed by running `./bin/op-dispute-mon --help`.
+`mc-dispute-mon` is configurable via command line flags and environment variables. The help menu
+shows the available config options and can be accessed by running `./bin/mc-dispute-mon --help`.
 
 ```shell
 
-# Start the op-dispute-mon with predefined network and RPC endpoints
-./bin/op-dispute-mon \
+# Start the mc-dispute-mon with predefined network and RPC endpoints
+./bin/mc-dispute-mon \
   --network <Predefined-Network> \
   --l1-eth-rpc <L1-Ethereum-RPC-URL> \
   --rollup-rpc <Optimism-Rollup-RPC-URL>,<Secondary-RPC-URL>,<Tertiary-RPC-URL>
 
-# For networks using op-supervisor:
-./bin/op-dispute-mon \
+# For networks using mc-supervisor:
+./bin/mc-dispute-mon \
   --network <Predefined-Network> \
   --l1-eth-rpc <L1-Ethereum-RPC-URL> \
   --supervisor-rpc <Supervisor-RPC-URL>,<Secondary-RPC-URL>,<Tertiary-RPC-URL>

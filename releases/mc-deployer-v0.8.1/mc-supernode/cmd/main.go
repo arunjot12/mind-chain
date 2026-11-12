@@ -6,22 +6,22 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 	"github.com/urfave/cli/v2"
 
-	opnode "github.com/ethereum-optimism/optimism/mc-node"
-	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
-	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-supernode/config"
-	"github.com/ethereum-optimism/optimism/op-supernode/flags"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity/interop"
 	"github.com/ethereum/go-ethereum/log"
+	opnode "github.com/mindchain/mind-chain/mc-node"
+	opnodecfg "github.com/mindchain/mind-chain/mc-node/config"
+	opnodeflags "github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-supernode/config"
+	"github.com/mindchain/mind-chain/mc-supernode/flags"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity/interop"
 )
 
 var (
@@ -48,7 +48,7 @@ func main() {
 	app := cli.NewApp()
 	app.Flags = cliapp.ProtectFlags(dynamicFlags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-supernode"
+	app.Name = "mc-supernode"
 	app.Usage = "Supernode"
 	app.Description = "Supernode service that starts up, prints, and exits"
 

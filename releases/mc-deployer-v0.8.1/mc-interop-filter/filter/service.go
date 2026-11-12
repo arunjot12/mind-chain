@@ -12,21 +12,21 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/urfave/cli/v2"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-interop-filter/flags"
-	"github.com/ethereum-optimism/optimism/op-interop-filter/metrics"
+	"github.com/mindchain/mind-chain/mc-interop-filter/flags"
+	"github.com/mindchain/mind-chain/mc-interop-filter/metrics"
 )
 
-// Service is the main op-interop-filter service
+// Service is the main mc-interop-filter service
 type Service struct {
 	log     log.Logger
 	metrics metrics.Metricer
@@ -63,7 +63,7 @@ func Main(version string) cliapp.LifecycleAction {
 		oplog.SetGlobalLogHandler(l.Handler())
 		opservice.ValidateEnvVars(flags.EnvVarPrefix, flags.Flags, l)
 
-		l.Info("Initializing op-interop-filter", "version", version)
+		l.Info("Initializing mc-interop-filter", "version", version)
 
 		if cfg.Passthrough {
 			l.Warn("PASSTHROUGH MODE ENABLED: all transactions will bypass interop filtering")
@@ -300,7 +300,7 @@ func (s *Service) initAdminRPCServer(cfg *Config) error {
 
 // Start starts the service
 func (s *Service) Start(ctx context.Context) error {
-	s.log.Info("Starting op-interop-filter")
+	s.log.Info("Starting mc-interop-filter")
 
 	// Start backend (begins block ingestion)
 	if err := s.backend.Start(ctx); err != nil {
@@ -335,7 +335,7 @@ func (s *Service) Stop(ctx context.Context) error {
 	if !s.stopped.CompareAndSwap(false, true) {
 		return nil
 	}
-	s.log.Info("Stopping op-interop-filter")
+	s.log.Info("Stopping mc-interop-filter")
 
 	var result error
 	if s.adminRPCServer != nil {

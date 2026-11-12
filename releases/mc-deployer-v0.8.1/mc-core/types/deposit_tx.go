@@ -86,7 +86,7 @@ func UnmarshalDepositTx(raw []byte) (*DepositTx, error) {
 // 0x7E type is rejected on decode), making these dead — they are removed at the
 // cutover, together with the differential test. The durable shape decodes raw
 // bytes into a [DepositTx] (via [UnmarshalDepositTx]) and reads its fields
-// directly; see op-service/sources accessors (#20264).
+// directly; see mc-service/sources accessors (#20264).
 
 // IsDepositTx reports whether tx is an OP Stack deposit transaction.
 func IsDepositTx(tx *types.Transaction) bool {

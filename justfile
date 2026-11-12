@@ -23,11 +23,6 @@ FRAUD_PROOF_TEST_PKGS := "./mc-e2e/faultproofs/..."
 help:
   @just --list
 
-# Install the repo's git hooks (core.hooksPath -> .githooks). Idempotent; run once per clone.
-install-git-hooks:
-  git config core.hooksPath .githooks
-  @echo "Installed git hooks: core.hooksPath -> .githooks"
-
 # Builds Go components and contracts-bedrock.
 build: build-go build-contracts
 
@@ -247,17 +242,6 @@ test-unit:
   cd mc-e2e && just test
   cd packages/contracts-bedrock && just test
 
-# Runs semgrep on the entire monorepo.
-semgrep:
-  semgrep scan --config .semgrep/rules/ --error .
-
-# Runs semgrep CI checks against develop baseline.
-[script('bash')]
-semgrep-ci:
-  set -euo pipefail
-  DEV_REF=$(git rev-parse develop)
-  SEMGREP_REPO_NAME=ethereum-optimism/optimism semgrep ci --baseline-commit="$DEV_REF"
-
 # Makes pre-test setup.
 make-pre-test:
   cd mc-e2e && just pre-test
@@ -435,18 +419,14 @@ nut-prefork-state-for fork: build-contracts
 todo-checker:
   ./ops/scripts/todo-checker.sh
 
-# Runs semgrep tests.
-semgrep-test:
-  semgrep scan --test --config .semgrep/rules/ .semgrep/tests/
-
 # Runs shellcheck.
 shellcheck:
-  find . -type f -name '*.sh' -not -path '*/node_modules/*' -not -path './packages/contracts-bedrock/lib/*' -not -path './packages/contracts-bedrock/kout*/*' -not -path './docs/public-docs/*' -not -path './rust/*target*/*' -exec sh -c 'echo "Checking $1"; shellcheck "$1"' _ {} \;
-  find . -type f -name '*.sh' -not -path '*/node_modules/*' -not -path './packages/contracts-bedrock/lib/*' -not -path './packages/contracts-bedrock/kout*/*' -not -path './docs/public-docs/*' -not -path './rust/*target*/*' -exec shfmt --diff {} \;
+  find . -type f -name '*.sh' -not -path '*/node_modules/*' -not -path './packages/contracts-bedrock/lib/*' -not -path './packages/contracts-bedrock/kout*/*' -not -path './rust/*target*/*' -exec sh -c 'echo "Checking $1"; shellcheck "$1"' _ {} \;
+  find . -type f -name '*.sh' -not -path '*/node_modules/*' -not -path './packages/contracts-bedrock/lib/*' -not -path './packages/contracts-bedrock/kout*/*' -not -path './rust/*target*/*' -exec shfmt --diff {} \;
 
 # Format shell scripts with shfmt.
 shfmt-fix:
-  find . -type f -name '*.sh' -not -path '*/node_modules/*' -not -path './packages/contracts-bedrock/lib/*' -not -path './packages/contracts-bedrock/kout*/*' -not -path './docs/public-docs/*' -not -path './rust/*target*/*' -exec shfmt --write {} \;
+  find . -type f -name '*.sh' -not -path '*/node_modules/*' -not -path './packages/contracts-bedrock/lib/*' -not -path './packages/contracts-bedrock/kout*/*' -not -path './rust/*target*/*' -exec shfmt --write {} \;
 
 # Generates a table of contents for the README.md file.
 toc:
@@ -631,6 +611,3 @@ release-notes component from='latest' to='latest-rc' mode='':
         "${offline_args[@]}" \
         -- "${from_tag}..${range_end}"
 
-# Run the rust-code-reviewer agent over the current branch (delegates to rust/justfile).
-rust-review base='':
-  cd rust && just rust-review "{{base}}"

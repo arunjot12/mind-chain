@@ -152,7 +152,7 @@ func (s *Spec) ExtractData(r io.Reader) (*EnclaveSpec, error) {
 				elType = "op-geth"
 			}
 			if clType == "" {
-				clType = "op-node"
+				clType = "mc-node"
 			}
 			nodes[name] = NodeConfig{
 				IsSequencer: participant.Sequencer,

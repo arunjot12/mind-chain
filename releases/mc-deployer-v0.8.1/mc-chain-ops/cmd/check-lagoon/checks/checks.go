@@ -12,13 +12,13 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/interopbridge"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/txintent"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	"github.com/mindchain/mind-chain/mc-chain-ops/interopbridge"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/txintent"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 const (
@@ -48,7 +48,7 @@ type CheckInteropConfig struct {
 	// RelayTimeout bounds each bridge leg (the send and its self-relay).
 	RelayTimeout time.Duration
 
-	// FilterAdmins are the JWT-authenticated admin RPCs of each op-interop-filter instance,
+	// FilterAdmins are the JWT-authenticated admin RPCs of each mc-interop-filter instance,
 	// required only by CheckFailsafe.
 	FilterAdmins []client.RPC
 	// PropagationWait is how long to wait after the initiating send before the
@@ -261,13 +261,13 @@ func interopTxRejected(err error) bool {
 	// op-geth: generic filter rejection wrapping all causes
 	case strings.Contains(msg, "transaction filtered out"):
 		return true
-	// op-interop-filter: malformed or unrecognized access list entry
+	// mc-interop-filter: malformed or unrecognized access list entry
 	case strings.Contains(msg, "failed to parse access entry"):
 		return true
 	// mc-reth fast-path: cached failsafe state rejects before calling the filter
 	case strings.Contains(msg, "interop failsafe is active"):
 		return true
-	// op-interop-filter: failsafe enabled at the filter level
+	// mc-interop-filter: failsafe enabled at the filter level
 	case strings.Contains(msg, "failsafe is enabled"):
 		return true
 	default:

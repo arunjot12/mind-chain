@@ -3,8 +3,8 @@ package match
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 type assume[I comparable, E stack.Identifiable[I]] struct {

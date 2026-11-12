@@ -5,15 +5,15 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
-	"github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/mc-node/metrics"
-	rollupNode "github.com/ethereum-optimism/optimism/mc-node/node"
-	"github.com/ethereum-optimism/optimism/mc-node/node/runcfg"
-	"github.com/ethereum-optimism/optimism/mc-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/services"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	rollupNode "github.com/mindchain/mind-chain/mc-node/node"
+	"github.com/mindchain/mind-chain/mc-node/node/runcfg"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
 )
 
 type Opnode struct {

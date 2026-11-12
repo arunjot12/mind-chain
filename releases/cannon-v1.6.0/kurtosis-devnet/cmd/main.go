@@ -9,12 +9,12 @@ import (
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/telemetry"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/deploy"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/inspect"
-	autofixTypes "github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/types"
 	"github.com/honeycombio/otel-config-go/otelconfig"
+	"github.com/mindchain/mind-chain/devnet-sdk/telemetry"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/deploy"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/inspect"
+	autofixTypes "github.com/mindchain/mind-chain/kurtosis-devnet/pkg/types"
 	"github.com/urfave/cli/v2"
 )
 

@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/telemetry"
 	"github.com/honeycombio/otel-config-go/otelconfig"
+	"github.com/mindchain/mind-chain/devnet-sdk/telemetry"
 	"github.com/urfave/cli/v2"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
@@ -189,15 +189,15 @@ func runAcceptanceTest(c *cli.Context) error {
 	ctx := c.Context
 	ctx, shutdown, err := telemetry.SetupOpenTelemetry(
 		ctx,
-		otelconfig.WithServiceName("op-acceptance-tests"),
+		otelconfig.WithServiceName("mc-acceptance-tests"),
 	)
 	if err != nil {
 		return fmt.Errorf("failed to setup OpenTelemetry: %w", err)
 	}
 	defer shutdown()
 
-	tracer := otel.Tracer("op-acceptance-tests")
-	ctx, span := tracer.Start(ctx, "op-acceptance-tests")
+	tracer := otel.Tracer("mc-acceptance-tests")
+	ctx, span := tracer.Start(ctx, "mc-acceptance-tests")
 	defer span.End()
 
 	steps := []func(ctx context.Context) error{}

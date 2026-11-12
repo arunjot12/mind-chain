@@ -27,8 +27,8 @@ import (
 	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
 	_ "github.com/ethereum/go-ethereum/eth/tracers/native"
 
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/clock"
 )
 
 func InitL1(blockTime uint64, finalizedDistance uint64, genesis *core.Genesis, c clock.Clock, blobPoolDir string, beaconSrv Beacon, opts ...GethOption) (*GethInstance, *FakePoS, error) {
@@ -161,7 +161,7 @@ func InitL2(name string, genesis *core.Genesis, jwtPath string, opts ...GethOpti
 // createGethNode creates an in-memory geth node based on the configuration.
 // The private keys are added to the keystore and are unlocked.
 // Catalyst is always enabled. If the node is an L1, the catalyst API can be used by alternative
-// sequencers (e.g., op-test-sequencer) if the default FakePoS is stopped.
+// sequencers (e.g., mc-test-sequencer) if the default FakePoS is stopped.
 // The node should be started and then closed when done.
 func createGethNode(l2 bool, nodeCfg *node.Config, ethCfg *ethconfig.Config, opts ...GethOption) (*GethInstance, error) {
 	for i, opt := range opts {

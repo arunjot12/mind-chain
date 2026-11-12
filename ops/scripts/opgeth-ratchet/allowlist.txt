@@ -1,8 +1,8 @@
 # Uses of go-ethereum APIs that only op-geth provides, checked by `just opgeth-ratchet`.
 #
 # The monorepo is moving off op-geth to upstream go-ethereum, and every entry below blocks that
-# cutover. Before adding one, check docs/ai/opgeth-decoupling.md for how to avoid the dependency
-# (mc-core/*, the mc-service seams, mc-reth). If there is no way around it yet, add the entry with
+# cutover. Before adding one, try to avoid the dependency (mc-core/*, the mc-service seams,
+# mc-reth). If there is no way around it yet, add the entry with
 # a reason; reviewers will ask for one that holds up.
 #
 # Format: <package> | <what it needs from op-geth> | <reason>

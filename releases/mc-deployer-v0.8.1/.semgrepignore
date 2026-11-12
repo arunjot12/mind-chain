@@ -15,7 +15,7 @@ vendor/
 .semgrep_logs/
 
 # Test contracts the scripts folder
-op-chain-ops/script/testdata/scripts/
+mc-chain-ops/script/testdata/scripts/
 
 # Op-alloy book theme (third-party mdbook assets)
 rust/op-alloy/book/
@@ -24,5 +24,3 @@ rust/op-alloy/book/
 rust/mc-reth/crates/tests/
 rust/mc-reth/tests/
 
-# Public docs (example code, not production)
-docs/public-docs/

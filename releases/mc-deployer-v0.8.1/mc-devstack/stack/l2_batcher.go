@@ -1,8 +1,8 @@
 package stack
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // L2Batcher represents an L2 batch-submission service, posting L2 data of an L2 to L1.

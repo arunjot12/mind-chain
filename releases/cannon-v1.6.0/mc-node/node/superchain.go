@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
 	"github.com/ethereum/go-ethereum/eth/catalyst"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 )
 
 var errNodeHalt = errors.New("opted to halt, unprepared for protocol change")
@@ -25,8 +25,8 @@ func (n *OpNode) handleProtocolVersionsUpdate(ctx context.Context) error {
 		n.log.Warn("failed to notify engine of protocol version", "err", err)
 		// engineSupport may still be available, or otherwise zero to signal as unknown
 	} else {
-		catalyst.LogProtocolVersionSupport(n.log.New("node", "op-node"), engineSupport, recommended, "recommended")
-		catalyst.LogProtocolVersionSupport(n.log.New("node", "op-node"), engineSupport, required, "required")
+		catalyst.LogProtocolVersionSupport(n.log.New("node", "mc-node"), engineSupport, recommended, "recommended")
+		catalyst.LogProtocolVersionSupport(n.log.New("node", "mc-node"), engineSupport, required, "required")
 	}
 	n.metrics.ReportProtocolVersions(local, engineSupport, recommended, required)
 	catalyst.LogProtocolVersionSupport(n.log.New("node", "engine"), local, recommended, "recommended")

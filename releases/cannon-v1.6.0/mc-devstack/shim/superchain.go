@@ -1,7 +1,7 @@
 package shim
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 type SuperchainConfig struct {

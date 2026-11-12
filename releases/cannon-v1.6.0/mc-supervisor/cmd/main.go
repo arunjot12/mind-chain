@@ -4,19 +4,19 @@ import (
 	"context"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-supervisor/config"
+	"github.com/mindchain/mind-chain/mc-supervisor/config"
 	"github.com/urfave/cli/v2"
 
 	"github.com/ethereum/go-ethereum/log"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
-	"github.com/ethereum-optimism/optimism/op-supervisor/flags"
-	"github.com/ethereum-optimism/optimism/op-supervisor/metrics"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
+	"github.com/mindchain/mind-chain/mc-supervisor/flags"
+	"github.com/mindchain/mind-chain/mc-supervisor/metrics"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor"
 )
 
 var (
@@ -39,9 +39,9 @@ func run(ctx context.Context, args []string, fn supervisor.MainFn) error {
 	app := cli.NewApp()
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-supervisor"
-	app.Usage = "op-supervisor monitors cross-L2 interop messaging"
-	app.Description = "The op-supervisor monitors cross-L2 interop messaging by pre-fetching events and then resolving the cross-L2 dependencies to answer safety queries."
+	app.Name = "mc-supervisor"
+	app.Usage = "mc-supervisor monitors cross-L2 interop messaging"
+	app.Description = "The mc-supervisor monitors cross-L2 interop messaging by pre-fetching events and then resolving the cross-L2 dependencies to answer safety queries."
 	app.Action = cliapp.LifecycleCmd(supervisor.Main(app.Version, fn))
 	app.Commands = []*cli.Command{
 		{

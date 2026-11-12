@@ -9,11 +9,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	ktfs "github.com/ethereum-optimism/optimism/devnet-sdk/kt/fs"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/spec"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/kurtosis_core_rpc_api_bindings"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/lib/services"
+	ktfs "github.com/mindchain/mind-chain/devnet-sdk/kt/fs"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/spec"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

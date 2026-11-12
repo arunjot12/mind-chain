@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 )
 
 type SequenceBuilder struct {

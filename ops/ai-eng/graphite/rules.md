@@ -38,7 +38,6 @@ This section applies to Solidity files ONLY.
 
 ### Style Guide
 
-- Follow the style guide found at `.cursor/rules/solidity-styles.mdc` in the root of this repository.
 
 ### Versioning
 
@@ -95,8 +94,7 @@ Non-idempotent or unsafe-to-rerun behavior in initializers is **disallowed** unl
 > Please either:
 > 1. Make the operation idempotent, or
 > 2. Add a `@notice` comment on the function explaining why the non-idempotent behavior is safe given how callers use it
->
-> See `docs/ai/contract-dev.md` for detailed guidance.
+
 
 ### Storage Layout Mutation Warnings
 

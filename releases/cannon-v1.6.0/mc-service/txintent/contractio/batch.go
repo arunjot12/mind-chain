@@ -6,9 +6,9 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
-	"github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
+	"github.com/mindchain/mind-chain/mc-service/txintent/bindings"
 )
 
 // BatchableCall represents a contract read call (eth_call) that can be executed as part of a larger batch of requests

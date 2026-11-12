@@ -3,8 +3,8 @@ package engine
 import (
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // ReplaceBlockSource is a magic value for the "Source" attribute,
@@ -17,7 +17,7 @@ var ReplaceBlockSource = eth.L1BlockRef{
 	Time:       0,
 }
 
-// no local metrics interface; engine depends directly on op-node/metrics.Metricer
+// no local metrics interface; engine depends directly on mc-node/metrics.Metricer
 
 type ForkchoiceUpdateEvent struct {
 	UnsafeL2Head, SafeL2Head, FinalizedL2Head eth.L2BlockRef

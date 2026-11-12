@@ -5,8 +5,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
 )
 
 // FakePublishAPI is used to instantiate an opstack API backend without full block publishing

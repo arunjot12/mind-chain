@@ -1,9 +1,9 @@
 package presets
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 func singleSupernodeWithSyncTesterFromRuntime(t devtest.T, runtime *sysgo.MultiChainRuntime) *SingleSupernodeWithSyncTester {

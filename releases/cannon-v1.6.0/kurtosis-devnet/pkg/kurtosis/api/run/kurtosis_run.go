@@ -7,10 +7,10 @@ import (
 	"io"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/enclave"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/interfaces"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/wrappers"
 	"github.com/kurtosis-tech/kurtosis/api/golang/core/lib/starlark_run_config"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/enclave"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/interfaces"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/wrappers"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
 )

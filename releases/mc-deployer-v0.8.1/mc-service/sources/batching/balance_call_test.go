@@ -5,9 +5,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/test"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/test"
 	"github.com/stretchr/testify/require"
 )
 

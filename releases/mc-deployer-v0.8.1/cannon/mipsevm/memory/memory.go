@@ -9,7 +9,7 @@ import (
 	"slices"
 	"sort"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
 )
 
 // Note: 2**12 = 4 KiB, the min phys page size in the Go runtime.

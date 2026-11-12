@@ -4,13 +4,13 @@ import (
 	"context"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/deployer"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/depset"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/inspect"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/interfaces"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/jwt"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/spec"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/deployer"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/depset"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/inspect"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/interfaces"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/jwt"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/spec"
 )
 
 type enclaveSpecAdapter struct{}

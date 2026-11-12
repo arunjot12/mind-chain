@@ -1,12 +1,12 @@
 package presets
 
 import (
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	ps "github.com/ethereum-optimism/optimism/op-proposer/proposer"
 	"github.com/ethereum/go-ethereum/common"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	ps "github.com/mindchain/mind-chain/mc-proposer/proposer"
 )
 
 func WithProposerGameType(gameType faultTypes.GameType) stack.CommonOption {

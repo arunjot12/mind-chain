@@ -8,7 +8,7 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/time/rate"
 
@@ -18,27 +18,27 @@ import (
 	gnode "github.com/ethereum/go-ethereum/node"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	opnodemetrics "github.com/ethereum-optimism/optimism/op-node/metrics"
-	"github.com/ethereum-optimism/optimism/op-node/node"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/attributes"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/clsync"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/finality"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop/indexing"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/status"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/safego"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/syncnode"
+	opnodemetrics "github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/node"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/attributes"
+	"github.com/mindchain/mind-chain/mc-node/rollup/clsync"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/driver"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/finality"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop/indexing"
+	"github.com/mindchain/mind-chain/mc-node/rollup/status"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/safego"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/syncnode"
 )
 
 var interopJWTSecret = [32]byte{4}
@@ -83,7 +83,7 @@ type L2Verifier struct {
 
 	interopSys interop.SubSystem // may be nil if interop is not active
 
-	InteropControl InteropControl // if managed by an op-supervisor
+	InteropControl InteropControl // if managed by an mc-supervisor
 
 	failRPC func(call []rpc.BatchElem) error // mock error
 
@@ -470,7 +470,7 @@ func (s *L2Verifier) ActL2InsertUnsafePayload(payload *eth.ExecutionPayloadEnvel
 }
 
 func (s *L2Verifier) SyncSupervisor(t Testing) {
-	require.NotNil(t, s.InteropControl, "must be managed by op-supervisor")
+	require.NotNil(t, s.InteropControl, "must be managed by mc-supervisor")
 	_, err := s.InteropControl.PullEvents(t.Ctx())
 	require.NoError(t, err)
 }

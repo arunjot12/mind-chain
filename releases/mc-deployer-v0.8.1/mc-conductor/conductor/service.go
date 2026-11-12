@@ -16,22 +16,22 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/hashicorp/raft"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/client"
-	"github.com/ethereum-optimism/optimism/op-conductor/consensus"
-	"github.com/ethereum-optimism/optimism/op-conductor/health"
-	"github.com/ethereum-optimism/optimism/op-conductor/metrics"
-	conductorrpc "github.com/ethereum-optimism/optimism/op-conductor/rpc"
-	"github.com/ethereum-optimism/optimism/op-conductor/rpc/ws"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	opclient "github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	"github.com/mindchain/mind-chain/mc-conductor/client"
+	"github.com/mindchain/mind-chain/mc-conductor/consensus"
+	"github.com/mindchain/mind-chain/mc-conductor/health"
+	"github.com/mindchain/mind-chain/mc-conductor/metrics"
+	conductorrpc "github.com/mindchain/mind-chain/mc-conductor/rpc"
+	"github.com/mindchain/mind-chain/mc-conductor/rpc/ws"
+	"github.com/mindchain/mind-chain/mc-node/rollup/driver"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	opclient "github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 var (
@@ -969,7 +969,7 @@ func (oc *OpConductor) startSequencer() error {
 	ctx := context.Background()
 
 	// When starting sequencer, we need to make sure that the current node has the latest unsafe head from the consensus protocol
-	// If not, then we wait for the unsafe head to catch up or gossip it to mc-node manually from op-conductor.
+	// If not, then we wait for the unsafe head to catch up or gossip it to mc-node manually from mc-conductor.
 	unsafeInCons, unsafeInNode, err := oc.compareUnsafeHead(ctx)
 	// if there's a mismatch, try to post the unsafe head to mc-node
 	if errors.Is(err, ErrUnsafeHeadMismatch) && uint64(unsafeInCons.ExecutionPayload.BlockNumber)-unsafeInNode.NumberU64() == 1 {

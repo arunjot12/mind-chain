@@ -1,8 +1,8 @@
 package stack
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/client"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/client"
 )
 
 // OPRBuilderNode is a L2 ethereum execution-layer node

@@ -7,7 +7,7 @@ import (
 )
 
 // Development feature flag constants that mirror the solidity DevFeatures library.
-// These use a 32 byte bitmap for easy integration between op-deployer and contracts.
+// These use a 32 byte bitmap for easy integration between mc-deployer and contracts.
 var (
 	// OptimismPortalInterop enables the OptimismPortalInterop contract.
 	OptimismPortalInterop = common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000001")

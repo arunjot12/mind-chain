@@ -1,8 +1,8 @@
 package sysgo
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester"
 )
 
 // Caveat: id is binded by a single EL(chainID), but service can support multiple ELs

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
 )
 
 // CaptureBroadcaster retains broadcasts in their script-native form so callers can

@@ -8,12 +8,12 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-core/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 func TestIntegration_Backend_NoChains_FailsafeOn(t *testing.T) {

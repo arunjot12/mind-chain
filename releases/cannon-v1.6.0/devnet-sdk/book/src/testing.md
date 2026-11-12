@@ -59,12 +59,12 @@ Here's a complete example showing these principles in action:
 import (
     "math/big"
     
-    "github.com/ethereum-optimism/optimism/devnet-sdk/contracts/constants"
-    "github.com/ethereum-optimism/optimism/devnet-sdk/system"
-    "github.com/ethereum-optimism/optimism/devnet-sdk/testing/systest"
-    "github.com/ethereum-optimism/optimism/devnet-sdk/testing/testlib/validators"
-    "github.com/ethereum-optimism/optimism/devnet-sdk/types"
-    "github.com/ethereum-optimism/optimism/op-service/testlog"
+    "github.com/mindchain/mind-chain/devnet-sdk/contracts/constants"
+    "github.com/mindchain/mind-chain/devnet-sdk/system"
+    "github.com/mindchain/mind-chain/devnet-sdk/testing/systest"
+    "github.com/mindchain/mind-chain/devnet-sdk/testing/testlib/validators"
+    "github.com/mindchain/mind-chain/devnet-sdk/types"
+    "github.com/mindchain/mind-chain/mc-service/testlog"
     "github.com/ethereum/go-ethereum/log"
     "github.com/stretchr/testify/require"
 )

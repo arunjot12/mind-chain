@@ -1,7 +1,7 @@
 package stack
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/apis"
 )
 
 // L2ELNode is a L2 ethereum execution-layer node

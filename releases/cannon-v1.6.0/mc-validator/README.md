@@ -1,6 +1,6 @@
-# op-validator
+# mc-validator
 
-The op-validator is a tool for validating Optimism chain configurations and deployments. It works by calling into the
+The mc-validator is a tool for validating Optimism chain configurations and deployments. It works by calling into the
 StandardValidator smart contracts (StandardValidatorV180 and StandardValidatorV200). These then perform a set of checks,
 and return error codes for any issues found. These checks include:
 
@@ -15,7 +15,7 @@ and return error codes for any issues found. These checks include:
 The validator supports different protocol versions through subcommands:
 
 ```bash
-op-validator validate [version] [flags]
+mc-validator validate [version] [flags]
 ```
 
 Where version is one of:
@@ -39,7 +39,7 @@ Where version is one of:
 ### Example
 
 ```bash
-op-validator validate v2.0.0 \
+mc-validator validate v2.0.0 \
   --l1-rpc-url "https://mainnet.infura.io/v3/YOUR-PROJECT-ID" \
   --absolute-prestate "0x1234..." \
   --proxy-admin "0xabcd..." \

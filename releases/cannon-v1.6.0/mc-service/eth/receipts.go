@@ -23,7 +23,7 @@ func EncodeReceipts(elems []*types.Receipt) ([]hexutil.Bytes, error) {
 }
 
 // DecodeRawReceipts decodes receipts and adds additional blocks metadata.
-// The contract-deployment addresses are not set however (high cost, depends on nonce values, unused by op-node).
+// The contract-deployment addresses are not set however (high cost, depends on nonce values, unused by mc-node).
 func DecodeRawReceipts(block BlockID, rawReceipts []hexutil.Bytes, txHashes []common.Hash) ([]*types.Receipt, error) {
 	result := make([]*types.Receipt, len(rawReceipts))
 	totalIndex := uint(0)

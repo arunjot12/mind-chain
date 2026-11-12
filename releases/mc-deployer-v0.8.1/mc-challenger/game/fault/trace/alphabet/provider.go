@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"

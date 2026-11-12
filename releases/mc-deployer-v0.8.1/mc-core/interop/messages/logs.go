@@ -7,7 +7,7 @@ import (
 	ethTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
 )
 
 // MessageFromLog returns the executing message decoded from a CrossL2Inbox log,

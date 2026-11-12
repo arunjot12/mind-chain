@@ -25,12 +25,12 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
-	"github.com/ethereum-optimism/optimism/op-service/sources/caching"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-service/sources/caching"
 )
 
 type EthClientConfig struct {
@@ -443,7 +443,7 @@ func (s *EthClient) InfoAndUserTxsByNumber(ctx context.Context, number uint64) (
 }
 
 // InfoAndDepositsByHash returns the block info and the block's deposit (0x7E)
-// transactions as op-core structs.
+// transactions as mc-core structs.
 func (s *EthClient) InfoAndDepositsByHash(ctx context.Context, hash common.Hash) (eth.BlockInfo, []*optypes.DepositTx, error) {
 	header, rawTxs, err := s.headerAndRawTxsByHash(ctx, hash)
 	if err != nil {

@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/tls/certman"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/tls/certman"
 )
 
 func TestValidPair(t *testing.T) {

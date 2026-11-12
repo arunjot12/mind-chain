@@ -1,7 +1,7 @@
 optimism_package:
   faucet:
     enabled: true
-    image: {{ localDockerImage "op-faucet" }}
+    image: {{ localDockerImage "mc-faucet" }}
   chains:
     op-kurtosis:
       participants:
@@ -20,8 +20,8 @@ optimism_package:
             min_mem: 0
             max_mem: 0
           cl: &x-node-cl
-            type: op-node
-            image: {{ localDockerImage "op-node" }}
+            type: mc-node
+            image: {{ localDockerImage "mc-node" }}
             log_level: ""
             extra_env_vars: {}
             extra_labels: {}
@@ -43,22 +43,22 @@ optimism_package:
         jovian_time_offset: 0
         fund_dev_accounts: true
       batcher_params:
-        image: {{ localDockerImage "op-batcher" }}
+        image: {{ localDockerImage "mc-batcher" }}
         extra_params: []
       proposer_params:
-        image: {{ localDockerImage "op-proposer" }}
+        image: {{ localDockerImage "mc-proposer" }}
         extra_params: []
         game_type: 1
         proposal_interval: 10m
   challengers:
     challenger:
       enabled: true
-      image: {{ localDockerImage "op-challenger" }}
+      image: {{ localDockerImage "mc-challenger" }}
       participants: "*"
       cannon_prestates_url: {{ localPrestate.URL }}
       cannon_trace_types: ["cannon", "permissioned"]
   op_contract_deployer_params:
-    image: {{ localDockerImage "op-deployer" }}
+    image: {{ localDockerImage "mc-deployer" }}
     l1_artifacts_locator: {{ localContractArtifacts "l1" }}
     l2_artifacts_locator: {{ localContractArtifacts "l2" }}
     overrides:

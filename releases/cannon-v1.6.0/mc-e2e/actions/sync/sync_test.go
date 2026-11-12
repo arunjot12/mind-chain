@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	upgradesHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/upgrades/helpers"
+	actionsHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	upgradesHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/upgrades/helpers"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum"
@@ -21,17 +21,17 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	engine2 "github.com/ethereum-optimism/optimism/op-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	engine2 "github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 func newSpanChannelOut(t actionsHelpers.StatefulTesting, e e2eutils.SetupData) derive.ChannelOut {
@@ -789,8 +789,8 @@ func TestELSyncTransitionstoCL(gt *testing.T) {
 	verifier.ActL2PipelineFull(t)
 
 	// Verify that the unsafe blocks are there now
-	// This was failing prior to PR 9661 because op-node would attempt to immediately insert blocks into the EL inside the engine queue. op-geth
-	// would not be able to fetch the second range of blocks & it would wipe out the unsafe payloads queue because op-node thought that it had a
+	// This was failing prior to PR 9661 because mc-node would attempt to immediately insert blocks into the EL inside the engine queue. op-geth
+	// would not be able to fetch the second range of blocks & it would wipe out the unsafe payloads queue because mc-node thought that it had a
 	// higher unsafe block but op-geth did not.
 	VerifyBlock(t, verifier.Eng, 22, eth.Unsafe)
 
@@ -820,7 +820,7 @@ func TestELSyncTransitionsToCLSyncAfterNodeRestart(gt *testing.T) {
 
 	PrepareELSyncedNode(t, miner, sequencer, seqEng, verifier, verEng, seqEngCl, batcher, dp)
 
-	// Create a new verifier which is essentially a new op-node with the sync mode of ELSync and default geth engine kind.
+	// Create a new verifier which is essentially a new mc-node with the sync mode of ELSync and default geth engine kind.
 	verifier = actionsHelpers.NewL2Verifier(t, captureLog, miner.L1Client(t, sd.RollupCfg), miner.BlobStore(), altda.Disabled, verifier.Eng, sd.RollupCfg, sd.DependencySet, &sync.Config{SyncMode: sync.ELSync}, actionsHelpers.DefaultVerifierCfg().SafeHeadListener)
 
 	// Build another 10 L1 blocks on the sequencer
@@ -839,7 +839,7 @@ func TestELSyncTransitionsToCLSyncAfterNodeRestart(gt *testing.T) {
 	record := captureLogHandler.FindLog(testlog.NewMessageFilter("Forkchoice requested sync to new head"), testlog.NewAttributesFilter("number", "22"))
 	require.Nil(t, record, "The verifier should not request to sync to block number 22 because it is in CL mode, not EL mode at this point.")
 
-	// Verify that op-node has skipped ELSync and started CL sync because geth has finalized block from ELSync.
+	// Verify that mc-node has skipped ELSync and started CL sync because geth has finalized block from ELSync.
 	record = captureLogHandler.FindLog(testlog.NewMessageFilter("Skipping EL sync and going straight to CL sync because there is a finalized block"))
 	require.NotNil(t, record, "The verifier should skip EL Sync at this point.")
 }
@@ -862,7 +862,7 @@ func TestForcedELSyncCLAfterNodeRestart(gt *testing.T) {
 
 	PrepareELSyncedNode(t, miner, sequencer, seqEng, verifier, verEng, seqEngCl, batcher, dp)
 
-	// Create a new verifier which is essentially a new op-node with the sync mode of ELSync and erigon engine kind.
+	// Create a new verifier which is essentially a new mc-node with the sync mode of ELSync and erigon engine kind.
 	verifier2 := actionsHelpers.NewL2Verifier(t, captureLog, miner.L1Client(t, sd.RollupCfg), miner.BlobStore(), altda.Disabled, verifier.Eng, sd.RollupCfg, sd.DependencySet, &sync.Config{SyncMode: sync.ELSync, SupportsPostFinalizationELSync: true}, actionsHelpers.DefaultVerifierCfg().SafeHeadListener)
 
 	// Build another 10 L1 blocks on the sequencer
@@ -883,7 +883,7 @@ func TestForcedELSyncCLAfterNodeRestart(gt *testing.T) {
 	record := captureLogHandler.FindLog(testlog.NewMessageFilter("Forkchoice requested sync to new head"), testlog.NewAttributesFilter("number", "22"))
 	require.NotNil(t, record, "The verifier should request to sync to block number 22 in EL mode")
 
-	// Verify that op-node is starting ELSync.
+	// Verify that mc-node is starting ELSync.
 	record = captureLogHandler.FindLog(testlog.NewMessageFilter("Skipping EL sync and going straight to CL sync because there is a finalized block"))
 	require.Nil(t, record, "The verifier should start EL Sync when l2.engineKind is not geth")
 	record = captureLogHandler.FindLog(testlog.NewMessageFilter("Starting EL sync"))

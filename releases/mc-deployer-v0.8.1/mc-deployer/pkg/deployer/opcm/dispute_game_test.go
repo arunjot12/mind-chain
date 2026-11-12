@@ -4,15 +4,15 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script/addresses"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/broadcaster"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/testutil"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/env"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script/addresses"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/broadcaster"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/testutil"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/env"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 )
 

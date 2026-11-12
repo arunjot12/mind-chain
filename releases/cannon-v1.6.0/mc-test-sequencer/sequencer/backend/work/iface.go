@@ -8,10 +8,10 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/metrics"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/metrics"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 // Builder provides access to block-building work.
@@ -74,7 +74,7 @@ type Signer interface {
 // the block is not safe to continue to work with, as it can be replaced by another block.
 // E.g.:
 // - commit a block to be persisted in the local node.
-// - commit a block to an op-conductor service.
+// - commit a block to an mc-conductor service.
 type Committer interface {
 	String() string
 	ID() seqtypes.CommitterID

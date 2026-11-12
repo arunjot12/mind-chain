@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/cli"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/version"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/cli"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/version"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 var (

@@ -1,13 +1,14 @@
-module github.com/ethereum-optimism/optimism
+module github.com/mindchain/mind-chain
 
 go 1.23.0
 
-toolchain go1.23.8
+toolchain go1.26.5
 
 require (
 	github.com/BurntSushi/toml v1.5.0
 	github.com/Masterminds/semver/v3 v3.3.1
 	github.com/andybalholm/brotli v1.1.0
+	github.com/arunjot12/go-ethereum-hdwallet v0.1.1
 	github.com/bmatcuk/doublestar/v4 v4.8.1
 	github.com/btcsuite/btcd v0.24.2
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0
@@ -19,8 +20,6 @@ require (
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0
 	github.com/docker/docker v27.5.1+incompatible
 	github.com/docker/go-connections v0.5.0
-	github.com/ethereum-optimism/go-ethereum-hdwallet v0.1.3
-	github.com/ethereum-optimism/superchain-registry/validation v0.0.0-20250603144016-9c45ca7d4508
 	github.com/ethereum/go-ethereum v1.16.3
 	github.com/fatih/color v1.18.0
 	github.com/fsnotify/fsnotify v1.9.0
@@ -87,6 +86,7 @@ require (
 	github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b // indirect
 	github.com/allegro/bigcache v1.2.1 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
+	github.com/base/go-bip39 v1.1.0 // indirect
 	github.com/benbjohnson/clock v1.3.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.20.0 // indirect
@@ -303,11 +303,12 @@ require (
 	lukechampine.com/blake3 v1.3.0 // indirect
 )
 
+// cannon v1.6.0 needs the go-ethereum version it was released with; mc-geth is newer and
+// removed APIs it uses (e.g. trie/utils).
 replace github.com/ethereum/go-ethereum => github.com/ethereum-optimism/op-geth v1.101603.0-rc.1
 
 // replace github.com/ethereum/go-ethereum => ../op-geth
 
-// replace github.com/ethereum-optimism/superchain-registry/superchain => ../superchain-registry/superchain
 // This release keeps breaking Go builds. Stop that.
 exclude (
 	github.com/kataras/iris/v12 v12.2.0-beta5

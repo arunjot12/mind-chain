@@ -1,6 +1,6 @@
 package monitor
 
-import "github.com/ethereum-optimism/optimism/op-service/eth"
+import "github.com/mindchain/mind-chain/mc-service/eth"
 
 // BlockBuffer is a circular buffer of seen blocks.
 // It can be used as a fix-sized stack of blocks to ensure

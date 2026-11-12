@@ -21,15 +21,15 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 
-	clientmocks "github.com/ethereum-optimism/optimism/op-conductor/client/mocks"
-	consensusmocks "github.com/ethereum-optimism/optimism/op-conductor/consensus/mocks"
-	"github.com/ethereum-optimism/optimism/op-conductor/health"
-	healthmocks "github.com/ethereum-optimism/optimism/op-conductor/health/mocks"
-	"github.com/ethereum-optimism/optimism/op-conductor/metrics"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	clientmocks "github.com/mindchain/mind-chain/mc-conductor/client/mocks"
+	consensusmocks "github.com/mindchain/mind-chain/mc-conductor/consensus/mocks"
+	"github.com/mindchain/mind-chain/mc-conductor/health"
+	healthmocks "github.com/mindchain/mind-chain/mc-conductor/health/mocks"
+	"github.com/mindchain/mind-chain/mc-conductor/metrics"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 func mockConfig(t *testing.T) Config {
@@ -1172,7 +1172,7 @@ connected:
 			s.Equal(expected, receivedMessages[i], "Message content should match")
 		}
 	}
-	s.T().Log("Successfully received all messages from rollup boost via op-conductor")
+	s.T().Log("Successfully received all messages from rollup boost via mc-conductor")
 
 	// Stop the conductor, which should also stop the flashblocks handler
 	s.hmon.EXPECT().Stop().Return(nil)

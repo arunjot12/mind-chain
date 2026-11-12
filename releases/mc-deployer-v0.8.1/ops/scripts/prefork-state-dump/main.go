@@ -4,9 +4,9 @@
 // It is invoked by ops/scripts/gen-seed-state.sh, which copies this file into a git
 // worktree checked out at the fork's commit and runs it there. Running inside the
 // worktree is the whole point: it pairs the fork-era contracts with the fork-era
-// mc-deployer (via op-e2e/config), avoiding the ABI drift that breaks the current
+// mc-deployer (via mc-e2e/config), avoiding the ABI drift that breaks the current
 // mc-deployer against older contracts. For that reason it depends only on the
-// long-stable public op-e2e/config.L2Allocs API, which exists across these
+// long-stable public mc-e2e/config.L2Allocs API, which exists across these
 // commits — do not add dependencies on newer helpers.
 package main
 
@@ -18,10 +18,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	config "github.com/ethereum-optimism/optimism/op-e2e/config"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	config "github.com/mindchain/mind-chain/mc-e2e/config"
 )
 
 // predeployScoped keeps every predeploy and preinstall, plus the

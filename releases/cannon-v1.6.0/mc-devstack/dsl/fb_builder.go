@@ -3,8 +3,8 @@ package dsl
 import (
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 type FlashblocksBuilderSet []*FlashblocksBuilderNode

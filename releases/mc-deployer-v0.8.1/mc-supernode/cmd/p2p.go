@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/op-supernode/flags"
+	opnodeflags "github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-supernode/flags"
 )
 
 func withNoP2P(vcli *flags.VirtualCLI) error {

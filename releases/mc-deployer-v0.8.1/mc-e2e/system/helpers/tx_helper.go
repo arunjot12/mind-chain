@@ -7,18 +7,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
 	"github.com/holiman/uint256"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/transactions"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/transactions"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 	"github.com/stretchr/testify/require"
 )
 

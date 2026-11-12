@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	// Imported only by this test file, to pin that test imports are exempt.
-	_ "github.com/ethereum-optimism/optimism/op-service/bigs"
+	_ "github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 // TestFindForbiddenChains is the positive control for the guard: a broken
@@ -25,7 +25,7 @@ func TestFindForbiddenChains(t *testing.T) {
 	t.Run("test-only imports are exempt", func(t *testing.T) {
 		// Dependents of a package never build its test files, so the guard
 		// walks only the production closure.
-		chains, err := findForbiddenChains(".", "github.com/ethereum-optimism/optimism/op-service/bigs")
+		chains, err := findForbiddenChains(".", "github.com/mindchain/mind-chain/mc-service/bigs")
 		require.NoError(t, err)
 		require.Empty(t, chains)
 	})

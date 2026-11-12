@@ -1,9 +1,9 @@
 package dsl
 
 import (
-	opclient "github.com/ethereum-optimism/optimism/op-service/client"
+	opclient "github.com/mindchain/mind-chain/mc-service/client"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 type OPRBuilderNodeSet []*OPRBuilderNode

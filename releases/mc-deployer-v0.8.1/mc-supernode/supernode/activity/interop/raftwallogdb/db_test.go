@@ -7,10 +7,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/interop"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
 )
 
 func hash(b byte) common.Hash {
@@ -107,7 +107,7 @@ func TestSealBlock_Validation(t *testing.T) {
 	require.ErrorIs(t, err, interop.ErrConflict)
 
 	// Wrong block number. Matches old logs DB: state desync on SealBlock is
-	// ErrConflict so op-interop-filter's failsafe (logsdb_chain_ingester.go:793)
+	// ErrConflict so mc-interop-filter's failsafe (logsdb_chain_ingester.go:793)
 	// trips rather than silently retrying.
 	err = db.SealBlock(parent.Hash, blockID(2, 0x22), 200)
 	require.ErrorIs(t, err, interop.ErrConflict)
@@ -207,7 +207,7 @@ func TestContains(t *testing.T) {
 func TestContains_Block0(t *testing.T) {
 	// Block 0 must flow through the same validation paths as any other block —
 	// no special-case rejection. The supernode only seals block 0 as a logless
-	// genesis (see processBlockLogs in op-supernode/.../logdb.go), so we test
+	// genesis (see processBlockLogs in mc-supernode/.../logdb.go), so we test
 	// that shape here.
 	db := tempDB(t)
 

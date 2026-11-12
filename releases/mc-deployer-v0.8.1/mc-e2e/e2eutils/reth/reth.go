@@ -1,6 +1,6 @@
 // Package reth runs mc-reth as an external subprocess and exposes it as a
-// services.EthInstance, so op-e2e can use mc-reth as the L2 execution layer.
-// The launch/genesis/JWT/readiness machinery mirrors op-devstack/sysgo, which
+// services.EthInstance, so mc-e2e can use mc-reth as the L2 execution layer.
+// The launch/genesis/JWT/readiness machinery mirrors mc-devstack/sysgo, which
 // already drives mc-reth this way.
 package reth
 
@@ -18,12 +18,12 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/shared/rustbin"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/logpipe"
-	"github.com/ethereum-optimism/optimism/op-service/tasks"
+	"github.com/mindchain/mind-chain/mc-devstack/shared/rustbin"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/services"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/logpipe"
+	"github.com/mindchain/mind-chain/mc-service/tasks"
 )
 
 const (

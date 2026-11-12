@@ -20,20 +20,20 @@ For more information, see [Docs](./docs/README.md).
 ## Usage
 
 ```shell
-# Build op-program server-mode and MIPS-client binaries.
-cd ../op-program
-make op-program # build
+# Build mc-program server-mode and MIPS-client binaries.
+cd ../mc-program
+make mc-program # build
 
 # Switch back to cannon, and build the CLI
 cd ../cannon
 make cannon
 
-# Transform MIPS op-program client binary into first VM state.
+# Transform MIPS mc-program client binary into first VM state.
 # This outputs state.bin.gz (VM state) and meta.json (for debug symbols).
-./bin/cannon load-elf --type singlethreaded-2 --path=../op-program/bin/op-program-client.elf
+./bin/cannon load-elf --type singlethreaded-2 --path=../mc-program/bin/op-program-client.elf
 
 # Run cannon emulator (with example inputs)
-# Note that the server-mode op-program command is passed into cannon (after the --),
+# Note that the server-mode mc-program command is passed into cannon (after the --),
 # it runs as sub-process to provide the pre-image data.
 #
 # Note:
@@ -48,7 +48,7 @@ make cannon
     --snapshot-at '%1000000000' \
     --input ./state.bin.gz \
     -- \
-    ../op-program/bin/op-program \
+    ../mc-program/bin/mc-program \
     --network <network name> \
     --l1 <L1_URL> \
     --l2 <L2_URL> \

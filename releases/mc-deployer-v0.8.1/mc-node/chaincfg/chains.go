@@ -5,9 +5,9 @@ import (
 	"sort"
 	"strings"
 
-	registry "github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/superchain"
+	registry "github.com/mindchain/mind-chain/mc-core/superchain"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/superchain"
 )
 
 // OPSepolia loads the op-sepolia rollup config. This is intended for tests that need an arbitrary, valid rollup config.

@@ -3,11 +3,11 @@ package node
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
-	node_utils "github.com/ethereum-optimism/optimism/rust/kona/tests/node/utils"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
+	node_utils "github.com/mindchain/mind-chain/rust/kona/tests/node/utils"
 )
 
 // Check that all the nodes in the network are synced to the local safe block and can catch up to the sequencer node.

@@ -4,7 +4,7 @@ import (
 	"net"
 	"net/url"
 
-	"github.com/ethereum-optimism/optimism/op-service/testreq"
+	"github.com/mindchain/mind-chain/mc-service/testreq"
 )
 
 func ProxyAddr(require *testreq.Assertions, urlStr string) string {

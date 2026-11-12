@@ -5,11 +5,11 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/crossdomain"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/holiman/uint256"
+	"github.com/mindchain/mind-chain/mc-chain-ops/crossdomain"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 	"github.com/stretchr/testify/require"
 )
 

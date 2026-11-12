@@ -5,15 +5,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/clsync"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/status"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/clsync"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/status"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
 )
 
 type SyncDeriver struct {
@@ -45,8 +45,8 @@ type SyncDeriver struct {
 
 	Ctx context.Context
 
-	// When in interop, and managed by an op-supervisor,
-	// the node performs a reset based on the instructions of the op-supervisor.
+	// When in interop, and managed by an mc-supervisor,
+	// the node performs a reset based on the instructions of the mc-supervisor.
 	ManagedBySupervisor bool
 
 	StepDeriver StepDeriver
@@ -183,7 +183,7 @@ func (s *SyncDeriver) onEngineConfirmedReset(ctx context.Context, x engine.Engin
 
 func (s *SyncDeriver) onResetEvent(ctx context.Context, x rollup.ResetEvent) {
 	if s.ManagedBySupervisor {
-		s.Log.Warn("Encountered reset when managed by op-supervisor, waiting for op-supervisor", "err", x.Err)
+		s.Log.Warn("Encountered reset when managed by mc-supervisor, waiting for mc-supervisor", "err", x.Err)
 		// IndexingMode will pick up the ResetEvent
 		return
 	}
@@ -219,7 +219,7 @@ func (s *SyncDeriver) tryBackupUnsafeReorg() {
 }
 
 // SyncStep performs the sequence of encapsulated syncing steps.
-// Warning: this sequence will be broken apart as outlined in op-node derivers design doc.
+// Warning: this sequence will be broken apart as outlined in mc-node derivers design doc.
 func (s *SyncDeriver) SyncStep() {
 	s.Log.Debug("Sync process step")
 

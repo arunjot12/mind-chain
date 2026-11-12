@@ -16,12 +16,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
 	"github.com/klauspost/compress/zstd"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
 
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
 )
 
 var ErrUnsupportedArtifactsScheme = errors.New("unsupported artifacts URL scheme")

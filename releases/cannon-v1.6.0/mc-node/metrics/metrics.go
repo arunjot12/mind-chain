@@ -1,4 +1,4 @@
-// Package metrics provides a set of metrics for the op-node.
+// Package metrics provides a set of metrics for the mc-node.
 package metrics
 
 import (
@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"time"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-node/p2p/store"
-	ophttp "github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
 	"github.com/ethereum/go-ethereum/params"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-node/p2p/store"
+	ophttp "github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
 
 	pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	libp2pmetrics "github.com/libp2p/go-libp2p/core/metrics"
@@ -21,8 +21,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
 )
 
 const Namespace = "op_node"
@@ -74,7 +74,7 @@ type Metricer interface {
 	ReportProtocolVersions(local, engine, recommended, required params.ProtocolVersion)
 }
 
-// Metrics tracks all the metrics for the op-node.
+// Metrics tracks all the metrics for the mc-node.
 type Metrics struct {
 	Info *prometheus.GaugeVec
 	Up   prometheus.Gauge

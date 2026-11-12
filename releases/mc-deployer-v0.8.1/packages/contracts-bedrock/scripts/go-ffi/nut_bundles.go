@@ -6,10 +6,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-core/nuts"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
 	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/nuts"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 // NUTBundleEncoded is the ABI-encoded representation consumed by Solidity tests.

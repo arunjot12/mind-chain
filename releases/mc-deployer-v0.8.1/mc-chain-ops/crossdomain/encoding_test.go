@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/crossdomain"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
+	"github.com/mindchain/mind-chain/mc-chain-ops/crossdomain"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 	"github.com/stretchr/testify/require"
 )
 

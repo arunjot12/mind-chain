@@ -33,8 +33,8 @@ ARG TARGETOS TARGETARCH
 
 WORKDIR /app
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build just \
-        -d /app/op-program \
-        -f /app/op-program/repro.justfile \
+        -d /app/mc-program \
+        -f /app/mc-program/repro.justfile \
         GOOS="$TARGETOS" \
         GOARCH="$TARGETARCH" \
         GIT_COMMIT="$GIT_COMMIT" \
@@ -46,27 +46,27 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 
 FROM scratch AS export-current
 # Cannon64 files
-COPY --from=builder /app/op-program/bin/op-program-client64.elf .
-COPY --from=builder /app/op-program/bin/meta-mt64.json .
-COPY --from=builder /app/op-program/bin/prestate-mt64.bin.gz .
-COPY --from=builder /app/op-program/bin/prestate-proof-mt64.json .
+COPY --from=builder /app/mc-program/bin/op-program-client64.elf .
+COPY --from=builder /app/mc-program/bin/meta-mt64.json .
+COPY --from=builder /app/mc-program/bin/prestate-mt64.bin.gz .
+COPY --from=builder /app/mc-program/bin/prestate-proof-mt64.json .
 # Interop files
-COPY --from=builder ./app/op-program/bin/op-program-client-interop.elf .
-COPY --from=builder /app/op-program/bin/meta-interop.json .
-COPY --from=builder /app/op-program/bin/prestate-interop.bin.gz .
-COPY --from=builder /app/op-program/bin/prestate-proof-interop.json .
+COPY --from=builder ./app/mc-program/bin/op-program-client-interop.elf .
+COPY --from=builder /app/mc-program/bin/meta-interop.json .
+COPY --from=builder /app/mc-program/bin/prestate-interop.bin.gz .
+COPY --from=builder /app/mc-program/bin/prestate-proof-interop.json .
 
 FROM scratch AS export-next
 # Cannon64 Next VM files
-COPY --from=builder /app/op-program/bin/op-program-client64.elf ./op-program-client-next64.elf
-COPY --from=builder /app/op-program/bin/meta-mt64Next.json .
-COPY --from=builder /app/op-program/bin/prestate-mt64Next.bin.gz .
-COPY --from=builder /app/op-program/bin/prestate-proof-mt64Next.json .
+COPY --from=builder /app/mc-program/bin/op-program-client64.elf ./op-program-client-next64.elf
+COPY --from=builder /app/mc-program/bin/meta-mt64Next.json .
+COPY --from=builder /app/mc-program/bin/prestate-mt64Next.bin.gz .
+COPY --from=builder /app/mc-program/bin/prestate-proof-mt64Next.json .
 # Interop Next files
-COPY --from=builder ./app/op-program/bin/op-program-client-interop.elf ./op-program-client-interopNext.elf
-COPY --from=builder /app/op-program/bin/meta-interopNext.json .
-COPY --from=builder /app/op-program/bin/prestate-interopNext.bin.gz .
-COPY --from=builder /app/op-program/bin/prestate-proof-interopNext.json .
+COPY --from=builder ./app/mc-program/bin/op-program-client-interop.elf ./op-program-client-interopNext.elf
+COPY --from=builder /app/mc-program/bin/meta-interopNext.json .
+COPY --from=builder /app/mc-program/bin/prestate-interopNext.bin.gz .
+COPY --from=builder /app/mc-program/bin/prestate-proof-interopNext.json .
 
 # Exports files to the specified output location.
 # Writing files to host requires buildkit to be enabled.

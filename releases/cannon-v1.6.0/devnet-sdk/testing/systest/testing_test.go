@@ -7,13 +7,13 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/shell/env"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/system"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	supervisorTypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/devnet-sdk/shell/env"
+	"github.com/mindchain/mind-chain/devnet-sdk/system"
+	"github.com/mindchain/mind-chain/devnet-sdk/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	supervisorTypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 	"github.com/stretchr/testify/require"
 )
 

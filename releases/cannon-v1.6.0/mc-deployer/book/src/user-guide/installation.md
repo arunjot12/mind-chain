@@ -17,7 +17,7 @@ To install from source, you will need Go, `just`, and `git`. Then, run the follo
 
 ```shell
 git clone git@github.com:ethereum-optimism/optimism.git # you can skip this if you already have the repo
-cd optimism/op-deployer
+cd optimism/mc-deployer
 just build
-cp ./bin/op-deployer /usr/local/bin/op-deployer # or any other directory in your $PATH
+cp ./bin/mc-deployer /usr/local/bin/mc-deployer # or any other directory in your $PATH
 ```

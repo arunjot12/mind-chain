@@ -9,7 +9,7 @@ import (
 	gethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 func postExecTxTestCases() []optypes.PostExecTx {
@@ -49,7 +49,7 @@ func TestPostExecTxHashGoldenVector(t *testing.T) {
 	require.Equal(t, opRethTxHash, gethHash.Hex(),
 		"op-geth post-exec tx hash must match mc-reth (op-alloy TxPostExec::tx_hash)")
 
-	// The shared value is exactly keccak256 of the canonical encoding op-core produces.
+	// The shared value is exactly keccak256 of the canonical encoding mc-core produces.
 	canonical, err := (&optypes.PostExecTx{Data: data}).MarshalBinary()
 	require.NoError(t, err)
 	require.Equal(t, gethHash, crypto.Keccak256Hash(canonical))

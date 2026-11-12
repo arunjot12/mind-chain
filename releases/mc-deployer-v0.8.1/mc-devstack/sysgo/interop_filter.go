@@ -5,15 +5,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-interop-filter/filter"
-	filterflags "github.com/ethereum-optimism/optimism/op-interop-filter/flags"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-interop-filter/filter"
+	filterflags "github.com/mindchain/mind-chain/mc-interop-filter/flags"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
-// InteropFilter wraps an in-process op-interop-filter service for devstack.
+// InteropFilter wraps an in-process mc-interop-filter service for devstack.
 type InteropFilter struct {
 	mu      sync.Mutex
 	name    string

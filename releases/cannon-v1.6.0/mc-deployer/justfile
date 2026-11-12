@@ -19,12 +19,12 @@ _LDFLAGSSTRING := "'" + trim(
     "-X main.Meta=" + VERSION_META + " " + \
     "") + "'"
 
-build-go: (go_build "./bin/op-deployer" "./cmd/op-deployer" "-ldflags" _LDFLAGSSTRING)
+build-go: (go_build "./bin/mc-deployer" "./cmd/mc-deployer" "-ldflags" _LDFLAGSSTRING)
 
 docker-build: build-contracts copy-contract-artifacts
     #!/bin/bash
     cd ..
-    docker buildx bake op-deployer --load --set op-deployer.tags=op-deployer:local
+    docker buildx bake mc-deployer --load --set mc-deployer.tags=mc-deployer:local
 
 # Updates pkg/deployer/forge/version.json with version and checksum of tarball for each supported OS/arch
 # - forge_version format: "v1.3.4"
@@ -67,7 +67,7 @@ pre-deploy: build build-contracts
 deploy-opcm release="dev" locator="$DEFAULT_LOCATOR": _validate_rpc
   #!/bin/bash
   echo "Using artifacts locator: {{locator}}"
-  ./bin/op-deployer bootstrap implementations \
+  ./bin/mc-deployer bootstrap implementations \
     --l1-rpc-url $ETH_RPC_URL \
     --private-key $PRIVATE_KEY \
     --mips-version 7 \
@@ -84,7 +84,7 @@ deploy-opcm release="dev" locator="$DEFAULT_LOCATOR": _validate_rpc
 verify-opcm locator="$DEFAULT_LOCATOR": _validate_rpc
   #!/bin/bash
   echo "Using artifacts locator: {{locator}}"
-  ./bin/op-deployer verify \
+  ./bin/mc-deployer verify \
     --artifacts-locator {{locator}} \
     --l1-rpc-url $ETH_RPC_URL \
     --etherscan-api-key $ETHERSCAN_API_KEY \

@@ -5,21 +5,21 @@ import (
 	"fmt"
 	"testing"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
 
 	"github.com/stretchr/testify/require"
 
-	fjordChecks "github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-fjord/checks"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	fjordChecks "github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-fjord/checks"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
-// TestCheckFjordScript ensures the op-chain-ops/cmd/check-fjord script runs successfully
+// TestCheckFjordScript ensures the mc-chain-ops/cmd/check-fjord script runs successfully
 // against a test chain with the fjord hardfork activated/unactivated
 func TestCheckFjordScript(t *testing.T) {
 	op_e2e.InitParallel(t)

@@ -3,9 +3,9 @@ package sysext
 import (
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 const (
@@ -23,7 +23,7 @@ type l1AddressBook struct {
 }
 
 func newL1AddressBook(t devtest.T, addresses descriptors.AddressMap) *l1AddressBook {
-	// TODO(#15817) op-devstack: sysext: fix address book
+	// TODO(#15817) mc-devstack: sysext: fix address book
 	return &l1AddressBook{}
 }
 
@@ -44,7 +44,7 @@ type l2AddressBook struct {
 }
 
 func newL2AddressBook(t devtest.T, l1Addresses descriptors.AddressMap) *l2AddressBook {
-	// TODO(#15817) op-devstack: sysext: fix address book
+	// TODO(#15817) mc-devstack: sysext: fix address book
 	return &l2AddressBook{
 		systemConfig:       l1Addresses[SystemConfigAddressName],
 		disputeGameFactory: l1Addresses[DisputeGameFactoryName],

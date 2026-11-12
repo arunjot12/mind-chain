@@ -69,12 +69,12 @@ go run . extra-data
 
 From the `optimism` directory:
 ```bash
-go build ./op-chain-ops/cmd/check-jovian
+go build ./mc-chain-ops/cmd/check-jovian
 ```
 
 ## Implementation Details
 
-The tool uses the `op-e2e/bindings` package to interact with the L2 contracts and verify:
+The tool uses the `mc-e2e/bindings` package to interact with the L2 contracts and verify:
 
 - **GasPriceOracle.isJovian**: Returns `true` after the Jovian upgrade is activated
 - **L1Block.DAFootprintGasScalar**: Returns the DA footprint gas scalar value (warns if 0, as SystemConfig needs to update)

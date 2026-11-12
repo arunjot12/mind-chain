@@ -9,8 +9,8 @@ import (
 	"sort"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ethereum-optimism/optimism/op-node/params"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-node/params"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type StaticConfigDependency struct {

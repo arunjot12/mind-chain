@@ -8,11 +8,11 @@ Not all components can be built locally. Only components that are part of the Op
 
 ### Buildable Components
 Components that can be built locally include:
-- `op-node`
-- `op-batcher`
-- `op-proposer`
-- `op-challenger`
-- `op-deployer`
+- `mc-node`
+- `mc-batcher`
+- `mc-proposer`
+- `mc-challenger`
+- `mc-deployer`
 
 ### External Components
 Some components are dependencies living outside the monorepo and cannot be built locally:
@@ -26,8 +26,8 @@ el_type: op-geth
 el_image: ""  # Will use the default op-geth image
 
 # This can be built locally
-cl_type: op-node
-cl_image: {{ localDockerImage "op-node" }}  # Will build from local source
+cl_type: mc-node
+cl_image: {{ localDockerImage "mc-node" }}  # Will build from local source
 ```
 
 ## Template Functions
@@ -36,7 +36,7 @@ In the `simple.yaml` configuration, you'll notice several custom template functi
 
 ```yaml
 # Example usage in simple.yaml
-image: {{ localDockerImage "op-node" }}
+image: {{ localDockerImage "mc-node" }}
 l1_artifacts_locator: {{ localContractArtifacts "l1" }}
 faultGameAbsolutePrestate: {{ localPrestate.Hashes.prestate_mt64 }}
 ```
@@ -51,7 +51,7 @@ The Docker image builder manages the building and tagging of local Docker images
 
 ```go
 // Usage in YAML:
-image: {{ localDockerImage "op-node" }}
+image: {{ localDockerImage "mc-node" }}
 ```
 
 This builder:
@@ -101,10 +101,10 @@ optimism_package:
     - participants:
         - el_type: op-geth
           el_image: ""  # Uses default external op-geth image
-          cl_type: op-node
-          cl_image: {{ localDockerImage "op-node" }}
+          cl_type: mc-node
+          cl_image: {{ localDockerImage "mc-node" }}
   op_contract_deployer_params:
-    image: {{ localDockerImage "op-deployer" }}
+    image: {{ localDockerImage "mc-deployer" }}
     l1_artifacts_locator: {{ localContractArtifacts "l1" }}
     l2_artifacts_locator: {{ localContractArtifacts "l2" }}
     global_deploy_overrides:

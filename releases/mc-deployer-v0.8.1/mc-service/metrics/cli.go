@@ -4,9 +4,9 @@ import (
 	"errors"
 	"math"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
 	"github.com/urfave/cli/v2"
 )
 

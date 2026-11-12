@@ -3,8 +3,8 @@ package dial
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // RollupProvider is an interface for providing a RollupClient

@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"log/slog"
 
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/log"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 type rawGoJSONLog map[string]any

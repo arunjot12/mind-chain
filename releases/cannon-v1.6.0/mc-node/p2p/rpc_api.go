@@ -1,8 +1,8 @@
 package p2p
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // backwards compatibility

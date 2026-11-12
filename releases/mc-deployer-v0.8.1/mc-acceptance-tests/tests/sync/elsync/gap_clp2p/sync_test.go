@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 func TestReachUnsafeTipByAppendingUnsafePayload(gt *testing.T) {
@@ -51,8 +51,8 @@ func TestCLUnsafeNotRewoundOnInvalidDuringELSync(gt *testing.T) {
 	// Example error with mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|09:41:58.089]
-	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_cl.go:279
-	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/elsync/gap_clp2p/sync_test.go:96
+	// assertions.go:387:             	Error Trace:	/optimism/mc-devstack/dsl/l2_cl.go:279
+	// assertions.go:387:             	            				/optimism/mc-acceptance-tests/tests/sync/elsync/gap_clp2p/sync_test.go:96
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	expected head not to advance: unsafe
 	// assertions.go:387:             	Test:       	TestCLUnsafeNotRewoundOnInvalidDuringELSync

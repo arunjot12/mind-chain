@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-core/forks"
 	"github.com/stretchr/testify/require"
 )
 

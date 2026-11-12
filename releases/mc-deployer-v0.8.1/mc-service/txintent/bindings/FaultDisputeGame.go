@@ -5,7 +5,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 )
 
 type ClaimData struct {

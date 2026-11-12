@@ -3,9 +3,9 @@ package solver
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/test"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/test"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 )
 
 type actor interface {

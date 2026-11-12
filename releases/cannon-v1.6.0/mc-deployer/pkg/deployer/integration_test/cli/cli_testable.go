@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/cli"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/cli"
 )
 
-// RunCLI provides a testable interface for running the op-deployer CLI
+// RunCLI provides a testable interface for running the mc-deployer CLI
 func RunCLI(ctx context.Context, w io.Writer, ew io.Writer, args []string) error {
 	app := cli.NewApp("v0.0.0-test")
 	app.Writer = w

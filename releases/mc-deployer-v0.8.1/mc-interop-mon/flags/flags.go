@@ -5,11 +5,11 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 const EnvVarPrefix = "OP_INTEROP_MON"
@@ -38,7 +38,7 @@ var (
 	// Optional Flags
 	InteropFilterEndpointFlag = &cli.StringFlag{
 		Name:     "interop-filter-endpoint",
-		Usage:    "Optional op-interop-filter RPC endpoint to cross-check executing-message validity and observe failsafe state (read-only)",
+		Usage:    "Optional mc-interop-filter RPC endpoint to cross-check executing-message validity and observe failsafe state (read-only)",
 		EnvVars:  prefixEnvVars("INTEROP_FILTER_ENDPOINT"),
 		Required: false,
 	}
@@ -53,7 +53,7 @@ var (
 
 	SupernodeEndpointsFlag = &cli.StringSliceFlag{
 		Name:     "supernode-endpoints",
-		Usage:    "Optional op-supernode CL RPC endpoints to observe liveness, per-chain safe/finalized heads, and cross-safety violations (read-only)",
+		Usage:    "Optional mc-supernode CL RPC endpoints to observe liveness, per-chain safe/finalized heads, and cross-safety violations (read-only)",
 		EnvVars:  prefixEnvVars("SUPERNODE_ENDPOINTS"),
 		Required: false,
 	}

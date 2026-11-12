@@ -1,8 +1,8 @@
 package presets
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 // NewMinimalNoFaultProofs is a Minimal preset that skips the proposer and

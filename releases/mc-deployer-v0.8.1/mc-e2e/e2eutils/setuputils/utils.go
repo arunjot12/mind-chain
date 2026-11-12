@@ -5,12 +5,12 @@ import (
 	"math"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/crypto"
+	"github.com/mindchain/mind-chain/mc-service/crypto"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 func hexPriv(in *ecdsa.PrivateKey) string {

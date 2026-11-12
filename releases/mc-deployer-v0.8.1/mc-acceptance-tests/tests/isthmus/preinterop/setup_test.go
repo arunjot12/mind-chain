@@ -1,8 +1,8 @@
 package preinterop
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
 )
 
 func newSimpleInteropPreinterop(t devtest.T) *presets.SimpleInterop {

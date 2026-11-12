@@ -1,7 +1,7 @@
 package match
 
 import (
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 func WithLabel[I comparable, E interface {
@@ -24,7 +24,7 @@ const (
 	OpGeth                    Vendor = "op-geth"
 	Proxyd                    Vendor = "proxyd"
 	FlashblocksWebsocketProxy Vendor = "flashblocks-websocket-proxy"
-	OpNode                    Vendor = "op-node"
+	OpNode                    Vendor = "mc-node"
 	KonaNode                  Vendor = "kona-node"
 )
 

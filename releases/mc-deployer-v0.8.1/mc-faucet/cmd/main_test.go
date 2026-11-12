@@ -11,8 +11,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-faucet/config"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-faucet/config"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 )
 
 func TestLogLevel(t *testing.T) {
@@ -49,7 +49,7 @@ func configForArgs(t *testing.T, cliArgs []string) *config.Config {
 func dryRunWithArgs(cliArgs []string) (log.Logger, *config.Config, error) {
 	cfg := new(config.Config)
 	var logger log.Logger
-	fullArgs := append([]string{"op-faucet"}, cliArgs...)
+	fullArgs := append([]string{"mc-faucet"}, cliArgs...)
 	testErr := errors.New("dry-run")
 	err := run(context.Background(), io.Discard, io.Discard, fullArgs, func(ctx context.Context, config *config.Config, log log.Logger) (cliapp.Lifecycle, error) {
 		logger = log

@@ -3,8 +3,8 @@ package interop
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/resources"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/resources"
 	"github.com/stretchr/testify/require"
 )
 

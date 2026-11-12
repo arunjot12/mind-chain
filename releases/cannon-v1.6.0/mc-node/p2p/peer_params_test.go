@@ -8,7 +8,7 @@ import (
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
 )
 
 // PeerParamsTestSuite tests peer parameterization.

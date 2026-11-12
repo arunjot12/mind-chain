@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/constants"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/lmittmann/w3"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/constants"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	suptypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	suptypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 var _ Call = (*InitTrigger)(nil)

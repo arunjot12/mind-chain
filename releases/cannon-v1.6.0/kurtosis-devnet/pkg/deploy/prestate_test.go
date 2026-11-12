@@ -9,7 +9,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/tmpl"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/tmpl"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
@@ -105,7 +105,7 @@ second:
 			assert.Equal(t, result.First.Hashes, result.Second.Hashes, "Hashes should match")
 
 			// In dry run mode, we don't create the directory
-			prestateDir := filepath.Join(tmpDir, "proofs", "op-program", "cannon")
+			prestateDir := filepath.Join(tmpDir, "proofs", "mc-program", "cannon")
 			assert.DirExists(t, prestateDir)
 		})
 	}

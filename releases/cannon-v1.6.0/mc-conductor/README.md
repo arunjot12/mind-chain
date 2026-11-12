@@ -1,13 +1,13 @@
 
-# op-conductor
+# mc-conductor
 
-op-conductor is an auxiliary service designed to enhance the reliability and availability of a sequencer in
+mc-conductor is an auxiliary service designed to enhance the reliability and availability of a sequencer in
 high-availability setups, thereby minimizing the risks associated with single point of failure.
 It is important to note, however, that this design does not incorporate Byzantine fault tolerance.
 This means it operates under the assumption that all participating nodes are honest.
 
 > [!IMPORTANT]
-> op-conductor does not perform authentication or authorization of RPC requests, and is
+> mc-conductor does not perform authentication or authorization of RPC requests, and is
 intended to run inside a private network with access restricted to authorized users only.
 
 ## Summary
@@ -24,23 +24,23 @@ For configuration and runbook, please refer to [RUNBOOK.md](./RUNBOOK.md)
 
 ### Architecture
 
-Typically you can setup a 3 nodes sequencer cluster, each one with op-conductor running alongside the sequencer in different regions / AZs.
+Typically you can setup a 3 nodes sequencer cluster, each one with mc-conductor running alongside the sequencer in different regions / AZs.
 Below diagram showcases how conductor interacts with relevant op-stack components.
 
-![op-conductor setup](./assets/setup.svg)
+![mc-conductor setup](./assets/setup.svg)
 
-On a high level, op-conductor serves the following functions:
+On a high level, mc-conductor serves the following functions:
 
 1. serves as a (raft) consensus layer participant to determine
    1. leader of the sequencers
    2. store latest unsafe block within its state machine.
 2. serves rpc requests for
    1. admin rpc for manual recovery scenarios such as stop leadership vote, remove itself from cluster, etc
-   2. health rpc for op-node to determine if it should allow publish txs / unsafe blocks
-3. monitor sequencer (op-node) health
-4. control loop => control sequencer (op-node) status (start / stop) based on different scenarios
+   2. health rpc for mc-node to determine if it should allow publish txs / unsafe blocks
+3. monitor sequencer (mc-node) health
+4. control loop => control sequencer (mc-node) status (start / stop) based on different scenarios
 
-![op-conductor architecture](./assets/op-conductor.svg)
+![mc-conductor architecture](./assets/mc-conductor.svg)
 
 ### Conductor State Transition
 

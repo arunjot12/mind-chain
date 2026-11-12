@@ -1,7 +1,7 @@
 package compressor
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 )
 
 type RatioCompressor struct {

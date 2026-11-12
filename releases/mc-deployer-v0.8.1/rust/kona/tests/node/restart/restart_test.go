@@ -6,13 +6,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
-	node_utils "github.com/ethereum-optimism/optimism/rust/kona/tests/node/utils"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
+	node_utils "github.com/mindchain/mind-chain/rust/kona/tests/node/utils"
 )
 
 // Ensure that kona-nodes reconnect to the sequencer and sync properly when the connection is dropped.

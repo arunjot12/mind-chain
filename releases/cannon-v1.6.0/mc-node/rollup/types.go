@@ -9,13 +9,13 @@ import (
 	"math/big"
 	"time"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (
@@ -148,7 +148,7 @@ type Config struct {
 	// ChainOpConfig is the OptimismConfig of the execution layer ChainConfig.
 	// It is used during safe chain consolidation to translate zero SystemConfig EIP1559
 	// parameters to the protocol values, like the execution layer does.
-	// If missing, it is loaded by the op-node from the embedded superchain config at startup.
+	// If missing, it is loaded by the mc-node from the embedded superchain config at startup.
 	ChainOpConfig *params.OptimismConfig `json:"chain_op_config,omitempty"`
 
 	// Optional Features

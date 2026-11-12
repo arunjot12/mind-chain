@@ -9,11 +9,11 @@ import (
 
 	"github.com/coder/websocket"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/metrics"
-	opclient "github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-conductor/metrics"
+	opclient "github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
 const (

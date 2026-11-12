@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
 
-	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
+	opnodeflags "github.com/mindchain/mind-chain/mc-node/flags"
 )
 
 func newTestContext(t *testing.T, flags []cli.Flag, args []string) *cli.Context {

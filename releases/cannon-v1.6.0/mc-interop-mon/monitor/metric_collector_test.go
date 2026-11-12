@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	supervisortypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	supervisortypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 	"github.com/stretchr/testify/require"
 )
 

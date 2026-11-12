@@ -4,13 +4,13 @@ import (
 	"context"
 	"math"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	hosttypes "github.com/ethereum-optimism/optimism/op-program/host/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	hosttypes "github.com/mindchain/mind-chain/mc-program/host/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
 const maxAttempts = math.MaxInt // Succeed or die trying

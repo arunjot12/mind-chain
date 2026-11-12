@@ -6,14 +6,14 @@ import (
 	"math/big"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/urfave/cli/v2"
 
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 const (

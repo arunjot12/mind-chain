@@ -6,13 +6,13 @@ import (
 	"strings"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	devtestmetrics "github.com/ethereum-optimism/optimism/op-devstack/devtest/metrics"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl/proofs"
-	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/params"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	devtestmetrics "github.com/mindchain/mind-chain/mc-devstack/devtest/metrics"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl/proofs"
+	"github.com/mindchain/mind-chain/mc-service/client"
 )
 
 const (

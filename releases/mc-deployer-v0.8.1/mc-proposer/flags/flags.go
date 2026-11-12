@@ -6,11 +6,11 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 const EnvVarPrefix = "OP_PROPOSER"
@@ -38,7 +38,7 @@ var (
 	SuperRootRpcsFlag = &cli.StringSliceFlag{
 		Name:    "superroot-rpcs",
 		Aliases: []string{"supernode-rpcs"},
-		Usage:   "HTTP provider URLs for super root RPC sources (mc-node or op-supernode). Multiple URLs can be provided to automatically fail over.",
+		Usage:   "HTTP provider URLs for super root RPC sources (mc-node or mc-supernode). Multiple URLs can be provided to automatically fail over.",
 		EnvVars: prefixEnvVars("SUPERROOT_RPCS", "SUPERNODE_RPCS"),
 	}
 

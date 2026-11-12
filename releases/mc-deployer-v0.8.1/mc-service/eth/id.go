@@ -3,9 +3,9 @@ package eth
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 type BlockID struct {

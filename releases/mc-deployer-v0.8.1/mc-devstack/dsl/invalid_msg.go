@@ -3,9 +3,9 @@ package dsl
 import (
 	"math/big"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // InvalidMsgFn is a function that takes a valid message and returns an invalid copy.

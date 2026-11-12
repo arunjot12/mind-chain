@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script/addresses"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script/addresses"
 
 	"github.com/holiman/uint256"
 

@@ -3,9 +3,9 @@ package services
 import (
 	"context"
 
-	rollupNode "github.com/ethereum-optimism/optimism/op-node/node/runcfg"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
+	rollupNode "github.com/mindchain/mind-chain/mc-node/node/runcfg"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
 )
 
 // EthInstance is either an in process Geth or external process exposing its

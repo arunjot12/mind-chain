@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive/params"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive/params"
 )
 
 // Frames cannot be larger than 1 MB.

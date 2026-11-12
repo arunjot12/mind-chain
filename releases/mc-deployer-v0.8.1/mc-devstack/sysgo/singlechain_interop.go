@@ -1,10 +1,10 @@
 package sysgo
 
 import (
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/devfeatures"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/devfeatures"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 )
 
 func newSingleChainInteropWorldNoSupernode(t devtest.T, keys devkeys.Keys, cfg PresetConfig) singleChainRuntimeWorld {

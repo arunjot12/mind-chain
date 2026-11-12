@@ -9,15 +9,6 @@ import (
 	"slices"
 	"strings"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	clientTypes "github.com/ethereum-optimism/optimism/op-program/client/interop/types"
-	"github.com/ethereum-optimism/optimism/op-program/client/l1"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2"
-	"github.com/ethereum-optimism/optimism/op-program/client/mpt"
-	hostcommon "github.com/ethereum-optimism/optimism/op-program/host/common"
-	"github.com/ethereum-optimism/optimism/op-program/host/kvstore"
-	hosttypes "github.com/ethereum-optimism/optimism/op-program/host/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -25,6 +16,15 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	clientTypes "github.com/mindchain/mind-chain/mc-program/client/interop/types"
+	"github.com/mindchain/mind-chain/mc-program/client/l1"
+	"github.com/mindchain/mind-chain/mc-program/client/l2"
+	"github.com/mindchain/mind-chain/mc-program/client/mpt"
+	hostcommon "github.com/mindchain/mind-chain/mc-program/host/common"
+	"github.com/mindchain/mind-chain/mc-program/host/kvstore"
+	hosttypes "github.com/mindchain/mind-chain/mc-program/host/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (

@@ -6,14 +6,14 @@ import (
 	"sync"
 	"time"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/locks"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/locks"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 var inboxDepth = 100_000

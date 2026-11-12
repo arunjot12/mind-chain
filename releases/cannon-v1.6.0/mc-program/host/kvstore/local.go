@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/op-program/client/boot"
-	"github.com/ethereum-optimism/optimism/op-program/host/config"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-program/client/boot"
+	"github.com/mindchain/mind-chain/mc-program/host/config"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type LocalPreimageSource struct {

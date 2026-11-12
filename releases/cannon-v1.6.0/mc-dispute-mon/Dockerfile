@@ -4,6 +4,6 @@ FROM $OP_STACK_GO_BUILDER AS builder
 
 FROM alpine:3.20
 
-COPY --from=builder /usr/local/bin/op-dispute-mon /usr/local/bin/op-dispute-mon
+COPY --from=builder /usr/local/bin/mc-dispute-mon /usr/local/bin/mc-dispute-mon
 
-CMD ["op-dispute-mon"]
+CMD ["mc-dispute-mon"]

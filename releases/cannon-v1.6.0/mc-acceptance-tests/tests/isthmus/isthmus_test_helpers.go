@@ -3,11 +3,11 @@ package isthmus
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/system"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm/program"
+	"github.com/mindchain/mind-chain/devnet-sdk/system"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 )
 
 func DefaultTxSubmitOptions(w system.WalletV2) txplan.Option {

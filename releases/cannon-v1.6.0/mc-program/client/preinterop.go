@@ -1,13 +1,13 @@
 package client
 
 import (
-	"github.com/ethereum-optimism/optimism/op-program/client/boot"
-	"github.com/ethereum-optimism/optimism/op-program/client/claim"
-	"github.com/ethereum-optimism/optimism/op-program/client/l1"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2"
-	"github.com/ethereum-optimism/optimism/op-program/client/tasks"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-program/client/boot"
+	"github.com/mindchain/mind-chain/mc-program/client/claim"
+	"github.com/mindchain/mind-chain/mc-program/client/l1"
+	"github.com/mindchain/mind-chain/mc-program/client/l2"
+	"github.com/mindchain/mind-chain/mc-program/client/tasks"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 func RunPreInteropProgram(

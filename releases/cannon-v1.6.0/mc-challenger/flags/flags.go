@@ -7,22 +7,22 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/vm"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/flags"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/superchain"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/flags"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 const EnvVarPrefix = "OP_CHALLENGER"
@@ -152,7 +152,7 @@ var (
 	})
 	CannonL2CustomFlag = &cli.BoolFlag{
 		Name: "cannon-l2-custom",
-		Usage: "Notify the op-program host that the L2 chain uses custom config to be loaded via the preimage oracle. " +
+		Usage: "Notify the mc-program host that the L2 chain uses custom config to be loaded via the preimage oracle. " +
 			"WARNING: This is incompatible with on-chain testing and must only be used for testing purposes.",
 		EnvVars: prefixEnvVars("CANNON_L2_CUSTOM"),
 		Value:   false,

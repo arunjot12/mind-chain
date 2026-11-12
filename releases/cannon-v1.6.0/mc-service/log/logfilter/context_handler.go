@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-service/logmods"
+	"github.com/mindchain/mind-chain/mc-service/logmods"
 )
 
 type contextKey struct {
@@ -74,7 +74,7 @@ func WrapContextHandler(h slog.Handler) slog.Handler {
 	}
 }
 
-// Currently used by op-devstack/devtest to unify logging and contextual config.
+// Currently used by mc-devstack/devtest to unify logging and contextual config.
 type contextHandler struct {
 	handler slog.Handler
 }

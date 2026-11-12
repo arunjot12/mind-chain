@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/core"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -25,32 +25,32 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	bss "github.com/ethereum-optimism/optimism/op-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/blobstore"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/emit"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/inbox"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/fakebeacon"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/helpers"
-	l2os "github.com/ethereum-optimism/optimism/op-proposer/proposer"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/predeploys"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	supervisorConfig "github.com/ethereum-optimism/optimism/op-supervisor/config"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/syncnode"
-	supervisortypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/interopgen"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/blobstore"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/emit"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/inbox"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/fakebeacon"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
+	"github.com/mindchain/mind-chain/mc-e2e/system/helpers"
+	l2os "github.com/mindchain/mind-chain/mc-proposer/proposer"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/predeploys"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	supervisorConfig "github.com/mindchain/mind-chain/mc-supervisor/config"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/syncnode"
+	supervisortypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 // SuperSystem is an interface for the system (collection of connected resources)
@@ -276,7 +276,7 @@ func (s *interopE2ESystem) L2Genesis(network string) *core.Genesis {
 
 // prepareSupervisor creates a new supervisor for the system
 func (s *interopE2ESystem) prepareSupervisor() *supervisor.SupervisorService {
-	// Be verbose with op-supervisor, it's in early test phase
+	// Be verbose with mc-supervisor, it's in early test phase
 	logger := testlog.Logger(s.t, log.LevelDebug).New("role", "supervisor")
 	cfg := &supervisorConfig.Config{
 		MetricsConfig: metrics.CLIConfig{
@@ -359,7 +359,7 @@ func (s *interopE2ESystem) prepare(t *testing.T, w WorldResourcePaths) {
 		}
 	}
 
-	// Try to close the op-supervisor first
+	// Try to close the mc-supervisor first
 	s.t.Cleanup(func() {
 		ctx, cancel := context.WithCancel(context.Background())
 		cancel() // force-quit
@@ -374,7 +374,7 @@ func (s *interopE2ESystem) prepare(t *testing.T, w WorldResourcePaths) {
 // because all user maps start empty, a users index should be the same for all L2s,
 // but if in the future these maps can diverge, the indexes for username would also diverge
 // NOTE: The first 20 accounts are implicitly funded by the Recipe's World Deployment
-// see: op-chain-ops/interopgen/recipe.go
+// see: mc-chain-ops/interopgen/recipe.go
 func (s *interopE2ESystem) AddUser(username string) {
 	for id, l2 := range s.l2s {
 		bigID, _ := big.NewInt(0).SetString(id, 10)
@@ -459,7 +459,7 @@ func (s *interopE2ESystem) L2IDs() []string {
 }
 
 // SendL2Tx sends an L2 transaction to the L2 with the given ID.
-// it acts as a wrapper around op-e2e.SendL2TxWithID
+// it acts as a wrapper around mc-e2e.SendL2TxWithID
 // and uses the L2's chain ID, username key, and geth client.
 func (s *interopE2ESystem) SendL2Tx(
 	id string,

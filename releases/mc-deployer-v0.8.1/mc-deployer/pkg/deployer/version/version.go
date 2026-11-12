@@ -1,6 +1,6 @@
 package version
 
-import opservice "github.com/ethereum-optimism/optimism/op-service"
+import opservice "github.com/mindchain/mind-chain/mc-service"
 
 var (
 	GitCommit = ""

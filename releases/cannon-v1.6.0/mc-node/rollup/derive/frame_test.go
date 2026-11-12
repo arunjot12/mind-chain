@@ -11,8 +11,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive/params"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive/params"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 func FuzzFrameUnmarshalBinary(f *testing.F) {

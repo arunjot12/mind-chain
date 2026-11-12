@@ -1,16 +1,16 @@
 package superfaultproofs
 
 import (
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 	"github.com/ethereum/go-ethereum/crypto"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // RunOptimisticPairingTest exercises the optimistic branch of a super-root

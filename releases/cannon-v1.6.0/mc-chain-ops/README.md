@@ -1,4 +1,4 @@
-# `op-chain-ops`
+# `mc-chain-ops`
 
 Issues: [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-chain-ops)
 
@@ -48,21 +48,21 @@ cmd/
 ### Optimization target
 
 Provide tools for chain-setup and inspection tools for deployment, upgrades, and testing.
-This includes `op-deployer`, OP-Contracts-Manager (OPCM), upgrade-check scripts, and `op-e2e` testing.
+This includes `mc-deployer`, OP-Contracts-Manager (OPCM), upgrade-check scripts, and `mc-e2e` testing.
 
 ### Vision
 
 - Upgrade checking scripts should become more extensible, and maybe be bundled in a single check-script CLI tool.
-- Serve chain inspection/processing building-blocks for test setups and tooling like op-deployer.
-- `interopgen` is meant to be temporary, and consolidate with `op-deployer`.
-  This change depends largely on the future of `op-e2e`,
-  where system tests may be replaced in favor of tests set up by `op-e2e`.
+- Serve chain inspection/processing building-blocks for test setups and tooling like mc-deployer.
+- `interopgen` is meant to be temporary, and consolidate with `mc-deployer`.
+  This change depends largely on the future of `mc-e2e`,
+  where system tests may be replaced in favor of tests set up by `mc-e2e`.
 - `script` is a Go version of `forge` script, with hooks and customization options,
-  for better integration into tooling such as `op-deployer`.
-  This package should evolve to serve testing and `op-deployer` as best as possible,
+  for better integration into tooling such as `mc-deployer`.
+  This package should evolve to serve testing and `mc-deployer` as best as possible,
   it is not a full `forge` replacement.
 - `genesis` will shrink over time, as more of the genesis responsibilities are automated away into
-  the protocol through system-transactions, and tooling such as `op-deployer` and OPCM.
+  the protocol through system-transactions, and tooling such as `mc-deployer` and OPCM.
 
 ## Design principles
 
@@ -72,7 +72,7 @@ This includes `op-deployer`, OP-Contracts-Manager (OPCM), upgrade-check scripts,
 There is a trade-off here in how minimal the tooling is:
 generally we aim to provide dedicated functionality in Go for better integration,
 if the target tool is significant Go service of its own.
-If not, then `op-chain-ops` should not be extended, and the design of the target tool should be adjusted instead.
+If not, then `mc-chain-ops` should not be extended, and the design of the target tool should be adjusted instead.
 
 ## Testing
 

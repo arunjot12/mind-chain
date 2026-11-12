@@ -6,12 +6,12 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	opflags "github.com/ethereum-optimism/optimism/op-service/flags"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	opflags "github.com/mindchain/mind-chain/mc-service/flags"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 const EnvVarPrefix = "OP_CONDUCTOR"
@@ -188,7 +188,7 @@ var (
 	}
 	HealthCheckRollupBoostPartialHealthinessToleranceLimit = &cli.Uint64Flag{
 		Name:    "healthcheck.rollup-boost-partial-healthiness-tolerance-limit",
-		Usage:   "Sets the count of rollup-boost partial healthiness failures to occur before marking op-conducto as unhealthy. Default is 0 with which a single occurrence of rollup-boost partial healthiness is enough to set op-conductor as unhealthy",
+		Usage:   "Sets the count of rollup-boost partial healthiness failures to occur before marking op-conducto as unhealthy. Default is 0 with which a single occurrence of rollup-boost partial healthiness is enough to set mc-conductor as unhealthy",
 		EnvVars: opservice.PrefixEnvVar(EnvVarPrefix, "HEALTHCHECK_ROLLUP_BOOST_PARTIAL_HEALTHINESS_TOLERANCE_LIMIT"),
 	}
 	HealthCheckRollupBoostPartialHealthinessToleranceIntervalSeconds = &cli.Uint64Flag{

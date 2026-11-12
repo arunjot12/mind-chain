@@ -13,7 +13,7 @@ help: ## Prints this help message
 build: build-go build-contracts ## Builds Go components and contracts-bedrock
 .PHONY: build
 
-build-go: submodules op-node op-proposer op-batcher op-challenger op-dispute-mon op-program cannon ## Builds main Go components
+build-go: submodules mc-node mc-proposer mc-batcher mc-challenger mc-dispute-mon mc-program cannon ## Builds main Go components
 .PHONY: build-go
 
 build-contracts:
@@ -38,7 +38,7 @@ golang-docker: ## Builds Docker images for Go components using buildx
 			--progress plain \
 			--load \
 			-f docker-bake.hcl \
-			op-node op-batcher op-proposer op-challenger op-dispute-mon op-supervisor
+			mc-node mc-batcher mc-proposer mc-challenger mc-dispute-mon mc-supervisor
 .PHONY: golang-docker
 
 docker-builder-clean: ## Removes the Docker buildx builder
@@ -51,13 +51,13 @@ docker-builder: ## Creates a Docker buildx builder
 .PHONY: docker-builder
 
 # add --print to dry-run
-cross-op-node: ## Builds cross-platform Docker image for op-node
+cross-op-node: ## Builds cross-platform Docker image for mc-node
 	# We don't use a buildx builder here, and just load directly into regular docker, for convenience.
 	GIT_COMMIT=$$(git rev-parse HEAD) \
 	GIT_DATE=$$(git show -s --format='%ct') \
 	IMAGE_TAGS=$$(git rev-parse HEAD),latest \
 	PLATFORMS="linux/arm64" \
-	GIT_VERSION=$(shell tags=$$(git tag --points-at $(GITCOMMIT) | grep '^op-node/' | sed 's/op-node\///' | sort -V); \
+	GIT_VERSION=$(shell tags=$$(git tag --points-at $(GITCOMMIT) | grep '^mc-node/' | sed 's/mc-node\///' | sort -V); \
              preferred_tag=$$(echo "$$tags" | grep -v -- '-rc' | tail -n 1); \
              if [ -z "$$preferred_tag" ]; then \
                  if [ -z "$$tags" ]; then \
@@ -74,7 +74,7 @@ cross-op-node: ## Builds cross-platform Docker image for op-node
 			--load \
 			--no-cache \
 			-f docker-bake.hcl \
-			op-node
+			mc-node
 .PHONY: cross-op-node
 
 contracts-bedrock-docker: ## Builds Docker image for Bedrock contracts
@@ -91,48 +91,48 @@ submodules: ## Updates git submodules
 .PHONY: submodules
 
 
-op-node: ## Builds op-node binary
-	just $(JUSTFLAGS) ./op-node/op-node
-.PHONY: op-node
+mc-node: ## Builds mc-node binary
+	just $(JUSTFLAGS) ./mc-node/mc-node
+.PHONY: mc-node
 
-generate-mocks-op-node: ## Generates mocks for op-node
-	make -C ./op-node generate-mocks
+generate-mocks-op-node: ## Generates mocks for mc-node
+	make -C ./mc-node generate-mocks
 .PHONY: generate-mocks-op-node
 
-generate-mocks-op-service: ## Generates mocks for op-service
-	make -C ./op-service generate-mocks
+generate-mocks-op-service: ## Generates mocks for mc-service
+	make -C ./mc-service generate-mocks
 .PHONY: generate-mocks-op-service
 
-op-batcher: ## Builds op-batcher binary
-	just $(JUSTFLAGS) ./op-batcher/op-batcher
-.PHONY: op-batcher
+mc-batcher: ## Builds mc-batcher binary
+	just $(JUSTFLAGS) ./mc-batcher/mc-batcher
+.PHONY: mc-batcher
 
-op-proposer: ## Builds op-proposer binary
-	just $(JUSTFLAGS) ./op-proposer/op-proposer
-.PHONY: op-proposer
+mc-proposer: ## Builds mc-proposer binary
+	just $(JUSTFLAGS) ./mc-proposer/mc-proposer
+.PHONY: mc-proposer
 
-op-challenger: ## Builds op-challenger binary
-	make -C ./op-challenger op-challenger
-.PHONY: op-challenger
+mc-challenger: ## Builds mc-challenger binary
+	make -C ./mc-challenger mc-challenger
+.PHONY: mc-challenger
 
-op-dispute-mon: ## Builds op-dispute-mon binary
-	make -C ./op-dispute-mon op-dispute-mon
-.PHONY: op-dispute-mon
+mc-dispute-mon: ## Builds mc-dispute-mon binary
+	make -C ./mc-dispute-mon mc-dispute-mon
+.PHONY: mc-dispute-mon
 
-op-program: ## Builds op-program binary
-	make -C ./op-program op-program
-.PHONY: op-program
+mc-program: ## Builds mc-program binary
+	make -C ./mc-program mc-program
+.PHONY: mc-program
 
 cannon:  ## Builds cannon binary
 	make -C ./cannon cannon
 .PHONY: cannon
 
 reproducible-prestate:   ## Builds reproducible-prestate binary
-	make -C ./op-program reproducible-prestate
+	make -C ./mc-program reproducible-prestate
 .PHONY: reproducible-prestate
 
-cannon-prestates: cannon op-program
-	go run ./op-program/builder/main.go build-all-prestates
+cannon-prestates: cannon mc-program
+	go run ./mc-program/builder/main.go build-all-prestates
 .PHONY: cannon-prestates
 
 mod-tidy: ## Cleans up unused dependencies in Go modules
@@ -154,10 +154,10 @@ nuke: clean ## Completely clean the project directory
 .PHONY: nuke
 
 test-unit: ## Runs unit tests for individual components
-	make -C ./op-node test
-	make -C ./op-proposer test
-	make -C ./op-batcher test
-	make -C ./op-e2e test
+	make -C ./mc-node test
+	make -C ./mc-proposer test
+	make -C ./mc-batcher test
+	make -C ./mc-e2e test
 	(cd packages/contracts-bedrock && just test)
 .PHONY: test-unit
 
@@ -168,66 +168,66 @@ semgrep: ## Runs Semgrep checks
 .PHONY: semgrep
 
 op-program-client: ## Builds op-program-client binary
-	make -C ./op-program op-program-client
+	make -C ./mc-program op-program-client
 .PHONY: op-program-client
 
 op-program-host: ## Builds op-program-host binary
-	make -C ./op-program op-program-host
+	make -C ./mc-program op-program-host
 .PHONY: op-program-host
 
 make-pre-test: ## Makes pre-test setup
-	make -C ./op-e2e pre-test
+	make -C ./mc-e2e pre-test
 .PHONY: make-pre-test
 
 # Common prerequisites and package list for Go tests
 TEST_DEPS := op-program-client op-program-host cannon build-contracts cannon-prestates make-pre-test
 
-# Excludes: op-validator, op-deployer/pkg/{validation,deployer/{bootstrap,manage,opcm,pipeline,upgrade}} (need RPC)
+# Excludes: mc-validator, mc-deployer/pkg/{validation,deployer/{bootstrap,manage,opcm,pipeline,upgrade}} (need RPC)
 TEST_PKGS := \
-	./op-alt-da/... \
-	./op-batcher/... \
-	./op-chain-ops/... \
-	./op-node/... \
-	./op-proposer/... \
-	./op-challenger/... \
-	./op-faucet/... \
-	./op-dispute-mon/... \
-	./op-conductor/... \
-	./op-program/... \
-	./op-service/... \
-	./op-supervisor/... \
-	./op-test-sequencer/... \
-	./op-fetcher/... \
-	./op-e2e/system/... \
-	./op-e2e/e2eutils/... \
-	./op-e2e/opgeth/... \
-	./op-e2e/interop/... \
-	./op-e2e/actions/... \
+	./mc-alt-da/... \
+	./mc-batcher/... \
+	./mc-chain-ops/... \
+	./mc-node/... \
+	./mc-proposer/... \
+	./mc-challenger/... \
+	./mc-faucet/... \
+	./mc-dispute-mon/... \
+	./mc-conductor/... \
+	./mc-program/... \
+	./mc-service/... \
+	./mc-supervisor/... \
+	./mc-test-sequencer/... \
+	./mc-fetcher/... \
+	./mc-e2e/system/... \
+	./mc-e2e/e2eutils/... \
+	./mc-e2e/opgeth/... \
+	./mc-e2e/interop/... \
+	./mc-e2e/actions/... \
 	./packages/contracts-bedrock/scripts/checks/... \
-	./op-dripper/... \
+	./mc-dripper/... \
 	./devnet-sdk/... \
 	./kurtosis-devnet/... \
-	./op-devstack/... \
-	./op-deployer/pkg/deployer/artifacts/... \
-	./op-deployer/pkg/deployer/broadcaster/... \
-	./op-deployer/pkg/deployer/clean/... \
-	./op-deployer/pkg/deployer/integration_test/... \
-	./op-deployer/pkg/deployer/standard/... \
-	./op-deployer/pkg/deployer/state/... \
-	./op-deployer/pkg/deployer/verify/... \
-	./op-sync-tester/...
+	./mc-devstack/... \
+	./mc-deployer/pkg/deployer/artifacts/... \
+	./mc-deployer/pkg/deployer/broadcaster/... \
+	./mc-deployer/pkg/deployer/clean/... \
+	./mc-deployer/pkg/deployer/integration_test/... \
+	./mc-deployer/pkg/deployer/standard/... \
+	./mc-deployer/pkg/deployer/state/... \
+	./mc-deployer/pkg/deployer/verify/... \
+	./mc-sync-tester/...
 
 FRAUD_PROOF_TEST_PKGS := \
-	./op-e2e/faultproofs/...
+	./mc-e2e/faultproofs/...
 
-# Includes: op-validator, op-deployer/pkg/{bootstrap,manage,opcm,pipeline,upgrade} (need RPC)
+# Includes: mc-validator, mc-deployer/pkg/{bootstrap,manage,opcm,pipeline,upgrade} (need RPC)
 RPC_TEST_PKGS := \
-	./op-validator/pkg/validations/... \
-	./op-deployer/pkg/deployer/bootstrap/... \
-	./op-deployer/pkg/deployer/manage/... \
-	./op-deployer/pkg/deployer/opcm/... \
-	./op-deployer/pkg/deployer/pipeline/... \
-	./op-deployer/pkg/deployer/upgrade/...
+	./mc-validator/pkg/validations/... \
+	./mc-deployer/pkg/deployer/bootstrap/... \
+	./mc-deployer/pkg/deployer/manage/... \
+	./mc-deployer/pkg/deployer/opcm/... \
+	./mc-deployer/pkg/deployer/pipeline/... \
+	./mc-deployer/pkg/deployer/upgrade/...
 
 # All test packages used by CI (combination of all package groups)
 ALL_TEST_PACKAGES := $(TEST_PKGS) $(RPC_TEST_PKGS) $(FRAUD_PROOF_TEST_PKGS)

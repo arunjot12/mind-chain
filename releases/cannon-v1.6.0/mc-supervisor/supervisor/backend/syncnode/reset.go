@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/superevents"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/superevents"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 // managedNodeResetBackend is a shim to pass to the resetTracker to let it
@@ -123,7 +123,7 @@ func (t *ManagedNode) resetHeadsFromTarget(ctx context.Context, target eth.Block
 	} else {
 		xSafe = target
 		// Resetting to older block should be unneeded.
-		// Note: op-node may not have the same blocks as op-supervisor has,
+		// Note: mc-node may not have the same blocks as mc-supervisor has,
 		// and thus needs to start from an old forkchoice state.
 	}
 

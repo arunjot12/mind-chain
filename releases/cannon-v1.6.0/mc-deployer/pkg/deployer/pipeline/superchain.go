@@ -3,11 +3,11 @@ package pipeline
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/opcm"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 )
 
 func DeploySuperchain(env *Env, intent *state.Intent, st *state.State) error {

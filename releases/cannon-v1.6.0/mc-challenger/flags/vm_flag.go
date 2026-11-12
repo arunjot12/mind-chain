@@ -3,8 +3,8 @@ package flags
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 	"github.com/urfave/cli/v2"
 )
 

@@ -1,7 +1,7 @@
 package ws
 
 import (
-	"github.com/ethereum-optimism/optimism/op-conductor/metrics"
+	"github.com/mindchain/mind-chain/mc-conductor/metrics"
 )
 
 // HubCallbacks defines optional callback functions for Hub events.

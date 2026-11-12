@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/forge"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/forge"
 )
 
 // ForgeEnv contains the forge-related configuration needed to run forge scripts

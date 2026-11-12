@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-core/superchain"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/stretchr/testify/require"
 )
 

@@ -3,9 +3,9 @@ package types
 import (
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 const maxIDLength = 100
@@ -14,7 +14,7 @@ var ErrInvalidID = errors.New("invalid ID")
 
 // FaucetID represents a unique faucet.
 // There may be multiple faucets per chain.
-// The op-faucet service serves identifies a default faucet for each chain to serve, see config.
+// The mc-faucet service serves identifies a default faucet for each chain to serve, see config.
 type FaucetID string
 
 func (id FaucetID) String() string {

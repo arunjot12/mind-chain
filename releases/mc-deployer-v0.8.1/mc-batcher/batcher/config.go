@@ -8,16 +8,16 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/urfave/cli/v2"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/mc-batcher/compressor"
-	"github.com/ethereum-optimism/optimism/mc-batcher/config"
-	"github.com/ethereum-optimism/optimism/mc-batcher/flags"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-batcher/compressor"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 // Current max blobs const, irrespective of active fork, is that of the Prague

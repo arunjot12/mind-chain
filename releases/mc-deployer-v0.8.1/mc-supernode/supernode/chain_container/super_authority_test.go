@@ -5,12 +5,12 @@ import (
 	"errors"
 	"testing"
 
-	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity"
 	"github.com/ethereum/go-ethereum/log"
+	opnodecfg "github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity"
 	"github.com/stretchr/testify/require"
 )
 

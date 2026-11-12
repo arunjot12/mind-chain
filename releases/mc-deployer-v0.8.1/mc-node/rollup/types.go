@@ -9,16 +9,16 @@ import (
 	"math/big"
 	"time"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	opparams "github.com/ethereum-optimism/optimism/op-core/params"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	opparams "github.com/mindchain/mind-chain/mc-core/params"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // historyPrunedErrCode is the JSON-RPC error code an execution engine returns when the requested

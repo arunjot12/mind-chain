@@ -75,7 +75,7 @@ ACCEPTOR_VERSION=v1.0.0 just acceptance-test simple base
 You can also run the acceptance test wrapper directly:
 
 ```bash
-cd op-acceptance-tests
+cd mc-acceptance-tests
 
 # In-process testing (sysgo orchestrator)
 go run cmd/main.go --orchestrator sysgo --gate base --testdir .. --validators ./acceptance-tests.yaml --acceptor op-acceptor
@@ -94,7 +94,7 @@ go run cmd/main.go --orchestrator sysext --devnet "kt://my-network" --gate base 
 For rapid test development, use in-process testing:
 
 ```bash
-cd op-acceptance-tests
+cd mc-acceptance-tests
 # Not providing a network uses the sysgo orchestrator (in-memory network) which is faster and easier to iterate with.
 just acceptance-test "" base
 ```
@@ -110,7 +110,7 @@ For integration testing against realistic networks:
 
 2. **Manual approach** (once-off)
    ```bash
-   cd op-acceptance-tests
+   cd mc-acceptance-tests
    # This spins up a devnet, then runs op-acceptor
    go run cmd/main.go --orchestrator sysext --devnet "interop" --gate interop --testdir .. --validators ./acceptance-tests.yaml
    ```
@@ -122,7 +122,7 @@ For integration testing against realistic networks:
    just isthmus-devnet
 
    # Run tests multiple times against the same devnet
-   cd op-acceptance-tests
+   cd mc-acceptance-tests
    # This runs op-acceptor (devnet spin up is skipped due to `--reuse-devnet`)
    go run cmd/main.go --orchestrator sysext --devnet "interop" --gate interop --testdir .. --validators ./acceptance-tests.yaml --reuse-devnet
    ```
@@ -145,10 +145,10 @@ When invoked with `go test`, devstack acceptance tests support configuring loggi
 Environment variables override CLI flags. For example:
 ```bash
 # Override log level via flag
-go test -v ./op-acceptance-tests/tests/interop/sync/multisupervisor_interop/... -run TestL2CLAheadOfSupervisor -log.format=json | logdy
+go test -v ./mc-acceptance-tests/tests/interop/sync/multisupervisor_interop/... -run TestL2CLAheadOfSupervisor -log.format=json | logdy
 
 # Override via env var
-LOG_LEVEL=info go test -v ./op-acceptance-tests/tests/interop/sync/multisupervisor_interop/... -run TestL2CLAheadOfSupervisor
+LOG_LEVEL=info go test -v ./mc-acceptance-tests/tests/interop/sync/multisupervisor_interop/... -run TestL2CLAheadOfSupervisor
 ```
 
 ## Adding New Tests
@@ -160,7 +160,7 @@ To add new acceptance tests:
 3. Follow the existing pattern for test registration:
    ```yaml
    - name: YourTestName
-     package: github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/your/package/path
+     package: github.com/mindchain/mind-chain/mc-acceptance-tests/tests/your/package/path
    ```
 
 ### Quick Development
@@ -168,7 +168,7 @@ To add new acceptance tests:
 For rapid development and testing:
 
 ```bash
-cd op-acceptance-tests
+cd mc-acceptance-tests
 
 # Run all tests (sysgo gateless mode) - most comprehensive coverage
 just acceptance-test "" ""

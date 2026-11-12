@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/types"
 )
 
 type BondClaimer interface {

@@ -3,7 +3,7 @@ package interop
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // l1ByNumberSource provides L1 block lookups by number for consistency checking.

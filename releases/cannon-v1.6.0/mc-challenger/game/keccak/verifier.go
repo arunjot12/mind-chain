@@ -7,13 +7,13 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/keccak/fetcher"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/keccak/matrix"
-	keccakTypes "github.com/ethereum-optimism/optimism/op-challenger/game/keccak/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 	lru "github.com/hashicorp/golang-lru/v2"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/fetcher"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/matrix"
+	keccakTypes "github.com/mindchain/mind-chain/mc-challenger/game/keccak/types"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 )
 
 const validPreimageCacheSize = 500

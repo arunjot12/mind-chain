@@ -6,15 +6,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
-	"github.com/ethereum-optimism/optimism/rust/mc-reth/tests/proofs/utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
+	"github.com/mindchain/mind-chain/rust/mc-reth/tests/proofs/utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -111,7 +111,7 @@ func TestReorgUsingAccountProof(gt *testing.T) {
 				Parent:   parentOfDivergenceHead.Hash,
 				L1Origin: nil,
 			})
-			require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 
 			// include simple transfer tx in opened block
 			{
@@ -119,12 +119,12 @@ func TestReorgUsingAccountProof(gt *testing.T) {
 				opt := txplan.Combine(to)
 				ptx := txplan.NewPlannedTx(opt)
 				signed_tx, err := ptx.Signed.Eval(ctx)
-				require.NoError(t, err, "Expected to be able to evaluate a planned transaction on op-test-sequencer, but got error")
+				require.NoError(t, err, "Expected to be able to evaluate a planned transaction on mc-test-sequencer, but got error")
 				txdata, err := signed_tx.MarshalBinary()
-				require.NoError(t, err, "Expected to be able to marshal a signed transaction on op-test-sequencer, but got error")
+				require.NoError(t, err, "Expected to be able to marshal a signed transaction on mc-test-sequencer, but got error")
 
 				err = ia.IncludeTx(ctx, txdata)
-				require.NoError(t, err, "Expected to be able to include a signed transaction on op-test-sequencer, but got error")
+				require.NoError(t, err, "Expected to be able to include a signed transaction on mc-test-sequencer, but got error")
 
 				cases = append(cases, caseEntry{
 					Block: divergenceHead.Number,
@@ -139,25 +139,25 @@ func TestReorgUsingAccountProof(gt *testing.T) {
 			}
 
 			err = ia.Next(ctx)
-			require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 		}
 	}
 
 	// start batcher on chain A
 	sys.L2Batcher.Start()
 
-	// sequence a second block with op-test-sequencer (no L1 origin override)
+	// sequence a second block with mc-test-sequencer (no L1 origin override)
 	{
-		l.Info("Sequencing with op-test-sequencer (no L1 origin override)")
+		l.Info("Sequencing with mc-test-sequencer (no L1 origin override)")
 		err := ia.New(ctx, seqtypes.BuildOpts{
 			Parent:   sys.L2ELSequencerNode().BlockRefByLabel(eth.Unsafe).Hash,
 			L1Origin: nil,
 		})
-		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to create a new block job for sequencing on mc-test-sequencer, but got error")
 		time.Sleep(2 * time.Second)
 
 		err = ia.Next(ctx)
-		require.NoError(t, err, "Expected to be able to call Next() after New() on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to call Next() after New() on mc-test-sequencer, but got error")
 		time.Sleep(2 * time.Second)
 	}
 

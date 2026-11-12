@@ -7,14 +7,14 @@ import (
 	"sync"
 	"testing"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container/engine_controller"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container/virtual_node"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	gethlog "github.com/ethereum/go-ethereum/log"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	opnodecfg "github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/chain_container/engine_controller"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/chain_container/virtual_node"
 	"github.com/stretchr/testify/require"
 )
 

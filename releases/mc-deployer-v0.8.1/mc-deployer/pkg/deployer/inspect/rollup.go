@@ -3,10 +3,10 @@ package inspect
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
 
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 	"github.com/urfave/cli/v2"
 )
 

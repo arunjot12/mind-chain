@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/client"
+	"github.com/mindchain/mind-chain/mc-service/client"
 	clientmodel "github.com/prometheus/client_model/go"
 	"github.com/prometheus/common/expfmt"
 )

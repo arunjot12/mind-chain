@@ -3,14 +3,14 @@ package main
 import (
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-program/host"
-	"github.com/ethereum-optimism/optimism/op-program/host/config"
-	"github.com/ethereum-optimism/optimism/op-program/host/flags"
-	"github.com/ethereum-optimism/optimism/op-program/host/subcmds"
-	"github.com/ethereum-optimism/optimism/op-program/host/version"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-program/host"
+	"github.com/mindchain/mind-chain/mc-program/host/config"
+	"github.com/mindchain/mind-chain/mc-program/host/flags"
+	"github.com/mindchain/mind-chain/mc-program/host/subcmds"
+	"github.com/mindchain/mind-chain/mc-program/host/version"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 	"github.com/urfave/cli/v2"
 )
 
@@ -42,7 +42,7 @@ func run(args []string, action ConfigAction) error {
 	app := cli.NewApp()
 	app.Version = VersionWithMeta
 	app.Flags = flags.Flags
-	app.Name = "op-program"
+	app.Name = "mc-program"
 	app.Usage = "Optimism Fault Proof Program"
 	app.Description = "The Optimism Fault Proof Program fault proof program that runs through the rollup state-transition to verify an L2 output from L1 inputs."
 	app.Commands = []*cli.Command{

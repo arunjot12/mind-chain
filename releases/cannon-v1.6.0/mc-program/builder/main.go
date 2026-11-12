@@ -7,11 +7,11 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/versions"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/versions"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 	"github.com/urfave/cli/v2"
 )
 
@@ -54,11 +54,11 @@ func buildPrestate(ctx context.Context, log log.Logger, programELF string, versi
 	if _, err := os.Stat(cannonBin); err != nil {
 		return fmt.Errorf("cannon binary not found: %w. make sure it's built with `make cannon`", err)
 	}
-	prestate := filepath.Join(root, "op-program", "bin", "prestate"+suffix+".bin.gz")
+	prestate := filepath.Join(root, "mc-program", "bin", "prestate"+suffix+".bin.gz")
 	if _, err := os.Stat(programELF); err != nil {
-		return fmt.Errorf("op-program elf not found: %w. make sure it's built with `make op-program`", err)
+		return fmt.Errorf("mc-program elf not found: %w. make sure it's built with `make mc-program`", err)
 	}
-	meta := filepath.Join(root, "op-program", "bin", "meta"+suffix+".json")
+	meta := filepath.Join(root, "mc-program", "bin", "meta"+suffix+".json")
 
 	cmd := exec.CommandContext(ctx, cannonBin, "load-elf", "--type", version.String(), "--path", programELF, "--out", prestate, "--meta", meta)
 	cmd.Stdout = os.Stdout
@@ -67,7 +67,7 @@ func buildPrestate(ctx context.Context, log log.Logger, programELF string, versi
 		return err
 	}
 
-	proofFmt := filepath.Join(root, "op-program", "bin", "%d"+suffix+".json")
+	proofFmt := filepath.Join(root, "mc-program", "bin", "%d"+suffix+".json")
 	cmd = exec.CommandContext(ctx, cannonBin, "run", "--proof-at", "=0", "--stop-at", "=1", "--input", prestate, "--meta", meta, "--proof-fmt", proofFmt, "--output", "")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -75,8 +75,8 @@ func buildPrestate(ctx context.Context, log log.Logger, programELF string, versi
 		return err
 	}
 
-	proof := filepath.Join(root, "op-program", "bin", "0"+suffix+".json")
-	target := filepath.Join(root, "op-program", "bin", "prestate-proof"+suffix+".json")
+	proof := filepath.Join(root, "mc-program", "bin", "0"+suffix+".json")
+	target := filepath.Join(root, "mc-program", "bin", "prestate-proof"+suffix+".json")
 	if err := os.Rename(proof, target); err != nil {
 		return fmt.Errorf("failed to rename proof file: %w", err)
 	}
@@ -100,8 +100,8 @@ func runBuildPrestates(cliCtx *cli.Context) error {
 		version    versions.StateVersion
 		suffix     string
 	}
-	programELF := filepath.Join(root, "op-program", "bin", "op-program-client64.elf")
-	interopProgramELF := filepath.Join(root, "op-program", "bin", "op-program-client-interop.elf")
+	programELF := filepath.Join(root, "mc-program", "bin", "op-program-client64.elf")
+	interopProgramELF := filepath.Join(root, "mc-program", "bin", "op-program-client-interop.elf")
 
 	prestates := []prestateInfo{
 		{programELF, versions.GetCurrentVersion(), "-mt64"},
@@ -123,8 +123,8 @@ func runBuildPrestates(cliCtx *cli.Context) error {
 		copies := []struct {
 			src, dst string
 		}{
-			{filepath.Join(root, "op-program", "bin", "prestate-mt64.bin.gz"), filepath.Join(root, "op-program", "bin", "prestate-mt64Next.bin.gz")},
-			{filepath.Join(root, "op-program", "bin", "prestate-interop.bin.gz"), filepath.Join(root, "op-program", "bin", "prestate-interopNext.bin.gz")},
+			{filepath.Join(root, "mc-program", "bin", "prestate-mt64.bin.gz"), filepath.Join(root, "mc-program", "bin", "prestate-mt64Next.bin.gz")},
+			{filepath.Join(root, "mc-program", "bin", "prestate-interop.bin.gz"), filepath.Join(root, "mc-program", "bin", "prestate-interopNext.bin.gz")},
 		}
 		for _, copy := range copies {
 			data, err := os.ReadFile(copy.src)
@@ -152,7 +152,7 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = "op-program-builder"
-	app.Usage = "Tool to build op-program prestates in the monorepo"
+	app.Usage = "Tool to build mc-program prestates in the monorepo"
 	app.Commands = []*cli.Command{
 		buildPrestateCommand,
 		buildAllPrestates,
@@ -167,7 +167,7 @@ func main() {
 
 var buildPrestateCommand = &cli.Command{
 	Name:  "build-prestate",
-	Usage: "Build an op-program prestate",
+	Usage: "Build an mc-program prestate",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "program-elf",
@@ -187,7 +187,7 @@ var buildPrestateCommand = &cli.Command{
 
 var buildAllPrestates = &cli.Command{
 	Name:   "build-all-prestates",
-	Usage:  "Build all op-program prestates",
+	Usage:  "Build all mc-program prestates",
 	Action: runBuildPrestates,
 	Flags: []cli.Flag{
 		&cli.BoolFlag{

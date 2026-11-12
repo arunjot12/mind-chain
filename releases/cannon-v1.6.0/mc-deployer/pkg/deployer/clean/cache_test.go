@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 )
 
@@ -41,8 +41,8 @@ func TestCacheCLIE2E(t *testing.T) {
 
 	require.NoError(t, os.WriteFile(filepath.Join(tmpDirForCache, "test.txt"), []byte("test"), 0644))
 
-	binaryPath := filepath.Join(tmpDirForBinary, "op-deployer")
-	cmd := exec.Command("go", "build", "-o", binaryPath, "../../../cmd/op-deployer/main.go")
+	binaryPath := filepath.Join(tmpDirForBinary, "mc-deployer")
+	cmd := exec.Command("go", "build", "-o", binaryPath, "../../../cmd/mc-deployer/main.go")
 	output, err := cmd.CombinedOutput()
 	require.NoError(t, err, "Failed to build binary: %s", output)
 

@@ -48,7 +48,7 @@ All modules in Rollup Boost are designed and tested with a fallback scenario in 
 
 Rollup Boost allows operators to continue using the standard `mc-node` and `op-geth` / `mc-reth` software without any custom forks. 
 
-It is also compatible with `op-conductor` when running sequencers with a high availability setup.
+It is also compatible with `mc-conductor` when running sequencers with a high availability setup.
 
 It aims to be on parity with the performance of using a vanilla proposer setup without Rollup Boost.
 

@@ -37,9 +37,9 @@ func (f *BigIntPlugin) GetLoadMode() string {
 }
 
 func (f *BigIntPlugin) run(pass *analysis.Pass) (any, error) {
-	shouldSuggestFix := pass.Pkg != nil && pass.Pkg.Path() != "github.com/ethereum-optimism/optimism/op-service/bigs"
+	shouldSuggestFix := pass.Pkg != nil && pass.Pkg.Path() != "github.com/mindchain/mind-chain/mc-service/bigs"
 	for _, file := range pass.Files {
-		addImportEdit := shouldSuggestFix && !fileHasImport(file, "github.com/ethereum-optimism/optimism/op-service/bigs")
+		addImportEdit := shouldSuggestFix && !fileHasImport(file, "github.com/mindchain/mind-chain/mc-service/bigs")
 		ast.Inspect(file, func(n ast.Node) bool {
 			call, ok := n.(*ast.CallExpr)
 			if !ok {
@@ -147,7 +147,7 @@ func importEdit(pass *analysis.Pass, file *ast.File) analysis.TextEdit {
 		}
 		insertPos = genDecl.End()
 	}
-	newText := []byte("\n\nimport \"github.com/ethereum-optimism/optimism/op-service/bigs\"")
+	newText := []byte("\n\nimport \"github.com/mindchain/mind-chain/mc-service/bigs\"")
 	return analysis.TextEdit{
 		Pos:     insertPos,
 		End:     insertPos,

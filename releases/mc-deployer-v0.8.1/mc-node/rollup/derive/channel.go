@@ -8,8 +8,8 @@ import (
 	"io"
 
 	"github.com/andybalholm/brotli"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 const (

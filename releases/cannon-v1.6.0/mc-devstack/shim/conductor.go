@@ -3,8 +3,8 @@ package shim
 import (
 	"github.com/ethereum/go-ethereum/rpc"
 
-	conductorRpc "github.com/ethereum-optimism/optimism/op-conductor/rpc"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
+	conductorRpc "github.com/mindchain/mind-chain/mc-conductor/rpc"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
 )
 
 type ConductorConfig struct {

@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	client "github.com/ethereum-optimism/optimism/op-conductor/client"
+	client "github.com/mindchain/mind-chain/mc-conductor/client"
 	mock "github.com/stretchr/testify/mock"
 )
 

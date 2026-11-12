@@ -10,16 +10,16 @@ import (
 	"strings"
 	"text/template"
 
-	ktfs "github.com/ethereum-optimism/optimism/devnet-sdk/kt/fs"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/types"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	ktfs "github.com/mindchain/mind-chain/devnet-sdk/kt/fs"
+	"github.com/mindchain/mind-chain/devnet-sdk/types"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 )
 
 const (
@@ -275,9 +275,9 @@ func parseStateFile(r io.Reader) (*DeployerState, error) {
 
 		l1Addresses := mapDeployment(deployment)
 
-		// op-deployer currently does not categorize L2 addresses
+		// mc-deployer currently does not categorize L2 addresses
 		// so we need to map them manually.
-		// TODO: Update op-deployer to sort rollup contracts by category
+		// TODO: Update mc-deployer to sort rollup contracts by category
 		l2Addresses := make(DeploymentAddresses)
 		for _, addressName := range []string{"OptimismMintableErc20FactoryProxy"} {
 			if addr, ok := l1Addresses[addressName]; ok {
@@ -301,7 +301,7 @@ func parseStateFile(r io.Reader) (*DeployerState, error) {
 	return result, nil
 }
 
-// ExtractData downloads and parses the op-deployer state
+// ExtractData downloads and parses the mc-deployer state
 func (d *Deployer) ExtractData(ctx context.Context) (*DeployerData, error) {
 	fs, err := ktfs.NewEnclaveFS(ctx, d.enclave)
 	if err != nil {

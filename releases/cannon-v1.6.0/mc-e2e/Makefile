@@ -48,7 +48,7 @@ pre-test: pre-test-cannon
 .PHONY: pre-test
 
 pre-test-cannon:
-	@if [ ! -e ../op-program/bin ]; then \
+	@if [ ! -e ../mc-program/bin ]; then \
 		make cannon-prestates; \
 	fi
 .PHONY: pre-test-cannon
@@ -56,7 +56,7 @@ pre-test-cannon:
 
 clean:
 	rm -r ../.devnet
-	rm -r ../op-program/bin
+	rm -r ../mc-program/bin
 .PHONY: clean
 
 fuzz:

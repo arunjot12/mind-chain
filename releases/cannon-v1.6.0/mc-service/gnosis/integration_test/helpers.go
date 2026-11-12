@@ -37,7 +37,7 @@ func deploySafeContracts(t *testing.T, rpcUrl string, privateKey string) (common
 	_, testFile, _, ok := runtime.Caller(0)
 	require.True(t, ok, "Failed to get test file location")
 
-	testDir := filepath.Dir(testFile) // op-service/gnosis/integration_test
+	testDir := filepath.Dir(testFile) // mc-service/gnosis/integration_test
 
 	// Navigate to the correct paths from test file location
 	contractsDir := filepath.Join(testDir, "..", "contracts")

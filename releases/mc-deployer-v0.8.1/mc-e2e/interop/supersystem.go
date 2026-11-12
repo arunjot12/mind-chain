@@ -14,9 +14,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/core"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -28,29 +28,29 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/interopgen"
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/blobstore"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/emit"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/inbox"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/fakebeacon"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/helpers"
-	opnodeconfig "github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	snconfig "github.com/ethereum-optimism/optimism/op-supernode/config"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/interopgen"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/blobstore"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/emit"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/inbox"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/fakebeacon"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/services"
+	"github.com/mindchain/mind-chain/mc-e2e/system/helpers"
+	opnodeconfig "github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	snconfig "github.com/mindchain/mind-chain/mc-supernode/config"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode"
 )
 
 // SuperSystem is an interface for the system (collection of connected resources)
@@ -281,7 +281,7 @@ func (s *interopE2ESystem) L2Genesis(network string) *core.Genesis {
 	return s.l2s[network].l2Out.Genesis
 }
 
-// prepareSupernode boots an op-supernode that owns one virtual mc-node per L2 chain.
+// prepareSupernode boots an mc-supernode that owns one virtual mc-node per L2 chain.
 // The L2 ELs (op-geth) must already be running so their engine RPC endpoints can be wired in.
 func (s *interopE2ESystem) prepareSupernode() (*supernode.Supernode, string) {
 	logger := testlog.Logger(s.t, log.LevelDebug).New("role", "supernode")
@@ -312,7 +312,7 @@ func (s *interopE2ESystem) prepareSupernode() (*supernode.Supernode, string) {
 
 	ctx, cancel := context.WithCancel(context.Background())
 	exitFn := context.CancelCauseFunc(func(err error) { s.t.Errorf("supernode critical error: %v", err) })
-	sn, err := supernode.New(ctx, logger, "op-e2e", "", exitFn, snCfg, vnCfgs)
+	sn, err := supernode.New(ctx, logger, "mc-e2e", "", exitFn, snCfg, vnCfgs)
 	require.NoError(s.t, err, "failed to construct supernode")
 	require.NoError(s.t, sn.Start(ctx), "failed to start supernode")
 
@@ -386,7 +386,7 @@ func (s *interopE2ESystem) prepare(t *testing.T, w WorldResourcePaths) {
 // because all user maps start empty, a users index should be the same for all L2s,
 // but if in the future these maps can diverge, the indexes for username would also diverge
 // NOTE: The first 20 accounts are implicitly funded by the Recipe's World Deployment
-// see: op-chain-ops/interopgen/recipe.go
+// see: mc-chain-ops/interopgen/recipe.go
 func (s *interopE2ESystem) AddUser(username string) {
 	for id, l2 := range s.l2s {
 		bigID, _ := big.NewInt(0).SetString(id, 10)
@@ -478,7 +478,7 @@ func (s *interopE2ESystem) L2IDs() []string {
 }
 
 // SendL2Tx sends an L2 transaction to the L2 with the given ID.
-// it acts as a wrapper around op-e2e.SendL2TxWithID
+// it acts as a wrapper around mc-e2e.SendL2TxWithID
 // and uses the L2's chain ID, username key, and geth client.
 func (s *interopE2ESystem) SendL2Tx(
 	id string,

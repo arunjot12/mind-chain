@@ -7,16 +7,16 @@ import (
 	"strings"
 	"time"
 
-	contractMetrics "github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/sources/caching"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	contractMetrics "github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts/metrics"
+	"github.com/mindchain/mind-chain/mc-service/sources/caching"
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 const Namespace = "op_dispute_mon"
@@ -262,7 +262,7 @@ func NewMetrics() *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: Namespace,
 			Name:      "up",
-			Help:      "1 if the op-challenger has finished starting up",
+			Help:      "1 if the mc-challenger has finished starting up",
 		}),
 		monitorDuration: factory.NewHistogram(prometheus.HistogramOpts{
 			Namespace: Namespace,
@@ -414,7 +414,7 @@ func (m *Metrics) StartBalanceMetrics(
 }
 
 // RecordInfo sets a pseudo-metric that contains versioning and
-// config info for the op-proposer.
+// config info for the mc-proposer.
 func (m *Metrics) RecordInfo(version string) {
 	m.info.WithLabelValues(version).Set(1)
 }

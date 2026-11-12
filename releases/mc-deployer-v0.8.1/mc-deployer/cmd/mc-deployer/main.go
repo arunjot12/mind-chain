@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/cli"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/version"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/cli"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/version"
 )
 
 func main() {

@@ -1,14 +1,14 @@
 package presets
 
 import (
-	challengerConfig "github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	challengerConfig "github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 // singleChainInteropNoSupernodeFromRuntime builds a SingleChainInterop whose super roots
-// are served by the single mc-node (superroot_atTimestamp) rather than op-supernode. The
+// are served by the single mc-node (superroot_atTimestamp) rather than mc-supernode. The
 // runtime runs no supernode; the mc-challenger is wired to the mc-node's super-root RPC.
 func singleChainInteropNoSupernodeFromRuntime(t devtest.T, runtime *sysgo.SingleChainRuntime) *SingleChainInterop {
 	l1ChainID := runtime.L1Network.ChainID()

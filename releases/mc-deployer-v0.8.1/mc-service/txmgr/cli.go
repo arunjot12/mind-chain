@@ -9,16 +9,16 @@ import (
 	"sync/atomic"
 	"time"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/bgpo"
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
-	opcrypto "github.com/ethereum-optimism/optimism/op-service/crypto"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/bgpo"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
+	opcrypto "github.com/mindchain/mind-chain/mc-service/crypto"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
 	"github.com/urfave/cli/v2"
 )
 

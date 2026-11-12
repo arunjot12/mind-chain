@@ -9,7 +9,7 @@ import (
 	"github.com/coder/websocket"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/retry"
+	"github.com/mindchain/mind-chain/mc-service/retry"
 )
 
 // WSConfig configures a websocket connection.

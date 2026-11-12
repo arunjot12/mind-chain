@@ -8,14 +8,14 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	monitor "github.com/ethereum-optimism/optimism/op-dispute-mon"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/config"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/flags"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/version"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	monitor "github.com/mindchain/mind-chain/mc-dispute-mon"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/config"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/flags"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/version"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 var (
@@ -44,7 +44,7 @@ func run(ctx context.Context, args []string, action ConfiguredLifecycle) error {
 	app := cli.NewApp()
 	app.Version = VersionWithMeta
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
-	app.Name = "op-dispute-mon"
+	app.Name = "mc-dispute-mon"
 	app.Usage = "Monitor dispute games"
 	app.Description = "Monitors output proposals and dispute games."
 	app.Action = cliapp.LifecycleCmd(func(ctx *cli.Context, close context.CancelCauseFunc) (cliapp.Lifecycle, error) {
@@ -52,7 +52,7 @@ func run(ctx context.Context, args []string, action ConfiguredLifecycle) error {
 		if err != nil {
 			return nil, err
 		}
-		logger.Info("Starting op-dispute-mon", "version", VersionWithMeta)
+		logger.Info("Starting mc-dispute-mon", "version", VersionWithMeta)
 
 		cfg, err := flags.NewConfigFromCLI(ctx)
 		if err != nil {

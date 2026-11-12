@@ -6,13 +6,13 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/crossdomain"
-	"github.com/ethereum-optimism/optimism/op-node/bindings"
-	bindingspreview "github.com/ethereum-optimism/optimism/op-node/bindings/preview"
-	"github.com/ethereum-optimism/optimism/op-node/withdrawals"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-chain-ops/crossdomain"
+	"github.com/mindchain/mind-chain/mc-node/bindings"
+	bindingspreview "github.com/mindchain/mind-chain/mc-node/bindings/preview"
+	"github.com/mindchain/mind-chain/mc-node/withdrawals"
 )
 
 // ForOutputRootPublished waits until there is an output published for an L2 block number larger than the supplied l2BlockNumber

@@ -6,11 +6,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	node_utils "github.com/ethereum-optimism/optimism/rust/kona/tests/node/utils"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	node_utils "github.com/mindchain/mind-chain/rust/kona/tests/node/utils"
 )
 
 var sharedRestartRuntime *sysgo.MixedSingleChainRuntime

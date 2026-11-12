@@ -3,16 +3,16 @@ package interop
 import (
 	"fmt"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	interopTypes "github.com/ethereum-optimism/optimism/op-program/client/interop/types"
-	"github.com/ethereum-optimism/optimism/op-program/client/l2"
-	l2Types "github.com/ethereum-optimism/optimism/op-program/client/l2/types"
-	"github.com/ethereum-optimism/optimism/op-program/client/mpt"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethdb/memorydb"
 	"github.com/ethereum/go-ethereum/rlp"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	interopTypes "github.com/mindchain/mind-chain/mc-program/client/interop/types"
+	"github.com/mindchain/mind-chain/mc-program/client/l2"
+	l2Types "github.com/mindchain/mind-chain/mc-program/client/l2/types"
+	"github.com/mindchain/mind-chain/mc-program/client/mpt"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // ConsolidateOracle extends another l2.Oracle with consolidated state data.

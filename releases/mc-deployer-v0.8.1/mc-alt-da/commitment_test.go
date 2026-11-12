@@ -3,7 +3,7 @@ package altda
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive/params"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive/params"
 	"github.com/stretchr/testify/require"
 )
 

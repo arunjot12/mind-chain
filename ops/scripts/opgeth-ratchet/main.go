@@ -23,7 +23,6 @@ import (
 
 const (
 	allowlistFile = "ops/scripts/opgeth-ratchet/allowlist.txt"
-	decouplingDoc = "docs/ai/opgeth-decoupling.md"
 )
 
 func main() {
@@ -86,15 +85,15 @@ func run(ctx context.Context, update bool) (bool, error) {
   %s
 
 The monorepo is moving to upstream go-ethereum (%s). Please avoid the
-dependency: %s describes the replacements (mc-core/*, the
-mc-service seams, mc-reth) and where each kind of use is headed.
+dependency by using the replacements (mc-core/*, the mc-service seams,
+mc-reth).
 
 If there is no way around it yet, add the lines below to %s,
 replacing %s with the issue tracking its removal and why the use can't be
 avoided for now:
 
 %s
-`, joinUses(unlisted, "\n  "), version, decouplingDoc, allowlistFile, reasonPlaceholder, entryLines(unlisted))
+`, joinUses(unlisted, "\n  "), version, allowlistFile, reasonPlaceholder, entryLines(unlisted))
 	}
 	if len(stale) > 0 {
 		fmt.Printf(`These allowlist entries are no longer used:

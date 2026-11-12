@@ -11,16 +11,16 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"go.opentelemetry.io/otel"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/telemetry"
-	"github.com/ethereum-optimism/optimism/op-devstack/compat"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/stack"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysext"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/flags"
-	"github.com/ethereum-optimism/optimism/op-service/locks"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/log/logfilter"
+	"github.com/mindchain/mind-chain/devnet-sdk/telemetry"
+	"github.com/mindchain/mind-chain/mc-devstack/compat"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/stack"
+	"github.com/mindchain/mind-chain/mc-devstack/sysext"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/flags"
+	"github.com/mindchain/mind-chain/mc-service/locks"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log/logfilter"
 )
 
 // lockedOrchestrator is the global variable that stores

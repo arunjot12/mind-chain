@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/event"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 // HeadSignalFn is used as callback function to accept head-signals

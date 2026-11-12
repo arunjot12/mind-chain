@@ -3,10 +3,10 @@ package mon
 import (
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/metrics"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum/go-ethereum/log"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/metrics"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
 )
 
 const MaxResolveDelay = time.Minute

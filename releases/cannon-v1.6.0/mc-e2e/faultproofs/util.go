@@ -8,16 +8,16 @@ import (
 	"sync"
 	"testing"
 
-	op_e2e "github.com/ethereum-optimism/optimism/op-e2e"
-	"github.com/ethereum-optimism/optimism/op-e2e/config"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/e2esys"
-	"github.com/ethereum-optimism/optimism/op-e2e/system/helpers"
+	op_e2e "github.com/mindchain/mind-chain/mc-e2e"
+	"github.com/mindchain/mind-chain/mc-e2e/config"
+	"github.com/mindchain/mind-chain/mc-e2e/system/e2esys"
+	"github.com/mindchain/mind-chain/mc-e2e/system/helpers"
 
-	batcherFlags "github.com/ethereum-optimism/optimism/op-batcher/flags"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+	batcherFlags "github.com/mindchain/mind-chain/mc-batcher/flags"
 	"github.com/stretchr/testify/require"
 )
 
@@ -63,7 +63,7 @@ func WithLatestFork() faultDisputeConfigOpts {
 			cfg.DeployConfig.L2GenesisGraniteTimeOffset = &genesisActivation
 			cfg.DeployConfig.L2GenesisHoloceneTimeOffset = &genesisActivation
 			cfg.DeployConfig.L2GenesisIsthmusTimeOffset = &genesisActivation
-			// TODO(#17348): Jovian is not supported in op-e2e tests yet
+			// TODO(#17348): Jovian is not supported in mc-e2e tests yet
 			//cfg.DeployConfig.L2GenesisJovianTimeOffset = &genesisActivation
 		})
 	}

@@ -5,17 +5,17 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl/proofs"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl/proofs"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // TestChallengerPlaysGameFromOpNode verifies mc-challenger plays a super-cannon-kona game
 // when its super roots are sourced from a single mc-node (superroot_atTimestamp) rather than
-// op-supernode. An attacker posts a bad super root; the challenger, backed by mc-node, must
+// mc-supernode. An attacker posts a bad super root; the challenger, backed by mc-node, must
 // counter it down to the split depth.
 func TestChallengerPlaysGameFromOpNode(gt *testing.T) {
 	t := devtest.ParallelT(gt)

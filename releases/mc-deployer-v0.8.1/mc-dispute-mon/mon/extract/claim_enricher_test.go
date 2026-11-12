@@ -5,9 +5,9 @@ import (
 	"errors"
 	"testing"
 
-	faultTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 	"github.com/stretchr/testify/require"
 )
 

@@ -5,8 +5,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/consensus"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-conductor/consensus"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var RPCNamespace = "conductor"

@@ -33,7 +33,7 @@ flowchart TD
   end
 
   %% Main Monitoring Group
-  subgraph service["op-interop-mon"]
+  subgraph service["mc-interop-mon"]
     s[Service Routing]
     m[Metric Collector]
     fa[Chain A Finder]

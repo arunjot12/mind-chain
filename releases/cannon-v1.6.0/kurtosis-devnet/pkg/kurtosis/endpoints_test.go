@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/inspect"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/sources/spec"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/inspect"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/sources/spec"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -253,7 +253,7 @@ func createTestServiceMap() inspect.ServiceMap {
 		},
 
 		// Shared L2 Services
-		"op-faucet": &inspect.Service{
+		"mc-faucet": &inspect.Service{
 			Ports: inspect.PortMap{
 				"rpc": &descriptors.PortInfo{Port: 32813},
 			},
@@ -356,14 +356,14 @@ func TestReorderNodes(t *testing.T) {
 	}
 
 	opGethOpNode := descriptors.Node{
-		Name: "op-node",
+		Name: "mc-node",
 		Services: descriptors.ServiceMap{
 			"el": &descriptors.Service{Name: "op-geth-1"},
 			"cl": &descriptors.Service{Name: "op-node-1"},
 		},
 		Labels: map[string]string{
 			"elType": "op-geth",
-			"clType": "op-node",
+			"clType": "mc-node",
 		},
 	}
 
@@ -377,7 +377,7 @@ func TestReorderNodes(t *testing.T) {
 	clOnlyNode := descriptors.Node{
 		Name: "cl-only",
 		Services: descriptors.ServiceMap{
-			"cl": &descriptors.Service{Name: "op-node"},
+			"cl": &descriptors.Service{Name: "mc-node"},
 		},
 	}
 
@@ -423,18 +423,18 @@ func TestReorderNodes(t *testing.T) {
 		assert.Equal(t, expected, result, "First sequencer should be moved to front")
 	})
 
-	t.Run("op-geth and op-node services moved to front", func(t *testing.T) {
+	t.Run("op-geth and mc-node services moved to front", func(t *testing.T) {
 		nodes := []descriptors.Node{regularNode1, opGethOpNode, regularNode3}
 		result := reorderNodes(nodes)
 
 		expected := []descriptors.Node{opGethOpNode, regularNode1, regularNode3}
-		assert.Equal(t, expected, result, "Node with op-geth and op-node should be moved to front")
+		assert.Equal(t, expected, result, "Node with op-geth and mc-node should be moved to front")
 	})
 
-	t.Run("op-geth and op-node services already first", func(t *testing.T) {
+	t.Run("op-geth and mc-node services already first", func(t *testing.T) {
 		nodes := []descriptors.Node{opGethOpNode, regularNode2, regularNode3}
 		result := reorderNodes(nodes)
-		assert.Equal(t, nodes, result, "Node with op-geth and op-node already first should remain unchanged")
+		assert.Equal(t, nodes, result, "Node with op-geth and mc-node already first should remain unchanged")
 	})
 
 	t.Run("only el service - no reordering", func(t *testing.T) {
@@ -455,11 +455,11 @@ func TestReorderNodes(t *testing.T) {
 		assert.Equal(t, nodes, result, "Nodes without special properties should maintain original order")
 	})
 
-	t.Run("sequencer takes precedence over op-geth/op-node", func(t *testing.T) {
+	t.Run("sequencer takes precedence over op-geth/mc-node", func(t *testing.T) {
 		nodes := []descriptors.Node{opGethOpNode, sequencerNode, regularNode3}
 		result := reorderNodes(nodes)
 
 		expected := []descriptors.Node{sequencerNode, opGethOpNode, regularNode3}
-		assert.Equal(t, expected, result, "Sequencer should take precedence over op-geth/op-node")
+		assert.Equal(t, expected, result, "Sequencer should take precedence over op-geth/mc-node")
 	})
 }

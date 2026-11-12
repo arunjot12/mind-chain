@@ -3,7 +3,7 @@ package sysgo
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type ComponentTarget struct {

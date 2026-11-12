@@ -9,10 +9,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // ObtainJWTSecret attempts to read a JWT secret, and generates one if necessary.

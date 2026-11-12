@@ -1,8 +1,8 @@
 package types
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // OracleHinter is an optional interface that can be implemented by an Oracle to provide hints

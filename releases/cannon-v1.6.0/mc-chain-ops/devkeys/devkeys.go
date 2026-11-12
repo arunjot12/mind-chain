@@ -137,13 +137,13 @@ type ChainOperatorRole uint64
 const (
 	// DeployerRole is the deployer of contracts for an OP-Stack chain
 	DeployerRole ChainOperatorRole = 0
-	// ProposerRole is the key used by op-proposer
+	// ProposerRole is the key used by mc-proposer
 	ProposerRole ChainOperatorRole = 1
-	// BatcherRole is the key used by op-batcher
+	// BatcherRole is the key used by mc-batcher
 	BatcherRole ChainOperatorRole = 2
 	// SequencerP2PRole is the key used to publish sequenced L2 blocks
 	SequencerP2PRole ChainOperatorRole = 3
-	// ChallengerRole is the key used by op-challenger
+	// ChallengerRole is the key used by mc-challenger
 	ChallengerRole ChainOperatorRole = 4
 	// L2ProxyAdminOwnerRole is the key that controls the ProxyAdmin predeploy in L2
 	L2ProxyAdminOwnerRole ChainOperatorRole = 5

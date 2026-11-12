@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	opparams "github.com/ethereum-optimism/optimism/op-core/params"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
+	opparams "github.com/mindchain/mind-chain/mc-core/params"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 func TestLoadOpChainConfig(t *testing.T) {

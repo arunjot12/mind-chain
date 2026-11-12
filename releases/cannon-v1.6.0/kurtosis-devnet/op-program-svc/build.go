@@ -147,7 +147,7 @@ func (b *Builder) ExecuteBuild() ([]byte, error) {
 	return output.Bytes(), nil
 }
 
-// This is a convenience hack to natively support the file format of op-deployer
+// This is a convenience hack to natively support the file format of mc-deployer
 func (b *Builder) normalizeFilename(filename string) string {
 	// Get just the filename without directories
 	filename = filepath.Base(filename)

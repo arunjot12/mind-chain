@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
-// SupernodeObserverClient is the read-only op-supernode surface the observer needs.
-// It is satisfied by op-service/sources.SuperNodeClient.
+// SupernodeObserverClient is the read-only mc-supernode surface the observer needs.
+// It is satisfied by mc-service/sources.SuperNodeClient.
 type SupernodeObserverClient interface {
 	// SyncStatus returns the supernode's aggregate per-chain sync status. A successful
 	// call is also taken as the supernode's liveness signal.
@@ -23,7 +23,7 @@ type CanonicalBlockSource interface {
 	InfoByNumber(ctx context.Context, number uint64) (eth.BlockInfo, error)
 }
 
-// SupernodeObserver watches one op-supernode (read-only). It records liveness,
+// SupernodeObserver watches one mc-supernode (read-only). It records liveness,
 // per-chain safe/finalized heads, and the highest-signal check: a bad executing
 // message that the supernode has already promoted to cross-safe. It never gates
 // monitor behaviour.

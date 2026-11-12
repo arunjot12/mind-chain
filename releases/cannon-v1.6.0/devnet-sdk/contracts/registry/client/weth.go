@@ -3,10 +3,10 @@ package client
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts/bindings"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/interfaces"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts/bindings"
+	"github.com/mindchain/mind-chain/devnet-sdk/interfaces"
+	"github.com/mindchain/mind-chain/devnet-sdk/types"
 )
 
 type WETHBinding struct {

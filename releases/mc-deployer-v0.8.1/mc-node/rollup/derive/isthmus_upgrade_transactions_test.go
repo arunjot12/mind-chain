@@ -3,8 +3,8 @@ package derive
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
 	"github.com/stretchr/testify/require"
 )
 

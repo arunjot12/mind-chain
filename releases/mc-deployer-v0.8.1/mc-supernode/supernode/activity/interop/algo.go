@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
 )
 
 // defaultMessageExpiryWindow is the default maximum age of an initiating message

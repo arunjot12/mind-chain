@@ -23,8 +23,8 @@ WORKDIR /app
 
 # build cannon ahead of time
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build just \
-        -d /app/op-program \
-        -f /app/op-program/repro.justfile \
+        -d /app/mc-program \
+        -f /app/mc-program/repro.justfile \
         GOOS="$TARGETOS" \
         GOARCH="$TARGETARCH" \
         GIT_COMMIT="$GIT_COMMIT" \

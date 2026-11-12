@@ -38,7 +38,6 @@ This section applies to Solidity files ONLY.
 
 ### Style Guide
 
-- Follow the style guide found at `.cursor/rules/solidity-styles.mdc` in the root of this repository.
 
 ### Versioning
 

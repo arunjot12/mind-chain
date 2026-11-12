@@ -18,7 +18,7 @@ func TestInteropTxRejected(t *testing.T) {
 			want: true,
 		},
 		{
-			name: "op-interop-filter access entry parse failure",
+			name: "mc-interop-filter access entry parse failure",
 			err:  errors.New("failed to parse access entry: bad data"),
 			want: true,
 		},
@@ -28,7 +28,7 @@ func TestInteropTxRejected(t *testing.T) {
 			want: true,
 		},
 		{
-			name: "op-interop-filter failsafe enabled",
+			name: "mc-interop-filter failsafe enabled",
 			err:  errors.New("failsafe is enabled"),
 			want: true,
 		},

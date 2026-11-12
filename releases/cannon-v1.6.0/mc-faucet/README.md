@@ -1,4 +1,4 @@
-# op-faucet
+# mc-faucet
 
 This implements a dev-faucet, with support for multiple chains and faucet configurations.
 
@@ -11,9 +11,9 @@ for acceptance tests to point against for test-user funding.
 ### Build from source
 
 ```bash
-# from op-faucet dir:
-just op-faucet
-./bin/op-faucet --help
+# from mc-faucet dir:
+just mc-faucet
+./bin/mc-faucet --help
 ```
 
 ### Run from source
@@ -57,7 +57,7 @@ For each known chain, an alias is set up to serve the default faucet for each ch
 Multiple faucets may be configured, for different chains and use-cases.
 
 Different chains are supported to make interop-devnet faucets easy:
-only one op-faucet service is needed in a dev environment.
+only one mc-faucet service is needed in a dev environment.
 
 The configuration may also be used to configure different authenticated faucets.
 

@@ -1,10 +1,10 @@
-# `op-wheel`
+# `mc-wheel`
 
 Issues: [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-wheel)
 
 Pull requests: [monorepo](https://github.com/ethereum-optimism/optimism/pulls?q=is%3Aopen+is%3Apr+label%3AA-op-wheel)
 
-`op-wheel` is a CLI tool to direct the engine one way or the other with Engine API routines.
+`mc-wheel` is a CLI tool to direct the engine one way or the other with Engine API routines.
 
 It was named the "wheel" because of two reasons:
 - Figuratively, it allows to steer the stack, an interface for a *driver* (like the mc-node sub-component) to control the execution *engine* (e.g. op-geth).
@@ -20,7 +20,7 @@ Each sub-command dials the engine API endpoint (with provided JWT secret) and th
 
 To run:
 ```bash
-go run ./op-wheel/cmd engine --help
+go run ./mc-wheel/cmd engine --help
 ```
 
 ## Usage
@@ -28,25 +28,25 @@ go run ./op-wheel/cmd engine --help
 ### Build from source
 
 ```bash
-# from op-wheel dir:
-just op-wheel
-./bin/op-wheel --help
+# from mc-wheel dir:
+just mc-wheel
+./bin/mc-wheel --help
 ```
 
 ### Run from source
 
 ```bash
-# from op-wheel dir:
+# from mc-wheel dir:
 go run ./cmd --help
 ```
 
 ### Build docker image
 
-See `op-wheel` docker-bake target.
+See `mc-wheel` docker-bake target.
 
 ## Product
 
-`op-wheel` is a tool for expert-users to perform advanced data recoveries, tests and overrides.
+`mc-wheel` is a tool for expert-users to perform advanced data recoveries, tests and overrides.
 This tool optimizes for reusability of these expert actions, to make them less error-prone.
 
 This is not part of a standard release / process, as this tool is not used commonly,

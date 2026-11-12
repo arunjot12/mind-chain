@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,8 +1,8 @@
 package helpers
 
 import (
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils"
 )
 
 // ApplyDeltaTimeOffset adjusts fork configuration to not conflict with the delta overrides

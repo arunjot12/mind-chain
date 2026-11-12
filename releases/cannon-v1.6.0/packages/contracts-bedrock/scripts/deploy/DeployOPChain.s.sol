@@ -172,7 +172,7 @@ contract DeployOPChainInput is BaseDeployIO {
         // anchor root and deploy a new permissioned dispute game contract anyway.
         //
         // You can `console.logBytes(abi.encode(ScriptConstants.DEFAULT_OUTPUT_ROOT()))` to get the bytes that
-        // are hardcoded into `op-chain-ops/deployer/opcm/opchain.go`
+        // are hardcoded into `mc-chain-ops/deployer/opcm/opchain.go`
 
         return abi.encode(ScriptConstants.DEFAULT_OUTPUT_ROOT());
     }

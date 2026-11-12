@@ -13,8 +13,8 @@ import (
 	boltdb "github.com/hashicorp/raft-boltdb/v2"
 	"github.com/pkg/errors"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 const defaultTimeout = 5 * time.Second

@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/test"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/test"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 	"github.com/stretchr/testify/require"
 )
 

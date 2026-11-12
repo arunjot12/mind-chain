@@ -12,10 +12,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-supervisor/config"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/syncnode"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-supervisor/config"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/syncnode"
 )
 
 var (
@@ -150,7 +150,7 @@ func configForArgs(t *testing.T, cliArgs []string) *config.Config {
 func dryRunWithArgs(cliArgs []string) (log.Logger, *config.Config, error) {
 	cfg := new(config.Config)
 	var logger log.Logger
-	fullArgs := append([]string{"op-supervisor"}, cliArgs...)
+	fullArgs := append([]string{"mc-supervisor"}, cliArgs...)
 	testErr := errors.New("dry-run")
 	err := run(context.Background(), fullArgs, func(ctx context.Context, config *config.Config, log log.Logger) (cliapp.Lifecycle, error) {
 		logger = log

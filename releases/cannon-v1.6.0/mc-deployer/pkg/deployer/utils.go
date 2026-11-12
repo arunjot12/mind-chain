@@ -44,10 +44,10 @@ func EnsureDefaultCacheDir() string {
 
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
-		cacheDir = ".op-deployer/cache"
+		cacheDir = ".mc-deployer/cache"
 		log.Printf("error getting user home directory: %v, using fallback directory: %s\n", err, cacheDir)
 	} else {
-		cacheDir = path.Join(homeDir, ".op-deployer/cache")
+		cacheDir = path.Join(homeDir, ".mc-deployer/cache")
 	}
 
 	if err := os.MkdirAll(cacheDir, 0755); err != nil {

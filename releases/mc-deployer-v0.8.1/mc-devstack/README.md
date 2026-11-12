@@ -1,4 +1,4 @@
-# op-devstack
+# mc-devstack
 
 Devstack provides typed test presets and DSL helpers for integration and acceptance testing.
 
@@ -85,7 +85,7 @@ and returns a typed output that the test then may use.
   - The test-handle is very minimal, so that tooling can implement it, and is only made accessible for internal sanity-check assertions.
 - Option pattern for each type, taking the interface, so that the system can be composed by external packages, eg:
   - Kurtosis
-  - System like op-e2e
+  - System like mc-e2e
   - Action-test
 - Implementations should take `client.RPC` (or equivalent), not raw endpoints. Dialing is best done by the system composer, which can customize retries, in-process RPC pipes, lazy-dialing, etc. as needed.
 - The system composer is responsible for tracking raw RPC URLs. These are not portable, and would expose too much low-level detail in the System interface.
@@ -128,7 +128,7 @@ and returns a typed output that the test then may use.
 - `SYSGO_PROMETHEUS_DOCKER_IMAGE_TAG` indicates which prometheus docker image tag should be used (default is `v3.7.2`).
 
 ### Other useful env vars:
-- `DISABLE_OP_E2E_LEGACY=true` to disable the op-e2e package from loading build-artifacts that are not used by devstack.
+- `DISABLE_OP_E2E_LEGACY=true` to disable the mc-e2e package from loading build-artifacts that are not used by devstack.
 
 ## Metrics
 If [metrics are enabled](#metrics-env-vars) and any component is configured to expose metrics, prometheus and grafana instances will be created via docker to serve them to the user.

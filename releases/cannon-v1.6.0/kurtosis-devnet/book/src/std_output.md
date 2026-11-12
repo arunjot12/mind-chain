@@ -89,7 +89,7 @@ Here's a simplified example of a devnet descriptor:
         {
           "services": {
             "cl": {
-              "name": "op-node",
+              "name": "mc-node",
               "endpoints": {
                 "http": {
                   "host": "127.0.0.1",

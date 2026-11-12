@@ -7,10 +7,10 @@ _LDFLAGSSTRING := "'" + trim(
     "-X main.Version=" + VERSION + " " + \
     "") + "'"
 
-BINARY := "./bin/op-proposer"
+BINARY := "./bin/mc-proposer"
 
-# Build op-proposer binary
-op-proposer: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
+# Build mc-proposer binary
+mc-proposer: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
 
 # Clean build artifacts
 clean:

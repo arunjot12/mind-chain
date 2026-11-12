@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	"github.com/ethereum-optimism/optimism/kurtosis-devnet/pkg/kurtosis/api/wrappers"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/kurtosis-devnet/pkg/kurtosis/api/wrappers"
 )
 
 type ConductorSequencer struct {
@@ -69,7 +69,7 @@ func ExtractConductorConfig(ctx context.Context, enclaveID string) (*ConductorCo
 			}
 		}
 
-		if labels["op.kind"] == "cl" && labels["op.cl.type"] == "op-node" {
+		if labels["op.kind"] == "cl" && labels["op.cl.type"] == "mc-node" {
 			opNodeServices[svcNameStr] = map[string]interface{}{
 				"labels": labels,
 				"ports":  ports,
@@ -110,7 +110,7 @@ func ExtractConductorConfig(ctx context.Context, enclaveID string) (*ConductorCo
 		participantName := labels["op.network.participant.name"]
 		var nodeRPCURL string
 
-		// Look for matching op-node service
+		// Look for matching mc-node service
 		for _, nodeData := range opNodeServices {
 			nodeLabels := nodeData["labels"].(map[string]string)
 			nodePorts := nodeData["ports"].(map[string]*descriptors.PortInfo)

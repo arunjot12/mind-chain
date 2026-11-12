@@ -3,7 +3,7 @@ package driver
 import (
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/finality"
+	"github.com/mindchain/mind-chain/mc-node/rollup/finality"
 )
 
 type Config struct {

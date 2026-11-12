@@ -3,9 +3,9 @@ package interop
 import (
 	"fmt"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type frontierQueryKey struct {

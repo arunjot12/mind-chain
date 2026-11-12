@@ -9,15 +9,15 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/config"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/flags"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/metrics"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
+	"github.com/mindchain/mind-chain/mc-sync-tester/config"
+	"github.com/mindchain/mind-chain/mc-sync-tester/flags"
+	"github.com/mindchain/mind-chain/mc-sync-tester/metrics"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester"
 )
 
 var (
@@ -42,9 +42,9 @@ func run(ctx context.Context, w io.Writer, ew io.Writer, args []string, fn synct
 	app.ErrWriter = ew
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-sync-tester"
-	app.Usage = "op-sync-tester mocks EL layer to test CL sync"
-	app.Description = "op-sync-tester mocks EL layer to test CL sync"
+	app.Name = "mc-sync-tester"
+	app.Usage = "mc-sync-tester mocks EL layer to test CL sync"
+	app.Description = "mc-sync-tester mocks EL layer to test CL sync"
 	app.Action = cliapp.LifecycleCmd(synctester.Main(app.Version, fn))
 	app.Commands = []*cli.Command{
 		{

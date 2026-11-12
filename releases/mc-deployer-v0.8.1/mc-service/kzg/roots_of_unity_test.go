@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 // TestInitRootsOfUnity validates that the roots of unity are constructed and ordered correctly such that the

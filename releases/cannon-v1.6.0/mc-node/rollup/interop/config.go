@@ -6,15 +6,15 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop/indexing"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/rpc"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop/indexing"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 type Config struct {
 	// RPCAddr address to bind RPC server to, to serve external supervisor nodes.
-	// Optional. This will soon be required: running op-node without supervisor is being deprecated.
+	// Optional. This will soon be required: running mc-node without supervisor is being deprecated.
 	RPCAddr string
 	// RPCPort port to bind RPC server to, to serve external supervisor nodes.
 	// Binds to any available port if set to 0.

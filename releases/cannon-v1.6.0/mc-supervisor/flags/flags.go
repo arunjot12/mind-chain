@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
 	"github.com/urfave/cli/v2"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-supervisor/config"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/syncnode"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-supervisor/config"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/syncnode"
 )
 
 const EnvVarPrefix = "OP_SUPERVISOR"
@@ -54,7 +54,7 @@ var (
 	}
 	DataDirSyncEndpointFlag = &cli.PathFlag{
 		Name:    "datadir.sync-endpoint",
-		Usage:   "op-supervisor endpoint to sync databases from",
+		Usage:   "mc-supervisor endpoint to sync databases from",
 		EnvVars: prefixEnvVars("DATADIR_SYNC_ENDPOINT"),
 	}
 	NetworkFlag = &cli.StringSliceFlag{
@@ -71,7 +71,7 @@ var (
 	}
 	RollupConfigPathsFlag = &cli.StringFlag{
 		Name: "rollup-config-paths",
-		Usage: "Path pattern to op-node rollup.json configs to load as a rollup config set. " +
+		Usage: "Path pattern to mc-node rollup.json configs to load as a rollup config set. " +
 			"The pattern should use the Go filepath glob sytax, e.g. '/configs/rollup-*.json' " +
 			"When using this flag, the L1 timestamps are loaded from the provided L1 RPC",
 		EnvVars: prefixEnvVars("ROLLUP_CONFIG_PATHS"),

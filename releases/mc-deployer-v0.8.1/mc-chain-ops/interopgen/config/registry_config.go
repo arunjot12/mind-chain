@@ -6,11 +6,11 @@ import (
 
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	coredepset "github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	registry "github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/superchain"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	coredepset "github.com/mindchain/mind-chain/mc-core/interop/depset"
+	registry "github.com/mindchain/mind-chain/mc-core/superchain"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/superchain"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type RegistryFullConfigSetSource struct {

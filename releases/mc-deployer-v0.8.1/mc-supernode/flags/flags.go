@@ -6,12 +6,12 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	opnodeflags "github.com/mindchain/mind-chain/mc-node/flags"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 const (
@@ -32,7 +32,7 @@ var (
 	}
 	DataDirFlag = &cli.StringFlag{
 		Name:     "data-dir",
-		Usage:    "Data directory for op-supernode",
+		Usage:    "Data directory for mc-supernode",
 		EnvVars:  prefixEnvVars("DATA_DIR"),
 		Value:    "./datadir",
 		Required: false,

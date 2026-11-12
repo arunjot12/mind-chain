@@ -7,12 +7,12 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/upgrade/embedded"
-	txintentbindings "github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
 	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade/embedded"
+	txintentbindings "github.com/mindchain/mind-chain/mc-service/txintent/bindings"
 	"github.com/stretchr/testify/require"
 )
 

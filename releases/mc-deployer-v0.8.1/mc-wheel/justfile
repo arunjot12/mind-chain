@@ -7,7 +7,7 @@ _LDFLAGSSTRING := "'" + trim(
     "-X main.Version=" + VERSION + " " + \
     "") + "'"
 
-BINARY := "./bin/op-wheel"
+BINARY := "./bin/mc-wheel"
 
-# Build op-wheel binary
-op-wheel: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
+# Build mc-wheel binary
+mc-wheel: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)

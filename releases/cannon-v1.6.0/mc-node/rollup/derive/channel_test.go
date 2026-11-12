@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/andybalholm/brotli"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/klauspost/compress/zstd"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/stretchr/testify/require"
 )
 

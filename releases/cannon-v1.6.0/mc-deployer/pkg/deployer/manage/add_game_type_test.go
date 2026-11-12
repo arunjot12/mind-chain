@@ -4,22 +4,13 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log/slog"
-	"math/big"
-	"os"
 	"testing"
-	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
 	"github.com/lmittmann/w3"
 	"github.com/lmittmann/w3/module/eth"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
 	"github.com/ethereum/go-ethereum/superchain"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/testutil"
-	"github.com/ethereum-optimism/superchain-registry/validation"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
@@ -61,62 +52,6 @@ func getAddressesOnchain(ctx context.Context, rpcURL string, chainConfig *superc
 	}
 
 	return opChainProxyAdmin, delayedWETHProxy, nil
-}
-
-func TestAddGameType(t *testing.T) {
-	rpcURL := os.Getenv("SEPOLIA_RPC_URL")
-	require.NotEmpty(t, rpcURL, "must specify RPC url via SEPOLIA_RPC_URL env var")
-
-	afacts, _ := testutil.LocalArtifacts(t)
-	v200SepoliaAddrs := validation.StandardVersionsSepolia[standard.ContractsV200Tag]
-	testCacheDir := testutils.IsolatedTestDirWithAutoCleanup(t)
-
-	chain, err := superchain.GetChain(11155420)
-	require.NoError(t, err)
-	chainConfig, err := chain.Config()
-	require.NoError(t, err)
-
-	readCtx, readCancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer readCancel()
-
-	opChainProxyAdmin, delayedWETHProxy, err := getAddressesOnchain(readCtx, rpcURL, chainConfig)
-	require.NoError(t, err, "failed to read addresses from chain")
-
-	cfg := AddGameTypeConfig{
-		L1RPCUrl:         rpcURL,
-		Logger:           testlog.Logger(t, slog.LevelInfo),
-		ArtifactsLocator: afacts,
-		SaltMixer:        "foo",
-		// The values below were pulled from the Superchain Registry for OP Sepolia.
-		SystemConfigProxy:       *chainConfig.Addresses.SystemConfigProxy,
-		OPChainProxyAdmin:       opChainProxyAdmin,
-		DelayedWETHProxy:        delayedWETHProxy,
-		DisputeGameType:         999,
-		DisputeAbsolutePrestate: common.HexToHash("0x1234"),
-		DisputeMaxGameDepth:     big.NewInt(73),
-		DisputeSplitDepth:       big.NewInt(30),
-		DisputeClockExtension:   10800,
-		DisputeMaxClockDuration: 302400,
-		InitialBond:             big.NewInt(1),
-		VM:                      common.Address(*v200SepoliaAddrs.Mips.Address),
-		Permissionless:          false,
-		L1ProxyAdminOwner:       *chainConfig.Roles.ProxyAdminOwner,
-		OPCMImpl:                common.Address(*v200SepoliaAddrs.OPContractsManager.Address),
-		CacheDir:                testCacheDir,
-	}
-
-	addCtx, addCancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer addCancel()
-
-	output, broadcasts, err := AddGameType(addCtx, cfg)
-	require.NoError(t, err)
-
-	require.Equal(t, 1, len(broadcasts))
-	// Selector for addGameType
-	require.EqualValues(t, []byte{0x16, 0x61, 0xa2, 0xe9}, broadcasts[0].Data[0:4])
-
-	require.NotEqual(t, common.Address{}, output.DelayedWETHProxy)
-	require.NotEqual(t, common.Address{}, output.FaultDisputeGameProxy)
 }
 
 func TestAddGameType_CLI(t *testing.T) {

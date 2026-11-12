@@ -8,21 +8,6 @@ import (
 	"sort"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/crossdomain"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	nodebindings "github.com/ethereum-optimism/optimism/mc-node/bindings"
-	bindingspreview "github.com/ethereum-optimism/optimism/mc-node/bindings/preview"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/mc-node/withdrawals"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txintent/bindings"
-	"github.com/ethereum-optimism/optimism/op-service/txintent/contractio"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -31,6 +16,21 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient/gethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/holiman/uint256"
+	"github.com/mindchain/mind-chain/mc-chain-ops/crossdomain"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	nodebindings "github.com/mindchain/mind-chain/mc-node/bindings"
+	bindingspreview "github.com/mindchain/mind-chain/mc-node/bindings/preview"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/withdrawals"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txintent/bindings"
+	"github.com/mindchain/mind-chain/mc-service/txintent/contractio"
 )
 
 // ProvenWithdrawalParameters is the set of parameters to pass to the ProveWithdrawalTransaction
@@ -609,7 +609,7 @@ func (b *StandardBridge) ProveWithFaultProofParams(user *EOA, params withdrawals
 }
 
 // ProveWithdrawalParameters calls ProveWithdrawalParametersForBlock with the most recent L2 output after the latest game.
-// Ported from mc-node/withdrawals/utils.go to fit in the op-devstack
+// Ported from mc-node/withdrawals/utils.go to fit in the mc-devstack
 func (w *Withdrawal) proveWithdrawalParameters() ProvenWithdrawalParameters {
 	// Wait for a suitable game to be published
 	latestGame := w.bridge.forGamePublished(w.initReceipt.BlockNumber)
@@ -626,7 +626,7 @@ func (w *Withdrawal) proveWithdrawalParameters() ProvenWithdrawalParameters {
 // proveWithdrawalParametersForEvent queries L1 to generate all withdrawal parameters and proof necessary to prove a withdrawal on L1.
 // The l2Header provided is very important. It should be a block for which there is a submitted output in the L2 Output Oracle
 // contract. If not, the withdrawal will fail as it the storage proof cannot be verified if there is no submitted state root.
-// Ported from mc-node/withdrawals/utils.go to fit in the op-devstack, using op-service ethclient
+// Ported from mc-node/withdrawals/utils.go to fit in the mc-devstack, using mc-service ethclient
 func (w *Withdrawal) proveWithdrawalParametersForEvent(ev *nodebindings.L2ToL1MessagePasserMessagePassed, l2Header eth.BlockInfo, disputeGame disputeGame) ProvenWithdrawalParameters {
 	// Generate then verify the withdrawal proof
 	withdrawalHash, err := withdrawals.WithdrawalHash(ev)
@@ -681,7 +681,7 @@ func (w *Withdrawal) proveWithdrawalParametersForEvent(ev *nodebindings.L2ToL1Me
 	return params
 }
 
-// Ported from mc-node/withdrawals/proof.go to fit in the op-devstack, using op-service proof types
+// Ported from mc-node/withdrawals/proof.go to fit in the mc-devstack, using mc-service proof types
 func verifyProof(stateRoot common.Hash, proof *eth.AccountResult) error {
 	balance, overflow := uint256.FromBig(proof.Balance.ToInt())
 	if overflow {

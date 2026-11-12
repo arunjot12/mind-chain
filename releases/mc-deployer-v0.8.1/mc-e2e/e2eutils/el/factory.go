@@ -1,4 +1,4 @@
-// Package el is the single construction seam for op-e2e's L2 execution layer.
+// Package el is the single construction seam for mc-e2e's L2 execution layer.
 // It selects between in-process op-geth and external-process mc-reth based on
 // the requested ELKind, so call sites never construct an EL backend directly.
 // It lives apart from the geth/reth/services packages to avoid an import cycle.
@@ -11,9 +11,9 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/reth"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/reth"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/services"
 )
 
 // L2Config carries everything needed to construct an L2 EL backend.

@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"strconv"
 
-	log2 "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/log"
+	log2 "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 type SnapshotSelect func(logger log.Logger, dir string, absolutePreState string, i uint64, binary bool) (string, error)

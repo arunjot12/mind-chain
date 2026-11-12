@@ -24,11 +24,11 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 
-	p2p "github.com/ethereum-optimism/optimism/op-node/p2p"
-	p2pMocks "github.com/ethereum-optimism/optimism/op-node/p2p/mocks"
-	"github.com/ethereum-optimism/optimism/op-node/p2p/store"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	testlog "github.com/ethereum-optimism/optimism/op-service/testlog"
+	p2p "github.com/mindchain/mind-chain/mc-node/p2p"
+	p2pMocks "github.com/mindchain/mind-chain/mc-node/p2p/mocks"
+	"github.com/mindchain/mind-chain/mc-node/p2p/store"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	testlog "github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 // PeerScoresTestSuite tests peer parameterization.

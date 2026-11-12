@@ -4,9 +4,9 @@ import (
 	"context"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	cc "github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container"
 	gethlog "github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	cc "github.com/mindchain/mind-chain/mc-supernode/supernode/chain_container"
 )
 
 func Aggregate(ctx context.Context, log gethlog.Logger, chains map[eth.ChainID]cc.ChainContainer) (eth.SuperNodeSyncStatusResponse, error) {

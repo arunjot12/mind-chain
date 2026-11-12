@@ -1,6 +1,6 @@
 # Running Rollup Boost
 
-Rollup boost acts as a proxy between the proposer and its execution engine. It is stateless and can be run with a regular sequencer setup or in a high availability setup with `op-conductor`.
+Rollup boost acts as a proxy between the proposer and its execution engine. It is stateless and can be run with a regular sequencer setup or in a high availability setup with `mc-conductor`.
 
 ![rollup-boost-architecture](../assets/rollup-boost-architecture.png)
 
@@ -22,9 +22,9 @@ Optionally, you can set a separate builder jwt token or path to the proposer jwt
 
 ## High Availability Setup with Rollup Boost
 
-One potential way to setup rollup boost in a high availability setup is with `op-conductor` to run multiple instances of rollup boost and have them proxy to the same builder.
+One potential way to setup rollup boost in a high availability setup is with `mc-conductor` to run multiple instances of rollup boost and have them proxy to the same builder.
 
-While this does not ensure high availability for the builder, the chain will have a high availability setup for the fallback node. If the proposer execution engine is healthy, `op-conductor` will assume the sequencer is healthy.
+While this does not ensure high availability for the builder, the chain will have a high availability setup for the fallback node. If the proposer execution engine is healthy, `mc-conductor` will assume the sequencer is healthy.
 
 ![rollup-boost-op-conductor](../assets/rollup-boost-op-conductor.png)
 
@@ -33,7 +33,7 @@ While this does not ensure high availability for the builder, the chain will hav
 `rollup-boost` supports the standard array of kubernetes probes:
 
 - `/healthz` Returns various status codes to communicate `rollup-boost` health - 200 OK - The builder is producing blocks - 206 Partial Content - The l2 is producing blocks, but the builder is not - 503 Service Unavailable - Neither the l2 or the builder is producing blocks
-  `op-conductor` should eventually be able to use this signal to switch to a different sequencer in an HA sequencer setup. In a future upgrade to `op-conductor`, A sequencer leader with a healthy (200 OK) EL (`rollup-boost` in our case) could be selected preferentially over one with an unhealthy (206 or 503) EL. If no ELs are healthy, then we can fallback to an EL which is responding with `206 Partial Content`.
+  `mc-conductor` should eventually be able to use this signal to switch to a different sequencer in an HA sequencer setup. In a future upgrade to `mc-conductor`, A sequencer leader with a healthy (200 OK) EL (`rollup-boost` in our case) could be selected preferentially over one with an unhealthy (206 or 503) EL. If no ELs are healthy, then we can fallback to an EL which is responding with `206 Partial Content`.
 
 - `/readyz` Used by kubernetes to determine if the service is ready to accept traffic. Should always respond with `200 OK`
 

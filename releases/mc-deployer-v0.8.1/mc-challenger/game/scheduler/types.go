@@ -5,7 +5,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/types"
 )
 
 type GamePlayer interface {

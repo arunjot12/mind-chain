@@ -5,8 +5,8 @@ import (
 	"net"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-node/p2p"
 	"github.com/ethereum/go-ethereum/p2p/enode"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
 	"github.com/stretchr/testify/require"
 )
 

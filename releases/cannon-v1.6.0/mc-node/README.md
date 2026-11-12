@@ -1,4 +1,4 @@
-# `op-node`
+# `mc-node`
 
 Issues:
 [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-node)
@@ -14,7 +14,7 @@ Specs:
 
 - [rollup-node spec]
 
-The op-node implements the [rollup-node spec].
+The mc-node implements the [rollup-node spec].
 It functions as a Consensus Layer client of an OP Stack chain.
 This builds, relays and verifies the canonical chain of blocks.
 The blocks are processed by an execution layer client, like [op-geth].
@@ -25,7 +25,7 @@ The blocks are processed by an execution layer client, like [op-geth].
 ## Quickstart
 
 ```bash
-just op-node
+just mc-node
 
 # Network selection:
 # - Join any of the pre-configured networks with the `--network` flag.
@@ -37,7 +37,7 @@ just op-node
 # - L2 engine API, to apply new blocks to
 # - P2P TCP port, to expose publicly, to retrieve and relay the latest L2 blocks
 # - P2P UDP port, to expose publicly, to discover other nodes to peer with
-# - RPC port, to serve RPC of the op-node
+# - RPC port, to serve RPC of the mc-node
 #
 # Other:
 # - Sync mode: how to interact with the execution-engine,
@@ -45,8 +45,8 @@ just op-node
 #   - consensus-layer (block by block sync)
 #   - execution-layer (e.g. snap-sync)
 #
-# Tip: every CLI flag has an env-var equivalent (run `op-node --help` for more information)
-./bin/op-node \
+# Tip: every CLI flag has an env-var equivalent (run `mc-node --help` for more information)
+./bin/mc-node \
   --network=op-sepolia \
   --l1=ws://localhost:8546 \
   --l1.beacon=http://localhost:4000 \
@@ -72,22 +72,22 @@ just op-node
 ### Build from source
 
 ```bash
-# from op-node dir:
-just op-node
+# from mc-node dir:
+just mc-node
 
-./bin/op-node --help
+./bin/mc-node --help
 ```
 
 ### Run from source
 
 ```bash
-# from op-node dir:
+# from mc-node dir:
 go run ./cmd --help
 ```
 
 ### Build docker image
 
-See `op-node` docker-bake target.
+See `mc-node` docker-bake target.
 
 ## Implementation overview
 
@@ -98,13 +98,13 @@ See `op-node` docker-bake target.
 
 ## Product
 
-The op-node **builds**, **relays** and **verifies** the canonical chain of blocks.
+The mc-node **builds**, **relays** and **verifies** the canonical chain of blocks.
 
-The op-node does not store critical data:
-the op-node can recover from any existing L2 chain pre-state
+The mc-node does not store critical data:
+the mc-node can recover from any existing L2 chain pre-state
 that is sufficiently synced such that available input data can complete the sync.
 
-The op-node **builds** blocks:
+The mc-node **builds** blocks:
 either from scratch as a sequencer, or from block-inputs (made available through L1) as verifier.
 
 The block **relay** is a happy-path: the P2P sync is optional, and does not affect the ability to verify.
@@ -118,7 +118,7 @@ The blocks are **verified**: only valid L2 blocks that can be reproduced from L1
 
 **Safely and reliably sync the canonical chain**
 
-The op-node implements the three core product features as following:
+The mc-node implements the three core product features as following:
 
 - Block **building**: extend the chain at a throughput rate and latency that is safe to relay and verify.
 - Block **relaying**: while keeping throughput high and latency low, prevent single points of failure.
@@ -131,7 +131,7 @@ and design-choices should aim to improve the trade-off.
 
 ### Vision
 
-The op-node is changing in two ways:
+The mc-node is changing in two ways:
 
 - [Reliability](#reliability): improve the reliability with improved processing, testing and syncing.
 - [Interoperability](#interoperability): cross-chain messaging support.
@@ -146,20 +146,20 @@ The op-node is changing in two ways:
 
 The OP Stack makes chains natively interoperable:
 messages between chains form safety dependencies, and verified asynchronously.
-Asynchronous verification entails that the op-node reorgs away a block
+Asynchronous verification entails that the mc-node reorgs away a block
 if and when the block is determined to be invalid.
 
-The [op-supervisor] specializes in this dependency verification work.
+The [mc-supervisor] specializes in this dependency verification work.
 
-The op-node encapsulates all the single-chain concerns:
-it prepares the local safety data-points (DA confirmation and block contents) for the op-supervisor.
+The mc-node encapsulates all the single-chain concerns:
+it prepares the local safety data-points (DA confirmation and block contents) for the mc-supervisor.
 
-The op-supervisor then verifies the cross-chain safety, and promotes the block safety level accordingly,
-which the op-node then follows.
+The mc-supervisor then verifies the cross-chain safety, and promotes the block safety level accordingly,
+which the mc-node then follows.
 
 See [Interop specs] and [Interop design-docs] for more information about interoperability.
 
-[op-supervisor]: ../op-supervisor/README.md
+[mc-supervisor]: ../mc-supervisor/README.md
 
 ### User stories
 
@@ -177,7 +177,7 @@ As _a proof dev_ I want _reusable state-transition code_ so that I _don't reimpl
 
 - Encapsulate the state-transition:
   - Use interfaces to abstract file-IO / concurrency / etc. away from state-transition logic.
-  - Ensure code-sharing with action-tests and op-program.
+  - Ensure code-sharing with action-tests and mc-program.
 - No critical database:
   - Persisting data is ok, but it should be recoverable from external data without too much work.
   - The best chain "sync" is no sync.
@@ -188,18 +188,18 @@ As _a proof dev_ I want _reusable state-transition code_ so that I _don't reimpl
 
 ## Failure modes
 
-This is a brief overview of what might fail, and how the op-node responds.
+This is a brief overview of what might fail, and how the mc-node responds.
 
 ### L1 downtime
 
-When the L1 data-source is temporarily unavailable the op-node `safe`/`finalized` progression halts.
+When the L1 data-source is temporarily unavailable the mc-node `safe`/`finalized` progression halts.
 Blocks may continue to sync through the happy-path if P2P connectivity is undisrupted.
 
 ### No batch confirmation
 
 As per the [rollup-node spec] the sequencing-window ensures that after a bounded period of L1 blocks
 the verifier will infer blocks, to ensure liveness of blocks with deposited transactions.
-The op-node will continue to process the happy-path in the mean time,
+The mc-node will continue to process the happy-path in the mean time,
 which may have to be reorged out if it does not match the blocks that is inferred after sequencing window expiry.
 
 ### L1 reorg
@@ -208,13 +208,13 @@ L1 reorgs are detected passively during traversal: upon traversal to block `N+1`
 if the next canonical block has a parent-hash that does not match the
 current block `N` we know the remote L1 chain view has diverged.
 
-When this happens, the op-node assumes the local view is wrong, and resets itself to follow that of the remote node,
+When this happens, the mc-node assumes the local view is wrong, and resets itself to follow that of the remote node,
 dropping any non-canonical blocks in the process.
 
 ### No L1 finality
 
 When L1 does not finalize for an extended period of time,
-the op-node is also unable to finalize the L2 chain for the same time.
+the mc-node is also unable to finalize the L2 chain for the same time.
 
 Note that the `safe` block in the execution-layer is bootstrapped from the `finalized` block:
 some verification work may repeat after a restart.
@@ -228,14 +228,14 @@ The `unsafe` part of the chain will no longer progress optimistically ahead of t
 
 The `safe` blocks will continue to be derived from L1 however, providing a higher-latency access to the latest chain.
 
-The op-node may pick back up the latest `unsafe` blocks after recovering its P2P connectivity,
+The mc-node may pick back up the latest `unsafe` blocks after recovering its P2P connectivity,
 and buffering `unsafe` blocks until the `safe` blocks progress meets the first known buffered `unsafe` block.
 
 ### Restarts and resyncing
 
 After a restart, or detection of missing chain data,
-the op-node dynamically determines what L1 data is required to continue, based on the syncing state of execution-engine.
-If the sync-state is far behind, the op-node may need archived blob data to sync from the original L1 inputs.
+the mc-node dynamically determines what L1 data is required to continue, based on the syncing state of execution-engine.
+If the sync-state is far behind, the mc-node may need archived blob data to sync from the original L1 inputs.
 
 A faster alternative may be to bootstrap through the execution-layer sync mode,
 where the execution-engine may perform an optimized long-range sync, such as snap-sync.
@@ -254,10 +254,10 @@ back in a normal state.
 
 <!-- describe testing methods and approach to test coverage -->
 
-- Unit tests: encapsulated functionality, fuzz tests, etc. in the op-node Go packages.
-- `op-e2e` action tests: in-progress Go testing, focused on the onchain aspects,
+- Unit tests: encapsulated functionality, fuzz tests, etc. in the mc-node Go packages.
+- `mc-e2e` action tests: in-progress Go testing, focused on the onchain aspects,
   e.g. state-transition edge-cases. This applies primarily to the derivation pipeline.
-- `op-e2e` system tests: in-process Go testing, focused on the offchain aspects of the op-node,
+- `mc-e2e` system tests: in-process Go testing, focused on the offchain aspects of the mc-node,
   e.g. background work, P2P integration, general service functionality.
 - Local devnet tests: full end to end testing, but set up on minimal resources.
 - Kurtosis tests: new automated devnet-like testing. Work in progress.

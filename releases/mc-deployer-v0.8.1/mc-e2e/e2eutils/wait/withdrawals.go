@@ -6,15 +6,15 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/crossdomain"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/mc-node/bindings"
-	bindingspreview "github.com/ethereum-optimism/optimism/mc-node/bindings/preview"
-	"github.com/ethereum-optimism/optimism/mc-node/withdrawals"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-chain-ops/crossdomain"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-node/bindings"
+	bindingspreview "github.com/mindchain/mind-chain/mc-node/bindings/preview"
+	"github.com/mindchain/mind-chain/mc-node/withdrawals"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 // ForGamePublished waits until a game is published on L1 for the given l2BlockNumber.

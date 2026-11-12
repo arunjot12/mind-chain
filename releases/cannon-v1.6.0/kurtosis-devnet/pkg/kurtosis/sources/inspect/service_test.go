@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
 )
 
 func TestInspectService(t *testing.T) {
@@ -38,8 +38,8 @@ func TestFileWriting(t *testing.T) {
 	inspectData := &InspectData{
 		FileArtifacts: []string{"genesis.json", "jwt.txt"},
 		UserServices: ServiceMap{
-			"op-node": &Service{
-				Labels: map[string]string{"app": "op-node"},
+			"mc-node": &Service{
+				Labels: map[string]string{"app": "mc-node"},
 				Ports:  PortMap{"rpc": &descriptors.PortInfo{Host: "127.0.0.1", Port: 8545}},
 			},
 		},
@@ -59,5 +59,5 @@ func TestFileWriting(t *testing.T) {
 	envContent, err := os.ReadFile(cfg.EnvironmentPath)
 	require.NoError(t, err)
 	assert.Contains(t, string(envContent), "genesis.json")
-	assert.Contains(t, string(envContent), "op-node")
+	assert.Contains(t, string(envContent), "mc-node")
 }

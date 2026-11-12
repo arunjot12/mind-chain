@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type InteropMessageMetrics interface {
@@ -34,10 +34,10 @@ type MetricCollector struct {
 	cancel context.CancelFunc
 
 	// filterObserver, when set, cross-checks the monitor's verdict against the
-	// op-interop-filter (read-only). nil disables the filter observer.
+	// mc-interop-filter (read-only). nil disables the filter observer.
 	filterObserver *FilterObserver
 
-	// supernodeObservers, when non-empty, observe each op-supernode (read-only):
+	// supernodeObservers, when non-empty, observe each mc-supernode (read-only):
 	// liveness, per-chain heads, and cross-safety violations.
 	supernodeObservers []*SupernodeObserver
 }
@@ -288,7 +288,7 @@ func (m *MetricCollector) CollectMetrics() {
 		m.filterObserver.PollFailsafe(m.ctx)
 	}
 
-	// Optional read-only observation of each op-supernode.
+	// Optional read-only observation of each mc-supernode.
 	for _, obs := range m.supernodeObservers {
 		obs.Observe(m.ctx, jobMap)
 	}

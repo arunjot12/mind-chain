@@ -3,7 +3,7 @@ package interop
 import (
 	"errors"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // ErrNotActive signals that ts is before interop activation. Callers compose

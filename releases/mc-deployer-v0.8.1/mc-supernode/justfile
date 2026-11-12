@@ -7,10 +7,10 @@ _LDFLAGSSTRING := "'" + trim(
     "-X main.Version=" + VERSION + " " + \
     "") + "'"
 
-BINARY := "./bin/op-supernode"
+BINARY := "./bin/mc-supernode"
 
-# Build op-supernode binary
-op-supernode: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
+# Build mc-supernode binary
+mc-supernode: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
 
 # Clean build artifacts
 clean:

@@ -6,9 +6,9 @@ package v3_0_0
 import (
 	"encoding/json"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
-	v200 "github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/upgrade/v2_0_0"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
+	v200 "github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade/v2_0_0"
 )
 
 type Upgrader struct {

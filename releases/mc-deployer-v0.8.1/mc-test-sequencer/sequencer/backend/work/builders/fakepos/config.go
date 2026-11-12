@@ -1,8 +1,8 @@
 package fakepos
 
 import (
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
 )
 
 type Config struct {

@@ -9,15 +9,15 @@ import (
 	"strings"
 
 	"github.com/BurntSushi/toml"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/prestate"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/registry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/cmd/check-prestate/types"
-	"github.com/ethereum-optimism/optimism/op-program/prestates"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/superchain"
 	"github.com/mattn/go-isatty"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/prestate"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/registry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/cmd/check-prestate/types"
+	"github.com/mindchain/mind-chain/mc-program/prestates"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 	"golang.org/x/exp/maps"
 )
 

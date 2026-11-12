@@ -1,4 +1,4 @@
-# op-interop-filter
+# mc-interop-filter
 
 A lightweight service that validates interop executing messages for op-geth or mc-reth transaction filtering.
 
@@ -9,8 +9,8 @@ Any reorg will trigger the failsafe which disables all interop transactions. If 
 ### Build from source
 
 ```bash
-just op-interop-filter
-./bin/op-interop-filter --help
+just mc-interop-filter
+./bin/mc-interop-filter --help
 ```
 
 ### Run from source
@@ -22,5 +22,5 @@ go run ./cmd --help
 ### Build docker image
 
 ```bash
-docker buildx bake op-interop-filter
+docker buildx bake mc-interop-filter
 ```

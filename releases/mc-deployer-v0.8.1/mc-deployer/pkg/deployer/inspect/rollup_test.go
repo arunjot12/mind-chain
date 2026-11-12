@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
 	"github.com/stretchr/testify/require"
 )
 

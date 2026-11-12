@@ -5,8 +5,8 @@ import (
 	"math"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-batcher/compressor"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-batcher/compressor"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 	"github.com/stretchr/testify/require"
 )
 

@@ -9,13 +9,13 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/crypto"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/crypto"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 )
 
 type PrestateVariant string
@@ -58,11 +58,11 @@ func applyCannonConfig(c *config.Config, rollupCfgs []*rollup.Config, l2Geneses 
 		return err
 	}
 	c.Cannon.VmBin = root + "cannon/bin/cannon"
-	c.Cannon.Server = root + "op-program/bin/op-program"
+	c.Cannon.Server = root + "mc-program/bin/mc-program"
 	if prestateVariant != "" {
-		c.CannonAbsolutePreState = root + "op-program/bin/prestate-" + string(prestateVariant) + ".bin.gz"
+		c.CannonAbsolutePreState = root + "mc-program/bin/prestate-" + string(prestateVariant) + ".bin.gz"
 	} else {
-		c.CannonAbsolutePreState = root + "op-program/bin/prestate.bin.gz"
+		c.CannonAbsolutePreState = root + "mc-program/bin/prestate.bin.gz"
 	}
 	c.Cannon.SnapshotFreq = 10_000_000
 
@@ -192,7 +192,7 @@ func applyCommonChallengerOpts(cfg *config.Config, options ...Option) error {
 	if cfg.Cannon.Server != "" {
 		_, err := os.Stat(cfg.Cannon.Server)
 		if err != nil {
-			return errors.New("op-program should be built. Make sure you've run make cannon-prestates")
+			return errors.New("mc-program should be built. Make sure you've run make cannon-prestates")
 		}
 	}
 	if cfg.CannonAbsolutePreState != "" {
@@ -206,13 +206,13 @@ func applyCommonChallengerOpts(cfg *config.Config, options ...Option) error {
 }
 
 // FindMonorepoRoot finds the relative path to the monorepo root
-// Different tests might be nested in subdirectories of the op-e2e dir.
+// Different tests might be nested in subdirectories of the mc-e2e dir.
 func findMonorepoRoot() (string, error) {
 	path := "./"
 	// Only search a limited number of directories
 	// Avoids infinite recursion if the root isn't found for some reason
 	for i := 0; i < 10; i++ {
-		_, err := os.Stat(path + "op-devstack")
+		_, err := os.Stat(path + "mc-devstack")
 		if errors.Is(err, os.ErrNotExist) {
 			path = path + "../"
 			continue

@@ -3,8 +3,8 @@ package flags
 import (
 	"github.com/urfave/cli/v2"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 )
 
 const EnvVarPrefix = "KURTOSIS_INSPECT"
@@ -43,7 +43,7 @@ var optionalFlags = []cli.Flag{
 var Flags []cli.Flag
 
 func init() {
-	// Add common op-service flags
+	// Add common mc-service flags
 	optionalFlags = append(optionalFlags, oplog.CLIFlags(EnvVarPrefix)...)
 
 	Flags = append(requiredFlags, optionalFlags...)

@@ -6,7 +6,7 @@ contents:
   packages:
     - ca-certificates-bundle
     - wolfi-baselayout
-    - op-test-sequencer@local
+    - mc-test-sequencer@local
     - busybox
     - apk-tools
 
@@ -26,9 +26,9 @@ accounts:
   run-as: 0
 
 # No entrypoint, bare-name cmd: matches the upstream image contract
-# (CMD ["op-test-sequencer"], resolved via PATH).
-cmd: op-test-sequencer
+# (CMD ["mc-test-sequencer"], resolved via PATH).
+cmd: mc-test-sequencer
 
 annotations:
   org.opencontainers.image.source: https://github.com/ethereum-optimism/optimism
-  org.opencontainers.image.title: op-test-sequencer
+  org.opencontainers.image.title: mc-test-sequencer

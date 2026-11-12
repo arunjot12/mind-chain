@@ -1,12 +1,12 @@
-# op-batcher
+# mc-batcher
 
-The `op-batcher` is responsible for ensuring data availability. See the [specs](https://specs.optimism.io/protocol/batcher.html).
+The `mc-batcher` is responsible for ensuring data availability. See the [specs](https://specs.optimism.io/protocol/batcher.html).
 
 ## Interactions & Dependencies
 
-The `op-batcher` works together with the [sequencer](../op-node/) (which it reads unsafe blocks from), the data availability layer (e.g. Layer 1 or an [Alt DA](../op-alt-da/) layer, which it posts data to), and the [derivation pipeline](../op-node/) (which reads the data from the DA layer and progresses the safe chain).
+The `mc-batcher` works together with the [sequencer](../mc-node/) (which it reads unsafe blocks from), the data availability layer (e.g. Layer 1 or an [Alt DA](../mc-alt-da/) layer, which it posts data to), and the [derivation pipeline](../mc-node/) (which reads the data from the DA layer and progresses the safe chain).
 
-It depends directly on some code shared with the derivation pipeline, namely the [`ChannelOut`](../op-node/rollup/derive/channel_out.go) implementation(s). It also depends directly on the shared [txmgr](../op-service/txmgr/) module.
+It depends directly on some code shared with the derivation pipeline, namely the [`ChannelOut`](../mc-node/rollup/derive/channel_out.go) implementation(s). It also depends directly on the shared [txmgr](../mc-service/txmgr/) module.
 
 ## Testing
 
@@ -16,7 +16,7 @@ The batcher has a suite of unit test which can be triggered by running
 go test ./...
 ```
 
-from this directory. There are also end-to-end tests in [`op-e2e`](../op-e2e/) which integrate the batcher.
+from this directory. There are also end-to-end tests in [`mc-e2e`](../mc-e2e/) which integrate the batcher.
 
 ## Architecture
 
@@ -168,7 +168,7 @@ The batcher tries to ensure that batches are posted at a minimum frequency speci
 
 ## Known issues and future work
 
-Link to [open issues with the `op-batcher` tag](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aopen+is%3Aissue+label%3AA-op-batcher).
+Link to [open issues with the `mc-batcher` tag](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aopen+is%3Aissue+label%3AA-op-batcher).
 
 The batcher launches L1 transactions in parallel so that it can achieve higher throughput, particularly in situations where there is a large backlog of data which needs to be posted. Sometimes, transactions can get stuck in the L1 mempool. The batcher does have functionality to clear these stuck transactions, but it is not completely reliable.
 

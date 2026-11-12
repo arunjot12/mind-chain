@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	opnodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/op-supernode/flags"
+	opnodeflags "github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-supernode/flags"
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
 )
@@ -134,7 +134,7 @@ func TestWithNamespacedP2P_NamespacesPrivPathByDefault(t *testing.T) {
 
 func TestWithNamespacedP2P_HonoursPerChainPrivPath(t *testing.T) {
 	privName := fmt.Sprintf("%s%d.%s", flags.VNFlagNamePrefix, testChainID, opnodeflags.P2PPrivPathName)
-	keyPath := fmt.Sprintf("/etc/op-supernode/p2p-node-key-%d.txt", testChainID)
+	keyPath := fmt.Sprintf("/etc/mc-supernode/p2p-node-key-%d.txt", testChainID)
 
 	flagSet := append(portFlags(), &cli.StringFlag{Name: privName})
 	ctx := newCtx(t, flagSet, []string{"--" + privName + "=" + keyPath})

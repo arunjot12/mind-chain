@@ -36,7 +36,6 @@ Use the [Developer Quick Start](./CONTRIBUTING.md#development-quick-start) to in
 
 <pre>
 ├── <a href="./cannon">cannon</a>: Onchain MIPS instruction emulator for fault proofs
-├── <a href="./docs">docs</a>: Developer documentation
 ├── <a href="./mindchain">mindchain</a>: Mind Chain version pins and helper scripts
 ├── <a href="./mc-acceptance-tests">mc-acceptance-tests</a>: Acceptance tests
 ├── <a href="./mc-alt-da">mc-alt-da</a>: Alternative Data Availability mode (beta)

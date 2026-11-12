@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/merkle"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/merkle"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/types"
 )
 
 // StateMatrix implements a stateful keccak sponge with the ability to create state commitments after each permutation

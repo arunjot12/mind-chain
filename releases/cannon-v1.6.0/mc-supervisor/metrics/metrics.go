@@ -1,10 +1,10 @@
 package metrics
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -90,7 +90,7 @@ func NewMetrics(procName string) *Metrics {
 		up: factory.NewGauge(prometheus.GaugeOpts{
 			Namespace: ns,
 			Name:      "up",
-			Help:      "1 if the op-supervisor has finished starting up",
+			Help:      "1 if the mc-supervisor has finished starting up",
 		}),
 
 		CacheSizeVec: factory.NewGaugeVec(prometheus.GaugeOpts{
@@ -154,7 +154,7 @@ func (m *Metrics) Document() []opmetrics.DocumentedMetric {
 	return m.factory.Document()
 }
 
-// RecordInfo sets a pseudo-metric that contains versioning and config info for the op-supervisor.
+// RecordInfo sets a pseudo-metric that contains versioning and config info for the mc-supervisor.
 func (m *Metrics) RecordInfo(version string) {
 	m.info.WithLabelValues(version).Set(1)
 }

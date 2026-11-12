@@ -9,7 +9,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/versions"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/versions"
 	"github.com/urfave/cli/v2"
 )
 

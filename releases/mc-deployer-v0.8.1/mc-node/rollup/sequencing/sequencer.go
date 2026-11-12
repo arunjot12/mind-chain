@@ -13,12 +13,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/conductor"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/conductor"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
 )
 
 // defaultSealingDuration defines the expected time it takes to seal the block
@@ -934,7 +934,7 @@ func (d *Sequencer) Init(ctx context.Context, active bool) error {
 func (d *Sequencer) forceStart() error {
 	if d.latestHead == (eth.L2BlockRef{}) {
 		// This happens if sequencing is activated on mc-node startup.
-		// The op-conductor check and choice of sequencing with this pre-state already happened before mc-node startup.
+		// The mc-conductor check and choice of sequencing with this pre-state already happened before mc-node startup.
 		d.log.Info("Starting sequencing, without known pre-state")
 		d.asyncGossip.Clear() // if we are starting from an unknown pre-state, just clear gossip out of caution.
 	} else {

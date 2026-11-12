@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/version"
-	"github.com/ethereum-optimism/optimism/op-fetcher/pkg/fetcher/fetch"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/version"
+	"github.com/mindchain/mind-chain/mc-fetcher/pkg/fetcher/fetch"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 	"github.com/urfave/cli/v2"
 )
 
@@ -22,7 +22,7 @@ var VersionWithMeta = opservice.FormatVersion(version.Version, GitCommit, GitDat
 func main() {
 	app := cli.NewApp()
 	app.Version = VersionWithMeta
-	app.Name = "op-fetcher"
+	app.Name = "mc-fetcher"
 	app.Usage = "tool to fetch OP Chain config info from onchain"
 	app.Flags = cliapp.ProtectFlags(fetch.GlobalFlags)
 	app.Commands = []*cli.Command{

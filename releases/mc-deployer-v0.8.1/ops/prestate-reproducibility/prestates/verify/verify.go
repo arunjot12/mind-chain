@@ -7,7 +7,7 @@ import (
 	"os"
 	"slices"
 
-	"github.com/ethereum-optimism/optimism/ops/prestate-reproducibility/prestates"
+	"github.com/mindchain/mind-chain/ops/prestate-reproducibility/prestates"
 )
 
 func main() {

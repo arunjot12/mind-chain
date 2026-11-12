@@ -3,12 +3,12 @@ package bpo2
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/fusaka"
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/jovian/bpo2/joviantest"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
 	"github.com/ethereum/go-ethereum/params/forks"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/fusaka"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/jovian/bpo2/joviantest"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 )
 
 func setupBPO2(t devtest.T) *presets.Minimal {

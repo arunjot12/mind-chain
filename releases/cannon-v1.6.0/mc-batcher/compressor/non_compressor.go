@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"compress/zlib"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 )
 
 type NonCompressor struct {

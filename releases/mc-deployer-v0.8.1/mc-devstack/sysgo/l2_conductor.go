@@ -1,8 +1,8 @@
 package sysgo
 
 import (
-	opconductor "github.com/ethereum-optimism/optimism/op-conductor/conductor"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	opconductor "github.com/mindchain/mind-chain/mc-conductor/conductor"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type Conductor struct {

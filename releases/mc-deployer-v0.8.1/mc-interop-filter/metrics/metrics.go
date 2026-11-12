@@ -5,7 +5,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 const Namespace = "op_interop_filter"

@@ -1,9 +1,9 @@
 package stack
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity/interop"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity/interop"
 )
 
 type Supernode interface {
@@ -14,7 +14,7 @@ type Supernode interface {
 }
 
 // SupernodeTestControl is the integration-test surface on a running
-// supernode. See op-supernode/supernode/activity/interop for the methods
+// supernode. See mc-supernode/supernode/activity/interop for the methods
 // available on the InteropActivity pointer.
 type SupernodeTestControl interface {
 	// InteropActivity returns the current interop activity, or nil if the

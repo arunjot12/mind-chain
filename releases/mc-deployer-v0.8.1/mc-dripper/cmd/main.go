@@ -4,18 +4,18 @@ import (
 	"context"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-dripper/dripper"
-	"github.com/ethereum-optimism/optimism/op-dripper/flags"
-	"github.com/ethereum-optimism/optimism/op-dripper/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-dripper/dripper"
+	"github.com/mindchain/mind-chain/mc-dripper/flags"
+	"github.com/mindchain/mind-chain/mc-dripper/metrics"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
 )
 
 var (
@@ -30,7 +30,7 @@ func main() {
 	app := cli.NewApp()
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-dripper"
+	app.Name = "mc-dripper"
 	app.Usage = "Drippie Executor"
 	app.Description = "Service for executing Drippie drips"
 	app.Action = cliapp.LifecycleCmd(dripper.Main(Version))

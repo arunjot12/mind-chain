@@ -11,7 +11,7 @@ import (
 var (
 	flagAppRoot    = flag.String("app-root", "/app", "Root directory for the application")
 	flagConfigsDir = flag.String("configs-dir", "chainconfig/configs", "Directory for config files (relative to build-dir)")
-	flagBuildDir   = flag.String("build-dir", "op-program", "Directory where the build command will be executed (relative to app-root)")
+	flagBuildDir   = flag.String("build-dir", "mc-program", "Directory where the build command will be executed (relative to app-root)")
 	flagBuildCmd   = flag.String("build-cmd", "just -f repro.justfile build-current", "Build command to execute")
 	flagPort       = flag.Int("port", 8080, "Port to listen on")
 )

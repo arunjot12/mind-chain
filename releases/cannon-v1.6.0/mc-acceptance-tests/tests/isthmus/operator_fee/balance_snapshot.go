@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -1,9 +1,9 @@
 package split
 
 import (
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 )
 
 func CreateLocalContext(pre types.Claim, post types.Claim) common.Hash {

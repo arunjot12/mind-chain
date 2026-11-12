@@ -10,10 +10,10 @@ import (
 
 	log "github.com/ethereum/go-ethereum/log"
 
-	p2p "github.com/ethereum-optimism/optimism/mc-node/p2p"
-	p2pMocks "github.com/ethereum-optimism/optimism/mc-node/p2p/mocks"
-	"github.com/ethereum-optimism/optimism/mc-node/p2p/store"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	p2p "github.com/mindchain/mind-chain/mc-node/p2p"
+	p2pMocks "github.com/mindchain/mind-chain/mc-node/p2p/mocks"
+	"github.com/mindchain/mind-chain/mc-node/p2p/store"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 // PeerScorerTestSuite tests peer parameterization.

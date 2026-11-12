@@ -7,12 +7,12 @@ import (
 	"math/big"
 	"math/rand/v2"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/super"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/super"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 func createGameInputs(ctx context.Context, log log.Logger, rollupClient *sources.RollupClient, supervisorClient *sources.SupervisorClient, typeName string, traceType types.TraceType) (utils.LocalGameInputs, error) {
@@ -39,8 +39,8 @@ func createGameInputsSingle(ctx context.Context, log log.Logger, client *sources
 
 	l1Head := status.FinalizedL1
 	if status.FinalizedL1.Number > status.CurrentL1.Number {
-		// Restrict the L1 head to a block that has actually been processed by op-node.
-		// This only matters if op-node is behind and hasn't processed all finalized L1 blocks yet.
+		// Restrict the L1 head to a block that has actually been processed by mc-node.
+		// This only matters if mc-node is behind and hasn't processed all finalized L1 blocks yet.
 		l1Head = status.CurrentL1
 		log.Info("Node has not completed syncing finalized L1 block, using CurrentL1 instead", "type", typeName)
 	} else if status.FinalizedL1.Number == 0 {

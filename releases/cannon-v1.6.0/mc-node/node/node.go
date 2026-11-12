@@ -16,29 +16,29 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/op-node/config"
-	"github.com/ethereum-optimism/optimism/op-node/metrics"
-	"github.com/ethereum-optimism/optimism/op-node/node/runcfg"
-	"github.com/ethereum-optimism/optimism/op-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-node/node/tracer"
-	"github.com/ethereum-optimism/optimism/op-node/p2p"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/conductor"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/driver"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/interop/indexing"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sequencing"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/client"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/retry"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/node/runcfg"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-node/node/tracer"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/conductor"
+	"github.com/mindchain/mind-chain/mc-node/rollup/driver"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop"
+	"github.com/mindchain/mind-chain/mc-node/rollup/interop/indexing"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sequencing"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/client"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/retry"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 var ErrAlreadyClosed = errors.New("node is already closed")
@@ -356,7 +356,7 @@ func (n *OpNode) initL1BeaconAPI(ctx context.Context, cfg *config.Config) error 
 	}
 
 	// We always initialize a client. We will get an error on requests if the client does not work.
-	// This way the op-node can continue non-L1 functionality when the user chooses to ignore the Beacon API requirement.
+	// This way the mc-node can continue non-L1 functionality when the user chooses to ignore the Beacon API requirement.
 	beaconClient, fallbacks, err := cfg.Beacon.Setup(ctx, n.log)
 	if err != nil {
 		return fmt.Errorf("failed to setup L1 Beacon API client: %w", err)
@@ -820,7 +820,7 @@ func (n *OpNode) InteropRPC() (rpcEndpoint string, jwtSecret eth.Bytes32) {
 func (n *OpNode) InteropRPCPort() (int, error) {
 	m, ok := n.interopSys.(*indexing.IndexingMode)
 	if !ok {
-		return 0, fmt.Errorf("failed to fetch interop port for op-node")
+		return 0, fmt.Errorf("failed to fetch interop port for mc-node")
 	}
 	return m.WSPort()
 }

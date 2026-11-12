@@ -36,7 +36,7 @@ From a branch based on the updated `develop`:
 just nut-snapshot-for <fork>
 ```
 
-This copies `current-upgrade-bundle.json` to `op-core/nuts/bundles/<fork>_nut_bundle.json` and updates `fork_lock.toml` with the sha256 hash and the merge-base commit with `origin/develop`.
+This copies `current-upgrade-bundle.json` to `mc-core/nuts/bundles/<fork>_nut_bundle.json` and updates `fork_lock.toml` with the sha256 hash and the merge-base commit with `origin/develop`.
 
 **Why merge-base, not HEAD?** The recorded commit is the [merge-base](https://git-scm.com/docs/git-merge-base) with `develop`. By ensuring that the recorded commit is a recent ancestor of `develop`, we can ensure that the reference will survives a squash-merge and persist in the history of the `develop` branch. This is why PR 1 must be merged first.
 
@@ -46,7 +46,7 @@ Then generate this fork's **pre-fork state** and commit it alongside the lock, s
 just nut-prefork-state-for <fork>
 ```
 
-This writes `op-core/nuts/state/<fork>_state.json` (= the previous fork's state with this fork's bundle applied), which `check-nut-locks` requires. See [`op-core/nuts/state/README.md`](state/README.md) for details.
+This writes `mc-core/nuts/state/<fork>_state.json` (= the previous fork's state with this fork's bundle applied), which `check-nut-locks` requires. See [`mc-core/nuts/state/README.md`](state/README.md) for details.
 
 ### Verifying a bundle
 
@@ -62,14 +62,14 @@ Requires `forge` for the provenance check (step 2).
 
 ### CI checks
 
-- **`check-nut-locks`** — Verifies all bundle hashes match their lock entries, all entries have a commit, every `*_nut_bundle.json` file has a corresponding lock entry, and each locked fork has a committed pre-fork state (`op-core/nuts/state/<fork>_state.json`). Runs in CI on every PR.
-- **`check-nut-prefork-states`** — Regenerates every committed non-seed `op-core/nuts/state/<fork>_state.json` file and fails if any committed state snapshot drifts.
+- **`check-nut-locks`** — Verifies all bundle hashes match their lock entries, all entries have a commit, every `*_nut_bundle.json` file has a corresponding lock entry, and each locked fork has a committed pre-fork state (`mc-core/nuts/state/<fork>_state.json`). Runs in CI on every PR.
+- **`check-nut-prefork-states`** — Regenerates every committed non-seed `mc-core/nuts/state/<fork>_state.json` file and fails if any committed state snapshot drifts.
 
 ## fork_lock.toml schema
 
 ```toml
 [<fork-name>]
-bundle = "op-core/nuts/bundles/<fork>_nut_bundle.json"  # repo-relative path
+bundle = "mc-core/nuts/bundles/<fork>_nut_bundle.json"  # repo-relative path
 hash = "sha256:<hex>"                                      # sha256 of bundle contents
 commit = "<full-sha>"                                      # commit that produced the bundle
 ```

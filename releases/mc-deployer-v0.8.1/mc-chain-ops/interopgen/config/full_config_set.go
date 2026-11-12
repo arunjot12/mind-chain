@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	coredepset "github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	coredepset "github.com/mindchain/mind-chain/mc-core/interop/depset"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type FullConfigSet interface {

@@ -13,7 +13,7 @@ Generates an output root for a given block using only the execution client RPC e
 ## Usage:
 
 ```bash
-go run op-chain-ops/cmd/check-output-root/ --l2-eth-rpc $RPC_URL --block-num $BLOCK_NUM
+go run mc-chain-ops/cmd/check-output-root/ --l2-eth-rpc $RPC_URL --block-num $BLOCK_NUM
 ```
 
 Output:

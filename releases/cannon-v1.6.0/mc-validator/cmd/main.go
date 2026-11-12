@@ -5,10 +5,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
 
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-validator/pkg/service"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-validator/pkg/service"
 	"github.com/urfave/cli/v2"
 )
 
@@ -23,7 +23,7 @@ var (
 func main() {
 	app := cli.NewApp()
 	app.Version = Version
-	app.Name = "op-validator"
+	app.Name = "mc-validator"
 	app.Usage = "Optimism Validator Service"
 	app.Description = "CLI to validate Optimism L2 deployments"
 	app.Flags = oplog.CLIFlags(EnvVarPrefix)

@@ -8,11 +8,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var (
@@ -62,7 +62,7 @@ func (j *JSONRollupConfigSetLoader) LoadRollupConfigSet(ctx context.Context) (Ro
 	return &out, nil
 }
 
-// JSONRollupConfigsLoader loads a set of op-node rollup.json configs into
+// JSONRollupConfigsLoader loads a set of mc-node rollup.json configs into
 // a supervisor rollup config set.
 // The [PathPattern] is a glob pattern that matches the rollup.json files, e.g.
 // "configs/rollup-*.json". See https://pkg.go.dev/path/filepath#Glob for more details.

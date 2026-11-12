@@ -4,15 +4,15 @@ import (
 	"context"
 	"math/big"
 
-	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-service/client"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
 )
 
 type ChainID interface {
@@ -46,7 +46,7 @@ type EthHeader interface {
 
 // EthL2BlockTxs partitions an L2 block's transactions by class: the OP Stack
 // synthetic transactions (0x7E deposits, 0x7D post-exec) are routed to
-// op-core/types structs, and the remainder — standard Ethereum transactions —
+// mc-core/types structs, and the remainder — standard Ethereum transactions —
 // decode as go-ethereum types on any block. Use these instead of InfoAndTxsBy*
 // for L2 blocks, whose full transaction lists upstream go-ethereum cannot
 // decode.

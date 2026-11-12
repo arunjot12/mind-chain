@@ -3,14 +3,14 @@ package manual
 import (
 	"testing"
 
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
 	"github.com/ethereum/go-ethereum"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 func TestVerifierManualSync(gt *testing.T) {
@@ -18,8 +18,8 @@ func TestVerifierManualSync(gt *testing.T) {
 	// Example error using mc-reth:
 	//
 	// assertions.go:387:             ERROR[03-31|10:02:09.740]
-	// assertions.go:387:             	Error Trace:	/optimism/op-devstack/dsl/l2_el.go:64
-	// assertions.go:387:             	            				/optimism/op-acceptance-tests/tests/sync/manual/sync_test.go:53
+	// assertions.go:387:             	Error Trace:	/optimism/mc-devstack/dsl/l2_el.go:64
+	// assertions.go:387:             	            				/optimism/mc-acceptance-tests/tests/sync/manual/sync_test.go:53
 	// assertions.go:387:             	Error:      	Received unexpected error:
 	// assertions.go:387:             	            	failed to determine block-hash of hash 0x2f6324eaff3942802eff5ddd47872544aa02182c222bf90042d5f715dfa72308, could not get payload: not found
 	// assertions.go:387:             	Test:       	TestVerifierManualSync

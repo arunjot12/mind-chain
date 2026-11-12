@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
 )
 
 // Returns a DepositEvent customized on the basis of the id parameter.
@@ -39,7 +39,7 @@ func GenerateDeposit(sourceHash common.Hash, rng *rand.Rand) *optypes.DepositTx 
 	return dep
 }
 
-// TxFromDeposit wraps an op-core deposit tx in a go-ethereum *types.Transaction for
+// TxFromDeposit wraps an mc-core deposit tx in a go-ethereum *types.Transaction for
 // test paths that feed deposits into block or tx-list builders still typed on
 // *types.Transaction. Callers that only need the deposit's hash use
 // (*optypes.DepositTx).Hash() instead. It constructs op-geth's deposit tx directly

@@ -7,14 +7,14 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/consensus"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-conductor/consensus"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 var ErrNotLeader = errors.New("refusing to proxy request to non-leader sequencer")
 
-// API defines the interface for the op-conductor API.
+// API defines the interface for the mc-conductor API.
 type API interface {
 	// OverrideLeader is used to override or clear override for the leader status.
 	// It does not impact the actual raft consensus leadership status. It is supposed to be used when the cluster is unhealthy
@@ -24,15 +24,15 @@ type API interface {
 	OverrideLeader(ctx context.Context, override bool) error
 	// LeaderOverridden returns true if the leader status is overridden.
 	LeaderOverridden(ctx context.Context) (bool, error)
-	// Pause pauses op-conductor.
+	// Pause pauses mc-conductor.
 	Pause(ctx context.Context) error
-	// Resume resumes op-conductor.
+	// Resume resumes mc-conductor.
 	Resume(ctx context.Context) error
-	// Stop stops op-conductor.
+	// Stop stops mc-conductor.
 	Stop(ctx context.Context) error
-	// Paused returns true if op-conductor is paused.
+	// Paused returns true if mc-conductor is paused.
 	Paused(ctx context.Context) (bool, error)
-	// Stopped returns true if op-conductor is stopped.
+	// Stopped returns true if mc-conductor is stopped.
 	Stopped(ctx context.Context) (bool, error)
 	// SequencerHealthy returns true if the sequencer is healthy.
 	SequencerHealthy(ctx context.Context) (bool, error)
@@ -58,7 +58,7 @@ type API interface {
 	ClusterMembership(ctx context.Context) (*consensus.ClusterMembership, error)
 
 	// APIs called by mc-node
-	// Active returns true if op-conductor is active (not paused or stopped).
+	// Active returns true if mc-conductor is active (not paused or stopped).
 	Active(ctx context.Context) (bool, error)
 	// CommitUnsafePayload commits an unsafe payload (latest head) to the consensus layer.
 	CommitUnsafePayload(ctx context.Context, payload *eth.ExecutionPayloadEnvelope) error

@@ -3,8 +3,8 @@ package el
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/services"
 	"github.com/ethereum/go-ethereum/core"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/services"
 	"github.com/stretchr/testify/require"
 )
 

@@ -1,6 +1,6 @@
-# op-preimage
+# mc-preimage
 
-`op-preimage` offers simple Go bindings to interact as client or server over the Pre-image Oracle ABI.
+`mc-preimage` offers simple Go bindings to interact as client or server over the Pre-image Oracle ABI.
 
 Read more about the Preimage Oracle in the [specs](https://github.com/ethereum-optimism/specs/blob/main/specs/fault-proof/index.md#pre-image-oracle).
 

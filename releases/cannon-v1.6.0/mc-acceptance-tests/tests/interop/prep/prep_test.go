@@ -3,13 +3,13 @@ package msg
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-devstack/presets"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-devstack/presets"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
-// TestUnscheduledInterop runs against an interop system (i.e. op-nodes are managed by op-supervisor),
+// TestUnscheduledInterop runs against an interop system (i.e. op-nodes are managed by mc-supervisor),
 // before interop is scheduled with an actual hardfork time.
 // And then confirms we can finalize the chains.
 func TestUnscheduledInterop(gt *testing.T) {

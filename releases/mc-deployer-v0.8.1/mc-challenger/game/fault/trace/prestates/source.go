@@ -3,7 +3,7 @@ package prestates
 import (
 	"net/url"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
 )
 
 func NewPrestateSource(baseURL *url.URL, path string, localDir string, stateConverter vm.StateConverter) PrestateSource {

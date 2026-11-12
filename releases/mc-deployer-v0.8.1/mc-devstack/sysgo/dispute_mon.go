@@ -5,13 +5,13 @@ import (
 
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	disputeMon "github.com/ethereum-optimism/optimism/op-dispute-mon"
-	disputeMonConfig "github.com/ethereum-optimism/optimism/op-dispute-mon/config"
-	disputeMonService "github.com/ethereum-optimism/optimism/op-dispute-mon/mon"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	disputeMon "github.com/mindchain/mind-chain/mc-dispute-mon"
+	disputeMonConfig "github.com/mindchain/mind-chain/mc-dispute-mon/config"
+	disputeMonService "github.com/mindchain/mind-chain/mc-dispute-mon/mon"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 type DisputeMonConfig struct {
@@ -57,7 +57,7 @@ func StartDisputeMon(t devtest.T, input DisputeMonConfig) *DisputeMonRuntime {
 		serviceOptions = append(serviceOptions, disputeMonService.WithClock(input.Clock))
 	}
 
-	logger := t.Logger().New("component", "op-dispute-mon")
+	logger := t.Logger().New("component", "mc-dispute-mon")
 	service, err := disputeMon.Main(t.Ctx(), logger, &cfg, serviceOptions...)
 	require.NoError(err, "create dispute monitor service")
 	metricsAddr := service.MetricsAddr()

@@ -9,12 +9,12 @@ import (
 	"os"
 	"os/exec"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	cl "github.com/ethereum-optimism/optimism/op-program/client"
-	"github.com/ethereum-optimism/optimism/op-program/host/config"
-	"github.com/ethereum-optimism/optimism/op-program/host/kvstore"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	cl "github.com/mindchain/mind-chain/mc-program/client"
+	"github.com/mindchain/mind-chain/mc-program/host/config"
+	"github.com/mindchain/mind-chain/mc-program/host/kvstore"
 )
 
 type Prefetcher interface {

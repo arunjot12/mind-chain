@@ -5,9 +5,9 @@ import (
 	"net"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-service/client"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-service/client"
 	"golang.org/x/sync/semaphore"
 )
 

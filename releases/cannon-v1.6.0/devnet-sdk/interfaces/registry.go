@@ -3,8 +3,8 @@ package interfaces
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/types"
 	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/mindchain/mind-chain/devnet-sdk/types"
 )
 
 // ErrContractNotFound indicates that a contract is not available at the requested address

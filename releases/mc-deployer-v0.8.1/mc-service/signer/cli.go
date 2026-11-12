@@ -7,9 +7,9 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
-	optls "github.com/ethereum-optimism/optimism/op-service/tls"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
+	optls "github.com/mindchain/mind-chain/mc-service/tls"
 )
 
 const (

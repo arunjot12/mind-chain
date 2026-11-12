@@ -3,7 +3,7 @@ package activity
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // Activity is an open interface to collect pluggable behaviors which satisfy sub-activitiy interfaces.

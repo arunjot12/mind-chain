@@ -1,7 +1,7 @@
 # check-prestate
 
 The `check-prestate` tool can be used to generate a status report for an absolute prestate hash.
-It outputs JSON to stdout that contains useful information like its op-program version tag and commit of the monorepo,
+It outputs JSON to stdout that contains useful information like its mc-program version tag and commit of the monorepo,
 its type (cannon32/64), and the underlying op-geth and superchain-registry commits.
 It then also checks for each specified chain if the included chain configuration has changed
 compared to the latest changes in the superchain-registry.

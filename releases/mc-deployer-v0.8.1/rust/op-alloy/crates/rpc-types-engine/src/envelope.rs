@@ -339,7 +339,7 @@ mod tests {
 
     #[test]
     fn test_try_into_checked_block() {
-        // Pin hashes produced by op-service's independent ExecutionPayloadEnvelope.CheckBlockHash.
+        // Pin hashes produced by mc-service's independent ExecutionPayloadEnvelope.CheckBlockHash.
         // The V3 case uses a present zero beacon root to verify that presence is preserved.
         let v1_hash = b256!("55e9427d0f33b1e09e76c229aa4d685336ebc151a26820914652439a69e46791");
         let v2_hash = b256!("de05d55fdc91f15fc85cbf222ab05a586a3b7b6afd1a7abb7f353d3522dfff15");

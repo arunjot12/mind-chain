@@ -9,18 +9,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/op-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/transactions"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/wait"
-	"github.com/ethereum-optimism/optimism/op-service/errutil"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	gethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/transactions"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/wait"
+	"github.com/mindchain/mind-chain/mc-service/errutil"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 	"github.com/stretchr/testify/require"
 )
 
@@ -432,7 +432,7 @@ func WithoutWaitingForStep() DefendClaimOpt {
 }
 
 // SupportClaim uses the supplied Mover to perform moves in an attempt to support the supplied claim.
-// It is assumed that the specified claim is valid and that an honest op-challenger is already running.
+// It is assumed that the specified claim is valid and that an honest mc-challenger is already running.
 // When the game has reached the maximum depth it uses the specified stepper to counter the leaf claim.
 func (g *SplitGameHelper) SupportClaim(ctx context.Context, claim *ClaimHelper, performMove Mover, attemptStep Stepper) {
 	g.T.Logf("Supporting claim %v at depth %v", claim.Index, claim.Depth())
@@ -454,7 +454,7 @@ func (g *SplitGameHelper) SupportClaim(ctx context.Context, claim *ClaimHelper, 
 }
 
 // DefendClaim uses the supplied Mover to perform moves in an attempt to defend the supplied claim.
-// It is assumed that the specified claim is invalid and that an honest op-challenger is already running.
+// It is assumed that the specified claim is invalid and that an honest mc-challenger is already running.
 // When the game has reached the maximum depth it waits for the honest challenger to counter the leaf claim with step.
 // Returns the final leaf claim
 func (g *SplitGameHelper) DefendClaim(ctx context.Context, claim *ClaimHelper, performMove Mover, Opts ...DefendClaimOpt) *ClaimHelper {
@@ -480,7 +480,7 @@ func (g *SplitGameHelper) DefendClaim(ctx context.Context, claim *ClaimHelper, p
 }
 
 // ChallengeClaim uses the supplied functions to perform moves and steps in an attempt to challenge the supplied claim.
-// It is assumed that the claim being disputed is valid and that an honest op-challenger is already running.
+// It is assumed that the claim being disputed is valid and that an honest mc-challenger is already running.
 // When the game has reached the maximum depth it calls the Stepper to attempt to counter the leaf claim.
 // Since the output root is valid, it should not be possible for the Stepper to call step successfully.
 func (g *SplitGameHelper) ChallengeClaim(ctx context.Context, claim *ClaimHelper, performMove Mover, attemptStep Stepper) {

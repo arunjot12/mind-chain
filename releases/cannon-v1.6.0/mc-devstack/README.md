@@ -1,4 +1,4 @@
-# op-devstack
+# mc-devstack
 
 Devstack provides a flexible test-frontend, optimized for integration and network acceptance testing.
 
@@ -57,11 +57,11 @@ Available components:
   - `L1CLNode`: L1 consensus-layer node. A full beacon node or a mock consensus replacement for testing.
 - `L2Network`: a L2 chain configuration and registered L2 components
   - `L2ELNode`: L2 execution-engine, like op-geth or op-reth
-  - `L2CLNode`: op-node service, or equivalent
-  - `L2Batcher`: op-batcher, or equivalent
-  - `L2Proposer`: op-proposer, or equivalent
-  - `L2Challenger`: op-challenger, or equivalent
-- `Supervisor`: op-supervisor service, or equivalent
+  - `L2CLNode`: mc-node service, or equivalent
+  - `L2Batcher`: mc-batcher, or equivalent
+  - `L2Proposer`: mc-proposer, or equivalent
+  - `L2Challenger`: mc-challenger, or equivalent
+- `Supervisor`: mc-supervisor service, or equivalent
 - `Faucet`: util to fund eth to test accounts
 
 ### DSL-only components
@@ -133,7 +133,7 @@ and returns a typed output that the test then may use.
   - The test-handle is very minimal, so that tooling can implement it, and is only made accessible for internal sanity-check assertions.
 - Option pattern for each type, taking the interface, so that the system can be composed by external packages, eg:
   - Kurtosis
-  - System like op-e2e
+  - System like mc-e2e
   - Action-test
 - Implementations should take `client.RPC` (or equivalent), not raw endpoints. Dialing is best done by the system composer, which can customize retries, in-process RPC pipes, lazy-dialing, etc. as needed.
 - The system composer is responsible for tracking raw RPC URLs. These are not portable, and would expose too much low-level detail in the System interface.
@@ -160,4 +160,4 @@ Rust stack env vars:
 - `OP_RETH_EXEC_PATH=/home/USERHERE/projects/reth/target/release/op-reth` to select the op-reth executable to run
 
 Other useful env vars:
-- `DISABLE_OP_E2E_LEGACY=true` to disable the op-e2e package from loading build-artifacts that are not used by devstack.
+- `DISABLE_OP_E2E_LEGACY=true` to disable the mc-e2e package from loading build-artifacts that are not used by devstack.

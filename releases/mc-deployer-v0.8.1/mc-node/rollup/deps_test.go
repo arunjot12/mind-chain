@@ -3,10 +3,10 @@ package rollup
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/testutils/depguard"
+	"github.com/mindchain/mind-chain/mc-service/testutils/depguard"
 )
 
-// TestNoSuperchainImport keeps mc-node/rollup decoupled from op-core/superchain.
+// TestNoSuperchainImport keeps mc-node/rollup decoupled from mc-core/superchain.
 // That package embeds the multi-megabyte superchain config bundle, so anything
 // in its build closure must generate the bundle before it compiles. mc-node/rollup
 // is imported by dozens of packages that only need its types, so it must stay
@@ -16,5 +16,5 @@ import (
 // through an intermediate package.
 func TestNoSuperchainImport(t *testing.T) {
 	depguard.RequireNoTransitiveImport(t, ".",
-		"github.com/ethereum-optimism/optimism/op-core/superchain")
+		"github.com/mindchain/mind-chain/mc-core/superchain")
 }

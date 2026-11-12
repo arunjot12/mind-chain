@@ -12,7 +12,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/ethereum-optimism/optimism/op-service/testreq"
+	"github.com/mindchain/mind-chain/mc-service/testreq"
 )
 
 // P is used by the preset package and system backends as testing interface, to host package-wide resources.

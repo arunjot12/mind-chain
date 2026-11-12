@@ -5,9 +5,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/alphabet"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/alphabet"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 func NewAlphabetWithProofProvider(t *testing.T, startingL2BlockNumber *big.Int, maxDepth types.Depth, oracleError error) *AlphabetWithProofProvider {

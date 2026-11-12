@@ -8,13 +8,13 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/op-conductor/flags"
-	opnode "github.com/ethereum-optimism/optimism/mc-node"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	"github.com/mindchain/mind-chain/mc-conductor/flags"
+	opnode "github.com/mindchain/mind-chain/mc-node"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 type Config struct {
@@ -91,11 +91,11 @@ type Config struct {
 	// RPCEnableProxy is true if the sequencer RPC proxy should be enabled.
 	RPCEnableProxy bool
 
-	// The following fields are used to configure the websocket server that op-conductor exposes to get flashblocks from rollup boost and send them to clients.
+	// The following fields are used to configure the websocket server that mc-conductor exposes to get flashblocks from rollup boost and send them to clients.
 	// RollupBoostWsURL is the URL of the rollup boost websocket proxy.
 	RollupBoostWsURL string
 
-	// WebsocketServerPort is the port at which op-conductor exposes its websocket server from which clients can read streams sourced from rollupBoostWsUrl.
+	// WebsocketServerPort is the port at which mc-conductor exposes its websocket server from which clients can read streams sourced from rollupBoostWsUrl.
 	WebsocketServerPort int
 
 	LogConfig     oplog.CLIConfig

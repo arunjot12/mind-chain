@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/proofs/prestate"
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/state"
+	"github.com/mindchain/mind-chain/devnet-sdk/proofs/prestate"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 )
 
 type PreStateBuilder interface {

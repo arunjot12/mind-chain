@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
-	ktfs "github.com/ethereum-optimism/optimism/devnet-sdk/kt/fs"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
+	ktfs "github.com/mindchain/mind-chain/devnet-sdk/kt/fs"
 )
 
 // DevnetFS is an interface that both our mock and the real implementation satisfy

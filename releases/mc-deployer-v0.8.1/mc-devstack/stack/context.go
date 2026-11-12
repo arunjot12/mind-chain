@@ -3,8 +3,8 @@ package stack
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/log/logfilter"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/log/logfilter"
 )
 
 // ContextWithChainID annotates the context with the given chainID of service

@@ -5,9 +5,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	opnodecfg "github.com/ethereum-optimism/optimism/mc-node/config"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supernode/config"
+	opnodecfg "github.com/mindchain/mind-chain/mc-node/config"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supernode/config"
 	"github.com/stretchr/testify/require"
 )
 

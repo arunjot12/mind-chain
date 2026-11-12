@@ -9,15 +9,15 @@ import (
 
 	"github.com/ethereum/go-ethereum/log"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/config"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/flags"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/metrics"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/config"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/flags"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/metrics"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer"
 )
 
 var (
@@ -42,9 +42,9 @@ func run(ctx context.Context, w io.Writer, ew io.Writer, args []string, fn seque
 	app.ErrWriter = ew
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Version = opservice.FormatVersion(Version, GitCommit, GitDate, "")
-	app.Name = "op-test-sequencer"
-	app.Usage = "op-test-sequencer sequences blocks"
-	app.Description = "op-test-sequencer sequences blocks"
+	app.Name = "mc-test-sequencer"
+	app.Usage = "mc-test-sequencer sequences blocks"
+	app.Description = "mc-test-sequencer sequences blocks"
 	app.Action = cliapp.LifecycleCmd(sequencer.Main(app.Version, fn))
 	app.Commands = []*cli.Command{
 		{

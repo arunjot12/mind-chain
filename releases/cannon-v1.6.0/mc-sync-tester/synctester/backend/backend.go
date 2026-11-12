@@ -8,13 +8,13 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/locks"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/metrics"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/config"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/synctester/frontend"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/locks"
+	"github.com/mindchain/mind-chain/mc-sync-tester/metrics"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/config"
+	"github.com/mindchain/mind-chain/mc-sync-tester/synctester/frontend"
 
-	sttypes "github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/types"
+	sttypes "github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/types"
 )
 
 type APIRouter interface {

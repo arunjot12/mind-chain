@@ -1,5 +1,5 @@
 build:
-  go build -o bin/op-fetcher cmd/main.go
+  go build -o bin/mc-fetcher cmd/main.go
 
 build-go: build
 build-all: build-contracts build-go
@@ -10,4 +10,4 @@ build-contracts:
   cd ../packages/contracts-bedrock
   just clean
   just build-dev --deny-warnings --skip test
-  cp -r forge-artifacts/FetchChainInfo.s.sol ../../op-fetcher/pkg/fetcher/fetch/forge-artifacts
+  cp -r forge-artifacts/FetchChainInfo.s.sol ../../mc-fetcher/pkg/fetcher/fetch/forge-artifacts

@@ -33,7 +33,7 @@ requires writing bindings between Go and the Solidity ABI. These bindings are er
 
 ## Engine Implementation
 
-The scripting engine is implemented in the `op-chain-ops/script` package. It extends Geth's EVM implementation with
+The scripting engine is implemented in the `mc-chain-ops/script` package. It extends Geth's EVM implementation with
 Forge cheatcodes, and defines some tools that allow Go structs to be etched into the EVM's memory. Geth exposes
 hooks that drive most of the engine's behavior. The best way to understand these further is to read the code.
 

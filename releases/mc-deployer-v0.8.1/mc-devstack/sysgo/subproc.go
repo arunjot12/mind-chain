@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-service/logpipe"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-service/logpipe"
 )
 
 // SubProcess is a process that can be started and stopped.

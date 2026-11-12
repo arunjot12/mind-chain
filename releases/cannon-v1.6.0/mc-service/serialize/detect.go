@@ -4,8 +4,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 )
 
 func Write[X Serializable](outputPath string, x X, perm os.FileMode) error {

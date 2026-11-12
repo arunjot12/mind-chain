@@ -3,8 +3,8 @@ package clsync
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-acceptance-tests/tests/depreqres/common"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-acceptance-tests/tests/depreqres/common"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
 )
 
 func TestUnsafeChainNotStalling_CLSync(gt *testing.T) {

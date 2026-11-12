@@ -4,11 +4,11 @@ import (
 	"math/big"
 	"time"
 
-	faultTypes "github.com/ethereum-optimism/optimism/op-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/metrics"
-	"github.com/ethereum-optimism/optimism/op-dispute-mon/mon/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	faultTypes "github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/metrics"
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
 )
 
 const MaximumResolutionResponseBuffer = time.Minute

@@ -3,18 +3,18 @@ package backend
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/endpoint"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-service/endpoint"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-sync-tester/metrics"
-	stconf "github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/config"
+	"github.com/mindchain/mind-chain/mc-sync-tester/metrics"
+	stconf "github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/config"
 
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	sttypes "github.com/ethereum-optimism/optimism/op-sync-tester/synctester/backend/types"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	sttypes "github.com/mindchain/mind-chain/mc-sync-tester/synctester/backend/types"
 )
 
 type testAPI struct{}

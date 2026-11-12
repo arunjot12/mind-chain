@@ -4,7 +4,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	lru "github.com/hashicorp/golang-lru/v2/simplelru"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
 )
 
 // Define stats interface

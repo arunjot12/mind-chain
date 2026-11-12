@@ -7,11 +7,10 @@ import (
 	"net"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-node/p2p/gating"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
+	"github.com/mindchain/mind-chain/mc-node/p2p/gating"
+	"github.com/mindchain/mind-chain/mc-service/apis"
 
 	decredSecp "github.com/decred/dcrd/dcrec/secp256k1/v4"
-	"github.com/ethereum-optimism/optimism/op-node/p2p/store"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/libp2p/go-libp2p-testing/netutil"
 	"github.com/libp2p/go-libp2p/core/connmgr"
@@ -20,6 +19,7 @@ import (
 	"github.com/libp2p/go-libp2p/core/network"
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/libp2p/go-libp2p/core/peerstore"
+	"github.com/mindchain/mind-chain/mc-node/p2p/store"
 
 	gcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"

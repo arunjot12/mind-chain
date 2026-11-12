@@ -1,16 +1,16 @@
 package operatorfee
 
-// NOTE: These utility functions have been converted from devnet-sdk to op-devstack types
+// NOTE: These utility functions have been converted from devnet-sdk to mc-devstack types
 // but are currently unused by tests. They would need implementation updates if used.
 
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-e2e/bindings"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-e2e/bindings"
 )
 
 type TestParams struct {
@@ -89,15 +89,15 @@ func EnsureFeeParams(systemConfig *bindings.SystemConfig, systemConfigAddress co
 }
 
 func UpdateFeeParams(systemConfig *bindings.SystemConfig, systemConfigAddress common.Address, l2L1BlockContract *bindings.L1Block, wallet *dsl.EOA, tc TestParams) (err error) {
-	return fmt.Errorf("not implemented for op-devstack - utility function not used by tests")
+	return fmt.Errorf("not implemented for mc-devstack - utility function not used by tests")
 }
 
 // UpdateOperatorFeeParams updates the operator fee parameters in the SystemConfig contract.
 // It constructs and sends a transaction using txplan and returns the signed transaction, the receipt, or an error.
 func UpdateOperatorFeeParams(systemConfig *bindings.SystemConfig, systemConfigAddress common.Address, l2L1BlockContract *bindings.L1Block, wallet *dsl.EOA, operatorFeeConstant uint64, operatorFeeScalar uint32) (receipt *gethTypes.Receipt, err error) {
-	return nil, fmt.Errorf("not implemented for op-devstack - utility function not used by tests")
+	return nil, fmt.Errorf("not implemented for mc-devstack - utility function not used by tests")
 }
 
 func UpdateL1FeeParams(systemConfig *bindings.SystemConfig, systemConfigAddress common.Address, l2L1BlockContract *bindings.L1Block, wallet *dsl.EOA, l1BaseFeeScalar uint32, l1BlobBaseFeeScalar uint32) (receipt *gethTypes.Receipt, err error) {
-	return nil, fmt.Errorf("not implemented for op-devstack - utility function not used by tests")
+	return nil, fmt.Errorf("not implemented for mc-devstack - utility function not used by tests")
 }

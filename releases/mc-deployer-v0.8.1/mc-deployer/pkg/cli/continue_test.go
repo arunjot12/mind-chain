@@ -3,7 +3,7 @@ package cli
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
 	"github.com/stretchr/testify/require"
 )
 

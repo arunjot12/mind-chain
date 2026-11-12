@@ -3,7 +3,6 @@ package sysgo
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/geth"
 	"github.com/ethereum/go-ethereum/beacon/engine"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -11,6 +10,7 @@ import (
 	gn "github.com/ethereum/go-ethereum/node"
 	"github.com/ethereum/go-ethereum/rpc"
 	gethrpc "github.com/ethereum/go-ethereum/rpc"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/geth"
 )
 
 type engineClient struct {

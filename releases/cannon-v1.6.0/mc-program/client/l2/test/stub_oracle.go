@@ -4,15 +4,15 @@ import (
 	"encoding/binary"
 	"testing"
 
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
-	interopTypes "github.com/ethereum-optimism/optimism/op-program/client/interop/types"
-	l2Types "github.com/ethereum-optimism/optimism/op-program/client/l2/types"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/rawdb"
 	gethTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethdb"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
+	interopTypes "github.com/mindchain/mind-chain/mc-program/client/interop/types"
+	l2Types "github.com/mindchain/mind-chain/mc-program/client/l2/types"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // Same as l2.StateOracle but need to use our own copy to avoid dependency loops

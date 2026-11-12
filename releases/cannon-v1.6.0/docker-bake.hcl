@@ -98,7 +98,7 @@ variable "OP_INTEROP_MON_VERSION" {
 }
 
 
-target "op-node" {
+target "mc-node" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -108,10 +108,10 @@ target "op-node" {
   }
   target = "op-node-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-node:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-node:${tag}"]
 }
 
-target "op-batcher" {
+target "mc-batcher" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -121,10 +121,10 @@ target "op-batcher" {
   }
   target = "op-batcher-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-batcher:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-batcher:${tag}"]
 }
 
-target "op-proposer" {
+target "mc-proposer" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -134,10 +134,10 @@ target "op-proposer" {
   }
   target = "op-proposer-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-proposer:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-proposer:${tag}"]
 }
 
-target "op-challenger" {
+target "mc-challenger" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -149,10 +149,10 @@ target "op-challenger" {
   }
   target = "op-challenger-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-challenger:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-challenger:${tag}"]
 }
 
-target "op-dispute-mon" {
+target "mc-dispute-mon" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -162,10 +162,10 @@ target "op-dispute-mon" {
   }
   target = "op-dispute-mon-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-dispute-mon:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-dispute-mon:${tag}"]
 }
 
-target "op-conductor" {
+target "mc-conductor" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -175,7 +175,7 @@ target "op-conductor" {
   }
   target = "op-conductor-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-conductor:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-conductor:${tag}"]
 }
 
 target "da-server" {
@@ -190,7 +190,7 @@ target "da-server" {
   tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/da-server:${tag}"]
 }
 
-target "op-program" {
+target "mc-program" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -200,10 +200,10 @@ target "op-program" {
   }
   target = "op-program-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-program:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-program:${tag}"]
 }
 
-target "op-supervisor" {
+target "mc-supervisor" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -213,10 +213,10 @@ target "op-supervisor" {
   }
   target = "op-supervisor-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-supervisor:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-supervisor:${tag}"]
 }
 
-target "op-test-sequencer" {
+target "mc-test-sequencer" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -226,7 +226,7 @@ target "op-test-sequencer" {
   }
   target = "op-test-sequencer-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-test-sequencer:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-test-sequencer:${tag}"]
 }
 
 target "cannon" {
@@ -253,7 +253,7 @@ target "holocene-deployer" {
   tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/holocene-deployer:${tag}"]
 }
 
-target "op-deployer" {
+target "mc-deployer" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -263,10 +263,10 @@ target "op-deployer" {
   }
   target = "op-deployer-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-deployer:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-deployer:${tag}"]
 }
 
-target "op-dripper" {
+target "mc-dripper" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -276,10 +276,10 @@ target "op-dripper" {
   }
   target = "op-dripper-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-dripper:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-dripper:${tag}"]
 }
 
-target "op-faucet" {
+target "mc-faucet" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -289,10 +289,10 @@ target "op-faucet" {
   }
   target = "op-faucet-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-faucet:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-faucet:${tag}"]
 }
 
-target "op-interop-mon" {
+target "mc-interop-mon" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -302,5 +302,5 @@ target "op-interop-mon" {
   }
   target = "op-interop-mon-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-interop-mon:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-interop-mon:${tag}"]
 }

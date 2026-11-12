@@ -3,10 +3,10 @@ package presets
 import (
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type Option interface {
@@ -306,7 +306,7 @@ func WithMaxSequencingWindow(max uint64) Option {
 	}
 }
 
-// WithInteropFilter enables the in-process op-interop-filter for EL transaction
+// WithInteropFilter enables the in-process mc-interop-filter for EL transaction
 // validation. Only supported on supernode interop presets.
 func WithInteropFilter() Option {
 	return option{

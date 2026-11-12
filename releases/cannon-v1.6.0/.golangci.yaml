@@ -19,17 +19,17 @@ linters:
     - staticcheck
     - unused
 linters-settings:
-  # Require specifying all fields in op-deployer's OPCM input and output structs
+  # Require specifying all fields in mc-deployer's OPCM input and output structs
   exhaustruct:
     include:
-      - '.*op-deployer/pkg/deployer/opcm\..*(Input|Output)$'
+      - '.*mc-deployer/pkg/deployer/opcm\..*(Input|Output)$'
 issues:
   exclude:
     - 'errors.As'
     - 'errors.Is'
   exclude-rules:
-    # Only apply err113 to op-program/client
-    - path-except: 'op-program/client/.*'
+    # Only apply err113 to mc-program/client
+    - path-except: 'mc-program/client/.*'
       linters:
         - err113
 run:

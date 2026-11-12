@@ -3,7 +3,7 @@ package metrics
 import (
 	"testing"
 
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 	"github.com/stretchr/testify/require"
 )
 

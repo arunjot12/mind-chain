@@ -1,8 +1,8 @@
 package sysgo
 
 import (
-	bss "github.com/ethereum-optimism/optimism/mc-batcher/batcher"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	bss "github.com/mindchain/mind-chain/mc-batcher/batcher"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type L2Batcher struct {

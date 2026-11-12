@@ -7,7 +7,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/ethereum-optimism/optimism/op-service/locks"
+	"github.com/mindchain/mind-chain/mc-service/locks"
 )
 
 var ErrNotReady = errors.New("not ready for reads (forgot to register a dependency or eval func/val?)")

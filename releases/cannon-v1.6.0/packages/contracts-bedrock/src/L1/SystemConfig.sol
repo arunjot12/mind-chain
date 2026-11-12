@@ -57,7 +57,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
 
     /// @notice Storage slot that the unsafe block signer is stored at.
     ///         Storing it at this deterministic storage slot allows for decoupling the storage
-    ///         layout from the way that `solc` lays out storage. The `op-node` uses a storage
+    ///         layout from the way that `solc` lays out storage. The `mc-node` uses a storage
     ///         proof to fetch this value.
     /// @dev    NOTE: this value will be migrated to another storage slot in a future version.
     ///         User input should not be placed in storage in this contract until this migration
@@ -85,7 +85,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
     /// @notice Storage slot that the batch inbox address is stored at.
     bytes32 public constant BATCH_INBOX_SLOT = bytes32(uint256(keccak256("systemconfig.batchinbox")) - 1);
 
-    /// @notice Storage slot for block at which the op-node can start searching for logs from.
+    /// @notice Storage slot for block at which the mc-node can start searching for logs from.
     bytes32 public constant START_BLOCK_SLOT = bytes32(uint256(keccak256("systemconfig.startBlock")) - 1);
 
     /// @notice The maximum gas limit that can be set for L2 blocks. This limit is used to enforce that the blocks
@@ -183,7 +183,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
     /// @param _gasLimit          Initial gas limit.
     /// @param _unsafeBlockSigner Initial unsafe block signer address.
     /// @param _config            Initial ResourceConfig.
-    /// @param _batchInbox        Batch inbox address. An identifier for the op-node to find
+    /// @param _batchInbox        Batch inbox address. An identifier for the mc-node to find
     ///                           canonical data.
     /// @param _addresses         Set of L1 contract addresses. These should be the proxies.
     /// @param _l2ChainId         The L2 chain ID that this SystemConfig configures.
@@ -472,7 +472,7 @@ contract SystemConfig is ProxyAdminOwnedBase, OwnableUpgradeable, Reinitializabl
 
     /// @notice An internal setter for the resource config.
     ///         Ensures that the config is sane before storing it by checking for invariants.
-    ///         In the future, this method may emit an event that the `op-node` picks up
+    ///         In the future, this method may emit an event that the `mc-node` picks up
     ///         for when the resource config is changed.
     /// @param _config The new resource config.
     function _setResourceConfig(IResourceMetering.ResourceConfig memory _config) internal {

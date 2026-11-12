@@ -10,11 +10,11 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supervisor/supervisor/backend/depset"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supervisor/supervisor/backend/depset"
 )
 
-// These constants should be in sync with op-program/chainconfig/chaincfg.go
+// These constants should be in sync with mc-program/chainconfig/chaincfg.go
 const (
 	InteropDepSetName    = "depsets.json"
 	rollupConfigSuffix   = "-rollup.json"

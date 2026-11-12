@@ -1,9 +1,9 @@
 package txintent
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/apis"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-service/apis"
 )
 
 // Call expresses minimal representation to plan transaction to write.

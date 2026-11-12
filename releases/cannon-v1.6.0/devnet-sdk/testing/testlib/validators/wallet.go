@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/constraints"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/system"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/testing/systest"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/types"
+	"github.com/mindchain/mind-chain/devnet-sdk/constraints"
+	"github.com/mindchain/mind-chain/devnet-sdk/system"
+	"github.com/mindchain/mind-chain/devnet-sdk/testing/systest"
+	"github.com/mindchain/mind-chain/devnet-sdk/types"
 )
 
 type WalletGetter = func(context.Context) system.Wallet

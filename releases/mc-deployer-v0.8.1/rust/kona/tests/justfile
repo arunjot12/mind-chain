@@ -53,7 +53,7 @@ acceptance-tests-run CL_TYPE="kona-node" EL_TYPE="mc-reth":
   export DEVSTACK_L2CL_KIND="{{CL_TYPE}}"
   export DEVSTACK_L2EL_KIND="{{EL_TYPE}}"
   export LOG_LEVEL="debug"
-  cd {{SOURCE}}/optimism/op-acceptance-tests && just acceptance-test
+  cd {{SOURCE}}/optimism/mc-acceptance-tests && just acceptance-test
 
 # Run the e2e tests for the sysgo orchestrator.
 # Builds the kona-node and mc-reth binaries and runs the tests.

@@ -1,11 +1,11 @@
 package upgrade
 
 import (
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer"
-	v200 "github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/upgrade/v2_0_0"
-	v300 "github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/upgrade/v3_0_0"
-	v400 "github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/upgrade/v4_0_0"
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	v200 "github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade/v2_0_0"
+	v300 "github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade/v3_0_0"
+	v400 "github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade/v4_0_0"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
 	"github.com/urfave/cli/v2"
 )
 

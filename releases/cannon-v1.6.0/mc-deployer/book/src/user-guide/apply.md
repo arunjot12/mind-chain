@@ -9,7 +9,7 @@ You can call the `apply` command like this:
 
 ```shell
 
-op-deployer apply \
+mc-deployer apply \
   --workdir <directory containing the intent and state files> \
   <... additional arguments ...>
 ```

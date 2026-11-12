@@ -8,13 +8,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/op-deployer/pkg/deployer/integration_test/shared"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
-	"github.com/ethereum-optimism/optimism/op-service/testutils/devnet"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/integration_test/shared"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+	"github.com/mindchain/mind-chain/mc-service/testutils/devnet"
 	"github.com/stretchr/testify/require"
 )
 
-// CLITestRunner provides utilities for running op-deployer CLI commands in tests
+// CLITestRunner provides utilities for running mc-deployer CLI commands in tests
 type CLITestRunner struct {
 	workDir       string
 	l1RPC         string
@@ -91,10 +91,10 @@ func (r *CLITestRunner) Run(ctx context.Context, args []string, env map[string]s
 	stdout := newCaptureOutputWriter()
 	stderr := newCaptureOutputWriter()
 
-	// Add "op-deployer" as the first argument if not already present
+	// Add "mc-deployer" as the first argument if not already present
 	fullArgs := args
-	if len(args) == 0 || args[0] != "op-deployer" {
-		fullArgs = append([]string{"op-deployer"}, args...)
+	if len(args) == 0 || args[0] != "mc-deployer" {
+		fullArgs = append([]string{"mc-deployer"}, args...)
 	}
 
 	// Run the CLI command using the testable interface

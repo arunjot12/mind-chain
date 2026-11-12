@@ -3,9 +3,9 @@ package fullseq
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/backend/work"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/backend/work"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
 )
 
 type Config struct {
@@ -45,7 +45,7 @@ func (c *Config) Start(ctx context.Context, id seqtypes.SequencerID, opts *work.
 
 		chainID: c.ChainID,
 
-		log: opts.Log.New("service", "op-test-sequencer", "chain", c.ChainID),
+		log: opts.Log.New("service", "mc-test-sequencer", "chain", c.ChainID),
 		m:   opts.Metrics,
 
 		builder:   builder,

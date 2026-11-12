@@ -1,7 +1,7 @@
 package metrics
 
 import (
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
 )
 
 type noopMetrics struct {

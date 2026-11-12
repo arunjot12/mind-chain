@@ -14,16 +14,16 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/devkeys"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/interop/dsl"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/emit"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/contracts/bindings/inbox"
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-service/predeploys"
-	stypes "github.com/ethereum-optimism/optimism/op-supervisor/supervisor/types"
+	"github.com/mindchain/mind-chain/mc-chain-ops/devkeys"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/interop/dsl"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/emit"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/contracts/bindings/inbox"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-service/predeploys"
+	stypes "github.com/mindchain/mind-chain/mc-supervisor/supervisor/types"
 )
 
 type userWithKeys struct {
@@ -232,7 +232,7 @@ func includeTxOnChain(t helpers.Testing, actors *dsl.InteropActors, chain *dsl.C
 	actors.Supervisor.ProcessFull(t)
 	actors.ChainA.Sequencer.ActL2PipelineFull(t)
 	actors.ChainB.Sequencer.ActL2PipelineFull(t)
-	// another round-trip, for post-processing like cross-safe / cross-unsafe to propagate to the op-node
+	// another round-trip, for post-processing like cross-safe / cross-unsafe to propagate to the mc-node
 	actors.ChainA.Sequencer.SyncSupervisor(t)
 	actors.ChainB.Sequencer.SyncSupervisor(t)
 	actors.Supervisor.ProcessFull(t)

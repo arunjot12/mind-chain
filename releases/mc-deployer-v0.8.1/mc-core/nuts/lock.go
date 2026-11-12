@@ -7,8 +7,8 @@ import (
 
 	"github.com/BurntSushi/toml"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 // ForkLockEntry represents a single fork's entry in fork_lock.toml.
@@ -27,7 +27,7 @@ func LockFilePath(dir string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("finding monorepo root: %w", err)
 	}
-	return filepath.Join(root, "op-core", "nuts", "fork_lock.toml"), nil
+	return filepath.Join(root, "mc-core", "nuts", "fork_lock.toml"), nil
 }
 
 // ReadLockFile reads and parses fork_lock.toml from the monorepo root.

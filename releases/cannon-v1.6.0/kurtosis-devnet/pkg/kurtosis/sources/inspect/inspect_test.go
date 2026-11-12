@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/descriptors"
+	"github.com/mindchain/mind-chain/devnet-sdk/descriptors"
 )
 
 func TestNewInspector(t *testing.T) {
@@ -27,8 +27,8 @@ func TestInspectData(t *testing.T) {
 	data := &InspectData{
 		FileArtifacts: []string{"genesis.json", "jwt.txt"},
 		UserServices: ServiceMap{
-			"op-node": &Service{
-				Labels: map[string]string{"app": "op-node", "role": "sequencer"},
+			"mc-node": &Service{
+				Labels: map[string]string{"app": "mc-node", "role": "sequencer"},
 				Ports: PortMap{
 					"rpc": &descriptors.PortInfo{Host: "127.0.0.1", Port: 8545},
 					"p2p": &descriptors.PortInfo{Host: "127.0.0.1", Port: 9222},
@@ -41,8 +41,8 @@ func TestInspectData(t *testing.T) {
 	assert.Len(t, data.UserServices, 1)
 	assert.Contains(t, data.FileArtifacts, "genesis.json")
 
-	service := data.UserServices["op-node"]
-	assert.Equal(t, "op-node", service.Labels["app"])
+	service := data.UserServices["mc-node"]
+	assert.Equal(t, "mc-node", service.Labels["app"])
 	assert.Equal(t, "sequencer", service.Labels["role"])
 
 	rpcPort, exists := service.Ports["rpc"]

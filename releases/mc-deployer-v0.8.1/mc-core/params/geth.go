@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	gethparams "github.com/ethereum/go-ethereum/params"
 
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
 )
 
 // GethChainConfig returns the equivalent go-ethereum params.ChainConfig. It exists

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	nodeSync "github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	nodeSync "github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type PreGenesisSuperGameConfig struct {

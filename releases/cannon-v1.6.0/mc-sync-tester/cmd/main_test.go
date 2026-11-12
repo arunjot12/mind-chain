@@ -7,9 +7,9 @@ import (
 	"io"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-sync-tester/config"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-sync-tester/config"
 	"github.com/stretchr/testify/require"
 )
 
@@ -46,7 +46,7 @@ func configForArgs(t *testing.T, cliArgs []string) *config.Config {
 func dryRunWithArgs(cliArgs []string) (log.Logger, *config.Config, error) {
 	cfg := new(config.Config)
 	var logger log.Logger
-	fullArgs := append([]string{"op-sync-tester"}, cliArgs...)
+	fullArgs := append([]string{"mc-sync-tester"}, cliArgs...)
 	testErr := errors.New("dry-run")
 	err := run(context.Background(), io.Discard, io.Discard, fullArgs, func(ctx context.Context, config *config.Config, log log.Logger) (cliapp.Lifecycle, error) {
 		logger = log

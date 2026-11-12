@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-challenger/game/keccak/matrix"
-	keccakTypes "github.com/ethereum-optimism/optimism/op-challenger/game/keccak/types"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/matrix"
+	keccakTypes "github.com/mindchain/mind-chain/mc-challenger/game/keccak/types"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 type Oracle interface {

@@ -8,7 +8,7 @@ import (
 
 	"golang.org/x/mod/modfile"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 const (

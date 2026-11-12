@@ -5,10 +5,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 
-	messages "github.com/ethereum-optimism/optimism/op-core/interop/messages"
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
+	messages "github.com/mindchain/mind-chain/mc-core/interop/messages"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
 )
 
 // LogsDB is the subset of an interop logs DB that

@@ -188,12 +188,11 @@ main's CI actually validated.
 
    - From `rust/`, `just mirrors stale` lists mirrors that still record an older
      pin. Work every entry and advance a tag only after checking its named
-     upstream symbol. See `docs/ai/reth-upstream-mirrors.md`.
+     upstream symbol.
    - For anything touching validation or gas, ask which upstream precondition
      makes the change safe and whether the OP Stack holds it. Deposits skip
      `validate_env` outright, which exempts them from a long list of checks
-     upstream may treat as guaranteed. `docs/ai/reth-update-review.md`,
-     "The precondition question", has the list and the procedure.
+     upstream may treat as guaranteed.
 
 8. Build, format, and test before pushing:
 
@@ -223,10 +222,9 @@ main's CI actually validated.
    deny-list in `mc-reth/crates/cli/src/lib.rs`, e.g. `--minimal`) must stay
    rejected — they render with a `[hidden]` marker in the snapshot.
 
-   Report removed flags and changed defaults in the PR's migration notes. The
-   [published CLI reference](../docs/public-docs/scripts/gen-mc-reth-cli/README.md)
-   intentionally documents a finalized release, not `develop`. Do not regenerate
-   it from an unreleased dependency bump; update it through the release generator
+   Report removed flags and changed defaults in the PR's migration notes. A
+   published CLI reference should document a finalized release, not `develop`. Do
+   not regenerate it from an unreleased dependency bump; update it through the release generator
    after the next finalized tag.
 
 10. Open the companion `ethereum-optimism/optimism-premium` PR. Premium pins the
@@ -258,8 +256,7 @@ git push git@github.com:ethereum-optimism/reth.git refs/tags/v<version>
 
 **Start** a branch from the upstream base. Cherry-pick the fork's CI commit
 first so every push runs the fork's CI, then the patches retained by the step 2
-audit and any upstream fixes picked in the forward sweep
-(`docs/ai/reth-update-review.md`), oldest first. The first push may already
+audit and any upstream fixes picked in the forward sweep, oldest first. The first push may already
 carry all of them:
 
 ```bash
@@ -368,17 +365,13 @@ onto an older base, or accept the broader catch-up work as part of the bump.
 
 ## See also
 
-- `docs/ai/reth-update-review.md` — the review guide for these bumps: the risk
-  taxonomy, the deliberately-broken upstream preconditions to check against, and
-  the `reth-update-reviewer` agent that surfaces upstream changes which should
-  have forced an op- change but didn't.
-- `docs/ai/reth-upstream-mirrors.md` — the `UPSTREAM-MIRROR` tags marking OP code
-  that reproduces upstream logic instead of calling it, each recording the
-  upstream version it was last verified against. `just mirrors stale` turns them
-  into the worklist for a bump.
+- The `reth-update-reviewer` agent — surfaces upstream changes which should have
+  forced an op- change but didn't.
+- The `UPSTREAM-MIRROR` tags mark OP code that reproduces upstream logic instead of
+  calling it, each recording the upstream version it was last verified against.
+  `just mirrors stale` turns them into the worklist for a bump.
 - `rust/scripts/upstream-mirrors.py` — the tag checker behind `just mirrors` and
   `just check-upstream-mirrors` (the latter runs as part of `just lint`).
-- `docs/ai/rust-dev.md` — broader Rust workflow (build, test, lint).
 - `rust/Cargo.toml` — where the pin lives (~70 occurrences).
 - `rust/kona/sp1/programs/Cargo.lock` — the second lockfile; refresh it when
   shared revm or alloy anchors move.

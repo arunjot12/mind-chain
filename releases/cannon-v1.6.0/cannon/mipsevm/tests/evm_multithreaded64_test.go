@@ -10,13 +10,13 @@ import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/maps"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/exec"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded"
-	mtutil "github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded/testutil"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/testutil"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/versions"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/exec"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded"
+	mtutil "github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded/testutil"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/testutil"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/versions"
 )
 
 func TestEVM_MT64_LL(t *testing.T) {

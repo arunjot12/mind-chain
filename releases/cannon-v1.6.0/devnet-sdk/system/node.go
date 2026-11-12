@@ -6,13 +6,13 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/devnet-sdk/contracts"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/interfaces"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/mindchain/mind-chain/devnet-sdk/contracts"
+	"github.com/mindchain/mind-chain/devnet-sdk/interfaces"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 var (

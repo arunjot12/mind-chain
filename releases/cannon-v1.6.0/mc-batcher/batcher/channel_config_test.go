@@ -5,7 +5,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 
 	"github.com/stretchr/testify/require"
 )

@@ -6,9 +6,9 @@ import (
 	"math"
 	"strings"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	"github.com/ethereum-optimism/optimism/op-service/flags"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	"github.com/mindchain/mind-chain/mc-service/flags"
 	"github.com/urfave/cli/v2"
 )
 

@@ -1,8 +1,8 @@
 package empty
 
 import (
-	"github.com/ethereum-optimism/optimism/devnet-sdk/interfaces"
-	"github.com/ethereum-optimism/optimism/devnet-sdk/types"
+	"github.com/mindchain/mind-chain/devnet-sdk/interfaces"
+	"github.com/mindchain/mind-chain/devnet-sdk/types"
 )
 
 // EmptyRegistry represents a registry that returns not found errors for all contract accesses

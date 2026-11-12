@@ -32,9 +32,9 @@ import (
 	"strings"
 	"sync"
 
-	oplog "github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/logmods"
 	"github.com/ethereum/go-ethereum/log"
+	oplog "github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/logmods"
 )
 
 // Testing interface to log to. Some functions are marked as Helper function to log the call site accurately.

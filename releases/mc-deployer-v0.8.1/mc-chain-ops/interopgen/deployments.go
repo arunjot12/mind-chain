@@ -1,8 +1,8 @@
 package interopgen
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/opcm"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
 )
 
 type L1Deployment struct {

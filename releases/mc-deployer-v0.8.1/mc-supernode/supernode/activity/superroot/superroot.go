@@ -5,13 +5,13 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity/internal/syncstatus"
-	"github.com/ethereum-optimism/optimism/op-supernode/supernode/activity/interop"
-	cc "github.com/ethereum-optimism/optimism/op-supernode/supernode/chain_container"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	gethlog "github.com/ethereum/go-ethereum/log"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity/internal/syncstatus"
+	"github.com/mindchain/mind-chain/mc-supernode/supernode/activity/interop"
+	cc "github.com/mindchain/mind-chain/mc-supernode/supernode/chain_container"
 )
 
 // Superroot composes the super-root at a given timestamp across the
