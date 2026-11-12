@@ -86,7 +86,6 @@ pub struct Cli<
 /// These arguments live in upstream arg structs that mc-reth reuses, so they cannot be removed at
 /// the type level. They are hidden from all help output and rejected with a hard error after
 /// parsing. Add new entries here as further unsupported upstream options are identified
-/// (tracked in [#21687](https://github.com/ethereum-optimism/optimism/issues/21687)).
 const DENIED_ARGS: &[(&str, &str, &str)] = &[
     ("node", "minimal", MINIMAL_REMOVED_HELP),
     ("node", "max_bals", BAL_ARGS_UNSUPPORTED_HELP),

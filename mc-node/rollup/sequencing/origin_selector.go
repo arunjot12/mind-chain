@@ -278,7 +278,7 @@ func (los *L1OriginSelector) findL1OriginOfNextL2Block(
 
 	if (nextL1Origin == eth.L1BlockRef{}) {
 		if matchAutoDerivation {
-			// See https://github.com/ethereum-optimism/optimism/blob/ce9fa62d0c0325304fc37d91d87aa2e16a7f8356/op-node/rollup/derive/base_batch_stage.go#L186-L205
+			// See https://github.com/mindchain/mind-chain/blob/ce9fa62d0c0325304fc37d91d87aa2e16a7f8356/op-node/rollup/derive/base_batch_stage.go#L186-L205
 			// We need the next L1 origin to decide whether we can eagerly adopt it.
 			// NOTE: This can cause unsafe block production to slow to the rate of L1 block production, if the L1 origin is caught up to the L1 Head.
 			// Code higher up the call stack should ensure that matchAutoDerivation is false under such conditions.

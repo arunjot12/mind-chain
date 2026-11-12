@@ -30,7 +30,6 @@ func TestSupernodeInteropInvalidMessageReplacement(gt *testing.T) {
 // TestSupernodeLightSequencerInteropInvalidMessageReplacement is the follow-mode
 // (light mc-node CL sequencer) analogue of TestSupernodeInteropInvalidMessageReplacement:
 // the light CLs sequence on their own ELs and follow the shared supernode's safe head via
-// EL sync. See https://github.com/ethereum-optimism/optimism/issues/21119.
 //
 // mc-reth only. On op-geth the follower never adopts the replacement (cross-safe stalls,
 // follow-source reorgs forever); the virtual variant passes there, so it's specific to the

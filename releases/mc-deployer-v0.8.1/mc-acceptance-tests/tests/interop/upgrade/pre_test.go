@@ -45,7 +45,6 @@ func TestPreNoInbox(gt *testing.T) {
 	// Use a very large activation delay (24h) so Lagoon never activates interop during the test.
 	// This test only checks pre-interop state and the old 60s offset caused flakiness
 	// when the test took too long and crossed the activation boundary.
-	// See: https://github.com/ethereum-optimism/optimism/issues/17298
 	sys := presets.NewTwoL2SupernodeInterop(t, 86400)
 	require := t.Require()
 

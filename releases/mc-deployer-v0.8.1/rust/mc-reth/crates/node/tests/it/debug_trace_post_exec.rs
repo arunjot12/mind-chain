@@ -7,7 +7,7 @@
 //! revm's mainnet default chain id, and no honest env for a zero-gas-limit transaction passes
 //! validation either.
 //!
-//! [the bug]: https://github.com/ethereum-optimism/optimism-premium/issues/163
+//! [the bug]: https://github.com/mindchain/mind-chain-premium/issues/163
 
 use alloy_consensus::{Block, BlockBody, Header, Sealable};
 use alloy_primitives::{Address, B256, Bytes, TxKind, U256};

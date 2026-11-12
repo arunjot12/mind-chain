@@ -219,7 +219,6 @@ func RunDAFootprint(gt *testing.T, setup SetupFn) {
 				// Wait for change to propagate to L2.
 				// Retrying up to 100 times is overkill, but lower values may not work on
 				// persistent networks. See the following issue for more details.
-				// https://github.com/ethereum-optimism/optimism/issues/18061
 				env.l2EL.WaitL1OriginReached(eth.Unsafe, bigs.Uint64Strict(rec.BlockNumber), 100)
 			} else {
 				scalar := env.getDAFootprintGasScalarOfSystemConfig(t)

@@ -5,7 +5,7 @@
 //!
 //! This test ensures that EIP-7825 is handled correctly by `eth_estimateGas`.
 //!
-//! [configuration footguns]: https://github.com/ethereum-optimism/optimism/pull/21337
+//! [configuration footguns]: https://github.com/mindchain/mind-chain/pull/21337
 //! [upstream issues]: https://github.com/paradigmxyz/reth/pull/25612
 
 use alloy_primitives::{Address, Bytes, TxKind, U256};

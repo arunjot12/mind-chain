@@ -954,7 +954,7 @@ func TestEVM_Fault(t *testing.T) {
 
 	setExpectations := func(t require.TestingT, tt testCase, expected *mtutil.ExpectedState, vm VersionedVMTestCase) ExpectedExecResult {
 		// Memory is accessed when processing illegal instructions, so we need to make sure to append a memory proof
-		// See: https://github.com/ethereum-optimism/optimism/blob/a08b5b343a0005c6308566cd8afa810dd67e0e8f/cannon/mipsevm/exec/mips_instructions.go#L102-L105
+		// See: https://github.com/mindchain/mind-chain/blob/a08b5b343a0005c6308566cd8afa810dd67e0e8f/cannon/mipsevm/exec/mips_instructions.go#L102-L105
 		rsReg := (tt.insn >> 21) & 0x1F
 		rs := expected.ActiveThread().Registers[rsReg]
 		memAddr := testutil.EffAddr(rs + exec.SignExtendImmediate(tt.insn))
