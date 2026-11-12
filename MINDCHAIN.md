@@ -19,15 +19,15 @@ Upstream versions: `mindchain/versions.env`.
     git add -A && git commit -m "mc-node: what changed"
     git push -u origin HEAD                  # then open a Pull Request to main
 
-## Build locally (needs Go, Rust, just, forge, Docker; versions in mise.toml)
-    just mc-node            # -> mc-node/bin/mc-node
-    just mc-batcher         # -> mc-batcher/bin/mc-batcher
-    just mc-proposer        # -> mc-proposer/bin/mc-proposer
-    just mc-challenger      # -> mc-challenger/bin/mc-challenger
-    cd rust && cargo build --release -p mc-reth --bin mc-reth
-    cd rust && cargo build --release --bin kona-host
-    mindchain/scripts/build-tools.sh              # mc-deployer v0.8.1 + cannon v1.6.0 from releases/ -> ./bin
-    mindchain/scripts/install-tools.sh            # or: download the official binaries instead
+## Build locally
+All binaries go to `./bin` (git-ignored, never pushed). Needs Go, Rust/cargo, just, make, forge (versions in mise.toml).
+
+    bash mindchain/scripts/build-all.sh                  # everything
+    bash mindchain/scripts/build-all.sh mc-node mc-reth  # only some
+
+Builds: mc-node, mc-batcher, mc-proposer, mc-challenger (repo root), mc-deployer v0.8.1 and
+cannon v1.6.0 (from releases/), mc-reth and kona-host (rust/). Each binary reports its upstream
+version from mindchain/versions.env.
 
 ## Docker images (CI)
 Every PR builds the images. Every push to main and every v* tag pushes them to
