@@ -4,9 +4,11 @@ use clap::Parser;
 use reth_chainspec::EthChainSpec;
 use reth_cli::chainspec::ChainSpecParser;
 use reth_cli_commands::common::{AccessRights, CliNodeTypes, Environment, EnvironmentArgs};
+use reth_mind_chain_node::args::ProofsHistoryStorageArgs;
+use reth_mind_chain_trie::{
+    OpProofsBackfillProvider, OpProofsBackfillStore, db::MdbxProofsStorage,
+};
 use reth_node_core::version::version_metadata;
-use reth_optimism_node::args::ProofsHistoryStorageArgs;
-use reth_optimism_trie::{OpProofsBackfillProvider, OpProofsBackfillStore, db::MdbxProofsStorage};
 use std::sync::Arc;
 use tracing::info;
 

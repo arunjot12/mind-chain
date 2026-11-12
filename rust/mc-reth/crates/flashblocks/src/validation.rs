@@ -50,7 +50,7 @@ pub enum SequenceValidationResult {
 /// # Example
 ///
 /// ```
-/// use reth_optimism_flashblocks::validation::{
+/// use reth_mind_chain_flashblocks::validation::{
 ///     FlashblockSequenceValidator, SequenceValidationResult,
 /// };
 ///
@@ -171,7 +171,7 @@ impl ReorgDetectionResult {
 ///
 /// ```
 /// use alloy_primitives::B256;
-/// use reth_optimism_flashblocks::validation::{
+/// use reth_mind_chain_flashblocks::validation::{
 ///     CanonicalBlockFingerprint, ReorgDetectionResult, ReorgDetector, TrackedBlockFingerprint,
 /// };
 ///
@@ -255,7 +255,9 @@ pub enum ReconciliationStrategy {
 /// # Example
 ///
 /// ```
-/// use reth_optimism_flashblocks::validation::{CanonicalBlockReconciler, ReconciliationStrategy};
+/// use reth_mind_chain_flashblocks::validation::{
+///     CanonicalBlockReconciler, ReconciliationStrategy,
+/// };
 ///
 /// // Canonical caught up to pending
 /// let strategy = CanonicalBlockReconciler::reconcile(

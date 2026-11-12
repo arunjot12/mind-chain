@@ -7,17 +7,17 @@
 //! ```
 
 use reth_db::test_utils::create_test_rw_db;
-use reth_node_builder::{EngineApiExt, FullNodeComponents, NodeBuilder, NodeConfig};
-use reth_optimism_chainspec::OP_MAINNET;
-use reth_optimism_node::{
+use reth_mind_chain_chainspec::OP_DEV;
+use reth_mind_chain_node::{
     OpAddOns, OpEngineApiBuilder, OpNode, args::RollupArgs, node::OpEngineValidatorBuilder,
 };
+use reth_node_builder::{EngineApiExt, FullNodeComponents, NodeBuilder, NodeConfig};
 use tokio::sync::oneshot;
 
 #[tokio::main]
 async fn main() {
     // Op node configuration and setup
-    let config = NodeConfig::new(OP_MAINNET.clone());
+    let config = NodeConfig::new(OP_DEV.clone());
     let db = create_test_rw_db();
     let args = RollupArgs::default();
     let op_node = OpNode::new(args);

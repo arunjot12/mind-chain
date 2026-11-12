@@ -1,0 +1,28 @@
+import '../justfiles/go.just'
+
+# Build ldflags string
+_LDFLAGSSTRING := "'" + trim(
+    "-X main.GitCommit=" + GITCOMMIT + " " + \
+    "-X main.GitDate=" + GITDATE + " " + \
+    "-X main.Version=" + VERSION + " " + \
+    "") + "'"
+
+BINARY := "./bin/mc-supernode"
+
+# Build mc-supernode binary
+mc-supernode: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
+
+# Clean build artifacts
+clean:
+    rm -f {{BINARY}}
+
+# Run tests
+test: (go_test "./...")
+
+# Run tests with coverage report
+coverage:
+    @go test ./... -coverprofile=coverage.out
+    @go tool cover -func=coverage.out | grep '^total:'
+    @go tool cover -func=coverage.out | grep -v '^total:'
+
+

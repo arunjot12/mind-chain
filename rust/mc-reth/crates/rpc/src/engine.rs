@@ -11,8 +11,8 @@ use jsonrpsee::proc_macros::rpc;
 use jsonrpsee_core::{RpcResult, server::RpcModule};
 use op_alloy_rpc_types_engine::OpExecutionPayloadV4;
 use reth_chainspec::EthereumHardforks;
+use reth_mind_chain_payload_builder::OpExecData;
 use reth_node_api::{EngineApiValidator, EngineTypes};
-use reth_optimism_payload_builder::OpExecData;
 use reth_rpc_api::IntoEngineApiRpcModule;
 use reth_rpc_engine_api::EngineApi;
 use reth_storage_api::{BalProvider, BlockReader, HeaderProvider, StateProviderFactory};
@@ -255,7 +255,7 @@ pub trait OpEngineApi<Engine: EngineTypes> {
 /// functions in the Execution layer that are crucial for the consensus process.
 ///
 /// Rejecting invalid derived transactions at `engine_forkchoiceUpdated` depends on the node's
-/// payload service being wrapped in `reth_optimism_node::DerivedPayloadServiceBuilder`.
+/// payload service being wrapped in `reth_mind_chain_node::DerivedPayloadServiceBuilder`.
 #[derive(Debug, Constructor)]
 pub struct OpEngineApi<Provider, EngineT: EngineTypes, Pool, Validator, ChainSpec> {
     inner: EngineApi<Provider, EngineT, Pool, Validator, ChainSpec>,

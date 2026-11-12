@@ -2,9 +2,9 @@
 # Annotate every PR in a git-cliff release-notes draft with what it actually touched,
 # and whether that code is compiled into the component's binary.
 #
-# `just release-notes` filters by include-path (go.*, op-core/**, op-service/**, or all of
+# `just release-notes` filters by include-path (go.*, mc-core/**, mc-service/**, or all of
 # rust/kona/**, rust/op-alloy/**, rust/alloy-op*/**), which is far broader than any one
-# binary. But a change under op-service/ or op-core/ can absolutely change how mc-batcher
+# binary. But a change under mc-service/ or mc-core/ can absolutely change how mc-batcher
 # behaves — txmgr, bgpo and fees are all linked in — so "did it touch mc-batcher/" is the
 # wrong question. The right one is "is the changed package in this binary's transitive
 # dependency set", which `go list -deps` and `cargo tree` answer exactly.
@@ -37,7 +37,7 @@
 set -euo pipefail
 
 REPO=${REPO:-ethereum-optimism/optimism}
-MODULE=github.com/ethereum-optimism/optimism
+MODULE=github.com/mindchain/mind-chain
 JOBS=8
 
 if [ $# -lt 1 ] || [ ! -r "${1:-}" ]; then
@@ -250,7 +250,7 @@ for f in "$workdir"/pr-*; do
         # Both are tried, because one image can ship binaries of each language; workspace
         # crates all live under rust/, so the two mappings cannot claim the same path.
         function unit(path,   d, best, rest) {
-            # The upgrade bundle ships too: op-core/nuts snapshots it for the fork.
+            # The upgrade bundle ships too: mc-core/nuts snapshots it for the fork.
             if (contracts == 1) {
                 if (path ~ /^packages\/contracts-bedrock\/snapshots\/upgrades\//) {
                     linked["upgrade-bundle"] = 1

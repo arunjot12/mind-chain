@@ -1,4 +1,4 @@
-module github.com/ethereum-optimism/optimism
+module github.com/mindchain/mind-chain
 
 go 1.26.0
 
@@ -8,6 +8,7 @@ require (
 	github.com/BurntSushi/toml v1.5.0
 	github.com/Masterminds/semver/v3 v3.3.1
 	github.com/andybalholm/brotli v1.2.2
+	github.com/arunjot12/go-ethereum-hdwallet v0.1.1
 	github.com/base/go-bip39 v1.1.0
 	github.com/btcsuite/btcd v0.24.2
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0
@@ -16,8 +17,6 @@ require (
 	github.com/consensys/gnark-crypto v0.18.1
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0
-	github.com/ethereum-optimism/go-ethereum-hdwallet v0.1.4-0.20251001155152-4eb15ccedf7e
-	github.com/ethereum-optimism/superchain-registry/validation v0.0.0-20260917213257-bd6236e8d0bb
 	github.com/ethereum/go-ethereum v1.17.0
 	github.com/fsnotify/fsnotify v1.9.0
 	github.com/golang/snappy v1.0.0
@@ -243,11 +242,8 @@ require (
 	lukechampine.com/blake3 v1.4.1 // indirect
 )
 
-replace github.com/ethereum/go-ethereum => github.com/ethereum-optimism/op-geth v1.101702.4-rc.1
+replace github.com/ethereum/go-ethereum => github.com/arunjot12/mc-geth v0.1.0
 
-// replace github.com/ethereum/go-ethereum => ../op-geth
-
-// replace github.com/ethereum-optimism/superchain-registry/superchain => ../superchain-registry/superchain
 // This release keeps breaking Go builds. Stop that.
 exclude (
 	github.com/kataras/iris/v12 v12.2.0-beta5

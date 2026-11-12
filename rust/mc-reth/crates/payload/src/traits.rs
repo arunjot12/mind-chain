@@ -1,7 +1,7 @@
 use alloy_consensus::BlockBody;
 use alloy_primitives::B256;
 use alloy_rpc_types_engine::PayloadId;
-use reth_optimism_primitives::{DepositReceipt, transaction::OpTransaction};
+use reth_mind_chain_primitives::{DepositReceipt, transaction::OpTransaction};
 use reth_payload_builder_primitives::PayloadBuilderError;
 use reth_primitives_traits::{FullBlockHeader, NodePrimitives, SignedTransaction, WithEncoded};
 

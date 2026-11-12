@@ -5,7 +5,7 @@ use alloc::sync::Arc;
 use alloy_chains::Chain;
 use alloy_primitives::U256;
 use reth_chainspec::{BaseFeeParams, BaseFeeParamsKind, ChainSpec};
-use reth_optimism_forks::DEV_HARDFORKS;
+use reth_mind_chain_forks::DEV_HARDFORKS;
 
 use crate::{LazyLock, OpChainSpec, make_op_sealed_genesis_header};
 

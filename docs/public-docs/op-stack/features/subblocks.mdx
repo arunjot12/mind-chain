@@ -111,7 +111,7 @@ flowchart LR
 *   **`mc-node`** drives block building through the engine API, exactly as it does on a chain without subblocks.
 *   **The execution client** executes the block and publishes a subblock every 200 ms while it does so.
 *   **`flashblocks-websocket-proxy`** relays the stream from the active sequencer to RPC providers.
-*   **`op-conductor`** *(optional)* manages a multi-sequencer setup so only the healthy leader's stream reaches the proxy.
+*   **`mc-conductor`** *(optional)* manages a multi-sequencer setup so only the healthy leader's stream reaches the proxy.
 
 Producing subblocks is available to OP Enterprise customers.
 Consuming them is not restricted: any node can follow the stream, and any application can read pre-confirmed state from a provider that does.
@@ -154,8 +154,8 @@ For availability information, see [Enabling Subblocks](/chain-operators/guides/f
 <AccordionGroup>
   <Accordion title="What happens if the sequencer fails mid-block?">
     The subblocks already published for the abandoned block do not seal.
-    In a multi-sequencer setup, `op-conductor` transfers leadership to a healthy sequencer, and the stream continues from the new leader through the same endpoint.
-    For details, see the [op-conductor documentation](/chain-operators/tools/op-conductor).
+    In a multi-sequencer setup, `mc-conductor` transfers leadership to a healthy sequencer, and the stream continues from the new leader through the same endpoint.
+    For details, see the [mc-conductor documentation](/chain-operators/tools/mc-conductor).
   </Accordion>
 
   <Accordion title="Do subblocks change the safety model of the chain?">

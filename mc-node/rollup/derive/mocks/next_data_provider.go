@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	eth "github.com/ethereum-optimism/optimism/op-service/eth"
+	eth "github.com/mindchain/mind-chain/mc-service/eth"
 
 	mock "github.com/stretchr/testify/mock"
 )

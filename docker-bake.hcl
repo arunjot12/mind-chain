@@ -142,7 +142,7 @@ target "mc-challenger" {
   tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-challenger:${tag}"]
 }
 
-target "op-dispute-mon" {
+target "mc-dispute-mon" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -152,10 +152,10 @@ target "op-dispute-mon" {
   }
   target = "op-dispute-mon-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-dispute-mon:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-dispute-mon:${tag}"]
 }
 
-target "op-conductor" {
+target "mc-conductor" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -165,7 +165,7 @@ target "op-conductor" {
   }
   target = "op-conductor-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-conductor:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-conductor:${tag}"]
 }
 
 target "da-server" {
@@ -180,7 +180,7 @@ target "da-server" {
   tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/da-server:${tag}"]
 }
 
-target "op-supernode" {
+target "mc-supernode" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -190,10 +190,10 @@ target "op-supernode" {
   }
   target = "op-supernode-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-supernode:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-supernode:${tag}"]
 }
 
-target "op-interop-filter" {
+target "mc-interop-filter" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -203,10 +203,10 @@ target "op-interop-filter" {
   }
   target = "op-interop-filter-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-interop-filter:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-interop-filter:${tag}"]
 }
 
-target "op-test-sequencer" {
+target "mc-test-sequencer" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -216,7 +216,7 @@ target "op-test-sequencer" {
   }
   target = "op-test-sequencer-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-test-sequencer:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-test-sequencer:${tag}"]
 }
 
 target "cannon" {
@@ -245,7 +245,7 @@ target "mc-deployer" {
   tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-deployer:${tag}"]
 }
 
-target "op-dripper" {
+target "mc-dripper" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -255,10 +255,10 @@ target "op-dripper" {
   }
   target = "op-dripper-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-dripper:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-dripper:${tag}"]
 }
 
-target "op-faucet" {
+target "mc-faucet" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -268,10 +268,10 @@ target "op-faucet" {
   }
   target = "op-faucet-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-faucet:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-faucet:${tag}"]
 }
 
-target "op-interop-mon" {
+target "mc-interop-mon" {
   dockerfile = "ops/docker/op-stack-go/Dockerfile"
   context = "."
   args = {
@@ -281,7 +281,7 @@ target "op-interop-mon" {
   }
   target = "op-interop-mon-target"
   platforms = split(",", PLATFORMS)
-  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/op-interop-mon:${tag}"]
+  tags = [for tag in split(",", IMAGE_TAGS) : "${REGISTRY}/${REPOSITORY}/mc-interop-mon:${tag}"]
 }
 
 // Rust-based images
@@ -290,7 +290,7 @@ target "kona-node" {
   dockerfile = "kona/docker/apps/kona_app_generic.dockerfile"
   context = "rust"
   contexts = {
-    nuts-bundles = "op-core/nuts/bundles"
+    nuts-bundles = "mc-core/nuts/bundles"
   }
   args = {
     REPO_LOCATION = "local"
@@ -308,7 +308,7 @@ target "kona-host" {
   dockerfile = "kona/docker/apps/kona_app_generic.dockerfile"
   context = "rust"
   contexts = {
-    nuts-bundles = "op-core/nuts/bundles"
+    nuts-bundles = "mc-core/nuts/bundles"
   }
   args = {
     REPO_LOCATION = "local"
@@ -323,7 +323,7 @@ target "kona-client" {
   dockerfile = "kona/docker/apps/kona_app_generic.dockerfile"
   context = "rust"
   contexts = {
-    nuts-bundles = "op-core/nuts/bundles"
+    nuts-bundles = "mc-core/nuts/bundles"
   }
   args = {
     REPO_LOCATION = "local"
@@ -338,7 +338,7 @@ target "op-zk-proposer" {
   dockerfile = "kona/docker/apps/kona_app_generic.dockerfile"
   context = "rust"
   contexts = {
-    nuts-bundles = "op-core/nuts/bundles"
+    nuts-bundles = "mc-core/nuts/bundles"
     contracts-bedrock-abis = "packages/contracts-bedrock/snapshots/abi"
   }
   args = {
@@ -354,12 +354,6 @@ target "op-zk-proposer" {
 target "mc-reth" {
   dockerfile = "mc-reth/DockerfileOp"
   context = "rust"
-  # The chainspec build.rs reads the superchain-registry submodule (at the repo
-  # root, outside the "rust" context); expose it as a named context so the
-  # Dockerfile can COPY the subset it needs.
-  contexts = {
-    superchain-registry = "superchain-registry"
-  }
   args = {
     BUILD_PROFILE = "maxperf"
     GIT_VERSION = "${GIT_VERSION}"

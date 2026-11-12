@@ -1,20 +1,20 @@
 ---
 title: Configuration and RPCs
-description: Reference for op-conductor configuration flags, environment variables, and conductor namespace RPC methods.
+description: Reference for mc-conductor configuration flags, environment variables, and conductor namespace RPC methods.
 diataxis: reference
 ---
 
 import OpConductorFlags from '/snippets/generated/op-conductor-flags.mdx';
 import { ConfigReferencePreamble } from '/snippets/config-reference-preamble.mdx';
 
-This page catalogues op-conductor's configuration options and its admin RPC
+This page catalogues mc-conductor's configuration options and its admin RPC
 methods. For how the service works, see
-[OP Conductor](/chain-operators/tools/op-conductor); to add it to a running
-network, follow the [setup guide](/chain-operators/tools/op-conductor/setup).
+[OP Conductor](/chain-operators/tools/mc-conductor); to add it to a running
+network, follow the [setup guide](/chain-operators/tools/mc-conductor/setup).
 
 ## Configuration options
 
-<ConfigReferencePreamble component="op-conductor" />
+<ConfigReferencePreamble component="mc-conductor" />
 
 <OpConductorFlags />
 
@@ -68,7 +68,7 @@ manually started sequencer.
 
 ### conductor_pause
 
-`Pause` pauses op-conductor.
+`Pause` pauses mc-conductor.
 
 <Tabs>
   <Tab title="curl">
@@ -88,7 +88,7 @@ manually started sequencer.
 
 ### conductor_resume
 
-`Resume` resumes op-conductor.
+`Resume` resumes mc-conductor.
 
 <Tabs>
   <Tab title="curl">
@@ -108,7 +108,7 @@ manually started sequencer.
 
 ### conductor_paused
 
-Paused returns true if the op-conductor is paused.
+Paused returns true if the mc-conductor is paused.
 
 <Tabs>
   <Tab title="curl">
@@ -128,7 +128,7 @@ Paused returns true if the op-conductor is paused.
 
 ### conductor_stopped
 
-Stopped returns true if the op-conductor is stopped.
+Stopped returns true if the mc-conductor is stopped.
 
 <Tabs>
   <Tab title="curl">
@@ -361,7 +361,7 @@ ClusterMembership returns the current cluster membership configuration.
   API called by `mc-node`.
 </Info>
 
-Active returns true if the op-conductor is active (not paused or stopped).
+Active returns true if the mc-conductor is active (not paused or stopped).
 
 <Tabs>
   <Tab title="curl">

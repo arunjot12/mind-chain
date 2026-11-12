@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
 )
 
 // ⚠️  EXPERIMENTAL FEATURE ⚠️

@@ -16,7 +16,7 @@ Sequencers receive transactions from the Tx Ingress Nodes via execution-layer p2
 
 *   **Sequencer mc-reth** can be either full or archive. mc-reth runs as an archive node by default; pass `--full` to run a (pruned) full node. Full nodes offer better performance but can't recover from deep L1 reorgs, so run at least one archive sequencer as a backup.
 *   **Sequencer mc-node** should have p2p discovery disabled and only be statically peered with other internal nodes (or use [peer-management-service](https://github.com/ethereum-optimism/infra/tree/main/peer-mgmt-service) to define peering network).
-*   The **op-conductor** RPC can act as a leader-aware RPC proxy for mc-batcher (proxies the necessary mc-reth / mc-node RPC methods if the node is the leader).
+*   The **mc-conductor** RPC can act as a leader-aware RPC proxy for mc-batcher (proxies the necessary mc-reth / mc-node RPC methods if the node is the leader).
 *   Sequencers should have local transaction backup (journalling) disabled.
 
 ### mc-node Configuration

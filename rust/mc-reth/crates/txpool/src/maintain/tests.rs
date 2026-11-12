@@ -8,7 +8,7 @@ use alloy_eips::eip2930::{AccessList, AccessListItem};
 use alloy_primitives::{Address, B256, Signature, TxKind, U256};
 use op_alloy_rpc_types::SuperchainDAError;
 use reth_execution_types::{Chain, ExecutionOutcome};
-use reth_optimism_primitives::{OpBlock, OpPrimitives};
+use reth_mind_chain_primitives::{OpBlock, OpPrimitives};
 use reth_primitives_traits::RecoveredBlock;
 use reth_transaction_pool::{
     CoinbaseTipOrdering, Pool, PoolConfig, TransactionOrigin, blobstore::InMemoryBlobStore,

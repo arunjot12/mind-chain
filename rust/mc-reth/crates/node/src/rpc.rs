@@ -9,17 +9,17 @@
 //! use alloy_rpc_types_eth::BlockId;
 //! use op_alloy_network::Optimism;
 //! use reth_db::test_utils::create_test_rw_db_with_path;
+//! use reth_mind_chain_chainspec::OP_DEV;
+//! use reth_mind_chain_evm::OpEvmConfig;
+//! use reth_mind_chain_node::{OpExecutorBuilder, OpNetworkPrimitives, OpNode};
+//! use reth_mind_chain_rpc::OpEthApiBuilder;
+//! use reth_mind_chain_txpool::OpPooledTransaction;
 //! use reth_node_builder::{
 //!     ConsensusEngineHandle, LaunchContext, NodeConfig, RethFullAdapter,
 //!     components::ComponentsBuilder,
 //!     hooks::OnComponentInitializedHook,
 //!     rpc::{EthApiBuilder, EthApiCtx},
 //! };
-//! use reth_optimism_chainspec::OP_SEPOLIA;
-//! use reth_optimism_evm::OpEvmConfig;
-//! use reth_optimism_node::{OpExecutorBuilder, OpNetworkPrimitives, OpNode};
-//! use reth_optimism_rpc::OpEthApiBuilder;
-//! use reth_optimism_txpool::OpPooledTransaction;
 //! use reth_provider::providers::BlockchainProvider;
 //! use reth_rpc::TraceApi;
 //! use reth_rpc_eth_types::{EthConfig, EthStateCache};
@@ -30,13 +30,13 @@
 //! #[tokio::main]
 //! async fn main() {
 //!     // build core node with all components disabled except EVM and state
-//!     let sepolia = NodeConfig::new(OP_SEPOLIA.clone());
-//!     let db = create_test_rw_db_with_path(sepolia.datadir());
+//!     let config = NodeConfig::new(OP_DEV.clone());
+//!     let db = create_test_rw_db_with_path(config.datadir());
 //!     let runtime =
 //!         RuntimeBuilder::new(Default::default()).build().expect("failed to build runtime");
-//!     let launch_ctx = LaunchContext::new(runtime, sepolia.datadir());
+//!     let launch_ctx = LaunchContext::new(runtime, config.datadir());
 //!     let node = launch_ctx
-//!         .with_loaded_toml_config(sepolia)
+//!         .with_loaded_toml_config(config)
 //!         .unwrap()
 //!         .attach(Arc::new(db))
 //!         .with_provider_factory::<_, OpEvmConfig>(OverlayManager::default(), None, &[])
@@ -87,18 +87,18 @@
 //! }
 //! ```
 
-pub use reth_optimism_rpc::{OpEngineApi, OpEthApi, OpEthApiBuilder};
+pub use reth_mind_chain_rpc::{OpEngineApi, OpEthApi, OpEthApiBuilder};
 
 use crate::OP_NAME_CLIENT;
 use alloy_rpc_types_engine::ClientVersionV1;
 use reth_chainspec::EthereumHardforks;
+use reth_mind_chain_payload_builder::OpExecData;
+use reth_mind_chain_rpc::engine::OP_ENGINE_CAPABILITIES;
 use reth_node_api::{
     AddOnsContext, EngineApiValidator, EngineTypes, FullNodeComponents, NodeTypes,
 };
 use reth_node_builder::rpc::{EngineApiBuilder, PayloadValidatorBuilder};
 use reth_node_core::version::{CLIENT_CODE, version_metadata};
-use reth_optimism_payload_builder::OpExecData;
-use reth_optimism_rpc::engine::OP_ENGINE_CAPABILITIES;
 use reth_payload_builder::PayloadStore;
 use reth_rpc_engine_api::{EngineApi, EngineCapabilities};
 

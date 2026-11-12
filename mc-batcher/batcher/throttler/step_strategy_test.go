@@ -3,7 +3,7 @@ package throttler
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
 )
 
 // Test constants specific to step strategy

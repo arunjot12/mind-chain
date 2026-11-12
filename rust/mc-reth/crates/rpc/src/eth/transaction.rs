@@ -9,7 +9,7 @@ use op_alloy_consensus::{
     transaction::{OpDepositInfo, OpTransactionInfo},
 };
 use reth_chain_state::CanonStateSubscriptions;
-use reth_optimism_primitives::DepositReceipt;
+use reth_mind_chain_primitives::DepositReceipt;
 use reth_primitives_traits::{SignedTransaction, SignerRecoverable, WithEncoded};
 use reth_rpc_eth_api::{
     EthApiTypes as _, FromEthApiError, FromEvmError, RpcConvert, RpcNodeCore, RpcReceipt,

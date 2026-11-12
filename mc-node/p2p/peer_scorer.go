@@ -3,10 +3,10 @@ package p2p
 import (
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-node/p2p/store"
-	"github.com/ethereum-optimism/optimism/op-service/log"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	peer "github.com/libp2p/go-libp2p/core/peer"
+	"github.com/mindchain/mind-chain/mc-node/p2p/store"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 type scorer struct {

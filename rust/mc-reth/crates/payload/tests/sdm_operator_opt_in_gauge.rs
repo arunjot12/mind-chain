@@ -4,10 +4,10 @@
 //! the process lands on it, and the assertions below read back a single shared value.
 
 use metrics_exporter_prometheus::PrometheusBuilder;
+use reth_mind_chain_payload_builder::config::OpBuilderConfig;
 use reth_node_metrics::recorder::{
     install_prometheus_recorder, try_install_prometheus_recorder_with_builder,
 };
-use reth_optimism_payload_builder::config::OpBuilderConfig;
 
 /// Every store to the operator gate reports its value, so an alert can tell a node that opted in
 /// from one that silently booted with SDM off — the flag is in-memory and starts `false`.

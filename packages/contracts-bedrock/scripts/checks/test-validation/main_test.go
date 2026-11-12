@@ -7,8 +7,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/solc"
 	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/mindchain/mind-chain/mc-chain-ops/solc"
 )
 
 // setupTestDir creates a temporary directory and changes to it for testing.

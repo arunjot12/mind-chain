@@ -4,7 +4,7 @@ use crate::OpConsensusError;
 use alloy_consensus::BlockHeader;
 use alloy_primitives::B256;
 use alloy_trie::EMPTY_ROOT_HASH;
-use reth_optimism_primitives::L2_TO_L1_MESSAGE_PASSER_ADDRESS;
+use reth_mind_chain_primitives::L2_TO_L1_MESSAGE_PASSER_ADDRESS;
 use reth_storage_api::{StorageRootProvider, errors::ProviderResult};
 use reth_trie_common::HashedStorage;
 use revm::database::BundleState;
@@ -134,8 +134,8 @@ mod test {
     use core::str::FromStr;
     use reth_chain_state::{ExecutedBlock, test_utils::TestBlockBuilder};
     use reth_db_common::init::init_genesis;
-    use reth_optimism_chainspec::OpChainSpecBuilder;
-    use reth_optimism_node::OpNode;
+    use reth_mind_chain_chainspec::OpChainSpecBuilder;
+    use reth_mind_chain_node::OpNode;
     use reth_primitives_traits::Account;
     use reth_provider::{
         BlockWriter, LatestStateProviderRef, StateWriter, StorageSettings, StorageSettingsCache,

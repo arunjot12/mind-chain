@@ -7,7 +7,7 @@
 //! in the snapshot and has to be acknowledged by regenerating it:
 //!
 //! ```text
-//! UPDATE_SNAPSHOT=1 cargo nextest run -p reth-optimism-cli --all-features cli_surface_snapshot
+//! UPDATE_SNAPSHOT=1 cargo nextest run -p reth-mind-chain-cli --all-features cli_surface_snapshot
 //! ```
 //!
 //! The rendering is hand-rolled (instead of `--help` output or a snapshot crate) so that it is
@@ -23,8 +23,8 @@
 //! (the `rust-tests` `CircleCI` job), which enables it.
 #![cfg(feature = "dev")]
 
-use reth_optimism_cli::{Cli, chainspec::OpChainSpecParser};
-use reth_optimism_node::args::RollupArgs;
+use reth_mind_chain_cli::{Cli, chainspec::OpChainSpecParser};
+use reth_mind_chain_node::args::RollupArgs;
 use std::{env, fmt::Write as _, fs, path::Path};
 
 /// Path of the checked-in snapshot file.
@@ -84,7 +84,7 @@ fn cli_surface_snapshot() {
          \n\
          If this change is intentional, regenerate the snapshot with\n\
          \n\
-         UPDATE_SNAPSHOT=1 cargo nextest run -p reth-optimism-cli --all-features cli_surface_snapshot\n\
+         UPDATE_SNAPSHOT=1 cargo nextest run -p reth-mind-chain-cli --all-features cli_surface_snapshot\n\
          \n\
          or copy the block between the BEGIN/END markers in this test's stdout into\n\
          rust/mc-reth/crates/cli/tests/snapshots/cli.snap."
@@ -99,7 +99,7 @@ fn render_snapshot(cmd: &clap::Command) -> String {
          # One block per subcommand path; arguments in clap definition order, hidden ones\n\
          # included. Platform- and build-specific defaults are normalized to placeholders.\n\
          # Regenerate with:\n\
-         #   UPDATE_SNAPSHOT=1 cargo nextest run -p reth-optimism-cli --all-features cli_surface_snapshot\n\
+         #   UPDATE_SNAPSHOT=1 cargo nextest run -p reth-mind-chain-cli --all-features cli_surface_snapshot\n\
          \n",
     );
     render_command(&mut out, ROOT_NAME, cmd);

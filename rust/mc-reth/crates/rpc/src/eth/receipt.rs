@@ -8,9 +8,9 @@ use op_alloy_consensus::{OpReceipt, OpTransaction, parse_post_exec_payload_from_
 use op_alloy_rpc_types::{L1BlockInfo, OpTransactionReceipt, OpTransactionReceiptFields};
 use op_revm::tx_da_footprint;
 use reth_chainspec::{ChainSpecProvider, EthChainSpec};
+use reth_mind_chain_evm::RethL1BlockInfo;
+use reth_mind_chain_forks::OpHardforks;
 use reth_node_api::NodePrimitives;
-use reth_optimism_evm::RethL1BlockInfo;
-use reth_optimism_forks::OpHardforks;
 use reth_primitives_traits::{BlockBody, SealedBlock, SealedHeaderFor};
 use reth_rpc_eth_api::{
     RpcConvert,
@@ -82,7 +82,7 @@ where
         block: &SealedBlock<N::Block>,
     ) -> Result<Vec<Self::RpcReceipt>, Self::Error> {
         let chain_spec = self.provider.chain_spec();
-        let mut l1_block_info = match reth_optimism_evm::extract_l1_info(block.body()) {
+        let mut l1_block_info = match reth_mind_chain_evm::extract_l1_info(block.body()) {
             Ok(l1_block_info) => l1_block_info,
             Err(err) => {
                 let genesis_number = chain_spec.genesis().number.unwrap_or_default();
@@ -96,8 +96,10 @@ where
         };
 
         let mut receipts = Vec::with_capacity(inputs.len());
-        let sdm_active =
-            reth_optimism_evm::is_sdm_active_at_timestamp(&chain_spec, block.header().timestamp());
+        let sdm_active = reth_mind_chain_evm::is_sdm_active_at_timestamp(
+            &chain_spec,
+            block.header().timestamp(),
+        );
         let post_exec_payload = parse_post_exec_payload_from_transactions(
             block.body().transactions(),
             block.header().number(),

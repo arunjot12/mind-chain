@@ -12,13 +12,13 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/conductor"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/event"
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/conductor"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/event"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // defaultSealingDuration defines the expected time it takes to seal the block
@@ -925,7 +925,7 @@ func (s *Sequencer) Init(ctx context.Context, active bool) error {
 func (s *Sequencer) forceStart() error {
 	if s.unsafeHead == (eth.L2BlockRef{}) {
 		// This happens if sequencing is activated on mc-node startup.
-		// The op-conductor check and choice of sequencing with this pre-state already happened before mc-node startup.
+		// The mc-conductor check and choice of sequencing with this pre-state already happened before mc-node startup.
 		s.log.Info("Starting sequencing, without known pre-state")
 	} else {
 		// This happens when we start sequencing on an already-running node.

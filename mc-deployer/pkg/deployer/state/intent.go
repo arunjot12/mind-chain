@@ -11,13 +11,12 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/artifacts"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/version"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
-	"github.com/ethereum-optimism/optimism/op-service/jsonutil"
-	"github.com/ethereum-optimism/superchain-registry/validation"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/version"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-service/jsonutil"
 )
 
 type IntentType string
@@ -312,15 +311,6 @@ func (c *Intent) Clone() (*Intent, error) {
 }
 
 func (c *Intent) checkL1Prod() error {
-	versions, err := standard.L1VersionsFor(c.L1ChainID)
-	if err != nil {
-		return err
-	}
-
-	if _, ok := versions[validation.Semver(standard.CurrentTag)]; !ok {
-		return fmt.Errorf("tag '%s' not found in standard versions", standard.CurrentTag)
-	}
-
 	opcmAddr, err := standard.OPCMImplAddressFor(c.L1ChainID, standard.CurrentTag)
 	if err != nil {
 		return fmt.Errorf("error getting OPCM address: %w", err)

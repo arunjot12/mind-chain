@@ -6,7 +6,7 @@ contents:
   packages:
     - ca-certificates-bundle>=20260909-r3
     - wolfi-baselayout
-    - op-interop-mon@local
+    - mc-interop-mon@local
     - busybox
     - apk-tools
 
@@ -26,9 +26,9 @@ accounts:
   run-as: 0
 
 # No entrypoint, bare-name cmd: matches the upstream image contract
-# (CMD ["op-interop-mon"], resolved via PATH).
-cmd: op-interop-mon
+# (CMD ["mc-interop-mon"], resolved via PATH).
+cmd: mc-interop-mon
 
 annotations:
-  org.opencontainers.image.source: https://github.com/ethereum-optimism/optimism
-  org.opencontainers.image.title: op-interop-mon
+  org.opencontainers.image.source: https://github.com/arunjot12/mind-chain
+  org.opencontainers.image.title: mc-interop-mon

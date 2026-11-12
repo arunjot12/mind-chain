@@ -12,8 +12,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/params"
 
-	nodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	nodeflags "github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 func TestNewL1ChainConfig_KnownChains(t *testing.T) {

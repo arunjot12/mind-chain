@@ -2,7 +2,7 @@ use alloy_json_rpc::RpcError;
 use core::error;
 use op_alloy_rpc_types::SuperchainDAError;
 
-/// Dedicated JSON-RPC error code emitted by the op-interop-filter server when its failsafe is
+/// Dedicated JSON-RPC error code emitted by the mc-interop-filter server when its failsafe is
 /// active. Detection relies on this code; the filter must emit it (a prerequisite server change).
 const FAILSAFE_ENABLED_CODE: i32 = -320602;
 

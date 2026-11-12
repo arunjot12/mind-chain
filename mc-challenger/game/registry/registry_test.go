@@ -5,12 +5,12 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/claims"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/scheduler"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/scheduler/test"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/claims"
+	"github.com/mindchain/mind-chain/mc-challenger/game/scheduler"
+	"github.com/mindchain/mind-chain/mc-challenger/game/scheduler/test"
+	"github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 	"github.com/stretchr/testify/require"
 )
 

@@ -13,11 +13,11 @@ use alloy_eips::{NumHash, eip1898::BlockWithParent};
 use futures_util::TryStreamExt;
 use reth_execution_types::Chain;
 use reth_exex::{ExExContext, ExExEvent, ExExNotification};
-use reth_node_api::{FullNodeComponents, NodePrimitives, NodeTypes};
-use reth_optimism_trie::{
+use reth_mind_chain_trie::{
     CanonicalInMemoryStateProvider, OpProofStoragePruner, OpProofsProviderRO, OpProofsProviderRw,
     OpProofsStore, ProofWindowRange, engine::EngineHandle, proof::DatabaseStateRoot,
 };
+use reth_node_api::{FullNodeComponents, NodePrimitives, NodeTypes};
 use reth_provider::{BlockHashReader, BlockNumReader, HeaderProvider};
 use reth_trie::{
     HashedPostState, HashedPostStateSorted, SortedTrieData, StateRoot, updates::TrieUpdatesSorted,
@@ -111,12 +111,12 @@ where
 /// ```
 /// use futures_util::FutureExt;
 /// use reth_db::test_utils::create_test_rw_db;
+/// use reth_mind_chain_chainspec::OP_DEV;
+/// use reth_mind_chain_exex::OpProofsExEx;
+/// use reth_mind_chain_node::{OpNode, args::RollupArgs};
+/// use reth_mind_chain_trie::{InMemoryProofsStorage, OpProofsStorage, db::MdbxProofsStorage};
 /// use reth_node_api::NodeTypesWithDBAdapter;
 /// use reth_node_builder::{NodeBuilder, NodeConfig};
-/// use reth_optimism_chainspec::OP_DEV;
-/// use reth_optimism_exex::OpProofsExEx;
-/// use reth_optimism_node::{OpNode, args::RollupArgs};
-/// use reth_optimism_trie::{InMemoryProofsStorage, OpProofsStorage, db::MdbxProofsStorage};
 /// use reth_provider::providers::BlockchainProvider;
 /// use std::{sync::Arc, time::Duration};
 ///
@@ -523,7 +523,7 @@ mod tests {
     use reth_ethereum_primitives::{Block, Receipt};
     use reth_execution_types::{Chain, ExecutionOutcome};
     use reth_exex_test_utils::{TestExExContext, TestExExHandle};
-    use reth_optimism_trie::{
+    use reth_mind_chain_trie::{
         BlockStateDiff, InMemoryProofsStorage, OpProofsInitProvider, OpProofsProviderRO,
         OpProofsProviderRw, OpProofsStore, db::MdbxProofsStorage, engine::EngineHandle,
     };
@@ -1155,7 +1155,7 @@ mod tests {
 
     #[tokio::test]
     async fn handle_notification_hands_block_reth_replaced_to_sync_loop() {
-        use reth_optimism_trie::engine::EngineError;
+        use reth_mind_chain_trie::engine::EngineError;
         use std::time::{Duration, Instant};
 
         let dir = tempdir_path();

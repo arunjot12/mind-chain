@@ -1,5 +1,5 @@
 [package]
-name = "reth-optimism-consensus"
+name = "reth-mind-chain-consensus"
 version = "2.0.0"
 edition.workspace = true
 rust-version.workspace = true
@@ -24,8 +24,8 @@ reth-storage-errors.workspace = true
 reth-trie-common.workspace = true
 
 # mc-reth
-reth-optimism-forks.workspace = true
-reth-optimism-primitives.workspace = true
+reth-mind-chain-forks.workspace = true
+reth-mind-chain-primitives.workspace = true
 
 # op-alloy
 op-alloy-consensus.workspace = true
@@ -43,10 +43,10 @@ revm.workspace = true
 # misc
 tracing.workspace = true
 thiserror.workspace = true
-reth-optimism-chainspec.workspace = true
+reth-mind-chain-chainspec.workspace = true
 
 [dev-dependencies]
-reth-optimism-chainspec = { workspace = true, features = ["superchain-configs"] }
+reth-mind-chain-chainspec.workspace = true
 reth-provider = { workspace = true, features = ["test-utils"] }
 reth-chain-state = { workspace = true, features = ["test-utils"] }
 reth-stages-types.workspace = true
@@ -54,7 +54,7 @@ reth-storage-overlay.workspace = true
 reth-db-common.workspace = true
 reth-revm.workspace = true
 reth-trie.workspace = true
-reth-optimism-node.workspace = true
+reth-mind-chain-node.workspace = true
 
 alloy-chains.workspace = true
 metrics-exporter-prometheus.workspace = true
@@ -70,9 +70,9 @@ std = [
     "reth-consensus-common/std",
     "reth-ethereum-consensus/std",
     "reth-primitives-traits/std",
-    "reth-optimism-forks/std",
-    "reth-optimism-chainspec/std",
-    "reth-optimism-primitives/std",
+    "reth-mind-chain-forks/std",
+    "reth-mind-chain-chainspec/std",
+    "reth-mind-chain-primitives/std",
     "reth-storage-api/std",
     "reth-storage-errors/std",
     "reth-trie-common/std",

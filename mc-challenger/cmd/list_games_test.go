@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
 	"github.com/stretchr/testify/require"
 )
 

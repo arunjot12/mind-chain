@@ -1,5 +1,5 @@
 [package]
-name = "reth-optimism-node"
+name = "reth-mind-chain-node"
 version = "2.0.0"
 edition.workspace = true
 rust-version.workspace = true
@@ -40,21 +40,21 @@ reth-metrics.workspace = true
 metrics.workspace = true
 
 # mc-reth
-reth-optimism-payload-builder.workspace = true
-reth-optimism-evm = { workspace = true, features = ["std", "rpc"] }
-reth-optimism-rpc.workspace = true
-reth-optimism-storage.workspace = true
-reth-optimism-txpool.workspace = true
-reth-optimism-chainspec.workspace = true
-reth-optimism-consensus = { workspace = true, features = ["std"] }
-reth-optimism-forks.workspace = true
-reth-optimism-primitives = { workspace = true, features = [
+reth-mind-chain-payload-builder.workspace = true
+reth-mind-chain-evm = { workspace = true, features = ["std", "rpc"] }
+reth-mind-chain-rpc.workspace = true
+reth-mind-chain-storage.workspace = true
+reth-mind-chain-txpool.workspace = true
+reth-mind-chain-chainspec.workspace = true
+reth-mind-chain-consensus = { workspace = true, features = ["std"] }
+reth-mind-chain-forks.workspace = true
+reth-mind-chain-primitives = { workspace = true, features = [
   "serde",
   "serde-bincode-compat",
   "reth-codec",
 ] }
-reth-optimism-exex = { workspace = true, features = ["metrics"] }
-reth-optimism-trie = { workspace = true, features = ["metrics"] }
+reth-mind-chain-exex = { workspace = true, features = ["metrics"] }
+reth-mind-chain-trie = { workspace = true, features = ["metrics"] }
 
 # revm with required optimism features
 # Note: this must be kept to ensure all features are properly enabled/forwarded
@@ -86,11 +86,9 @@ futures-util.workspace = true
 
 # test-utils dependencies
 reth-e2e-test-utils = { workspace = true, optional = true }
-alloy-genesis = { workspace = true, optional = true }
-serde_json = { workspace = true, optional = true }
 
 [dev-dependencies]
-reth-optimism-node = { workspace = true, features = ["test-utils"] }
+reth-mind-chain-node = { workspace = true, features = ["test-utils"] }
 reth-db = { workspace = true, features = ["test-utils"] }
 reth-db-common.workspace = true
 reth-node-builder = { workspace = true, features = ["test-utils"] }
@@ -122,30 +120,26 @@ op-alloy-network.workspace = true
 default = ["reth-codec"]
 asm-keccak = [
   "alloy-primitives/asm-keccak",
-  "reth-optimism-node/asm-keccak",
+  "reth-mind-chain-node/asm-keccak",
   "reth-node-core/asm-keccak",
   "revm/asm-keccak",
 ]
 keccak-cache-global = [
   "alloy-primitives/keccak-cache-global",
   "reth-node-core/keccak-cache-global",
-  "reth-optimism-node/keccak-cache-global",
+  "reth-mind-chain-node/keccak-cache-global",
 ]
 js-tracer = [
   "reth-node-builder/js-tracer",
-  "reth-optimism-node/js-tracer",
+  "reth-mind-chain-node/js-tracer",
   "reth-rpc/js-tracer",
   "reth-rpc-eth-types/js-tracer",
 ]
 test-utils = [
 	"reth-codec",
 	"reth-e2e-test-utils",
-	"alloy-genesis",
-	"serde_json",
 	"reth-node-builder/test-utils",
 	"reth-chainspec/test-utils",
-	# `utils.rs` builds OP Sepolia / OP Mainnet specs, which live behind this feature.
-	"reth-optimism-chainspec/superchain-configs",
 	"reth-consensus/test-utils",
 	"reth-evm/test-utils",
 	"reth-network/test-utils",
@@ -154,20 +148,16 @@ test-utils = [
 	"reth-db/test-utils",
 	"reth-provider/test-utils",
 	"reth-transaction-pool/test-utils",
-	"reth-optimism-node/test-utils",
-	"reth-optimism-primitives/arbitrary",
+	"reth-mind-chain-node/test-utils",
+	"reth-mind-chain-primitives/arbitrary",
 	"reth-primitives-traits/test-utils",
 	"reth-trie-common/test-utils",
 	"reth-trie-db/test-utils",
 	"reth-stages-types/test-utils",
 	"reth-db-api/test-utils",
 	"reth-tasks/test-utils",
-	"reth-optimism-exex/test-utils",
-	"reth-optimism-trie/test-utils",
+	"reth-mind-chain-exex/test-utils",
+	"reth-mind-chain-trie/test-utils",
 	"reth-chain-state/test-utils"
 ]
-reth-codec = ["reth-optimism-primitives/reth-codec"]
-
-[[test]]
-name = "e2e_testsuite"
-path = "tests/e2e-testsuite/main.rs"
+reth-codec = ["reth-mind-chain-primitives/reth-codec"]

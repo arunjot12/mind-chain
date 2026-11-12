@@ -2,7 +2,7 @@
 
 use alloy_eips::{BlockNumHash, NumHash, eip1898::BlockWithParent};
 use alloy_primitives::{B256, U256};
-use reth_optimism_trie::{
+use reth_mind_chain_trie::{
     BlockStateDiff, InMemoryProofsStorage, OpProofsInitProvider, OpProofsProviderRO,
     OpProofsProviderRw, OpProofsStorageError, OpProofsStore, db::MdbxProofsStorage,
 };

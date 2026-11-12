@@ -13,7 +13,7 @@ use jsonrpsee::proc_macros::rpc;
 use jsonrpsee_core::RpcResult;
 use jsonrpsee_types::error::ErrorObject;
 use reth_errors::RethError;
-use reth_optimism_trie::{OpProofsStorage, OpProofsStore};
+use reth_mind_chain_trie::{OpProofsStorage, OpProofsStore};
 use reth_provider::StateProofProvider;
 use reth_rpc_api::eth::helpers::FullEthApi;
 use reth_rpc_eth_api::FromEthApiError;
@@ -26,7 +26,7 @@ use reth_rpc_eth_types::EthApiError;
 /// Re-declares the proof methods that are answered from historical proofs rather than live state.
 /// A proof method added to upstream's `EthApi` produces no diff here, so diff the two method sets
 /// on each bump: every new one must either be declared here or dropped from the served surface in
-/// `reth_optimism_node::node`, so that a proofs-history node never answers it from live state.
+/// `reth_mind_chain_node::node`, so that a proofs-history node never answers it from live state.
 #[cfg_attr(not(test), rpc(server, namespace = "eth"))]
 #[cfg_attr(test, rpc(server, client, namespace = "eth"))]
 pub trait EthApiOverride {

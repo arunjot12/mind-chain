@@ -9,14 +9,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-core/nuts"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	"github.com/mindchain/mind-chain/mc-core/nuts"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 // nutBundleGlobs are the locations where NUT bundle JSON files may live.
 // Update this list when adding new bundle locations.
 var nutBundleGlobs = []string{
-	"op-core/nuts/bundles/*_nut_bundle.json",
+	"mc-core/nuts/bundles/*_nut_bundle.json",
 }
 
 // checkAllBundlesLocked searches known paths for *_nut_bundle.json files and
@@ -34,7 +34,7 @@ func checkAllBundlesLocked(root string, lockedBundles map[string]bool) error {
 			}
 			if !lockedBundles[rel] {
 				return fmt.Errorf(
-					"NUT bundle %s has no entry in op-core/nuts/fork_lock.toml",
+					"NUT bundle %s has no entry in mc-core/nuts/fork_lock.toml",
 					rel,
 				)
 			}
@@ -52,7 +52,7 @@ func validateEntry(fork string, entry nuts.ForkLockEntry, bundleContent []byte) 
 	if actual != expectedHash {
 		return fmt.Errorf(
 			"bundle hash mismatch for fork %s: expected=%s actual=%s. "+
-				"If this change is intentional, update the hash in op-core/nuts/fork_lock.toml",
+				"If this change is intentional, update the hash in mc-core/nuts/fork_lock.toml",
 			fork, expectedHash, actual,
 		)
 	}
@@ -66,16 +66,16 @@ func validateEntry(fork string, entry nuts.ForkLockEntry, bundleContent []byte) 
 }
 
 // checkPreForkState verifies the locked fork's own pre-fork state artifact exists
-// — op-core/nuts/state/<fork>_state.json, the state as of this fork. Locking a
+// — mc-core/nuts/state/<fork>_state.json, the state as of this fork. Locking a
 // fork's bundle should also produce this state (post-activation) so the NEXT
 // fork's activation test can boot from it. Catching a forgotten one here keeps
 // the chain of states complete, and cheaply (the proofs suite needs kona-host).
 func checkPreForkState(root, fork string) error {
-	rel := filepath.Join("op-core", "nuts", "state", fork+"_state.json")
+	rel := filepath.Join("mc-core", "nuts", "state", fork+"_state.json")
 	if _, err := os.Stat(filepath.Join(root, rel)); err != nil {
 		return fmt.Errorf(
 			"fork %s is locked but its pre-fork state %s is missing — generate and commit it so "+
-				"the next fork can boot from it (see op-core/nuts/state/README.md)", fork, rel)
+				"the next fork can boot from it (see mc-core/nuts/state/README.md)", fork, rel)
 	}
 	return nil
 }

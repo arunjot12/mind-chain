@@ -5,7 +5,7 @@
 use alloy_primitives::Address;
 use clap::builder::ArgPredicate;
 use op_alloy_consensus::interop::SafetyLevel;
-use reth_optimism_trie::DEFAULT_BACKFILL_BATCH_SIZE;
+use reth_mind_chain_trie::DEFAULT_BACKFILL_BATCH_SIZE;
 use std::path::PathBuf;
 use url::Url;
 

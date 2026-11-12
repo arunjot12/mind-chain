@@ -909,7 +909,7 @@ mod tests {
     use alloy_primitives::{B256, Bytes};
     use alloy_rpc_types_engine::PayloadId;
     use op_alloy_consensus::{OpTxEnvelope, SDMGasEntry, build_post_exec_tx};
-    use reth_optimism_primitives::OpPrimitives;
+    use reth_mind_chain_primitives::OpPrimitives;
 
     fn canonical_for(
         manager: &SequenceManager<OpTxEnvelope>,

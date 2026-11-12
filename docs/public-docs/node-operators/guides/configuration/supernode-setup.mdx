@@ -1,31 +1,31 @@
 ---
 title: Supernode setup
-description: Stand up op-supernode end to end - build the binary, wire each chain's engine API, start the process, and verify every chain is syncing.
+description: Stand up mc-supernode end to end - build the binary, wire each chain's engine API, start the process, and verify every chain is syncing.
 diataxis: how-to
 audit-source:
-  - op-supernode/README.md
-  - op-supernode/justfile
-  - op-supernode/flags/flags.go
-  - op-supernode/cmd/main.go
-  - op-supernode/supernode/supernode.go
-  - op-supernode/supernode/resources/rpc_router.go
-  - op-supernode/supernode/resources/metrics_fan_in.go
-  - op-supernode/supernode/activity/heartbeat/heartbeat.go
-  - op-supernode/supernode/activity/supernode/supernode.go
+  - mc-supernode/README.md
+  - mc-supernode/justfile
+  - mc-supernode/flags/flags.go
+  - mc-supernode/cmd/main.go
+  - mc-supernode/supernode/supernode.go
+  - mc-supernode/supernode/resources/rpc_router.go
+  - mc-supernode/supernode/resources/metrics_fan_in.go
+  - mc-supernode/supernode/activity/heartbeat/heartbeat.go
+  - mc-supernode/supernode/activity/supernode/supernode.go
 ---
 
 <Info>
-  op-supernode is in active development.
-  This page tracks the [op-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8) release candidate and the procedure may evolve before the stable release.
-  For background on what op-supernode is and why it exists, see the [supernode explainer](/op-stack/interop/supernode).
+  mc-supernode is in active development.
+  This page tracks the [mc-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8) release candidate and the procedure may evolve before the stable release.
+  For background on what mc-supernode is and why it exists, see the [supernode explainer](/op-stack/interop/supernode).
 </Info>
 
-This guide stands up a single op-supernode process from scratch: build the binary, wire each chain's execution client over the engine API, start the process, and verify that every chain in the dependency set is syncing.
-At the end, one op-supernode acts as the consensus layer for every chain it hosts, replacing a separate mc-node per chain.
+This guide stands up a single mc-supernode process from scratch: build the binary, wire each chain's execution client over the engine API, start the process, and verify that every chain in the dependency set is syncing.
+At the end, one mc-supernode acts as the consensus layer for every chain it hosts, replacing a separate mc-node per chain.
 
 This page covers getting to a running, verified process.
 For recommended production settings (beacon archiver fallbacks, execution-client retention, Light CL fleets, and HA pools), continue with the [supernode configuration guide](/node-operators/guides/configuration/supernode).
-Every flag used below is catalogued in the [op-supernode configuration reference](/node-operators/reference/op-supernode-config).
+Every flag used below is catalogued in the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config).
 
 ## Before you start
 
@@ -35,7 +35,7 @@ You need:
 *   **L1 endpoints.** An L1 JSON-RPC endpoint with the `eth` namespace enabled and an L1 beacon-node HTTP endpoint, shared by every chain. A beacon archiver fallback is strongly recommended; see [configuring a blob archiver](/node-operators/guides/management/blobs#configuring-a-blob-archiver).
 *   **The chain IDs of every chain the supernode will host.** For chains in mc-node's built-in network registry (for example `op-sepolia`, `unichain-sepolia`), the network name is enough. For any other chain, you need a rollup configuration JSON file per chain.
 
-## Build op-supernode
+## Build mc-supernode
 
 The binary is built from the Optimism Monorepo.
 The build environment is managed through [mise](https://mise.jdx.dev/), which installs the toolchains needed to build the monorepo; see [`mise.toml`](https://github.com/ethereum-optimism/optimism/blob/develop/mise.toml) at the monorepo root.
@@ -45,26 +45,26 @@ The build environment is managed through [mise](https://mise.jdx.dev/), which in
     ```bash
     git clone https://github.com/ethereum-optimism/optimism.git
     cd optimism
-    git checkout op-supernode/v0.2.2-rc.8
+    git checkout mc-supernode/v0.2.2-rc.8
     ```
   </Step>
 
   <Step title="Build the binary">
     ```bash
-    cd op-supernode
-    just op-supernode
+    cd mc-supernode
+    just mc-supernode
     ```
 
-    The binary is written to `op-supernode/bin/op-supernode`.
+    The binary is written to `mc-supernode/bin/mc-supernode`.
   </Step>
 
   <Step title="Confirm the build">
     ```bash
-    ./bin/op-supernode --version
+    ./bin/mc-supernode --version
     ```
 
     <Info>
-      The flag set is generated dynamically from the `--chains` list, so to inspect the full help output for your chains, run `./bin/op-supernode --chains=<chainIDs> --help`.
+      The flag set is generated dynamically from the `--chains` list, so to inspect the full help output for your chains, run `./bin/mc-supernode --chains=<chainIDs> --help`.
     </Info>
   </Step>
 </Steps>
@@ -91,16 +91,16 @@ Each chain's virtual node authenticates to that chain's execution client over th
   </Step>
 </Steps>
 
-## Start op-supernode
+## Start mc-supernode
 
 Start the supernode with the list of chain IDs, the shared L1 endpoints, and each chain's network identity and engine-API endpoint.
 The example below hosts OP Sepolia (chain ID `11155420`) and Unichain Sepolia (chain ID `1301`) with mc-reth execution clients.
 Fill in the placeholders, and add or remove the per-chain `--vn.<chainID>.*` groups to match your dependency set.
 
 ```bash
-./bin/op-supernode \
+./bin/mc-supernode \
   --chains=11155420,1301 \
-  --data-dir=/var/lib/op-supernode \
+  --data-dir=/var/lib/mc-supernode \
   --l1=<your-l1-eth-rpc> \
   --l1.beacon=<your-l1-beacon-rpc> \
   --l1.beacon-fallbacks=<your-l1-beacon-archiver-rpc> \
@@ -118,7 +118,7 @@ A few notes on the flags:
 
 *   For a chain that is not in mc-node's built-in network registry, replace `--vn.<chainID>.network` with `--vn.<chainID>.rollup.config=<path-to-rollup-config.json>`.
 *   The `--vn.<chainID>.l2.enginekind=reth` lines tell the supernode the execution client is mc-reth; the default is `geth`, so drop them if you run op-geth.
-*   P2P is enabled by default, with each virtual node's listen port chosen dynamically to avoid collisions. Set `--disable-p2p=true` when other nodes in your topology handle unsafe-head gossip; see [pair op-supernode with a Light CL fleet](/node-operators/guides/configuration/supernode#pair-op-supernode-with-a-light-cl-fleet).
+*   P2P is enabled by default, with each virtual node's listen port chosen dynamically to avoid collisions. Set `--disable-p2p=true` when other nodes in your topology handle unsafe-head gossip; see [pair mc-supernode with a Light CL fleet](/node-operators/guides/configuration/supernode#pair-op-supernode-with-a-light-cl-fleet).
 *   The JSON-RPC server listens on `0.0.0.0:8545` by default (`--rpc.addr` / `--rpc.port`). Like the mc-node RPC, it is not meant to be exposed to the public internet.
 *   Every flag has an environment-variable equivalent (`OP_SUPERNODE_*`). The [configuration guide's example configuration](/node-operators/guides/configuration/supernode#example-configuration) shows the same kind of setup in environment-variable form, and the [configuration reference](/node-operators/reference/op-supernode-config) lists the exact name for every flag.
 
@@ -175,6 +175,6 @@ A few notes on the flags:
 ## Next steps
 
 *   Harden the deployment with the [supernode configuration guide](/node-operators/guides/configuration/supernode): beacon archiver fallbacks, execution-client retention for backfill, Light CL fleets, and HA pools behind a consensus-aware proxyd.
-*   Look up any flag in the [op-supernode configuration reference](/node-operators/reference/op-supernode-config).
-*   Read the [supernode explainer](/op-stack/interop/supernode) for what op-supernode is and why it exists.
+*   Look up any flag in the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config).
+*   Read the [supernode explainer](/op-stack/interop/supernode) for what mc-supernode is and why it exists.
 *   Read the [interop prep notice](/notices/interop-prep) for the node-operator action checklist for the OP Sepolia and Unichain Sepolia activation.

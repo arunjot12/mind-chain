@@ -1,9 +1,9 @@
 package manage
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/upgrade"
-	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/upgrade"
+	"github.com/mindchain/mind-chain/mc-service/log/logcli"
 	"github.com/urfave/cli/v2"
 )
 

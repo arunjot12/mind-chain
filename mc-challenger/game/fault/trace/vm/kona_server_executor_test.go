@@ -5,8 +5,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -17,7 +17,7 @@ func TestKonaFillHostCommand(t *testing.T) {
 		L1Beacon:      "http://localhost:9000",
 		L2s:           []string{"http://localhost:9999"},
 		Server:        "./bin/mockserver",
-		Networks:      []string{"op-mainnet"},
+		Networks:      []string{"467294"},
 		L1GenesisPath: "mockdir/l1-genesis-1.json",
 	}
 	inputs := utils.LocalGameInputs{
@@ -45,4 +45,10 @@ func TestKonaFillHostCommand(t *testing.T) {
 	require.True(t, slices.Contains(args, "--claimed-l2-output-root"))
 	require.True(t, slices.Contains(args, "--claimed-l2-block-number"))
 	require.True(t, slices.Contains(args, "--l1-config-path"))
+	chainIDIdx := slices.Index(args, "--l2-chain-id")
+	require.Equal(t, "467294", args[chainIDIdx+1])
+
+	cfg.Networks = []string{"not-a-network"}
+	_, err = vmConfig.OracleCommand(cfg, dir, inputs)
+	require.ErrorIs(t, err, ErrNetworkUnknown)
 }

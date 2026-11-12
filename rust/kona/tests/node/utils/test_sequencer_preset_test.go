@@ -3,7 +3,7 @@ package node_utils
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/sysgo"
+	"github.com/mindchain/mind-chain/mc-devstack/sysgo"
 	"github.com/stretchr/testify/require"
 )
 

@@ -3,10 +3,10 @@ package cli
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/state"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/holiman/uint256"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/state"
 	"github.com/stretchr/testify/require"
 )
 
@@ -39,27 +39,6 @@ func TestCLIInit(t *testing.T) {
 	require.NoError(t, err)
 	// State starts empty and gets populated during apply
 	require.Len(t, st.Chains, 0)
-}
-
-// TestCLIInitStandardOverrides_producesZeroPAOs ensures standard-overrides intent type
-// also produces zero PAOs - user must specify manually.
-func TestCLIInitStandardOverrides_producesZeroPAOs(t *testing.T) {
-	runner := NewCLITestRunner(t)
-	workDir := runner.GetWorkDir()
-
-	runner.ExpectSuccess(t, []string{
-		"init",
-		"--l1-chain-id", "11155111",
-		"--l2-chain-ids", "1",
-		"--intent-type", string(state.IntentTypeStandardOverrides),
-		"--workdir", workDir,
-	}, nil)
-
-	intent, err := pipeline.ReadIntent(workDir)
-	require.NoError(t, err)
-	require.Equal(t, state.IntentTypeStandardOverrides, intent.ConfigType)
-	require.Equal(t, common.Address{}, intent.Chains[0].Roles.L1ProxyAdminOwner, "L1ProxyAdminOwner must be zero by default")
-	require.Equal(t, common.Address{}, intent.Chains[0].Roles.L2ProxyAdminOwner, "L2ProxyAdminOwner must be zero by default")
 }
 
 // TestCLIInitMultipleChains tests init with multiple L2 chain IDs

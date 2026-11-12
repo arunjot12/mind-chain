@@ -5,8 +5,8 @@ import (
 	"slices"
 	"sync"
 
-	keccakTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/types"
 	"github.com/ethereum/go-ethereum/common"
+	keccakTypes "github.com/mindchain/mind-chain/mc-challenger/game/keccak/types"
 )
 
 type OracleRegistry struct {

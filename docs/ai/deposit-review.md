@@ -86,23 +86,23 @@ It does not vendor them. `op-alloy-consensus` holds the wire format and the sour
 
 | Behavior | Specification | Go | Rust | Contracts |
 | --- | --- | --- | --- | --- |
-| `0x7E` wire format, encode, decode, hash | [Deposited transaction type](https://specs.optimism.io/protocol/deposits.html#the-deposited-transaction-type) | `op-core/types`: `DepositTx`, `MarshalBinary`, `UnmarshalDepositTx`, `Hash` | `op-alloy-consensus`: `TxDeposit`, `OpTxType`; `op-revm`: `DepositTransactionParts`, `DEPOSIT_TRANSACTION_TYPE` | `OptimismPortal2`: `TransactionDeposited` |
-| Typed-envelope dispatch, including every fallback | [Deposited transaction type](https://specs.optimism.io/protocol/deposits.html#the-deposited-transaction-type) | `op-core/types`: `UnmarshalDepositTx`, the JSON transaction decoder | `op-alloy-consensus`: `OpTxEnvelope`, `OpPooledTransaction`, `fallback_decode`; `reth-optimism-primitives`: the `Decodable2718` table for `OpTransactionSigned` | n/a |
+| `0x7E` wire format, encode, decode, hash | [Deposited transaction type](https://specs.optimism.io/protocol/deposits.html#the-deposited-transaction-type) | `mc-core/types`: `DepositTx`, `MarshalBinary`, `UnmarshalDepositTx`, `Hash` | `op-alloy-consensus`: `TxDeposit`, `OpTxType`; `op-revm`: `DepositTransactionParts`, `DEPOSIT_TRANSACTION_TYPE` | `OptimismPortal2`: `TransactionDeposited` |
+| Typed-envelope dispatch, including every fallback | [Deposited transaction type](https://specs.optimism.io/protocol/deposits.html#the-deposited-transaction-type) | `mc-core/types`: `UnmarshalDepositTx`, the JSON transaction decoder | `op-alloy-consensus`: `OpTxEnvelope`, `OpPooledTransaction`, `fallback_decode`; `reth-mind-chain-primitives`: the `Decodable2718` table for `OpTransactionSigned` | n/a |
 | Source hash domains | [Source hash computation](https://specs.optimism.io/protocol/deposits.html#source-hash-computation) | `mc-node/rollup/derive`: `UserDepositSource`, `L1InfoDepositSource`, `UpgradeDepositSource` | `op-alloy-consensus`: `DepositSourceDomain`, `UserDepositSource`, `L1InfoDepositSource`, `UpgradeDepositSource`. Kona holds no second implementation. | n/a |
 | Deposit log decode and the derived fields | [User-deposited transactions](https://specs.optimism.io/protocol/deposits.html#user-deposited-transactions) | `mc-node/rollup/derive`: `UnmarshalDepositLogEvent`, `unmarshalDepositVersion0`, `MarshalDepositLogEvent` | `kona-protocol`: `decode_deposit`, `DepositError` | `OptimismPortal2`: `depositTransaction`, the `opaqueData` packing |
 | Per-block deposit list | [Kinds of deposited transactions](https://specs.optimism.io/protocol/deposits.html#kinds-of-deposited-transactions) | `mc-node/rollup/derive`: `UserDeposits`, `DeriveDeposits` | `kona-derive`: `StatefulAttributesBuilder`, `derive_deposits` | n/a |
 | Transaction order in the block | [Kinds of deposited transactions](https://specs.optimism.io/protocol/deposits.html#kinds-of-deposited-transactions) | `mc-node/rollup/derive`: `PreparePayloadAttributes` | `kona-derive`: `prepare_payload_attributes` | n/a |
 | L1 attributes deposit and calldata | [L1 attributes deposited transaction](https://specs.optimism.io/protocol/deposits.html#l1-attributes-deposited-transaction), [Ecotone L1 attributes](https://specs.optimism.io/protocol/ecotone/l1-attributes.html) | `mc-node/rollup/derive`: `L1InfoDeposit`, `L1InfoDepositBytes`, `L1InfoDepositerAddress`, the per-fork marshal functions | `kona-protocol`: `L1BlockInfoTx`, `try_new_with_deposit_tx`, `encode_calldata`, `decode_calldata`, `L1_INFO_DEPOSITOR_ADDRESS` | `L1Block`: the `setL1BlockValues` functions, `DEPOSITOR_ACCOUNT` |
 | Network upgrade deposits | The upgrade-transaction section of each fork specification, [L2 upgrades](https://specs.optimism.io/protocol/l2-upgrades-1-execution.html) | `mc-node/rollup/derive`: `UpgradeTransactions`, `UpgradeGas`, `nutBundleForFork`, the Lagoon activation transactions | `kona-hardforks`: the per-fork upgrade types; `op-alloy-consensus`: the NUT bundle conversion | `NetworkUpgradeTxns` |
-| Upgrade bundle data | [L2 upgrades](https://specs.optimism.io/protocol/l2-upgrades-1-execution.html) | `op-core/nuts/bundles`: the per-fork NUT bundle JSON, shared by both clients | the same JSON files | n/a |
+| Upgrade bundle data | [L2 upgrades](https://specs.optimism.io/protocol/l2-upgrades-1-execution.html) | `mc-core/nuts/bundles`: the per-fork NUT bundle JSON, shared by both clients | the same JSON files | n/a |
 | Validation and authorization | [Validation and authorization](https://specs.optimism.io/protocol/deposits.html#validation-and-authorization-of-deposited-transactions) | n/a | `op-revm`: `validate_env`, `validate_initial_tx_gas` | `OptimismPortal2`: `depositTransaction` |
 | Mint, caller deduction, nonce | [Execution](https://specs.optimism.io/protocol/deposits.html#execution), [Nonce handling](https://specs.optimism.io/protocol/deposits.html#nonce-handling) | n/a | `op-revm`: `validate_against_state_and_deduct_caller` | `OptimismPortal2`, `ETHLockbox` |
 | Gas result, refunds, system transactions | [Execution](https://specs.optimism.io/protocol/deposits.html#execution), [Regolith](https://specs.optimism.io/protocol/regolith/overview.html) | n/a | `op-revm`: `last_frame_result`, `refund`, `tx_gas`; `alloy-op-evm`: `validate_block_gas` | `ResourceMetering`: `metered`, `useGas` |
 | Fee exemptions | [Execution](https://specs.optimism.io/protocol/deposits.html#execution) | n/a | `op-revm`: `reward_beneficiary`, `reimburse_caller` | n/a |
 | Post-exec refund eligibility | [Lagoon post-exec](https://specs.optimism.io/protocol/lagoon/post-exec.html), [Lagoon SDM](https://specs.optimism.io/protocol/lagoon/sdm.html) | n/a | `alloy-op-evm`: `post_exec_settlement_deltas`, `sanitize_producer_refund`, `verifier_post_exec_refund_for_tx` | n/a |
 | Failure semantics | [Execution](https://specs.optimism.io/protocol/deposits.html#execution) | n/a | `op-revm`: `execution_result`, `catch_error_failed_deposit` | n/a |
-| Deposit receipt fields | [Deposit receipt](https://specs.optimism.io/protocol/deposits.html#deposit-receipt), [Canyon](https://specs.optimism.io/protocol/canyon/overview.html) | `op-core/types`: `depositReceiptRLP`, `MarshalBinary` | `op-alloy-consensus`: `OpDepositReceipt`; `alloy-op-evm`: the receipt build; `reth-optimism-evm`: `strip_deposit_nonce`; `reth-optimism-rpc`: the RPC receipt build | n/a |
-| Receipts-root encoding | [Deposit receipt](https://specs.optimism.io/protocol/deposits.html#deposit-receipt), [Canyon](https://specs.optimism.io/protocol/canyon/overview.html) | `op-core/types`: `Receipts.EncodeIndex` | `reth-optimism-consensus`: `calculate_receipt_root_optimism`; `kona-executor`: `compute_receipts_root` | n/a |
+| Deposit receipt fields | [Deposit receipt](https://specs.optimism.io/protocol/deposits.html#deposit-receipt), [Canyon](https://specs.optimism.io/protocol/canyon/overview.html) | `mc-core/types`: `depositReceiptRLP`, `MarshalBinary` | `op-alloy-consensus`: `OpDepositReceipt`; `alloy-op-evm`: the receipt build; `reth-mind-chain-evm`: `strip_deposit_nonce`; `reth-mind-chain-rpc`: the RPC receipt build | n/a |
+| Receipts-root encoding | [Deposit receipt](https://specs.optimism.io/protocol/deposits.html#deposit-receipt), [Canyon](https://specs.optimism.io/protocol/canyon/overview.html) | `mc-core/types`: `Receipts.EncodeIndex` | `reth-mind-chain-consensus`: `calculate_receipt_root_optimism`; `kona-executor`: `compute_receipts_root` | n/a |
 | Address aliasing | [Address aliasing](https://specs.optimism.io/protocol/deposits.html#address-aliasing) | n/a | n/a | `AddressAliasHelper`: `applyL1ToL2Alias`, `undoL1ToL2Alias` |
 | Guaranteed gas | [Guaranteed gas market](https://specs.optimism.io/protocol/guaranteed-gas-market.html) | n/a | n/a | `ResourceMetering` |
 | Fault-proof execution environment | [Deposits](https://specs.optimism.io/protocol/deposits.html) | n/a | `kona-client`: the FPVM transaction environment; `kona-executor`: the block builder | n/a |
@@ -111,7 +111,7 @@ The fault-proof executor holds no separate deposit execution rules.
 It uses `alloy-op-evm` and `op-revm`, so an execution finding usually affects both clients.
 
 The receipts-root encoding is the exception.
-Three implementations reproduce it: mc-node in Go, `reth-optimism-consensus`, and `kona-executor`.
+Three implementations reproduce it: mc-node in Go, `reth-mind-chain-consensus`, and `kona-executor`.
 Each one applies the Regolith-to-Canyon nonce strip with its own fork predicate.
 Compare all three when a change touches the deposit receipt.
 
@@ -130,10 +130,10 @@ Check whether a change needs a new case in one of these:
 | --- | --- |
 | Go and Rust upgrade-deposit bytes | `ops/scripts`: the interop deposits diff script and its two dump commands |
 | Deposit gas parity against the proof | `rust/kona/tests/proofs`: `TestDepositGasParity` |
-| `0x7E` encoding and hash against op-geth | `op-core/types`: `TestDepositTxMarshalBinaryDifferential`, `TestDepositHashParity` |
+| `0x7E` encoding and hash against op-geth | `mc-core/types`: `TestDepositTxMarshalBinaryDifferential`, `TestDepositHashParity` |
 | Execution golden vectors | `revm-ee-tests`: the deposit and halted-deposit vectors |
 | Karst cap exemption | `alloy-op-evm`: the deposit gas-cap test |
-| Mint on a reverted deposit | `op-e2e/system/bridge`: `TestMintOnRevertedDeposit` |
+| Mint on a reverted deposit | `mc-e2e/system/bridge`: `TestMintOnRevertedDeposit` |
 
 ## Inherited rules
 

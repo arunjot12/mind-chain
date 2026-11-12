@@ -1,8 +1,8 @@
 package kvstore
 
 import (
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
 	"github.com/ethereum/go-ethereum/common"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 )
 
 type PreimageSource func(key common.Hash) ([]byte, error)

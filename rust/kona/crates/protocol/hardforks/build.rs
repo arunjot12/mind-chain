@@ -1,6 +1,6 @@
 //! Build script for `kona-hardforks`.
 //!
-//! Reads NUT bundle JSON files from `op-core/nuts/bundles/` and generates Rust source
+//! Reads NUT bundle JSON files from `mc-core/nuts/bundles/` and generates Rust source
 //! that constructs [`op_alloy_consensus::NutBundle`] values at runtime without serde.
 //!
 //! The parsing and codegen logic lives in [`build_helpers`] so it can be shared
@@ -31,22 +31,22 @@ fn run() -> Result<()> {
     let manifest_dir =
         PathBuf::from(env::var("CARGO_MANIFEST_DIR").context("CARGO_MANIFEST_DIR not set")?);
 
-    // Probe for the karst bundle file rather than the `op-core/` directory: Docker
-    // bind-mounts auto-create empty `op-core/` ancestor stubs on the host, and an
-    // `is_dir()` check picks those up before reaching the real op-core at the
+    // Probe for the karst bundle file rather than the `mc-core/` directory: Docker
+    // bind-mounts auto-create empty `mc-core/` ancestor stubs on the host, and an
+    // `is_dir()` check picks those up before reaching the real mc-core at the
     // monorepo root. Probing for a known file inside the bundle path skips the stubs.
     let monorepo_root = manifest_dir
         .ancestors()
-        .find(|p| p.join("op-core/nuts/bundles/karst_nut_bundle.json").is_file())
+        .find(|p| p.join("mc-core/nuts/bundles/karst_nut_bundle.json").is_file())
         .ok_or_else(|| {
             anyhow!(
-                "could not find op-core/nuts/bundles/karst_nut_bundle.json in any ancestor of {}",
+                "could not find mc-core/nuts/bundles/karst_nut_bundle.json in any ancestor of {}",
                 manifest_dir.display()
             )
         })?
         .to_path_buf();
 
-    let karst_bundle = monorepo_root.join("op-core/nuts/bundles/karst_nut_bundle.json");
+    let karst_bundle = monorepo_root.join("mc-core/nuts/bundles/karst_nut_bundle.json");
     println!("cargo::rerun-if-changed={}", karst_bundle.display());
     generate("karst", &karst_bundle, &out_dir).context("generate karst bundle")?;
 
@@ -56,7 +56,7 @@ fn run() -> Result<()> {
     // `fork_name: "Interop"` stay unchanged — they feed deposit source_hash
     // derivation and must match op-node, which keeps `bundleLabel = "interop"`
     // in op-node/rollup/derive/upgrade_transaction.go for the same reason.
-    let lagoon_bundle = monorepo_root.join("op-core/nuts/bundles/lagoon_nut_bundle.json");
+    let lagoon_bundle = monorepo_root.join("mc-core/nuts/bundles/lagoon_nut_bundle.json");
     println!("cargo::rerun-if-changed={}", lagoon_bundle.display());
     generate("interop", &lagoon_bundle, &out_dir).context("generate interop bundle")?;
 

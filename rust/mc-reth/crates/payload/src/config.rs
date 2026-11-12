@@ -1,7 +1,7 @@
 //! Additional configuration for the OP builder
 
 use crate::sdm_metrics;
-use reth_optimism_txpool::interop::InteropFailsafe;
+use reth_mind_chain_txpool::interop::InteropFailsafe;
 use std::sync::{
     Arc,
     atomic::{AtomicBool, AtomicU64, Ordering},

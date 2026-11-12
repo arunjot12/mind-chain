@@ -2,7 +2,7 @@
 # One block per subcommand path; arguments in clap definition order, hidden ones
 # included. Platform- and build-specific defaults are normalized to placeholders.
 # Regenerate with:
-#   UPDATE_SNAPSHOT=1 cargo nextest run -p reth-optimism-cli --all-features cli_surface_snapshot
+#   UPDATE_SNAPSHOT=1 cargo nextest run -p reth-mind-chain-cli --all-features cli_surface_snapshot
 
 == mc-reth
 command: [arg-required-else-help] [subcommand-required]

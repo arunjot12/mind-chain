@@ -11,8 +11,8 @@ production launch with the two properties that are hard to retrofit: a
 fault-proof system that secures withdrawals from day one, and a sequencer
 topology with no single point of failure. It involves `mc-deployer` and your
 chain's dispute game contracts on L1, a cluster of `mc-node` + `mc-reth`
-sequencers managed by `op-conductor`, and the L1-facing services
-(`mc-batcher`, `mc-proposer`, `mc-challenger`, `op-dispute-mon`) that keep
+sequencers managed by `mc-conductor`, and the L1-facing services
+(`mc-batcher`, `mc-proposer`, `mc-challenger`, `mc-dispute-mon`) that keep
 the chain posting, proposing, and defended.
 
 ## Is this guide for you?
@@ -30,7 +30,7 @@ If you are deploying an OP Stack chain for the first time, run the
 on a testnet first; this guide assumes that experience and adds the
 production decisions on top. If your chain is already live and you only want
 to add sequencer high availability, skip to Step 4 and the
-[op-conductor setup guide](/chain-operators/tools/op-conductor/setup). If
+[mc-conductor setup guide](/chain-operators/tools/mc-conductor/setup). If
 your chain is already live on permissioned fault proofs and you want to go
 permissionless, go straight to the
 [permissionless migration tutorial](/chain-operators/tutorials/migrating-permissionless).
@@ -51,7 +51,7 @@ You should already have:
     [key management guide](/chain-operators/guides/management/key-management).
 *   Infrastructure that can run three sequencer nodes in separate failure
     domains (regions or availability zones) on a private network, plus the
-    supporting services. op-conductor's RPC does no authentication, so the
+    supporting services. mc-conductor's RPC does no authentication, so the
     cluster must not be publicly reachable.
 
 ## Step 1: Understand what launch day ships
@@ -100,8 +100,8 @@ monitoring all take it as configuration.
 
 A single sequencer is a single point of failure for the whole chain: when
 it stops, no new unsafe blocks exist for anyone. The OP Stack's
-high-availability answer is `op-conductor`. Read the
-[OP Conductor explainer](/chain-operators/tools/op-conductor) and take away:
+high-availability answer is `mc-conductor`. Read the
+[OP Conductor explainer](/chain-operators/tools/mc-conductor) and take away:
 
 *   Each sequencer runs a conductor alongside it; the conductors form a Raft
     cluster, and the Raft leader is the one sequencer allowed to produce and
@@ -130,7 +130,7 @@ sequencer.
 
 Stand up the three sequencers (each an `mc-node` + `mc-reth` pair with a
 conductor beside it), then form the cluster. The
-[op-conductor setup guide](/chain-operators/tools/op-conductor/setup) is the
+[mc-conductor setup guide](/chain-operators/tools/mc-conductor/setup) is the
 canonical stop; follow it end to end and take away:
 
 *   The bootstrap shape: exactly one conductor starts with
@@ -152,7 +152,7 @@ canonical stop; follow it end to end and take away:
 The setup guide is written for adding conductor to an already-running
 network with a blue/green deployment; for a chain that is not live yet, the
 same sequence applies without the zero-downtime choreography, and the
-[op-conductor runbook](https://github.com/ethereum-optimism/optimism/blob/develop/op-conductor/RUNBOOK.md)
+[mc-conductor runbook](https://github.com/ethereum-optimism/optimism/blob/develop/op-conductor/RUNBOOK.md)
 covers bootstrapping a cluster from scratch (in-repo document on `develop`,
 as of 2026-07-21).
 
@@ -184,7 +184,7 @@ challenger and monitoring you battle-test now are a precondition for the
 permissionless switch. Follow the
 [run a fault-proof challenger guide](/use-cases/run-a-fault-proof-challenger),
 which covers bond budgeting, prestate selection, the four infrastructure
-endpoints, and monitoring with `op-dispute-mon`, and take away one
+endpoints, and monitoring with `mc-dispute-mon`, and take away one
 launch-specific point: in the permissioned game, only addresses holding the
 proposer or challenger role can participate in disputes, so the challenger
 must sign with the challenger role address from your Step 2 intent. For the
@@ -259,7 +259,7 @@ Confirm each property you paid for, before users depend on it:
 *   **Posting and proposing**: batcher transactions land on L1 at the
     expected cadence and the safe head advances; the `DisputeGameFactory`
     shows new games from your proposer address at the proposal interval.
-*   **Defense**: `op-dispute-mon` tracks the games your proposer creates,
+*   **Defense**: `mc-dispute-mon` tracks the games your proposer creates,
     and the challenger's logs show it monitoring them (the
     [challenger guide's verification step](/use-cases/run-a-fault-proof-challenger#step-7-verify-the-challenger-is-defending)
     has the full checklist).
@@ -268,10 +268,10 @@ Confirm each property you paid for, before users depend on it:
 
 ## Next steps
 
-*   [op-conductor runbook](https://github.com/ethereum-optimism/optimism/blob/develop/op-conductor/RUNBOOK.md):
+*   [mc-conductor runbook](https://github.com/ethereum-optimism/optimism/blob/develop/op-conductor/RUNBOOK.md):
     disaster-recovery procedures and manual overrides for every failure mode
     the cluster can enter. In-repo document on `develop`, as of 2026-07-21.
-*   [op-conductor configuration and RPC reference](/chain-operators/tools/op-conductor/reference):
+*   [mc-conductor configuration and RPC reference](/chain-operators/tools/mc-conductor/reference):
     the flag and RPC catalogue behind Steps 4 and 8.
 *   [op-conductor-ops](https://github.com/ethereum-optimism/infra/tree/main/op-conductor-ops):
     the operational CLI for inspecting and driving a conductor cluster, and

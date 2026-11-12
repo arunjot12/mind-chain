@@ -167,7 +167,7 @@ mnemonic, or op-signer).
 A challenger that silently stops is worse than none, because you believe you
 are defended. Read the
 [dispute-mon section of chain monitoring](/chain-operators/tools/chain-monitoring#dispute-mon)
-and take away that `op-dispute-mon` tracks the status of every game over the
+and take away that `mc-dispute-mon` tracks the status of every game over the
 last 28 days and is considered essential for production challenger
 deployments. Alert on two conditions at minimum: games the monitor flags as
 resolving against your chain, and the challenger's account balance falling
@@ -208,6 +208,6 @@ Give the challenger a few minutes against live games, then confirm each layer:
     reason about what a correct response is.
 *   [Bond incentives specification](https://specs.optimism.io/fault-proof/stage-one/bond-incentives.html?utm_source=op-docs&utm_medium=docs):
     the required-bond formula behind Step 2's budget.
-*   [op-dispute-mon](https://github.com/ethereum-optimism/optimism/tree/develop/op-dispute-mon):
+*   [mc-dispute-mon](https://github.com/ethereum-optimism/optimism/tree/develop/op-dispute-mon):
     the monitoring service from Step 6. In-repo document on `develop`, as of
     2026-07-18.

@@ -3,15 +3,15 @@ package outputs
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/alphabet"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/split"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/alphabet"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/split"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 func NewOutputAlphabetTraceAccessor(

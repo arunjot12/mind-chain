@@ -11,8 +11,8 @@ import (
 
 	"github.com/klauspost/compress/zstd"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 //go:embed forge-artifacts

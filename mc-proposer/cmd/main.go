@@ -4,18 +4,18 @@ import (
 	"context"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/mc-proposer/flags"
-	"github.com/ethereum-optimism/optimism/mc-proposer/metrics"
-	"github.com/ethereum-optimism/optimism/mc-proposer/proposer"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
+	"github.com/mindchain/mind-chain/mc-proposer/flags"
+	"github.com/mindchain/mind-chain/mc-proposer/metrics"
+	"github.com/mindchain/mind-chain/mc-proposer/proposer"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log/logcli"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
 )
 
 var (

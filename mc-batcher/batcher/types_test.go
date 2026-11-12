@@ -6,10 +6,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	opfees "github.com/ethereum-optimism/optimism/op-core/fees"
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	derivetest "github.com/ethereum-optimism/optimism/mc-node/rollup/derive/test"
-	"github.com/ethereum-optimism/optimism/op-service/bigs"
+	opfees "github.com/mindchain/mind-chain/mc-core/fees"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	derivetest "github.com/mindchain/mind-chain/mc-node/rollup/derive/test"
+	"github.com/mindchain/mind-chain/mc-service/bigs"
 )
 
 // TestSizedBlockParity pins that the payload-based size estimates equal the

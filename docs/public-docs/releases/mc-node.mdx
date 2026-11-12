@@ -215,7 +215,7 @@ Operators that rely on Req/Resp sync should explicitly set the flag to `true` an
    * mc-node: disable Req/Resp p2p sync by default (`--syncmode.req-resp=false`). Operators that rely on Req/Resp sync should explicitly set the flag to `true` ([#18088](https://github.com/ethereum-optimism/optimism/pull/18088))
    * all: upgrade the bundled op-geth dependency for this release candidate ([#19844](https://github.com/ethereum-optimism/optimism/pull/19844))
    * supernode: use denylist output when computing `OptimisticOutputRoot`, improving optimistic output behavior around invalidated blocks ([#19880](https://github.com/ethereum-optimism/optimism/pull/19880))
-   * op-service / flashblocks: refactor flashblocks coverage and fix a shutdown race in the flashblock client ([#19942](https://github.com/ethereum-optimism/optimism/pull/19942),
+   * mc-service / flashblocks: refactor flashblocks coverage and fix a shutdown race in the flashblock client ([#19942](https://github.com/ethereum-optimism/optimism/pull/19942),
  [#19950](https://github.com/ethereum-optimism/optimism/pull/19950))
    * feat(nuts): add `update-nuts` and `verify-nuts` commands for bundle snapshotting and provenance verification ([#19463](https://github.com/ethereum-optimism/optimism/pull/19463))
    * fault proof test infra: migrate end-to-end fault proof coverage from `CANNON` to `CANNON_KONA` ([#19791](https://github.com/ethereum-optimism/optimism/pull/19791))
@@ -288,7 +288,7 @@ This is a maintenance release.
   ## What's Changed in mc-node/v1.16.6
 
   * all: upgrade op-geth (upstream v1.16.8) by @joshklop in [#18338](https://github.com/ethereum-optimism/optimism/pull/18338)
-  * op-supernode: multiplex metrics by chain_id label and serve at a single endpoint by @geoknee in [#18750](https://github.com/ethereum-optimism/optimism/pull/18750)
+  * mc-supernode: multiplex metrics by chain_id label and serve at a single endpoint by @geoknee in [#18750](https://github.com/ethereum-optimism/optimism/pull/18750)
 
   **Full Changelog**: https://github.com/ethereum-optimism/optimism/compare/op-node/v1.16.5...op-node/v1.16.6
 

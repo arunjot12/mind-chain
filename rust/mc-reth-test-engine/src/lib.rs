@@ -1,7 +1,7 @@
 //! `mc-reth-test-engine`: a library-first, ephemeral, OP-flavored execution layer for tests.
 //!
 //! Tests drive this as a library (Rust action tests, fuzzers, replays) or, via the companion
-//! binary, as a subprocess over a Unix socket (Go action tests). It exists so `op-e2e/actions`
+//! binary, as a subprocess over a Unix socket (Go action tests). It exists so `mc-e2e/actions`
 //! can run an OP-flavored execution layer without embedding op-geth in-process.
 
 mod chain;
@@ -12,7 +12,7 @@ use alloy_consensus::Header;
 use alloy_genesis::Genesis;
 use alloy_primitives::B256;
 use reth_db_common::init::InitStorageError;
-use reth_optimism_primitives::{OpBlock, OpReceipt};
+use reth_mind_chain_primitives::{OpBlock, OpReceipt};
 use reth_provider::ProviderError;
 
 /// Errors produced by the test engine.

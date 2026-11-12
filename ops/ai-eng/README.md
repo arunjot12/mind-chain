@@ -1,10 +1,10 @@
 # AI Engineering Tools
 
-> Collection of AI-driven automation systems for Optimism engineering workflows
+> Collection of AI-driven automation systems for Mind Chain engineering workflows
 
 ## Overview
 
-This directory contains AI-powered tools designed to automate and improve engineering processes across the Optimism monorepo. Each project uses AI to handle repetitive tasks, maintain code quality, and enhance developer productivity.
+This directory contains AI-powered tools designed to automate and improve engineering processes across the Mind Chain monorepo. Each project uses AI to handle repetitive tasks, maintain code quality, and enhance developer productivity.
 
 ## Projects
 

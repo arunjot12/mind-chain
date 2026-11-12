@@ -8,7 +8,7 @@ use alloy_rpc_types_engine::PayloadId;
 use op_alloy_rpc_types_engine::{
     OpFlashblockPayloadBase, OpFlashblockPayloadDelta, OpFlashblockPayloadMetadata,
 };
-use reth_optimism_flashblocks::{
+use reth_mind_chain_flashblocks::{
     CanonicalBlockNotification, FlashBlock, FlashBlockCompleteSequence, InProgressFlashBlockRx,
     PendingBlockState,
     validation::{CanonicalBlockFingerprint, ReconciliationStrategy},

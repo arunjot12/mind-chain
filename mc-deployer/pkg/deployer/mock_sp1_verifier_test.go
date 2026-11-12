@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/testutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/testutil"
 	"github.com/stretchr/testify/require"
 )
 

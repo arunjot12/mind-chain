@@ -3,7 +3,7 @@ use alloy_primitives::B256;
 use alloy_rpc_types_engine::PayloadStatusEnum;
 use op_alloy_rpc_types_engine::{OpExecutionData, OpExecutionPayloadEnvelope};
 use reth_engine_primitives::ConsensusEngineHandle;
-use reth_optimism_payload_builder::OpPayloadTypes;
+use reth_mind_chain_payload_builder::OpPayloadTypes;
 use reth_payload_primitives::{ExecutionPayload, PayloadTypes};
 use tracing::*;
 
@@ -181,7 +181,7 @@ impl TryFrom<&FlashBlockCompleteSequence> for OpExecutionData {
     }
 }
 
-impl TryFrom<&FlashBlockCompleteSequence> for reth_optimism_payload_builder::OpExecData {
+impl TryFrom<&FlashBlockCompleteSequence> for reth_mind_chain_payload_builder::OpExecData {
     type Error = &'static str;
 
     fn try_from(sequence: &FlashBlockCompleteSequence) -> Result<Self, Self::Error> {

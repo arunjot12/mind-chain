@@ -10,13 +10,13 @@ use reth_db_common::init::init_genesis;
 use reth_ethereum_primitives::{Block, BlockBody, Receipt, Transaction, TransactionSigned};
 use reth_evm::{ConfigureEvm, execute::Executor};
 use reth_evm_ethereum::EthEvmConfig;
-use reth_node_api::{NodePrimitives, NodeTypesWithDB};
-use reth_optimism_trie::{
+use reth_mind_chain_trie::{
     MdbxProofsStorage, OpProofStoragePruner, OpProofsProviderRO, OpProofsStorage, OpProofsStore,
     RethTrieStorageLayout,
     engine::{EngineError, EngineHandle},
     initialize::InitializationJob,
 };
+use reth_node_api::{NodePrimitives, NodeTypesWithDB};
 use reth_primitives_traits::{Block as _, RecoveredBlock};
 use reth_provider::{
     BlockWriter as _, ExecutionOutcome, HashedPostStateProvider, LatestStateProviderRef,

@@ -3,8 +3,8 @@ package batcher
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-batcher/compressor"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-batcher/compressor"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 )
 
 type ChannelConfig struct {

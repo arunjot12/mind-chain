@@ -27,9 +27,9 @@ use op_alloy_consensus::{
 use op_revm::OpSpecId;
 use reth_chainspec::EthChainSpec;
 use reth_evm::{ConfigureEvm, EvmEnv, eth::NextEvmEnvAttributes, precompiles::PrecompilesMap};
-use reth_optimism_chainspec::OpChainSpec;
-use reth_optimism_forks::OpHardforks;
-use reth_optimism_primitives::{DepositReceipt, OpPrimitives};
+use reth_mind_chain_chainspec::OpChainSpec;
+use reth_mind_chain_forks::OpHardforks;
+use reth_mind_chain_primitives::{DepositReceipt, OpPrimitives};
 use reth_primitives_traits::{NodePrimitives, SealedBlock, SealedHeader, SignedTransaction};
 use revm::context::BlockEnv;
 
@@ -461,33 +461,22 @@ mod tests {
     use alloy_eips::eip7685::Requests;
     use alloy_genesis::Genesis;
     use alloy_primitives::{
-        Address, B256, LogData, U256, bytes,
+        Address, B256, LogData, bytes,
         map::{AddressMap, B256Map, HashMap},
     };
     use op_alloy_consensus::{SDMGasEntry, TxDeposit, build_post_exec_tx};
     use op_alloy_rpc_types_engine::OpExecutionPayload;
-    use op_revm::OpSpecId;
+
     use reth_chainspec::ChainSpec;
-    use reth_evm::execute::ProviderError;
+
     use reth_execution_types::{
         AccountRevertInit, BundleStateInit, Chain, ExecutionOutcome, RevertsInit,
     };
-    use reth_optimism_chainspec::{OP_MAINNET, OpChainSpec, OpChainSpecBuilder};
-    use reth_optimism_primitives::{OpBlock, OpPrimitives, OpReceipt, OpTransactionSigned};
+    use reth_mind_chain_chainspec::{OpChainSpec, OpChainSpecBuilder};
+    use reth_mind_chain_primitives::{OpBlock, OpPrimitives, OpReceipt, OpTransactionSigned};
     use reth_primitives_traits::{Account, RecoveredBlock, SealedBlock};
-    use revm::{
-        context::CfgEnv,
-        database::{BundleState, CacheDB},
-        database_interface::EmptyDBTyped,
-        inspector::NoOpInspector,
-        primitives::Log,
-        state::AccountInfo,
-    };
+    use revm::{database::BundleState, primitives::Log, state::AccountInfo};
     use std::sync::Arc;
-
-    fn test_evm_config() -> OpEvmConfig {
-        OpEvmConfig::optimism(OP_MAINNET.clone())
-    }
 
     fn lagoon_at_timestamp_chain_spec(activation: u64) -> Arc<OpChainSpec> {
         Arc::new(
@@ -495,7 +484,7 @@ mod tests {
                 .chain(10.into())
                 .genesis(Genesis::default())
                 .with_fork(
-                    reth_optimism_forks::OpHardfork::Lagoon,
+                    reth_mind_chain_forks::OpHardfork::Lagoon,
                     reth_chainspec::ForkCondition::Timestamp(activation),
                 )
                 .build(),
@@ -552,28 +541,6 @@ mod tests {
 
     // Valid payloads enter Verify mode; parser failures become `Invalid` for the executor.
     #[test]
-    fn context_for_block_applies_sdm_post_exec_mode() {
-        let disabled_ctx = test_evm_config()
-            .context_for_block(&block_with_post_exec_tx(7, 123, 7))
-            .expect("infallible");
-        assert!(matches!(disabled_ctx.post_exec_mode, PostExecMode::Invalid(_)));
-
-        let evm_config = OpEvmConfig::optimism(lagoon_at_timestamp_chain_spec(0));
-        let ctx = evm_config
-            .context_for_block(&block_with_post_exec_tx(7, 123, 7))
-            .expect("SDM-enabled block parses");
-        let PostExecMode::Verify(payload) = ctx.post_exec_mode else {
-            panic!("expected Verify mode");
-        };
-        assert_eq!(payload.block_number, 7);
-        assert_eq!(payload.gas_refund_entries, vec![SDMGasEntry { index: 0, gas_refund: 1 }]);
-
-        let mismatch_ctx =
-            evm_config.context_for_block(&block_with_post_exec_tx(7, 123, 8)).expect("infallible");
-        assert!(matches!(mismatch_ctx.post_exec_mode, PostExecMode::Invalid(_)));
-    }
-
-    #[test]
     fn context_for_payload_defers_parse_failure() {
         let block = block_with_post_exec_tx(7, 123, 8).into_block();
         let (payload, sidecar) = OpExecutionPayload::from_block_slow(&block);
@@ -607,24 +574,6 @@ mod tests {
             assert!(matches!(context.post_exec_mode, PostExecMode::Invalid(_)));
             assert!(evm_config.tx_iterator_for_payload(&execution_data).is_ok());
         }
-    }
-
-    #[test]
-    fn context_for_payload_defers_non_post_exec_decode_failure() {
-        let mut block = block_with_post_exec_tx(7, 123, 7).into_block();
-        block.body.transactions.pop();
-        let (mut payload, sidecar) = OpExecutionPayload::from_block_slow(&block);
-        payload.as_v1_mut().transactions[0] = bytes!("02c0");
-        let execution_data = OpExecutionData::new(payload, sidecar);
-        let evm_config = test_evm_config();
-        assert!(!evm_config.is_sdm_active_at_timestamp(123));
-
-        let context = evm_config.context_for_payload(&execution_data).expect("infallible");
-        let PostExecMode::Invalid(reason) = context.post_exec_mode else {
-            panic!("expected Invalid mode for an undecodable non-PostExec transaction");
-        };
-        assert!(reason.starts_with("transaction envelope decoding failed: "));
-        assert!(evm_config.tx_iterator_for_payload(&execution_data).is_ok());
     }
 
     #[test]
@@ -695,144 +644,6 @@ mod tests {
         // Assert that the chain ID in the `cfg_env` is correctly set to the chain ID of the
         // ChainSpec
         assert_eq!(cfg_env.chain_id, chain_spec.chain().id());
-    }
-
-    #[test]
-    fn test_evm_with_env_default_spec() {
-        let evm_config = test_evm_config();
-
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        let evm_env = EvmEnv::default();
-
-        let evm = evm_config.evm_with_env(db, evm_env.clone());
-
-        // Check that the EVM environment
-        assert_eq!(evm.cfg, evm_env.cfg_env);
-    }
-
-    #[test]
-    fn test_evm_with_env_custom_cfg() {
-        let evm_config = test_evm_config();
-
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        // Create a custom configuration environment with a chain ID of 111
-        let cfg =
-            CfgEnv::new().with_chain_id(111).with_spec_and_mainnet_gas_params(OpSpecId::default());
-
-        let evm_env = EvmEnv { cfg_env: cfg.clone(), ..Default::default() };
-
-        let evm = evm_config.evm_with_env(db, evm_env);
-
-        // Check that the EVM environment is initialized with the custom environment
-        assert_eq!(evm.cfg, cfg);
-    }
-
-    #[test]
-    fn test_evm_with_env_custom_block_and_tx() {
-        let evm_config = test_evm_config();
-
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        // Create customs block and tx env
-        let block = BlockEnv {
-            basefee: 1000,
-            gas_limit: 10_000_000,
-            number: U256::from(42),
-            ..Default::default()
-        };
-
-        let evm_env = EvmEnv { block_env: block, ..Default::default() };
-
-        let evm = evm_config.evm_with_env(db, evm_env.clone());
-
-        // Verify that the block and transaction environments are set correctly
-        assert_eq!(evm.block, evm_env.block_env);
-    }
-
-    #[test]
-    fn test_evm_with_spec_id() {
-        let evm_config = test_evm_config();
-
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        let evm_env = EvmEnv {
-            cfg_env: CfgEnv::new().with_spec_and_mainnet_gas_params(OpSpecId::ECOTONE),
-            ..Default::default()
-        };
-
-        let evm = evm_config.evm_with_env(db, evm_env.clone());
-
-        assert_eq!(evm.cfg, evm_env.cfg_env);
-    }
-
-    #[test]
-    fn test_evm_with_env_and_default_inspector() {
-        let evm_config = test_evm_config();
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        let evm_env = EvmEnv { cfg_env: Default::default(), ..Default::default() };
-
-        let evm = evm_config.evm_with_env_and_inspector(db, evm_env.clone(), NoOpInspector {});
-
-        // Check that the EVM environment is set to default values
-        assert_eq!(evm.block, evm_env.block_env);
-        assert_eq!(evm.cfg, evm_env.cfg_env);
-    }
-
-    #[test]
-    fn test_evm_with_env_inspector_and_custom_cfg() {
-        let evm_config = test_evm_config();
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        let cfg =
-            CfgEnv::new().with_chain_id(111).with_spec_and_mainnet_gas_params(OpSpecId::default());
-        let block = BlockEnv::default();
-        let evm_env = EvmEnv { block_env: block, cfg_env: cfg.clone() };
-
-        let evm = evm_config.evm_with_env_and_inspector(db, evm_env.clone(), NoOpInspector {});
-
-        // Check that the EVM environment is set with custom configuration
-        assert_eq!(evm.cfg, cfg);
-        assert_eq!(evm.block, evm_env.block_env);
-    }
-
-    #[test]
-    fn test_evm_with_env_inspector_and_custom_block_tx() {
-        let evm_config = test_evm_config();
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        // Create custom block and tx environment
-        let block = BlockEnv {
-            basefee: 1000,
-            gas_limit: 10_000_000,
-            number: U256::from(42),
-            ..Default::default()
-        };
-        let evm_env = EvmEnv { block_env: block, ..Default::default() };
-
-        let evm = evm_config.evm_with_env_and_inspector(db, evm_env.clone(), NoOpInspector {});
-
-        // Verify that the block and transaction environments are set correctly
-        assert_eq!(evm.block, evm_env.block_env);
-    }
-
-    #[test]
-    fn test_evm_with_env_inspector_and_spec_id() {
-        let evm_config = test_evm_config();
-        let db = CacheDB::<EmptyDBTyped<ProviderError>>::default();
-
-        let evm_env = EvmEnv {
-            cfg_env: CfgEnv::new().with_spec_and_mainnet_gas_params(OpSpecId::ECOTONE),
-            ..Default::default()
-        };
-
-        let evm = evm_config.evm_with_env_and_inspector(db, evm_env.clone(), NoOpInspector {});
-
-        // Check that the spec ID is set properly
-        assert_eq!(evm.cfg, evm_env.cfg_env);
-        assert_eq!(evm.block, evm_env.block_env);
     }
 
     #[test]

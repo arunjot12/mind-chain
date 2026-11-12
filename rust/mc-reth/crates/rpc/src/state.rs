@@ -2,7 +2,7 @@
 
 use alloy_eips::BlockId;
 use derive_more::Constructor;
-use reth_optimism_trie::{
+use reth_mind_chain_trie::{
     OpProofsStorage, OpProofsStorageError, OpProofsStore, api::OpProofsProviderRO,
     provider::OpProofsStateProviderRef,
 };
@@ -123,7 +123,7 @@ mod tests {
     use super::*;
     use alloy_eips::BlockNumHash;
     use alloy_primitives::B256;
-    use reth_optimism_trie::{InMemoryProofsStorage, OpProofsInitProvider};
+    use reth_mind_chain_trie::{InMemoryProofsStorage, OpProofsInitProvider};
 
     #[test]
     fn proof_window_check_rejects_blocks_outside_the_stored_window() {

@@ -9,7 +9,7 @@ All Rust code lives under `rust/`. This is a unified Cargo workspace — always 
 - **Kona** — Proof system and rollup node (`rust/kona/`)
 - **Op-Reth** — OP Stack execution client built on reth (`rust/mc-reth/`)
 - **Op-Alloy / Alloy extensions** — OP Stack types and providers
-- **Lokahi** — Rust rewrite of the Go `op-supernode` multi-chain consensus-layer host (`rust/lokahi/`, binary `lokahi`). Early development: the crate currently builds a CLI skeleton only.
+- **Lokahi** — Rust rewrite of the Go `mc-supernode` multi-chain consensus-layer host (`rust/lokahi/`, binary `lokahi`). Early development: the crate currently builds a CLI skeleton only.
 
 Check `rust/Cargo.toml` for the full workspace member list, dependency versions, and lint configuration. The Rust toolchain version is pinned in `rust/rust-toolchain.toml`.
 
@@ -69,9 +69,11 @@ just build-mc-reth          # mc-reth
 just build-lokahi   # lokahi
 ```
 
-### superchain-registry submodule (mc-reth)
+### Built-in chain specs (mc-reth)
 
-The `reth-optimism-chainspec` crate's `build.rs` materializes its chain-config archive (`res/superchain-configs.tar`, gitignored) from the `superchain-registry` submodule at the repo root. Any mc-reth build that enables the `superchain-configs` feature (the `mc-reth` binary, `clippy --all-features`, the chainspec tests) needs that submodule checked out, or the build fails. Initialize it from the repo root with `just update-superchain-registry-submodule` (or `just sync-superchain`, which also does it). Once `res/` holds the archive, later builds reuse it without touching the submodule (default mode mirrors kona's `KONA_SYNC_SUPERCHAIN`); set `OP_RETH_SYNC_SUPERCHAIN=1` to force a regeneration.
+mc-reth ships no superchain-registry chain specs. `--chain` accepts `dev` or the path to a
+genesis file. Production chain IDs on which test-only node options are refused are listed in
+`PRODUCTION_CHAIN_IDS` in `rust/mc-reth/crates/chainspec/src/lib.rs`.
 
 ### Running Tests
 
@@ -100,7 +102,7 @@ The mc-reth E2E tests (`rust/mc-reth/tests/proofs/`) run a full devnet with mc-r
    mise exec -- just build-no-tests
    ```
 
-2. **mc-reth binary** — the test harness (`op-devstack/shared/rustbin/rust_binary.go`) uses the most recently built binary under `target/release/` or `target/debug/`. Options:
+2. **mc-reth binary** — the test harness (`mc-devstack/shared/rustbin/rust_binary.go`) uses the most recently built binary under `target/release/` or `target/debug/`. Options:
    ```bash
    # Option A: let the test build it (slow first run, cached after)
    RUST_JIT_BUILD=1 go test -v -run TestName ./rust/mc-reth/tests/proofs/core/
@@ -202,7 +204,7 @@ Op-reth requires `clang` / `libclang-dev` for reth-mdbx-sys bindgen. CI installs
 ## Cross-implementation parity
 
 `rust/op-alloy` holds the OP transaction and receipt types that mc-reth and kona consume; the Go
-services run the same formats through op-geth and `op-core/*`. A change to a wire format or hash
+services run the same formats through op-geth and `mc-core/*`. A change to a wire format or hash
 rule on either side has to agree with the other, pinned by a shared golden vector asserted in both
 suites. The rule and the current
 example live in [opgeth-decoupling.md](opgeth-decoupling.md#cross-implementation-parity);

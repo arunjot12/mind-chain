@@ -73,10 +73,10 @@ mise x -- just forge-build --skip test
 mise x -- just copy-contract-artifacts
 ```
 
-**Plain Go action tests** (`op-e2e/actions/...`) then run directly:
+**Plain Go action tests** (`mc-e2e/actions/...`) then run directly:
 
 ```bash
-go test ./op-e2e/actions/upgrades/ -run TestName -count=1
+go test ./mc-e2e/actions/upgrades/ -run TestName -count=1
 ```
 
 **Kona fault-proof action tests** (`rust/kona/tests/proofs/...`, e.g.

@@ -19,10 +19,10 @@ import { IL2ProxyAdmin } from "interfaces/L2/IL2ProxyAdmin.sol";
 /// @notice Shared test init for `PastNUTBundles` unit tests.
 abstract contract PastNUTBundles_TestInit is Test {
     /// @notice Path to the committed Karst NUT bundle, relative to `packages/contracts-bedrock`.
-    string internal constant KARST_BUNDLE_PATH = "../../op-core/nuts/bundles/karst_nut_bundle.json";
+    string internal constant KARST_BUNDLE_PATH = "../../mc-core/nuts/bundles/karst_nut_bundle.json";
 
     /// @notice Path to the committed Lagoon NUT bundle, relative to `packages/contracts-bedrock`.
-    string internal constant LAGOON_BUNDLE_PATH = "../../op-core/nuts/bundles/lagoon_nut_bundle.json";
+    string internal constant LAGOON_BUNDLE_PATH = "../../mc-core/nuts/bundles/lagoon_nut_bundle.json";
 
     /// @notice L2ContractsManager address encoded by the committed Karst NUT bundle.
     address internal constant KARST_L2CM = 0x5398A70Eb0929dd7bfc73c59E7137d8C7CDF6669;

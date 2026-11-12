@@ -12,19 +12,19 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-core/predeploys"
-	actionsHelpers "github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/rust/kona/tests/proofs/helpers"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/predeploys"
+	actionsHelpers "github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/rust/kona/tests/proofs/helpers"
 )
 
 // genPreForkStateEnv names the fork whose pre-fork state artifact to (re)generate,
 // e.g. OP_E2E_GEN_PREFORK_STATE=karst. It gates TestGenerateForkState, and the engine
 // records trie-key preimages whenever it is set (see
-// op-e2e/actions/helpers/l2_engine.go) so the post-activation state can be
+// mc-e2e/actions/helpers/l2_engine.go) so the post-activation state can be
 // enumerated and dumped.
 //
 // Generate one fork at a time, committing each before the next: the loader embeds
@@ -32,7 +32,7 @@ import (
 // binary rebuilt) before generating <fork>_state.json.
 const genPreForkStateEnv = "OP_E2E_GEN_PREFORK_STATE"
 
-// TestGenerateForkState (re)generates op-core/nuts/state/<fork>_state.json for the
+// TestGenerateForkState (re)generates mc-core/nuts/state/<fork>_state.json for the
 // fork named by OP_E2E_GEN_PREFORK_STATE, and is skipped otherwise (so it never runs in
 // normal CI). It reuses the exact activation flow via activateFork — the
 // post-activation state IS the artifact (compose: <fork>_state = <prev>_state +
@@ -62,7 +62,7 @@ func generateForkState(gt *testing.T, testCfg *helpers.TestCfg[forks.Name]) {
 }
 
 // writePreForkState dumps the post-activation predeploy-scoped state to
-// op-core/nuts/state/<fork>_state.json. It requires the engine to have recorded
+// mc-core/nuts/state/<fork>_state.json. It requires the engine to have recorded
 // trie-key preimages (enabled by genPreForkStateEnv) so the state can be enumerated.
 func writePreForkState(t actionsHelpers.Testing, env *helpers.L2FaultProofEnv, fork forks.Name, actHeader *types.Header) {
 	stateDB, err := env.Engine.L2Chain().StateAt(actHeader.Root)
@@ -76,7 +76,7 @@ func writePreForkState(t actionsHelpers.Testing, env *helpers.L2FaultProofEnv, f
 
 	root, err := opservice.FindMonorepoRoot(".")
 	require.NoError(t, err)
-	outPath := filepath.Join(root, "op-core", "nuts", "state", string(fork)+"_state.json")
+	outPath := filepath.Join(root, "mc-core", "nuts", "state", string(fork)+"_state.json")
 	data, err := json.MarshalIndent(scoped, "", "  ")
 	require.NoError(t, err)
 	data = append(data, '\n')

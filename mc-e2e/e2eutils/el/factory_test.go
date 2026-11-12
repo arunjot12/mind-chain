@@ -1,0 +1,60 @@
+package el
+
+import (
+	"testing"
+
+	opgenesis "github.com/mindchain/mind-chain/mc-core/genesis"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/services"
+	"github.com/stretchr/testify/require"
+)
+
+func TestInitL2GenesisInputValidation(t *testing.T) {
+	tests := []struct {
+		name    string
+		config  L2Config
+		wantErr string
+	}{
+		{
+			name:   "mc-reth in-memory genesis",
+			config: L2Config{Kind: services.ELKindOpReth, Genesis: &opgenesis.Genesis{}},
+		},
+		{
+			name:   "mc-reth genesis path",
+			config: L2Config{Kind: services.ELKindOpReth, GenesisJSONPath: "genesis.json"},
+		},
+		{
+			name:    "mc-reth missing genesis",
+			config:  L2Config{Kind: services.ELKindOpReth},
+			wantErr: "set exactly one of Genesis or GenesisJSONPath",
+		},
+		{
+			name: "mc-reth conflicting genesis inputs",
+			config: L2Config{
+				Kind:            services.ELKindOpReth,
+				Genesis:         &opgenesis.Genesis{},
+				GenesisJSONPath: "genesis.json",
+			},
+			wantErr: "set exactly one of Genesis or GenesisJSONPath",
+		},
+		{
+			name:   "op-geth in-memory genesis",
+			config: L2Config{Kind: services.ELKindOpGeth, Genesis: &opgenesis.Genesis{}},
+		},
+		{
+			name:    "op-geth genesis path",
+			config:  L2Config{Kind: services.ELKindOpGeth, GenesisJSONPath: "genesis.json"},
+			wantErr: "op-geth requires an in-memory genesis",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			err := validateGenesisInput(test.config)
+			if test.wantErr == "" {
+				require.NoError(t, err)
+				return
+			}
+			require.ErrorContains(t, err, test.wantErr)
+		})
+	}
+}

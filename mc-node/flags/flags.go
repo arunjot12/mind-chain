@@ -6,18 +6,18 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/engine"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/sync"
-	"github.com/ethereum-optimism/optimism/op-service/cliiface"
-	openum "github.com/ethereum-optimism/optimism/op-service/enum"
-	opflags "github.com/ethereum-optimism/optimism/op-service/flags"
-	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	"github.com/ethereum-optimism/optimism/op-service/ptr"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-node/rollup/engine"
+	"github.com/mindchain/mind-chain/mc-node/rollup/sync"
+	"github.com/mindchain/mind-chain/mc-service/cliiface"
+	openum "github.com/mindchain/mind-chain/mc-service/enum"
+	opflags "github.com/mindchain/mind-chain/mc-service/flags"
+	"github.com/mindchain/mind-chain/mc-service/log/logcli"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	"github.com/mindchain/mind-chain/mc-service/ptr"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // Flags
@@ -219,7 +219,7 @@ var (
 	}
 	L2EngineKind = &cli.GenericFlag{
 		Name: "l2.enginekind",
-		Usage: "The kind of engine client, used to control the behavior of optimism in respect to different types of engine clients. Valid options: " +
+		Usage: "The kind of engine client, used to control the behavior of mc-node in respect to different types of engine clients. Valid options: " +
 			openum.EnumString(engine.Kinds),
 		EnvVars: prefixEnvVars("L2_ENGINE_KIND"),
 		Value: func() *engine.Kind {

@@ -1,11 +1,11 @@
-# Static checks for recurring flake patterns in op-acceptance-tests / op-devstack.
+# Static checks for recurring flake patterns in mc-acceptance-tests / mc-devstack.
 #
 # Scoped narrowly to test code; do not enable for production code paths.
 # Each rule maps to a numbered entry (F1..F14) in docs/ai/flake-prevention.md.
 #
 # Run locally:
 #   semgrep scan --config .semgrep/rules/go-acceptance-test-flakes.yaml \
-#                op-acceptance-tests/ op-devstack/
+#                mc-acceptance-tests/ mc-devstack/
 #
 # To skip a true-positive intentionally (rare — use only after discussing in review):
 #   // nosemgrep: <rule-id>
@@ -20,8 +20,8 @@ rules:
     severity: ERROR
     paths:
       include:
-        - "op-acceptance-tests/"
-        - "op-devstack/"
+        - "mc-acceptance-tests/"
+        - "mc-devstack/"
     message: |
       `require.*` / `assert.*` calls inside a polling callback (Eventually, EventuallyWithT,
       EventuallyFn, retry.Do) make the first transient failure fatal — the retry loop
@@ -86,8 +86,8 @@ rules:
     severity: ERROR
     paths:
       include:
-        - "op-acceptance-tests/"
-        - "op-devstack/"
+        - "mc-acceptance-tests/"
+        - "mc-devstack/"
     message: |
       `require.*` inside a spawned goroutine calls FailNow, which only exits the
       goroutine. The main test will hang until package timeout. Send errors back to
@@ -134,9 +134,9 @@ rules:
     severity: ERROR
     paths:
       include:
-        - "op-acceptance-tests/tests/"
-        - "op-devstack/dsl/"
-        - "op-devstack/presets/"
+        - "mc-acceptance-tests/tests/"
+        - "mc-devstack/dsl/"
+        - "mc-devstack/presets/"
     message: |
       `time.Sleep` in tests or DSL methods masks a missing wait. Replace with an
       explicit `WaitFor*` on the actual postcondition. See docs/ai/flake-prevention.md#f8.
@@ -163,7 +163,7 @@ rules:
     severity: ERROR
     paths:
       include:
-        - "op-acceptance-tests/"
+        - "mc-acceptance-tests/"
     message: |
       `*WithoutCheck` paired with a hand-rolled `MatchedFn`/`ReachedFn` typically
       undoes the preset's automatic ELSync budget extension (4x). Use the matching
@@ -193,8 +193,8 @@ rules:
     severity: ERROR
     paths:
       include:
-        - "op-acceptance-tests/"
-        - "op-devstack/"
+        - "mc-acceptance-tests/"
+        - "mc-devstack/"
     message: |
       `defer $CANCEL()` written BEFORE `defer $WG.Wait()` deadlocks at cleanup —
       defers run LIFO, so Wait pops first and blocks waiting on a goroutine that
@@ -221,11 +221,11 @@ rules:
     severity: WARNING
     paths:
       include:
-        - "op-acceptance-tests/"
-        - "op-devstack/"
+        - "mc-acceptance-tests/"
+        - "mc-devstack/"
       exclude:
-        - "op-devstack/devtest/"
-        - "op-devstack/sysgo/mixed_runtime.go"
+        - "mc-devstack/devtest/"
+        - "mc-devstack/sysgo/mixed_runtime.go"
     message: |
       `MarkFlaky` is acceptable only as a documented band-aid. Add an inline
       comment citing the GitHub issue tracking the root-cause fix (`// flake: #12345`).
@@ -243,8 +243,8 @@ rules:
     severity: WARNING
     paths:
       include:
-        - "op-acceptance-tests/"
-        - "op-devstack/"
+        - "mc-acceptance-tests/"
+        - "mc-devstack/"
     message: |
       Reading the unsafe head and immediately passing its hash to StartSequencer
       is a TOCTOU race — the head may advance between the two RPCs. Wrap in a
@@ -268,7 +268,7 @@ rules:
     severity: INFO
     paths:
       include:
-        - "op-acceptance-tests/tests/"
+        - "mc-acceptance-tests/tests/"
     message: |
       Short context timeout (<30s) in acceptance test code is brittle under CI
       load. Either use the preset's default timeout, or budget more generously

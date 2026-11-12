@@ -3,7 +3,7 @@ package deployer
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/flags"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/flags"
 	"github.com/stretchr/testify/require"
 )
 

@@ -3,9 +3,9 @@ package super
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/op-service/eth"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type SuperNodePrestateProvider struct {

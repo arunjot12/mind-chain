@@ -3,8 +3,8 @@ package preimages
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	preimage "github.com/ethereum-optimism/optimism/op-preimage"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	preimage "github.com/mindchain/mind-chain/mc-preimage"
 )
 
 var _ PreimageUploader = (*SplitPreimageUploader)(nil)

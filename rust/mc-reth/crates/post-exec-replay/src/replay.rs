@@ -11,8 +11,8 @@ use op_alloy_consensus::{
 };
 use reth_evm::{Database, execute::BlockExecutor};
 use reth_execution_errors::BlockExecutionError;
+use reth_mind_chain_evm::ConfigurePostExecEvm;
 use reth_node_api::NodePrimitives;
-use reth_optimism_evm::ConfigurePostExecEvm;
 use reth_primitives_traits::{Block, BlockHeader, RecoveredBlock, SignedTransaction};
 use revm::database::State;
 use std::collections::{BTreeMap, BTreeSet};
@@ -268,7 +268,7 @@ where
         .post_exec_executor_for_block(
             &mut state,
             normalized.replay_block.sealed_block(),
-            reth_optimism_evm::PostExecMode::Disabled,
+            reth_mind_chain_evm::PostExecMode::Disabled,
         )
         .map_err(BlockExecutionError::other)?;
 
@@ -372,7 +372,7 @@ mod tests {
     use op_alloy_consensus::{
         OpTxEnvelope, POST_EXEC_PAYLOAD_VERSION, TxDeposit, build_post_exec_tx,
     };
-    use reth_optimism_primitives::OpTransactionSigned;
+    use reth_mind_chain_primitives::OpTransactionSigned;
     use reth_primitives_traits::RecoveredBlock;
 
     fn user_tx() -> OpTransactionSigned {

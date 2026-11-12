@@ -1,7 +1,7 @@
 package deployer
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/opcm"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
 )
 
 // Primitive ABI types primarily used with `abi.Arguments` to pack/unpack values when calling contract methods.

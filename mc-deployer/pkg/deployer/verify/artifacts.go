@@ -7,8 +7,8 @@ import (
 
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/foundry"
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-chain-ops/foundry"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // SourceContent represents the content of a source file

@@ -3,7 +3,7 @@ package testutil
 import (
 	"os"
 
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 func CreateLogger() log.Logger {

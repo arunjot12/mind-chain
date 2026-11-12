@@ -1,8 +1,8 @@
-# Flake Prevention — op-acceptance-tests & op-devstack
+# Flake Prevention — mc-acceptance-tests & mc-devstack
 
 Companion to [writing-acceptance-tests.md](writing-acceptance-tests.md). That doc tells you how to write a test cleanly; this doc names the *recurring* anti-patterns that have caused flakes in CI, the static checks that catch them, and the review questions that catch the ones a linter can't.
 
-If you are reviewing a PR that touches `op-acceptance-tests/` or `op-devstack/`, run through the [Reviewer checklist](#reviewer-checklist) at the bottom.
+If you are reviewing a PR that touches `mc-acceptance-tests/` or `mc-devstack/`, run through the [Reviewer checklist](#reviewer-checklist) at the bottom.
 
 ## Why flakes keep landing
 
@@ -404,7 +404,7 @@ addTrustedPeer(acceptor, initiatorEnode)
 
 ## Reviewer checklist
 
-When reviewing a PR that touches `op-acceptance-tests/` or `op-devstack/`, ask:
+When reviewing a PR that touches `mc-acceptance-tests/` or `mc-devstack/`, ask:
 
 - [ ] **F1**: Any `require.*` / `assert.*` calls inside a `Eventually`/`Until`/`retry.Do` callback? They should be `if err != nil { return false }` instead.
 - [ ] **F2**: Any `require.*` inside `go func(){...}()`? Goroutine assertions hang the test on failure.
@@ -435,4 +435,4 @@ When reviewing a PR that touches `op-acceptance-tests/` or `op-devstack/`, ask:
 
 Lint rules for the catchable patterns live in [`.semgrep/rules/go-acceptance-test-flakes.yaml`](../../.semgrep/rules/go-acceptance-test-flakes.yaml) and run in CI under the `semgrep-scan-local` job. Failing rules block merge.
 
-The rules are *deliberately scoped* to `op-acceptance-tests/` and `op-devstack/` paths — they encode test-specific conventions, not generic Go style.
+The rules are *deliberately scoped* to `mc-acceptance-tests/` and `mc-devstack/` paths — they encode test-specific conventions, not generic Go style.

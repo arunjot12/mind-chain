@@ -42,7 +42,7 @@ pub enum L1BlockInfoError {
     #[error("could not convert DA footprint gas scalar constant")]
     DaFootprintGasScalarConversion,
     /// Optimism hardforks not active
-    #[error("Optimism hardforks are not active")]
+    #[error("Mind Chain hardforks are not active")]
     HardforksNotActive,
 }
 

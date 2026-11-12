@@ -1,7 +1,7 @@
 package throttler
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
 )
 
 // ThrottleParams holds the current throttling parameters

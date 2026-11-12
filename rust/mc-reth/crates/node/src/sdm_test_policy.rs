@@ -1,7 +1,7 @@
 //! Deterministic SDM policy used by hidden, default-off testing controls.
 
 use alloy_primitives::{Address, U256};
-use reth_optimism_evm::{
+use reth_mind_chain_evm::{
     PostExecExecutedTx, PostExecRefundInspector, PostExecRefundPolicyFactory, PostExecTxContext,
     RevertToCheckpointError,
 };
@@ -123,7 +123,7 @@ impl PostExecRefundInspector for FixedRefundPolicy {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use reth_optimism_evm::{OpEvmFactory, OpTx, PostExecTxKind};
+    use reth_mind_chain_evm::{OpEvmFactory, OpTx, PostExecTxKind};
 
     #[test]
     fn fixed_policy_refunds_only_normal_transactions() {

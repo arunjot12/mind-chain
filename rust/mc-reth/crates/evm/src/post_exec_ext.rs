@@ -15,8 +15,8 @@ use reth_evm::{
     execute::{BasicBlockBuilder, BlockBuilder},
     precompiles::PrecompilesMap,
 };
-use reth_optimism_forks::OpHardforks;
-use reth_optimism_primitives::DepositReceipt;
+use reth_mind_chain_forks::OpHardforks;
+use reth_mind_chain_primitives::DepositReceipt;
 use reth_primitives_traits::{NodePrimitives, SealedBlock, SealedHeader, SignedTransaction};
 use revm::{context::BlockEnv, database::State};
 

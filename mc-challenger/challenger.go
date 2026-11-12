@@ -3,12 +3,12 @@ package op_challenger
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-challenger/game"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // Main is the programmatic entry-point for running mc-challenger with a given configuration.

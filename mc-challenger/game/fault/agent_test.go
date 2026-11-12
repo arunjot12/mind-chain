@@ -10,24 +10,24 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/merkle"
-	keccakTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/keccak/types"
-	"github.com/ethereum-optimism/optimism/op-service/clock"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace"
+	"github.com/mindchain/mind-chain/mc-challenger/game/keccak/merkle"
+	keccakTypes "github.com/mindchain/mind-chain/mc-challenger/game/keccak/types"
+	"github.com/mindchain/mind-chain/mc-service/clock"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum/common"
 
-	faulttest "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/test"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/alphabet"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/testlog"
+	faulttest "github.com/mindchain/mind-chain/mc-challenger/game/fault/test"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/alphabet"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
 )
 
 var l1Time = time.UnixMilli(100)

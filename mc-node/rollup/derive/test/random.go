@@ -5,14 +5,14 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/testutils"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/trie"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/testutils"
 )
 
 // RandomL2Block returns a random block whose first transaction is a random pre-Ecotone upgrade
@@ -55,7 +55,7 @@ func RandomL2BlockWithChainIdAndTime(rng *rand.Rand, txCount int, chainId *big.I
 // signed for chainID.
 //
 // It lives here rather than in derive itself so that derive's production build
-// stays clear of op-service/testutils, whose closure reaches op-service/apis
+// stays clear of mc-service/testutils, whose closure reaches mc-service/apis
 // and the libp2p stack. derive's own tests use an equivalent helper in
 // batch_test_utils_test.go, which cannot be shared with this package without an
 // import cycle.

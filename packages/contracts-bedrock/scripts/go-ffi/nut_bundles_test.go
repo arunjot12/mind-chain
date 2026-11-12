@@ -6,34 +6,34 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-core/nuts"
 	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/mindchain/mind-chain/mc-core/nuts"
 	"github.com/stretchr/testify/require"
 )
 
 func TestOrderedNUTBundlesFromLocks(t *testing.T) {
 	root := mockMonorepo(t)
-	writeBundle(t, root, "op-core/nuts/bundles/karst_nut_bundle.json")
-	writeBundle(t, root, "op-core/nuts/bundles/lagoon_nut_bundle.json")
+	writeBundle(t, root, "mc-core/nuts/bundles/karst_nut_bundle.json")
+	writeBundle(t, root, "mc-core/nuts/bundles/lagoon_nut_bundle.json")
 
 	bundles, err := orderedNUTBundlesFromLocks(nuts.ForkLock{
-		"lagoon": {Bundle: "op-core/nuts/bundles/lagoon_nut_bundle.json"},
-		"karst":  {Bundle: "op-core/nuts/bundles/karst_nut_bundle.json"},
+		"lagoon": {Bundle: "mc-core/nuts/bundles/lagoon_nut_bundle.json"},
+		"karst":  {Bundle: "mc-core/nuts/bundles/karst_nut_bundle.json"},
 	}, root)
 
 	require.NoError(t, err)
 	require.Equal(t, []NUTBundleEncoded{
-		{Fork: "karst", Path: "../../op-core/nuts/bundles/karst_nut_bundle.json"},
-		{Fork: "lagoon", Path: "../../op-core/nuts/bundles/lagoon_nut_bundle.json"},
+		{Fork: "karst", Path: "../../mc-core/nuts/bundles/karst_nut_bundle.json"},
+		{Fork: "lagoon", Path: "../../mc-core/nuts/bundles/lagoon_nut_bundle.json"},
 	}, bundles)
 }
 
 func TestOrderedNUTBundlesFromLocksRejectsUnknownFork(t *testing.T) {
 	root := mockMonorepo(t)
-	writeBundle(t, root, "op-core/nuts/bundles/example_nut_bundle.json")
+	writeBundle(t, root, "mc-core/nuts/bundles/example_nut_bundle.json")
 
 	_, err := orderedNUTBundlesFromLocks(nuts.ForkLock{
-		"example": {Bundle: "op-core/nuts/bundles/example_nut_bundle.json"},
+		"example": {Bundle: "mc-core/nuts/bundles/example_nut_bundle.json"},
 	}, root)
 
 	require.ErrorContains(t, err, `locked fork "example" is not in forks.All`)
@@ -63,7 +63,7 @@ func TestOrderedNUTBundlesFromLocksRejectsMissingBundleFile(t *testing.T) {
 	root := mockMonorepo(t)
 
 	_, err := orderedNUTBundlesFromLocks(nuts.ForkLock{
-		"karst": {Bundle: "op-core/nuts/bundles/missing_nut_bundle.json"},
+		"karst": {Bundle: "mc-core/nuts/bundles/missing_nut_bundle.json"},
 	}, root)
 
 	require.ErrorContains(t, err, "checking bundle file")
@@ -73,7 +73,7 @@ func TestOrderedNUTBundlesFromLocksRejectsDirectoryBundlePath(t *testing.T) {
 	root := mockMonorepo(t)
 
 	_, err := orderedNUTBundlesFromLocks(nuts.ForkLock{
-		"karst": {Bundle: "op-core/nuts/bundles"},
+		"karst": {Bundle: "mc-core/nuts/bundles"},
 	}, root)
 
 	require.ErrorContains(t, err, "is a directory")
@@ -81,17 +81,17 @@ func TestOrderedNUTBundlesFromLocksRejectsDirectoryBundlePath(t *testing.T) {
 
 func TestOrderedNUTBundlesFromLocksDropsPreKarstForks(t *testing.T) {
 	root := mockMonorepo(t)
-	writeBundle(t, root, "op-core/nuts/bundles/bedrock_nut_bundle.json")
-	writeBundle(t, root, "op-core/nuts/bundles/karst_nut_bundle.json")
+	writeBundle(t, root, "mc-core/nuts/bundles/bedrock_nut_bundle.json")
+	writeBundle(t, root, "mc-core/nuts/bundles/karst_nut_bundle.json")
 
 	bundles, err := orderedNUTBundlesFromLocks(nuts.ForkLock{
-		"bedrock": {Bundle: "op-core/nuts/bundles/bedrock_nut_bundle.json"},
-		"karst":   {Bundle: "op-core/nuts/bundles/karst_nut_bundle.json"},
+		"bedrock": {Bundle: "mc-core/nuts/bundles/bedrock_nut_bundle.json"},
+		"karst":   {Bundle: "mc-core/nuts/bundles/karst_nut_bundle.json"},
 	}, root)
 
 	require.NoError(t, err)
 	require.Equal(t, []NUTBundleEncoded{
-		{Fork: "karst", Path: "../../op-core/nuts/bundles/karst_nut_bundle.json"},
+		{Fork: "karst", Path: "../../mc-core/nuts/bundles/karst_nut_bundle.json"},
 	}, bundles)
 }
 
@@ -104,8 +104,8 @@ func TestNUTBundleABIRoundTrip(t *testing.T) {
 
 	args := abi.Arguments{{Type: nutBundleType}}
 	original := []NUTBundleEncoded{
-		{Fork: "karst", Path: "../../op-core/nuts/bundles/karst_nut_bundle.json"},
-		{Fork: "lagoon", Path: "../../op-core/nuts/bundles/lagoon_nut_bundle.json"},
+		{Fork: "karst", Path: "../../mc-core/nuts/bundles/karst_nut_bundle.json"},
+		{Fork: "lagoon", Path: "../../mc-core/nuts/bundles/lagoon_nut_bundle.json"},
 	}
 
 	encoded, err := args.Pack(original)
@@ -131,7 +131,7 @@ func mockMonorepo(t *testing.T) string {
 
 	root := t.TempDir()
 	require.NoError(t, os.MkdirAll(filepath.Join(root, "packages", "contracts-bedrock"), 0o755))
-	require.NoError(t, os.MkdirAll(filepath.Join(root, "op-core", "nuts", "bundles"), 0o755))
+	require.NoError(t, os.MkdirAll(filepath.Join(root, "mc-core", "nuts", "bundles"), 0o755))
 	return root
 }
 

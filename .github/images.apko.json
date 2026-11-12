@@ -10,9 +10,9 @@
   "shared_go_paths": [
     "go.mod",
     "go.sum",
-    "op-service/**",
-    "op-core/**",
-    "op-chain-ops/**"
+    "mc-service/**",
+    "mc-core/**",
+    "mc-chain-ops/**"
   ],
   "shared_rust_paths": [
     "rust/**"
@@ -118,119 +118,119 @@
       ],
       "smoke_test": "mc-proposer --version"
     },
-    "op-conductor": {
+    "mc-conductor": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-conductor/**",
+        "mc-conductor/**",
         "mc-node/**"
       ],
       "nexus_paths": [
-        "apko/op-conductor.yaml"
+        "apko/mc-conductor.yaml"
       ],
-      "smoke_test": "op-conductor --version"
+      "smoke_test": "mc-conductor --version"
     },
-    "op-dispute-mon": {
+    "mc-dispute-mon": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-dispute-mon/**"
+        "mc-dispute-mon/**"
       ],
       "nexus_paths": [
-        "apko/op-dispute-mon.yaml"
+        "apko/mc-dispute-mon.yaml"
       ],
-      "smoke_test": "op-dispute-mon --version"
+      "smoke_test": "mc-dispute-mon --version"
     },
-    "op-dripper": {
+    "mc-dripper": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-dripper/**"
+        "mc-dripper/**"
       ],
       "nexus_paths": [
-        "apko/op-dripper.yaml"
+        "apko/mc-dripper.yaml"
       ],
-      "smoke_test": "op-dripper --version"
+      "smoke_test": "mc-dripper --version"
     },
-    "op-faucet": {
+    "mc-faucet": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-faucet/**"
+        "mc-faucet/**"
       ],
       "nexus_paths": [
-        "apko/op-faucet.yaml"
+        "apko/mc-faucet.yaml"
       ],
-      "smoke_test": "op-faucet --version"
+      "smoke_test": "mc-faucet --version"
     },
-    "op-interop-filter": {
+    "mc-interop-filter": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-interop-filter/**"
+        "mc-interop-filter/**"
       ],
       "nexus_paths": [
-        "apko/op-interop-filter.yaml"
+        "apko/mc-interop-filter.yaml"
       ],
-      "smoke_test": "op-interop-filter --version"
+      "smoke_test": "mc-interop-filter --version"
     },
-    "op-interop-mon": {
+    "mc-interop-mon": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-interop-mon/**"
+        "mc-interop-mon/**"
       ],
       "nexus_paths": [
-        "apko/op-interop-mon.yaml"
+        "apko/mc-interop-mon.yaml"
       ],
-      "smoke_test": "op-interop-mon --version"
+      "smoke_test": "mc-interop-mon --version"
     },
-    "op-supernode": {
+    "mc-supernode": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-supernode/**",
+        "mc-supernode/**",
         "mc-node/**"
       ],
       "nexus_paths": [
-        "apko/op-supernode.yaml"
+        "apko/mc-supernode.yaml"
       ],
-      "smoke_test": "op-supernode --version"
+      "smoke_test": "mc-supernode --version"
     },
-    "op-test-sequencer": {
+    "mc-test-sequencer": {
       "type": "go",
       "verify_version": true,
       "needs_melange": [
         "op-stack-go"
       ],
       "paths": [
-        "op-test-sequencer/**"
+        "mc-test-sequencer/**"
       ],
       "nexus_paths": [
-        "apko/op-test-sequencer.yaml"
+        "apko/mc-test-sequencer.yaml"
       ],
-      "smoke_test": "op-test-sequencer --version"
+      "smoke_test": "mc-test-sequencer --version"
     },
     "da-server": {
       "type": "go",
@@ -239,7 +239,7 @@
         "op-stack-go"
       ],
       "paths": [
-        "op-alt-da/**"
+        "mc-alt-da/**"
       ],
       "nexus_paths": [
         "apko/da-server.yaml"
@@ -257,7 +257,7 @@
       "paths": [
         "mc-challenger/**",
         "cannon/**",
-        "op-preimage/**",
+        "mc-preimage/**",
         "rust/kona/**"
       ],
       "nexus_paths": [

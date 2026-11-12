@@ -6,7 +6,7 @@ Reference for the `DevFeatures` bitmap system. The bitmap is transitional infras
 
 A 32-byte bitmap (`bytes32` on chain, `common.Hash` in Go) where each feature occupies its own nibble — `0x...01`, `0x...10`, `0x...100`, etc. — giving 64 concurrent feature slots. Defined identically on both sides:
 
-- **Go**: `op-core/devfeatures/devfeatures.go` — flag constants, `IsDevFeatureEnabled(bitmap, flag)`, `EnableDevFeature(bitmap, flag)`
+- **Go**: `mc-core/devfeatures/devfeatures.go` — flag constants, `IsDevFeatureEnabled(bitmap, flag)`, `EnableDevFeature(bitmap, flag)`
 - **Solidity**: `packages/contracts-bedrock/src/libraries/DevFeatures.sol` — same constants, same predicate
 
 The two sides are independent literals with **no compile-time sync check** — a mismatch silently diverges Go and Solidity behavior. The constant values are canonical in those two files; don't trust copies elsewhere.
@@ -45,7 +45,7 @@ The bitmap has **two operator-facing input surfaces**, both in mc-deployer:
    - Both surfaces read the mapping from `standard.SP1VerifierFor`, so bootstrap and apply can never drift.
    - `mc-deployer/pkg/deployer/standard/sp1-verifier.json` records, per chain, the `VERIFIER_HASH()` of that verifier, the PLONK circuit it accepts proofs for; `standard.SP1VerifierHashFor` reads it. `TestApplyDefaultsSP1VerifierOnSepolia` holds it to the chain, `VerifyOPCM` re-checks it at release, and `op-zk-proposer`'s release-pin test holds the linked sp1-sdk to it, so bumping sp1-sdk to a new circuit fails CI until the address and the file move together. The proposer also derives the hash from its SDK at runtime and pauses creation and skips proving for any adapter whose verifier hash differs.
    - The selected raw verifier is recorded in deployment state (`State.SP1Verifier`) and never written back into intent. A resumed deployment reuses the recorded address rather than re-resolving the default, so upgrading mc-deployer mid-deployment cannot swap the verifier under a chain.
-   - Genesis deployments never select the release verifier: it does not exist in a generated genesis. They must set `sp1Verifier` explicitly, or the op-devstack builder can opt into deploying a test raw verifier during genesis.
+   - Genesis deployments never select the release verifier: it does not exist in a generated genesis. They must set `sp1Verifier` explicitly, or the mc-devstack builder can opt into deploying a test raw verifier during genesis.
 
 There is no other production operator-facing surface. `mc-node`, `kona`, and rollup config do not take a bitmap at runtime.
 
@@ -133,7 +133,7 @@ Interop and ZK use the bitmap as their per-chain provisioning switch and have no
 
 | Concern | Path |
 |---|---|
-| Go constants & predicate | `op-core/devfeatures/devfeatures.go` |
+| Go constants & predicate | `mc-core/devfeatures/devfeatures.go` |
 | Solidity constants & predicate | `packages/contracts-bedrock/src/libraries/DevFeatures.sol` |
 | CLI input | `mc-deployer/pkg/deployer/bootstrap/flags.go` |
 | Intent input + composition | `mc-deployer/pkg/deployer/pipeline/l2genesis.go` |

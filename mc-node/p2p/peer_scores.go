@@ -3,7 +3,7 @@ package p2p
 import (
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // ConfigurePeerScoring configures the peer scoring parameters for the pubsub

@@ -6,7 +6,7 @@ The docs pages import these snippets instead of hand-transcribing `--help`
 output, so the published flag catalogs cannot silently fall behind a release.
 
 Covered components: mc-batcher, mc-node, mc-proposer, mc-challenger,
-op-conductor — every first-party Go service with a flag reference page.
+mc-conductor — every first-party Go service with a flag reference page.
 
 ## Usage
 
@@ -30,7 +30,7 @@ problem):
 go run ./docs/public-docs/scripts/gen-flags -check
 ```
 
-The monorepo Go build embeds `op-core/superchain/superchain-configs.zip`
+The monorepo Go build embeds `mc-core/superchain/superchain-configs.zip`
 (gitignored). On a fresh checkout, build it first:
 
 ```bash
@@ -40,7 +40,7 @@ just build-superchain-go
 ## How it works
 
 - `main.go` imports each component's composed flag slice (e.g. for mc-batcher,
-  `mc-batcher/flags.Flags` — including the op-service flag families appended in
+  `mc-batcher/flags.Flags` — including the mc-service flag families appended in
   its `init()`) and renders one snippet per component:
   `snippets/generated/<component>-flags.mdx`.
 - Flag name, usage, default, and environment variable come from urfave/cli's
@@ -76,10 +76,10 @@ published:
 1. Check out that tag and regenerate from it — or, if working from another
    commit, verify the flag-defining packages are identical to the tag first
    (`git diff <tag> HEAD -- <paths>`): the component's `flags/` package (and,
-   for mc-challenger, its `config/` defaults) plus the op-service flag
-   families it appends (`op-service/rpc`, `op-service/log`,
-   `op-service/metrics`, `op-service/oppprof`, `op-service/txmgr`,
-   `op-service/flags`, `op-alt-da`, as applicable per component).
+   for mc-challenger, its `config/` defaults) plus the mc-service flag
+   families it appends (`mc-service/rpc`, `mc-service/log`,
+   `mc-service/metrics`, `mc-service/oppprof`, `mc-service/txmgr`,
+   `mc-service/flags`, `mc-alt-da`, as applicable per component).
 2. Update the component's `tag` in `manifest.json` to the new release tag.
 3. Run the generator, restricted to that component:
    `go run ./docs/public-docs/scripts/gen-flags -only <component>`
@@ -121,7 +121,7 @@ model in the Solutions repo's
 | --- | --- | --- | --- |
 | Generator code + its CI job (this directory, the regeneration workflow) | Matthew Cruz (@sbvegan), docs owner — proposed, pending confirmation | @ethereum-optimism/solutions (via the `/docs/public-docs/scripts/` CODEOWNERS rule) | Author of record |
 | Generated snippets (`snippets/generated/`) | The pipeline — nobody hand-edits; `-check` fails on hand edits by construction | @ethereum-optimism/solutions review the regeneration PRs | A snippet that can't be regenerated cleanly is filed as an `accuracy`-labelled issue on the Solutions board |
-| Flag facts (each component's `flags/` package, op-service flag families) | Component engineers | Component team | Component team; the docs table follows at the next finalized release |
+| Flag facts (each component's `flags/` package, mc-service flag families) | Component engineers | Component team | Component team; the docs table follows at the next finalized release |
 
 Known residual gaps (accepted, by design):
 
@@ -143,7 +143,7 @@ Known residual gaps (accepted, by design):
   list (`canonicalizeUsage` in `main.go`) so output is deterministic; the
   proper fix is sorting `KindKeys` at the source (one line in
   `mc-batcher/compressor/compressors.go`), proposed as a follow-up.
-- The `--network` usage string (mc-node, mc-challenger, op-conductor)
+- The `--network` usage string (mc-node, mc-challenger, mc-conductor)
   enumerates the chains bundled from the superchain-registry, which changes
   with every registry submodule bump — independent of component releases.
   `canonicalizeUsage` replaces the enumerated list with a stable pointer at

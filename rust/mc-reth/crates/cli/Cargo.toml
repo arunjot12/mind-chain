@@ -1,5 +1,5 @@
 [package]
-name = "reth-optimism-cli"
+name = "reth-mind-chain-cli"
 version = "2.0.0"
 edition.workspace = true
 rust-version.workspace = true
@@ -21,7 +21,7 @@ reth-db-common.workspace = true
 reth-provider.workspace = true
 reth-stages.workspace = true
 reth-node-core.workspace = true
-reth-optimism-node.workspace = true
+reth-mind-chain-node.workspace = true
 reth-fs-util.workspace = true
 
 # so jemalloc metrics can be included
@@ -29,10 +29,10 @@ reth-node-metrics.workspace = true
 metrics.workspace = true
 
 ## optimism
-reth-optimism-primitives.workspace = true
-reth-optimism-chainspec = { workspace = true, features = ["superchain-configs"] }
-reth-optimism-consensus.workspace = true
-reth-optimism-trie.workspace = true
+reth-mind-chain-primitives.workspace = true
+reth-mind-chain-chainspec.workspace = true
+reth-mind-chain-consensus.workspace = true
+reth-mind-chain-trie.workspace = true
 
 reth-chainspec.workspace = true
 reth-cli-runner.workspace = true
@@ -63,9 +63,6 @@ dirs-next.workspace = true
 tempfile.workspace = true
 metrics-exporter-prometheus.workspace = true
 
-[build-dependencies]
-reth-optimism-chainspec = { workspace = true, features = ["std", "superchain-configs"] }
-
 [features]
 default = []
 
@@ -76,13 +73,13 @@ otlp-logs = ["reth-tracing/otlp-logs", "reth-node-core/otlp-logs"]
 asm-keccak = [
     "alloy-primitives/asm-keccak",
     "reth-node-core/asm-keccak",
-    "reth-optimism-node/asm-keccak",
+    "reth-mind-chain-node/asm-keccak",
 ]
 
 keccak-cache-global = [
     "alloy-primitives/keccak-cache-global",
     "reth-node-core/keccak-cache-global",
-    "reth-optimism-node/keccak-cache-global",
+    "reth-mind-chain-node/keccak-cache-global",
 ]
 
 jemalloc = [
@@ -107,7 +104,7 @@ serde = [
     "alloy-consensus/serde",
     "alloy-primitives/serde",
     "op-alloy-consensus?/serde",
-    "reth-optimism-primitives/serde",
+    "reth-mind-chain-primitives/serde",
     "reth-primitives-traits/serde",
-    "reth-optimism-chainspec/serde",
+    "reth-mind-chain-chainspec/serde",
 ]

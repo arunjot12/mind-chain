@@ -1,0 +1,21 @@
+import '../justfiles/go.just'
+
+# Build ldflags string
+_LDFLAGSSTRING := "'" + trim(
+    "-X main.GitCommit=" + GITCOMMIT + " " + \
+    "-X main.GitDate=" + GITDATE + " " + \
+    "-X github.com/mindchain/mind-chain/mc-dispute-mon/version.Version=" + VERSION + " " + \
+    "-X github.com/mindchain/mind-chain/mc-dispute-mon/version.Meta=" + VERSION_META + " " + \
+    "") + "'"
+
+BINARY := "./bin/mc-dispute-mon"
+
+# Build mc-dispute-mon binary
+mc-dispute-mon: (go_build BINARY "./cmd" "-ldflags" _LDFLAGSSTRING)
+
+# Clean build artifacts
+clean:
+    rm -f {{BINARY}}
+
+# Run tests
+test: (go_test "./...")

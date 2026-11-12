@@ -7,12 +7,12 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-service/serialize"
+	"github.com/mindchain/mind-chain/mc-service/serialize"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/arch"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded"
-	"github.com/ethereum-optimism/optimism/op-service/ioutil"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/arch"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded"
+	"github.com/mindchain/mind-chain/mc-service/ioutil"
 )
 
 const statesPath = "testdata/states"

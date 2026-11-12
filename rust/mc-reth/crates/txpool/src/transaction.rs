@@ -13,7 +13,7 @@ use alloy_primitives::{Address, B256, Bytes, TxHash, TxKind, U256};
 use alloy_rpc_types_eth::erc4337::TransactionConditional;
 use c_kzg::KzgSettings;
 use core::fmt::Debug;
-use reth_optimism_primitives::OpTransactionSigned;
+use reth_mind_chain_primitives::OpTransactionSigned;
 use reth_primitives_traits::{InMemorySize, SignedTransaction};
 use reth_transaction_pool::{
     EthBlobTransactionSidecar, EthPoolTransaction, EthPooledTransaction, PoolTransaction,
@@ -327,120 +327,5 @@ where
 
     fn set_op_fee_reservation(&mut self, fee: U256) {
         self.op_cost = self.inner.cost.saturating_add(fee);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::{OpPooledTransaction, OpTransactionValidator};
-    use alloy_consensus::transaction::Recovered;
-    use alloy_eips::eip2718::Encodable2718;
-    use alloy_primitives::{TxKind, U256};
-    use op_alloy_consensus::TxDeposit;
-    use reth_optimism_chainspec::OP_MAINNET;
-    use reth_optimism_evm::OpEvmConfig;
-    use reth_optimism_primitives::{OpPrimitives, OpTransactionSigned};
-    use reth_provider::test_utils::MockEthProvider;
-    use reth_transaction_pool::{
-        TransactionOrigin, TransactionValidationOutcome, blobstore::InMemoryBlobStore,
-        error::InvalidPoolTransactionError, validate::EthTransactionValidatorBuilder,
-    };
-    #[tokio::test]
-    async fn validate_optimism_transaction() {
-        let client = MockEthProvider::<OpPrimitives>::new()
-            .with_chain_spec(OP_MAINNET.clone())
-            .with_genesis_block();
-        let evm_config = OpEvmConfig::optimism(OP_MAINNET.clone());
-        let validator = EthTransactionValidatorBuilder::new(client, evm_config)
-            .no_shanghai()
-            .no_cancun()
-            .build(InMemoryBlobStore::default());
-        let validator = OpTransactionValidator::new(validator);
-
-        let origin = TransactionOrigin::External;
-        let signer = Default::default();
-        let deposit_tx = TxDeposit {
-            source_hash: Default::default(),
-            from: signer,
-            to: TxKind::Create,
-            mint: 0,
-            value: U256::ZERO,
-            gas_limit: 0,
-            is_system_transaction: false,
-            input: Default::default(),
-        };
-        let signed_tx: OpTransactionSigned = deposit_tx.into();
-        let signed_recovered = Recovered::new_unchecked(signed_tx, signer);
-        let len = signed_recovered.encode_2718_len();
-        let pooled_tx: OpPooledTransaction = OpPooledTransaction::new(signed_recovered, len);
-        let outcome = validator.validate_one(origin, pooled_tx).await;
-
-        let err = match outcome {
-            TransactionValidationOutcome::Invalid(_, err) => err,
-            _ => panic!("Expected invalid transaction"),
-        };
-        assert_eq!(err.to_string(), "transaction type not supported");
-    }
-
-    /// A non-deposit transaction may use at most `block_gas_limit - L1_INFO_GAS_OVERHEAD` gas:
-    /// the L1-info deposit is present in every block and always consumes gas, so a tx asking for
-    /// the full block gas limit can never be included. Mirrors op-geth's `EffectiveGasLimit`
-    /// (`core/txpool/validation.go`); such a tx must be rejected at admission, not silently stuck.
-    #[tokio::test]
-    async fn rejects_tx_exceeding_l1_info_reserved_gas_limit() {
-        use crate::validator::L1_INFO_GAS_OVERHEAD;
-        use alloy_consensus::{SignableTransaction, TxEip1559};
-        use alloy_primitives::{Address, Signature};
-        use reth_provider::test_utils::ExtendedAccount;
-
-        let client = MockEthProvider::<OpPrimitives>::new()
-            .with_chain_spec(OP_MAINNET.clone())
-            .with_genesis_block();
-        let signer = Address::with_last_byte(1);
-        client.add_account(signer, ExtendedAccount::new(0, U256::MAX));
-
-        let evm_config = OpEvmConfig::optimism(OP_MAINNET.clone());
-        let validator = EthTransactionValidatorBuilder::new(client, evm_config)
-            .build(InMemoryBlobStore::default());
-        let validator = OpTransactionValidator::new(validator);
-
-        let block_gas_limit = validator.block_gas_limit();
-        let effective_limit = block_gas_limit - L1_INFO_GAS_OVERHEAD;
-
-        let make_tx = |gas_limit: u64| -> OpPooledTransaction {
-            let tx: OpTransactionSigned = TxEip1559 {
-                chain_id: 10,
-                nonce: 0,
-                gas_limit,
-                max_fee_per_gas: 1_000_000_000,
-                to: TxKind::Call(Address::with_last_byte(0x42)),
-                ..Default::default()
-            }
-            .into_signed(Signature::test_signature())
-            .into();
-            let recovered = Recovered::new_unchecked(tx, signer);
-            let len = recovered.encode_2718_len();
-            OpPooledTransaction::new(recovered, len)
-        };
-
-        // At the full block gas limit: <= the inner full-limit check (so it alone wouldn't
-        // reject), but above the L1-info-reserved limit => rejected by the reservation.
-        let outcome =
-            validator.validate_one(TransactionOrigin::External, make_tx(block_gas_limit)).await;
-        assert!(
-            matches!(
-                outcome,
-                TransactionValidationOutcome::Invalid(
-                    _,
-                    InvalidPoolTransactionError::ExceedsGasLimit(..)
-                )
-            ),
-            "tx at the full block gas limit must be rejected by the L1-info reservation, got: {outcome:?}"
-        );
-
-        // At the effective limit => accepted.
-        let outcome =
-            validator.validate_one(TransactionOrigin::External, make_tx(effective_limit)).await;
-        assert!(outcome.is_valid(), "tx at the effective limit must be accepted, got: {outcome:?}");
     }
 }

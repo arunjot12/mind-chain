@@ -6,8 +6,8 @@ use reth_cli::chainspec::ChainSpecParser;
 use reth_cli_commands::common::{AccessRights, CliNodeTypes, Environment};
 use reth_db_api::database::Database;
 use reth_db_common::init::init_from_state_dump;
-use reth_optimism_chainspec::OpChainSpec;
-use reth_optimism_primitives::{
+use reth_mind_chain_chainspec::OpChainSpec;
+use reth_mind_chain_primitives::{
     OpPrimitives,
     bedrock::{BEDROCK_HEADER, BEDROCK_HEADER_HASH},
 };

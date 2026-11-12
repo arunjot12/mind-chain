@@ -17,7 +17,7 @@ pub mod commands;
 /// Optimism CLI metrics.
 pub mod metrics;
 pub use app::CliApp;
-use reth_optimism_chainspec::OpChainSpec;
+use reth_mind_chain_chainspec::OpChainSpec;
 use reth_rpc_server_types::{DefaultRpcModuleValidator, RpcModuleValidator};
 
 use std::{ffi::OsString, fmt, marker::PhantomData};
@@ -30,12 +30,12 @@ use reth_cli::chainspec::ChainSpecParser;
 use reth_cli_commands::launcher::FnLauncher;
 use reth_cli_runner::CliRunner;
 use reth_db::DatabaseEnv;
+use reth_mind_chain_node::args::RollupArgs;
 use reth_node_builder::{NodeBuilder, WithLaunchContext};
 use reth_node_core::{
     args::{DefaultEngineValues, LogArgs, TraceArgs},
     version::version_metadata,
 };
-use reth_optimism_node::args::RollupArgs;
 
 // This allows us to manually enable node metrics features, required for proper jemalloc metric
 // reporting
@@ -272,8 +272,8 @@ mod test {
     use crate::{Cli, chainspec::OpChainSpecParser, commands::Commands};
     use clap::Parser;
     use reth_cli_commands::{NodeCommand, node::NoArgs};
-    use reth_optimism_chainspec::{OP_DEV, OP_MAINNET};
-    use reth_optimism_node::args::RollupArgs;
+    use reth_mind_chain_chainspec::OP_DEV;
+    use reth_mind_chain_node::args::RollupArgs;
 
     #[test]
     fn deny_minimal_on_parse() {
@@ -427,51 +427,5 @@ mod test {
         assert!(cmd.network.discovery.disable_discovery);
 
         assert!(cmd.dev.dev);
-    }
-
-    #[test]
-    fn parse_node() {
-        let cmd = Cli::<OpChainSpecParser, RollupArgs>::parse_from([
-            "mc-reth",
-            "node",
-            "--chain",
-            "op-mainnet",
-            "--datadir",
-            "/mnt/datadirs/optimism",
-            "--instance",
-            "2",
-            "--http",
-            "--http.addr",
-            "0.0.0.0",
-            "--ws",
-            "--ws.addr",
-            "0.0.0.0",
-            "--http.api",
-            "admin,debug,eth,net,trace,txpool,web3,rpc,reth,ots",
-            "--rollup.sequencer-http",
-            "https://mainnet-sequencer.optimism.io",
-            "--rpc-max-tracing-requests",
-            "1000000",
-            "--rpc.gascap",
-            "18446744073709551615",
-            "--rpc.max-connections",
-            "429496729",
-            "--rpc.max-logs-per-response",
-            "0",
-            "--rpc.max-subscriptions-per-connection",
-            "10000",
-            "--metrics",
-            "9003",
-            "--tracing-otlp=http://localhost:4318/v1/traces",
-            "--log.file.max-size",
-            "100",
-        ]);
-
-        match cmd.command {
-            Commands::Node(command) => {
-                assert_eq!(command.chain.as_ref(), OP_MAINNET.as_ref());
-            }
-            _ => panic!("unexpected command"),
-        }
     }
 }

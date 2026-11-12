@@ -125,7 +125,7 @@ since no archive-node is required anymore to determine the withdrawals-root.
 [Isthmus upgrade feature]: https://github.com/ethereum-optimism/specs/blob/main/specs/protocol/isthmus/exec-engine.md#l2tol1messagepasser-storage-root-in-header
 
 Testing of this service may be further improved by decoupling the scheduling and processing.
-Better encapsulated processing would lend itself better to [op-e2e](../op-e2e) action-tests.
+Better encapsulated processing would lend itself better to [mc-e2e](../mc-e2e) action-tests.
 
 
 ## Design principles
@@ -151,4 +151,4 @@ Assuming finality, the mc-proposer is only really subject to liveness failures:
 
 ## Testing
 
-The `mc-proposer` integration is covered in system `op-e2e` tests.
+The `mc-proposer` integration is covered in system `mc-e2e` tests.

@@ -1,6 +1,6 @@
-## Optimism Monorepo Documentation
+## Mind Chain Monorepo Documentation
 
-The `docs/` directory contains Optimism documentation closely tied to the implementation details of the monorepo (https://github.com/ethereum-optimism/optimism).
+The `docs/` directory contains Mind Chain documentation closely tied to the implementation details of the monorepo (https://github.com/arunjot12/mind-chain).
 
 The directory layout is divided into the following sub-directories.
 

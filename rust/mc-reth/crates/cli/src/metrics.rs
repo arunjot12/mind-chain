@@ -2,7 +2,7 @@
 
 use metrics::{describe_gauge, gauge};
 use reth_chainspec::{ForkCondition, Hardforks};
-use reth_optimism_chainspec::{OpChainSpec, OpHardfork};
+use reth_mind_chain_chainspec::{OpChainSpec, OpHardfork};
 
 const HARDFORK_ACTIVATION: &str = "chain_hardfork_activation";
 
@@ -46,8 +46,8 @@ mod tests {
     use super::*;
     use metrics_exporter_prometheus::PrometheusBuilder;
     use reth_chainspec::{ChainHardforks, EthereumHardfork, ForkCondition, Hardfork};
+    use reth_mind_chain_chainspec::{OP_DEV, OpChainSpecBuilder, OpHardfork};
     use reth_node_metrics::recorder::try_install_prometheus_recorder_with_builder;
-    use reth_optimism_chainspec::{OP_DEV, OpChainSpecBuilder, OpHardfork};
 
     #[test]
     fn registers_only_l2_hardfork_activation_metrics() {

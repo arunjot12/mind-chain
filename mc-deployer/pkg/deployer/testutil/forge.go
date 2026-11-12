@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/forge"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/forge"
 	"github.com/stretchr/testify/require"
 )
 

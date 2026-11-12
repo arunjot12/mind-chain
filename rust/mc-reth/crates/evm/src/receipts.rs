@@ -3,7 +3,7 @@ use alloy_evm::eth::receipt_builder::ReceiptBuilderCtx;
 use alloy_op_evm::block::receipt_builder::OpReceiptBuilder;
 use op_alloy_consensus::{OpDepositReceipt, OpTxType};
 use reth_evm::Evm;
-use reth_optimism_primitives::{OpReceipt, OpTransactionSigned};
+use reth_mind_chain_primitives::{OpReceipt, OpTransactionSigned};
 
 /// A builder that operates on mc-reth primitive types, specifically [`OpTransactionSigned`] and
 /// [`OpReceipt`].

@@ -9,9 +9,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/solc"
-	"github.com/ethereum-optimism/optimism/packages/contracts-bedrock/scripts/checks/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/mindchain/mind-chain/mc-chain-ops/solc"
+	"github.com/mindchain/mind-chain/packages/contracts-bedrock/scripts/checks/common"
 )
 
 const semverLockFile = "snapshots/semver-lock.json"

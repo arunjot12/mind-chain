@@ -3,7 +3,7 @@ package mipsevm
 import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // LoggingWriter is a simple util to wrap a logger,

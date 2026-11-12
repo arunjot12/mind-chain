@@ -1,4 +1,4 @@
-# Optimism Monorepo Contributing Guide
+# Mind Chain Monorepo Contributing Guide
 
 ## Documentation
 
@@ -8,8 +8,8 @@ See [`docs/public-docs/DOCS_CONTRIBUTING.md`](./docs/public-docs/DOCS_CONTRIBUTI
 
 ## What to Contribute
 
-Welcome to the Optimism Monorepo Contributing Guide!
-If you're reading this then you might be interested in contributing to the Optimism Monorepo.
+Welcome to the Mind Chain Monorepo Contributing Guide!
+If you're reading this then you might be interested in contributing to the Mind Chain Monorepo.
 Before diving into the specifics of this repository, you might be interested in taking a quick look at just a few of the ways that you can contribute.
 You can:
 
@@ -17,10 +17,10 @@ You can:
   - **IMPORTANT**: If you believe your report impacts the security of this repository, refer to the canonical [Security Policy](https://github.com/ethereum-optimism/.github/blob/master/SECURITY.md) document.
 - Fix issues that are tagged as [`D-good-first-issue`](https://github.com/ethereum-optimism/optimism/labels/D-good-first-issue) or [`S-confirmed`](https://github.com/ethereum-optimism/optimism/labels/S-confirmed).
 - Larger projects are listed on [this project board](https://github.com/orgs/ethereum-optimism/projects/31/views/9). Please talk to us if you're considering working on one of these, they may not be fully specified so it will reduce risk to discuss the approach and ensure that it's still relevant.
-- Help improve the [Optimism Docs] by reporting issues or adding missing sections.
+- Help improve the [Mind Chain Docs] by reporting issues or adding missing sections.
 - Get involved in the protocol design process by joining discussions within the [OP Stack Specs](https://github.com/ethereum-optimism/specs/discussions) repository.
 
-[Optimism Docs]: https://github.com/ethereum-optimism/optimism/tree/develop/docs/public-docs
+[Mind Chain Docs]: ./docs/public-docs
 
 ### Contributions Related to Spelling and Grammar
 
@@ -76,7 +76,7 @@ cd optimism
 ### Software Dependencies
 
 You will need to install a number of software dependencies to effectively contribute to the
-Optimism Monorepo. We use [`mise`](https://mise.jdx.dev/) as a dependency manager for these tools.
+Mind Chain Monorepo. We use [`mise`](https://mise.jdx.dev/) as a dependency manager for these tools.
 Once properly installed, `mise` will provide the correct versions for each tool. `mise` does not
 replace any other installations of these binaries and will only serve these binaries when you are
 working inside of the `optimism` directory.
@@ -111,7 +111,7 @@ the latest versions of the dependencies if you receive these notifications.
 ### Building the Monorepo
 
 You must install all of the required [Software Dependencies](#software-dependencies) to build the
-Optimism Monorepo. Once you've done so, run the following command to build:
+Mind Chain Monorepo. Once you've done so, run the following command to build:
 
 ```bash
 just build
@@ -142,7 +142,7 @@ go test ./...
 
 #### Running e2e tests (Go)
 
-See [this document](./op-e2e/README.md)
+See [this document](./mc-e2e/README.md)
 
 #### Rust (kona, mc-reth, op-alloy, …)
 

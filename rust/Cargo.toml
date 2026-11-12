@@ -66,7 +66,7 @@ members = [
   # Revm execution-environment integration tests
   "revm-ee-tests/",
 
-  # In-test OP execution layer for op-e2e/actions parity
+  # In-test OP execution layer for mc-e2e/actions parity
   "mc-reth-test-engine/",
 
   # Shared build/version metadata (mc-reth + kona-node)
@@ -322,22 +322,22 @@ kona-zkvm-canary = { path = "kona/sp1/crates/zkvm-canary" }
 
 # ==================== OP-RETH INTERNAL CRATES ====================
 mc-reth = { path = "mc-reth/bin/" }
-reth-optimism-chainspec = { path = "mc-reth/crates/chainspec/", default-features = false }
-reth-optimism-cli = { path = "mc-reth/crates/cli/", default-features = false }
-reth-optimism-consensus = { path = "mc-reth/crates/consensus/", default-features = false }
-reth-optimism-evm = { path = "mc-reth/crates/evm/", default-features = false }
-reth-optimism-flashblocks = { path = "mc-reth/crates/flashblocks/" }
-reth-optimism-forks = { path = "mc-reth/crates/hardforks/", default-features = false }
-reth-optimism-node = { path = "mc-reth/crates/node/" }
-reth-optimism-payload-builder = { path = "mc-reth/crates/payload/" }
-reth-optimism-post-exec-replay = { path = "mc-reth/crates/post-exec-replay/" }
-reth-optimism-primitives = { path = "mc-reth/crates/primitives/", default-features = false }
+reth-mind-chain-chainspec = { path = "mc-reth/crates/chainspec/", default-features = false }
+reth-mind-chain-cli = { path = "mc-reth/crates/cli/", default-features = false }
+reth-mind-chain-consensus = { path = "mc-reth/crates/consensus/", default-features = false }
+reth-mind-chain-evm = { path = "mc-reth/crates/evm/", default-features = false }
+reth-mind-chain-flashblocks = { path = "mc-reth/crates/flashblocks/" }
+reth-mind-chain-forks = { path = "mc-reth/crates/hardforks/", default-features = false }
+reth-mind-chain-node = { path = "mc-reth/crates/node/" }
+reth-mind-chain-payload-builder = { path = "mc-reth/crates/payload/" }
+reth-mind-chain-post-exec-replay = { path = "mc-reth/crates/post-exec-replay/" }
+reth-mind-chain-primitives = { path = "mc-reth/crates/primitives/", default-features = false }
 reth-op = { path = "mc-reth/crates/reth/", default-features = false }
-reth-optimism-rpc = { path = "mc-reth/crates/rpc/" }
-reth-optimism-storage = { path = "mc-reth/crates/storage/" }
-reth-optimism-exex = { path = "mc-reth/crates/exex/" }
-reth-optimism-trie = { path = "mc-reth/crates/trie/" }
-reth-optimism-txpool = { path = "mc-reth/crates/txpool/" }
+reth-mind-chain-rpc = { path = "mc-reth/crates/rpc/" }
+reth-mind-chain-storage = { path = "mc-reth/crates/storage/" }
+reth-mind-chain-exex = { path = "mc-reth/crates/exex/" }
+reth-mind-chain-trie = { path = "mc-reth/crates/trie/" }
+reth-mind-chain-txpool = { path = "mc-reth/crates/txpool/" }
 
 # ==================== OP-ALLOY INTERNAL CRATES ====================
 op-alloy-consensus = { version = "2.0.0", path = "op-alloy/crates/consensus", default-features = false }

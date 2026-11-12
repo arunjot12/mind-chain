@@ -1,5 +1,5 @@
 [package]
-name = "reth-optimism-payload-builder"
+name = "reth-mind-chain-payload-builder"
 version = "2.0.0"
 edition.workspace = true
 rust-version.workspace = true
@@ -28,10 +28,10 @@ reth-payload-validator.workspace = true
 reth-metrics.workspace = true
 
 # mc-reth
-reth-optimism-evm = { workspace = true, features = ["std"] }
-reth-optimism-forks.workspace = true
-reth-optimism-primitives = { workspace = true, features = ["reth-codec"] }
-reth-optimism-txpool.workspace = true
+reth-mind-chain-evm = { workspace = true, features = ["std"] }
+reth-mind-chain-forks.workspace = true
+reth-mind-chain-primitives = { workspace = true, features = ["reth-codec"] }
+reth-mind-chain-txpool.workspace = true
 
 # ethereum
 revm.workspace = true
@@ -59,6 +59,6 @@ alloy-rpc-types-eth.workspace = true
 metrics-exporter-prometheus.workspace = true
 metrics-util.workspace = true
 reth-node-metrics.workspace = true
-reth-optimism-chainspec = { workspace = true, features = ["superchain-configs"] }
+reth-mind-chain-chainspec.workspace = true
 reth-revm = { workspace = true, features = ["test-utils"] }
 rstest.workspace = true

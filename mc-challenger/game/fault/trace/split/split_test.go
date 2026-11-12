@@ -6,10 +6,10 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/test"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/alphabet"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/test"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/alphabet"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
 	"github.com/stretchr/testify/require"
 )
 

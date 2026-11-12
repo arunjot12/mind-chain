@@ -12,7 +12,7 @@
 
 /// Re-exported optimism types
 #[doc(inline)]
-pub use reth_optimism_primitives::*;
+pub use reth_mind_chain_primitives::*;
 
 /// Re-exported reth primitives
 pub mod primitives {
@@ -30,7 +30,7 @@ pub mod cli {
         parse_socket_address, sigsegv_handler,
     };
     #[doc(inline)]
-    pub use reth_optimism_cli::*;
+    pub use reth_mind_chain_cli::*;
 }
 
 /// Re-exported pool types
@@ -47,7 +47,7 @@ pub mod consensus {
         #[doc(inline)]
         pub use reth_consensus_common::validation::*;
         #[doc(inline)]
-        pub use reth_optimism_consensus::validation::*;
+        pub use reth_mind_chain_consensus::validation::*;
     }
 }
 
@@ -57,14 +57,14 @@ pub mod chainspec {
     #[doc(inline)]
     pub use reth_chainspec::*;
     #[doc(inline)]
-    pub use reth_optimism_chainspec::*;
+    pub use reth_mind_chain_chainspec::*;
 }
 
 /// Re-exported evm types
 #[cfg(feature = "evm")]
 pub mod evm {
     #[doc(inline)]
-    pub use reth_optimism_evm::*;
+    pub use reth_mind_chain_evm::*;
 
     #[doc(inline)]
     pub use reth_evm as primitives;
@@ -118,14 +118,14 @@ pub mod storage {
 /// Re-exported optimism node
 #[cfg(feature = "node-api")]
 pub mod node {
+    #[cfg(feature = "node")]
+    pub use reth_mind_chain_node::*;
     #[doc(inline)]
     pub use reth_node_api as api;
     #[cfg(feature = "node")]
     pub use reth_node_builder as builder;
     #[doc(inline)]
     pub use reth_node_core as core;
-    #[cfg(feature = "node")]
-    pub use reth_optimism_node::*;
 }
 
 /// Re-exported  engine types
@@ -134,7 +134,7 @@ pub mod engine {
     #[doc(inline)]
     pub use reth_engine_local as local;
     #[doc(inline)]
-    pub use reth_optimism_node::engine::*;
+    pub use reth_mind_chain_node::engine::*;
 }
 
 /// Re-exported reth trie types
@@ -152,7 +152,7 @@ pub mod trie {
 #[cfg(feature = "rpc")]
 pub mod rpc {
     #[doc(inline)]
-    pub use reth_optimism_rpc::*;
+    pub use reth_mind_chain_rpc::*;
     #[doc(inline)]
     pub use reth_rpc::*;
 

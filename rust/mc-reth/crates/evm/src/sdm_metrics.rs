@@ -148,9 +148,9 @@ mod tests {
     use reth_chainspec::ForkCondition;
     use reth_evm::ConfigureEvm;
     use reth_metrics::metrics::with_local_recorder;
-    use reth_optimism_chainspec::OpChainSpecBuilder;
-    use reth_optimism_forks::OpHardfork;
-    use reth_optimism_primitives::{OpBlock, OpTransactionSigned};
+    use reth_mind_chain_chainspec::OpChainSpecBuilder;
+    use reth_mind_chain_forks::OpHardfork;
+    use reth_mind_chain_primitives::{OpBlock, OpTransactionSigned};
     use reth_primitives_traits::SealedBlock;
     use rstest::rstest;
     use std::sync::Arc;

@@ -6,8 +6,8 @@ import (
 	"math/big"
 	"os"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
 )
 
 func main() {

@@ -1,9 +1,7 @@
 <div align="center">
   <br />
-  <br />
-  <a href="https://optimism.io"><img alt="Optimism" src="./logo.svg" width=600></a>
-  <br />
-  <h3><a href="https://optimism.io">Optimism</a> is Ethereum, scaled.</h3>
+  <h1>Mind Chain</h1>
+  <h3>The Mind Chain rollup stack: node, batcher, proposer, challenger, execution client and contracts.</h3>
   <br />
 </div>
 
@@ -11,172 +9,95 @@
 
 <!--TOC-->
 
-- [What is Optimism?](#what-is-optimism)
-- [Documentation](#documentation)
-- [Specification](#specification)
-- [Community](#community)
-- [Contributing](#contributing)
-- [Security Policy and Vulnerability Reporting](#security-policy-and-vulnerability-reporting)
+- [What is Mind Chain?](#what-is-mind-chain)
+- [Getting Started](#getting-started)
 - [Directory Structure](#directory-structure)
-- [Development and Release Process](#development-and-release-process)
-  - [Overview](#overview)
-  - [Production Releases](#production-releases)
-  - [Development branch](#development-branch)
+- [Releases](#releases)
+- [Downloading & Shallow-Cloning](#downloading--shallow-cloning)
 - [License](#license)
 
 <!--TOC-->
 
-## What is Optimism?
+## What is Mind Chain?
 
-[Optimism](https://www.optimism.io/) is a project dedicated to scaling Ethereum's technology and expanding its ability to coordinate people from across the world to build effective decentralized economies and governance systems. The [Optimism Collective](https://www.optimism.io/vision) builds open-source software that powers scalable blockchains and aims to address key governance and economic challenges in the wider Ethereum ecosystem. Optimism operates on the principle of **impact=profit**, the idea that individuals who positively impact the Collective should be proportionally rewarded with profit. **Change the incentives and you change the world.**
+Mind Chain is an Ethereum Layer 2 rollup. This repository holds every Mind Chain service in one place:
+the rollup node (`mc-node`), the batch submitter (`mc-batcher`), the output proposer (`mc-proposer`),
+the dispute game agent (`mc-challenger`), the deployer (`mc-deployer`), the execution client (`mc-reth`)
+and the L1/L2 smart contracts.
 
-In this repository you'll find numerous core components of the OP Stack, the decentralized software stack maintained by the Optimism Collective that powers Optimism and forms the backbone of blockchains like [OP Mainnet](https://explorer.optimism.io/) and [Base](https://base.org). The OP Stack is designed to be aggressively open-source — you are welcome to explore, modify, and extend this code.
+See [MINDCHAIN.md](./MINDCHAIN.md) for how to clone, build, run and release the services.
 
-## Documentation
+## Getting Started
 
-- If you want to build on top of OP Mainnet, refer to the [Optimism Documentation](https://docs.optimism.io)
-- If you want to build your own OP Stack based blockchain, refer to the [OP Stack Guide](https://docs.optimism.io/stack/getting-started) and make sure to understand this repository's [Development and Release Process](#development-and-release-process)
-
-## Specification
-
-Detailed specifications for the OP Stack can be found within the [OP Stack Specs](https://github.com/ethereum-optimism/specs) repository.
-
-## Community
-
-General discussion happens most frequently on the [Optimism discord](https://discord.gg/optimism).
-Governance discussion can also be found on the [Optimism Governance Forum](https://gov.optimism.io/).
-
-## Contributing
-
-The OP Stack is a collaborative project. By collaborating on free, open software and shared standards, the Optimism Collective aims to prevent siloed software development and rapidly accelerate the development of the Ethereum ecosystem. Come contribute, build the future, and redefine power, together.
-
-[CONTRIBUTING.md](./CONTRIBUTING.md) contains a detailed explanation of the contributing process for this repository. Make sure to use the [Developer Quick Start](./CONTRIBUTING.md#development-quick-start) to properly set up your development environment.
-
-[Good First Issues](https://github.com/ethereum-optimism/optimism/issues?q=is:open+is:issue+label:D-good-first-issue) are a great place to look for tasks to tackle if you're not sure where to start, and see [CONTRIBUTING.md](./CONTRIBUTING.md) for info on larger projects.
-
-## Security Policy and Vulnerability Reporting
-
-Please refer to the canonical [Security Policy](https://github.com/ethereum-optimism/.github/blob/master/SECURITY.md) document for detailed information about how to report vulnerabilities in this codebase.
-Bounty hunters are encouraged to check out the [Optimism Immunefi bug bounty program](https://immunefi.com/bounty/optimism/).
-The Optimism Immunefi program offers up to $2,000,042 for in-scope critical vulnerabilities.
+[CONTRIBUTING.md](./CONTRIBUTING.md) explains how to set up a development environment and contribute.
+Use the [Developer Quick Start](./CONTRIBUTING.md#development-quick-start) to install the toolchain.
 
 ## Directory Structure
 
 <pre>
 ├── <a href="./cannon">cannon</a>: Onchain MIPS instruction emulator for fault proofs
-├── <a href="./docs">docs</a>: A collection of documents including audits and post-mortems
-│   └── <a href="./docs/public-docs">public-docs</a>: Public developer documentation for <a href="https://docs.optimism.io">docs.optimism.io</a>
-├── <a href="./op-acceptance-tests">op-acceptance-tests</a>: Acceptance tests and configuration for OP Stack
-├── <a href="./op-alt-da">op-alt-da</a>: Alternative Data Availability mode (beta)
+├── <a href="./docs">docs</a>: Developer documentation
+├── <a href="./mindchain">mindchain</a>: Mind Chain version pins and helper scripts
+├── <a href="./mc-acceptance-tests">mc-acceptance-tests</a>: Acceptance tests
+├── <a href="./mc-alt-da">mc-alt-da</a>: Alternative Data Availability mode (beta)
 ├── <a href="./mc-batcher">mc-batcher</a>: L2-Batch Submitter, submits bundles of batches to L1
-├── <a href="./op-chain-ops">op-chain-ops</a>: State surgery utilities
+├── <a href="./mc-chain-ops">mc-chain-ops</a>: State surgery utilities
 ├── <a href="./mc-challenger">mc-challenger</a>: Dispute game challenge agent
-├── <a href="./op-conductor">op-conductor</a>: High-availability sequencer service
-├── <a href="./mc-deployer">mc-deployer</a>: CLI tool for deploying and upgrading OP Stack smart contracts
-├── <a href="./op-devstack">op-devstack</a>: Flexible test frontend for integration and acceptance testing
-├── <a href="./op-dispute-mon">op-dispute-mon</a>: Off-chain service to monitor dispute games
-├── <a href="./op-dripper">op-dripper</a>: Controlled token distribution service
-├── <a href="./op-e2e">op-e2e</a>: End-to-End testing of all bedrock components in Go
-├── <a href="./op-faucet">op-faucet</a>: Dev-faucet with support for multiple chains
-├── <a href="./op-fetcher">op-fetcher</a>: Data fetching utilities
-├── <a href="./op-interop-mon">op-interop-mon</a>: Interoperability monitoring service
+├── <a href="./mc-conductor">mc-conductor</a>: High-availability sequencer service
+├── <a href="./mc-deployer">mc-deployer</a>: CLI tool for deploying and upgrading the Mind Chain smart contracts
+├── <a href="./mc-devstack">mc-devstack</a>: Flexible test frontend for integration and acceptance testing
+├── <a href="./mc-dispute-mon">mc-dispute-mon</a>: Off-chain service to monitor dispute games
+├── <a href="./mc-dripper">mc-dripper</a>: Controlled token distribution service
+├── <a href="./mc-e2e">mc-e2e</a>: End-to-End testing of all components in Go
+├── <a href="./mc-faucet">mc-faucet</a>: Dev-faucet with support for multiple chains
+├── <a href="./mc-fetcher">mc-fetcher</a>: Data fetching utilities
+├── <a href="./mc-interop-mon">mc-interop-mon</a>: Interoperability monitoring service
 ├── <a href="./mc-node">mc-node</a>: Rollup consensus-layer client
-├── <a href="./op-preimage">op-preimage</a>: Go bindings for Preimage Oracle
+├── <a href="./mc-preimage">mc-preimage</a>: Go bindings for Preimage Oracle
 ├── <a href="./mc-proposer">mc-proposer</a>: L2-Output Submitter, submits proposals to L1
-├── <a href="./op-service">op-service</a>: Common codebase utilities
-├── <a href="./op-sync-tester">op-sync-tester</a>: Sync testing utilities
-├── <a href="./op-test-sequencer">op-test-sequencer</a>: Test sequencer for development
-├── <a href="./op-up">op-up</a>: Deployment and management utilities
-├── <a href="./op-wheel">op-wheel</a>: Database utilities
+├── <a href="./mc-service">mc-service</a>: Common codebase utilities
+├── <a href="./mc-sync-tester">mc-sync-tester</a>: Sync testing utilities
+├── <a href="./mc-test-sequencer">mc-test-sequencer</a>: Test sequencer for development
+├── <a href="./mc-up">mc-up</a>: Deployment and management utilities
+├── <a href="./mc-wheel">mc-wheel</a>: Database utilities
 ├── <a href="./ops">ops</a>: Various operational packages
 ├── <a href="./packages">packages</a>
-│   └── <a href="./packages/contracts-bedrock">contracts-bedrock</a>: OP Stack smart contracts
+│   └── <a href="./packages/contracts-bedrock">contracts-bedrock</a>: Mind Chain smart contracts
+├── <a href="./releases">releases</a>: Pinned sources of mc-deployer and cannon releases
 └── <a href="./rust">rust</a>: Rust components — a unified Cargo workspace
-    ├── <a href="./rust/kona">kona</a>: OP Stack state-transition (fault proof) program and rollup node in Rust
-    ├── <a href="./rust/mc-reth">mc-reth</a>: OP Stack execution client built on reth
-    ├── <a href="./rust/mc-reth-test-engine">mc-reth-test-engine</a>: Minimal execution-layer engine, e.g. an op-geth replacement in Go action tests (WIP)
-    ├── <a href="./rust/op-revm">op-revm</a>: OP Stack EVM implementation (revm fork)
-    ├── <a href="./rust/op-alloy">op-alloy</a>: OP Stack types and providers for the alloy ecosystem
-    ├── <a href="./rust/alloy-op-evm">alloy-op-evm</a>: OP Stack EVM support for the alloy ecosystem
-    ├── <a href="./rust/alloy-op-hardforks">alloy-op-hardforks</a>: OP Stack hardfork definitions for the alloy ecosystem
-    └── <a href="./rust/lokahi">lokahi</a>: Rust rewrite of op-supernode, the multi-chain consensus-layer host (WIP)
+    ├── <a href="./rust/kona">kona</a>: State-transition (fault proof) program and rollup node in Rust
+    ├── <a href="./rust/mc-reth">mc-reth</a>: Mind Chain execution client built on reth
+    ├── <a href="./rust/mc-reth-test-engine">mc-reth-test-engine</a>: Minimal execution-layer engine for Go action tests (WIP)
+    ├── <a href="./rust/op-revm">op-revm</a>: Rollup EVM implementation (revm fork)
+    ├── <a href="./rust/op-alloy">op-alloy</a>: Rollup types and providers for the alloy ecosystem
+    ├── <a href="./rust/alloy-op-evm">alloy-op-evm</a>: Rollup EVM support for the alloy ecosystem
+    ├── <a href="./rust/alloy-op-hardforks">alloy-op-hardforks</a>: Hardfork definitions for the alloy ecosystem
+    └── <a href="./rust/lokahi">lokahi</a>: Rust multi-chain consensus-layer host (WIP)
 </pre>
 
-## Development and Release Process
+## Releases
 
-### Overview
-
-Please read this section carefully if you're planning to fork or make frequent PRs into this repository.
-
-### Production Releases
-
-Production releases are always tags, versioned as `<component-name>/v<semver>`.
-For example, an `mc-node` release might be versioned as `mc-node/v1.1.2`, and  smart contract releases might be versioned as `op-contracts/v1.0.0`.
-Release candidates are versioned in the format `mc-node/v1.1.2-rc.1`.
-We always start with `rc.1` rather than `rc`.
-
-For contract releases, refer to the GitHub release notes for a given release which will list the specific contracts being released. Not all contracts are considered production ready within a release and many are under active development.
-
-Tags of the form `v<semver>`, such as `v1.1.4`, indicate releases of all Go code only, and **DO NOT** include smart contracts.
-This naming scheme is required by Golang.
-In the above list, this means these `v<semver>` releases contain all `op-*` components and exclude all `contracts-*` components.
-
-`op-geth` embeds upstream geth’s version inside its own version as follows: `vMAJOR.GETH_MAJOR GETH_MINOR GETH_PATCH.PATCH`.
-Basically, geth’s version is our minor version.
-For example if geth is at `v1.12.0`, the corresponding op-geth version would be `v1.101200.0`.
-Note that we pad out to three characters for the geth minor version and two characters for the geth patch version.
-Since we cannot left-pad with zeroes, the geth major version is not padded.
-
-See the [GitHub releases](https://github.com/ethereum-optimism/optimism/releases) page for more information about releases for the latest node components.
-
-The full set of components that have releases are:
-
-- `mc-batcher`
-- `op-contracts`
-- `mc-challenger`
-- `mc-node`
-- `mc-proposer`
-
-All other components and packages should be considered development components only and do not have releases.
-
-### Development branch
-
-The primary development branch is [`develop`](https://github.com/ethereum-optimism/optimism/tree/develop/).
-`develop` contains the most up-to-date software that remains backwards compatible with the latest experimental [network deployments](https://docs.optimism.io/chain/networks).
-If you're making a backwards compatible change, please direct your pull request towards `develop`.
-
-**Changes to contracts within `packages/contracts-bedrock/src` are usually NOT considered backwards compatible.**
-Some exceptions to this rule exist for cases in which we absolutely must deploy some new contract after a tag has already been fully deployed.
-If you're changing or adding a contract and you're unsure about which branch to make a PR into, default to using a feature branch.
-Feature branches are typically used when there are conflicts between 2 projects touching the same code, to avoid conflicts from merging both into `develop`.
-
-## Downloading & Shallow-Cloning the Monorepo
-
-If you want to use the monorepo as a dependency, e.g. in CI, you can greatly speed up the fetching process by either downloading it directly as an archive from Github instead of cloning as a git repository or shallow-cloning it.
-This avoids downloading the full monorepo git history, which is unfortunately a few GBs in size, but which also isn't needed for many use cases, like CI.
-
-To fetch the monorepo at a specific commit/branch/tag `$REF`, download and unpack with
-```
-curl -L https://github.com/ethereum-optimism/optimism/archive/$REF.tar.gz | tar xz
-```
-Note that if you need any of its submodules, you'd need to manually download those too.
-
-If you want a shallow git clone of latest `develop`, you can just do
-```
-git clone --depth 1 --shallow-submodules https://github.com/ethereum-optimism/optimism.git
-```
-which takes only a few seconds on a good internet connection.
-
-If you want to shallow-checkout a specific branch or tag `$REF`, do
+Every push to `main` and every `v*` tag builds and pushes the service images to
+`ghcr.io/arunjot12/mind-chain/<service>:<tag>`. To cut a release:
 
 ```
-git clone --no-checkout --depth 1 --shallow-submodules https://github.com/ethereum-optimism/optimism.git
-cd optimism
+git tag v1.1.0 && git push origin v1.1.0
+```
+
+The upstream versions each service is based on are pinned in [mindchain/versions.env](./mindchain/versions.env).
+
+## Downloading & Shallow-Cloning
+
+To fetch a specific commit, branch or tag `$REF` without the full history:
+
+```
+git clone --no-checkout --depth 1 --shallow-submodules https://github.com/arunjot12/mind-chain.git
+cd mind-chain
 git fetch --depth 1 origin "$REF"
 git checkout "$REF"
 ```
-which should also only take a few seconds.
 
 ## License
 
-All other files within this repository are licensed under the [MIT License](https://github.com/ethereum-optimism/optimism/blob/master/LICENSE) unless stated otherwise.
+MIT, see [LICENSE](./LICENSE). Mind Chain is derived from the open-source OP Stack by Optimism,
+which is also MIT-licensed; its copyright notice is kept in [LICENSE](./LICENSE) as that license requires.

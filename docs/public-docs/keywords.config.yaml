@@ -252,7 +252,7 @@ metadata_rules:
       - protocol
       - infrastructure
       - mc-proposer
-      - op-conductor
+      - mc-conductor
       - op-signer
       - mcp
       - mcp-l2

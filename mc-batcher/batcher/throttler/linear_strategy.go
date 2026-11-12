@@ -3,8 +3,8 @@ package throttler
 import (
 	"sync"
 
-	"github.com/ethereum-optimism/optimism/mc-batcher/config"
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-service/log"
 )
 
 // LinearStrategy implements linear throttling for a smoother and more eager response than the step strategy

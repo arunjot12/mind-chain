@@ -1,0 +1,4 @@
+build:
+  go build -o bin/mc-fetcher cmd/main.go
+
+build-go: build

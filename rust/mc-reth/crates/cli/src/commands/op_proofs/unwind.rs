@@ -5,12 +5,12 @@ use clap::Parser;
 use reth_chainspec::EthChainSpec;
 use reth_cli::chainspec::ChainSpecParser;
 use reth_cli_commands::common::{AccessRights, CliNodeTypes, Environment, EnvironmentArgs};
-use reth_node_core::version::version_metadata;
-use reth_optimism_node::args::ProofsHistoryStorageArgs;
-use reth_optimism_trie::{
+use reth_mind_chain_node::args::ProofsHistoryStorageArgs;
+use reth_mind_chain_trie::{
     OpProofsProviderRO, OpProofsProviderRw, OpProofsStorageError, OpProofsStore,
     db::MdbxProofsStorage,
 };
+use reth_node_core::version::version_metadata;
 use reth_primitives_traits::BlockBody;
 use reth_provider::{BlockReader, TransactionVariant};
 use std::sync::Arc;

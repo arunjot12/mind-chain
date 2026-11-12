@@ -26,7 +26,7 @@ The Rollup Node is responsible for deriving L2 block payloads from L1 data and p
 *   **[mc-node](/op-stack/components/mc-node)** is the reference implementation of the Rollup Node, written in Go and maintained by Optimism. It is the default choice for any node role and is not deprecated.
 *   **[kona-node](/op-stack/components/kona-node)** is the Rust implementation of the Rollup Node, built as part of the Kona project. It is in active development and should be considered experimental, so give it a role where that is acceptable.
 
-For nodes that follow every chain in an [interop](/op-stack/interop/explainer) dependency set, deploy the consensus layer as [op-supernode](/op-stack/interop/supernode), which hosts an mc-node instance for each chain in one process and adds cross-chain message verification. See the [supernode configuration guide](/node-operators/guides/configuration/supernode) for recommended settings and the [op-supernode configuration reference](/node-operators/reference/op-supernode-config) for the flag catalogue.
+For nodes that follow every chain in an [interop](/op-stack/interop/explainer) dependency set, deploy the consensus layer as [mc-supernode](/op-stack/interop/supernode), which hosts an mc-node instance for each chain in one process and adds cross-chain message verification. See the [supernode configuration guide](/node-operators/guides/configuration/supernode) for recommended settings and the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config) for the flag catalogue.
 
 ## Execution client
 

@@ -1,5 +1,5 @@
 [package]
-name = "reth-optimism-rpc"
+name = "reth-mind-chain-rpc"
 version = "2.0.0"
 edition.workspace = true
 rust-version.workspace = true
@@ -35,15 +35,15 @@ reth-payload-util.workspace = true
 reth-provider.workspace = true
 
 # mc-reth
-reth-optimism-evm.workspace = true
-reth-optimism-flashblocks.workspace = true
-reth-optimism-payload-builder.workspace = true
-reth-optimism-post-exec-replay.workspace = true
-reth-optimism-txpool.workspace = true
+reth-mind-chain-evm.workspace = true
+reth-mind-chain-flashblocks.workspace = true
+reth-mind-chain-payload-builder.workspace = true
+reth-mind-chain-post-exec-replay.workspace = true
+reth-mind-chain-txpool.workspace = true
 # TODO remove node-builder import
-reth-optimism-primitives = { workspace = true, features = ["reth-codec", "serde-bincode-compat", "serde"] }
-reth-optimism-forks.workspace = true
-reth-optimism-trie.workspace = true
+reth-mind-chain-primitives = { workspace = true, features = ["reth-codec", "serde-bincode-compat", "serde"] }
+reth-mind-chain-forks.workspace = true
+reth-mind-chain-trie.workspace = true
 
 # ethereum
 alloy-eips.workspace = true
@@ -98,8 +98,8 @@ strum.workspace = true
 [dev-dependencies]
 alloy-op-hardforks.workspace = true
 alloy-genesis.workspace = true
-reth-optimism-chainspec = { workspace = true, features = ["superchain-configs"] }
-reth-optimism-evm = { workspace = true, features = ["rpc"] }
+reth-mind-chain-chainspec.workspace = true
+reth-mind-chain-evm = { workspace = true, features = ["rpc"] }
 rstest.workspace = true
 
 [features]

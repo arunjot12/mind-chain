@@ -17,11 +17,11 @@ use op_alloy_consensus::DEPOSIT_TX_TYPE_ID;
 use reth_basic_payload_builder::{BuildArguments, HeaderForPayload, PayloadBuilder, PayloadConfig};
 use reth_evm::ConfigureEvm;
 use reth_metrics::Metrics;
-use reth_node_api::{BuiltPayload, Events, NodeTypes, PayloadBuilderError, PayloadTypes};
-use reth_node_builder::{BuilderContext, FullNodeTypes, components::PayloadServiceBuilder};
-use reth_optimism_payload_builder::{
+use reth_mind_chain_payload_builder::{
     OpPayloadAttrs, OpPayloadBuilder, is_invalid_derived_payload_error,
 };
+use reth_node_api::{BuiltPayload, Events, NodeTypes, PayloadBuilderError, PayloadTypes};
+use reth_node_builder::{BuilderContext, FullNodeTypes, components::PayloadServiceBuilder};
 use reth_payload_builder::{
     BuildNewPayload, PayloadBuilderHandle, PayloadBuilderResources, PayloadKind,
     PayloadServiceCommand,
@@ -534,9 +534,9 @@ mod tests {
     use alloy_primitives::{Bytes, U256};
     use op_alloy_rpc_types_engine::OpPayloadAttributes;
     use reth_evm::execute::{BlockExecutionError, BlockValidationError};
+    use reth_mind_chain_payload_builder::OpBuiltPayload;
+    use reth_mind_chain_primitives::OpBlock;
     use reth_node_api::PayloadAttributes;
-    use reth_optimism_payload_builder::OpBuiltPayload;
-    use reth_optimism_primitives::OpBlock;
     use reth_payload_builder::PayloadBuilderLease;
     use reth_primitives_traits::SealedBlock;
     use reth_provider::ProviderError;

@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-core/nuts"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/nuts"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 // bundleGenerator generates a NUT bundle in the given contracts directory.
@@ -131,7 +131,7 @@ func verifyFromCommit(root string, fork forks.Name, entry nuts.ForkLockEntry, ge
 
 	if !bytes.Equal(regenContent, committedContent) {
 		return fmt.Errorf(
-			"the bundle regenerated from commit %s does not match the committed bundle at %s for the %s fork . See op-core/nuts/README.md for details on how to lock a new bundle.",
+			"the bundle regenerated from commit %s does not match the committed bundle at %s for the %s fork . See mc-core/nuts/README.md for details on how to lock a new bundle.",
 			entry.Commit[:12], entry.Bundle, fork,
 		)
 	}

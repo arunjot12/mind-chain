@@ -1,6 +1,6 @@
 # E2e testing for the kona-node
 
-This directory contains the e2e testing resources for the kona-node. The e2e testing is done using the `op-devstack` from the [Optimism monorepo](https://github.com/ethereum-optimism/optimism) with the `sysgo` orchestrator.
+This directory contains the e2e testing resources for the kona-node. The e2e testing is done using the `mc-devstack` from the [Optimism monorepo](https://github.com/ethereum-optimism/optimism) with the `sysgo` orchestrator.
 
 ## Prerequisites
 
@@ -67,10 +67,10 @@ Where:
 
 ## Environment Variables
 
-When using `op-devstack` for testing, the following environment variables are set automatically by the justfile recipes:
+When using `mc-devstack` for testing, the following environment variables are set automatically by the justfile recipes:
 
-- `DEVSTACK_ORCHESTRATOR=sysgo`: Tells `op-devstack` to use the sysgo orchestrator.
-- `DISABLE_OP_E2E_LEGACY=true`: Tells `op-devstack` not to use the `op-e2e` tests that rely on e2e config and contracts-bedrock artifacts.
+- `DEVSTACK_ORCHESTRATOR=sysgo`: Tells `mc-devstack` to use the sysgo orchestrator.
+- `DISABLE_OP_E2E_LEGACY=true`: Tells `mc-devstack` not to use the `mc-e2e` tests that rely on e2e config and contracts-bedrock artifacts.
 
 ## Contributing
 

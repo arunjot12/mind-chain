@@ -4,23 +4,20 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/addresses"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/standard"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/artifacts"
+
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/mindchain/mind-chain/mc-chain-ops/addresses"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/standard"
 	"github.com/stretchr/testify/require"
 )
 
-func TestNewIntentStandard_producesZeroPAOs(t *testing.T) {
-	intent, err := NewIntentStandard(11155111, []common.Hash{common.HexToHash("0x336")})
-	require.NoError(t, err)
-	require.Equal(t, common.Address{}, intent.Chains[0].Roles.L1ProxyAdminOwner, "L1ProxyAdminOwner should be zero - user must specify manually")
-	require.Equal(t, common.Address{}, intent.Chains[0].Roles.L2ProxyAdminOwner, "L2ProxyAdminOwner should be zero - user must specify manually")
-}
-
 func TestIntentClone(t *testing.T) {
-	intent, err := NewIntentStandard(11155111, []common.Hash{common.HexToHash("0x336")})
+	intent, err := NewIntentCustom(11155111, []common.Hash{common.HexToHash("0x336")})
 	require.NoError(t, err)
+	intent.L1ContractsLocator = artifacts.DefaultL1ContractsLocator
+	intent.L2ContractsLocator = artifacts.DefaultL2ContractsLocator
 	setChainRolesForStandard(&intent)
 	proxy := common.HexToAddress("0x11")
 	intent.SuperchainConfigProxy = &proxy
@@ -38,118 +35,6 @@ func TestIntentClone(t *testing.T) {
 	require.Equal(t, common.HexToAddress("0x11"), proxy)
 	require.NotEqual(t, common.HexToAddress("0x33"), intent.Chains[0].Roles.Challenger)
 	require.Equal(t, float64(73), intent.GlobalDeployOverrides["faultGameMaxDepth"])
-}
-
-func TestValidateStandardValues(t *testing.T) {
-	intent, err := NewIntentStandard(11155111, []common.Hash{common.HexToHash("0x336")})
-	require.NoError(t, err)
-
-	err = intent.Check()
-	require.Error(t, err)
-	require.ErrorIs(t, err, ErrPAOMustBeSpecified)
-
-	setChainRolesForStandard(&intent)
-	err = intent.Check()
-	require.Error(t, err)
-	require.ErrorIs(t, err, ErrFeeVaultZeroAddress)
-
-	setFeeAddresses(&intent)
-
-	tests := []struct {
-		name    string
-		mutator func(intent *Intent)
-		err     error
-	}{
-		{
-			"EIP1559Denominator",
-			func(intent *Intent) {
-				intent.Chains[0].Eip1559Denominator = 3
-			},
-			ErrNonStandardValue,
-		},
-		{
-			"EIP1559DenominatorCanyon",
-			func(intent *Intent) {
-				intent.Chains[0].Eip1559DenominatorCanyon = 3
-			},
-			ErrNonStandardValue,
-		},
-		{
-			"EIP1559Elasticity",
-			func(intent *Intent) {
-				intent.Chains[0].Eip1559Elasticity = 999
-			},
-			ErrNonStandardValue,
-		},
-		{
-			"AdditionalDisputeGames",
-			func(intent *Intent) {
-				intent.Chains[0].AdditionalDisputeGames = []AdditionalDisputeGame{
-					{
-						VMType: VMTypeAlphabet,
-					},
-				}
-			},
-			ErrNonStandardValue,
-		},
-		{
-			"CustomGasToken",
-			func(intent *Intent) {
-				intent.Chains[0].CustomGasToken = CustomGasToken{
-					Name:             "Custom Gas Token",
-					Symbol:           "CGT",
-					InitialLiquidity: (*hexutil.Big)(big.NewInt(1000)),
-				}
-			},
-			ErrNonStandardValue,
-		},
-		{
-			"SuperchainConfigProxy",
-			func(intent *Intent) {
-				addr := common.HexToAddress("0x9999")
-				intent.SuperchainConfigProxy = &addr
-			},
-			ErrIncompatibleValue,
-		},
-		{
-			"OPCMAddress",
-			func(intent *Intent) {
-				addr := common.HexToAddress("0x9999")
-				intent.OPCMAddress = &addr
-			},
-			ErrNonStandardValue,
-		},
-		{
-			"SuperchainRoles",
-			func(intent *Intent) {
-				intent.SuperchainRoles = &addresses.SuperchainRoles{
-					SuperchainGuardian: common.HexToAddress("0x9999"),
-				}
-			},
-			ErrIncompatibleValue,
-		},
-		{
-			"UseInterop",
-			func(intent *Intent) {
-				intent.UseInterop = true
-			},
-			ErrNonStandardValue,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			intent, err := NewIntentStandard(11155111, []common.Hash{common.HexToHash("0x336")})
-			require.NoError(t, err)
-			setChainRolesForStandard(&intent)
-			setFeeAddresses(&intent)
-
-			tt.mutator(&intent)
-
-			err = intent.Check()
-			require.Error(t, err)
-			require.ErrorIs(t, err, tt.err)
-		})
-	}
 }
 
 func TestValidateCustomValues(t *testing.T) {

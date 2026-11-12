@@ -1,26 +1,26 @@
 ---
 title: Supernode configuration
-description: Learn how to configure op-supernode to run every chain in an interop dependency set in one process.
+description: Learn how to configure mc-supernode to run every chain in an interop dependency set in one process.
 diataxis: how-to
 audit-source:
-  - op-supernode/flags/flags.go
-  - op-supernode/flags/virtual_flags.go
-  - op-supernode/cmd/main.go
-  - op-supernode/supernode/supernode.go
-  - op-supernode/supernode/activity/interop/interop.go
-  - op-supernode/README.md
+  - mc-supernode/flags/flags.go
+  - mc-supernode/flags/virtual_flags.go
+  - mc-supernode/cmd/main.go
+  - mc-supernode/supernode/supernode.go
+  - mc-supernode/supernode/activity/interop/interop.go
+  - mc-supernode/README.md
 ---
 
 <Info>
-  op-supernode is in active development.
-  This page tracks the [op-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8) release candidate and the recommendations may evolve before the stable release.
-  For background on what op-supernode is and why it exists, see the [supernode explainer](/op-stack/interop/supernode).
+  mc-supernode is in active development.
+  This page tracks the [mc-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8) release candidate and the recommendations may evolve before the stable release.
+  For background on what mc-supernode is and why it exists, see the [supernode explainer](/op-stack/interop/supernode).
 </Info>
 
-This guide covers the recommended settings and a starter configuration for op-supernode.
-op-supernode runs every chain in an interop dependency set together as virtual nodes inside one process, sharing the L1 client and beacon-chain plumbing across them.
+This guide covers the recommended settings and a starter configuration for mc-supernode.
+mc-supernode runs every chain in an interop dependency set together as virtual nodes inside one process, sharing the L1 client and beacon-chain plumbing across them.
 For the end-to-end procedure to stand up a supernode from scratch (build, engine-API wiring, start, verify), see the [supernode setup guide](/node-operators/guides/configuration/supernode-setup).
-For the complete per-flag catalogue, see the [op-supernode configuration reference](/node-operators/reference/op-supernode-config).
+For the complete per-flag catalogue, see the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config).
 
 ## Recommendations
 
@@ -60,7 +60,7 @@ A full archive is not required — see the [mc-reth configuration reference](/no
 
 If you also run mc-challenger for permissionless fault proofs, the same ELs additionally need historical proofs enabled — see [Running mc-reth with Historical Proofs](/node-operators/tutorials/reth-historical-proofs).
 
-### Pair op-supernode with a Light CL fleet
+### Pair mc-supernode with a Light CL fleet
 
 For operators running more than a handful of nodes, the deployable pattern is to concentrate the expensive multi-chain derivation work on supernodes and run the rest of the fleet as mc-node or kona-node instances in Light CL mode.
 Each supernode (or HA pool of supernodes) acts as the safe source for a fleet of Light CLs.
@@ -74,18 +74,18 @@ Leave P2P enabled (the default) when the supernode is the only node in the topol
 
 ### Run an HA pool of supernodes behind a consensus-aware proxyd
 
-For production reliability, OP Labs recommends running an **HA pool of at least three op-supernode instances** and fronting them with a [consensus-aware `proxyd`](/chain-operators/tools/proxyd#consensus-awareness) configured with the `consensus_aware_consensus_layer` routing strategy.
+For production reliability, OP Labs recommends running an **HA pool of at least three mc-supernode instances** and fronting them with a [consensus-aware `proxyd`](/chain-operators/tools/proxyd#consensus-awareness) configured with the `consensus_aware_consensus_layer` routing strategy.
 Point the Light CL fleet's `--l2.follow.source` at the proxyd endpoint rather than at a single supernode.
 This hides individual supernode failures or reorgs from the Light CL fleet and lets the supernode tier roll between releases without downtime.
 
 An individual supernode going down inside the HA pool is masked by `proxyd` — Light CLs continue following the surviving instances.
 If the entire supernode tier becomes unreachable, Light CLs keep advancing the unsafe chain over P2P gossip and resume safe-head tracking automatically once the tier is restored.
 
-A single op-supernode is acceptable for evaluation, but treat it as a single point of failure for safe-head progression on every chain it hosts.
+A single mc-supernode is acceptable for evaluation, but treat it as a single point of failure for safe-head progression on every chain it hosts.
 
 ## Example configuration
 
-This is a minimum viable configuration for an op-supernode acting as a verifier across OP Sepolia and Unichain Sepolia.
+This is a minimum viable configuration for an mc-supernode acting as a verifier across OP Sepolia and Unichain Sepolia.
 The example uses environment variables; pass the equivalent `--flag` arguments instead if that fits your deployment better.
 Fill in the placeholders before starting the binary.
 
@@ -97,7 +97,7 @@ Fill in the placeholders before starting the binary.
 ```yaml
 # Dependency set and storage
 OP_SUPERNODE_CHAINS: "11155420,1301"          # OP Sepolia + Unichain Sepolia
-OP_SUPERNODE_DATA_DIR: /var/lib/op-supernode  # default is ./datadir
+OP_SUPERNODE_DATA_DIR: /var/lib/mc-supernode  # default is ./datadir
 
 # Shared L1 access
 OP_SUPERNODE_L1_ETH_RPC: <your-l1-eth-rpc>
@@ -128,15 +128,15 @@ OP_SUPERNODE_METRICS_PORT: "7300"
 
 For chains that are not in mc-node's built-in network registry, replace `--vn.<chainID>.network` with `--vn.<chainID>.rollup.config=<path-to-rollup-config.json>`.
 
-Every flag in the example — and everything else the binary accepts, including P2P, interop verification, JSON-RPC, logging, and metrics options — is catalogued with syntax, examples, and environment-variable names in the [op-supernode configuration reference](/node-operators/reference/op-supernode-config).
+Every flag in the example — and everything else the binary accepts, including P2P, interop verification, JSON-RPC, logging, and metrics options — is catalogued with syntax, examples, and environment-variable names in the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config).
 
 ## Where to go next
 
 * Follow the [supernode setup guide](/node-operators/guides/configuration/supernode-setup) to stand up a supernode from scratch.
-* Read the [op-supernode configuration reference](/node-operators/reference/op-supernode-config) for the complete flag and environment-variable catalogue.
+* Read the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config) for the complete flag and environment-variable catalogue.
 * Read the [interop prep notice](/notices/interop-prep) for the node-operator action checklist for the OP Sepolia and Unichain Sepolia activation.
-* Read the [supernode explainer](/op-stack/interop/supernode) for what op-supernode is and why it exists.
+* Read the [supernode explainer](/op-stack/interop/supernode) for what mc-supernode is and why it exists.
 * Read the [specialized mc-node topology notice](/notices/specialized-node-topology) for the operator-facing pattern of running Light CL fleets that follow a supernode safe source.
 * Read the [interop explainer](/op-stack/interop/explainer) for how cross-chain messaging works at the protocol level.
 * Read the [mc-node configuration reference](/node-operators/reference/mc-node-config) for the full set of flags available under the `--vn.*` namespace.
-* See the [op-supernode source](https://github.com/ethereum-optimism/optimism/tree/develop/op-supernode) in the monorepo for implementation detail.
+* See the [mc-supernode source](https://github.com/ethereum-optimism/optimism/tree/develop/op-supernode) in the monorepo for implementation detail.

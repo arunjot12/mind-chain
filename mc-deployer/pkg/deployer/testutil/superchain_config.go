@@ -5,10 +5,10 @@ import (
 	"fmt"
 
 	"github.com/Masterminds/semver/v3"
-	opbindings "github.com/ethereum-optimism/optimism/op-e2e/bindings"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	opbindings "github.com/mindchain/mind-chain/mc-e2e/bindings"
 )
 
 func NeedsSuperchainConfigUpgrade(

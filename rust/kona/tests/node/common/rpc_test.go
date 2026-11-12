@@ -4,11 +4,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/apis"
-	node_utils "github.com/ethereum-optimism/optimism/rust/kona/tests/node/utils"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/apis"
+	node_utils "github.com/mindchain/mind-chain/rust/kona/tests/node/utils"
 	"github.com/stretchr/testify/require"
 )
 

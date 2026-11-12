@@ -164,8 +164,8 @@ outside derivation.
 ## Technique 4: check the miss kind, not just the error
 
 The three miss kinds above are distinct, and callers branch on them. A permanent miss
-halts interop activity in op-supernode
-(`op-supernode/supernode/activity/interop/interop.go:425-430`); a transient one only backs
+halts interop activity in mc-supernode
+(`mc-supernode/supernode/activity/interop/interop.go:425-430`); a transient one only backs
 off. ethereum-optimism/optimism#20292 and #20400 were both fixes for the wrong kind. A
 change that collapses two kinds, or maps a new condition onto an existing one, needs its
 callers re-checked.
@@ -177,11 +177,11 @@ callers re-checked.
 | `optimism_safeHeadAtL1Block` (`mc-node/node/api.go:158-170`) | safe head at L1 | see the two rows below |
 | `superroot_atTimestamp` (`mc-node/node/superroot_api.go:74-79`) | L1 at safe head | a wrong `RequiredL1`, so super-root games resolve on the wrong transition |
 | mc-challenger output games (`mc-challenger/game/fault/trace/outputs/provider.go:76-88`) | the RPC | the honest trace clamps at the wrong block, so valid proposals are disputed |
-| op-dispute-mon (`op-dispute-mon/mon/extract/output_agreement_enricher.go:119-133`) | the RPC | a false alert; an error is deliberately treated as safe |
-| op-supernode interop (`op-supernode/supernode/chain_container/chain_container.go:611-663`) | L1 at safe head | interop halts, or backs off forever |
+| mc-dispute-mon (`mc-dispute-mon/mon/extract/output_agreement_enricher.go:119-133`) | the RPC | a false alert; an error is deliberately treated as safe |
+| mc-supernode interop (`mc-supernode/supernode/chain_container/chain_container.go:611-663`) | L1 at safe head | interop halts, or backs off forever |
 | EL-sync completion (`mc-node/rollup/engine/engine_controller.go:951-986`) | last entry, L1 at safe head | the database is wrongly kept, trimmed, or cleared |
 
-Note the asymmetry: op-dispute-mon degrades safely on an error, mc-challenger does not. An
+Note the asymmetry: mc-dispute-mon degrades safely on an error, mc-challenger does not. An
 error is not the dangerous outcome. A confident wrong answer is.
 
 ## False-positive traps
@@ -234,7 +234,7 @@ A test that uses one ref for everything cannot detect a label error. Ask for:
 - an "L1 at safe head" assertion for a block in the affected range, since that is the
   query a gap corrupts silently.
 
-`op-e2e/actions/safedb/safedb_test.go` and `op-acceptance-tests/tests/safeheaddb_elsync/`
+`mc-e2e/actions/safedb/safedb_test.go` and `mc-acceptance-tests/tests/safeheaddb_elsync/`
 cover the reorg and resync loops end-to-end. A change to the write or truncation policy
 should move one of them.
 

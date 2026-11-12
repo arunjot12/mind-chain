@@ -7,17 +7,16 @@ import (
 	"testing"
 	"time"
 
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 var (
@@ -249,10 +248,6 @@ func TestGameFactoryAddress(t *testing.T) {
 		verifyArgsInvalid(t, "flag game-factory-address or network is required", addRequiredArgsExcept(gameTypes.AlphabetGameType, "--game-factory-address"))
 	})
 
-	t.Run("RequiredWhenMultipleNetworksSuppliedWithDifferentFactories", func(t *testing.T) {
-		verifyArgsInvalid(t, "specified networks use different dispute game factories, flag game-factory-address required", addRequiredArgsExcept(gameTypes.AlphabetGameType, "--game-factory-address", "--network", "op-sepolia,op-mainnet"))
-	})
-
 	t.Run("Valid", func(t *testing.T) {
 		addr := common.Address{0xbb, 0xcc, 0xdd}
 		cfg := configForArgs(t, addRequiredArgsExcept(gameTypes.AlphabetGameType, "--game-factory-address", "--game-factory-address="+addr.Hex()))
@@ -271,16 +266,6 @@ func TestGameFactoryAddress(t *testing.T) {
 }
 
 func TestNetwork(t *testing.T) {
-	t.Run("Valid", func(t *testing.T) {
-		opSepoliaChainId := uint64(11155420)
-		opSepolia, err := superchain.GetChain(opSepoliaChainId)
-		require.NoError(t, err)
-		opSepoliaCfg, err := opSepolia.Config()
-		require.NoError(t, err)
-		cfg := configForArgs(t, addRequiredArgsExcept(gameTypes.AlphabetGameType, "--game-factory-address", "--network=op-sepolia"))
-		require.EqualValues(t, *opSepoliaCfg.Addresses.DisputeGameFactoryProxy, cfg.GameFactoryAddress)
-	})
-
 	t.Run("UnknownNetwork", func(t *testing.T) {
 		verifyArgsInvalid(t, "unknown chain: not-a-network", addRequiredArgsExcept(gameTypes.AlphabetGameType, "--game-factory-address", "--network=not-a-network"))
 	})

@@ -8,10 +8,10 @@
 
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
 
-// Pulls in `reth-optimism-primitives` with `reth-codec` so the transitively-required
+// Pulls in `reth-mind-chain-primitives` with `reth-codec` so the transitively-required
 // `Compact` impls for `OpPrimitives` exist: this crate's provider/DB dependencies activate
 // `reth-primitives-traits/reth-codec`, which demands them.
-use reth_optimism_primitives as _;
+use reth_mind_chain_primitives as _;
 
 mod replay;
 mod types;

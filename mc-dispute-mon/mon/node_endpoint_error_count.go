@@ -1,0 +1,43 @@
+package mon
+
+import (
+	"github.com/mindchain/mind-chain/mc-dispute-mon/mon/types"
+	"github.com/mindchain/mind-chain/mc-service/log"
+)
+
+type NodeEndpointErrorCountMetrics interface {
+	RecordNodeEndpointErrorCount(count int)
+}
+
+type NodeEndpointErrorCountMonitor struct {
+	logger  log.Logger
+	metrics NodeEndpointErrorCountMetrics
+}
+
+func NewNodeEndpointErrorCountMonitor(logger log.Logger, metrics NodeEndpointErrorCountMetrics) *NodeEndpointErrorCountMonitor {
+	return &NodeEndpointErrorCountMonitor{
+		logger:  logger,
+		metrics: metrics,
+	}
+}
+
+func (m *NodeEndpointErrorCountMonitor) CheckNodeEndpointErrorCount(games []*types.CommonGameData) {
+	totalErrors := 0
+
+	for _, game := range games {
+		totalErrors += game.NodeEndpointErrorCount
+	}
+
+	m.metrics.RecordNodeEndpointErrorCount(totalErrors)
+}
+
+// countGamesWithErrors returns the number of games that have at least one error
+func countGamesWithErrors(games []*types.CommonGameData) int {
+	count := 0
+	for _, game := range games {
+		if game.NodeEndpointErrorCount > 0 {
+			count++
+		}
+	}
+	return count
+}

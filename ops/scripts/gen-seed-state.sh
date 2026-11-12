@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Generates op-core/nuts/state/jovian_state.json.
+# Generates mc-core/nuts/state/jovian_state.json.
 # It must use jovian's OWN toolchain, so we check out jovian's commit
 # in a worktree, where mc-deployer and the contracts are mutually consistent,
 # and dump the predeploy state there.
@@ -16,7 +16,7 @@ ROOT="$(git rev-parse --show-toplevel)"
 JOVIAN_COMMIT="d09c836f818c73ae139f60b717654c4e53712743"
 COMMIT="${1:-$JOVIAN_COMMIT}"
 
-OUT="$ROOT/op-core/nuts/state/jovian_state.json"
+OUT="$ROOT/mc-core/nuts/state/jovian_state.json"
 WT="$(mktemp -d "${TMPDIR:-/tmp}/prefork-state-wt.XXXXXX")"
 
 cleanup() {
@@ -47,13 +47,13 @@ mkdir -p "$WT/ops/scripts/prefork-state-dump"
 cp "$ROOT/ops/scripts/prefork-state-dump/main.go" "$WT/ops/scripts/prefork-state-dump/main.go"
 
 # At the pinned jovian seed commit (op-contracts/v5.0.0) the predeploys package
-# still lives at op-service/predeploys; it moved to op-core/predeploys later, in
-# the op-core decoupling. The committed dumper uses the current op-core path so it
-# compiles on develop, so rewrite it back to op-service for the worktree build.
-sed -i.bak 's#op-core/predeploys#op-service/predeploys#' "$WT/ops/scripts/prefork-state-dump/main.go"
+# still lives at mc-service/predeploys; it moved to mc-core/predeploys later, in
+# the mc-core decoupling. The committed dumper uses the current mc-core path so it
+# compiles on develop, so rewrite it back to mc-service for the worktree build.
+sed -i.bak 's#mc-core/predeploys#mc-service/predeploys#' "$WT/ops/scripts/prefork-state-dump/main.go"
 rm -f "$WT/ops/scripts/prefork-state-dump/main.go.bak"
 
-mkdir -p "$ROOT/op-core/nuts/state"
+mkdir -p "$ROOT/mc-core/nuts/state"
 ( cd "$WT" && go run ./ops/scripts/prefork-state-dump jovian "$OUT" )
 
 echo ">>> done"

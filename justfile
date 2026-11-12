@@ -8,16 +8,16 @@ TEST_TIMEOUT := env('TEST_TIMEOUT', '10m')
 
 # Go test runs cover every package in the module except these, which run in
 # dedicated CI jobs or can't run in the standard go-tests environment:
-#   op-acceptance-tests             dedicated acceptance-test job (needs a running devnet)
+#   mc-acceptance-tests             dedicated acceptance-test job (needs a running devnet)
 #   cannon                          dedicated cannon job (slow MIPS emulation tests)
 #   rust                            rust-e2e pipeline (needs prebuilt Rust binaries)
 #   mc-deployer/pkg/deployer/forge  fails when forge is on PATH (ethereum-optimism/optimism#21200)
 # See the list-test-packages recipe, which expands `go list ./...` minus these.
-EXCLUDED_TEST_PKGS := "op-acceptance-tests cannon rust mc-deployer/pkg/deployer/forge"
+EXCLUDED_TEST_PKGS := "mc-acceptance-tests cannon rust mc-deployer/pkg/deployer/forge"
 
 # Fault-proof packages run in the default go-tests job and again in a dedicated
 # job with Cannon enabled, so they keep a separate list.
-FRAUD_PROOF_TEST_PKGS := "./op-e2e/faultproofs/..."
+FRAUD_PROOF_TEST_PKGS := "./mc-e2e/faultproofs/..."
 
 # Lists all available targets.
 help:
@@ -28,55 +28,11 @@ install-git-hooks:
   git config core.hooksPath .githooks
   @echo "Installed git hooks: core.hooksPath -> .githooks"
 
-# Initializes/updates the superchain-registry submodule — the single canonical SR
-# commit pin. Scoped to ONLY this submodule (never a bare `git submodule update`).
-# With no ref it initializes at the pinned commit (shallow) and leaves an
-# already-present checkout untouched; with a ref (tag or commit sha) it moves the
-# submodule there.
-[script('bash')]
-update-superchain-registry-submodule ref="":
-  set -euo pipefail
-  # Check out the submodule at the pinned (gitlink) commit, initializing it if
-  # absent and resetting a stale or dirty working tree (--force).
-  git submodule update --init --force --depth 1 -- superchain-registry
-  if [ -n "{{ref}}" ]; then
-    # Move it to the requested ref and stage the new gitlink so the subsequent
-    # (no-ref) syncs treat that as the pinned commit instead of resetting it.
-    git -C superchain-registry fetch --depth 1 origin "{{ref}}"
-    git -C superchain-registry checkout --detach FETCH_HEAD
-    git add superchain-registry
-  fi
-
-# Builds op-core/superchain/superchain-configs.zip (gitignored) from the
-# superchain-registry submodule. Lightweight; this is the recipe the Go build/test
-# targets depend on. Verify mode: skips work if the existing zip already matches the
-# committed .sha256, otherwise regenerates and asserts it still matches (failing on drift).
-build-superchain-go: update-superchain-registry-submodule
-  bash op-core/superchain/sync-superchain.sh
-
-# Regenerates op-core/superchain/superchain-configs.zip AND rewrites its committed
-# .sha256 from the submodule — build-superchain-go in refresh mode. Sibling of
-# sync-superchain-rust; both are run by sync-superchain when bumping the registry.
-sync-superchain-go:
-  @OP_CORE_SYNC_SUPERCHAIN=1 just build-superchain-go
-
-# Regenerates the committed Rust artifacts from the submodule: kona's etc/*.json
-# (via KONA_SYNC_SUPERCHAIN) and mc-reth's superchain-configs.tar.sha256 +
-# chain_specs.rs (via OP_RETH_SYNC_SUPERCHAIN; the tar itself is gitignored).
-sync-superchain-rust: update-superchain-registry-submodule
-  cd rust && KONA_SYNC_SUPERCHAIN=true cargo build -p kona-registry
-  cd rust && OP_RETH_SYNC_SUPERCHAIN=1 cargo build -p reth-optimism-chainspec --features superchain-configs
-
-# One-command superchain-registry sync. With a ref (tag or commit sha) it moves the
-# submodule there first, then regenerates every dependent artifact (Go + Rust), so
-# the submodule pointer and the committed artifacts can never drift out of sync.
-sync-superchain ref="": (update-superchain-registry-submodule ref) sync-superchain-go sync-superchain-rust
-
 # Builds Go components and contracts-bedrock.
 build: build-go build-contracts
 
 # Builds main Go components.
-build-go: submodules build-superchain-go mc-node mc-proposer mc-batcher mc-challenger op-dispute-mon cannon
+build-go: submodules mc-node mc-proposer mc-batcher mc-challenger mc-dispute-mon cannon
 
 # Builds contracts-bedrock.
 build-contracts:
@@ -87,12 +43,12 @@ build-customlint:
   cd linter && just build
 
 # Lints Go code with specific linters.
-lint-go: build-customlint build-superchain-go
+lint-go: build-customlint
   ./linter/bin/op-golangci-lint run ./...
   go mod tidy -diff
 
 # Lints Go code with specific linters and fixes reported issues.
-lint-go-fix: build-customlint build-superchain-go
+lint-go-fix: build-customlint
   ./linter/bin/op-golangci-lint run ./... --fix
 
 # Checks that op-geth version in go.mod is valid.
@@ -101,16 +57,16 @@ check-op-geth-version:
 
 # Type-checks the tree against upstream go-ethereum and fails on op-geth-only API uses that are
 # not in ops/scripts/opgeth-ratchet/allowlist.txt, or on allowlist entries no longer used.
-opgeth-ratchet: build-superchain-go
+opgeth-ratchet:
   go run ./ops/scripts/opgeth-ratchet
 
 # Removes allowlist entries that opgeth-ratchet reports as no longer used.
-opgeth-ratchet-update: build-superchain-go
+opgeth-ratchet-update:
   go run ./ops/scripts/opgeth-ratchet -update
 
 # Builds Docker images for Go components using buildx.
 [script('bash')]
-golang-docker: update-superchain-registry-submodule
+golang-docker:
   set -euo pipefail
   GIT_COMMIT=$(git rev-parse HEAD) \
   GIT_DATE=$(git show -s --format='%ct') \
@@ -119,12 +75,12 @@ golang-docker: update-superchain-registry-submodule
       --progress plain \
       --load \
       -f docker-bake.hcl \
-      mc-node mc-batcher mc-proposer mc-challenger op-dispute-mon
+      mc-node mc-batcher mc-proposer mc-challenger mc-dispute-mon
 
 # Builds selected Docker image targets using buildx.
 [private]
 [script('bash')]
-docker-bake targets: update-superchain-registry-submodule
+docker-bake targets:
   set -euo pipefail
   GIT_COMMIT=$(git rev-parse HEAD)
   GIT_DATE=$(git show -s --format='%ct')
@@ -207,16 +163,16 @@ submodules:
   git submodule update --init --recursive
 
 # Builds mc-node binary.
-mc-node: build-superchain-go
+mc-node:
   just ./mc-node/mc-node
 
 # Generates mocks for mc-node.
 generate-mocks-mc-node:
   cd mc-node && just generate-mocks
 
-# Generates mocks for op-service.
+# Generates mocks for mc-service.
 generate-mocks-op-service:
-  cd op-service && just generate-mocks
+  cd mc-service && just generate-mocks
 
 # Builds mc-batcher binary.
 mc-batcher:
@@ -230,17 +186,17 @@ mc-proposer:
 mc-challenger:
   cd mc-challenger && just mc-challenger
 
-# Builds op-dispute-mon binary.
-op-dispute-mon:
-  cd op-dispute-mon && just op-dispute-mon
+# Builds mc-dispute-mon binary.
+mc-dispute-mon:
+  cd mc-dispute-mon && just mc-dispute-mon
 
-# Builds op-supernode binary.
-op-supernode:
-  just ./op-supernode/op-supernode
+# Builds mc-supernode binary.
+mc-supernode:
+  just ./mc-supernode/mc-supernode
 
-# Builds op-interop-filter binary.
-op-interop-filter:
-  just ./op-interop-filter/op-interop-filter
+# Builds mc-interop-filter binary.
+mc-interop-filter:
+  just ./mc-interop-filter/mc-interop-filter
 
 # Builds cannon binary.
 cannon:
@@ -271,7 +227,7 @@ verify-reproducibility:
 # Cleans up unused dependencies in Go modules.
 # Bypasses the Go module proxy for freshly released versions.
 # See https://proxy.golang.org/ for more info.
-mod-tidy: build-superchain-go
+mod-tidy:
   GOPRIVATE="github.com/ethereum-optimism" go mod tidy
 
 # Removes all generated files under bin/.
@@ -288,7 +244,7 @@ test-unit:
   cd mc-node && just test
   cd mc-proposer && just test
   cd mc-batcher && just test
-  cd op-e2e && just test
+  cd mc-e2e && just test
   cd packages/contracts-bedrock && just test
 
 # Runs semgrep on the entire monorepo.
@@ -304,18 +260,18 @@ semgrep-ci:
 
 # Makes pre-test setup.
 make-pre-test:
-  cd op-e2e && just pre-test
+  cd mc-e2e && just pre-test
 
 # Lists the Go packages under test: every package in the module except those in
 # EXCLUDED_TEST_PKGS (which run in dedicated CI jobs or can't run in this environment).
 [script('bash')]
 list-test-packages:
   set -euo pipefail
-  go list -e ./... | grep -vE "^github.com/ethereum-optimism/optimism/($(echo '{{EXCLUDED_TEST_PKGS}}' | tr ' ' '|'))(/|$)"
+  go list -e ./... | grep -vE "^github.com/mindchain/mind-chain/($(echo '{{EXCLUDED_TEST_PKGS}}' | tr ' ' '|'))(/|$)"
 
 # Runs comprehensive Go tests across all packages.
 [script('bash')]
-go-tests: cannon build-contracts make-pre-test build-superchain-go
+go-tests: cannon build-contracts make-pre-test
   set -euo pipefail
   export ENABLE_KURTOSIS=true
   export OP_E2E_CANNON_ENABLED="false"
@@ -326,7 +282,7 @@ go-tests: cannon build-contracts make-pre-test build-superchain-go
 
 # Runs comprehensive Go tests with -short flag.
 [script('bash')]
-go-tests-short: cannon build-contracts make-pre-test build-superchain-go
+go-tests-short: cannon build-contracts make-pre-test
   set -euo pipefail
   export ENABLE_KURTOSIS=true
   export OP_E2E_CANNON_ENABLED="false"
@@ -337,7 +293,7 @@ go-tests-short: cannon build-contracts make-pre-test build-superchain-go
 
 # Internal: runs Go tests with gotestsum for CI.
 [script('bash')]
-_go-tests-ci-internal go_test_flags="": build-superchain-go
+_go-tests-ci-internal go_test_flags="":
   set -euo pipefail
   (cd cannon && just diff-hello-elf)
   echo "Setting up test directories..."
@@ -446,17 +402,17 @@ check-nut-locks:
 _check-nut-prefork-states:
   set -euo pipefail
   shopt -s nullglob
-  for state in op-core/nuts/state/*_state.json; do
+  for state in mc-core/nuts/state/*_state.json; do
     fork="$(basename "$state" _state.json)"
     if [ "$fork" = "jovian" ]; then
       continue
     fi
     just _nut-prefork-state-for "$fork"
   done
-  git diff --exit-code -- op-core/nuts/state/*_state.json
+  git diff --exit-code -- mc-core/nuts/state/*_state.json
 
 # Checks that committed NUT pre-fork states regenerate without drift.
-check-nut-prefork-states: build-contracts build-superchain-go
+check-nut-prefork-states: build-contracts
   just _check-nut-prefork-states
 
 # Snapshots current-upgrade-bundle.json as a fork's NUT bundle and updates the lock file.
@@ -467,12 +423,12 @@ nut-snapshot-for fork:
 nut-provenance-verify fork:
   go run ./ops/scripts/nut-provenance-verify {{fork}}
 
-# Generates op-core/nuts/state/<fork>_state.json (predecessor state + frozen <fork> bundle).
+# Generates mc-core/nuts/state/<fork>_state.json (predecessor state + frozen <fork> bundle).
 _nut-prefork-state-for fork:
   OP_E2E_GEN_PREFORK_STATE={{fork}} go test -count=1 -run TestGenerateForkState ./rust/kona/tests/proofs/
 
-# Generates op-core/nuts/state/<fork>_state.json (predecessor state + frozen <fork> bundle).
-nut-prefork-state-for fork: build-contracts build-superchain-go
+# Generates mc-core/nuts/state/<fork>_state.json (predecessor state + frozen <fork> bundle).
+nut-prefork-state-for fork: build-contracts
   just _nut-prefork-state-for {{fork}}
 
 # Checks that TODO comments have corresponding issues.
@@ -547,7 +503,7 @@ latest-rc-tag component:
 release-paths component:
     set -euo pipefail
     # Shared Go infrastructure linked into every Go binary.
-    go_shared="shared=go.*,op-core/,op-service/"
+    go_shared="shared=go.*,mc-core/,mc-service/"
     # kona-host's local-path dependency closure per `cargo metadata`, excluding
     # rust/kona/crates/node/ because kona-node is a separate binary. rust/Cargo.toml
     # is included because a dependency bump reaches the binary; a bump touching only
@@ -555,7 +511,7 @@ release-paths component:
     kona_host="kona-host=rust/Cargo.toml,rust/kona/bin/host/,rust/kona/crates/proof/,rust/kona/crates/protocol/,rust/kona/crates/providers/,rust/kona/crates/utilities/,rust/alloy-op-evm/,rust/alloy-op-hardforks/,rust/op-alloy/,rust/op-revm/"
     specs=()
     case "{{ component }}" in
-        mc-node|mc-batcher|mc-proposer|op-supernode|op-dispute-mon)
+        mc-node|mc-batcher|mc-proposer|mc-supernode|mc-dispute-mon)
             specs=("{{ component }}/" "$go_shared")
             ;;
         mc-challenger)
@@ -579,13 +535,13 @@ release-paths component:
             # import a few test mocks. Contract source changes belong to the
             # op-contracts release that the mc-deployer note links to.
             cb=packages/contracts-bedrock
-            specs=("mc-deployer/" "op-chain-ops/" "contract-scripts=$cb/scripts/,$cb/test/mocks/" "$go_shared")
+            specs=("mc-deployer/" "mc-chain-ops/" "contract-scripts=$cb/scripts/,$cb/test/mocks/" "$go_shared")
             ;;
         op-contracts)
             specs=("packages/contracts-bedrock/")
             ;;
         *)
-            echo "error: component must be one of: mc-node, mc-batcher, mc-proposer, mc-challenger, op-dispute-mon, mc-reth, mc-deployer, op-contracts, op-supernode, kona-*, op-zk-proposer; is {{ component }}" >&2
+            echo "error: component must be one of: mc-node, mc-batcher, mc-proposer, mc-challenger, mc-dispute-mon, mc-reth, mc-deployer, op-contracts, mc-supernode, kona-*, op-zk-proposer; is {{ component }}" >&2
             exit 1
             ;;
     esac

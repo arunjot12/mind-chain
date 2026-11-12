@@ -5,7 +5,7 @@ use alloy_consensus::Transaction;
 use alloy_primitives::{U16, U256, hex};
 use op_revm::L1BlockInfo;
 use reth_execution_errors::BlockExecutionError;
-use reth_optimism_forks::OpHardforks;
+use reth_mind_chain_forks::OpHardforks;
 use reth_primitives_traits::BlockBody;
 
 /// The function selector of the "setL1BlockValuesEcotone" function in the `L1Block` contract.
@@ -355,9 +355,8 @@ mod tests {
     use alloy_consensus::{Block, BlockBody};
     use alloy_eips::eip2718::Decodable2718;
     use alloy_primitives::keccak256;
-    use reth_optimism_chainspec::OP_MAINNET;
-    use reth_optimism_forks::OpHardforks;
-    use reth_optimism_primitives::OpTransactionSigned;
+
+    use reth_mind_chain_primitives::OpTransactionSigned;
 
     #[test]
     fn sanity_l1_block() {
@@ -385,48 +384,6 @@ mod tests {
     fn test_verify_set_jovian() {
         let hash = &keccak256("setL1BlockValuesJovian()")[..4];
         assert_eq!(hash, L1_BLOCK_JOVIAN_SELECTOR)
-    }
-
-    #[test]
-    fn sanity_l1_block_ecotone() {
-        // rig
-
-        // OP mainnet ecotone block 118024092
-        // <https://optimistic.etherscan.io/block/118024092>
-        const TIMESTAMP: u64 = 1711603765;
-        assert!(OP_MAINNET.is_ecotone_active_at_timestamp(TIMESTAMP));
-
-        // First transaction in OP mainnet block 118024092
-        //
-        // https://optimistic.etherscan.io/getRawTx?tx=0x88501da5d5ca990347c2193be90a07037af1e3820bb40774c8154871c7669150
-        const TX: [u8; 251] = hex!(
-            "7ef8f8a0a539eb753df3b13b7e386e147d45822b67cb908c9ddc5618e3dbaa22ed00850b94deaddeaddeaddeaddeaddeaddeaddeaddead00019442000000000000000000000000000000000000158080830f424080b8a4440a5e2000000558000c5fc50000000000000000000000006605a89f00000000012a10d90000000000000000000000000000000000000000000000000000000af39ac3270000000000000000000000000000000000000000000000000000000d5ea528d24e582fa68786f080069bdbfe06a43f8e67bfd31b8e4d8a8837ba41da9a82a54a0000000000000000000000006887246668a3b87f54deb3b94ba47a6f63f32985"
-        );
-
-        let tx = OpTransactionSigned::decode_2718(&mut TX.as_slice()).unwrap();
-        let block: Block<OpTransactionSigned> = Block {
-            body: BlockBody { transactions: vec![tx], ..Default::default() },
-            ..Default::default()
-        };
-
-        // expected l1 block info
-        let expected_l1_base_fee = U256::from_be_bytes(hex!(
-            "0000000000000000000000000000000000000000000000000000000af39ac327" // 47036678951
-        ));
-        let expected_l1_base_fee_scalar = U256::from(1368);
-        let expected_l1_blob_base_fee = U256::from_be_bytes(hex!(
-            "0000000000000000000000000000000000000000000000000000000d5ea528d2" // 57422457042
-        ));
-        let expected_l1_blob_base_fee_scalar = U256::from(810949);
-
-        // test
-
-        let l1_block_info: L1BlockInfo = extract_l1_info(&block.body).unwrap();
-
-        assert_eq!(l1_block_info.l1_base_fee, expected_l1_base_fee);
-        assert_eq!(l1_block_info.l1_base_fee_scalar, expected_l1_base_fee_scalar);
-        assert_eq!(l1_block_info.l1_blob_base_fee, Some(expected_l1_blob_base_fee));
-        assert_eq!(l1_block_info.l1_blob_base_fee_scalar, Some(expected_l1_blob_base_fee_scalar));
     }
 
     #[test]

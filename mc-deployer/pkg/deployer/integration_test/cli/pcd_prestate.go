@@ -8,9 +8,9 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/opcm"
-	op_service "github.com/ethereum-optimism/optimism/op-service"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/opcm"
+	op_service "github.com/mindchain/mind-chain/mc-service"
 	"github.com/stretchr/testify/require"
 )
 

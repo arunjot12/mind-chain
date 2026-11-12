@@ -54,7 +54,7 @@ field that comes from the registry means wiring it through **every** ingestion e
 **both** clients — not just the config struct and the mc-deployer/deploy-config
 (`DeployConfig.RollupConfig`) path:
 
-- **mc-node (Go)**: the TOML-decoded `superchain.HardforkConfig` (`op-core/superchain`) **and**
+- **mc-node (Go)**: the TOML-decoded `superchain.HardforkConfig` (`mc-core/superchain`) **and**
   the `superchain.ChainConfig` → `rollup.Config` conversion in `mc-node/superchain/superchain.go`
   (`applyHardforks` / `rollupConfigFromRegistry`).
 - **kona (Rust)**: `HardForkConfig` / `ChainConfig::as_rollup_config`
@@ -63,7 +63,7 @@ field that comes from the registry means wiring it through **every** ingestion e
 Two guards fail loudly on a field left unwired:
 
 - **Strict decoding** rejects registry keys that no struct field models —
-  `jsonutil.DecodeTOMLStrict` (Go, used by `op-core/superchain`) and
+  `jsonutil.DecodeTOMLStrict` (Go, used by `mc-core/superchain`) and
   `#[serde(deny_unknown_fields)]` (kona's `ChainConfig` / `HardForkConfig`). A registry bump that
   adds an unmodeled field fails to load until the struct consumes it.
 - **A reflection completeness test** (`TestRollupConfigFromRegistry_AllFieldsSet`) asserts every

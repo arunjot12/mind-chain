@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-devstack/devtest"
-	"github.com/ethereum-optimism/optimism/op-devstack/dsl"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/txplan"
+	"github.com/mindchain/mind-chain/mc-devstack/devtest"
+	"github.com/mindchain/mind-chain/mc-devstack/dsl"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/txplan"
 
-	safety "github.com/ethereum-optimism/optimism/op-service/eth/safety"
-	"github.com/ethereum-optimism/optimism/op-test-sequencer/sequencer/seqtypes"
-	node_utils "github.com/ethereum-optimism/optimism/rust/kona/tests/node/utils"
+	safety "github.com/mindchain/mind-chain/mc-service/eth/safety"
+	"github.com/mindchain/mind-chain/mc-test-sequencer/sequencer/seqtypes"
+	node_utils "github.com/mindchain/mind-chain/rust/kona/tests/node/utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -88,21 +88,21 @@ func TestL2Reorg(gt *testing.T) {
 
 		// include simple transfer tx in opened block
 		{
-			t.Logger().Info("Sequencing with op-test-sequencer simple transfer tx")
+			t.Logger().Info("Sequencing with mc-test-sequencer simple transfer tx")
 			to := alice.PlanTransfer(bob.Address(), eth.OneGWei)
 			opt := txplan.Combine(to)
 			ptx := txplan.NewPlannedTx(opt)
 			signed_tx, err := ptx.Signed.Eval(t.Ctx())
-			require.NoError(t, err, "Expected to be able to evaluate a planned transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to evaluate a planned transaction on mc-test-sequencer, but got error")
 			txdata, err := signed_tx.MarshalBinary()
-			require.NoError(t, err, "Expected to be able to marshal a signed transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to marshal a signed transaction on mc-test-sequencer, but got error")
 
 			err = controlAPI.IncludeTx(t.Ctx(), txdata)
-			require.NoError(t, err, "Expected to be able to include a signed transaction on op-test-sequencer, but got error")
+			require.NoError(t, err, "Expected to be able to include a signed transaction on mc-test-sequencer, but got error")
 		}
 
 		err = controlAPI.Next(t.Ctx())
-		require.NoError(t, err, "Expected to be able to call Next() after IncludeTx() on op-test-sequencer, but got error")
+		require.NoError(t, err, "Expected to be able to call Next() after IncludeTx() on mc-test-sequencer, but got error")
 
 		// Resume the main sequencer
 		sequencerCL.StartSequencer()

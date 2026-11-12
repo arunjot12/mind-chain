@@ -25,47 +25,47 @@
 )]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-/// Re-exported from `reth_optimism_cli`.
+/// Re-exported from `reth_mind_chain_cli`.
 pub mod cli {
-    pub use reth_optimism_cli::*;
+    pub use reth_mind_chain_cli::*;
 }
 
-/// Re-exported from `reth_optimism_chainspec`.
+/// Re-exported from `reth_mind_chain_chainspec`.
 pub mod chainspec {
-    pub use reth_optimism_chainspec::*;
+    pub use reth_mind_chain_chainspec::*;
 }
 
-/// Re-exported from `reth_optimism_consensus`.
+/// Re-exported from `reth_mind_chain_consensus`.
 pub mod consensus {
-    pub use reth_optimism_consensus::*;
+    pub use reth_mind_chain_consensus::*;
 }
 
-/// Re-exported from `reth_optimism_evm`.
+/// Re-exported from `reth_mind_chain_evm`.
 pub mod evm {
-    pub use reth_optimism_evm::*;
+    pub use reth_mind_chain_evm::*;
 }
 
-/// Re-exported from `reth_optimism_forks`.
+/// Re-exported from `reth_mind_chain_forks`.
 pub mod forks {
-    pub use reth_optimism_forks::*;
+    pub use reth_mind_chain_forks::*;
 }
 
-/// Re-exported from `reth_optimism_node`.
+/// Re-exported from `reth_mind_chain_node`.
 pub mod node {
-    pub use reth_optimism_node::*;
+    pub use reth_mind_chain_node::*;
 }
 
-/// Re-exported from `reth_optimism_payload_builder`.
+/// Re-exported from `reth_mind_chain_payload_builder`.
 pub mod payload {
-    pub use reth_optimism_payload_builder::*;
+    pub use reth_mind_chain_payload_builder::*;
 }
 
-/// Re-exported from `reth_optimism_primitives`.
+/// Re-exported from `reth_mind_chain_primitives`.
 pub mod primitives {
-    pub use reth_optimism_primitives::*;
+    pub use reth_mind_chain_primitives::*;
 }
 
-/// Re-exported from `reth_optimism_rpc`.
+/// Re-exported from `reth_mind_chain_rpc`.
 pub mod rpc {
-    pub use reth_optimism_rpc::*;
+    pub use reth_mind_chain_rpc::*;
 }

@@ -371,7 +371,7 @@ impl<N: NodePrimitives> TransactionCache<N> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use reth_optimism_primitives::OpPrimitives;
+    use reth_mind_chain_primitives::OpPrimitives;
 
     type TestCache = TransactionCache<OpPrimitives>;
 
@@ -623,7 +623,7 @@ mod tests {
     #[test]
     fn test_cache_preserves_receipts() {
         use op_alloy_consensus::OpReceipt;
-        use reth_optimism_primitives::OpPrimitives;
+        use reth_mind_chain_primitives::OpPrimitives;
 
         let mut cache: TransactionCache<OpPrimitives> = TransactionCache::new();
 

@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/flags"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
-	contractMetrics "github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/flags"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	contractMetrics "github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts/metrics"
+	"github.com/mindchain/mind-chain/mc-service/log/logcli"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 	"github.com/urfave/cli/v2"
 )
 

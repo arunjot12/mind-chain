@@ -1,7 +1,7 @@
 package engine
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 type PayloadInvalidEvent struct {

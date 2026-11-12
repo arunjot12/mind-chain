@@ -24,7 +24,7 @@ pub use payload::{
     payload_id_optimism,
 };
 mod traits;
-use reth_optimism_primitives::OpPrimitives;
+use reth_mind_chain_primitives::OpPrimitives;
 use reth_payload_primitives::{BuiltPayload, PayloadTypes};
 use reth_primitives_traits::{Block, NodePrimitives, SealedBlock, SignedTransaction};
 pub use traits::*;
@@ -37,7 +37,7 @@ mod sdm_metrics;
 // Implement `ConfigureEngineEvm<OpExecData>` by delegating to the `OpExecutionData` implementation.
 // This must live here because `OpExecData` is defined in this crate (orphan rules).
 impl<ChainSpec, N, R> reth_evm::ConfigureEngineEvm<OpExecData>
-    for reth_optimism_evm::OpEvmConfig<ChainSpec, N, R>
+    for reth_mind_chain_evm::OpEvmConfig<ChainSpec, N, R>
 where
     N: NodePrimitives,
     R: Send + Sync + Unpin + Clone + 'static,

@@ -260,7 +260,7 @@ Check that you have properly installed the challenger component:
   
   1.  Safe Head Database (SafeDB) Configuration for mc-node:
   
-      *   The `mc-node` behind the `op-conductor` must have the SafeDB enabled to ensure it is not stateless.
+      *   The `mc-node` behind the `mc-conductor` must have the SafeDB enabled to ensure it is not stateless.
   
       *   To enable SafeDB, set the `--safedb.path` value in your configuration. This specifies the file path used to persist safe head update data.
   
@@ -484,7 +484,7 @@ The challenger should show logs indicating:
   
   1.  Safe Head Database (SafeDB) Configuration for mc-node:
   
-      *   The `mc-node` behind the `op-conductor` must have the SafeDB enabled to ensure it is not stateless.
+      *   The `mc-node` behind the `mc-conductor` must have the SafeDB enabled to ensure it is not stateless.
   
       *   To enable SafeDB, set the `--safedb.path` value in your configuration. This specifies the file path used to persist safe head update data.
   
@@ -644,7 +644,7 @@ The challenger should show logs indicating:
 </Tab>
 </Tabs>
 
-### Monitoring with op-dispute-mon
+### Monitoring with mc-dispute-mon
 
 <OpChallengerDisputeMon />
 

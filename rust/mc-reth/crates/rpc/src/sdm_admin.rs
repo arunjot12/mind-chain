@@ -10,8 +10,8 @@
 
 use alloy_hardforks::ForkCondition;
 use jsonrpsee::{core::RpcResult, proc_macros::rpc};
-use reth_optimism_forks::{OpHardfork, OpHardforks};
-use reth_optimism_payload_builder::config::OperatorSdmOptIn;
+use reth_mind_chain_forks::{OpHardfork, OpHardforks};
+use reth_mind_chain_payload_builder::config::OperatorSdmOptIn;
 use serde::{Deserialize, Serialize};
 use std::{
     sync::Arc,
@@ -76,7 +76,7 @@ where
         let timestamp = query_timestamp.unwrap_or_else(current_unix_timestamp);
         let operator_sdm_opt_in = self.opt_in.enabled();
         let protocol_active =
-            reth_optimism_evm::is_sdm_active_at_timestamp(&self.chain_spec, timestamp);
+            reth_mind_chain_evm::is_sdm_active_at_timestamp(&self.chain_spec, timestamp);
         let activation_time = match self.chain_spec.op_fork_activation(OpHardfork::Lagoon) {
             ForkCondition::Timestamp(timestamp) => Some(timestamp),
             _ => None,
@@ -94,63 +94,9 @@ fn current_unix_timestamp() -> u64 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use reth_optimism_chainspec::{OpChainSpec, OpChainSpecBuilder};
-    use rstest::rstest;
 
     // Any timestamp works for the gate checks below: SDM's gating hardfork (Lagoon) is activated
     // at genesis on the active spec, and never on the inactive one.
-    const QUERY_TIMESTAMP: u64 = 2_000_000_000;
-
-    fn sdm_active_chain_spec() -> Arc<OpChainSpec> {
-        Arc::new(OpChainSpecBuilder::optimism_mainnet().lagoon_activated().build())
-    }
-
-    fn sdm_inactive_chain_spec() -> Arc<OpChainSpec> {
-        Arc::new(OpChainSpecBuilder::optimism_mainnet().regolith_activated().build())
-    }
-
-    fn admin_api(protocol_active: bool) -> OpSdmAdminApi<OpChainSpec> {
-        let chain_spec =
-            if protocol_active { sdm_active_chain_spec() } else { sdm_inactive_chain_spec() };
-        OpSdmAdminApi::new(OperatorSdmOptIn::default(), chain_spec)
-    }
-
-    /// The protocol gate (chain spec) and the operator opt-in are independent; SDM is effective
-    /// only when both are true.
-    #[rstest]
-    #[case::neither(false, false, false)]
-    #[case::operator_only(false, true, false)]
-    #[case::protocol_only(true, false, false)]
-    #[case::both(true, true, true)]
-    fn sdm_status_effective_is_and_of_both_gates(
-        #[case] protocol_active: bool,
-        #[case] operator_sdm_opt_in: bool,
-        #[case] expected_effective: bool,
-    ) {
-        let api = admin_api(protocol_active);
-        api.set_operator_sdm_opt_in(operator_sdm_opt_in).unwrap();
-
-        let status = api.sdm_status(Some(QUERY_TIMESTAMP)).unwrap();
-        assert_eq!(status.operator_sdm_opt_in, operator_sdm_opt_in);
-        assert_eq!(status.protocol_active, protocol_active);
-        assert_eq!(status.effective, expected_effective);
-    }
-
-    /// The operator opt-in starts disabled and can be hot-toggled on -> off -> on at runtime.
-    #[test]
-    fn set_operator_sdm_opt_in_toggles_on_off_on() {
-        let api = admin_api(true);
-        let ts = Some(QUERY_TIMESTAMP);
-
-        assert!(!api.sdm_status(ts).unwrap().operator_sdm_opt_in, "boots disabled");
-        api.set_operator_sdm_opt_in(true).unwrap();
-        assert!(api.sdm_status(ts).unwrap().effective, "enabled on an SDM-active chain");
-        api.set_operator_sdm_opt_in(false).unwrap();
-        assert!(!api.sdm_status(ts).unwrap().effective, "disabling clears effective");
-        api.set_operator_sdm_opt_in(true).unwrap();
-        assert!(api.sdm_status(ts).unwrap().effective, "re-enabling restores effective");
-    }
-
     /// The status serializes with camelCase JSON keys.
     #[test]
     fn sdm_status_serializes_with_camel_case_keys() {

@@ -9,9 +9,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	"github.com/ethereum-optimism/optimism/op-core/nuts"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/nuts"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 func main() {
@@ -45,7 +45,7 @@ func run(fork forks.Name) error {
 		return fmt.Errorf("reading bundle (run 'just generate-nut-bundle' in packages/contracts-bedrock/ first): %w", err)
 	}
 
-	bundleRel := filepath.Join("op-core", "nuts", "bundles", string(fork)+"_nut_bundle.json")
+	bundleRel := filepath.Join("mc-core", "nuts", "bundles", string(fork)+"_nut_bundle.json")
 	dstPath := filepath.Join(root, bundleRel)
 	if err := os.WriteFile(dstPath, content, 0600); err != nil {
 		return fmt.Errorf("writing bundle to %s: %w", bundleRel, err)

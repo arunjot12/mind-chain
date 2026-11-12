@@ -9,7 +9,7 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
 
 - L1 EL RPC (games live on L1) and an L2 EL RPC for the chain. The rollup-node RPC is
   useful but optional — **mc-node** (`optimism_outputAtBlock` / `optimism_safeHeadAtL1Block`)
-  for output-root games; **mc-node or op-supernode** (`superroot_atTimestamp`) for super-root
+  for output-root games; **mc-node or mc-supernode** (`superroot_atTimestamp`) for super-root
   games.
 - The `mc-challenger` binary: `just mc-challenger` (builds `./mc-challenger/bin/mc-challenger`).
 
@@ -27,8 +27,8 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
 
 3. **Canonical output root (ground truth).** Use the EL-only tools — they need just an
    L2 EL RPC and work against public nodes:
-   - output-root games: `go run ./op-chain-ops/cmd/check-output-root --l2-eth-rpc <l2> --block-num <n>`
-   - super-root games: `go run ./op-chain-ops/cmd/check-super-root --rpc-endpoints <l2…>`
+   - output-root games: `go run ./mc-chain-ops/cmd/check-output-root --l2-eth-rpc <l2> --block-num <n>`
+   - super-root games: `go run ./mc-chain-ops/cmd/check-super-root --rpc-endpoints <l2…>`
 
 4. **Classify each claim correct-vs-invalid.** A claim is invalid iff its value differs from
    the honest value at its position. Validity is bounded by the game's **`l1Head`**: a
@@ -69,7 +69,7 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
      acting. Super-root records omit `l2BlockNumber`, `outputRoot` and the safe-head fields.
      Challengers dispute invalid super-cannon-kona and zk proposals; super-permissioned games
      resolve DEFENDER_WINS at creation, so `rootMatch=false` there needs a guardian blacklist in the
-     `AnchorStateRegistry` (op-dispute-mon alerts on it). For zk games `rootMatch` covers only the
+     `AnchorStateRegistry` (mc-dispute-mon alerts on it). For zk games `rootMatch` covers only the
      root: the challenger also challenges any child of a parent that resolved CHALLENGER_WINS, so
      check the parent's status with `list-games`.
    - `mc-challenger/scripts/check-game-block-hashes.sh <node-rpc> <ref-rpc> <blocks…>` — block-hash
@@ -82,7 +82,7 @@ proposal is valid and who wins the bonds. Investigate and explain; never `move`,
 
    The `optimism_outputAtBlock` / `optimism_safeHeadAtL1Block` queries apply to **output-root
    games** only. For **super-root games** the data source is `superroot_atTimestamp` on the
-   mc-node **or op-supernode**; `game-proposal-outputs` reports the root match and node sync,
+   mc-node **or mc-supernode**; `game-proposal-outputs` reports the root match and node sync,
    and the step-level comparison follows the super-root rules in §4 (the response carries the
    `RequiredL1` / `VerifiedRequiredL1` that determine when the trace turns invalid).
 

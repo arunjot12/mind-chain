@@ -4,18 +4,18 @@ import (
 	"context"
 	"os"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/metrics"
+	"github.com/mindchain/mind-chain/mc-challenger/metrics"
 	"github.com/urfave/cli/v2"
 
-	challenger "github.com/ethereum-optimism/optimism/mc-challenger"
-	"github.com/ethereum-optimism/optimism/mc-challenger/config"
-	"github.com/ethereum-optimism/optimism/mc-challenger/flags"
-	"github.com/ethereum-optimism/optimism/mc-challenger/version"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
+	challenger "github.com/mindchain/mind-chain/mc-challenger"
+	"github.com/mindchain/mind-chain/mc-challenger/config"
+	"github.com/mindchain/mind-chain/mc-challenger/flags"
+	"github.com/mindchain/mind-chain/mc-challenger/version"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log/logcli"
 )
 
 var (

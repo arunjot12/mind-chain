@@ -3,7 +3,7 @@ package vm
 import (
 	"context"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
 )
 
 type StateConverter interface {

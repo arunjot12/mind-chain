@@ -30,7 +30,7 @@ Before beginning this transition, your chain should:
 
 *   Be running a standard OP Stack implementation
 *   It's recommended to use the latest contracts version, minimum required [**v5.0.0**](https://github.com/ethereum-optimism/optimism/releases/tag/op-contracts%2Fv5.0.0).
-*   Be operating with the required infrastructure services including [`mc-challenger`](/op-stack/fault-proofs/challenger) and [`op-dispute-mon`](/chain-operators/tools/chain-monitoring#dispute-mon).
+*   Be operating with the required infrastructure services including [`mc-challenger`](/op-stack/fault-proofs/challenger) and [`mc-dispute-mon`](/chain-operators/tools/chain-monitoring#dispute-mon).
 
 ## Migration steps
 
@@ -40,7 +40,7 @@ Let's begin with configuring the dispute components that will interact with the 
 
 ## 1. Configure the dispute components
 
-The `mc-challenger` and `op-dispute-mon` services are critical security components that participate in the dispute game process to challenge invalid proposals and monitor active games.
+The `mc-challenger` and `mc-dispute-mon` services are critical security components that participate in the dispute game process to challenge invalid proposals and monitor active games.
 
 ### Upgrade to the latest `mc-challenger`
 
@@ -165,9 +165,9 @@ This command runs forever, checking every couple of L2 blocks. But it suffices t
 Wait you see `Successfully verified output root` in the logs before shutting it down. 
 Any errors indicate a misconfiguration.
 
-### Set up `op-dispute-mon`
+### Set up `mc-dispute-mon`
 
-Ensure `op-dispute-mon` is properly configured by following the [steps](/chain-operators/tools/chain-monitoring#dispute-mon) in the documentation.
+Ensure `mc-dispute-mon` is properly configured by following the [steps](/chain-operators/tools/chain-monitoring#dispute-mon) in the documentation.
 
 ## 2. Deploy and configure smart contracts using OPCM
 
@@ -195,7 +195,7 @@ See a high‐level implementation from this [docs](/chain-operators/tutorials/di
 
 ## 3. Testing off-chain agents
 
-After you've set the permissionless `FaultDisputeContract` implementations on the `DisputeGameFactory` and before you set the respected game type to it (game type 0), you can test `mc-challenger` and `op-dispute-mon` to ensure they are working correctly with permissionless games.
+After you've set the permissionless `FaultDisputeContract` implementations on the `DisputeGameFactory` and before you set the respected game type to it (game type 0), you can test `mc-challenger` and `mc-dispute-mon` to ensure they are working correctly with permissionless games.
 
 There are a number of useful `mc-challenger` subcommands that can be used for testing, particularly `list-games`, `list-claims` and `create-game`.  See the [README](https://github.com/ethereum-optimism/optimism/tree/develop/op-challenger#subcommands) and `mc-challenger --help` output for further details. The two tests below are basic sanity tests:
 

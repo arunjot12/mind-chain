@@ -1,4 +1,4 @@
-# Consolidated build for the Rust services of the optimism monorepo. kona,
+# Consolidated build for the Rust services of the mind-chain monorepo. kona,
 # mc-reth, and lokahi live in the same cargo workspace (rust/) with a
 # single Cargo.lock, so one melange run shares the whole common dependency
 # graph (alloy, op-alloy, revm, ...) across all six binaries instead of
@@ -14,7 +14,7 @@ package:
   name: op-stack-rust
   version: "0.0.0"
   epoch: 0
-  description: op-stack-rust — meta package for the optimism monorepo Rust services
+  description: op-stack-rust — meta package for the mind-chain monorepo Rust services
   copyright:
     - license: MIT
 

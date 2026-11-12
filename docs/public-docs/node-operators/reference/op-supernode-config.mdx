@@ -1,32 +1,32 @@
 ---
-title: op-supernode configuration options
-description: Complete reference for all op-supernode command-line flags and environment variables.
+title: mc-supernode configuration options
+description: Complete reference for all mc-supernode command-line flags and environment variables.
 diataxis: reference
 audit-source:
-  - op-supernode/flags/flags.go
-  - op-supernode/flags/virtual_flags.go
-  - op-supernode/cmd/main.go
-  - op-supernode/supernode/supernode.go
-  - op-supernode/supernode/activity/interop/interop.go
-  - op-supernode/README.md
+  - mc-supernode/flags/flags.go
+  - mc-supernode/flags/virtual_flags.go
+  - mc-supernode/cmd/main.go
+  - mc-supernode/supernode/supernode.go
+  - mc-supernode/supernode/activity/interop/interop.go
+  - mc-supernode/README.md
 ---
 
 <Info>
-  op-supernode is in active development.
-  This page tracks the [op-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8) release candidate and the flag list may evolve before the stable release.
+  mc-supernode is in active development.
+  This page tracks the [mc-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8) release candidate and the flag list may evolve before the stable release.
 </Info>
 
-This page catalogues all configuration options for op-supernode, organized by functionality.
-The following options are from the `--help` in [op-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8).
+This page catalogues all configuration options for mc-supernode, organized by functionality.
+The following options are from the `--help` in [mc-supernode/v0.2.2-rc.8](https://github.com/ethereum-optimism/optimism/releases/tag/op-supernode%2Fv0.2.2-rc.8).
 
 For recommended settings, deployment topologies, and a starter configuration, see the [supernode configuration guide](/node-operators/guides/configuration/supernode).
-For what op-supernode is and why it exists, see the [supernode explainer](/op-stack/interop/supernode).
+For what mc-supernode is and why it exists, see the [supernode explainer](/op-stack/interop/supernode).
 
 <Info>
   Environment-variable names don't always derive mechanically from the CLI flag name.
   Some env-var suffixes keep mc-node's source-level spelling even when the CLI flag was renamed (for example, `--vn.<chainID>.l2` is set by `OP_SUPERNODE_VN_<chainID>_L2_ENGINE_RPC`, not `OP_SUPERNODE_VN_<chainID>_L2`).
   The per-flag entries below show the correct env-var name alongside the CLI form.
-  When in doubt, run `op-supernode --chains=<chainIDs> --help` for the authoritative name of any flag.
+  When in doubt, run `mc-supernode --chains=<chainIDs> --help` for the authoritative name of any flag.
 </Info>
 
 ## Dependency set and storage
@@ -46,13 +46,13 @@ Each chain ID must have a matching set of per-chain `--vn.<chainID>.*` flags tha
 
 ### data-dir
 
-Data directory for op-supernode.
+Data directory for mc-supernode.
 Each chain's SafeDB and P2P state is stored in a `chain-<chainID>` subdirectory under this path so the chains cannot collide.
 The default value is `./datadir`.
 
 <Tabs>
   <Tab title="Syntax">`--data-dir=<value>`</Tab>
-  <Tab title="Example">`--data-dir=/var/lib/op-supernode`</Tab>
+  <Tab title="Example">`--data-dir=/var/lib/mc-supernode`</Tab>
   <Tab title="Environment Variable">`OP_SUPERNODE_DATA_DIR=`</Tab>
 </Tabs>
 
@@ -226,7 +226,7 @@ To pin static ports per chain, set both the TCP (RLPx) and UDP (discovery v5) po
 
 ## Interop verification
 
-The interop activity is the part of op-supernode that decides when a chain's blocks have satisfied their cross-chain dependencies.
+The interop activity is the part of mc-supernode that decides when a chain's blocks have satisfied their cross-chain dependencies.
 For background on how the activity decides between *wait*, *advance*, *invalidate*, and *rewind*, see the [supernode explainer](/op-stack/interop/supernode#cross-chain-message-safety).
 
 ### interop.activation-timestamp
@@ -411,6 +411,6 @@ The default value is `6060`.
 ## Where to go next
 
 * Follow the [supernode configuration guide](/node-operators/guides/configuration/supernode) for recommended settings and a starter configuration.
-* Read the [supernode explainer](/op-stack/interop/supernode) for what op-supernode is and why it exists.
+* Read the [supernode explainer](/op-stack/interop/supernode) for what mc-supernode is and why it exists.
 * Read the [mc-node configuration reference](/node-operators/reference/mc-node-config) for the full set of flags available under the `--vn.*` namespace.
-* See the [op-supernode source](https://github.com/ethereum-optimism/optimism/tree/develop/op-supernode) in the monorepo for implementation detail.
+* See the [mc-supernode source](https://github.com/ethereum-optimism/optimism/tree/develop/op-supernode) in the monorepo for implementation detail.

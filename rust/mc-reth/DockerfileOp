@@ -37,13 +37,6 @@ ENV GIT_DATE=$GIT_DATE
 
 COPY . .
 
-# The reth-optimism-chainspec build.rs generates res/superchain-configs.tar from
-# the superchain-registry submodule, which lives at the repo root — outside this
-# "rust" build context. Provide the `superchain/` subdir it reads (configs +
-# extra/genesis + extra/dictionary) via the `superchain-registry` bake named
-# context; the git-free build.rs resolves it at /superchain-registry.
-COPY --from=superchain-registry superchain /superchain-registry/superchain
-
 RUN cargo auditable build --profile $BUILD_PROFILE --locked --bin mc-reth --manifest-path /app/mc-reth/bin/Cargo.toml
 
 RUN ls -la /app/target/$BUILD_PROFILE/mc-reth

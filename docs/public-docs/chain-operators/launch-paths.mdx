@@ -36,7 +36,7 @@ What that ownership includes, stated the way the docs themselves state it:
 *   **The sequencer.** A single sequencer is a single point of failure for the
     whole chain: when it stops, no new unsafe blocks exist for anyone. The
     high-availability answer is a sequencer cluster managed by
-    [op-conductor](/chain-operators/tools/op-conductor), with its nodes in
+    [mc-conductor](/chain-operators/tools/mc-conductor), with its nodes in
     separate failure domains. The design is not Byzantine fault tolerant: it
     assumes every node in the cluster is honest and operated by you, so it
     protects against crashes and partitions, not against a malicious cluster
@@ -56,7 +56,7 @@ What that ownership includes, stated the way the docs themselves state it:
     games whose prestate it does not have. See
     [Run a fault-proof challenger](/use-cases/run-a-fault-proof-challenger).
 *   **The monitoring.** Watching the chain is a separate set of services from
-    running it. `op-dispute-mon` tracks the status of every dispute game and is
+    running it. `mc-dispute-mon` tracks the status of every dispute game and is
     how you learn that your challenger is acting; `monitorism` carries the
     onchain security monitors, whose security-integrity group exists to check
     that the bridges between L2 and L1 behave as expected, including the
@@ -73,7 +73,7 @@ What that ownership includes, stated the way the docs themselves state it:
     an L1 beacon endpoint, and the batcher, proposer, and challenger read and
     transact against L1; `mc-challenger` additionally needs an L2 archive node
     (`--l2-eth-rpc`) and a rollup node with SafeDB (`--rollup-rpc`), and
-    `op-dispute-mon` takes a rollup RPC of its own. Redundant nodes behind a
+    `mc-dispute-mon` takes a rollup RPC of its own. Redundant nodes behind a
     generic load balancer are the wrong shape for any of them. Two nodes can be
     at the same head, but nothing holds them there, and a service whose
     consecutive requests round-robin between them reads that divergence as

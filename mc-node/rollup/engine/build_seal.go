@@ -8,9 +8,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/rpc"
 
-	optypes "github.com/ethereum-optimism/optimism/op-core/types"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup/derive"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	optypes "github.com/mindchain/mind-chain/mc-core/types"
+	"github.com/mindchain/mind-chain/mc-node/rollup/derive"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // PayloadSealInvalidEvent identifies a permanent in-consensus problem with the payload sealing.

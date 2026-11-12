@@ -53,7 +53,7 @@ acceptance-tests-run CL_TYPE="kona-node" EL_TYPE="op-reth":
   export DEVSTACK_L2CL_KIND="{{CL_TYPE}}"
   export DEVSTACK_L2EL_KIND="{{EL_TYPE}}"
   export LOG_LEVEL="debug"
-  cd {{SOURCE}}/optimism/op-acceptance-tests && just acceptance-test
+  cd {{SOURCE}}/optimism/mc-acceptance-tests && just acceptance-test
 
 # Run the e2e tests for the sysgo orchestrator.
 # Builds the kona-node and op-reth binaries and runs the tests.
@@ -227,7 +227,7 @@ action-tests-single-run test_name='.*' parallel="0" *args='':
 #
 # Builds the guest ELFs (Dockerized SP1 toolchain) and the super-range-executor binary, then runs
 # the SP1 execute action tests with KONA_SP1_SUPER_RANGE_ELF_EXECUTOR_PATH and KONA_SP1_ELF_DIR
-# set — the same two variables the op-acceptance-tests full-ELF suite reads. Tests skip when the
+# set — the same two variables the mc-acceptance-tests full-ELF suite reads. Tests skip when the
 # executor path is unset.
 action-tests-sp1 test_name='TestSP1.*':
   #!/bin/bash

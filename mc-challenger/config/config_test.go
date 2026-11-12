@@ -9,12 +9,12 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/vm"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/vm"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 var (
@@ -23,7 +23,7 @@ var (
 	validGameFactoryAddress               = common.Address{0x23}
 	validCannonBin                        = "./bin/cannon"
 	validCannonOpProgramBin               = "./bin/op-program"
-	validCannonNetwork                    = "mainnet"
+	validCannonNetwork                    = "467294"
 	validCannonAbsolutePreState           = "pre.json"
 	validCannonAbsolutePreStateBaseURL, _ = url.Parse("http://localhost/foo/")
 	validDatadir                          = "/tmp/data"
@@ -35,7 +35,7 @@ var (
 
 	validCannonKonaBin                        = "./bin/cannon"
 	validCannonKonaServerBin                  = "./bin/kona-host"
-	validCannonKonaNetwork                    = "mainnet"
+	validCannonKonaNetwork                    = "467294"
 	validCannonKonaAbsolutePreStateBaseURL, _ = url.Parse("http://localhost/bar/")
 )
 

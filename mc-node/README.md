@@ -247,9 +247,9 @@ from the new signer is verified, and after it elapses only the new signer is acc
 <!-- describe testing methods and approach to test coverage -->
 
 - Unit tests: encapsulated functionality, fuzz tests, etc. in the mc-node Go packages.
-- `op-e2e` action tests: in-progress Go testing, focused on the onchain aspects,
+- `mc-e2e` action tests: in-progress Go testing, focused on the onchain aspects,
   e.g. state-transition edge-cases. This applies primarily to the derivation pipeline.
-- `op-e2e` system tests: in-process Go testing, focused on the offchain aspects of the mc-node,
+- `mc-e2e` system tests: in-process Go testing, focused on the offchain aspects of the mc-node,
   e.g. background work, P2P integration, general service functionality.
 - Local devnet tests: full end to end testing, but set up on minimal resources.
 - Kurtosis tests: new automated devnet-like testing. Work in progress.

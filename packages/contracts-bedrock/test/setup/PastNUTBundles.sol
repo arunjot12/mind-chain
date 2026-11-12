@@ -24,7 +24,7 @@ import { IL2ProxyAdmin } from "interfaces/L2/IL2ProxyAdmin.sol";
 ///         with the predeploy state the current bundle expects.
 library PastNUTBundles {
     /// @notice One ordered NUT bundle entry returned by the `nut-bundles` Go FFI command.
-    /// @param fork The fork name from `op-core/nuts/fork_lock.toml`.
+    /// @param fork The fork name from `mc-core/nuts/fork_lock.toml`.
     /// @param path A path resolvable from `packages/contracts-bedrock` via `vm.readFile`.
     struct NUTBundle {
         string fork;

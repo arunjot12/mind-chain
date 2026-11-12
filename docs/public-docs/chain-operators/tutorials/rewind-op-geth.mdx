@@ -35,13 +35,13 @@ Follow these steps to rewind your op-geth node.
   </Step>
   <Step title="Rewind op-geth">
     You need the JWT secret and *open* & *admin* port (default `8545` & `8551`). 
-    Then you can use the `op-wheel` command from the [monorepo](https://github.com/ethereum-optimism/optimism/tree/develop/op-wheel) to issue the rewind.
+    Then you can use the `mc-wheel` command from the [monorepo](https://github.com/ethereum-optimism/optimism/tree/develop/op-wheel) to issue the rewind.
 
     ```bash
     # save JWT secret to env var
     export JWT="YourJWTSecret123"
     # assuming default ports 8545 and 8551 and local endpoint
-    go run ./op-wheel/cmd engine rewind \
+    go run ./mc-wheel/cmd engine rewind \
     --engine.open http://localhost:8545 \
     --engine http://localhost:8551 \
     --engine.jwt-secret $JWT \

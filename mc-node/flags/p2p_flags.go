@@ -6,8 +6,8 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/ethereum-optimism/optimism/mc-node/p2p"
-	opsigner "github.com/ethereum-optimism/optimism/op-service/signer"
+	"github.com/mindchain/mind-chain/mc-node/p2p"
+	opsigner "github.com/mindchain/mind-chain/mc-service/signer"
 )
 
 func p2pEnv(envprefix, v string) []string {
@@ -297,10 +297,10 @@ func P2PFlags(envPrefix string) []cli.Flag {
 		},
 		&cli.StringFlag{
 			Name:     UserAgentName,
-			Usage:    "User-agent string to share via LibP2P identify. If empty it defaults to 'optimism'.",
+			Usage:    "User-agent string to share via LibP2P identify. If empty it defaults to 'mind-chain'.",
 			Hidden:   true,
 			Required: false,
-			Value:    "optimism",
+			Value:    "mind-chain",
 			EnvVars:  p2pEnv(envPrefix, "AGENT"),
 			Category: P2PCategory,
 		},

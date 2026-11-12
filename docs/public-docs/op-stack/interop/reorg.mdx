@@ -3,9 +3,9 @@ title: Interop reorg awareness
 description: How OP Stack interop enables low-latency interop and avoids the double-spend
   problem.
 audit-source:
-  - op-supernode/supernode/activity/interop/interop.go
-  - op-supernode/supernode/chain_container/chain_container.go
-  - op-supernode/safety-labels.md
+  - mc-supernode/supernode/activity/interop/interop.go
+  - mc-supernode/supernode/chain_container/chain_container.go
+  - mc-supernode/safety-labels.md
 diataxis: explanation
 ---
 
@@ -109,7 +109,7 @@ In that case, the initiating message (A<sub>101</sub>) burns `n` tokens on the s
 
 ### How the dependency check is enforced
 
-The dependency rule above — a block is only safe once every initiating message it references is also safe — is enforced by [op-supernode](/op-stack/interop/supernode), the component that hosts the consensus layer of every chain in a dependency set together. For each L2 timestamp, op-supernode's interop activity decides between *wait*, *advance*, *invalidate*, and *rewind*. The decision is persisted to a write-ahead log before being applied, so the supernode picks up after a restart in the same state it was in before.
+The dependency rule above — a block is only safe once every initiating message it references is also safe — is enforced by [mc-supernode](/op-stack/interop/supernode), the component that hosts the consensus layer of every chain in a dependency set together. For each L2 timestamp, mc-supernode's interop activity decides between *wait*, *advance*, *invalidate*, and *rewind*. The decision is persisted to a write-ahead log before being applied, so the supernode picks up after a restart in the same state it was in before.
 
 Each chain's CL stays the single source of truth for safety on its own chain. The supernode influences advancement through interfaces the chain itself controls, never by reaching into the CL or the execution layer. The rest of this page describes the situations that drive each decision.
 
@@ -122,7 +122,7 @@ When an L1 reorg does affect L2, one of two things happens:
 * **The replacement L1 block carries the same batch data as the original.** Derivation is deterministic, so the L2 chain it produces is identical, and the reorg is a no-op from the L2 perspective.
 * **The replacement L1 block does not carry that batch data.** The sequencer notices and reposts the affected batch in a later L1 block. As long as the batch lands again before the [sequencer window](https://specs.optimism.io/glossary.html#sequencing-window) elapses (3600 L1 blocks ≈ 12 hours on standard chains like OP Mainnet and Unichain), derivation reproduces the same L2 chain. If the window does elapse without the batch reappearing, the affected L2 blocks are replaced with deposit-only blocks (see [Invalid block](#invalid-block) below).
 
-If a leaked L1 reorg leaves op-supernode with inconsistent per-chain views of L1, the interop activity issues a *rewind*: verified state is rolled back and re-derived once L1 settles.
+If a leaked L1 reorg leaves mc-supernode with inconsistent per-chain views of L1, the interop activity issues a *rewind*: verified state is rolled back and re-derived once L1 settles.
 
 L1 reorgs do not by themselves break interop guarantees. Either the data comes back and L2 stays identical, or the chain falls back to deposit-only blocks for that span — the same behavior as if the sequencer had simply gone offline.
 
@@ -135,7 +135,7 @@ Sequencers inform the rest of the OP Stack chains about a new block in two ways:
 *   Posting to L1, which typically happens a few minutes after the block is created.
     The reason is cost; it is much cheaper if compression and L1 posting are done in large batches rather than for each individual block.
 
-Equivocation happens when a sequencer publishes a block over the gossip protocol that differs from the one that eventually gets written to L1. The L1 version wins, and [op-supernode](#how-the-dependency-check-is-enforced) issues an *invalidate* for every unsafe dependent block (local or cross-chain) that built on the gossiped version.
+Equivocation happens when a sequencer publishes a block over the gossip protocol that differs from the one that eventually gets written to L1. The L1 version wins, and [mc-supernode](#how-the-dependency-check-is-enforced) issues an *invalidate* for every unsafe dependent block (local or cross-chain) that built on the gossiped version.
 
 ```mermaid
 
@@ -174,7 +174,7 @@ A block in another chain can only depend on a specific block here if it referenc
 
 ### Invalid block
 
-A block can also be canonically invalidated outright. If verifiers determine that an L2 block cannot be reproduced from L1 — for example because the batch claims an initiating message that does not exist on the source chain — the canonical chain replaces it with a *deposit-only block*: a block that contains only the deposit transactions forced through L1, with all sequencer transactions stripped out. For interop-specific failures like that example, [op-supernode](#how-the-dependency-check-is-enforced) is the verifier that makes the call.
+A block can also be canonically invalidated outright. If verifiers determine that an L2 block cannot be reproduced from L1 — for example because the batch claims an initiating message that does not exist on the source chain — the canonical chain replaces it with a *deposit-only block*: a block that contains only the deposit transactions forced through L1, with all sequencer transactions stripped out. For interop-specific failures like that example, [mc-supernode](#how-the-dependency-check-is-enforced) is the verifier that makes the call.
 
 <Accordion title="What makes a block invalid?">
 
@@ -197,6 +197,6 @@ At worst, some unsafe blocks need to be recalculated (if one fork is chosen over
 ## Next steps
 
 *   Read the [interop explainer](/op-stack/interop/explainer) for the rest of the architecture.
-*   Read about [op-supernode](/op-stack/interop/supernode), the component that derives every chain in the dependency set together and enforces the safety levels described above.
+*   Read about [mc-supernode](/op-stack/interop/supernode), the component that derives every chain in the dependency set together and enforces the safety levels described above.
 *   Read the [cross-chain security measures](/op-stack/security/interop-security) for safe interoperability.
 *   View more [interop guides and tutorials](/app-developers/guides/interoperability/get-started).

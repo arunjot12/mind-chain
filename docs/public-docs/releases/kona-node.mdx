@@ -193,7 +193,7 @@ This is a recommended release containing correctness and stability fixes for kon
 * chore(rust): misc clippy fixes on crates by @mablr in [#19736](https://github.com/ethereum-optimism/optimism/pull/19736)
 * ci: use cargo-auditable for Rust image builds by @falcorocks in [#19770](https://github.com/ethereum-optimism/optimism/pull/19770)
 * feat(op-alloy-evm): add `OpEvm::into_inner` method by @mablr in [#19735](https://github.com/ethereum-optimism/optimism/pull/19735)
-* feat(op-devstack): respect DEVSTACK_L2EL_KIND and DEVSTACK_L2CL_KIND in all single-chain runtimes by @joshklop in [#19653](https://github.com/ethereum-optimism/optimism/pull/19653)
+* feat(mc-devstack): respect DEVSTACK_L2EL_KIND and DEVSTACK_L2CL_KIND in all single-chain runtimes by @joshklop in [#19653](https://github.com/ethereum-optimism/optimism/pull/19653)
 
 Operator note: interop_message_expiry_window was removed from RollupConfig. Any existing serialized configs or fixtures that still include this field may fail to deserialize and should be updated before rollout.
 

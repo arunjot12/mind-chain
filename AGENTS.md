@@ -1,6 +1,6 @@
-# Optimism Monorepo
+# Mind Chain Monorepo
 
-This is the primary monorepo for the OP Stack, maintained by the Optimism Collective. The OP Stack is a decentralized software stack that powers Optimism and forms the backbone of blockchains like OP Mainnet and Base.
+This is the Mind Chain monorepo: every Mind Chain rollup service (node, batcher, proposer, challenger, deployer, execution client) and its smart contracts, derived from the upstream OP Stack.
 
 ## Improving This Documentation
 
@@ -30,8 +30,8 @@ The rollup node software and associated services, including:
 - **mc-batcher**: L2 batch submitter
 - **mc-proposer**: L2 output submitter
 - **mc-challenger**: Dispute game challenge agent
-- **op-conductor**: High-availability sequencer service
-- **op-supernode**: Multi-chain consensus-layer host that runs multiple OP Stack chains in a single process and performs in-process cross-chain safety verification
+- **mc-conductor**: High-availability sequencer service
+- **mc-supernode**: Multi-chain consensus-layer host that runs multiple OP Stack chains in a single process and performs in-process cross-chain safety verification
 
 The Go module is moving off the op-geth fork to upstream go-ethereum. If a Go change uses a new go-ethereum API — an import, field, method or changed signature — run `just opgeth-ratchet` before pushing. The required CI check of the same name fails on any op-geth-only use that is not in its allowlist. To avoid such a use, see [docs/ai/opgeth-decoupling.md](docs/ai/opgeth-decoupling.md).
 
@@ -47,7 +47,7 @@ The OP Stack includes significant Rust implementations:
 - **mc-reth**: OP Stack execution client built on reth
 - **op-alloy**: Rust crates providing OP Stack types and providers for the alloy ecosystem
 - **alloy-op-hardforks** / **alloy-op-evm**: OP Stack hardfork and EVM support for alloy
-- **lokahi**: Rust rewrite of op-supernode, in early development (`rust/lokahi/`)
+- **lokahi**: Rust rewrite of mc-supernode, in early development (`rust/lokahi/`)
 
 ### Fault Proof System
 
@@ -56,8 +56,8 @@ The OP Stack includes significant Rust implementations:
 
 ### Development and Testing Infrastructure
 
-- **op-e2e**: End-to-end testing framework
-- **op-acceptance-tests**: Acceptance test suite
+- **mc-e2e**: End-to-end testing framework
+- **mc-acceptance-tests**: Acceptance test suite
 
 ## Pull Requests
 
@@ -85,7 +85,7 @@ Some subdirectories have their own CLAUDE.md with domain-specific conventions. R
 - `rust/kona/CLAUDE.md` — Kona Rust workspace: build commands (`just b/t/l/f`), code style, architecture overview
 - `rust/` — read before working in that area; links to [docs/ai/rust-dev.md](docs/ai/rust-dev.md)
 - `packages/contracts-bedrock/` — read before working in that area; links to [docs/ai/contract-dev.md](docs/ai/contract-dev.md)
-- `op-acceptance-tests/` — read before working in that area; links to [docs/ai/acceptance-tests.md](docs/ai/acceptance-tests.md)
+- `mc-acceptance-tests/` — read before working in that area; links to [docs/ai/acceptance-tests.md](docs/ai/acceptance-tests.md)
 - `mc-node/rollup/derive/` — read before working in that area; links to [docs/ai/derivation.md](docs/ai/derivation.md)
 - `rust/kona/crates/protocol/` — read before working in that area; links to [docs/ai/derivation.md](docs/ai/derivation.md)
 - `rust/kona/sp1/` — read before working in that area; links to [docs/ai/kona-sp1-proof-limits.md](docs/ai/kona-sp1-proof-limits.md)
@@ -120,10 +120,10 @@ and the relevant language guide below. More detailed guidance for AI agents can 
 - [docs/ai/devfeatures.md](docs/ai/devfeatures.md) - The `DevFeatures` bitmap system gating in-development smart contract features: where the bitmap is supplied, composed, propagated, and read. Only relevant for contract development and mc-deployer — not needed for client (mc-node / mc-reth / kona) work
 - [docs/ai/acceptance-tests.md](docs/ai/acceptance-tests.md) - Building and running acceptance tests locally
 - [docs/ai/writing-acceptance-tests.md](docs/ai/writing-acceptance-tests.md) - Writing new acceptance tests: DSL patterns, naming, what to avoid
-- [docs/ai/opgeth-decoupling.md](docs/ai/opgeth-decoupling.md) - op-geth decoupling plan: consult when doing any op-geth decoupling work — migrating OP Stack–specific code out of op-geth into `op-core/*`, retiring op-geth-backed execution in tests/tooling, or removing fork-only API uses — so the monorepo can depend on upstream go-ethereum (scope: the whole monorepo — single go.mod; tracking issue #20257)
+- [docs/ai/opgeth-decoupling.md](docs/ai/opgeth-decoupling.md) - op-geth decoupling plan: consult when doing any op-geth decoupling work — migrating OP Stack–specific code out of op-geth into `mc-core/*`, retiring op-geth-backed execution in tests/tooling, or removing fork-only API uses — so the monorepo can depend on upstream go-ethereum (scope: the whole monorepo — single go.mod; tracking issue #20257)
 
 ## External References
 
-- [Optimism Documentation](https://docs.optimism.io)
+- [Upstream OP Stack documentation](https://docs.optimism.io)
 - [OP Stack Specifications](https://github.com/ethereum-optimism/specs)
 - [Contributing Guide](CONTRIBUTING.md)

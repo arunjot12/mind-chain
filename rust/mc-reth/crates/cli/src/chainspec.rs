@@ -1,5 +1,5 @@
 use reth_cli::chainspec::{ChainSpecParser, parse_genesis};
-use reth_optimism_chainspec::{OpChainSpec, SUPPORTED_CHAINS, generated_chain_value_parser};
+use reth_mind_chain_chainspec::{OpChainSpec, SUPPORTED_CHAINS, generated_chain_value_parser};
 use std::sync::Arc;
 
 /// Optimism chain specification parser.

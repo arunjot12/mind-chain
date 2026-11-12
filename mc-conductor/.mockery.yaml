@@ -1,0 +1,15 @@
+dir: "{{.InterfaceDir}}/mocks"
+pkgname: "mocks"
+filename: "{{.InterfaceName}}.go"
+structname: '{{.InterfaceName}}'
+packages:
+  github.com/mindchain/mind-chain/mc-conductor/health:
+    interfaces:
+      HealthMonitor:
+  github.com/mindchain/mind-chain/mc-conductor/consensus:
+    interfaces:
+      Consensus:
+  github.com/mindchain/mind-chain/mc-conductor/client:
+    interfaces:
+      SequencerControl:
+      ElP2PClient:

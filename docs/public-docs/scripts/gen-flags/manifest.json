@@ -7,9 +7,9 @@
     "sha256": "ba593ac3882424f9f985375b347fce27f86a6241a9439917cbfd05fb700e7451",
     "tag": "mc-challenger/v1.9.3"
   },
-  "op-conductor": {
+  "mc-conductor": {
     "sha256": "ad4dbd3cdf375fbd79c4e52733a1c68ef5844b94e820839bd6421a283d898aa9",
-    "tag": "op-conductor/v0.9.4"
+    "tag": "mc-conductor/v0.9.4"
   },
   "mc-node": {
     "sha256": "0e82f12b9b28e329349bbf7daeb06a8d073c2b6345ae9e5e0531ac710b9f0fa1",

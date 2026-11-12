@@ -5,9 +5,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/math"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	registry "github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	registry "github.com/mindchain/mind-chain/mc-core/superchain"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 )
 
 // LoadDependencySet loads the dependency set containing the requested chain ID

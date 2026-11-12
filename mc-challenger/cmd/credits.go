@@ -8,16 +8,16 @@ import (
 	"slices"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/flags"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/contracts/metrics"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching"
-	"github.com/ethereum-optimism/optimism/op-service/sources/batching/rpcblock"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-challenger/flags"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/contracts/metrics"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/log/logcli"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching"
+	"github.com/mindchain/mind-chain/mc-service/sources/batching/rpcblock"
 	"github.com/urfave/cli/v2"
 )
 
@@ -107,7 +107,7 @@ func faultCreditRecipients(ctx context.Context, faultGame contracts.FaultDispute
 // CHALLENGER_WINS and this game was never challenged, resolve() credits
 // normalModeCredit[claimData.challenger], which is address(0) (see
 // ZKDisputeGame.sol). That bond is recoverable by the DelayedWETH owner, so it is
-// a real credit that op-dispute-mon reports and list-credits should show.
+// a real credit that mc-dispute-mon reports and list-credits should show.
 func zkCreditRecipients(ctx context.Context, game contracts.ZKDisputeGameContract) ([]common.Address, error) {
 	bonds, err := game.GetBondMetadata(ctx, rpcblock.Latest)
 	if err != nil {

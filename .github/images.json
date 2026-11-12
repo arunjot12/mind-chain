@@ -10,9 +10,9 @@
     "go.mod",
     "go.sum",
     "ops/docker/op-stack-go/**",
-    "op-service/**",
-    "op-core/**",
-    "op-chain-ops/**"
+    "mc-service/**",
+    "mc-core/**",
+    "mc-chain-ops/**"
   ],
   "images": {
     "mc-node": {
@@ -31,13 +31,13 @@
       "target": "mc-batcher",
       "paths": ["mc-batcher/**"]
     },
-    "op-faucet": {
+    "mc-faucet": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-faucet",
-      "paths": ["op-faucet/**"]
+      "target": "mc-faucet",
+      "paths": ["mc-faucet/**"]
     },
     "mc-proposer": {
       "type": "go",
@@ -53,23 +53,23 @@
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
       "target": "mc-challenger",
-      "paths": ["mc-challenger/**", "cannon/**", "op-preimage/**", "rust/kona/**"]
+      "paths": ["mc-challenger/**", "cannon/**", "mc-preimage/**", "rust/kona/**"]
     },
-    "op-dispute-mon": {
+    "mc-dispute-mon": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-dispute-mon",
-      "paths": ["op-dispute-mon/**"]
+      "target": "mc-dispute-mon",
+      "paths": ["mc-dispute-mon/**"]
     },
-    "op-conductor": {
+    "mc-conductor": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-conductor",
-      "paths": ["op-conductor/**", "mc-node/**"]
+      "target": "mc-conductor",
+      "paths": ["mc-conductor/**", "mc-node/**"]
     },
     "da-server": {
       "type": "go",
@@ -77,23 +77,23 @@
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
       "target": "da-server",
-      "paths": ["op-alt-da/**"]
+      "paths": ["mc-alt-da/**"]
     },
-    "op-supernode": {
+    "mc-supernode": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-supernode",
-      "paths": ["op-supernode/**", "mc-node/**"]
+      "target": "mc-supernode",
+      "paths": ["mc-supernode/**", "mc-node/**"]
     },
-    "op-test-sequencer": {
+    "mc-test-sequencer": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-test-sequencer",
-      "paths": ["op-test-sequencer/**"]
+      "target": "mc-test-sequencer",
+      "paths": ["mc-test-sequencer/**"]
     },
     "mc-deployer": {
       "type": "go",
@@ -103,29 +103,29 @@
       "target": "mc-deployer",
       "paths": ["mc-deployer/**", "packages/contracts-bedrock/**"]
     },
-    "op-dripper": {
+    "mc-dripper": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-dripper",
-      "paths": ["op-dripper/**"]
+      "target": "mc-dripper",
+      "paths": ["mc-dripper/**"]
     },
-    "op-interop-mon": {
+    "mc-interop-mon": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-interop-mon",
-      "paths": ["op-interop-mon/**"]
+      "target": "mc-interop-mon",
+      "paths": ["mc-interop-mon/**"]
     },
-    "op-interop-filter": {
+    "mc-interop-filter": {
       "type": "go",
       "check": "go",
       "mode": "bake",
       "bake_file": "docker-bake.hcl",
-      "target": "op-interop-filter",
-      "paths": ["op-interop-filter/**"]
+      "target": "mc-interop-filter",
+      "paths": ["mc-interop-filter/**"]
     },
     "kona-node": {
       "type": "rust",

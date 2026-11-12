@@ -9,11 +9,11 @@
 
 use alloy_primitives::B256;
 use reth_execution_types::BlockExecutionOutput;
-use reth_optimism_flashblocks::{
+use reth_mind_chain_flashblocks::{
     CanonicalBlockNotification, PendingBlockState, PendingStateRegistry,
     validation::{CanonicalBlockFingerprint, ReconciliationStrategy},
 };
-use reth_optimism_primitives::OpPrimitives;
+use reth_mind_chain_primitives::OpPrimitives;
 use reth_revm::cached::CachedReads;
 use std::sync::Arc;
 
@@ -313,7 +313,7 @@ async fn test_in_progress_signal() {
 /// This verifies the cache flow at the sequence manager level.
 #[tokio::test]
 async fn test_transaction_cache_continuation_flow() {
-    use reth_optimism_flashblocks::TransactionCache;
+    use reth_mind_chain_flashblocks::TransactionCache;
 
     // Create a transaction cache
     let mut cache: TransactionCache<OpPrimitives> = TransactionCache::new();
@@ -340,7 +340,7 @@ async fn test_transaction_cache_continuation_flow() {
 /// Tests that transaction cache is invalidated on block change.
 #[tokio::test]
 async fn test_transaction_cache_block_transition() {
-    use reth_optimism_flashblocks::TransactionCache;
+    use reth_mind_chain_flashblocks::TransactionCache;
 
     let mut cache: TransactionCache<OpPrimitives> = TransactionCache::new();
 

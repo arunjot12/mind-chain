@@ -12,20 +12,20 @@ categories:
   - infrastructure
 is_imported_content: 'false'
 audit-source:
-  - op-supernode/cmd/main.go
-  - op-supernode/flags/flags.go
-  - op-supernode/supernode/supernode.go
-  - op-supernode/supernode/activity/interop/interop.go
+  - mc-supernode/cmd/main.go
+  - mc-supernode/flags/flags.go
+  - mc-supernode/supernode/supernode.go
+  - mc-supernode/supernode/activity/interop/interop.go
   - mc-node/rollup/types.go
   - mc-node/rollup/interop/config.go
 ---
 
 OP Stack interop is expected to activate on **OP Sepolia** (chain ID `11155420`) and **Unichain Sepolia** (chain ID `1301`) in **July of 2026**, forming a two-chain interop dependency set on testnet.
-Node operators on either chain must change their topology before the activation timestamp: each operator runs one or more [op-supernode](/op-stack/interop/supernode) instances that derive both chains and validate the cross-chain messages between them, and the rest of the fleet runs as [Light CLs](/notices/specialized-node-topology) that follow the supernode.
+Node operators on either chain must change their topology before the activation timestamp: each operator runs one or more [mc-supernode](/op-stack/interop/supernode) instances that derive both chains and validate the cross-chain messages between them, and the rest of the fleet runs as [Light CLs](/notices/specialized-node-topology) that follow the supernode.
 
 <Warning>
   **A node that has not been migrated to the [supernode-plus-Light-CL topology](/notices/specialized-node-topology) by the activation timestamp cannot verify cross-chain dependencies.**
-  Every mc-node in the fleet must run with `--l2.follow.source` (env: `OP_NODE_L2_FOLLOW_SOURCE`) pointed at an op-supernode that derives both chains.
+  Every mc-node in the fleet must run with `--l2.follow.source` (env: `OP_NODE_L2_FOLLOW_SOURCE`) pointed at an mc-supernode that derives both chains.
   Without that wiring — flag unset, or pointed at a non-supernode source — the mc-node's safe head advances past the activation block without cross-chain validation, so the node cannot serve as a verifier or RPC source for the interop chain.
   The [Specialized mc-node topology notice](/notices/specialized-node-topology) describes the pattern in detail.
   Start with that notice if your fleet hasn't moved off the homogeneous topology yet.
@@ -42,7 +42,7 @@ Node operators on either chain must change their topology before the activation 
 
 At the activation timestamp, OP Sepolia and Unichain Sepolia form a two-chain dependency set.
 Every block on either chain can contain executing messages that reference initiating messages on the other; a block is only [safe](/op-stack/interop/explainer#block-safety-levels) once every initiating message it depends on has itself reached the same safety level.
-The work of tracking both chains and proving those dependencies moves to a new component, [op-supernode](/op-stack/interop/supernode), that runs every chain in the dependency set together as virtual nodes inside one process.
+The work of tracking both chains and proving those dependencies moves to a new component, [mc-supernode](/op-stack/interop/supernode), that runs every chain in the dependency set together as virtual nodes inside one process.
 The rest of the operator's fleet stops deriving locally and follows the supernode's safe view through mc-node's [Light CL mode](/notices/specialized-node-topology).
 
 For how cross-chain messages and block safety work under interop, see the [interop explainer](/op-stack/interop/explainer).
@@ -51,8 +51,8 @@ For how cross-chain messages and block safety work under interop, see the [inter
 
 This notice applies to anyone running OP Sepolia or Unichain Sepolia nodes after the activation timestamp.
 
-Every mc-node in the fleet — replicas, RPC nodes, or any other mc-node deployment — must run as a Light CL pointed at an op-supernode that derives both chains.
-Each operator stands up at least one op-supernode for the dependency set and reconfigures every mc-node in their fleet to follow it.
+Every mc-node in the fleet — replicas, RPC nodes, or any other mc-node deployment — must run as a Light CL pointed at an mc-supernode that derives both chains.
+Each operator stands up at least one mc-supernode for the dependency set and reconfigures every mc-node in their fleet to follow it.
 
 This rollout is scoped to OP Sepolia and Unichain Sepolia.
 Other OP Stack chains will activate the same Lagoon hardfork.
@@ -66,7 +66,7 @@ Versions marked `TBD` will be pinned in this notice once the activation release 
 
 | Component        | Version | Role |
 | ---------------- | ------- | ---- |
-| `op-supernode`   | `TBD`   | Runs OP Sepolia and Unichain Sepolia as virtual nodes inside one binary and verifies cross-chain messages. Required component. See the [supernode explainer](/op-stack/interop/supernode) and [configuration guide](/node-operators/guides/configuration/supernode). |
+| `mc-supernode`   | `TBD`   | Runs OP Sepolia and Unichain Sepolia as virtual nodes inside one binary and verifies cross-chain messages. Required component. See the [supernode explainer](/op-stack/interop/supernode) and [configuration guide](/node-operators/guides/configuration/supernode). |
 | `mc-node`        | `TBD`   | Runs as a [Light CL](/notices/specialized-node-topology) on every node in the fleet; safe and finalized views are inherited from the supernode. |
 | `mc-reth`        | `TBD`   | Execution client. Run one per chain in the dependency set — an execution client cannot back two chains (mc-node rejects a mismatched chain ID at startup), so a host serving both chains runs at least two execution-client processes. |
 
@@ -75,8 +75,8 @@ Versions marked `TBD` will be pinned in this notice once the activation release 
 </Info>
 
 <Info>
-  op-supernode does not yet have a stable release.
-  Pull the latest candidate from the [op-supernode releases page](https://github.com/ethereum-optimism/optimism/releases?q=op-supernode).
+  mc-supernode does not yet have a stable release.
+  Pull the latest candidate from the [mc-supernode releases page](https://github.com/ethereum-optimism/optimism/releases?q=op-supernode).
   mc-node and mc-reth ship stable releases — track their respective release pages until this notice pins the exact activation versions.
 </Info>
 
@@ -86,7 +86,7 @@ The migration has four phases.
 Complete each one and verify it on testnet before the activation timestamp.
 Start the execution clients first, then the supernode — the supernode drives the ELs through their sync, because an EL has no way to know what chain head to target on its own.
 Light CLs come last, since they follow the supernode.
-Full per-flag reference for the supernode is in the [op-supernode configuration reference](/node-operators/reference/op-supernode-config); this notice walks through the testnet-specific setup.
+Full per-flag reference for the supernode is in the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config); this notice walks through the testnet-specific setup.
 
 The command examples in the steps are minimum viable configurations; they cover the flags required for the interop topology and nothing else.
 Layer your usual production flags (monitoring, logging, P2P tuning, RPC modules, resource limits) on top as your environment requires.
@@ -127,16 +127,16 @@ Layer your usual production flags (monitoring, logging, P2P tuning, RPC modules,
   Each Light CL connects to its EL with its own `--l2.jwt-secret` flag.
   </Step>
 
-  <Step title="Stand up op-supernode for both chains">
-  Run op-supernode with both chains in `--chains` (`11155420,1301`), a shared L1 RPC, and a shared beacon endpoint.
+  <Step title="Stand up mc-supernode for both chains">
+  Run mc-supernode with both chains in `--chains` (`11155420,1301`), a shared L1 RPC, and a shared beacon endpoint.
   The [example configuration](/node-operators/guides/configuration/supernode#example-configuration) in the supernode guide is written for exactly this dependency set (OP Sepolia plus Unichain Sepolia); use it as your starting point, and keep the engine kind set to `reth` for both chains since the fleet runs mc-reth.
   Follow the guide's recommendation to configure a beacon archiver fallback from the start, so a supernode that has been offline for an extended period can still recover pruned blobs.
 
-  For the full flag reference, see the [op-supernode configuration reference](/node-operators/reference/op-supernode-config); for recommendations, see the [supernode configuration guide](/node-operators/guides/configuration/supernode).
+  For the full flag reference, see the [mc-supernode configuration reference](/node-operators/reference/op-supernode-config); for recommendations, see the [supernode configuration guide](/node-operators/guides/configuration/supernode).
   </Step>
 
   <Step title="Migrate every mc-node in the fleet to Light CL">
-  On every mc-node, set `--l2.follow.source` to your op-supernode's per-chain RPC endpoint (the `/<chainID>` path prefix).
+  On every mc-node, set `--l2.follow.source` to your mc-supernode's per-chain RPC endpoint (the `/<chainID>` path prefix).
   This disables local derivation; the mc-node becomes a Light CL and inherits its safe and finalized view from the supernode.
 
   ```bash
@@ -183,7 +183,7 @@ None of them require interop to be active on either chain; they exercise the sup
 
 ### Confirm the supernode is hosting both chains
 
-Watch the supernode's logs using whatever you already use (`docker logs -f op-supernode`, `journalctl -fu op-supernode`, `kubectl logs -f op-supernode`, etc.).
+Watch the supernode's logs using whatever you already use (`docker logs -f mc-supernode`, `journalctl -fu mc-supernode`, `kubectl logs -f mc-supernode`, etc.).
 Each chain container tags its log lines with its `chain_id`, so a healthy supernode produces interleaved derivation lines for both chains.
 The most common line during catch-up is `"Advancing bq origin"` (the batch-queue is walking forward through L1):
 
@@ -217,16 +217,16 @@ If you scrape Prometheus, the equivalent gauge on a Light CL is `op_node_default
 
 ## Troubleshooting
 
-* **Safe head advances but RPC consumers report invalid blocks.** The mc-node isn't following an op-supernode — either `--l2.follow.source` is unset, or it points at a non-supernode source — so safe-head promotion skips cross-chain validation. Point `--l2.follow.source` at a supernode that derives both chains.
+* **Safe head advances but RPC consumers report invalid blocks.** The mc-node isn't following an mc-supernode — either `--l2.follow.source` is unset, or it points at a non-supernode source — so safe-head promotion skips cross-chain validation. Point `--l2.follow.source` at a supernode that derives both chains.
 * **Blobs missing for L1 blocks older than ~18 days.** The primary beacon node has pruned them. Configure `--l1.beacon-fallbacks` against a non-pruning beacon or an archiver service. See the [blob archiver guide](/node-operators/guides/management/blobs#configure-a-blob-archiver) for options.
 * **Light CL safe head lags the supernode by more than a few blocks.** Check the network path between Light CL and supernode (or supernode `proxyd`). The Light CL polls `optimism_syncStatus` over RPC; a high-latency or rate-limited path here directly delays safe-head propagation.
 
 ## Resources
 
 * [Interop explainer](/op-stack/interop/explainer) — how cross-chain messages and block safety work under interop.
-* [op-supernode explainer](/op-stack/interop/supernode) — what op-supernode is, why it exists, and how it pairs with Light CL.
+* [mc-supernode explainer](/op-stack/interop/supernode) — what mc-supernode is, why it exists, and how it pairs with Light CL.
 * [Supernode configuration guide](/node-operators/guides/configuration/supernode) — recommended settings and starter configuration.
-* [op-supernode configuration reference](/node-operators/reference/op-supernode-config) — full flag and environment-variable catalogue.
+* [mc-supernode configuration reference](/node-operators/reference/op-supernode-config) — full flag and environment-variable catalogue.
 * [Specialized mc-node topology notice](/notices/specialized-node-topology) — operator-facing pattern for running Light CL fleets behind a safe source.
 * [Interop reorg awareness](/op-stack/interop/reorg) — how the safety model handles equivocation and L1 reorgs.
 * [Cross-chain security measures](/op-stack/security/interop-security) — how the safety level for inbound cross-chain messages is configured at the chain level.

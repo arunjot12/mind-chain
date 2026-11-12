@@ -34,5 +34,5 @@ entrypoint:
   command: /usr/local/bin/kona-node
 
 annotations:
-  org.opencontainers.image.source: https://github.com/ethereum-optimism/optimism
+  org.opencontainers.image.source: https://github.com/arunjot12/mind-chain
   org.opencontainers.image.title: kona-node

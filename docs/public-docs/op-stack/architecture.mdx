@@ -95,7 +95,7 @@ The OP Stack is a set of separate services rather than one program.
 | [mc-batcher](/op-stack/components/mc-batcher) | Posts L2 transaction data to the DA layer | Operator | The safe head stops advancing; the chain cannot be derived |
 | [mc-proposer](/op-stack/components/mc-proposer) | Posts output roots (commitments to L2 state) to L1 | Operator, or anyone on a permissionless chain | No new withdrawals can be proven |
 | [mc-challenger](/op-stack/components/mc-challenger) | Disputes invalid proposals, defends valid ones | Operator, or anyone on a permissionless chain | Invalid proposals go unchallenged |
-| [op-conductor](/op-stack/components/op-conductor) | Leader election across a sequencer cluster | Operator (optional) | A sequencer failure stalls production until manual failover |
+| [mc-conductor](/op-stack/components/mc-conductor) | Leader election across a sequencer cluster | Operator (optional) | A sequencer failure stalls production until manual failover |
 | [mc-deployer](/op-stack/components/mc-deployer) | Deploys the chain's L1 contracts | Operator | No contracts on L1, so no chain |
 
 The consensus and execution clients run as a pair, one to one, connected over

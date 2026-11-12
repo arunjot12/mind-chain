@@ -3,8 +3,8 @@ package opnode
 import (
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/op-service/log"
+	"github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-service/log"
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
 )

@@ -1,4 +1,4 @@
-name: Install pinned Forge from Optimism's mc-deployer version metadata.
+name: Install pinned Forge from mc-deployer's version metadata.
 
 needs:
   packages:

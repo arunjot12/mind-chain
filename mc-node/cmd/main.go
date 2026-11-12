@@ -7,21 +7,21 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	opnode "github.com/ethereum-optimism/optimism/mc-node"
-	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
-	"github.com/ethereum-optimism/optimism/mc-node/cmd/genesis"
-	"github.com/ethereum-optimism/optimism/mc-node/cmd/networks"
-	"github.com/ethereum-optimism/optimism/mc-node/cmd/p2p"
-	"github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/mc-node/metrics"
-	"github.com/ethereum-optimism/optimism/mc-node/node"
-	"github.com/ethereum-optimism/optimism/mc-node/version"
-	opservice "github.com/ethereum-optimism/optimism/op-service"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/ctxinterrupt"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/log/logcli"
-	"github.com/ethereum-optimism/optimism/op-service/metrics/doc"
+	opnode "github.com/mindchain/mind-chain/mc-node"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-node/cmd/genesis"
+	"github.com/mindchain/mind-chain/mc-node/cmd/networks"
+	"github.com/mindchain/mind-chain/mc-node/cmd/p2p"
+	"github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-node/metrics"
+	"github.com/mindchain/mind-chain/mc-node/node"
+	"github.com/mindchain/mind-chain/mc-node/version"
+	opservice "github.com/mindchain/mind-chain/mc-service"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/ctxinterrupt"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/log/logcli"
+	"github.com/mindchain/mind-chain/mc-service/metrics/doc"
 )
 
 var (
@@ -41,8 +41,8 @@ func main() {
 	app.Version = VersionWithMeta
 	app.Flags = cliapp.ProtectFlags(flags.Flags)
 	app.Name = "mc-node"
-	app.Usage = "Optimism Rollup Node"
-	app.Description = "The Optimism Rollup Node derives L2 block inputs from L1 data and drives an external L2 Execution Engine to build a L2 chain."
+	app.Usage = "Mind Chain Rollup Node"
+	app.Description = "The Mind Chain Rollup Node derives L2 block inputs from L1 data and drives an external L2 Execution Engine to build a L2 chain."
 	app.Action = cliapp.LifecycleCmd(RollupNodeMain)
 	app.Commands = []*cli.Command{
 		{

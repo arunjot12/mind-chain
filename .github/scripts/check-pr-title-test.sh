@@ -31,7 +31,7 @@ expect pass 'docs: add span batches how-to'
 expect pass 'ci: shard cannon tests'
 expect pass 'all: update license headers'
 expect pass 'rust/kona: clean up derive pipeline'
-expect pass 'op-e2e: cover deposit-only blocks'
+expect pass 'mc-e2e: cover deposit-only blocks'
 expect pass 'Revert "mc-node: handle unsafe head reorgs"'
 
 expect fail ''

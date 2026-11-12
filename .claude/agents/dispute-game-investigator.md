@@ -17,7 +17,7 @@ The full methodology lives in **[docs/ai/dispute-game-investigation.md](../../do
 1. Identify the actors (proposer / challengers / our node), recalling that a signer
    may be a key pool and anyone can move on any claim.
 2. Enumerate games/claims with `mc-challenger list-games`/`list-claims --format json`.
-3. Establish the canonical output root with `op-chain-ops` `check-output-root` /
+3. Establish the canonical output root with `mc-chain-ops` `check-output-root` /
    `check-super-root` (EL-only, work against public nodes).
 4. Classify every claim correct-vs-invalid via the trace-index/clamping math.
 5. Diagnose the responsible mc-node with `mc-challenger game-proposal-outputs`

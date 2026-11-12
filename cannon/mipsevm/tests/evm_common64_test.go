@@ -5,10 +5,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded"
-	mtutil "github.com/ethereum-optimism/optimism/cannon/mipsevm/multithreaded/testutil"
-	"github.com/ethereum-optimism/optimism/cannon/mipsevm/testutil"
+	"github.com/mindchain/mind-chain/cannon/mipsevm"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded"
+	mtutil "github.com/mindchain/mind-chain/cannon/mipsevm/multithreaded/testutil"
+	"github.com/mindchain/mind-chain/cannon/mipsevm/testutil"
 )
 
 func TestEVM_SingleStep_Operators64(t *testing.T) {

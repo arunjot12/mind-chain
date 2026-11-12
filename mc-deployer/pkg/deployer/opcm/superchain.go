@@ -3,9 +3,9 @@ package opcm
 import (
 	"fmt"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/forge"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/forge"
 )
 
 // DeploySuperchainInput must mirror the Solidity DeploySuperchain.s.sol input

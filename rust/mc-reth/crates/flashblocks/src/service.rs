@@ -12,7 +12,7 @@ use futures_util::{FutureExt, Stream, StreamExt};
 use metrics::{Counter, Gauge, Histogram};
 use op_alloy_rpc_types_engine::OpFlashblockPayloadBase;
 use reth_metrics::Metrics;
-use reth_optimism_evm::ConfigurePostExecEvm;
+use reth_mind_chain_evm::ConfigurePostExecEvm;
 use reth_primitives_traits::{AlloyBlockHeader, BlockTy, HeaderTy, NodePrimitives, ReceiptTy};
 use reth_storage_api::{BlockReaderIdExt, StateProviderFactory};
 use reth_tasks::TaskExecutor;

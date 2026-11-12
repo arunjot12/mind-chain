@@ -1,7 +1,7 @@
 package rollup
 
 import (
-	"github.com/ethereum-optimism/optimism/op-service/event"
+	"github.com/mindchain/mind-chain/mc-service/event"
 )
 
 // L1TemporaryErrorEvent identifies a temporary issue with the L1 data.

@@ -1,12 +1,12 @@
 package helpers
 
 import (
-	"github.com/ethereum-optimism/optimism/op-e2e/actions/helpers"
-	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils/fakebeacon"
-	"github.com/ethereum-optimism/optimism/op-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/log"
 	"github.com/ethereum/go-ethereum/params"
+	"github.com/mindchain/mind-chain/mc-e2e/actions/helpers"
+	"github.com/mindchain/mind-chain/mc-e2e/e2eutils/fakebeacon"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/log"
 	"github.com/stretchr/testify/require"
 )
 
@@ -22,7 +22,7 @@ import (
 //
 // Only step 0 is proven. Steps 1..StepsPerTimestamp-2 are padding that the client short-circuits,
 // and the consolidation step is covered against a real dependency set by the ConsolidateStep cases
-// in op-acceptance-tests' superfaultproofs suite; re-proving it for every transition here would
+// in mc-acceptance-tests' superfaultproofs suite; re-proving it for every transition here would
 // double the suite's kona-host invocations for a single-chain no-op.
 func WithSuperDefaults(t helpers.Testing, l2ClaimBlockNum uint64, l2 *helpers.L2Verifier, l2Eng *helpers.L2Engine) FixtureInputParam {
 	return func(f *FixtureInputs) {

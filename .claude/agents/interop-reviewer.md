@@ -1,6 +1,6 @@
 ---
 name: interop-reviewer
-description: "Reviews OP Stack interop behavior against the protocol specification. It covers message extraction and validation; dependency-set membership, ordering, timing, and expiry; cycle detection; safe and cross-unsafe promotion; invalidation, rewind, and replacement; Lagoon activation and dependency-set upgrades. Use for any change that can alter these behaviors, wherever the code is. A change in op-interop-filter, op-core/interop, op-supernode interop activity, kona-interop, or kona-proof-interop is a strong signal. Also use for a Kona release that contains such changes. Do not use for test, metrics, log, or CLI-only changes."
+description: "Reviews OP Stack interop behavior against the protocol specification. It covers message extraction and validation; dependency-set membership, ordering, timing, and expiry; cycle detection; safe and cross-unsafe promotion; invalidation, rewind, and replacement; Lagoon activation and dependency-set upgrades. Use for any change that can alter these behaviors, wherever the code is. A change in mc-interop-filter, mc-core/interop, mc-supernode interop activity, kona-interop, or kona-proof-interop is a strong signal. Also use for a Kona release that contains such changes. Do not use for test, metrics, log, or CLI-only changes."
 model: opus
 ---
 

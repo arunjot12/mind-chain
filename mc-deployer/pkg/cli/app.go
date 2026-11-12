@@ -1,15 +1,15 @@
 package cli
 
 import (
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/bootstrap"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/clean"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/inspect"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/manage"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/validate"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/verify"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/bootstrap"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/clean"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/inspect"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/manage"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/validate"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/verify"
 
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
 	"github.com/urfave/cli/v2"
 )
 

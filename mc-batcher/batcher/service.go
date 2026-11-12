@@ -10,23 +10,23 @@ import (
 
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	altda "github.com/ethereum-optimism/optimism/op-alt-da"
-	"github.com/ethereum-optimism/optimism/mc-batcher/config"
-	"github.com/ethereum-optimism/optimism/mc-batcher/flags"
-	"github.com/ethereum-optimism/optimism/mc-batcher/metrics"
-	"github.com/ethereum-optimism/optimism/mc-batcher/rpc"
-	"github.com/ethereum-optimism/optimism/mc-node/params"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/cliapp"
-	"github.com/ethereum-optimism/optimism/op-service/dial"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/httputil"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	opmetrics "github.com/ethereum-optimism/optimism/op-service/metrics"
-	"github.com/ethereum-optimism/optimism/op-service/oppprof"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
-	"github.com/ethereum-optimism/optimism/op-service/slices"
-	"github.com/ethereum-optimism/optimism/op-service/txmgr"
+	altda "github.com/mindchain/mind-chain/mc-alt-da"
+	"github.com/mindchain/mind-chain/mc-batcher/config"
+	"github.com/mindchain/mind-chain/mc-batcher/flags"
+	"github.com/mindchain/mind-chain/mc-batcher/metrics"
+	"github.com/mindchain/mind-chain/mc-batcher/rpc"
+	"github.com/mindchain/mind-chain/mc-node/params"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/cliapp"
+	"github.com/mindchain/mind-chain/mc-service/dial"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/httputil"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/slices"
+	"github.com/mindchain/mind-chain/mc-service/txmgr"
 )
 
 var ErrAlreadyStopped = errors.New("already stopped")
@@ -52,7 +52,7 @@ type BatcherConfig struct {
 }
 
 // BatcherService represents a full batch-submitter instance and its resources,
-// and conforms to the op-service CLI Lifecycle interface.
+// and conforms to the mc-service CLI Lifecycle interface.
 type BatcherService struct {
 	closeApp         context.CancelCauseFunc
 	Log              log.Logger
@@ -249,8 +249,8 @@ func (bs *BatcherService) initRollupConfig(ctx context.Context) error {
 	if err := bs.RollupConfig.Check(); err != nil {
 		return fmt.Errorf("invalid rollup config: %w", err)
 	}
-	// No chain-ID→name map: the batcher deliberately keeps mc-node/chaincfg (and with it the
-	// superchain-configs bundle) out of its build closure — see TestBundleReachability.
+	// No chain-ID→name map: the batcher deliberately keeps mc-node/chaincfg out of its
+	// build closure.
 	// l2_chain_id identifies the chain in the banner.
 	bs.RollupConfig.LogDescription(bs.Log, nil)
 	return nil

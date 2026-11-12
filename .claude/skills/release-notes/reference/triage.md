@@ -7,12 +7,12 @@ For the Go services:
 
 ```
 --include-path "<component>/**/*"  --include-path "go.*"
---include-path "op-core/**/*"      --include-path "op-service/**/*"
+--include-path "mc-core/**/*"      --include-path "mc-service/**/*"
 ```
 
-`op-core/` and `op-service/` hold code shared by every Go service, by the test harnesses
-(`op-devstack`, `op-e2e`, `op-acceptance-tests`) and by tools that ship separately
-(`mc-deployer`, `op-chain-ops`). So a draft picks up many commits that never reach the
+`mc-core/` and `mc-service/` hold code shared by every Go service, by the test harnesses
+(`mc-devstack`, `mc-e2e`, `mc-acceptance-tests`) and by tools that ship separately
+(`mc-deployer`, `mc-chain-ops`). So a draft picks up many commits that never reach the
 binary — the mc-batcher v1.16.13 draft listed 21 PRs, of which 8 touched nothing mc-batcher
 compiles. The `kona-*` components and `op-zk-proposer` filter on all of `rust/kona/**`,
 `rust/op-alloy/**` and `rust/alloy-op*/**`, so a kona-node draft picks up kona-client,
@@ -21,8 +21,8 @@ kona-host and kona-sp1 work too.
 ## The test that matters
 
 **Not** "did this PR touch `<component>/`". Shared code is compiled into the binary, so a
-change under `op-service/` or `op-core/` can absolutely change how the component behaves —
-`op-service/txmgr`, `op-service/bgpo` and `op-core/fees` all reach mc-batcher.
+change under `mc-service/` or `mc-core/` can absolutely change how the component behaves —
+`mc-service/txmgr`, `mc-service/bgpo` and `mc-core/fees` all reach mc-batcher.
 
 The right question: **does this PR change code compiled into this binary, and does that
 change alter behaviour an operator would notice?** Downstream Go importers do not count —
@@ -64,8 +64,8 @@ excluded by path, so `LINKED` Rust rows still need this check by hand.
 
 **Linkage proves the package is compiled in, not that the changed function is on the
 component's runtime path.** This is the trap that survives the mechanical pass.
-`op-core/fees` is genuinely linked into mc-batcher, but the Jovian DA-footprint work
-(#22163, #22219) is reached from the `op-chain-ops/cmd/check-*` tools, not from anything the
+`mc-core/fees` is genuinely linked into mc-batcher, but the Jovian DA-footprint work
+(#22163, #22219) is reached from the `mc-chain-ops/cmd/check-*` tools, not from anything the
 batcher runs — both were cut with the note "doesn't affect the batcher". Similarly,
 `mc-node/rollup/derive` is linked into mc-batcher, but a derivation-only change there is not
 batcher-facing. Ask what the component does, not just what it links:
@@ -92,9 +92,9 @@ grep -rn "<ChangedSymbol>" <component>/ --include='*.go' | grep -v _test.go
   downstream importers** of the monorepo as a Go module — see house-style.md for why that is
   not a user-facing surface
 
-**Keep a cross-component PR** when the component embeds the other one. op-supernode runs
+**Keep a cross-component PR** when the component embeds the other one. mc-supernode runs
 virtual op-nodes, so mc-node's follow-source reorg metrics belong in the supernode notes even
-though the PR touches no `op-supernode/` path.
+though the PR touches no `mc-supernode/` path.
 
 **A change confined to an unreleased feature is cut entirely.** Keep it only if it also
 reaches a path that is live today. `house-style.md` has the liveness checks.
@@ -134,7 +134,7 @@ gets an entry in each note. The mc-deployer note links to the op-contracts relea
 not repeat its changes.
 
 For op-contracts, `LINKED` means a contract under `src/` or the candidate L2 upgrade bundle
-changed. Keep every bundle change: `op-core/nuts` snapshots it for the fork, and mc-node and
+changed. Keep every bundle change: `mc-core/nuts` snapshots it for the fork, and mc-node and
 kona execute it. Drop a change that only bumps a contract's version. `DEPS` means
 `foundry.toml` or a `lib/` pin changed; read each one, because it can change the deployed
 bytecode.
@@ -159,7 +159,7 @@ Renovate/dependabot bumps with no security label: drop.
 
 Two published releases, checked against their regenerated raw drafts:
 
-- **`mc-node/v1.19.4`** — 32 PRs raw, 15 published. Dropped: op-dispute-mon and mc-challenger
+- **`mc-node/v1.19.4`** — 32 PRs raw, 15 published. Dropped: mc-dispute-mon and mc-challenger
   work, kona changes, dependabot bumps, test fixes, a stale-TODO removal, two dev-feature
   toggle removals.
 - **`mc-batcher/v1.16.12`** — 23 PRs raw, 1 published. Almost the entire draft was other
@@ -172,7 +172,7 @@ GITHUB_TOKEN=$(gh auth token) mise exec -- just release-notes mc-node v1.19.3 v1
 ```
 
 The v1.19.5 train is the closest reference for current practice. Surviving PR counts:
-mc-node 10 of 30, mc-batcher 6 of 21, op-supernode 8 of 24, kona-node 6 of 17.
+mc-node 10 of 30, mc-batcher 6 of 21, mc-supernode 8 of 24, kona-node 6 of 17.
 
 ## Drafts with more than one section
 

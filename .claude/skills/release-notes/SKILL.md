@@ -78,9 +78,7 @@ union, reading the shipping units from `just release-paths`. mc-challenger cover
 mc-challenger and cannon binaries plus the Rust kona-host, so a kona-only change is `LINKED`,
 not `--`.
 
-If every Go row comes back `?`, `go list` failed. In a fresh worktree the usual cause is the
-missing generated `op-core/superchain/superchain-configs.zip`; run
-`mise exec -- just build-superchain-go` and run the script again.
+If every Go row comes back `?`, `go list` failed; run `go list ./...` to see why.
 
 ## 4. Triage
 
@@ -96,7 +94,7 @@ Keep the raw bullets for cut PRs as HTML comments at the bottom of the draft, ea
 short reason, so a reviewer can reinstate one in a single edit:
 
 ```markdown
-<!--* op-core/fees: add Jovian DA-footprint calculation (#22163) — doesn't affect the batcher-->
+<!--* mc-core/fees: add Jovian DA-footprint calculation (#22163) — doesn't affect the batcher-->
 ```
 
 Delete them before publishing, unless the release manager prefers to keep them.

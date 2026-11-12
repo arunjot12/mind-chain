@@ -1,3 +1,3 @@
-module github.com/ethereum-optimism/optimism/cannon/testdata/diff-hello
+module github.com/mindchain/mind-chain/cannon/testdata/diff-hello
 
 go 1.24.0

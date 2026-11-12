@@ -10,7 +10,7 @@ comment:
     - kona-unit
 
 ignore:
-  - "op-e2e"
+  - "mc-e2e"
   - "**/*.t.sol"
   - "packages/contracts-bedrock/test/**/*.sol"
   - "packages/contracts-bedrock/scripts/**/*.sol"

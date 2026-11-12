@@ -10,15 +10,15 @@ exclude.workspace = true
 
 [dependencies]
 reth-cli-util.workspace = true
-reth-optimism-cli.workspace = true
-reth-optimism-rpc.workspace = true
-reth-optimism-node.workspace = true
-reth-optimism-chainspec.workspace = true
-reth-optimism-consensus.workspace = true
-reth-optimism-evm.workspace = true
-reth-optimism-payload-builder.workspace = true
-reth-optimism-primitives.workspace = true
-reth-optimism-forks.workspace = true
+reth-mind-chain-cli.workspace = true
+reth-mind-chain-rpc.workspace = true
+reth-mind-chain-node.workspace = true
+reth-mind-chain-chainspec.workspace = true
+reth-mind-chain-consensus.workspace = true
+reth-mind-chain-evm.workspace = true
+reth-mind-chain-payload-builder.workspace = true
+reth-mind-chain-primitives.workspace = true
+reth-mind-chain-forks.workspace = true
 reth-node-builder.workspace = true
 reth-node-core.workspace = true
 reth-db.workspace = true
@@ -35,44 +35,44 @@ tempfile.workspace = true
 workspace = true
 
 [features]
-default = ["jemalloc", "otlp", "reth-optimism-evm/portable", "js-tracer", "keccak-cache-global", "asm-keccak"]
+default = ["jemalloc", "otlp", "reth-mind-chain-evm/portable", "js-tracer", "keccak-cache-global", "asm-keccak"]
 
 otlp = [
-    "reth-optimism-cli/otlp",
+    "reth-mind-chain-cli/otlp",
     "reth-node-core/otlp",
 ]
 
 js-tracer = [
-    "reth-optimism-node/js-tracer",
+    "reth-mind-chain-node/js-tracer",
     "reth-node-builder/js-tracer",
 ]
 
 jemalloc = [
     "reth-cli-util/jemalloc",
-    "reth-optimism-cli/jemalloc",
+    "reth-mind-chain-cli/jemalloc",
     "reth-node-core/jemalloc",
 ]
-jemalloc-prof = ["jemalloc", "reth-cli-util/jemalloc-prof", "reth-optimism-cli/jemalloc-prof"]
-jemalloc-symbols = ["jemalloc-prof", "reth-optimism-cli/jemalloc-symbols"]
+jemalloc-prof = ["jemalloc", "reth-cli-util/jemalloc-prof", "reth-mind-chain-cli/jemalloc-prof"]
+jemalloc-symbols = ["jemalloc-prof", "reth-mind-chain-cli/jemalloc-symbols"]
 tracy-allocator = ["reth-cli-util/tracy-allocator", "tracy"]
 tracy = [
-    "reth-optimism-cli/tracy",
+    "reth-mind-chain-cli/tracy",
     "reth-node-core/tracy",
 ]
 
 asm-keccak = [
-    "reth-optimism-cli/asm-keccak",
-    "reth-optimism-node/asm-keccak",
+    "reth-mind-chain-cli/asm-keccak",
+    "reth-mind-chain-node/asm-keccak",
     "reth-node-core/asm-keccak",
 ]
 keccak-cache-global = [
-    "reth-optimism-cli/keccak-cache-global",
-    "reth-optimism-node/keccak-cache-global",
+    "reth-mind-chain-cli/keccak-cache-global",
+    "reth-mind-chain-node/keccak-cache-global",
     "reth-node-core/keccak-cache-global",
 ]
 dev = [
-    "reth-optimism-cli/dev",
-    "reth-optimism-primitives/arbitrary",
+    "reth-mind-chain-cli/dev",
+    "reth-mind-chain-primitives/arbitrary",
 ]
 
 min-error-logs = [

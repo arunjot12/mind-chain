@@ -1,5 +1,5 @@
 use futures_util::stream::StreamExt;
-use reth_optimism_flashblocks::WsFlashBlockStream;
+use reth_mind_chain_flashblocks::WsFlashBlockStream;
 
 #[tokio::test]
 #[ignore = "depends on external service availability"]

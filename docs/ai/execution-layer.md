@@ -15,7 +15,7 @@ Stack carries on top of upstream Ethereum execution.
   proof binary minimal. See [fault-proofs.md](fault-proofs.md).
 - **op-geth** is a **deprecated** execution-layer client (`ethereum-optimism/op-geth`, a fork
   of go-ethereum). It is being removed in favor of mc-reth, and OP-Stack-specific code is
-  being extracted out of op-geth into `op-core/*` so the monorepo can depend on upstream
+  being extracted out of op-geth into `mc-core/*` so the monorepo can depend on upstream
   go-ethereum directly. Only read [opgeth-decoupling.md](opgeth-decoupling.md) when doing
   op-geth-decoupling / op-core-extraction work — it is not needed for general execution-layer
   development.

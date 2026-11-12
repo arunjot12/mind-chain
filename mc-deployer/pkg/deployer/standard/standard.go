@@ -3,18 +3,13 @@ package standard
 import (
 	_ "embed"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"reflect"
 	"strconv"
-	"strings"
-	"sync"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/genesis"
-	"github.com/ethereum-optimism/optimism/op-core/forks"
-	opparams "github.com/ethereum-optimism/optimism/op-core/params"
-	"github.com/ethereum-optimism/optimism/op-core/superchain"
-
-	"github.com/ethereum-optimism/superchain-registry/validation"
+	"github.com/mindchain/mind-chain/mc-chain-ops/genesis"
+	"github.com/mindchain/mind-chain/mc-core/forks"
+	"github.com/mindchain/mind-chain/mc-core/superchain"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -75,37 +70,23 @@ var GovernanceTokenOwner = common.HexToAddress("0xDeaDDEaDDeAdDeAdDEAdDEaddeAddE
 // The same-sender check keys off this value to skip when no real deployer is set.
 var PlaceholderAddress = common.Address{0x01}
 
-func L1VersionsFor(chainID uint64) (validation.Versions, error) {
-	switch chainID {
-	case 1:
-		return validation.StandardVersionsMainnet, nil
-	case 11155111:
-		return validation.StandardVersionsSepolia, nil
-	default:
-		return nil, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
+// ErrNoStandardSuperchain is returned by every lookup of the upstream "standard"
+// Superchain values (Optimism's shared contracts, roles and contract-manager
+// releases on Ethereum mainnet and Sepolia). Mind Chain does not ship the upstream
+// superchain-registry, so standard intents are unsupported: use a custom intent
+// with Mind Chain's own roles and contract addresses.
+var ErrNoStandardSuperchain = errors.New("standard Superchain values are not available in Mind Chain; use a custom intent")
+
+func noStandardSuperchain(chainID uint64) error {
+	return fmt.Errorf("%w (L1 chain ID %d)", ErrNoStandardSuperchain, chainID)
 }
 
 func GuardianAddressFor(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.Guardian), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.Guardian), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
+	return common.Address{}, noStandardSuperchain(chainID)
 }
 
 func ChallengerAddressFor(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.Challenger), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.Challenger), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
+	return common.Address{}, noStandardSuperchain(chainID)
 }
 
 const (
@@ -177,23 +158,7 @@ func SuperchainFor(chainID uint64) (superchain.Superchain, error) {
 }
 
 func OPCMImplAddressFor(chainID uint64, tag string) (common.Address, error) {
-	versionsData, err := L1VersionsFor(chainID)
-	if err != nil {
-		return common.Address{}, fmt.Errorf("unsupported chainID: %d", chainID)
-	}
-	versionData, ok := versionsData[validation.Semver(tag)]
-	if !ok {
-		return common.Address{}, fmt.Errorf("unsupported tag for chainID %d: %s", chainID, tag)
-	}
-	if versionData.OPContractsManager.Address != nil {
-		// op-contracts/v1.8.0 and earlier use proxied opcm
-		return common.Address(*versionData.OPContractsManager.Address), nil
-	}
-	if versionData.OPContractsManager.ImplementationAddress != nil {
-		// op-contracts/v2.0.0-rc.1 and later use non-proxied opcm
-		return common.Address(*versionData.OPContractsManager.ImplementationAddress), nil
-	}
-	return common.Address{}, fmt.Errorf("OPContractsManager address is nil for tag %s", tag)
+	return common.Address{}, fmt.Errorf("OPCM for tag %s: %w", tag, noStandardSuperchain(chainID))
 }
 
 // SuperchainProxyAdminAddrFor returns the address of the Superchain ProxyAdmin for the given chain ID.
@@ -211,74 +176,25 @@ func SuperchainProxyAdminAddrFor(chainID uint64) (common.Address, error) {
 }
 
 func L1ProxyAdminOwner(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.L1ProxyAdminOwner), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.L1ProxyAdminOwner), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
+	return common.Address{}, noStandardSuperchain(chainID)
 }
 
 func L2ProxyAdminOwner(chainID uint64) (common.Address, error) {
-	switch chainID {
-	case 1:
-		return common.Address(validation.StandardConfigRolesMainnet.L2ProxyAdminOwner), nil
-	case 11155111:
-		return common.Address(validation.StandardConfigRolesSepolia.L2ProxyAdminOwner), nil
-	default:
-		return common.Address{}, fmt.Errorf("unsupported chain ID: %d", chainID)
-	}
+	return common.Address{}, noStandardSuperchain(chainID)
 }
+
+// DefaultHardfork is the fork activated at genesis by default. It was previously
+// read from OP Mainnet's schedule in the superchain-registry; it is pinned here
+// because Mind Chain does not ship that registry. Raise it when adopting a newer fork.
+const DefaultHardfork = forks.Karst
 
 // DefaultHardforkSchedule is used to determine which hardforks should be activated by default.
-// It activates, at genesis, the most recent fork that has an activation timestamp scheduled on
-// OP Mainnet.
+// It activates DefaultHardfork, and every fork before it, at genesis.
 func DefaultHardforkSchedule() *genesis.UpgradeScheduleDeployConfig {
 	sched := &genesis.UpgradeScheduleDeployConfig{}
-	sched.ActivateForkAtGenesis(defaultHardfork())
+	sched.ActivateForkAtGenesis(DefaultHardfork)
 
 	return sched
-}
-
-var defaultHardfork = sync.OnceValue(func() forks.Name {
-	chain, err := superchain.GetChain(opparams.OPMainnetChainID)
-	if err != nil {
-		panic(fmt.Errorf("get op mainnet chain: %w", err))
-	}
-	chainConfig, err := chain.Config()
-	if err != nil {
-		panic(fmt.Errorf("load op mainnet chain config: %w", err))
-	}
-	return latestScheduledMainlineFork(chainConfig.Hardforks)
-})
-
-func latestScheduledMainlineFork(config superchain.HardforkConfig) forks.Name {
-	configValue := reflect.ValueOf(config)
-	mainlineForks := forks.From(forks.Canyon)
-	for i := len(mainlineForks) - 1; i >= 0; i-- {
-		fork := mainlineForks[i]
-		// HardforkConfig fields follow the <ForkName>Time convention. Looking them up
-		// from forks.All keeps this selection current when a new mainline fork is added.
-		field := configValue.FieldByNameFunc(func(name string) bool {
-			return strings.EqualFold(strings.TrimSuffix(name, "Time"), string(fork))
-		})
-		if !field.IsValid() {
-			panic(fmt.Sprintf("mainline fork %q is missing from superchain.HardforkConfig", fork))
-		}
-		activationTime, ok := field.Interface().(*uint64)
-		if !ok {
-			panic(fmt.Sprintf("superchain.HardforkConfig field for %q must be *uint64", fork))
-		}
-		if activationTime != nil {
-			return fork
-		}
-	}
-
-	// Regolith is active at genesis for every registry-backed rollup config, but its
-	// activation is implicit and is therefore not represented in HardforkConfig.
-	return forks.Regolith
 }
 
 func mustHexBigFromHex(hex string) *hexutil.Big {

@@ -79,13 +79,6 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 # NOTE: the Dockerfile.dockerignore file effectively describes all dependencies
 COPY . /app
 
-# Most op-stack-go services embed op-core/superchain/superchain-configs.zip via
-# //go:embed. It's gitignored and regenerated from the superchain-registry
-# submodule, whose data is copied into the build context (see Dockerfile.dockerignore).
-# Build it here in the shared builder stage — git-free, verifying against the
-# committed .sha256 — so every Go build stage below links it.
-RUN bash op-core/superchain/sync-superchain.sh
-
 # We avoid copying the full .git dir into the build for just some metadata.
 # Instead, specify:
 # --build-arg GIT_COMMIT=$(git rev-parse HEAD)
@@ -130,7 +123,7 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 FROM --platform=$BUILDPLATFORM builder AS op-wheel-builder
 ARG OP_WHEEL_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-wheel && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_WHEEL_VERSION" just op-wheel
+  cd mc-wheel && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_WHEEL_VERSION" just mc-wheel
 
 FROM --platform=$BUILDPLATFORM builder AS mc-node-builder
 ARG OP_NODE_VERSION=v0.0.0
@@ -145,7 +138,7 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 FROM --platform=$BUILDPLATFORM builder AS op-dispute-mon-builder
 ARG OP_DISPUTE_MON_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-dispute-mon && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DISPUTE_MON_VERSION" just op-dispute-mon
+  cd mc-dispute-mon && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DISPUTE_MON_VERSION" just mc-dispute-mon
 
 FROM --platform=$BUILDPLATFORM builder AS mc-batcher-builder
 ARG OP_BATCHER_VERSION=v0.0.0
@@ -160,26 +153,26 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 FROM --platform=$BUILDPLATFORM builder AS op-conductor-builder
 ARG OP_CONDUCTOR_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-conductor && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_CONDUCTOR_VERSION" just op-conductor
+  cd mc-conductor && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_CONDUCTOR_VERSION" just mc-conductor
 
 FROM --platform=$BUILDPLATFORM builder AS da-server-builder
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-alt-da && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE just da-server
+  cd mc-alt-da && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE just da-server
 
 FROM --platform=$BUILDPLATFORM builder AS op-supernode-builder
 ARG OP_SUPERNODE_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-supernode && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_SUPERNODE_VERSION" just op-supernode
+  cd mc-supernode && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_SUPERNODE_VERSION" just mc-supernode
 
 FROM --platform=$BUILDPLATFORM builder AS op-interop-filter-builder
 ARG OP_INTEROP_FILTER_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-interop-filter && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_INTEROP_FILTER_VERSION" just op-interop-filter
+  cd mc-interop-filter && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_INTEROP_FILTER_VERSION" just mc-interop-filter
 
 FROM --platform=$BUILDPLATFORM builder AS op-test-sequencer-builder
 ARG OP_TEST_SEQUENCER_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-test-sequencer && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_TEST_SEQUENCER_VERSION" just op-test-sequencer
+  cd mc-test-sequencer && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_TEST_SEQUENCER_VERSION" just mc-test-sequencer
 
 # Compile contracts in a glibc-based image (solc requires glibc, crashes on Alpine musl).
 # Uses BUILDPLATFORM so it runs natively (no QEMU). Contract artifacts are platform-independent.
@@ -242,19 +235,19 @@ RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache
 FROM --platform=$BUILDPLATFORM builder AS op-dripper-builder
 ARG OP_DRIPPER_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
-  cd op-dripper && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DRIPPER_VERSION" just op-dripper
+  cd mc-dripper && GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_DRIPPER_VERSION" just mc-dripper
 
 FROM --platform=$BUILDPLATFORM builder AS op-faucet-builder
 ARG OP_FAUCET_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_FAUCET_VERSION" \
-  just op-faucet/op-faucet
+  just mc-faucet/mc-faucet
 
 FROM --platform=$BUILDPLATFORM builder AS op-interop-mon-builder
 ARG OP_INTEROP_MON_VERSION=v0.0.0
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build \
   GOOS=$TARGETOS GOARCH=$TARGETARCH GITCOMMIT=$GIT_COMMIT GITDATE=$GIT_DATE VERSION="$OP_INTEROP_MON_VERSION" \
-  just op-interop-mon/op-interop-mon
+  just mc-interop-mon/mc-interop-mon
 
 # The Rust version must match rust/rust-toolchain.toml. We don't use "latest" to ensure reproducibility
 FROM --platform=$BUILDPLATFORM rust:1.95 AS kona-host-builder
@@ -271,8 +264,8 @@ RUN apt-get -o Acquire::Retries=8 update && apt-get -o Acquire::Retries=8 instal
 # Copy the entire rust workspace since kona depends on sibling crates (op-alloy, alloy-op-evm, etc.)
 COPY ./rust /rust
 # kona-hardforks build.rs probes ancestor paths for the embedded NUT bundle JSON.
-# Keep op-core as a sibling of /rust so Docker builds see the monorepo layout.
-COPY ./op-core/nuts/bundles /op-core/nuts/bundles
+# Keep mc-core as a sibling of /rust so Docker builds see the monorepo layout.
+COPY ./mc-core/nuts/bundles /mc-core/nuts/bundles
 WORKDIR /rust
 # Map TARGETARCH to Rust target triple, install it, and build
 RUN --mount=type=cache,target=/usr/local/cargo/registry --mount=type=cache,target=/rust/target \
@@ -293,8 +286,8 @@ CMD ["cannon"]
 
 FROM $TARGET_BASE_IMAGE AS op-wheel-target
 USER 0
-COPY --from=op-wheel-builder /app/op-wheel/bin/op-wheel /usr/local/bin/
-CMD ["op-wheel"]
+COPY --from=op-wheel-builder /app/mc-wheel/bin/mc-wheel /usr/local/bin/
+CMD ["mc-wheel"]
 
 FROM $TARGET_BASE_IMAGE AS mc-node-target
 USER 0
@@ -322,8 +315,8 @@ CMD ["mc-challenger"]
 
 FROM $TARGET_BASE_IMAGE AS op-dispute-mon-target
 USER 0
-COPY --from=op-dispute-mon-builder /app/op-dispute-mon/bin/op-dispute-mon /usr/local/bin/
-CMD ["op-dispute-mon"]
+COPY --from=op-dispute-mon-builder /app/mc-dispute-mon/bin/mc-dispute-mon /usr/local/bin/
+CMD ["mc-dispute-mon"]
 
 FROM $TARGET_BASE_IMAGE AS mc-batcher-target
 USER 0
@@ -337,28 +330,28 @@ CMD ["mc-proposer"]
 
 FROM $TARGET_BASE_IMAGE AS op-conductor-target
 USER 0
-COPY --from=op-conductor-builder /app/op-conductor/bin/op-conductor /usr/local/bin/
-CMD ["op-conductor"]
+COPY --from=op-conductor-builder /app/mc-conductor/bin/mc-conductor /usr/local/bin/
+CMD ["mc-conductor"]
 
 FROM $TARGET_BASE_IMAGE AS da-server-target
 USER 0
-COPY --from=da-server-builder /app/op-alt-da/bin/da-server /usr/local/bin/
+COPY --from=da-server-builder /app/mc-alt-da/bin/da-server /usr/local/bin/
 CMD ["da-server"]
 
 FROM $TARGET_BASE_IMAGE AS op-supernode-target
 USER 0
-COPY --from=op-supernode-builder /app/op-supernode/bin/op-supernode /usr/local/bin/
-CMD ["op-supernode"]
+COPY --from=op-supernode-builder /app/mc-supernode/bin/mc-supernode /usr/local/bin/
+CMD ["mc-supernode"]
 
 FROM $TARGET_BASE_IMAGE AS op-interop-filter-target
 USER 0
-COPY --from=op-interop-filter-builder /app/op-interop-filter/bin/op-interop-filter /usr/local/bin/
-CMD ["op-interop-filter"]
+COPY --from=op-interop-filter-builder /app/mc-interop-filter/bin/mc-interop-filter /usr/local/bin/
+CMD ["mc-interop-filter"]
 
 FROM $TARGET_BASE_IMAGE AS op-test-sequencer-target
 USER 0
-COPY --from=op-test-sequencer-builder /app/op-test-sequencer/bin/op-test-sequencer /usr/local/bin/
-CMD ["op-test-sequencer"]
+COPY --from=op-test-sequencer-builder /app/mc-test-sequencer/bin/mc-test-sequencer /usr/local/bin/
+CMD ["mc-test-sequencer"]
 
 FROM dhi.io/alpine-base:3.23 AS mc-deployer-target
 USER 0
@@ -369,15 +362,15 @@ CMD ["mc-deployer"]
 
 FROM $TARGET_BASE_IMAGE AS op-dripper-target
 USER 0
-COPY --from=op-dripper-builder /app/op-dripper/bin/op-dripper /usr/local/bin/
-CMD ["op-dripper"]
+COPY --from=op-dripper-builder /app/mc-dripper/bin/mc-dripper /usr/local/bin/
+CMD ["mc-dripper"]
 
 FROM $TARGET_BASE_IMAGE AS op-faucet-target
 USER 0
-COPY --from=op-faucet-builder /app/op-faucet/bin/op-faucet /usr/local/bin/
-CMD ["op-faucet"]
+COPY --from=op-faucet-builder /app/mc-faucet/bin/mc-faucet /usr/local/bin/
+CMD ["mc-faucet"]
 
 FROM $TARGET_BASE_IMAGE AS op-interop-mon-target
 USER 0
-COPY --from=op-interop-mon-builder /app/op-interop-mon/bin/op-interop-mon /usr/local/bin/
-CMD ["op-interop-mon"]
+COPY --from=op-interop-mon-builder /app/mc-interop-mon/bin/mc-interop-mon /usr/local/bin/
+CMD ["mc-interop-mon"]

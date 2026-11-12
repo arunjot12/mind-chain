@@ -6,7 +6,7 @@ contents:
   packages:
     - ca-certificates-bundle>=20260909-r3
     - wolfi-baselayout
-    - op-supernode@local
+    - mc-supernode@local
     - busybox
     - apk-tools
 
@@ -26,9 +26,9 @@ accounts:
   run-as: 0
 
 # No entrypoint, bare-name cmd: matches the upstream image contract
-# (CMD ["op-supernode"], resolved via PATH).
-cmd: op-supernode
+# (CMD ["mc-supernode"], resolved via PATH).
+cmd: mc-supernode
 
 annotations:
-  org.opencontainers.image.source: https://github.com/ethereum-optimism/optimism
-  org.opencontainers.image.title: op-supernode
+  org.opencontainers.image.source: https://github.com/arunjot12/mind-chain
+  org.opencontainers.image.title: mc-supernode

@@ -81,13 +81,13 @@ curl -s "$OUTPUT_URL" | jq -r '.[].message'
 The output will show a table of closed issues. Look for the `[Error] Closed issue details:` section at the end which shows:
 - Repository & Issue (e.g., "ethereum-optimism/optimism #18616")
 - Issue Title
-- Location (e.g., "op-acceptance-tests/tests/isthmus/preinterop/interop_readiness_test.go:106")
+- Location (e.g., "mc-acceptance-tests/tests/isthmus/preinterop/interop_readiness_test.go:106")
 
 ### Step 4: Parse the closed issue information
 
 Extract from the "Closed issue details" table:
 - Issue number (e.g., #18616)
-- File path and line number (e.g., `op-acceptance-tests/tests/isthmus/preinterop/interop_readiness_test.go:106`)
+- File path and line number (e.g., `mc-acceptance-tests/tests/isthmus/preinterop/interop_readiness_test.go:106`)
 - Issue title
 
 ### Step 5: Find who closed the issue

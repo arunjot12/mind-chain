@@ -15,7 +15,7 @@ pragma solidity ^0.8.0;
 ///
 ///        1. Add the new feature bit in this file. Do not reuse a retired value unless the reuse is
 ///           intentional and reviewed.
-///        2. Add the matching Go flag in `op-core/devfeatures/devfeatures.go`. The Go value MUST
+///        2. Add the matching Go flag in `mc-core/devfeatures/devfeatures.go`. The Go value MUST
 ///           match the Solidity value byte-for-byte.
 ///        3. Add the env var reader in `packages/contracts-bedrock/scripts/libraries/Config.sol`.
 ///        4. Wire the env var into the dev feature bitmap in

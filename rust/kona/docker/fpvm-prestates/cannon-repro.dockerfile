@@ -17,8 +17,8 @@ RUN n=0; until apk add --no-cache bash just; do n=$((n+1)); [ "$n" -ge 15 ] && e
 
 COPY go.mod go.sum /app/
 COPY cannon/ /app/cannon/
-COPY op-service/ /app/op-service/
-COPY op-preimage/ /app/op-preimage/
+COPY mc-service/ /app/mc-service/
+COPY mc-preimage/ /app/mc-preimage/
 COPY justfiles/ /app/justfiles/
 
 RUN --mount=type=cache,target=/go/pkg/mod \
@@ -84,9 +84,9 @@ COPY rust/mc-reth-test-engine/ /app/rust/mc-reth-test-engine/
 COPY rust/lokahi/ /app/rust/lokahi/
 
 # kona-hardforks build.rs walks ancestors of CARGO_MANIFEST_DIR for
-# op-core/nuts/bundles. Stage the bundles at /app/op-core so the walk
+# mc-core/nuts/bundles. Stage the bundles at /app/mc-core so the walk
 # succeeds inside the rust/-scoped build.
-COPY op-core/nuts/bundles /app/op-core/nuts/bundles
+COPY mc-core/nuts/bundles /app/mc-core/nuts/bundles
 
 # --- Layer 4: Custom chain configs ---
 # Always copy from the named build context. The justfile stages an empty

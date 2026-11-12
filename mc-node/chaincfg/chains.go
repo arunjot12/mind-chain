@@ -5,27 +5,14 @@ import (
 	"sort"
 	"strings"
 
-	registry "github.com/ethereum-optimism/optimism/op-core/superchain"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/mc-node/superchain"
+	registry "github.com/mindchain/mind-chain/mc-core/superchain"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-node/superchain"
 )
 
-// OPSepolia loads the op-sepolia rollup config. This is intended for tests that need an arbitrary, valid rollup config.
-func OPSepolia() *rollup.Config {
-	return mustLoadRollupConfig("op-sepolia")
-}
-
-func mustLoadRollupConfig(name string) *rollup.Config {
-	cfg, err := GetRollupConfig(name)
-	if err != nil {
-		panic(fmt.Errorf("failed to load rollup config %q: %w", name, err))
-	}
-	return cfg
-}
-
-// L2ChainIDToNetworkDisplayName maps chain IDs to registry chain names. It is built from the
-// registry's chain index alone — the index key is the chain ID (pinned by
-// TestAllEmbeddedConfigsDecodeStrictly) — so no chain config is parsed.
+// L2ChainIDToNetworkDisplayName maps chain IDs to built-in chain names. It is built from the
+// chain index alone, so no chain config is parsed. Mind Chain ships no built-in chains, so
+// it is empty.
 var L2ChainIDToNetworkDisplayName = func() map[string]string {
 	out := make(map[string]string)
 	for chainID, netCfg := range registry.Chains {

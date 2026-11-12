@@ -69,7 +69,7 @@ setup_repo() {
   sha3="$(git -C "${repo}" rev-parse HEAD)"
 
   # Tags on sha1: single service (conductor) + RC-only (proposer) + RC+release pair (batcher)
-  git -C "${repo}" tag -a "op-conductor/v0.9.3"      -m "op-conductor/v0.9.3"      "${sha1}"
+  git -C "${repo}" tag -a "mc-conductor/v0.9.3"      -m "mc-conductor/v0.9.3"      "${sha1}"
   git -C "${repo}" tag -a "mc-proposer/v2.0.0-rc.1"  -m "mc-proposer/v2.0.0-rc.1"  "${sha1}"
   git -C "${repo}" tag -a "mc-batcher/v1.0.0-rc.1"   -m "mc-batcher/v1.0.0-rc.1"   "${sha1}"
   git -C "${repo}" tag -a "mc-batcher/v1.0.0"        -m "mc-batcher/v1.0.0"        "${sha1}"
@@ -111,7 +111,7 @@ SHA3="${INFO[3]}"
 
 # Create one project directory per service under the fake repo so that
 # `basename justfile_directory()` resolves to the right project name.
-DIR_CONDUCTOR="$(make_project "${REPO}" op-conductor)"
+DIR_CONDUCTOR="$(make_project "${REPO}" mc-conductor)"
 DIR_BATCHER="$(make_project "${REPO}"   mc-batcher)"
 DIR_PROPOSER="$(make_project "${REPO}"  mc-proposer)"
 DIR_NODE="$(make_project "${REPO}"      mc-node)"

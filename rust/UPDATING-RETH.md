@@ -128,7 +128,7 @@ main's CI actually validated.
    When a bump is genuinely needed, **version in-tree crate families as a
    group.** Upstream reth versions every crate from one workspace version; two
    in-tree families follow the same rule: the published mc-reth crates
-   (`mc-reth`, `reth-optimism-*`, `reth-op`) and the `op-alloy*` crates. When
+   (`mc-reth`, `reth-mind-chain-*`, `reth-op`) and the `op-alloy*` crates. When
    any crate of a family needs a new version, bump the whole family to the
    same version. A lone bump leaves siblings whose API also changed at a
    version that downstream requirements still accept.
@@ -215,7 +215,7 @@ main's CI actually validated.
    is intentional, regenerate and commit the snapshot:
 
    ```bash
-   UPDATE_SNAPSHOT=1 cargo nextest run -p reth-optimism-cli --all-features cli_surface_snapshot
+   UPDATE_SNAPSHOT=1 cargo nextest run -p reth-mind-chain-cli --all-features cli_surface_snapshot
    ```
 
    Review the snapshot diff like code: it is the operator-facing surface of

@@ -4,7 +4,7 @@ use crate::{OpEthApi, OpEthApiError};
 use alloy_eips::BlockNumberOrTag;
 use alloy_primitives::B256;
 use reth_chain_state::BlockState;
-use reth_optimism_flashblocks::PendingFlashBlock;
+use reth_mind_chain_flashblocks::PendingFlashBlock;
 use reth_rpc_eth_api::{
     FromEvmError, RpcConvert, RpcNodeCore, RpcNodeCoreExt,
     helpers::{LoadPendingBlock, SpawnBlocking, pending_block::PendingEnvBuilder},
@@ -91,8 +91,8 @@ mod tests {
     use super::pending_state_history_lookup_hash;
     use alloy_primitives::B256;
     use reth_chain_state::ExecutedBlock;
-    use reth_optimism_flashblocks::PendingFlashBlock;
-    use reth_optimism_primitives::OpPrimitives;
+    use reth_mind_chain_flashblocks::PendingFlashBlock;
+    use reth_mind_chain_primitives::OpPrimitives;
     use reth_rpc_eth_types::PendingBlock;
     use std::time::Instant;
 

@@ -4,7 +4,7 @@ Guidance for AI agents writing new acceptance tests in the Optimism monorepo. Fo
 
 ## Philosophy
 
-An acceptance test exists to describe a user-visible behaviour of the OP Stack and fail loudly when that behaviour breaks. A reader who is not a domain expert should be able to open any test in `op-acceptance-tests/tests/` and understand what the system is supposed to do, without running anything.
+An acceptance test exists to describe a user-visible behaviour of the OP Stack and fail loudly when that behaviour breaks. A reader who is not a domain expert should be able to open any test in `mc-acceptance-tests/tests/` and understand what the system is supposed to do, without running anything.
 
 Tests express *requirements*. The DSL exposes reusable domain operations and hides transport details, asynchronous waits, and other mechanics. Tests retain scenario-specific policy and assertions so a reader can see what behaviour is required without opening the DSL. When shared mechanics change, the DSL is updated once and every test benefits. When a test is flaky, the fix usually belongs in a reusable wait or precondition rather than in timing code in the test.
 
@@ -208,7 +208,7 @@ A failing test must give the reader enough information to diagnose without re-ru
 
 - **Actionable assertion messages.** Name the expectation: `"expected L2 balance to reflect transfer minus gas"` beats `""`.
 - **Deterministic fixtures.** Fixed seeds, fixed addresses where possible, reproducible block/chain setup. A failure should reproduce on the next run unless production code changed.
-- **Persistent artefacts.** `just acceptance-test` already writes logs to `op-acceptance-tests/logs/testrun-<timestamp>/` (see [acceptance-tests.md](acceptance-tests.md#log-output-acceptance-test-only)) — make sure the log output your test produces via the DSL is enough to understand a failure from those files alone.
+- **Persistent artefacts.** `just acceptance-test` already writes logs to `mc-acceptance-tests/logs/testrun-<timestamp>/` (see [acceptance-tests.md](acceptance-tests.md#log-output-acceptance-test-only)) — make sure the log output your test produces via the DSL is enough to understand a failure from those files alone.
 
 Re-running to "see what happened" is a sign the failure artefact is missing.
 

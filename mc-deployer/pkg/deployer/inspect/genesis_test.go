@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	opgenesis "github.com/ethereum-optimism/optimism/op-core/genesis"
-	"github.com/ethereum-optimism/optimism/mc-deployer/pkg/deployer/pipeline"
+	opgenesis "github.com/mindchain/mind-chain/mc-core/genesis"
+	"github.com/mindchain/mind-chain/mc-deployer/pkg/deployer/pipeline"
 	"github.com/stretchr/testify/require"
 )
 

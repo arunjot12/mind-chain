@@ -4,9 +4,9 @@ The `mc-batcher` is responsible for ensuring data availability. See the [specs](
 
 ## Interactions & Dependencies
 
-The `mc-batcher` works together with the [sequencer](../mc-node/) (which it reads unsafe blocks from), the data availability layer (e.g. Layer 1 or an [Alt DA](../op-alt-da/) layer, which it posts data to), and the [derivation pipeline](../mc-node/) (which reads the data from the DA layer and progresses the safe chain).
+The `mc-batcher` works together with the [sequencer](../mc-node/) (which it reads unsafe blocks from), the data availability layer (e.g. Layer 1 or an [Alt DA](../mc-alt-da/) layer, which it posts data to), and the [derivation pipeline](../mc-node/) (which reads the data from the DA layer and progresses the safe chain).
 
-It depends directly on some code shared with the derivation pipeline, namely the [`ChannelOut`](../mc-node/rollup/derive/channel_out.go) implementation(s). It also depends directly on the shared [txmgr](../op-service/txmgr/) module.
+It depends directly on some code shared with the derivation pipeline, namely the [`ChannelOut`](../mc-node/rollup/derive/channel_out.go) implementation(s). It also depends directly on the shared [txmgr](../mc-service/txmgr/) module.
 
 ## Testing
 
@@ -16,7 +16,7 @@ The batcher has a suite of unit test which can be triggered by running
 go test ./...
 ```
 
-from this directory. There are also end-to-end tests in [`op-e2e`](../op-e2e/) which integrate the batcher.
+from this directory. There are also end-to-end tests in [`mc-e2e`](../mc-e2e/) which integrate the batcher.
 
 ## Architecture
 

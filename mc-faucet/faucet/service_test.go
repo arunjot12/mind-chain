@@ -1,0 +1,50 @@
+package faucet
+
+import (
+	"context"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+
+	"github.com/mindchain/mind-chain/mc-faucet/config"
+	fconf "github.com/mindchain/mind-chain/mc-faucet/faucet/backend/config"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	opmetrics "github.com/mindchain/mind-chain/mc-service/metrics"
+	"github.com/mindchain/mind-chain/mc-service/oppprof"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
+	"github.com/mindchain/mind-chain/mc-service/testlog"
+)
+
+// TestService is a quick smoke-test to check the service is up and running
+func TestService(t *testing.T) {
+	logger := testlog.Logger(t, log.LevelInfo)
+	cfg := &config.Config{
+		Version: "v0.0.1",
+		Faucets: &fconf.Config{},
+		MetricsConfig: opmetrics.CLIConfig{
+			Enabled:    true,
+			ListenAddr: "127.0.0.1",
+			ListenPort: 0,
+		},
+		RPC: oprpc.CLIConfig{
+			ListenAddr:  "127.0.0.1",
+			ListenPort:  0,
+			EnableAdmin: true,
+		},
+		PprofConfig: oppprof.CLIConfig{
+			ListenEnabled: true,
+			ListenAddr:    "127.0.0.1",
+			ListenPort:    0,
+		},
+	}
+	srv, err := FromConfig(context.Background(), cfg, logger)
+	require.NoError(t, err)
+	require.NoError(t, srv.Start(context.Background()))
+	require.NotEmpty(t, srv.RPC())
+	require.Contains(t, srv.FaucetEndpoint("foobar"), "/faucet/foobar")
+	require.Empty(t, srv.Faucets())
+	require.Empty(t, srv.Defaults())
+	require.False(t, srv.Stopped())
+	require.NoError(t, srv.Stop(context.Background()))
+	require.True(t, srv.Stopped())
+}

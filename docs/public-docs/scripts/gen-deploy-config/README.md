@@ -2,7 +2,7 @@
 
 Generates the MDX schema reference for the OP Stack `DeployConfig` — the flat
 JSON deployment configuration — under `docs/public-docs/snippets/generated/`,
-from the `DeployConfig` struct tree in `op-chain-ops/genesis`. The docs page
+from the `DeployConfig` struct tree in `mc-chain-ops/genesis`. The docs page
 (`chain-operators/reference/rollup-deployment-configuration.mdx`) imports the
 snippet instead of hand-transcribing the struct, so the published schema
 cannot silently fall behind the source.
@@ -36,7 +36,7 @@ checkout of any tag.
 
 ## How it works
 
-- `main.go` parses the genesis package source (default `op-chain-ops/genesis`,
+- `main.go` parses the genesis package source (default `mc-chain-ops/genesis`,
   override with `-source`), finds the `DeployConfig` struct, and flattens its
   embedded config structs (`L2CoreDeployConfig`, `FaultProofDeployConfig`,
   `UpgradeScheduleDeployConfig`, …) in declaration order — mirroring how
@@ -57,7 +57,7 @@ checkout of any tag.
 
 ## Why the tag is an mc-deployer tag
 
-`op-chain-ops` is a library, not a released binary — it has no release tags of
+`mc-chain-ops` is a library, not a released binary — it has no release tags of
 its own. The released tool whose pipeline derives and emits the `DeployConfig`
 (and the deploy path the docs frame as the default) is **mc-deployer**, so the
 snippet documents the schema as of the newest finalized (non-rc, non-alpha)
@@ -73,12 +73,12 @@ code. When a new finalized `mc-deployer/v*` tag is published:
    extract just the package the tool parses and point `-source` at it:
 
    ```bash
-   git archive mc-deployer/vX.Y.Z op-chain-ops/genesis | tar -x -C /tmp/opd-tag
-   go run ./docs/public-docs/scripts/gen-deploy-config -source /tmp/opd-tag/op-chain-ops/genesis
+   git archive mc-deployer/vX.Y.Z mc-chain-ops/genesis | tar -x -C /tmp/opd-tag
+   go run ./docs/public-docs/scripts/gen-deploy-config -source /tmp/opd-tag/mc-chain-ops/genesis
    ```
 
-   (If `op-chain-ops/genesis` is identical between the tag and your current
-   checkout — `git diff mc-deployer/vX.Y.Z HEAD -- op-chain-ops/genesis` —
+   (If `mc-chain-ops/genesis` is identical between the tag and your current
+   checkout — `git diff mc-deployer/vX.Y.Z HEAD -- mc-chain-ops/genesis` —
    running without `-source` is equivalent.)
 3. Commit the regenerated snippet and `manifest.json` in the same change.
 
@@ -106,7 +106,7 @@ model in the Solutions repo's
 | --- | --- | --- | --- |
 | Generator code + its CI job (this directory, the regeneration workflow) | Matthew Cruz (@sbvegan), docs owner — proposed, pending confirmation | @ethereum-optimism/solutions (via the `/docs/public-docs/scripts/` CODEOWNERS rule) | Author of record |
 | Generated snippet (`snippets/generated/deploy-config-schema.mdx`) | The pipeline — nobody hand-edits; `-check` fails on hand edits by construction | @ethereum-optimism/solutions review the regeneration PRs | A snippet that can't be regenerated cleanly is filed as an `accuracy`-labelled issue on the Solutions board |
-| Schema facts (`op-chain-ops/genesis` struct tags + doc comments) | Component engineers | Component team | Component team; the docs schema follows at the next finalized mc-deployer release |
+| Schema facts (`mc-chain-ops/genesis` struct tags + doc comments) | Component engineers | Component team | Component team; the docs schema follows at the next finalized mc-deployer release |
 
 Known residual gaps (accepted, by design):
 

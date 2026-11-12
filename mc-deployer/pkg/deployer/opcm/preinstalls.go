@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/ethereum-optimism/optimism/op-chain-ops/script"
+	"github.com/mindchain/mind-chain/mc-chain-ops/script"
 )
 
 type PreinstallsScript struct {

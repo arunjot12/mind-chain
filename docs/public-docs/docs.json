@@ -1168,8 +1168,8 @@
       "destination": "/chain-operators/guides/configuration/mc-challenger-config-guide"
     },
     {
-      "source": "/operators/chain-operators/tools/op-conductor",
-      "destination": "/chain-operators/tools/op-conductor"
+      "source": "/operators/chain-operators/tools/mc-conductor",
+      "destination": "/chain-operators/tools/mc-conductor"
     },
     {
       "source": "/operators/chain-operators/tools/mc-deployer",
@@ -2865,9 +2865,9 @@
               {
                 "group": "OP Conductor",
                 "pages": [
-                  "chain-operators/tools/op-conductor",
-                  "chain-operators/tools/op-conductor/setup",
-                  "chain-operators/tools/op-conductor/reference"
+                  "chain-operators/tools/mc-conductor",
+                  "chain-operators/tools/mc-conductor/setup",
+                  "chain-operators/tools/mc-conductor/reference"
                 ]
               },
               {
@@ -2904,7 +2904,7 @@
                   }
                 ]
               },
-              "chain-operators/tools/op-interop-filter",
+              "chain-operators/tools/mc-interop-filter",
               "chain-operators/tools/op-txproxy",
               "chain-operators/tools/proxyd"
             ]
@@ -3522,7 +3522,7 @@
                     "group": "Sequencing",
                     "pages": [
                       "op-stack/components/mc-batcher",
-                      "op-stack/components/op-conductor"
+                      "op-stack/components/mc-conductor"
                     ]
                   },
                   {
@@ -3673,7 +3673,7 @@
                 "group": "Tooling",
                 "pages": [
                   "releases/mc-deployer",
-                  "releases/op-conductor",
+                  "releases/mc-conductor",
                   "releases/proxyd",
                   "releases/op-acceptor"
                 ]

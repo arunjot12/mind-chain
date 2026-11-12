@@ -3,10 +3,10 @@ package node
 import (
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/mc-node/rollup"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	oprpc "github.com/ethereum-optimism/optimism/op-service/rpc"
+	"github.com/mindchain/mind-chain/mc-core/interop/depset"
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	oprpc "github.com/mindchain/mind-chain/mc-service/rpc"
 )
 
 func newRPCServer(rpcCfg *oprpc.CLIConfig, rollupCfg *rollup.Config, depSet depset.DependencySet, l2Client l2EthClient, dr driverClient,

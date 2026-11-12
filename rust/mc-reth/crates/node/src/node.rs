@@ -18,6 +18,34 @@ use reth_chainspec::{
 use reth_db::DatabaseEnv;
 use reth_db_api::database_metrics::DatabaseMetrics;
 use reth_evm::ConfigureEvm;
+use reth_mind_chain_chainspec::{OpChainSpec, OpHardfork};
+use reth_mind_chain_consensus::OpBeaconConsensus;
+use reth_mind_chain_evm::{ConfigurePostExecEvm, OpEvmConfig, OpRethReceiptBuilder};
+use reth_mind_chain_exex::OpProofsExEx;
+use reth_mind_chain_forks::OpHardforks;
+use reth_mind_chain_payload_builder::{
+    OpBuiltPayload, OpExecData, OpPayloadBuilderAttributes, OpPayloadPrimitives,
+    builder::OpPayloadTransactions,
+    config::{OpBuilderConfig, OpDAConfig, OpGasLimitConfig, OperatorSdmOptIn},
+};
+use reth_mind_chain_primitives::{DepositReceipt, OpPrimitives};
+use reth_mind_chain_rpc::{
+    SequencerClient,
+    debug::{DebugApiExt, DebugApiOverrideServer},
+    eth::{
+        OpEthApiBuilder,
+        ext::OpEthExtApi,
+        proofs::{EthApiExt, EthApiOverrideServer},
+    },
+    historical::{HistoricalRpc, HistoricalRpcClient},
+    miner::{MinerApiExtServer, OpMinerExtApi},
+    witness::{DebugExecutionWitnessApiServer, OpDebugPostExecApiServer, OpDebugWitnessApi},
+};
+use reth_mind_chain_storage::OpStorage;
+use reth_mind_chain_trie::{OpProofsStorage, db::MdbxProofsStorage};
+use reth_mind_chain_txpool::{
+    OpPool, OpPooledTx, interop::InteropFailsafe, interop_filter::InteropFilterClient,
+};
 use reth_network::{
     NetworkConfig, NetworkHandle, NetworkManager, NetworkPrimitives, PeersInfo,
     types::BasicNetworkPrimitives,
@@ -41,34 +69,6 @@ use reth_node_builder::{
     },
 };
 use reth_node_core::args::RpcStateCacheArgs;
-use reth_optimism_chainspec::{OpChainSpec, OpHardfork};
-use reth_optimism_consensus::OpBeaconConsensus;
-use reth_optimism_evm::{ConfigurePostExecEvm, OpEvmConfig, OpRethReceiptBuilder};
-use reth_optimism_exex::OpProofsExEx;
-use reth_optimism_forks::OpHardforks;
-use reth_optimism_payload_builder::{
-    OpBuiltPayload, OpExecData, OpPayloadBuilderAttributes, OpPayloadPrimitives,
-    builder::OpPayloadTransactions,
-    config::{OpBuilderConfig, OpDAConfig, OpGasLimitConfig, OperatorSdmOptIn},
-};
-use reth_optimism_primitives::{DepositReceipt, OpPrimitives};
-use reth_optimism_rpc::{
-    SequencerClient,
-    debug::{DebugApiExt, DebugApiOverrideServer},
-    eth::{
-        OpEthApiBuilder,
-        ext::OpEthExtApi,
-        proofs::{EthApiExt, EthApiOverrideServer},
-    },
-    historical::{HistoricalRpc, HistoricalRpcClient},
-    miner::{MinerApiExtServer, OpMinerExtApi},
-    witness::{DebugExecutionWitnessApiServer, OpDebugPostExecApiServer, OpDebugWitnessApi},
-};
-use reth_optimism_storage::OpStorage;
-use reth_optimism_trie::{OpProofsStorage, db::MdbxProofsStorage};
-use reth_optimism_txpool::{
-    OpPool, OpPooledTx, interop::InteropFailsafe, interop_filter::InteropFilterClient,
-};
 use reth_primitives_traits::header::HeaderMut;
 use reth_provider::{
     CanonStateSubscriptions, DatabaseProviderFactory, StorageSettingsCache,
@@ -91,7 +91,7 @@ use std::{marker::PhantomData, sync::Arc};
 use tokio::time::sleep;
 use url::Url;
 
-use reth_optimism_payload_builder::OpPayloadAttrs;
+use reth_mind_chain_payload_builder::OpPayloadAttrs;
 
 /// Builds [`OpPayloadAttrs`] for local/dev-mode payload generation.
 struct OpLocalPayloadAttributesBuilder {
@@ -374,12 +374,12 @@ impl OpNode {
     /// [`ReadOnlyConfig`](reth_provider::providers::ReadOnlyConfig).
     ///
     /// ```no_run
-    /// use reth_optimism_chainspec::OP_MAINNET;
-    /// use reth_optimism_node::OpNode;
+    /// use reth_mind_chain_chainspec::OP_DEV;
+    /// use reth_mind_chain_node::OpNode;
     ///
     /// fn demo(runtime: reth_tasks::Runtime) {
     ///     let factory = OpNode::provider_factory_builder()
-    ///         .open_read_only(OP_MAINNET.clone(), "datadir", runtime)
+    ///         .open_read_only(OP_DEV.clone(), "datadir", runtime)
     ///         .unwrap();
     /// }
     /// ```
@@ -387,14 +387,14 @@ impl OpNode {
     /// # Open a Providerfactory with custom config
     ///
     /// ```no_run
-    /// use reth_optimism_chainspec::OpChainSpecBuilder;
-    /// use reth_optimism_node::OpNode;
+    /// use reth_mind_chain_chainspec::OP_DEV;
+    /// use reth_mind_chain_node::OpNode;
     /// use reth_provider::providers::ReadOnlyConfig;
     ///
     /// fn demo(runtime: reth_tasks::Runtime) {
     ///     let factory = OpNode::provider_factory_builder()
     ///         .open_read_only(
-    ///             OpChainSpecBuilder::optimism_mainnet().build().into(),
+    ///             OP_DEV.clone(),
     ///             ReadOnlyConfig::from_datadir("datadir").no_watch(),
     ///             runtime,
     ///         )
@@ -838,7 +838,7 @@ const UNSERVED_RPC_METHODS: &[&str] = &[
 /// block access list options only tune BAL handling that OP blocks never trigger.
 ///
 /// mc-reth's CLI already rejects every block access list option (`DENIED_ARGS` in
-/// `reth-optimism-cli`), and these two have no environment variable, so this check only fires for
+/// `reth-mind-chain-cli`), and these two have no environment variable, so this check only fires for
 /// code that builds a `NodeConfig` without that CLI. Add new upstream BAL flags to `DENIED_ARGS`,
 /// and here too if they re-execute blocks or feed tracing.
 fn ensure_no_computed_bals(cache: &RpcStateCacheArgs) -> eyre::Result<()> {
@@ -937,7 +937,7 @@ where
 
         let rpc_add_ons = rpc_add_ons.option_layer_rpc_middleware(maybe_pre_bedrock_historical_rpc);
 
-        let builder = reth_optimism_payload_builder::OpPayloadBuilder::new(
+        let builder = reth_mind_chain_payload_builder::OpPayloadBuilder::new(
             ctx.node.pool().clone(),
             ctx.node.provider().clone(),
             ctx.node.evm_config().clone(),
@@ -952,7 +952,7 @@ where
             );
         let miner_ext = OpMinerExtApi::new(da_config, gas_limit_config);
 
-        let sdm_admin_ext = reth_optimism_rpc::sdm_admin::OpSdmAdminApi::new(
+        let sdm_admin_ext = reth_mind_chain_rpc::sdm_admin::OpSdmAdminApi::new(
             operator_sdm_opt_in,
             ctx.node.provider().chain_spec(),
         );
@@ -998,7 +998,7 @@ where
                     auth_module.merge_auth_methods(miner_ext.into_rpc())?;
                 }
 
-                use reth_optimism_rpc::sdm_admin::SdmAdminApiServer;
+                use reth_mind_chain_rpc::sdm_admin::SdmAdminApiServer;
                 modules.add_or_replace_if_module_configured(
                     RethRpcModule::Admin,
                     sdm_admin_ext.clone().into_rpc(),
@@ -1023,7 +1023,7 @@ where
                 }
 
                 // Runs before the `extend_rpc_modules` hooks, so a method an override there
-                // re-declares — see `reth_optimism_rpc::eth::proofs::EthApiOverride` — is put
+                // re-declares — see `reth_mind_chain_rpc::eth::proofs::EthApiOverride` — is put
                 // back and stays served.
                 remove_unserved_rpc_methods(modules, auth_module);
 
@@ -1625,7 +1625,7 @@ where
             // Spawn failsafe polling task (shares interop filter client via clone).
             ctx.task_executor().spawn_critical_task(
                 "Op txpool failsafe polling task",
-                reth_optimism_txpool::maintain::poll_failsafe_future(
+                reth_mind_chain_txpool::maintain::poll_failsafe_future(
                     interop.clone(),
                     transaction_pool.clone(),
                 ),
@@ -1636,7 +1636,7 @@ where
             let chain_events = ctx.provider().canonical_state_stream();
             ctx.task_executor().spawn_critical_task(
                 "Op txpool interop maintenance task",
-                reth_optimism_txpool::maintain::maintain_transaction_pool_interop_future(
+                reth_mind_chain_txpool::maintain::maintain_transaction_pool_interop_future(
                     transaction_pool.clone(),
                     chain_events,
                     interop.clone(),
@@ -1650,7 +1650,7 @@ where
             let chain_events = ctx.provider().canonical_state_stream();
             ctx.task_executor().spawn_critical_task(
                 "Op txpool conditional maintenance task",
-                reth_optimism_txpool::maintain::maintain_transaction_pool_conditional_future(
+                reth_mind_chain_txpool::maintain::maintain_transaction_pool_conditional_future(
                     transaction_pool.clone(),
                     chain_events,
                 ),
@@ -1775,7 +1775,7 @@ where
     Pool: TransactionPool<Transaction: OpPooledTx<Consensus = TxTy<Node::Types>>> + Unpin + 'static,
     Txs: OpPayloadTransactions<Pool::Transaction>,
 {
-    type PayloadBuilder = reth_optimism_payload_builder::OpPayloadBuilder<
+    type PayloadBuilder = reth_mind_chain_payload_builder::OpPayloadBuilder<
         Pool,
         Node::Provider,
         Evm,
@@ -1789,14 +1789,15 @@ where
         pool: Pool,
         evm_config: Evm,
     ) -> eyre::Result<Self::PayloadBuilder> {
-        let payload_builder = reth_optimism_payload_builder::OpPayloadBuilder::with_builder_config(
-            pool,
-            ctx.provider().clone(),
-            evm_config,
-            self.builder_config.clone(),
-        )
-        .with_transactions(self.best_transactions.clone())
-        .set_compute_pending_block(self.compute_pending_block);
+        let payload_builder =
+            reth_mind_chain_payload_builder::OpPayloadBuilder::with_builder_config(
+                pool,
+                ctx.provider().clone(),
+                evm_config,
+                self.builder_config.clone(),
+            )
+            .with_transactions(self.best_transactions.clone())
+            .set_compute_pending_block(self.compute_pending_block);
         Ok(payload_builder)
     }
 }

@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ethereum-optimism/optimism/ops/prestate-reproducibility/prestates"
+	"github.com/mindchain/mind-chain/ops/prestate-reproducibility/prestates"
 )
 
 var versionPattern = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$`)

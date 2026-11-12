@@ -1,15 +1,15 @@
 ---
 title: Setup
-description: Add op-conductor to an existing multi-sequencer OP Stack network without downtime.
+description: Add mc-conductor to an existing multi-sequencer OP Stack network without downtime.
 diataxis: how-to
 ---
 
-For how op-conductor works and the guarantees it provides, see
-[OP Conductor](/chain-operators/tools/op-conductor). The flags and RPC methods
+For how mc-conductor works and the guarantees it provides, see
+[OP Conductor](/chain-operators/tools/mc-conductor). The flags and RPC methods
 used below are catalogued in the
-[configuration and RPC reference](/chain-operators/tools/op-conductor/reference).
+[configuration and RPC reference](/chain-operators/tools/mc-conductor/reference).
 
-At OP Labs, op-conductor is deployed as a kubernetes statefulset because it
+At OP Labs, mc-conductor is deployed as a kubernetes statefulset because it
 requires a persistent volume to store the raft log. This guide describes
 setting up conductor on an existing network without incurring downtime.
 
@@ -28,7 +28,7 @@ This setup guide has the following assumptions:
     orchestrator (vm-based deployment may be slightly different and not covered
     here)
 
-## Spin up op-conductor
+## Spin up mc-conductor
 
 <Steps>
   <Step title="Deploy conductor">
@@ -60,7 +60,7 @@ This setup guide has the following assumptions:
         OP_CONDUCTOR_RPC_PORT: '8547'
         ```
   
-    *   sequencer-1 op-conductor extra config:
+    *   sequencer-1 mc-conductor extra config:
   
         ```yaml
         OP_CONDUCTOR_PAUSED: "true"
@@ -70,7 +70,7 @@ This setup guide has the following assumptions:
   </Step>
   
     <Step title="Pause two conductors">
-      Pause `sequencer-0` &` sequencer-2` conductors with [conductor_pause](/chain-operators/tools/op-conductor/reference#conductor_pause) RPC request.
+      Pause `sequencer-0` &` sequencer-2` conductors with [conductor_pause](/chain-operators/tools/mc-conductor/reference#conductor_pause) RPC request.
     </Step>
   
     <Step title="Update mc-node configuration and switch the active sequencer">
@@ -93,7 +93,7 @@ This setup guide has the following assumptions:
     </Step>
   
     <Step title="Add voting nodes">
-      Add voting nodes to cluster using [conductor_AddServerAsVoter](/chain-operators/tools/op-conductor/reference#conductor_addserverasvoter)
+      Add voting nodes to cluster using [conductor_AddServerAsVoter](/chain-operators/tools/mc-conductor/reference#conductor_addserverasvoter)
     RPC request to the leader conductor (`sequencer-1`)
 
   
@@ -118,18 +118,18 @@ This setup guide has the following assumptions:
     </Step>
   
     <Step title="Resume conductors">
-      Resume all conductors with [conductor\_resume](/chain-operators/tools/op-conductor/reference#conductor_resume) RPC request to
+      Resume all conductors with [conductor\_resume](/chain-operators/tools/mc-conductor/reference#conductor_resume) RPC request to
     each conductor instance.
 
   
     </Step>
   
     <Step title="Confirm state">
-      Confirm all conductors successfully resumed with [conductor_paused](/chain-operators/tools/op-conductor/reference#conductor_paused)
+      Confirm all conductors successfully resumed with [conductor_paused](/chain-operators/tools/mc-conductor/reference#conductor_paused)
     </Step>
   
     <Step title="Transfer leadership">
-      Trigger leadership transfer to `sequencer-0` using [conductor_transferLeaderToServer](/chain-operators/tools/op-conductor/reference#conductor_transferleadertoserver)
+      Trigger leadership transfer to `sequencer-0` using [conductor_transferLeaderToServer](/chain-operators/tools/mc-conductor/reference#conductor_transferleadertoserver)
     </Step>
   
     <Step title="Confirm state">

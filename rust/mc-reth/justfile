@@ -16,25 +16,13 @@ test edge='':
     --no-tests=warn \
     -E "!kind(test) and not binary(e2e_testsuite) and not test(test_online)"
 
-# Run integration tests for reth-optimism-node
+# Run integration tests for reth-mind-chain-node
 test-integration:
-  RUST_BACKTRACE=1 cargo nextest run --locked -p reth-optimism-node
+  RUST_BACKTRACE=1 cargo nextest run --locked -p reth-mind-chain-node
 
 # Build all examples
 examples:
   cargo build --examples --locked
-
-# Regenerate the reth-optimism-chainspec superchain archive
-# (res/superchain-configs.tar + .sha256) and chain_specs.rs from the
-# superchain-registry submodule. The repo-root `just sync-superchain-rust` runs
-# this for mc-reth.
-sync-superchain: update-superchain-registry-submodule
-  OP_RETH_SYNC_SUPERCHAIN=1 cargo build -p reth-optimism-chainspec --features superchain-configs
-
-# Initialize/update the superchain-registry submodule (delegates to the root recipe
-# that encapsulates the correct scoped, shallow update).
-update-superchain-registry-submodule:
-  cd "$(git rev-parse --show-toplevel)" && just update-superchain-registry-submodule
 
 # Run unit tests
 test-unit:

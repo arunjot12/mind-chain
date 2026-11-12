@@ -1,4 +1,0 @@
-build:
-  go build -o bin/op-fetcher cmd/main.go
-
-build-go: build

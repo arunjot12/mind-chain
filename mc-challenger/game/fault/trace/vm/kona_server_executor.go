@@ -2,10 +2,11 @@ package vm
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-node/chaincfg"
 )
 
 type KonaExecutor struct {
@@ -53,8 +54,11 @@ func (s *KonaExecutor) OracleCommand(cfg Config, dataDir string, inputs utils.Lo
 			return nil, errors.New("network is not defined")
 		}
 
-		chainCfg := chaincfg.ChainByName(cfg.Networks[0])
-		args = append(args, "--l2-chain-id", strconv.FormatUint(chainCfg.ChainID, 10))
+		chainID, err := networkChainID(cfg.Networks[0])
+		if err != nil {
+			return nil, err
+		}
+		args = append(args, "--l2-chain-id", strconv.FormatUint(chainID, 10))
 	}
 
 	if cfg.L1GenesisPath != "" {
@@ -62,4 +66,17 @@ func (s *KonaExecutor) OracleCommand(cfg Config, dataDir string, inputs utils.Lo
 	}
 
 	return args, nil
+}
+
+// networkChainID resolves a --network value to an L2 chain ID: a built-in chain name,
+// or a numeric chain ID for a chain with custom configuration.
+func networkChainID(network string) (uint64, error) {
+	if chainCfg := chaincfg.ChainByName(network); chainCfg != nil {
+		return chainCfg.ChainID, nil
+	}
+	chainID, err := strconv.ParseUint(network, 10, 64)
+	if err != nil {
+		return 0, fmt.Errorf("%w: %v", ErrNetworkUnknown, network)
+	}
+	return chainID, nil
 }

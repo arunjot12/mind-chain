@@ -4,7 +4,7 @@
 //
 // For each component listed in components below, the tool walks the composed
 // flag slice the binary actually registers (including the flag families
-// appended from op-service: rpc, log, metrics, pprof, txmgr, altda) and emits
+// appended from mc-service: rpc, log, metrics, pprof, txmgr, altda) and emits
 // a snippet into docs/public-docs/snippets/generated/. The snippet carries a
 // do-not-edit header and a provenance line naming the release tag recorded in
 // manifest.json.
@@ -34,11 +34,11 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	batcherflags "github.com/ethereum-optimism/optimism/mc-batcher/flags"
-	challengerflags "github.com/ethereum-optimism/optimism/mc-challenger/flags"
-	conductorflags "github.com/ethereum-optimism/optimism/op-conductor/flags"
-	nodeflags "github.com/ethereum-optimism/optimism/mc-node/flags"
-	proposerflags "github.com/ethereum-optimism/optimism/mc-proposer/flags"
+	batcherflags "github.com/mindchain/mind-chain/mc-batcher/flags"
+	challengerflags "github.com/mindchain/mind-chain/mc-challenger/flags"
+	conductorflags "github.com/mindchain/mind-chain/mc-conductor/flags"
+	nodeflags "github.com/mindchain/mind-chain/mc-node/flags"
+	proposerflags "github.com/mindchain/mind-chain/mc-proposer/flags"
 )
 
 // component describes one service whose flags are rendered into a snippet.
@@ -91,9 +91,9 @@ var components = []component{
 		required: []string{"l1-eth-rpc", "datadir", "l1-beacon", "l2-eth-rpc"},
 	},
 	{
-		name:  "op-conductor",
+		name:  "mc-conductor",
 		flags: conductorflags.Flags,
-		// Mirrors requiredFlags in op-conductor/flags/flags.go.
+		// Mirrors requiredFlags in mc-conductor/flags/flags.go.
 		required: []string{
 			"consensus.addr",
 			"consensus.port",
@@ -151,7 +151,7 @@ func main() {
 		}
 		for name := range selected {
 			if !known[name] {
-				fatalf("unknown component %q in -only (known: mc-batcher, mc-node, mc-proposer, mc-challenger, op-conductor)", name)
+				fatalf("unknown component %q in -only (known: mc-batcher, mc-node, mc-proposer, mc-challenger, mc-conductor)", name)
 			}
 		}
 	}
@@ -336,7 +336,7 @@ flag definitions. %[4]d flags: %[5]d required, %[6]d optional.
 //     KindKeys is sorted upstream (proposed as a follow-up to the B1 slice).
 //   - The --network usage string enumerates chaincfg.AvailableNetworks(),
 //     which is read from the superchain-registry bundle
-//     (op-core/superchain/superchain-configs.zip) — it changes with every
+//     (mc-core/superchain/superchain-configs.zip) — it changes with every
 //     registry submodule bump, independent of any component release, and
 //     would otherwise make the snippet stale (and -check red) by
 //     construction. Replace the enumerated list with a stable pointer at the

@@ -9,7 +9,7 @@ use jsonrpsee_types::error::{INTERNAL_ERROR_CODE, INVALID_PARAMS_CODE};
 use op_alloy_consensus::PostExecPayloadValidationError;
 use op_revm::OpHaltReason;
 use reth_evm::execute::ProviderError;
-use reth_optimism_evm::OpBlockExecutionError;
+use reth_mind_chain_evm::OpBlockExecutionError;
 use reth_rpc_eth_api::{AsEthApiError, EthTxEnvError, TransactionConversionError};
 use reth_rpc_eth_types::{
     EthApiError,

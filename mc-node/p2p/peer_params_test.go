@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/mindchain/mind-chain/mc-node/rollup"
+
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/stretchr/testify/suite"
-
-	"github.com/ethereum-optimism/optimism/mc-node/chaincfg"
 )
 
 // PeerParamsTestSuite tests peer parameterization.
@@ -51,7 +51,7 @@ func (testSuite *PeerParamsTestSuite) TestGetPeerScoreParams_None() {
 
 // TestLightPeerScoreParams validates the light peer score params.
 func (testSuite *PeerParamsTestSuite) TestGetPeerScoreParams_Light() {
-	cfg := chaincfg.OPSepolia()
+	cfg := &rollup.Config{}
 	cfg.BlockTime = 1
 	slot := time.Duration(cfg.BlockTime) * time.Second
 	epoch := 6 * slot
@@ -98,7 +98,7 @@ func (testSuite *PeerParamsTestSuite) TestGetPeerScoreParams_Light() {
 
 // TestParamsZeroBlockTime validates peer score params use default slot for 0 block time.
 func (testSuite *PeerParamsTestSuite) TestParamsZeroBlockTime() {
-	cfg := chaincfg.OPSepolia()
+	cfg := &rollup.Config{}
 	cfg.BlockTime = 0
 	slot := 2 * time.Second
 	params, err := GetScoringParams("light", cfg.BlockTime)

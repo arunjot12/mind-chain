@@ -12,7 +12,7 @@ use reth_primitives_traits::NodePrimitives;
 use std::sync::Arc;
 
 // Included to enable serde feature for OpReceipt type used transitively
-use reth_optimism_primitives as _;
+use reth_mind_chain_primitives as _;
 
 // Used by downstream crates that depend on this crate
 use alloy_rpc_types as _;

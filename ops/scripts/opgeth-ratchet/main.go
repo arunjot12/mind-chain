@@ -18,7 +18,7 @@ import (
 	"strings"
 	"syscall"
 
-	opservice "github.com/ethereum-optimism/optimism/op-service"
+	opservice "github.com/mindchain/mind-chain/mc-service"
 )
 
 const (
@@ -86,8 +86,8 @@ func run(ctx context.Context, update bool) (bool, error) {
   %s
 
 The monorepo is moving to upstream go-ethereum (%s). Please avoid the
-dependency: %s describes the replacements (op-core/*, the
-op-service seams, mc-reth) and where each kind of use is headed.
+dependency: %s describes the replacements (mc-core/*, the
+mc-service seams, mc-reth) and where each kind of use is headed.
 
 If there is no way around it yet, add the lines below to %s,
 replacing %s with the issue tracking its removal and why the use can't be

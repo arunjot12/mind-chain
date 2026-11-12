@@ -327,7 +327,7 @@ a **minor** bump, `op-revm` at `20.x` only by a major.
 So: **if the adaptation diff changes a `version =` line in one of our published crates,
 say so in the review.** It is a release-coordination item, not just a manifest edit.
 
-The mc-reth crates (`mc-reth`, `reth-optimism-*`, `reth-op`) and the `op-alloy*` crates
+The mc-reth crates (`mc-reth`, `reth-mind-chain-*`, `reth-op`) and the `op-alloy*` crates
 are each versioned as a group (UPDATING-RETH step 4): flag a `version =` change that moves
 only part of a family, and check whether sibling crates changed their public API without a
 bump.

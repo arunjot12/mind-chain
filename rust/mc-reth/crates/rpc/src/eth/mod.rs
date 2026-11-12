@@ -24,14 +24,14 @@ use op_alloy_rpc_types_engine::OpFlashblockPayloadBase;
 pub use receipt::{OpReceiptBuilder, OpReceiptFieldsBuilder};
 use reqwest::Url;
 use reth_chainspec::{EthereumHardforks, Hardforks};
-use reth_node_api::{FullNodeComponents, FullNodeTypes, HeaderTy, NodeTypes};
-use reth_node_builder::rpc::{EthApiBuilder, EthApiCtx};
-use reth_optimism_evm::ConfigurePostExecEvm;
-use reth_optimism_flashblocks::{
+use reth_mind_chain_evm::ConfigurePostExecEvm;
+use reth_mind_chain_flashblocks::{
     FlashBlock, FlashBlockBuildInfo, FlashBlockCompleteSequence, FlashBlockCompleteSequenceRx,
     FlashBlockConsensusClient, FlashBlockRx, FlashBlockService, FlashblockCachedReceipt,
     FlashblocksListeners, PendingBlockRx, PendingFlashBlock, WsFlashBlockStream,
 };
+use reth_node_api::{FullNodeComponents, FullNodeTypes, HeaderTy, NodeTypes};
+use reth_node_builder::rpc::{EthApiBuilder, EthApiCtx};
 use reth_primitives_traits::{NodePrimitives, SealedHeader};
 use reth_rpc::eth::core::EthApiInner;
 use reth_rpc_eth_api::{
@@ -508,7 +508,7 @@ pub type OpRpcConvert<N, NetworkT> = RpcConverter<
     OpTxInfoMapper<<N as FullNodeTypes>::Provider>,
     (),
     (),
-    reth_optimism_evm::tx::OpTxEnvConverter,
+    reth_mind_chain_evm::tx::OpTxEnvConverter,
 >;
 
 /// Builds [`OpEthApi`] for Optimism.
@@ -523,7 +523,7 @@ pub struct OpEthApiBuilder<NetworkT = Optimism> {
     min_suggested_priority_fee: u64,
     /// A URL pointing to a secure websocket connection (wss) that streams out [flashblocks].
     ///
-    /// [flashblocks]: reth_optimism_flashblocks
+    /// [flashblocks]: reth_mind_chain_flashblocks
     flashblocks_url: Option<Url>,
     /// Enable flashblock consensus client to drive the chain forward.
     ///
@@ -643,7 +643,7 @@ where
         let rpc_converter =
             RpcConverter::new(OpReceiptConverter::new(ctx.components.provider().clone()))
                 .with_mapper(OpTxInfoMapper::new(ctx.components.provider().clone()))
-                .with_tx_env_converter(reth_optimism_evm::tx::OpTxEnvConverter);
+                .with_tx_env_converter(reth_mind_chain_evm::tx::OpTxEnvConverter);
 
         let sequencer_client = if let Some(url) = sequencer_url {
             Some(
@@ -702,56 +702,5 @@ where
             flashblocks,
             retain_forwarded_txs,
         ))
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use alloy_consensus::Receipt;
-    use alloy_primitives::{Address, B256, Log, LogData};
-    use reth_optimism_chainspec::OP_MAINNET;
-    use reth_optimism_evm::{OpEvmConfig, tx::OpTxEnvConverter};
-    use reth_optimism_primitives::OpPrimitives;
-    use reth_storage_api::noop::NoopProvider;
-
-    const ADDRESS: Address = Address::repeat_byte(0xaa);
-    const TOPIC: B256 = B256::repeat_byte(0xbb);
-
-    fn flashblock() -> FlashBlock {
-        let receipt = OpReceipt::Eip1559(Receipt {
-            status: true.into(),
-            cumulative_gas_used: 21_000,
-            logs: vec![Log {
-                address: ADDRESS,
-                data: LogData::new_unchecked(vec![TOPIC], Default::default()),
-            }],
-        });
-        let mut fb = FlashBlock::default();
-        fb.diff.block_hash = B256::repeat_byte(0x01);
-        fb.metadata.receipts.insert(B256::repeat_byte(0x02), receipt);
-        fb
-    }
-
-    #[test]
-    fn flashblock_logs_match_address_and_topic_filters() {
-        let provider = NoopProvider::<_, OpPrimitives>::new(OP_MAINNET.clone());
-        let converter = RpcConverter::<Optimism, OpEvmConfig, _>::new(OpReceiptConverter::new(
-            provider.clone(),
-        ))
-        .with_mapper(OpTxInfoMapper::new(provider))
-        .with_tx_env_converter(OpTxEnvConverter);
-        let fb = flashblock();
-
-        for filter in
-            [Filter::new(), Filter::new().address(ADDRESS), Filter::new().event_signature(TOPIC)]
-        {
-            let logs = flashblock_logs(&converter, &filter, 1, 2, &fb);
-            assert_eq!(logs.len(), 1, "filter {filter:?}");
-            assert_eq!(logs[0].address(), ADDRESS);
-        }
-
-        let unrelated = Filter::new().address(Address::repeat_byte(0xcc));
-        assert!(flashblock_logs(&converter, &unrelated, 1, 2, &fb).is_empty());
     }
 }

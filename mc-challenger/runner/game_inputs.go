@@ -8,16 +8,16 @@ import (
 	"math/rand/v2"
 	"time"
 
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/super"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/trace/utils"
-	"github.com/ethereum-optimism/optimism/mc-challenger/game/fault/types"
-	gameTypes "github.com/ethereum-optimism/optimism/mc-challenger/game/types"
-	"github.com/ethereum-optimism/optimism/mc-node/node/safedb"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
-	"github.com/ethereum-optimism/optimism/op-service/log"
-	"github.com/ethereum-optimism/optimism/op-service/sources"
 	"github.com/ethereum/go-ethereum/common"
 	ethTypes "github.com/ethereum/go-ethereum/core/types"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/super"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/trace/utils"
+	"github.com/mindchain/mind-chain/mc-challenger/game/fault/types"
+	gameTypes "github.com/mindchain/mind-chain/mc-challenger/game/types"
+	"github.com/mindchain/mind-chain/mc-node/node/safedb"
+	"github.com/mindchain/mind-chain/mc-service/eth"
+	"github.com/mindchain/mind-chain/mc-service/log"
+	"github.com/mindchain/mind-chain/mc-service/sources"
 )
 
 // Simulate a dispute game created roughly 16 days ago on a proposal that was ~7 days old
@@ -189,7 +189,7 @@ func fullyProcessedL1Head(ctx context.Context, l1Client l1BlockHashSource, curre
 
 func createGameInputsInterop(ctx context.Context, log log.Logger, client super.SuperNodeRootProvider, l1Client l1BlockHashSource, typeName string) (utils.LocalGameInputs, error) {
 	// superroot_atTimestamp carries the same finalized timestamp and L1 head as
-	// supernode_syncStatus, and is served by op-supernode and by mc-node (which has no
+	// supernode_syncStatus, and is served by mc-supernode and by mc-node (which has no
 	// supernode namespace), so a single-chain rollup can be its own super root source.
 	// A timestamp past the head omits chain data but still reports both fields.
 	status, err := client.SuperRootAtTimestamp(ctx, uint64(time.Now().Unix()))

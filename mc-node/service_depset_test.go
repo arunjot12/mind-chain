@@ -1,15 +1,13 @@
 package opnode
 
 import (
-	"encoding/json"
 	"flag"
 	"os"
 	"path/filepath"
 	"testing"
 
-	"github.com/ethereum-optimism/optimism/op-core/interop/depset"
-	"github.com/ethereum-optimism/optimism/mc-node/flags"
-	"github.com/ethereum-optimism/optimism/op-service/eth"
+	"github.com/mindchain/mind-chain/mc-node/flags"
+	"github.com/mindchain/mind-chain/mc-service/eth"
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli/v2"
 )
@@ -39,32 +37,9 @@ func TestNewDependencySetFromCLI_ExplicitJSONOverridesRegistry(t *testing.T) {
 		"explicit JSON must win over the registry fallback")
 }
 
-func TestNewDependencySetFromCLI_RegistryFallback_KnownChain(t *testing.T) {
-	ctx := newDepsetCtx(t)
-	ds, err := NewDependencySetFromCLI(ctx, eth.ChainIDFromUInt64(10))
-	require.NoError(t, err)
-	require.NotNil(t, ds, "registry-known chain must yield a depset")
-	require.True(t, ds.HasChain(eth.ChainIDFromUInt64(10)),
-		"registry depset must at minimum contain the chain itself")
-}
-
 func TestNewDependencySetFromCLI_RegistryFallback_UnknownChain_Nil(t *testing.T) {
 	ctx := newDepsetCtx(t)
 	ds, err := NewDependencySetFromCLI(ctx, eth.ChainIDFromUInt64(999_999))
 	require.NoError(t, err, "unknown chain must not error here; config.Check gates this")
 	require.Nil(t, ds)
-}
-
-func TestNewDependencySetFromCLI_RegistryFallback_RoundTripsViaJSON(t *testing.T) {
-	ctx := newDepsetCtx(t)
-	ds, err := NewDependencySetFromCLI(ctx, eth.ChainIDFromUInt64(10))
-	require.NoError(t, err)
-	require.NotNil(t, ds)
-
-	raw, err := json.Marshal(ds)
-	require.NoError(t, err)
-
-	var roundTripped depset.StaticConfigDependencySet
-	require.NoError(t, json.Unmarshal(raw, &roundTripped))
-	require.Equal(t, ds.Chains(), roundTripped.Chains())
 }

@@ -6,7 +6,7 @@ OP Stack chains in one process and verifies cross-chain safety in process.
 This crate is the skeleton for that rewrite. It currently builds a CLI that prints a greeting and
 exits; the operator flags, embedded kona virtual nodes, RPC server, metrics, and interop
 verification arrive in later changes. The Go implementation in
-[`op-supernode/`](../../op-supernode) remains the production component until then.
+[`mc-supernode/`](../../mc-supernode) remains the production component until then.
 
 ## Usage
 

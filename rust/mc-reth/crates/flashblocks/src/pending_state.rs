@@ -164,7 +164,7 @@ impl<N: NodePrimitives> Default for PendingStateRegistry<N> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use reth_optimism_primitives::OpPrimitives;
+    use reth_mind_chain_primitives::OpPrimitives;
 
     type TestRegistry = PendingStateRegistry<OpPrimitives>;
 

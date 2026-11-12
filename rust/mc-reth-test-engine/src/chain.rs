@@ -8,10 +8,10 @@ use alloy_genesis::Genesis;
 use alloy_primitives::B256;
 use reth_db::{DatabaseEnv, test_utils::TempDatabase};
 use reth_db_common::init::init_genesis;
+use reth_mind_chain_chainspec::OpChainSpec;
+use reth_mind_chain_node::OpNode;
+use reth_mind_chain_primitives::{OpBlock, OpReceipt};
 use reth_node_api::NodeTypesWithDBAdapter;
-use reth_optimism_chainspec::OpChainSpec;
-use reth_optimism_node::OpNode;
-use reth_optimism_primitives::{OpBlock, OpReceipt};
 use reth_provider::{
     providers::BlockchainProvider, test_utils::create_test_provider_factory_with_node_types,
 };

@@ -4,7 +4,7 @@ Guidance for AI agents building and running acceptance tests in the Optimism mon
 
 ## What Are Acceptance Tests?
 
-Acceptance tests live in `op-acceptance-tests/tests/` and run full in-process devnet scenarios. They exercise the entire stack — contracts, Go services, and Rust binaries — in a single `go test` process. This means all dependencies must be built locally before running them.
+Acceptance tests live in `mc-acceptance-tests/tests/` and run full in-process devnet scenarios. They exercise the entire stack — contracts, Go services, and Rust binaries — in a single `go test` process. This means all dependencies must be built locally before running them.
 
 ## Running Tests
 
@@ -14,16 +14,16 @@ The `just test` target automatically builds dependencies (contracts, cannon pres
 
 Always set `RUST_JIT_BUILD=1` when running locally. This lets the test framework automatically build any Rust binaries it needs (e.g. mc-reth) using cargo's rebuild detection, so you don't have to pre-build them separately.
 
-Run from `op-acceptance-tests/`:
+Run from `mc-acceptance-tests/`:
 
 ### Specific Tests or Packages (recommended)
 
 ```bash
 # Run a single test
-cd op-acceptance-tests && RUST_JIT_BUILD=1 mise exec -- just test -run TestMyTest ./op-acceptance-tests/tests/base/
+cd mc-acceptance-tests && RUST_JIT_BUILD=1 mise exec -- just test -run TestMyTest ./mc-acceptance-tests/tests/base/
 
 # Run a package
-cd op-acceptance-tests && RUST_JIT_BUILD=1 mise exec -- just test ./op-acceptance-tests/tests/base/...
+cd mc-acceptance-tests && RUST_JIT_BUILD=1 mise exec -- just test ./mc-acceptance-tests/tests/base/...
 ```
 
 The `just test` target builds deps, then runs `go test -count=1 -timeout 30m` with your arguments.
@@ -31,25 +31,25 @@ The `just test` target builds deps, then runs `go test -count=1 -timeout 30m` wi
 ### All Tests
 
 ```bash
-cd op-acceptance-tests && RUST_JIT_BUILD=1 mise exec -- just acceptance-test
+cd mc-acceptance-tests && RUST_JIT_BUILD=1 mise exec -- just acceptance-test
 ```
 
 Runs all test packages with gotestsum, structured logging, and bounded parallelism.
 
 ### Selecting the L2 Clients
 
-Every run covers the whole `./op-acceptance-tests/tests/...` tree; there is no per-package
+Every run covers the whole `./mc-acceptance-tests/tests/...` tree; there is no per-package
 subset target. Which clients the devstack starts is chosen by two environment variables, read
-in `op-devstack/sysgo/mixed_runtime.go`:
+in `mc-devstack/sysgo/mixed_runtime.go`:
 
 - `DEVSTACK_L2CL_KIND` — `mc-node` (the default) or `kona-node`
 - `DEVSTACK_L2EL_KIND` — `mc-reth` (the default) or `op-geth`
 
 ```bash
-cd op-acceptance-tests && DEVSTACK_L2CL_KIND=kona-node RUST_JIT_BUILD=1 mise exec -- just acceptance-test
+cd mc-acceptance-tests && DEVSTACK_L2CL_KIND=kona-node RUST_JIT_BUILD=1 mise exec -- just acceptance-test
 ```
 
-CI runs two variants of the `op-acceptance-tests` job: `memory-all-opn-mc-reth-<l1_fork>`
+CI runs two variants of the `mc-acceptance-tests` job: `memory-all-opn-mc-reth-<l1_fork>`
 (mc-node + mc-reth) and `memory-all-kona-mc-reth-<l1_fork>` (kona-node + mc-reth).
 
 A test that cannot run under a given client skips itself in code rather than being left out of
@@ -97,23 +97,23 @@ When using `just acceptance-test`, the runner sets:
 Override with environment variables:
 
 ```bash
-cd op-acceptance-tests && ACCEPTANCE_TEST_PARALLEL=2 ACCEPTANCE_TEST_TIMEOUT=1h mise exec -- just acceptance-test
+cd mc-acceptance-tests && ACCEPTANCE_TEST_PARALLEL=2 ACCEPTANCE_TEST_TIMEOUT=1h mise exec -- just acceptance-test
 ```
 
 ## Log Output (`acceptance-test` only)
 
-When using `just acceptance-test`, logs are written to `op-acceptance-tests/logs/testrun-<timestamp>/`:
+When using `just acceptance-test`, logs are written to `mc-acceptance-tests/logs/testrun-<timestamp>/`:
 - `all.log` — full test output
 - `raw_go_events.log` — JSON test events
 - `flaky-tests.txt` — tests marked with `MarkFlaky()`
 
-Results XML goes to `op-acceptance-tests/results/results.xml`.
+Results XML goes to `mc-acceptance-tests/results/results.xml`.
 
 When using `just test`, output goes to stdout only.
 
 ## Common Issues
 
-- **Missing prestates** — Run `cd op-acceptance-tests && mise exec -- just build-deps` or `mise exec -- just cannon-prestates` from the repo root.
+- **Missing prestates** — Run `cd mc-acceptance-tests && mise exec -- just build-deps` or `mise exec -- just cannon-prestates` from the repo root.
 - **Stale contracts** — Rebuild with `cd packages/contracts-bedrock && mise exec -- just build-no-tests`.
 - **Missing Rust binaries** — Run `mise exec -- just build-rust-release` from the repo root.
 - **gotestsum not found** — Run `mise install` to install all pinned tools.
