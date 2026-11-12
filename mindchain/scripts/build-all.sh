@@ -7,6 +7,9 @@
 # Components: mc-node mc-batcher mc-proposer mc-challenger mc-deployer cannon mc-reth kona-host
 # Needs: go, just, make, cargo (Rust), forge (Foundry). Versions: mise.toml.
 set -euo pipefail
+# Let the `go` on PATH find its own tools. An exported GOROOT pointing at a different Go
+# install makes builds fail with "compile: version X does not match go tool version Y".
+unset GOROOT
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 source "$ROOT/mindchain/versions.env"
 BIN="$ROOT/bin"
@@ -29,9 +32,7 @@ need git; need just
 case " ${COMPONENTS[*]} " in *" mc-reth "*|*" kona-host "*) need cargo;; esac
 case " ${COMPONENTS[*]} " in *" mc-node "*|*" mc-batcher "*|*" mc-proposer "*|*" mc-challenger "*|*" mc-deployer "*|*" cannon "*) need go;; esac
 case " ${COMPONENTS[*]} " in *" mc-deployer "*)
-  need forge; need jq; need zip; need yq
-  # The registry sync script needs mikefarah yq v4 (some distros ship an unrelated `yq`).
-  yq --version 2>&1 | grep -qE 'mikefarah|version v?4\.' || { echo "ERROR: yq must be mikefarah yq v4 (see mise.toml), found: $(yq --version 2>&1 | head -1)"; exit 1; } ;;
+  need forge ;;
 esac
 case " ${COMPONENTS[*]} " in *" cannon "*) need make;; esac
 mkdir -p "$BIN"
@@ -57,11 +58,8 @@ for c in "${COMPONENTS[@]}"; do
     mc-deployer)
       say "mc-deployer $OP_DEPLOYER_VERSION (releases/mc-deployer-v0.8.1)"
       D="$ROOT/releases/mc-deployer-v0.8.1"
-      # v0.8.1 needs its own superchain-registry and contract libraries (git submodules)
-      git -C "$ROOT" submodule update --init --depth 1 -- releases/mc-deployer-v0.8.1/superchain-registry
+      # v0.8.1 builds its contracts from its own contract libraries (git submodules)
       git -C "$ROOT" submodule update --init --recursive -- releases/mc-deployer-v0.8.1/packages/contracts-bedrock/lib
-      # chain-config bundle from v0.8.1's own superchain-registry
-      (cd "$D/mc-deployer" && SUPERCHAIN_REGISTRY_DIR="$D/superchain-registry" bash ../op-core/superchain/sync-superchain.sh)
       (cd "$D/mc-deployer" && just GITCOMMIT="$GITCOMMIT" GITDATE="$GITDATE" VERSION="$OP_DEPLOYER_VERSION" build)
       put "$D/mc-deployer/bin/mc-deployer" mc-deployer ;;
     mc-reth)
