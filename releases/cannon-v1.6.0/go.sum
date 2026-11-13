@@ -63,6 +63,8 @@ github.com/armon/go-metrics v0.4.1 h1:hR91U9KYmb6bLBYLQjyM+3j+rcd/UhE+G78SFnF8gJ
 github.com/armon/go-metrics v0.4.1/go.mod h1:E6amYzXo6aW1tqzoZGT755KkbgrJsSdpwZ+3JqfkOG4=
 github.com/arunjot12/go-ethereum-hdwallet v0.1.1 h1:IvFZJHvCl3knpf5w2X4peFn4zIuvUWAweBeGuRVMNDI=
 github.com/arunjot12/go-ethereum-hdwallet v0.1.1/go.mod h1:8tYVPR2ARCqQhwY5XtTwMdLdDqQeQndHye1i+6c1SYc=
+github.com/arunjot12/mc-geth v1.101603.0-rc.1 h1:u5VRhunx/obPcmVSTEL6AVLf9QUhA3vyLk0bqWZgWPg=
+github.com/arunjot12/mc-geth v1.101603.0-rc.1/go.mod h1:Ct2QjqZ2UKgvvgKLLYzoh/DBicJZB8DXsv45DgEjcco=
 github.com/base/go-bip39 v1.1.0 h1:ely6zK09KaQbfX8wpcmN4pRXy0SbbqMT2QF45P1BNh0=
 github.com/base/go-bip39 v1.1.0/go.mod h1:grZZXX8gYycovDC4cLS/RS0DmctofwHN+MUhedYCbO0=
 github.com/benbjohnson/clock v1.1.0/go.mod h1:J11/hYXuz8f4ySSvYwY0FKfm+ezbsZBKZxNJlLklBHA=
@@ -232,8 +234,6 @@ github.com/elastic/gosigar v0.14.3 h1:xwkKwPia+hSfg9GqrCUKYdId102m9qTJIIr7egmK/u
 github.com/elastic/gosigar v0.14.3/go.mod h1:iXRIGg2tLnu7LBdpqzyQfGDEidKCfWcCMS0WKyPWoMs=
 github.com/emicklei/dot v1.6.2 h1:08GN+DD79cy/tzN6uLCT84+2Wk9u+wvqP+Hkx/dIR8A=
 github.com/emicklei/dot v1.6.2/go.mod h1:DeV7GvQtIw4h2u73RKBkkFdvVAz0D9fzeJrgPW6gy/s=
-github.com/ethereum-optimism/op-geth v1.101603.0-rc.1 h1:gTAlQu6QwaZyG2hW6fDhLkXeftVNHC5RCl4P0eBXH8U=
-github.com/ethereum-optimism/op-geth v1.101603.0-rc.1/go.mod h1:Ct2QjqZ2UKgvvgKLLYzoh/DBicJZB8DXsv45DgEjcco=
 github.com/ethereum/c-kzg-4844/v2 v2.1.0 h1:gQropX9YFBhl3g4HYhwE70zq3IHFRgbbNPw0Shwzf5w=
 github.com/ethereum/c-kzg-4844/v2 v2.1.0/go.mod h1:TC48kOKjJKPbN7C++qIgt0TJzZ70QznYR7Ob+WXl57E=
 github.com/ethereum/go-verkle v0.2.2 h1:I2W0WjnrFUIzzVPwm8ykY+7pL2d4VhlsePn4j7cnFk8=

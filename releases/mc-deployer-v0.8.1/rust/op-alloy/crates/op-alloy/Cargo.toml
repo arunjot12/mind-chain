@@ -6,8 +6,8 @@ edition.workspace = true
 rust-version.workspace = true
 authors = ["Alloy Contributors"]
 license.workspace = true
-homepage = "https://github.com/ethereum-optimism/optimism"
-repository = "https://github.com/ethereum-optimism/optimism"
+homepage = "https://github.com/mindchain/mind-chain"
+repository = "https://github.com/mindchain/mind-chain"
 exclude = ["benches/", "tests/"]
 
 [package.metadata.docs.rs]

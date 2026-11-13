@@ -86,8 +86,8 @@ registries = []
 [sources]
 allow-git = [
   "https://github.com/paradigmxyz/reth",
-  # Maintenance fork carrying patches not yet included in the selected upstream release.
-  "https://github.com/ethereum-optimism/reth",
+  # Mind Chain's reth fork (github.com/arunjot12/reth), pinned in Cargo.toml.
+  "https://github.com/arunjot12/reth",
   "https://github.com/alloy-rs/alloy",
   "https://github.com/alloy-rs/hardforks",
   "https://github.com/alloy-rs/evm",

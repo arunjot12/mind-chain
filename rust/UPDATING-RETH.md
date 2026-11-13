@@ -66,7 +66,7 @@ main's CI actually validated.
    ```
 
    If patches must survive, build a new `op-*` branch in the
-   `ethereum-optimism/reth` fork as described in
+   `arunjot12/reth` fork as described in
    [The reth fork](#the-reth-fork), tag its tip and pin it with
    `tag = "op-<base>-<n>"` (or a temporary `rev`, see
    [Pinning a fork change](#pinning-a-fork-change)). Verify every reth
@@ -236,7 +236,7 @@ main's CI actually validated.
 
 ## The reth fork
 
-The pin points at `ethereum-optimism/reth` whenever OP needs patches the
+The pin points at `arunjot12/reth` whenever OP needs patches the
 upstream base lacks. The fork carries one branch per upstream base:
 
 - `op-v<version>` for an upstream release tag `v<version>`, e.g. `op-v2.6.0`;
@@ -251,7 +251,7 @@ branch from one:
 
 ```bash
 git fetch <upstream-remote> --tags
-git push git@github.com:ethereum-optimism/reth.git refs/tags/v<version>
+git push git@github.com:arunjot12/reth.git refs/tags/v<version>
 ```
 
 **Start** a branch from the upstream base. Cherry-pick the fork's CI commit
@@ -262,7 +262,7 @@ carry all of them:
 ```bash
 git switch -c op-v<version> v<version>
 git cherry-pick <ci-commit> <retained-sha>...
-git push git@github.com:ethereum-optimism/reth.git op-v<version>
+git push git@github.com:arunjot12/reth.git op-v<version>
 ```
 
 `<ci-commit>` is the previous branch's CI commit squashed with every later CI
@@ -284,7 +284,7 @@ previous one:
 
 ```bash
 git tag -a op-v<version>-<n> <reth-sha> -m "..."
-git push git@github.com:ethereum-optimism/reth.git op-v<version>-<n>
+git push git@github.com:arunjot12/reth.git op-v<version>-<n>
 ```
 
 Tags are immutable, so a tag pin is as reproducible as a rev pin.

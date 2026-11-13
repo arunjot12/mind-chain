@@ -303,9 +303,9 @@ require (
 	lukechampine.com/blake3 v1.3.0 // indirect
 )
 
-// cannon v1.6.0 needs the go-ethereum version it was released with; mc-geth is newer and
-// removed APIs it uses (e.g. trie/utils).
-replace github.com/ethereum/go-ethereum => github.com/ethereum-optimism/op-geth v1.101603.0-rc.1
+// cannon v1.6.0 needs the go-ethereum version it was released with (op-geth v1.101603.0-rc.1);
+// mc-geth carries that version under its own tag.
+replace github.com/ethereum/go-ethereum => github.com/arunjot12/mc-geth v1.101603.0-rc.1
 
 // replace github.com/ethereum/go-ethereum => ../op-geth
 
