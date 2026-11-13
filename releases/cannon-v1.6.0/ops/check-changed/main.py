@@ -78,7 +78,7 @@ def main():
     pr_number = extract_pr_number(current_branch)
     if not pr_urls and pr_number is not None:
         log.info('No PR URLs found but extracted branch number, constructing PR URL')
-        base_url = "https://github.com/ethereum-optimism/optimism/pull/"
+        base_url = "https://github.com/mindchain/mind-chain/pull/"
         pr_urls = [base_url + pr_number]
 
     if len(pr_urls) == 0:

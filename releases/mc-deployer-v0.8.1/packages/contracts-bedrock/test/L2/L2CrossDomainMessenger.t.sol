@@ -374,8 +374,7 @@ contract L2CrossDomainMessenger_Uncategorized_Test is L2CrossDomainMessenger_Tes
     function test_relayMessage_nearMaxPayloadAllGasTarget_succeeds() external {
         skipIfForkTest("L2CrossDomainMessenger doesn't exist on L1 in forked test");
 
-        // Use the PoC's _minGasLimit value referenced from client-pod#609:
-        // https://github.com/ethereum-optimism/client-pod/issues/609
+        // Use the PoC's _minGasLimit value.
         uint32 minGasLimit = 50_000;
 
         // Match the largest 32-byte-aligned user message that fits under the portal's 120k

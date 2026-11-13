@@ -87,7 +87,7 @@ All Devin sessions are automatically logged to `log.jsonl` with:
     "contract_path": "src/libraries/Storage.sol"
   },
   "status": "finished",
-  "pull_request_url": "https://github.com/ethereum-optimism/optimism/pull/12345"
+  "pull_request_url": "https://github.com/mindchain/mind-chain/pull/12345"
 }
 ```
 

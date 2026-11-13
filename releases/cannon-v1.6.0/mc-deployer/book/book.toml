@@ -1,5 +1,5 @@
 [book]
-authors = ["Optimism Contributors"]
+authors = ["Mind Chain Contributors"]
 language = "en"
 multilingual = false
 src = "src"
@@ -7,6 +7,6 @@ title = "OP Deployer Book"
 
 [output.html]
 site-url = "/mc-deployer/"
-git-repository-url = "https://github.com/ethereum-optimism/optimism/tree/develop/op-deployer/book"
-edit-url-template = "https://github.com/ethereum-optimism/optimism/tree/develop/op-deployer/book/{path}"
+git-repository-url = "https://github.com/mindchain/mind-chain/tree/main/op-deployer/book"
+edit-url-template = "https://github.com/mindchain/mind-chain/tree/main/op-deployer/book/{path}"
 additional-css = ["custom.css"]

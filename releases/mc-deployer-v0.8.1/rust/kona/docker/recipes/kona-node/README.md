@@ -3,8 +3,7 @@
 > [!WARNING]
 >
 > `kona-node` is in active development, and this recipe is subject to frequent change (and may not work!) For the time
-> being, it is intended to be used for development purposes. Please [file an issue][new-issue] if you have any problems
-> during development.
+> being, it is intended to be used for development purposes.
 
 This directory contains a simple `docker-compose` setup for `kona-node` and `mc-reth`, including example Grafana
 dashboards and a default Prometheus configuration.
@@ -85,4 +84,3 @@ Example: `export RUST_LOG=engine_builder=trace,runtime=debug`
 
 [op-sepolia]: https://sepolia-optimism.etherscan.io
 [mc-reth]: https://github.com/paradigmxyz/reth
-[new-issue]: https://github.com/ethereum-optimism/optimism/issues/new

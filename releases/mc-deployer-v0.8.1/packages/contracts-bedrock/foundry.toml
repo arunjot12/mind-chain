@@ -89,6 +89,11 @@ gas_limit = 9223372036854775807
 [fuzz]
 runs = 64
 
+[lint]
+# forge >= 1.3 lints after every build and aborts on warnings; same setting as the root
+# contracts so v0.8.1 builds with the repo's pinned forge.
+lint_on_build = false
+
 [fmt]
 line_length=120
 multiline_func_header='all'

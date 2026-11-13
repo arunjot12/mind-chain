@@ -78,7 +78,7 @@ func planExecMsg(t devtest.T, initMsg *suptypes.Message, blockTime time.Duration
 			// of the initiating messages, modulo reorgs. Wait to plan the relay tx against a
 			// target block until the timestamp elapses. NOTE: this should be `>=`, but the mempool
 			// filtering in op-geth currently uses the unsafe head's timestamp instead of the
-			// pending timestamp. See https://github.com/ethereum-optimism/op-geth/issues/603.
+			// pending timestamp..
 			// TODO(16371): if every txintent.Call had a Plan() method, this Option could be
 			// included with ExecTrigger.
 			for {

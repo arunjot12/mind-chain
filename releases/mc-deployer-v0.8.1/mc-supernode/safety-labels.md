@@ -2,8 +2,6 @@
 
 ## Architecture Decision: CL-Centric Control
 
-[Context: Issue #18976](https://github.com/ethereum-optimism/optimism/issues/18976)
-
 ### The Problem
 
 With the supernode model, there are multiple components, each with a different degree of understanding over various safety labels:
@@ -19,7 +17,7 @@ Customers expect the EL's `Safe` label to guarantee data won't revert (barring L
 
 The consensus layer (CL) maintains the full, rich set of safety pointers `[Unsafe, Safe, CrossSafe, Finalized]` and remains the **sole controller of the engine**. The supernode exerts influence through an "authority" pattern that virtual nodes defer to, without requiring them to understand interop mechanics.
 
-> TODO: We plan to rename `CrossSafe` to `VerifiedSafe` in https://github.com/ethereum-optimism/optimism/issues/19187 (this is a generalised term which is not tied to interop per se).
+> TODO: We plan to rename `CrossSafe` to `VerifiedSafe` (this is a generalised term which is not tied to interop per se).
 
 This approach avoids having multiple stateful controllers which could get out of sync.
 

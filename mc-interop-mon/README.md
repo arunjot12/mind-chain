@@ -4,7 +4,7 @@
 The Mind Chain Interop Monitor is a service that monitors Executing Messages between OP Protocol chains to detect and report any invalid messages on chains. It helps ensure the reliability and correctness of cross-chain communication.
 
 Interop Monitor's primary output is a collection of metrics which can alert operators for fast response and insight.
-The design of this service follows the [Design Doc](https://github.com/ethereum-optimism/design-docs/pull/222).
+The design of this service follows the Design Doc.
 
 ## Validity model
 

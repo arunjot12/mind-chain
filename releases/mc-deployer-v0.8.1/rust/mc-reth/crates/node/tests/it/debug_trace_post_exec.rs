@@ -3,11 +3,9 @@
 //! The RPC trace path replays each transaction directly through the EVM instead of going through
 //! the block executor, so it only works on post-exec transactions because `OpEvm::transact_raw`
 //! short-circuits them with the consensus-defined no-op result. Without that, tracing any block
-//! that carries a 0x7d tx fails whole-block ([the bug]): the replayed post-exec tx env inherited
+//! that carries a 0x7d tx fails whole-block: the replayed post-exec tx env inherited
 //! revm's mainnet default chain id, and no honest env for a zero-gas-limit transaction passes
 //! validation either.
-//!
-//! [the bug]: https://github.com/mindchain/mind-chain-premium/issues/163
 
 use alloy_consensus::{Block, BlockBody, Header, Sealable};
 use alloy_primitives::{Address, B256, Bytes, TxKind, U256};

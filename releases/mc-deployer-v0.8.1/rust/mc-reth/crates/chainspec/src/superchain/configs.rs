@@ -51,7 +51,7 @@ pub(crate) fn read_superchain_genesis(
 
     // The "config" field is stripped (see build.rs) from the genesis file because it is
     // not always populated. For that reason, we read the config from the chain metadata
-    // file. See: https://github.com/ethereum-optimism/superchain-registry/issues/901
+    // file..
     genesis.config =
         to_genesis_chain_config(&read_superchain_metadata(name, environment, &archive)?);
 

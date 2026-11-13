@@ -7950,7 +7950,7 @@
               "showLineNumbers": false,
               "showMiniMap": false
             },
-            "content": "- [Kona Monorepo](https://github.com/op-rs/kona)\n- [Optimism Monorepo](https://github.com/ethereum-optimism/optimism)\n- [Op Alloy](https://github.com/alloy-rs/op-alloy)\n- [Reth](https://github.com/paradigmxyz/reth)\n- [Revm](https://github.com/bluealloy/revm)",
+            "content": "- [Kona Monorepo](https://github.com/op-rs/kona)\n- [Mind Chain Monorepo](https://github.com/mindchain/mind-chain)\n- [Op Alloy](https://github.com/alloy-rs/op-alloy)\n- [Reth](https://github.com/paradigmxyz/reth)\n- [Revm](https://github.com/bluealloy/revm)",
             "mode": "markdown"
           },
           "pluginVersion": "11.2.0",

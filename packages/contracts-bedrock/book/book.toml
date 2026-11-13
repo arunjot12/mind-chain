@@ -1,14 +1,14 @@
 [book]
-authors = ["Optimism Contributors"]
+authors = ["Mind Chain Contributors"]
 language = "en"
 multilingual = false
 src = "src"
-title = "OP Stack Smart Contracts"
+title = "Mind Chain Smart Contracts"
 
 [output.html]
 site-url = "/contracts-bedrock/"
-git-repository-url = "https://github.com/ethereum-optimism/optimism/tree/develop/packages/contracts-bedrock/book"
-edit-url-template = "https://github.com/ethereum-optimism/optimism/tree/develop/packages/contracts-bedrock/book/{path}"
+git-repository-url = "https://github.com/mindchain/mind-chain/tree/main/packages/contracts-bedrock/book"
+edit-url-template = "https://github.com/mindchain/mind-chain/tree/main/packages/contracts-bedrock/book/{path}"
 additional-css = ["custom.css"]
 additional-js = ["mermaid.min.js", "mermaid-init.js"]
 

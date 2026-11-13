@@ -1,5 +1,5 @@
 [book]
-authors = ["Optimism Contributors"]
+authors = ["Mind Chain Contributors"]
 language = "en"
 multilingual = false
 src = "src"
@@ -7,7 +7,7 @@ title = "Devnet SDK Book"
 
 [output.html]
 site-url = "/devnet-sdk/"
-git-repository-url = "https://github.com/ethereum-optimism/optimism/tree/develop/devnet-sdk/book"
-edit-url-template = "https://github.com/ethereum-optimism/optimism/tree/develop/devnet-sdk/book/{path}"
+git-repository-url = "https://github.com/mindchain/mind-chain/tree/main/devnet-sdk/book"
+edit-url-template = "https://github.com/mindchain/mind-chain/tree/main/devnet-sdk/book/{path}"
 additional-css = ["custom.css", "theme/css/footer.css"]
 additional-js = ["theme/js/footer.js"]

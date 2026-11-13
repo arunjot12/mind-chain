@@ -1,9 +1,5 @@
 # `mc-wheel`
 
-Issues: [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-wheel)
-
-Pull requests: [monorepo](https://github.com/ethereum-optimism/optimism/pulls?q=is%3Aopen+is%3Apr+label%3AA-op-wheel)
-
 `mc-wheel` is a CLI tool to direct the engine one way or the other with DB cheats and Engine API routines.
 
 It was named the "wheel" because of two reasons:

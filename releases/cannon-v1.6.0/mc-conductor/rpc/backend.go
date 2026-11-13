@@ -31,7 +31,7 @@ type conductor interface {
 }
 
 // APIBackend is the backend implementation of the API.
-// TODO: (https://github.com/ethereum-optimism/protocol-quest/issues/45) Add metrics tracer here.
+// TODO: Add metrics tracer here.
 type APIBackend struct {
 	log log.Logger
 	con conductor

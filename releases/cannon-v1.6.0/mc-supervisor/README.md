@@ -1,9 +1,5 @@
 # `mc-supervisor`
 
-Issues: [monorepo](https://github.com/ethereum-optimism/optimism/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-op-supervisor)
-
-Pull requests: [monorepo](https://github.com/ethereum-optimism/optimism/pulls?q=is%3Aopen+is%3Apr+label%3AA-op-supervisor)
-
 User docs:
 - [mc-supervisor](https://docs.optimism.io/stack/interop/op-supervisor)
 

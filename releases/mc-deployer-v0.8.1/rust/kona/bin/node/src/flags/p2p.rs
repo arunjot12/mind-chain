@@ -209,11 +209,9 @@ pub struct P2PArgs {
     /// Topic scoring is a mechanism to score peers based on their behavior in the gossip network.
     /// Historically, topic scoring was only enabled for the v1 topic on the OP Stack p2p network
     /// in the `mc-node`. This was a silent bug, and topic scoring is actively being
-    /// [phased out of the `mc-node`][out].
+    /// phased out of the `mc-node`.
     ///
     /// This flag is only presented for backwards compatibility and debugging purposes.
-    ///
-    /// [out]: https://github.com/ethereum-optimism/optimism/pull/15719
     #[arg(
         long = "p2p.topic-scoring",
         default_value = "false",

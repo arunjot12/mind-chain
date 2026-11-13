@@ -1,11 +1,10 @@
 //! `eth_estimateGas` integration tests for EIP-7825.
 //!
-//! During the U19 upgrade process, several subtle [configuration footguns] and
+//! During the U19 upgrade process, several subtle configuration footguns and
 //! [upstream issues] resulted in unfortunate user-facing estimateGas bugs.
 //!
 //! This test ensures that EIP-7825 is handled correctly by `eth_estimateGas`.
 //!
-//! [configuration footguns]: https://github.com/mindchain/mind-chain/pull/21337
 //! [upstream issues]: https://github.com/paradigmxyz/reth/pull/25612
 
 use alloy_primitives::{Address, Bytes, TxKind, U256};

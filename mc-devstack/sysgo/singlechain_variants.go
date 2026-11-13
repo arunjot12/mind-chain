@@ -504,8 +504,7 @@ func startConductorCluster(
 	// this barrier, a failover can elect a follower that is unable to start on
 	// the Raft-committed head.
 	//
-	// This is a work-around for the following issue to prevent flakes:
-	// https://github.com/ethereum-optimism/core-team/issues/2938.
+	// This is a work-around to prevent flakes.
 	seedHash, err := rollupClient.StopSequencer(ctx)
 	require.NoError(err, "failed to stop bootstrap sequencer after seeding")
 	var seedStatus *eth.SyncStatus
