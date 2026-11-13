@@ -46,4 +46,4 @@ Sepolia and mainnet, we've been incrementally deploying implementation contracts
 We plan on addressing this in our next release. In the meantime, as a workaround you can use a non-tagged locator for
 development chains, or use Sepolia or Ethereum mainnet as your L1.
 
-[release-notes]: https://github.com/ethereum-optimism/optimism/releases/tag/op-contracts%2Fv1.8.0
+[release-notes]: https://github.com/arunjot12/mind-chain/releases/tag/op-contracts%2Fv1.8.0

@@ -51,8 +51,8 @@ changelog:
 
 release:
   github:
-    owner: ethereum-optimism
-    name: optimism
+    owner: arunjot12
+    name: mind-chain
   make_latest: false
 
 monorepo:

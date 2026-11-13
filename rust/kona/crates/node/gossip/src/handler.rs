@@ -135,7 +135,7 @@ impl BlockHandler {
 
     /// Returns the topic using the specified timestamp and optional [`RollupConfig`].
     ///
-    /// Reference: <https://github.com/ethereum-optimism/optimism/blob/0bc5fe8d16155dc68bcdf1fa5733abc58689a618/op-node/p2p/gossip.go#L604C1-L612C3>
+    /// Reference: <https://github.com/arunjot12/mind-chain/blob/0bc5fe8d16155dc68bcdf1fa5733abc58689a618/op-node/p2p/gossip.go#L604C1-L612C3>
     pub fn topic(&self, timestamp: u64) -> IdentTopic {
         if self.rollup_config.is_isthmus_active(timestamp) {
             self.blocks_v4_topic.clone()

@@ -30,7 +30,7 @@ trap cleanup EXIT
 # `git worktree add`.
 if ! git -C "$ROOT" cat-file -e "${COMMIT}^{commit}" 2>/dev/null; then
   echo "error: commit $COMMIT not found locally — fetch it first, e.g.:" >&2
-  echo "  git fetch https://github.com/ethereum-optimism/optimism.git tag op-contracts/v5.0.0" >&2
+  echo "  git fetch https://github.com/arunjot12/mind-chain.git tag mc-contracts/v5.0.0" >&2
   exit 1
 fi
 

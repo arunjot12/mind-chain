@@ -5,7 +5,7 @@
 The latest version of OP Deployer is always available at [releases][releases]. You should search for `mc-deployer` to
 exclude other packages.
 
-[releases]: https://github.com/ethereum-optimism/optimism/releases?q=op-deployer&expanded=true
+[releases]: https://github.com/arunjot12/mind-chain/releases?q=op-deployer&expanded=true
 
 ## Versioning
 
@@ -21,7 +21,7 @@ deploying `op-contracts/v2.0.0`. Typically, errors like `unknown selector: <some
 version of OP Deployer for your contract artifacts. If this happens, we recommend trying different versions until you
 get one that works. Note that this workflow is **not recommended** for production chains.
 
-[releases]: https://github.com/ethereum-optimism/optimism/releases
+[releases]: https://github.com/arunjot12/mind-chain/releases
 
 ## Version Backports
 

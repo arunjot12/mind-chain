@@ -38,6 +38,6 @@ Release the kona crates from `rust/` with `just release kona <version>` (see the
 ## Links
 
 - [OP Stack specifications](https://specs.optimism.io/)
-- [Optimism monorepo](https://github.com/ethereum-optimism/optimism)
+- [Optimism monorepo](https://github.com/arunjot12/mind-chain)
 - [Contributing guide](../../CONTRIBUTING.md)
 - [License](./LICENSE.md)

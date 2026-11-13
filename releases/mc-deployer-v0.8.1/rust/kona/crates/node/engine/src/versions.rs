@@ -14,7 +14,7 @@
 //! - **Prague (Isthmus)** → V4 methods
 //! - **Osaka (Karst)** → V5 `getPayload` (`newPayload`/`forkchoiceUpdated` stay at their V4/V3)
 //!
-//! Adapted from the [OP Node version providers](https://github.com/ethereum-optimism/optimism/blob/develop/op-node/rollup/types.go#L546).
+//! Adapted from the [OP Node version providers](https://github.com/arunjot12/mind-chain/blob/develop/op-node/rollup/types.go#L546).
 
 use alloy_hardforks::EthereumHardforks;
 use kona_genesis::RollupConfig;

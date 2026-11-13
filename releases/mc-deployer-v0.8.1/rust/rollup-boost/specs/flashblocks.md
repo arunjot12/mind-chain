@@ -976,7 +976,7 @@ These failure scenarios are addressed as part of the High Availability (HA) sequ
 
 The integration of Flashblocks with High Availability (HA) Sequencer setups is outside the scope of this initial specification document. For details on managing Flashblock state across multiple sequencer instances and maintaining preconfirmation integrity during failovers, please refer to the resources linked below.
 
-- what do with a rotating set of sequencers like with OP conductor https://github.com/ethereum-optimism/optimism/tree/develop/op-conductor
+- what do with a rotating set of sequencers like with OP conductor https://github.com/arunjot12/mind-chain/tree/develop/op-conductor
 - World HA design discussion https://github.com/flashbots/rollup-boost/issues/181
 - Base Technical Design Document [TDD: Rollup Boost Integration with HA Sequencer](https://www.notion.so/TDD-Rollup-Boost-Integration-with-HA-Sequencer-1d0c9d820ca380348f21e44a5442feaf?pvs=21)
 

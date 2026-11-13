@@ -7,7 +7,7 @@ use crate::{BlockInfo, L2BlockInfo};
 /// The sync status is a snapshot of the current state of the node's sync process.
 /// Values may not be derived yet and are zeroed out if they are not yet derived.
 ///
-/// [ss]: https://github.com/ethereum-optimism/optimism/blob/develop/op-service/eth/sync_status.go#L5
+/// [ss]: https://github.com/arunjot12/mind-chain/blob/develop/op-service/eth/sync_status.go#L5
 #[derive(Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(feature = "serde", serde(rename_all = "snake_case"))]

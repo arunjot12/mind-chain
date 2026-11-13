@@ -76,13 +76,13 @@ Versioning for monorepo releases works as follows:
 - Feature specific monorepo releases (such as a release of the custom gas token feature) are supported, and should follow the guidelines in the [Smart Contract Feature Development](https://github.com/ethereum-optimism/design-docs/blob/main/smart-contract-feature-development.md) design doc. Bump the overall monorepo semver as required by the above rules. For example, if the last release before the custom gas token feature was `op-contracts/v1.5.1`, because the custom gas token introduces breaking changes, its release will be `op-contracts/v2.0.0`.
   - A subsequent release of the custom gas token feature that fixes bugs and introduces an additional breaking change would be `op-contracts/v3.0.0`.
   - This means `+feature-name` naming is not used for monorepo releases, only for individual contracts as described below.
-- A monorepo contracts release must map to an exact set of contract semvers, and this mapping must be defined in the contract release notes which are the source of truth. See [`op-contracts/v1.4.0-rc.4`](https://github.com/ethereum-optimism/optimism/releases/tag/op-contracts%2Fv1.4.0-rc.4) for an example of what release notes should look like.
+- A monorepo contracts release must map to an exact set of contract semvers, and this mapping must be defined in the contract release notes which are the source of truth. See [`op-contracts/v1.4.0-rc.4`](https://github.com/arunjot12/mind-chain/releases/tag/op-contracts%2Fv1.4.0-rc.4) for an example of what release notes should look like.
 
 ## Optimism Contracts Manager (OPCM) Versioning
 
-The [OPCM](https://github.com/ethereum-optimism/optimism/blob/develop/packages/contracts-bedrock/src/L1/opcm/OPContractsManagerV2.sol) is the contract that manages the deployment of all contracts on L1.
+The [OPCM](https://github.com/arunjot12/mind-chain/blob/develop/packages/contracts-bedrock/src/L1/opcm/OPContractsManagerV2.sol) is the contract that manages the deployment of all contracts on L1.
 
-The `OPCM` is the source of truth for the contracts that belong in a release, available as on-chain addresses by querying the [`implementations()`](https://github.com/ethereum-optimism/optimism/blob/develop/packages/contracts-bedrock/src/L1/opcm/OPContractsManagerV2.sol) function.
+The `OPCM` is the source of truth for the contracts that belong in a release, available as on-chain addresses by querying the [`implementations()`](https://github.com/arunjot12/mind-chain/blob/develop/packages/contracts-bedrock/src/L1/opcm/OPContractsManagerV2.sol) function.
 
 ### OPCM Semver Rules
 

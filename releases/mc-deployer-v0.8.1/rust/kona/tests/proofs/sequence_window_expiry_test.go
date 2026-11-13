@@ -26,10 +26,10 @@ func runSequenceWindowExpireTest(gt *testing.T, testCfg *helpers.TestCfg[any]) {
 	// That is to say, if the oldest batch in the span batch fails the sequencing window check
 	// (l1 origin + seq window < l1 inclusion)
 	// All following batches are invalidated / dropped as well.
-	// https://github.com/ethereum-optimism/optimism/blob/73339162d78a1ebf2daadab01736382eed6f4527/op-node/rollup/derive/batches.go#L96-L100
+	// https://github.com/arunjot12/mind-chain/blob/73339162d78a1ebf2daadab01736382eed6f4527/op-node/rollup/derive/batches.go#L96-L100
 	//
 	// If the same blocks were batched with singular batches, the validation rules are different
-	// https://github.com/ethereum-optimism/optimism/blob/73339162d78a1ebf2daadab01736382eed6f4527/op-node/rollup/derive/batches.go#L83-L86
+	// https://github.com/arunjot12/mind-chain/blob/73339162d78a1ebf2daadab01736382eed6f4527/op-node/rollup/derive/batches.go#L83-L86
 	// In the case of recover mode, the noTxPool=true condition means autoderviation actually fills
 	// the gap with identical blocks anyway, meaning the following batches are actually still valid.
 	bc := helpers.NewBatcherCfg()

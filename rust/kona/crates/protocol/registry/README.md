@@ -109,7 +109,7 @@ println!("OP Mainnet Chain Config: {:?}", op_chain_config);
 
 [serde]: https://crates.io/crates/serde
 [alloy]: https://github.com/alloy-rs/alloy
-[op-alloy]: https://github.com/ethereum-optimism/optimism/tree/develop/rust/op-alloy
+[op-alloy]: https://github.com/arunjot12/mind-chain/tree/develop/rust/op-alloy
 [op-superchain]: https://docs.optimism.io/stack/explainer
 [osr]: https://github.com/ethereum-optimism/superchain-registry
 

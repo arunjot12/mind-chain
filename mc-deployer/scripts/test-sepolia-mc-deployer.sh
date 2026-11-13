@@ -50,7 +50,7 @@ download_op_deployer_binary() {
     esac
 
     local name="mc-deployer-${version}-${os}-${arch}"
-    local url="https://github.com/ethereum-optimism/optimism/releases/download/op-deployer%2Fv${version}/${name}.tar.gz"
+    local url="https://github.com/arunjot12/mind-chain/releases/download/mc-deployer%2Fv${version}/${name}.tar.gz"
     local dest_dir
     dest_dir="$(mktemp -d "${TMPDIR:-/tmp}/mc-deployer.XXXXXX")"
     local tar_path="$dest_dir/${name}.tar.gz"

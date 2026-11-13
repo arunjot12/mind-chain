@@ -7,7 +7,7 @@ use alloy_primitives::{ChainId, map::HashMap};
 
 /// The peer info.
 ///
-/// <https://github.com/ethereum-optimism/optimism/blob/develop/op-node/p2p/rpc_api.go#L15>
+/// <https://github.com/arunjot12/mind-chain/blob/develop/op-node/p2p/rpc_api.go#L15>
 #[derive(Clone, Default, Debug, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PeerInfo {
@@ -59,7 +59,7 @@ pub struct PeerInfo {
 /// `GossipSub` protocol to maintain mesh quality and route messages efficiently.
 /// These scores influence peer selection for the gossip mesh topology.
 ///
-/// Reference: <https://github.com/ethereum-optimism/optimism/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L13>
+/// Reference: <https://github.com/arunjot12/mind-chain/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L13>
 #[derive(Clone, Default, Debug, Copy, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TopicScores {
@@ -94,7 +94,7 @@ pub struct TopicScores {
 /// evaluate peer quality and determine mesh topology. Higher scores indicate
 /// more reliable and well-behaved peers.
 ///
-/// Reference: <https://github.com/ethereum-optimism/optimism/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L20C6-L20C18>
+/// Reference: <https://github.com/arunjot12/mind-chain/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L20C6-L20C18>
 #[derive(Debug, Default, Clone, Copy, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GossipScores {
@@ -129,7 +129,7 @@ pub struct GossipScores {
 /// Tracks peer performance in direct request-response interactions outside
 /// of the gossip mesh, such as block synchronization requests.
 ///
-/// Reference: <https://github.com/ethereum-optimism/optimism/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L31C1-L35C2>
+/// Reference: <https://github.com/arunjot12/mind-chain/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L31C1-L35C2>
 #[derive(Debug, Default, Clone, Copy, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReqRespScores {
@@ -150,7 +150,7 @@ pub struct ReqRespScores {
 
 /// Peer Scores
 ///
-/// <https://github.com/ethereum-optimism/optimism/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L81>
+/// <https://github.com/arunjot12/mind-chain/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/p2p/store/iface.go#L81>
 #[derive(Clone, Default, Debug, Copy, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PeerScores {
@@ -172,7 +172,7 @@ pub struct PeerCount {
 
 /// A raw peer dump.
 ///
-/// <https://github.com/ethereum-optimism/optimism/blob/40750a58e7a4a6f06370d18dfe6c6eab309012d9/op-node/p2p/rpc_api.go#L36>
+/// <https://github.com/arunjot12/mind-chain/blob/40750a58e7a4a6f06370d18dfe6c6eab309012d9/op-node/p2p/rpc_api.go#L36>
 #[derive(Clone, Default, Debug, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PeerDump {
@@ -191,7 +191,7 @@ pub struct PeerDump {
 
 /// Peer stats.
 ///
-/// <https://github.com/ethereum-optimism/optimism/blob/develop/op-node/p2p/rpc_server.go#L203>
+/// <https://github.com/arunjot12/mind-chain/blob/develop/op-node/p2p/rpc_server.go#L203>
 #[derive(Clone, Default, Debug, Copy, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PeerStats {

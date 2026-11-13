@@ -90,7 +90,7 @@ impl BlockHandler {
     /// if new blocks for that height are received.
     ///
     /// This value is chosen to match `mc-node` validator's lru cache size.
-    /// See: <https://github.com/ethereum-optimism/optimism/blob/836d50be5d5f4ae14ffb2ea6106720a2b080cdae/op-node/p2p/gossip.go#L266>
+    /// See: <https://github.com/arunjot12/mind-chain/blob/836d50be5d5f4ae14ffb2ea6106720a2b080cdae/op-node/p2p/gossip.go#L266>
     pub const SEEN_HASH_CACHE_SIZE: usize = 1_000;
 
     /// The maximum number of blocks to keep per height.

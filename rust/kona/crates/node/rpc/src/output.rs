@@ -5,7 +5,7 @@ use kona_protocol::{L2BlockInfo, OutputRoot, SyncStatus};
 
 /// An [output response][or] for Optimism Rollup.
 ///
-/// [or]: https://github.com/ethereum-optimism/optimism/blob/f20b92d3eb379355c876502c4f28e72a91ab902f/op-service/eth/output.go#L10-L17
+/// [or]: https://github.com/arunjot12/mind-chain/blob/f20b92d3eb379355c876502c4f28e72a91ab902f/op-service/eth/output.go#L10-L17
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OutputResponse {

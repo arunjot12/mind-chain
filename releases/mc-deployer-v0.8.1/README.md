@@ -127,7 +127,7 @@ For example if geth is at `v1.12.0`, the corresponding op-geth version would be 
 Note that we pad out to three characters for the geth minor version and two characters for the geth patch version.
 Since we cannot left-pad with zeroes, the geth major version is not padded.
 
-See the [GitHub releases](https://github.com/ethereum-optimism/optimism/releases) page for more information about releases for the latest node components.
+See the [GitHub releases](https://github.com/arunjot12/mind-chain/releases) page for more information about releases for the latest node components.
 
 The full set of components that have releases are:
 
@@ -141,7 +141,7 @@ All other components and packages should be considered development components on
 
 ### Development branch
 
-The primary development branch is [`develop`](https://github.com/ethereum-optimism/optimism/tree/develop/).
+The primary development branch is [`develop`](https://github.com/arunjot12/mind-chain/tree/develop/).
 `develop` contains the most up-to-date software that remains backwards compatible with the latest experimental [network deployments](https://docs.optimism.io/chain/networks).
 If you're making a backwards compatible change, please direct your pull request towards `develop`.
 
@@ -157,20 +157,20 @@ This avoids downloading the full monorepo git history, which is unfortunately a 
 
 To fetch the monorepo at a specific commit/branch/tag `$REF`, download and unpack with
 ```
-curl -L https://github.com/ethereum-optimism/optimism/archive/$REF.tar.gz | tar xz
+curl -L https://github.com/arunjot12/mind-chain/archive/$REF.tar.gz | tar xz
 ```
 Note that if you need any of its submodules, you'd need to manually download those too.
 
 If you want a shallow git clone of latest `develop`, you can just do
 ```
-git clone --depth 1 --shallow-submodules https://github.com/ethereum-optimism/optimism.git
+git clone --depth 1 --shallow-submodules https://github.com/arunjot12/mind-chain.git
 ```
 which takes only a few seconds on a good internet connection.
 
 If you want to shallow-checkout a specific branch or tag `$REF`, do
 
 ```
-git clone --no-checkout --depth 1 --shallow-submodules https://github.com/ethereum-optimism/optimism.git
+git clone --no-checkout --depth 1 --shallow-submodules https://github.com/arunjot12/mind-chain.git
 cd optimism
 git fetch --depth 1 origin "$REF"
 git checkout "$REF"
@@ -179,4 +179,4 @@ which should also only take a few seconds.
 
 ## License
 
-All other files within this repository are licensed under the [MIT License](https://github.com/ethereum-optimism/optimism/blob/master/LICENSE) unless stated otherwise.
+All other files within this repository are licensed under the [MIT License](https://github.com/arunjot12/mind-chain/blob/master/LICENSE) unless stated otherwise.

@@ -58,7 +58,7 @@ shall be dual licensed as above, without any additional terms or conditions.
 
 [check-no-std]: ./scripts/check_no_std.sh
 
-[kona]: https://github.com/ethereum-optimism/optimism/tree/develop/rust/kona
+[kona]: https://github.com/arunjot12/mind-chain/tree/develop/rust/kona
 [alloy]: https://github.com/alloy-rs/alloy
 
 [`op-alloy-consensus`]: https://crates.io/crates/op-alloy-consensus

@@ -9,7 +9,7 @@ Installing OP Deployer from pre-built binaries is the easiest and most preferred
 binaries, download the latest release from the [releases page][releases] and extract the binary to a directory in your 
 `$PATH`.
 
-[releases]: https://github.com/ethereum-optimism/optimism/releases?q=op-deployer&expanded=true
+[releases]: https://github.com/arunjot12/mind-chain/releases?q=op-deployer&expanded=true
 
 ## Install From Source
 

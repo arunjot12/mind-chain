@@ -2,7 +2,7 @@
 //!
 //! These are based on p2p flags from the [`op-node`][op-node] CLI.
 //!
-//! [op-node]: https://github.com/ethereum-optimism/optimism/blob/develop/op-node/flags/p2p_flags.go
+//! [op-node]: https://github.com/arunjot12/mind-chain/blob/develop/op-node/flags/p2p_flags.go
 
 use crate::flags::{GlobalArgs, SignerArgs};
 use alloy_primitives::B256;
@@ -162,14 +162,14 @@ pub struct P2PArgs {
     /// The threshold used to ban peers.
     ///
     /// For peers to be banned, the `p2p.ban.peers` flag must be set to `true`.
-    /// By default, peers are banned if their score is below -100. This follows the `op-node` default `<https://github.com/ethereum-optimism/optimism/blob/09a8351a72e43647c8a96f98c16bb60e7b25dc6e/op-node/flags/p2p_flags.go#L123-L130>`.
+    /// By default, peers are banned if their score is below -100. This follows the `op-node` default `<https://github.com/arunjot12/mind-chain/blob/09a8351a72e43647c8a96f98c16bb60e7b25dc6e/op-node/flags/p2p_flags.go#L123-L130>`.
     #[arg(long = "p2p.ban.threshold", default_value = "-100", env = "KONA_NODE_P2P_BAN_THRESHOLD")]
     pub ban_threshold: i64,
 
     /// The duration in minutes to ban a peer for.
     ///
     /// For peers to be banned, the `p2p.ban.peers` flag must be set to `true`.
-    /// By default peers are banned for 1 hour. This follows the `op-node` default `<https://github.com/ethereum-optimism/optimism/blob/09a8351a72e43647c8a96f98c16bb60e7b25dc6e/op-node/flags/p2p_flags.go#L131-L138>`.
+    /// By default peers are banned for 1 hour. This follows the `op-node` default `<https://github.com/arunjot12/mind-chain/blob/09a8351a72e43647c8a96f98c16bb60e7b25dc6e/op-node/flags/p2p_flags.go#L131-L138>`.
     #[arg(long = "p2p.ban.duration", default_value = "60", env = "KONA_NODE_P2P_BAN_DURATION")]
     pub ban_duration: u64,
 

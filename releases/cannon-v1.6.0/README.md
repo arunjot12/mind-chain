@@ -136,7 +136,7 @@ All other components and packages should be considered development components on
 
 ### Development branch
 
-The primary development branch is [`develop`](https://github.com/ethereum-optimism/optimism/tree/develop/).
+The primary development branch is [`develop`](https://github.com/arunjot12/mind-chain/tree/develop/).
 `develop` contains the most up-to-date software that remains backwards compatible with the latest experimental [network deployments](https://docs.optimism.io/chain/networks).
 If you're making a backwards compatible change, please direct your pull request towards `develop`.
 
@@ -147,4 +147,4 @@ Feature branches are typically used when there are conflicts between 2 projects 
 
 ## License
 
-All other files within this repository are licensed under the [MIT License](https://github.com/ethereum-optimism/optimism/blob/master/LICENSE) unless stated otherwise.
+All other files within this repository are licensed under the [MIT License](https://github.com/arunjot12/mind-chain/blob/master/LICENSE) unless stated otherwise.

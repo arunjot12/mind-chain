@@ -27,7 +27,7 @@ Upstream versions: `mindchain/versions.env`.
     cd rust && cargo build --release -p mc-reth --bin mc-reth
     cd rust && cargo build --release --bin kona-host
     mindchain/scripts/build-tools.sh              # mc-deployer v0.8.1 + cannon v1.6.0 from releases/ -> ./bin
-    mindchain/scripts/install-tools.sh            # or: download the official binaries instead
+    mindchain/scripts/install-tools.sh            # or: download mc-deployer from your GitHub release + build cannon
 
 ## Docker images (CI)
 Every PR builds the images. Every push to main and every v* tag pushes them to

@@ -457,7 +457,7 @@ func (n *OpNode) initL2(ctx context.Context, cfg *config.Config) error {
 	}
 
 	if cfg.Rollup.ChainOpConfig == nil {
-		return fmt.Errorf("cfg.Rollup.ChainOpConfig is nil. Please see https://github.com/ethereum-optimism/optimism/releases/tag/op-node/v1.11.0: %w", err)
+		return fmt.Errorf("cfg.Rollup.ChainOpConfig is nil. Please see https://github.com/arunjot12/mind-chain/releases/tag/op-node/v1.11.0: %w", err)
 	}
 
 	n.l2Driver = driver.NewDriver(n.eventSys, n.eventDrain, &cfg.Driver, &cfg.Rollup, cfg.DependencySet, n.l2Source, n.l1Source,

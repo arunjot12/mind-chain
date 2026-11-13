@@ -2,7 +2,7 @@
 //!
 //! These are based on sequencer flags from the [`mc-node`][mc-node] CLI.
 //!
-//! [mc-node]: https://github.com/ethereum-optimism/optimism/blob/develop/op-node/flags/flags.go#L233-L265
+//! [mc-node]: https://github.com/arunjot12/mind-chain/blob/develop/op-node/flags/flags.go#L233-L265
 
 use clap::Parser;
 use kona_node_service::SequencerConfig;

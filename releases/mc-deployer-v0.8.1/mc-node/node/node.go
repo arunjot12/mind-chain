@@ -560,7 +560,7 @@ func initL2(ctx context.Context, cfg *config.Config, node *OpNode) (*sources.Eng
 	}
 
 	if cfg.Rollup.ChainOpConfig == nil {
-		return nil, nil, nil, fmt.Errorf("cfg.Rollup.ChainOpConfig is nil. Please see https://github.com/ethereum-optimism/optimism/releases/tag/op-node/v1.11.0: %w", err)
+		return nil, nil, nil, fmt.Errorf("cfg.Rollup.ChainOpConfig is nil. Please see https://github.com/arunjot12/mind-chain/releases/tag/op-node/v1.11.0: %w", err)
 	}
 
 	var upstreamFollowSource driver.UpstreamFollowSource

@@ -3,7 +3,7 @@
 
 use alloy_sol_types::sol;
 
-// Sourced from https://github.com/ethereum-optimism/optimism/blob/develop/packages/contracts-bedrock/src/dispute/DisputeGameFactory.sol.
+// Sourced from https://github.com/arunjot12/mind-chain/blob/develop/packages/contracts-bedrock/src/dispute/DisputeGameFactory.sol.
 sol! {
     /// @notice The current status of the dispute game.
     enum GameStatus {

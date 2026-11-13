@@ -21,4 +21,4 @@ kona-genesis = { version = "x.y.z", default-features = false, features = ["serde
 <!-- Links -->
 
 [alloy-genesis]: https://github.com/alloy-rs
-[kona]: https://github.com/ethereum-optimism/optimism/blob/develop/rust/kona/Cargo.toml#L137
+[kona]: https://github.com/arunjot12/mind-chain/blob/develop/rust/kona/Cargo.toml#L137

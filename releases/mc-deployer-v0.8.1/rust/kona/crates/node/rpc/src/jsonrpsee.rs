@@ -23,7 +23,7 @@ pub use op_alloy_rpc_jsonrpsee::traits::{MinerApiExtServer, OpAdminApiServer};
 /// Optimism specified rpc interface.
 ///
 /// https://docs.optimism.io/builders/node-operators/json-rpc
-/// https://github.com/ethereum-optimism/optimism/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/node/api.go#L114
+/// https://github.com/arunjot12/mind-chain/blob/8dd17a7b114a7c25505cd2e15ce4e3d0f7e3f7c1/op-node/node/api.go#L114
 #[cfg_attr(not(feature = "client"), rpc(server, namespace = "optimism"))]
 #[cfg_attr(feature = "client", rpc(server, client, namespace = "optimism"))]
 pub trait RollupNodeApi {

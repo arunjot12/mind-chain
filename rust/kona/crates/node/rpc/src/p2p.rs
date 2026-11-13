@@ -3,7 +3,7 @@
 //! Kona's P2P RPC API is a JSON-RPC API compatible with the [op-node] API.
 //!
 //!
-//! [op-node]: https://github.com/ethereum-optimism/optimism/blob/7a6788836984996747193b91901a824c39032bd8/op-node/p2p/rpc_api.go#L45
+//! [op-node]: https://github.com/arunjot12/mind-chain/blob/7a6788836984996747193b91901a824c39032bd8/op-node/p2p/rpc_api.go#L45
 
 use async_trait::async_trait;
 use backon::{ExponentialBuilder, Retryable};
