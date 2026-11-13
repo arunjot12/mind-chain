@@ -10,6 +10,10 @@ set -euo pipefail
 # Let the `go` on PATH find its own tools. An exported GOROOT pointing at a different Go
 # install makes builds fail with "compile: version X does not match go tool version Y".
 unset GOROOT
+# Limit parallel Rust/C++ compile jobs: with one job per core, the RocksDB C++ build (part of mc-reth)
+# plus rustc can exhaust RAM, and the C++ compiler then fails with a bare "exit status: 1".
+# Raise it on a machine with more RAM, e.g. CARGO_BUILD_JOBS=8 bash mindchain/scripts/build-all.sh
+export CARGO_BUILD_JOBS="${CARGO_BUILD_JOBS:-2}"
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 source "$ROOT/mindchain/versions.env"
 BIN="$ROOT/bin"
